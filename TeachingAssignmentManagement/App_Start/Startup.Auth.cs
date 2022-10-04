@@ -5,19 +5,22 @@ using Owin;
 using System;
 using System.Configuration;
 using System.Security.Claims;
+using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement
 {
     public partial class Startup
     {
-        private static string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
-        private static string aadInstance = EnsureTrailingSlash(ConfigurationManager.AppSettings["ida:AADInstance"]);
-        private static string tenantId = ConfigurationManager.AppSettings["ida:TenantId"];
-        private static string postLogoutRedirectUri = ConfigurationManager.AppSettings["ida:PostLogoutRedirectUri"];
-        private static string authority = aadInstance + tenantId + "/v2.0";
+        private static readonly string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
+        private static readonly string aadInstance = EnsureTrailingSlash(ConfigurationManager.AppSettings["ida:AADInstance"]);
+        private static readonly string tenantId = ConfigurationManager.AppSettings["ida:TenantId"];
+        private static readonly string authority = aadInstance + tenantId + "/v2.0";
 
         public void ConfigureAuth(IAppBuilder app)
         {
+            app.CreatePerOwinContext(ApplicationDbContext.Create);
+            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+
             app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
@@ -27,7 +30,6 @@ namespace TeachingAssignmentManagement
                 {
                     ClientId = clientId,
                     Authority = authority,
-                    PostLogoutRedirectUri = postLogoutRedirectUri,
 
                     Notifications = new OpenIdConnectAuthenticationNotifications()
                     {
