@@ -1939,7 +1939,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Major\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app-assets\data\ajax.php" />
@@ -2005,6 +2004,9 @@
     <None Include="packages.config" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Major\Index.cshtml" />
+    <Content Include="Views\Major\Create.cshtml" />
+    <Content Include="Views\Major\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
