@@ -1,5 +1,7 @@
-﻿using Owin;
+﻿using Microsoft.Owin;
+using Owin;
 
+[assembly: OwinStartupAttribute(typeof(TeachingAssignmentManagement.Startup))]
 namespace TeachingAssignmentManagement
 {
     public partial class Startup
