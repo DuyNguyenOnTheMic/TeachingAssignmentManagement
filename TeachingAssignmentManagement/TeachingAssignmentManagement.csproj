@@ -221,6 +221,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MajorController.cs" />
     <Compile Include="DAL\IMajorRepository.cs" />
     <Compile Include="DAL\MajorRepository.cs" />
     <Compile Include="Global.asax.cs">
@@ -1938,6 +1939,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Major\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app-assets\data\ajax.php" />
