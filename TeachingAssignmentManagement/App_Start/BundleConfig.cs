@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace TeachingAssignmentManagement
 {
@@ -8,23 +7,38 @@ namespace TeachingAssignmentManagement
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+            bundles.Add(new MyScriptBundle("~/bundles/vendorJs").Include(
+                "~/app-assets/vendors/js/vendors.min.js",
+                "~/app-assets/vendors/js/screenfull/screenfull.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+            bundles.Add(new MyScriptBundle("~/bundles/appJs").Include(
+               "~/app-assets/js/core/app-menu.min.js",
+               "~/app-assets/js/core/app.min.js"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+            bundles.Add(new MyScriptBundle("~/bundles/extensionsJs").Include(
+               "~/app-assets/vendors/js/extensions/toastr.min.js",
+               "~/app-assets/vendors/js/extensions/sweetalert2.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+            bundles.Add(new MyScriptBundle("~/bundles/datatablesJs").Include(
+               "~/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js",
+               "~/app-assets/vendors/js/tables/datatable/dataTables.bootstrap5.min.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+            bundles.Add(new MyStyleBundle("~/Content/themeCss").Include(
+                      "~/app-assets/vendors/css/vendors.min.css",
+                      "~/app-assets/vendors/css/tables/datatable/dataTables.bootstrap5.min.css",
+                      "~/app-assets/css/bootstrap.min.css",
+                      "~/app-assets/css/bootstrap-extended.min.css",
+                      "~/app-assets/css/colors.min.css",
+                      "~/app-assets/css/components.min.css",
+                      "~/app-assets/css/themes/dark-layout.min.css",
+                      "~/app-assets/css/core/menu/menu-types/vertical-menu.min.css"));
+
+            bundles.Add(new MyStyleBundle("~/Content/extensionsCss").Include(
+                      "~/app-assets/vendors/css/extensions/toastr.min.css",
+                      "~/app-assets/vendors/css/extensions/sweetalert2.min.css",
+                      "~/app-assets/css/plugins/extensions/ext-component-sweet-alerts.min.css"));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
