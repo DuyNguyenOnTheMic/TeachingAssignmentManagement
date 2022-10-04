@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web.Mvc;
-using TeachingAssignmentManagement;
 using TeachingAssignmentManagement.Controllers;
 
 namespace TeachingAssignmentManagement.Tests.Controllers

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Configuration;
-using System.Security.Claims;
-using Microsoft.Owin.Security;
+﻿using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
 using Owin;
+using System;
+using System.Configuration;
+using System.Security.Claims;
 
 namespace TeachingAssignmentManagement
 {
@@ -39,7 +39,7 @@ namespace TeachingAssignmentManagement
                         }
                     }
                 });
-                 
+
         }
 
         private static string EnsureTrailingSlash(string value)
