@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ea8e301e9140456aaa35e3c4f060efe8" Name="Diagram1">
+        <EntityTypeShape EntityType="SEP25Team03Model.C__MigrationHistory" Width="1.5" PointX="9.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEP25Team03Model.AspNetRole" Width="1.5" PointX="9.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEP25Team03Model.AspNetUserClaim" Width="1.5" PointX="14.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEP25Team03Model.AspNetUserLogin" Width="1.5" PointX="14.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEP25Team03Model.AspNetUser" Width="1.5" PointX="12" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEP25Team03Model.class_student" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEP25Team03Model.curriculum" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEP25Team03Model.curriculum_class" Width="1.5" PointX="7.5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEP25Team03Model.knowledge_type" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEP25Team03Model.lecturer" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEP25Team03Model.major" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEP25Team03Model.registration_results" Width="1.5" PointX="9.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEP25Team03Model.student" Width="1.5" PointX="7.5" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEP25Team03Model.student_course" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEP25Team03Model.study_results" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEP25Team03Model.sysdiagram" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEP25Team03Model.term" Width="1.5" PointX="7.5" PointY="11.125" IsExpanded="true" />
+        <AssociationConnector Association="SEP25Team03Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP25Team03Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP25Team03Model.FK_class_student_student_course" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP25Team03Model.FK_student_class_student" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP25Team03Model.FK_curriculum_knowledge_type" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP25Team03Model.FK_curriculum_student_course" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP25Team03Model.FK_registration_results_curriculum" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP25Team03Model.FK_study_results_curriculum" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP25Team03Model.FK_registration_results_curriculum_class" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP25Team03Model.FK_registration_results_lecturer" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP25Team03Model.FK_student_course_major" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP25Team03Model.FK_registration_results_student" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP25Team03Model.FK_registration_results_student_course" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP25Team03Model.FK_registration_results_term" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP25Team03Model.FK_student_student_course" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP25Team03Model.FK_study_results_student" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP25Team03Model.FK_study_results_student_course" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP25Team03Model.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
