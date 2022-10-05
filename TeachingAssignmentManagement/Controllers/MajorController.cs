@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
@@ -30,11 +29,7 @@ namespace TeachingAssignmentManagement.Controllers
         public JsonResult GetData()
         {
             // Get majors data from datatabse
-            return Json(majorRepository.GetMajors(false).Select(m => new
-            {
-                m.id,
-                m.name
-            }).ToList(), JsonRequestBehavior.AllowGet);
+            return Json(majorRepository.GetMajors(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

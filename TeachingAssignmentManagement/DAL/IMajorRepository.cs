@@ -6,7 +6,7 @@ namespace TeachingAssignmentManagement.DAL
 {
     public interface IMajorRepository : IDisposable
     {
-        IEnumerable<major> GetMajors(bool final);
+        IEnumerable<major> GetMajors();
         major GetMajorByID(string majorId);
         void InsertMajor(major major);
         void DeleteMajor(string majorId);

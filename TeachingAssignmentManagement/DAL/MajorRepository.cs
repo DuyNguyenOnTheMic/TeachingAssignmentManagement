@@ -15,10 +15,9 @@ namespace TeachingAssignmentManagement.DAL
             this.context = context;
         }
 
-        public IEnumerable<major> GetMajors(bool final = true)
+        public IEnumerable<major> GetMajors()
         {
-            IEnumerable<major> items = context.majors;
-            return final ? items.ToList() : items;
+            return context.majors.ToList();
         }
 
         public major GetMajorByID(string id)
