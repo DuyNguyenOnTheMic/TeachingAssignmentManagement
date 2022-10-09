@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.DAL
 {
     public interface IMajorRepository : IDisposable
     {
-        IEnumerable<major> GetMajors();
+        IEnumerable GetMajors();
         major GetMajorByID(string majorId);
         void InsertMajor(major major);
         void DeleteMajor(string majorId);

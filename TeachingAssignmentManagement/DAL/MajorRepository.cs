@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Data.Entity;
 using System.Linq;
 using TeachingAssignmentManagement.Models;
@@ -15,9 +15,13 @@ namespace TeachingAssignmentManagement.DAL
             this.context = context;
         }
 
-        public IEnumerable<major> GetMajors()
+        public IEnumerable GetMajors()
         {
-            return context.majors.ToList();
+            return context.majors.Select(m => new
+            {
+                m.id,
+                m.name
+            }).ToList();
         }
 
         public major GetMajorByID(string id)

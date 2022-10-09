@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
 
@@ -78,7 +77,7 @@ namespace TeachingAssignmentManagement.Controllers
                 majorRepository.DeleteMajor(id);
                 majorRepository.Save();
             }
-            catch (Exception)
+            catch
             {
                 return Json(new { error = true }, JsonRequestBehavior.AllowGet);
             }
