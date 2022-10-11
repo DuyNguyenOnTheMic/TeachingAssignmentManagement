@@ -1910,6 +1910,7 @@
     <Content Include="assets\images\img_sidebar_background.jpg" />
     <Content Include="assets\images\img_vlu_logo.png" />
     <Content Include="assets\images\img_vlu_name.png" />
+    <Content Include="assets\images\img_welcome.svg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Models\Model1.Context.tt">
