@@ -258,7 +258,11 @@
                 icon: 'warning',
                 showCancelButton: true,
                 cancelButtonText: 'Huỷ',
-                confirmButtonText: 'Xoá'
+                confirmButtonText: 'Xoá',
+                customClass: {
+                    confirmButton: 'btn btn-primary',
+                    cancelButton: 'btn btn-outline-danger ms-1'
+                }
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Delete item
