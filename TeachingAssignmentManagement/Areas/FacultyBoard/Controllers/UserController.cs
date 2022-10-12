@@ -43,12 +43,14 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public JsonResult GetData()
         {
             // Get user data from datatabse
+            var query_studyResult = db.lecturers;
             return Json(db.AspNetUsers.Select(u => new
             {
                 id = u.Id,
                 email = u.Email,
                 role = u.AspNetRoles.FirstOrDefault().Name,
-
+                query_studyResult.FirstOrDefault(l => l.email == u.Email).staff_id,
+                query_studyResult.FirstOrDefault(l => l.email == u.Email).full_name
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 

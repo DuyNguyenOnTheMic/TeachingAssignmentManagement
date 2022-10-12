@@ -22,6 +22,8 @@
                             <thead class="table-light">
                                 <tr>
                                     <th></th>
+                                    <th>Mã giảng viên</th>
+                                    <th>Tên giảng viên</th>
                                     <th>Email</th>
                                     <th>Role</th>
                                     <th></th>
@@ -63,6 +65,8 @@
                     },
                     columns: [
                         { 'data': '', defaultContent: '' },
+                        { 'data': 'staff_id' },
+                        { 'data': 'full_name' },
                         { 'data': 'email' },
                         { 'data': 'role' },
                         {
@@ -74,12 +78,12 @@
                     columnDefs: [
                         {
                             // User Role
-                            targets: 2,
+                            targets: 4,
                             render: function (data, type, full, meta) {
                                 var $role = full['role'];
                                 var roleBadgeObj = {
                                     'Chưa phân quyền': feather.icons['user'].toSvg({ class: 'font-medium-3 text-primary me-50' }),
-                                    Author: feather.icons['settings'].toSvg({ class: 'font-medium-3 text-warning me-50' }),
+                                    null: feather.icons['settings'].toSvg({ class: 'font-medium-3 text-warning me-50' }),
                                     Maintainer: feather.icons['database'].toSvg({ class: 'font-medium-3 text-success me-50' }),
                                     Editor: feather.icons['edit-2'].toSvg({ class: 'font-medium-3 text-info me-50' }),
                                     Admin: feather.icons['slack'].toSvg({ class: 'font-medium-3 text-danger me-50' })
@@ -91,10 +95,10 @@
                             searchable: false,
                             orderable: false,
                             className: 'text-center',
-                            targets: [0, 3]
+                            targets: [0, 5]
                         },
                         { width: '20px', targets: [0] },
-                        { width: '100px', targets: [3] }
+                        { width: '100px', targets: [5] }
                     ],
 
                     order: [[1, 'asc']],
