@@ -85,104 +85,17 @@
                         </div>
                     </div>
                     <div class="card-datatable table-responsive pt-0">
-                        <table class="user-list-table table">
+                        <table class="user-list-table table"  id="tblUser">
                             <thead class="table-light">
                                 <tr>
                                     <th></th>
-                                    <th>Name</th>
+                                    <th>Email</th>
                                     <th>Role</th>
-                                    <th>Plan</th>
-                                    <th>Billing</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                         </table>
                     </div>
-                    <!-- Modal to add new user starts-->
-                    <div class="modal modal-slide-in new-user-modal fade" id="modals-slide-in">
-                        <div class="modal-dialog">
-                            <form class="add-new-user modal-content pt-0">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
-                                <div class="modal-header mb-1">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
-                                </div>
-                                <div class="modal-body flex-grow-1">
-                                    <div class="mb-1">
-                                        <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-                                        <input type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" name="user-fullname" />
-                                    </div>
-                                    <div class="mb-1">
-                                        <label class="form-label" for="basic-icon-default-uname">Username</label>
-                                        <input type="text" id="basic-icon-default-uname" class="form-control dt-uname" placeholder="Web Developer" name="user-name" />
-                                    </div>
-                                    <div class="mb-1">
-                                        <label class="form-label" for="basic-icon-default-email">Email</label>
-                                        <input type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" name="user-email" />
-                                    </div>
-                                    <div class="mb-1">
-                                        <label class="form-label" for="basic-icon-default-contact">Contact</label>
-                                        <input type="text" id="basic-icon-default-contact" class="form-control dt-contact" placeholder="+1 (609) 933-44-22" name="user-contact" />
-                                    </div>
-                                    <div class="mb-1">
-                                        <label class="form-label" for="basic-icon-default-company">Company</label>
-                                        <input type="text" id="basic-icon-default-company" class="form-control dt-contact" placeholder="PIXINVENT" name="user-company" />
-                                    </div>
-                                    <div class="mb-1">
-                                        <label class="form-label" for="country">Country</label>
-                                        <select id="country" class="select2 form-select">
-                                            <option value="Australia">USA</option>
-                                            <option value="Bangladesh">Bangladesh</option>
-                                            <option value="Belarus">Belarus</option>
-                                            <option value="Brazil">Brazil</option>
-                                            <option value="Canada">Canada</option>
-                                            <option value="China">China</option>
-                                            <option value="France">France</option>
-                                            <option value="Germany">Germany</option>
-                                            <option value="India">India</option>
-                                            <option value="Indonesia">Indonesia</option>
-                                            <option value="Israel">Israel</option>
-                                            <option value="Italy">Italy</option>
-                                            <option value="Japan">Japan</option>
-                                            <option value="Korea">Korea, Republic of</option>
-                                            <option value="Mexico">Mexico</option>
-                                            <option value="Philippines">Philippines</option>
-                                            <option value="Russia">Russian Federation</option>
-                                            <option value="South Africa">South Africa</option>
-                                            <option value="Thailand">Thailand</option>
-                                            <option value="Turkey">Turkey</option>
-                                            <option value="Ukraine">Ukraine</option>
-                                            <option value="United Arab Emirates">United Arab Emirates</option>
-                                            <option value="United Kingdom">United Kingdom</option>
-                                            <option value="United States">United States</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-1">
-                                        <label class="form-label" for="user-role">User Role</label>
-                                        <select id="user-role" class="select2 form-select">
-                                            <option value="subscriber">Subscriber</option>
-                                            <option value="editor">Editor</option>
-                                            <option value="maintainer">Maintainer</option>
-                                            <option value="author">Author</option>
-                                            <option value="admin">Admin</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-2">
-                                        <label class="form-label" for="user-plan">Select Plan</label>
-                                        <select id="user-plan" class="select2 form-select">
-                                            <option value="basic">Basic</option>
-                                            <option value="enterprise">Enterprise</option>
-                                            <option value="company">Company</option>
-                                            <option value="team">Team</option>
-                                        </select>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary me-1 data-submit">Submit</button>
-                                    <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- Modal to add new user Ends-->
                 </div>
                 <!-- list and filter end -->
             </section>
@@ -206,5 +119,165 @@
     <script src="~/app-assets/vendors/js/forms/validation/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/app-assets/vendors/js/jquery-ui/jquery-ui.min.js"></script>
 
+    <script type="text/javascript">
+        var userEmail = '@User.Identity.Name';
+        var popup, dataTable;
 
+        $(document).ready(function () {
+
+            // Populate User datatable
+            dataTable = $('#tblUser').DataTable(
+                {
+                     ajax: {
+                        dataSrc: '',
+                        type: 'POST',
+                        url: '@Url.Action("GetData", "User")',
+                        dataType: "json",
+                    },
+
+                    lengthMenu: [[25, 50, -1], [25, 50, "Tất cả"]],
+                    order: [[1, 'asc']],
+                    columnDefs: [
+                        {
+                            searchable: false,
+                            orderable: false,
+                            className: 'text-center',
+                            targets: [0, 3]
+                        },
+                        { width: '20px', targets: [0] },
+                        { width: '100px', targets: [3] }
+                    ],
+
+                    columns: [
+                        { 'data': null },
+                        { 'data': 'email' },
+                        { 'data': 'role' },
+                        {
+                            'data': 'id', 'render': function (data, type, row) {
+                                // Reder edit and delete function
+                                return "<a class='editRow success p - 0' data-original-title='' title='' onclick=PopupForm('@Url.Action("Edit","User")/" + data + "')><i class='fa fa-pencil font-medium-3 mr-2'></i></a> <a class='deleteRow danger p-0' style='margin-left:5px' data-original-title='' title='' onclick=Delete('" + data + "','" + row.email + "')><i class='fa fa-trash-o font-medium-3 mr-2'></i></a>";
+                            }
+                        }
+                    ],
+
+                    language: {
+                        'url': '@Url.Content("~/app-assets/language/vi.json")'
+                    }
+                });
+
+            // Create Index column datatable
+            dataTable.on('draw.dt', function () {
+                dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1;
+                });
+            });
+        });
+
+        // Show Edit form
+        function PopupForm(url) {
+            var formDiv = $('<div/>')
+            $.get(url)
+                .done(function (response) {
+                    formDiv.html(response);
+
+                    popup = formDiv.dialog({
+                        autoOpen: true,
+                        resizable: true,
+                        title: 'Chỉnh sửa role',
+                        width: 550,
+                        open: function () {
+                            // Prevent user from add edit delete while dialog is populated
+                            $('.editRow').each(function () {
+                                this.style.pointerEvents = 'none';
+                            });
+                            $('.deleteRow').each(function () {
+                                this.style.pointerEvents = 'none';
+                            });
+                        },
+                        close: function () {
+                            popup.dialog('destroy').remove();
+
+                            // Re-enable buttons when user closes the dialog
+                            $('.editRow').each(function () {
+                                this.style.pointerEvents = 'auto';
+                            });
+                            $('.deleteRow').each(function () {
+                                this.style.pointerEvents = 'auto';
+                            });
+                        }
+                    });
+                });
+        }
+
+        function SubmitForm(form) {
+            $.validator.unobtrusive.parse(form);
+
+            if ($(form).valid()) {
+                $.ajax({
+                    type: 'POST',
+                    url: form.action,
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        if (data.Succeeded) {
+                            popup.dialog('close');
+                            dataTable.ajax.reload();
+
+                            // Show message when edit succeeded
+                            toastr.options.positionClass = 'toast-bottom-right';
+                            toastr.success(data.message);
+                        }
+                        else {
+                            // Show message when edit failed
+                            swal({
+                                title: 'Thông báo',
+                                text: 'Bạn không thể chỉnh sửa người dùng admin cuối cùng!',
+                                type: 'error',
+                            })
+                        }
+                    }
+                });
+            }
+            return false;
+        }
+
+        function Delete(id, email) {
+            swal({
+                title: 'Thông báo',
+                text: 'Bạn có chắc muốn xoá người dùng ' + email + ' này?',
+                type: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'Huỷ',
+                confirmButtonText: 'Xoá',
+
+            }).then(function () {
+                // Delete item
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Delete", "User")/' + id,
+                    success: function (data) {
+                        if (data.Succeeded) {
+                            dataTable.ajax.reload();
+
+                            // Show message when delete succeeded
+                            toastr.options.positionClass = 'toast-bottom-right';
+                            toastr.success(data.message);
+                        }
+                        else {
+                            // Show message when delete failed
+                            swal({
+                                title: 'Thông báo',
+                                text: 'Bạn không thể xoá người dùng admin cuối cùng!',
+                                type: 'error',
+                            })
+                        }
+                    }
+                });
+
+            }, function (dismiss) {
+                if (dismiss === 'cancel' || dismiss === 'close') {
+                    // Ignore
+                }
+            })
+        }
+    </script>
 }
