@@ -1482,11 +1482,6 @@
     <Content Include="app-assets\vendors\css\pickers\pickadate\pickadate.css" />
     <Content Include="app-assets\vendors\css\tables\datatable\buttons.bootstrap5.min.css" />
     <Content Include="app-assets\vendors\css\tables\datatable\dataTables.bootstrap5.min.css" />
-    <Content Include="app-assets\vendors\css\tables\datatable\extensions\dataTables.checkboxes.css" />
-    <Content Include="app-assets\vendors\css\tables\datatable\responsive.bootstrap.min.css" />
-    <Content Include="app-assets\vendors\css\tables\datatable\responsive.bootstrap5.min.css" />
-    <Content Include="app-assets\vendors\css\tables\datatable\rowGroup.bootstrap5.min.css" />
-    <Content Include="app-assets\vendors\css\tables\datatable\select.dataTables.min.css" />
     <Content Include="app-assets\vendors\css\ui\prism-treeview.css" />
     <Content Include="app-assets\vendors\css\ui\prism.min.css" />
     <Content Include="app-assets\vendors\css\vendors-rtl.min.css" />
@@ -1887,17 +1882,9 @@
     <Content Include="app-assets\vendors\js\tables\datatable\buttons.print.min.js" />
     <Content Include="app-assets\vendors\js\tables\datatable\dataTables.bootstrap5.min.js" />
     <Content Include="app-assets\vendors\js\tables\datatable\datatables.buttons.min.js" />
-    <Content Include="app-assets\vendors\js\tables\datatable\datatables.checkboxes.min.js" />
-    <Content Include="app-assets\vendors\js\tables\datatable\dataTables.responsive.js" />
-    <Content Include="app-assets\vendors\js\tables\datatable\dataTables.responsive.min.js" />
-    <Content Include="app-assets\vendors\js\tables\datatable\dataTables.rowGroup.min.js" />
-    <Content Include="app-assets\vendors\js\tables\datatable\dataTables.select.min.js" />
     <Content Include="app-assets\vendors\js\tables\datatable\jquery.dataTables.min.js" />
     <Content Include="app-assets\vendors\js\tables\datatable\jszip.min.js" />
     <Content Include="app-assets\vendors\js\tables\datatable\pdfmake.min.js" />
-    <Content Include="app-assets\vendors\js\tables\datatable\responsive.bootstrap5.js" />
-    <Content Include="app-assets\vendors\js\tables\datatable\responsive.bootstrap5.min.js" />
-    <Content Include="app-assets\vendors\js\tables\datatable\rowGroup.bootstrap5.min.js" />
     <Content Include="app-assets\vendors\js\tables\datatable\vfs_fonts.js" />
     <Content Include="app-assets\vendors\js\ui\affix.js" />
     <Content Include="app-assets\vendors\js\ui\jquery.sticky-kit.min.js" />
@@ -1938,6 +1925,7 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app-assets\vendors\css\tables\datatable\extensions\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
