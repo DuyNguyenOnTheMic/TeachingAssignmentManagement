@@ -219,6 +219,7 @@
     <Compile Include="App_Start\MyStyleBundle.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\FacultyBoard\Controllers\UserController.cs" />
     <Compile Include="Areas\FacultyBoard\FacultyBoardAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1895,9 +1896,9 @@
   <ItemGroup>
     <Folder Include="app-assets\vendors\css\tables\datatable\extensions\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\FacultyBoard\Controllers\" />
     <Folder Include="Areas\FacultyBoard\Data\" />
     <Folder Include="Areas\FacultyBoard\Views\Shared\" />
+    <Folder Include="Areas\FacultyBoard\Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app-assets\data\ajax.php" />

@@ -2,17 +2,17 @@
 
 namespace TeachingAssignmentManagement.Areas.FacultyBoard
 {
-    public class FacultyBoardAreaRegistration : AreaRegistration 
+    public class FacultyBoardAreaRegistration : AreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
+            get
             {
                 return "FacultyBoard";
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
                 "FacultyBoard_default",
