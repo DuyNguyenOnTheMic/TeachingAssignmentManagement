@@ -1,0 +1,26 @@
+﻿@model TeachingAssignmentManagement.Models.AspNetUser
+
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("Edit", "User", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.HiddenFor(model => model.Id)
+
+    <label>Email: </label>
+    <div class="form-group">
+        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+    </div>
+
+    <label>Role: </label>
+    <div class="form-group">
+        @Html.DropDownList("role_id", null, htmlAttributes: new { @class = "form-control" })
+    </div>
+
+    <div class="form-actions right">
+        <button type="submit" class="btn btn-success">
+            <i class="icon-note"></i> Lưu
+        </button>
+    </div>
+}
