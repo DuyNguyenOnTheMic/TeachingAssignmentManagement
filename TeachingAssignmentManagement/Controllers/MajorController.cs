@@ -11,7 +11,7 @@ namespace TeachingAssignmentManagement.Controllers
 
         public MajorController()
         {
-            this.majorRepository = new MajorRepository(new SEP25Team03Entities());
+            this.majorRepository = new MajorRepository(new CP25Team03Entities());
         }
 
         public MajorController(IMajorRepository majorRepository)

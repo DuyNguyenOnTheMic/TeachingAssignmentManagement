@@ -8,9 +8,9 @@ namespace TeachingAssignmentManagement.DAL
 {
     public class MajorRepository : IMajorRepository, IDisposable
     {
-        private readonly SEP25Team03Entities context;
+        private readonly CP25Team03Entities context;
 
-        public MajorRepository(SEP25Team03Entities context)
+        public MajorRepository(CP25Team03Entities context)
         {
             this.context = context;
         }
