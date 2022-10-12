@@ -145,6 +145,11 @@
                         title: 'Chỉnh sửa role',
                         width: 550,
                         open: function () {
+                            // Add close icon class
+                            $(this).closest(".ui-dialog")
+                                .find(".ui-dialog-titlebar-close")
+                                .addClass("btn-close");
+
                             // Prevent user from add edit delete while dialog is populated
                             $('.editRow').each(function () {
                                 this.style.pointerEvents = 'none';
