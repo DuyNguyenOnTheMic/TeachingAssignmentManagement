@@ -12,78 +12,8 @@
         <div class="content-body">
             <!-- users list start -->
             <section class="app-user-list">
-                <div class="row">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="card-body d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h3 class="fw-bolder mb-75">21,459</h3>
-                                    <span>Total Users</span>
-                                </div>
-                                <div class="avatar bg-light-primary p-50">
-                                    <span class="avatar-content">
-                                        <i data-feather="user" class="font-medium-4"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="card-body d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h3 class="fw-bolder mb-75">4,567</h3>
-                                    <span>Paid Users</span>
-                                </div>
-                                <div class="avatar bg-light-danger p-50">
-                                    <span class="avatar-content">
-                                        <i data-feather="user-plus" class="font-medium-4"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="card-body d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h3 class="fw-bolder mb-75">19,860</h3>
-                                    <span>Active Users</span>
-                                </div>
-                                <div class="avatar bg-light-success p-50">
-                                    <span class="avatar-content">
-                                        <i data-feather="user-check" class="font-medium-4"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="card-body d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h3 class="fw-bolder mb-75">237</h3>
-                                    <span>Pending Users</span>
-                                </div>
-                                <div class="avatar bg-light-warning p-50">
-                                    <span class="avatar-content">
-                                        <i data-feather="user-x" class="font-medium-4"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!-- list and filter start -->
                 <div class="card">
-                    <div class="card-body border-bottom">
-                        <h4 class="card-title">Search & Filter</h4>
-                        <div class="row">
-                            <div class="col-md-4 user_role"></div>
-                            <div class="col-md-4 user_plan"></div>
-                            <div class="col-md-4 user_status"></div>
-                        </div>
-                    </div>
                     <div class="card-datatable table-responsive pt-0">
                         <table class="user-list-table table"  id="tblUser">
                             <thead class="table-light">
@@ -106,7 +36,6 @@
 
 <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css">
 <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/jquery-ui/jquery-ui.min.css">
-
 
 @section scripts {
     <script src="~/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
@@ -134,10 +63,32 @@
                         url: '@Url.Action("GetData", "User")',
                         dataType: "json",
                     },
-
-                    lengthMenu: [[25, 50, -1], [25, 50, "Tất cả"]],
-                    order: [[1, 'asc']],
+                    columns: [
+                        { 'data': '', defaultContent: '' },
+                        { 'data': 'email' },
+                        { 'data': 'role' },
+                        {
+                            'data': 'id', 'render': function (data, type, row) {
+                                return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=PopupForm('@Url.Action("Edit","Major")/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' style='margin-left:5px' data-original-title='Delete' title='Delete' onclick=Delete('" + data + "')><i class='feather feather-trash-2 font-medium-3'></i></a>";
+                            }
+                        }
+                    ],
                     columnDefs: [
+                        {
+                            // User Role
+                            targets: 2,
+                            render: function (data, type, full, meta) {
+                                var $role = full['role'];
+                                var roleBadgeObj = {
+                                    'Chưa phân quyền': feather.icons['user'].toSvg({ class: 'font-medium-3 text-primary me-50' }),
+                                    Author: feather.icons['settings'].toSvg({ class: 'font-medium-3 text-warning me-50' }),
+                                    Maintainer: feather.icons['database'].toSvg({ class: 'font-medium-3 text-success me-50' }),
+                                    Editor: feather.icons['edit-2'].toSvg({ class: 'font-medium-3 text-info me-50' }),
+                                    Admin: feather.icons['slack'].toSvg({ class: 'font-medium-3 text-danger me-50' })
+                                };
+                                return "<span class='text-truncate align-middle'>" + roleBadgeObj[$role] + $role + '</span>';
+                            }
+                        },
                         {
                             searchable: false,
                             orderable: false,
@@ -148,14 +99,63 @@
                         { width: '100px', targets: [3] }
                     ],
 
-                    columns: [
-                        { 'data': null },
-                        { 'data': 'email' },
-                        { 'data': 'role' },
+                    order: [[1, 'asc']],
+                    dom:
+                        '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"' +
+                        '<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l>' +
+                        '<"col-sm-12 col-lg-8 ps-xl-75 ps-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>' +
+                        '>t' +
+                        '<"d-flex justify-content-between mx-2 row mb-1"' +
+                        '<"col-sm-12 col-md-6"i>' +
+                        '<"col-sm-12 col-md-6"p>' +
+                        '>',
+                    displayLength: 25,
+                    lengthMenu: [[25, 50, -1], [25, 50, "Tất cả"]],
+                    // Buttons with Dropdown
+                    buttons: [
                         {
-                            'data': 'id', 'render': function (data, type, row) {
-                                // Reder edit and delete function
-                                return "<a class='editRow success p - 0' data-original-title='' title='' onclick=PopupForm('@Url.Action("Edit","User")/" + data + "')><i class='fa fa-pencil font-medium-3 mr-2'></i></a> <a class='deleteRow danger p-0' style='margin-left:5px' data-original-title='' title='' onclick=Delete('" + data + "','" + row.email + "')><i class='fa fa-trash-o font-medium-3 mr-2'></i></a>";
+                            extend: 'collection',
+                            className: 'btn btn-outline-secondary dropdown-toggle me-2',
+                            text: feather.icons['external-link'].toSvg({ class: 'font-small-4 me-50' }) + 'Export',
+                            buttons: [
+                                {
+                                    extend: 'print',
+                                    className: 'dropdown-item'
+                                },
+                                {
+                                    extend: 'csv',
+                                    className: 'dropdown-item'
+                                },
+                                {
+                                    extend: 'excel',
+                                    className: 'dropdown-item'
+                                },
+                                {
+                                    extend: 'pdf',
+                                    className: 'dropdown-item'
+                                },
+                                {
+                                    extend: 'copy',
+                                    className: 'dropdown-item'
+                                }
+                            ],
+                            init: function (api, node, config) {
+                                $(node).removeClass('btn-secondary');
+                                $(node).parent().removeClass('btn-group');
+                                setTimeout(function () {
+                                    $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex mt-50');
+                                }, 50);
+                            }
+                        },
+                        {
+                            text: 'Add New User',
+                            className: 'add-new btn btn-primary',
+                            attr: {
+                                'data-bs-toggle': 'modal',
+                                'data-bs-target': '#modals-slide-in'
+                            },
+                            init: function (api, node, config) {
+                                $(node).removeClass('btn-secondary');
                             }
                         }
                     ],
@@ -169,6 +169,7 @@
             dataTable.on('draw.dt', function () {
                 dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
                     cell.innerHTML = i + 1;
+                    dataTable.cell(cell).invalidate('dom');
                 });
             });
         });
