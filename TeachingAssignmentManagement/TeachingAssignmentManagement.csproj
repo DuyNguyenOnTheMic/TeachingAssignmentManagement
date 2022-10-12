@@ -1913,7 +1913,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\FacultyBoard\Data\" />
     <Folder Include="Areas\FacultyBoard\Views\Shared\" />
-    <Folder Include="Areas\FacultyBoard\Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app-assets\data\ajax.php" />
@@ -1977,6 +1976,7 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\FacultyBoard\Views\User\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
