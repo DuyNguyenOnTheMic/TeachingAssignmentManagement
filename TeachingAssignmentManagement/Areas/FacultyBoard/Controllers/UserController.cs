@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -60,6 +61,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             // Get user role
             var query_user = UserManager.FindById(id);
+            var query_lecturer = db.lecturers.FirstOrDefault(l => l.email == query_user.Email);
             if (query_user.Roles.Count > 0)
             {
                 // Set selected role
@@ -71,17 +73,25 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 ViewBag.role_id = new SelectList(db.AspNetRoles, "id", "name");
             }
             ViewBag.email = query_user.Email;
-            return View();
+            return View(query_lecturer);
         }
 
         [HttpPost]
-        public ActionResult Edit(lecturer lecturer, string email, string role_id)
+        public ActionResult Edit(string staff_id, string full_name, string email, string role_id)
         {
             // Declare variables
             var oldUser = UserManager.FindByEmail(email);
             var oldRole = UserManager.GetRoles(oldUser.Id).FirstOrDefault();
             var role = db.AspNetRoles.Find(role_id);
             var result = new IdentityResult();
+            var query_lecturer = db.lecturers.FirstOrDefault(l => l.email == email);
+
+            if (query_lecturer != null)
+            {
+                query_lecturer.staff_id = staff_id;
+                query_lecturer.full_name = full_name;
+                db.SaveChanges();
+            }
 
             // Prevent user from editing the last admin role
             int adminCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN Khoa").Count();
