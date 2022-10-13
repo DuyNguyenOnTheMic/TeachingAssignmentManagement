@@ -90,8 +90,18 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             {
                 query_lecturer.staff_id = staff_id;
                 query_lecturer.full_name = full_name;
-                db.SaveChanges();
             }
+            else
+            {
+                var lecturer = new lecturer
+                {
+                    staff_id = staff_id,
+                    full_name = full_name,
+                    email = email
+                };
+                db.lecturers.Add(lecturer);
+            }
+            db.SaveChanges();
 
             // Prevent user from editing the last admin role
             int adminCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN Khoa").Count();
