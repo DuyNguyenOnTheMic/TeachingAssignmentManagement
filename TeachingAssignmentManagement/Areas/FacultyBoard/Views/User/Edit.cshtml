@@ -1,4 +1,4 @@
-﻿@model TeachingAssignmentManagement.Models.AspNetUser
+﻿@model TeachingAssignmentManagement.Models.lecturer
 
 @{
     Layout = null;
@@ -6,11 +6,21 @@
 
 @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
 {
-    @Html.HiddenFor(model => model.Id)
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="staff_id">Mã giảng viên: </label>
+        @Html.EditorFor(model => model.staff_id, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập mã giảng viên", @aria_label = "Nhập mã giảng viên" } })
+        @Html.ValidationMessageFor(model => model.staff_id, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="full_name">Tên giảng viên: </label>
+        @Html.EditorFor(model => model.full_name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập Tên giảng viên", @aria_label = "Nhập Tên giảng viên" } })
+        @Html.ValidationMessageFor(model => model.full_name, null, new { @class = "text-danger" })
+    </div>
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="Email">Email: </label>
-        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        <input type="text" class="form-control" id="email" name="email" disabled value="@ViewBag.email" />
     </div>
 
     <div class="mb-1">
