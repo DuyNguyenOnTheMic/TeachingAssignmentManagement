@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -80,21 +79,24 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public ActionResult Edit(string staff_id, string full_name, string email, string role_id)
         {
             // Declare variables
+            string txtStaffId = SetNullOnEmpty(staff_id);
+            string txtFullName = SetNullOnEmpty(full_name);
             var oldUser = UserManager.FindByEmail(email);
             var oldRole = UserManager.GetRoles(oldUser.Id).FirstOrDefault();
             var role = db.AspNetRoles.Find(role_id);
-            var result = new IdentityResult();
             var query_lecturer = db.lecturers.FirstOrDefault(l => l.email == email);
+            var result = new IdentityResult();
 
             if (query_lecturer != null)
             {
                 // Edit lecturer info
-                query_lecturer.staff_id = staff_id;
-                query_lecturer.full_name = full_name;
+                query_lecturer.staff_id = txtStaffId;
+                query_lecturer.full_name = txtFullName;
+                db.SaveChanges();
             }
-            else
+            else if (txtStaffId != null || txtFullName != null)
             {
-                // Add a lecturer
+                // Add a new lecturer
                 var lecturer = new lecturer
                 {
                     staff_id = staff_id,
@@ -102,8 +104,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     email = email
                 };
                 db.lecturers.Add(lecturer);
+                db.SaveChanges();
             }
-            db.SaveChanges();
 
             // Prevent user from editing the last Faculty board role
             int adminCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN Khoa").Count();
@@ -145,6 +147,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Delete user
             result = UserManager.Delete(user);
             return Json(new { result.Succeeded, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
+        public static string SetNullOnEmpty(string value)
+        {
+            // Check if string is empty
+            return value != null && string.IsNullOrEmpty(value.Trim()) ? null : value;
         }
 
         protected override void Dispose(bool disposing)
