@@ -7,6 +7,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 {
+    [Authorize(Roles = "BCN Khoa")]
     public class UserController : Controller
     {
         readonly CP25Team03Entities db = new CP25Team03Entities();
