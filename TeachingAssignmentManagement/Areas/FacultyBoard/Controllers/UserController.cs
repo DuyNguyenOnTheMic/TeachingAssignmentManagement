@@ -63,7 +63,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             if (query_user.Roles.Count > 0)
             {
                 // Set selected role
-                ViewBag.mail = query_user.Email;
                 ViewBag.role_id = new SelectList(db.AspNetRoles, "id", "name", query_user.Roles.FirstOrDefault().RoleId);
             }
             else
@@ -71,8 +70,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 // Populate new role select list
                 ViewBag.role_id = new SelectList(db.AspNetRoles, "id", "name");
             }
-
-            return View(db.AspNetUsers.Find(id));
+            ViewBag.email = query_user.Email;
+            return View();
         }
 
         [HttpPost]
