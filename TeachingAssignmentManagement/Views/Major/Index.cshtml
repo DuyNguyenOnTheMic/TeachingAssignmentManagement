@@ -129,7 +129,12 @@
                                 },
                                 {
                                     extend: 'excel',
-                                    className: 'dropdown-item'
+                                    className: 'dropdown-item',
+                                    title: '',
+                                    customize: function (xlsx) {
+                                        var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                                        $('row:first c', sheet).attr('s', '42');
+                                    }
                                 },
                                 {
                                     extend: 'pdf',
