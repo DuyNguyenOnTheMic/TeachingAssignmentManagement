@@ -59,11 +59,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public ActionResult Edit(string id)
         {
             // Get user role
-            var query_role = db.AspNetUsers.Find(id).AspNetRoles.FirstOrDefault();
-            if (query_role != null)
+            var query_user = UserManager.FindById(id);
+            if (query_user.Roles.Count > 0)
             {
                 // Set selected role
-                ViewBag.role_id = new SelectList(db.AspNetRoles, "id", "name", query_role.Id);
+                ViewBag.mail = query_user.Email;
+                ViewBag.role_id = new SelectList(db.AspNetRoles, "id", "name", query_user.Roles.FirstOrDefault().RoleId);
             }
             else
             {
