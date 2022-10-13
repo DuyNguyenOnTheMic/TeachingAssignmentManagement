@@ -101,7 +101,7 @@
                         { width: '100px', targets: [5] }
                     ],
 
-                    order: [[1, 'asc']],
+                    order: [[3, 'asc']],
                     dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 ps-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
                     displayLength: 25,
                     lengthMenu: [[25, 50, -1], [25, 50, "Tất cả"]],
@@ -184,18 +184,21 @@
                     success: function (data) {
                         if (data.Succeeded) {
                             popup.dialog('close');
-                            dataTable.ajax.reload();
+                            dataTable.ajax.reload(null, false);
 
                             // Show message when edit succeeded
                             toastr.options.positionClass = 'toast-bottom-right';
-                            toastr.success(data.message);
+                            toastr["success"](data.message);
                         }
                         else {
                             // Show message when edit failed
-                            swal({
+                            Swal.fire({
                                 title: 'Thông báo',
-                                text: 'Bạn không thể chỉnh sửa người dùng admin cuối cùng!',
-                                type: 'error',
+                                text: data.message,
+                                icon: 'error',
+                                customClass: {
+                                    confirmButton: 'btn btn-primary'
+                                }
                             })
                         }
                     }
@@ -224,18 +227,21 @@
                         url: '@Url.Action("Delete", "User")/' + id,
                         success: function (data) {
                             if (data.Succeeded) {
-                                dataTable.ajax.reload();
+                                dataTable.ajax.reload(null, false);
 
                                 // Show message when delete succeeded
                                 toastr.options.positionClass = 'toast-bottom-right';
-                                toastr.success(data.message);
+                                toastr["success"](data.message);
                             }
                             else {
                                 // Show message when delete failed
-                                swal({
+                                Swal.fire({
                                     title: 'Thông báo',
-                                    text: 'Bạn không thể xoá người dùng admin cuối cùng!',
-                                    type: 'error',
+                                    text: data.message,
+                                    icon: 'error',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary'
+                                    }
                                 })
                             }
                         }
