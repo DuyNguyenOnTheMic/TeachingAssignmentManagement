@@ -88,11 +88,13 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
             if (query_lecturer != null)
             {
+                // Edit lecturer info
                 query_lecturer.staff_id = staff_id;
                 query_lecturer.full_name = full_name;
             }
             else
             {
+                // Add a lecturer
                 var lecturer = new lecturer
                 {
                     staff_id = staff_id,
@@ -103,7 +105,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
             db.SaveChanges();
 
-            // Prevent user from editing the last admin role
+            // Prevent user from editing the last Faculty board role
             int adminCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN Khoa").Count();
             if (adminCount <= 1 && oldRole == "BCN Khoa" && role.Name != "BCN Khoa")
             {
