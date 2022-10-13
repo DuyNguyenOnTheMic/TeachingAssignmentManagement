@@ -99,8 +99,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 // Add a new lecturer
                 var lecturer = new lecturer
                 {
-                    staff_id = staff_id,
-                    full_name = full_name,
+                    staff_id = txtStaffId,
+                    full_name = txtFullName,
                     email = email
                 };
                 db.lecturers.Add(lecturer);
