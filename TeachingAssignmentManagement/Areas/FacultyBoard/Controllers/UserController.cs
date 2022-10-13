@@ -75,10 +75,10 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(AspNetUser aspNetUser, string role_id)
+        public ActionResult Edit(lecturer lecturer, string email, string role_id)
         {
             // Declare variables
-            var oldUser = UserManager.FindById(aspNetUser.Id);
+            var oldUser = UserManager.FindByEmail(email);
             var oldRole = UserManager.GetRoles(oldUser.Id).FirstOrDefault();
             var role = db.AspNetRoles.Find(role_id);
             var result = new IdentityResult();
@@ -93,13 +93,13 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             if (oldRole == null)
             {
                 // Add user to role
-                result = UserManager.AddToRole(aspNetUser.Id, role.Name);
+                result = UserManager.AddToRole(oldUser.Id, role.Name);
             }
             else
             {
                 // Update user role
-                UserManager.RemoveFromRole(aspNetUser.Id, oldRole);
-                result = UserManager.AddToRole(aspNetUser.Id, role.Name);
+                UserManager.RemoveFromRole(oldUser.Id, oldRole);
+                result = UserManager.AddToRole(oldUser.Id, role.Name);
             }
 
             return Json(new { result.Succeeded, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
