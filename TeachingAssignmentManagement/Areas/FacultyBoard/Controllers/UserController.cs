@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.Models;
@@ -68,43 +70,41 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Declare variables
             string txtStaffId = SetNullOnEmpty(staff_id);
             string txtFullName = SetNullOnEmpty(full_name);
-            var userId = UserManager.FindByEmail(email).Id;
-            var oldRole = UserManager.GetRoles(userId).FirstOrDefault();
             var role = db.AspNetRoles.Find(role_id);
-            var result = new IdentityResult();
+
+            // Get user information
+            var user = new ApplicationUser
+            {
+                Email = email,
+                UserName = email
+            };
+
+            // Check if user exists
+            var currentUser = UserManager.FindByEmail(user.Email);
+            if (currentUser != null)
+            {
+                return Json(new { error = true, message = "lỗi rồi ạ" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                // Create new user
+                UserManager.Create(user);
+                UserManager.AddToRole(user.Id, role.Name);
+            }
 
             if (txtStaffId != null || txtFullName != null)
             {
                 // Add a new lecturer
                 var lecturer = new lecturer
                 {
-                    id = userId,
+                    id = user.Id,
                     staff_id = txtStaffId,
                     full_name = txtFullName
                 };
                 db.lecturers.Add(lecturer);
                 db.SaveChanges();
             }
-
-            // Prevent user from editing the last Faculty board role
-            int adminCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN khoa").Count();
-            if (adminCount <= 1 && oldRole == "BCN khoa" && role.Name != "BCN khoa")
-            {
-                return Json(new { result.Errors, message = "Bạn không thể sửa BCN khoa cuối cùng!" }, JsonRequestBehavior.AllowGet);
-            }
-
-            if (oldRole == null)
-            {
-                // Add user to role
-                result = UserManager.AddToRole(userId, role.Name);
-            }
-            else
-            {
-                // Update user role
-                UserManager.RemoveFromRole(userId, oldRole);
-                result = UserManager.AddToRole(userId, role.Name);
-            }
-            return Json(new { result.Succeeded, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -136,7 +136,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             var oldRole = UserManager.GetRoles(userId).FirstOrDefault();
             var role = db.AspNetRoles.Find(role_id);
             var query_lecturer = db.lecturers.Find(userId);
-            var result = new IdentityResult();
 
             if (query_lecturer != null)
             {
@@ -162,21 +161,21 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             int adminCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN khoa").Count();
             if (adminCount <= 1 && oldRole == "BCN khoa" && role.Name != "BCN khoa")
             {
-                return Json(new { result.Errors, message = "Bạn không thể sửa BCN khoa cuối cùng!" }, JsonRequestBehavior.AllowGet);
+                return Json(new { error = true, message = "Bạn không thể sửa BCN khoa cuối cùng!" }, JsonRequestBehavior.AllowGet);
             }
 
             if (oldRole == null)
             {
                 // Add user to role
-                result = UserManager.AddToRole(userId, role.Name);
+                UserManager.AddToRole(userId, role.Name);
             }
             else
             {
                 // Update user role
                 UserManager.RemoveFromRole(userId, oldRole);
-                result = UserManager.AddToRole(userId, role.Name);
+                UserManager.AddToRole(userId, role.Name);
             }
-            return Json(new { result.Succeeded, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -185,7 +184,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Declare variables
             var user = UserManager.FindById(id);
             var role = UserManager.GetRoles(id).FirstOrDefault();
-            var result = new IdentityResult();
 
             // Prevent user from deleting the last admin role
             int adminCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN khoa").Count();
@@ -195,7 +193,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
 
             // Delete user
-            result = UserManager.Delete(user);
+            UserManager.Delete(user);
             return Json(new { result.Succeeded, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
         }
 

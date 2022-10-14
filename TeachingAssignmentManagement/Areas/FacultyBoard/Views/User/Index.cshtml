@@ -281,7 +281,7 @@
                     url: form.action,
                     data: $(form).serialize(),
                     success: function (data) {
-                        if (data.Succeeded) {
+                        if (data.success) {
                             popup.dialog('close');
                             dataTable.ajax.reload(null, false);
 
@@ -325,7 +325,7 @@
                         type: 'POST',
                         url: '@Url.Action("Delete", "User")/' + id,
                         success: function (data) {
-                            if (data.Succeeded) {
+                            if (data.success) {
                                 dataTable.ajax.reload(null, false);
 
                                 // Show message when delete succeeded
