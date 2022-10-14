@@ -95,8 +95,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     staff_id = txtStaffId,
                     full_name = txtFullName
                 };
-                db.lecturers.Add(lecturer);
-                db.SaveChanges();
+                userRepository.InsertLecturer(lecturer);
+                userRepository.Save();
             }
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
@@ -117,7 +117,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 ViewBag.role_id = new SelectList(db.AspNetRoles, "id", "name");
             }
             ViewBag.email = query_user.Email;
-            return View(db.lecturers.Find(id));
+            return View(userRepository.GetLecturerByID(id));
         }
 
         [HttpPost]
@@ -128,15 +128,15 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             string txtFullName = SetNullOnEmpty(full_name);
             var userId = UserManager.FindByEmail(email).Id;
             var oldRole = UserManager.GetRoles(userId).FirstOrDefault();
-            var role = db.AspNetRoles.Find(role_id);
-            var query_lecturer = db.lecturers.Find(userId);
+            var role = userRepository.GetRoleByID(role_id);
+            var query_lecturer = userRepository.GetLecturerByID(userId);
 
             if (query_lecturer != null)
             {
                 // Edit lecturer info
                 query_lecturer.staff_id = txtStaffId;
                 query_lecturer.full_name = txtFullName;
-                db.SaveChanges();
+                userRepository.Save();
             }
             else if (txtStaffId != null || txtFullName != null)
             {
@@ -147,8 +147,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     staff_id = txtStaffId,
                     full_name = txtFullName
                 };
-                db.lecturers.Add(lecturer);
-                db.SaveChanges();
+                userRepository.InsertLecturer(lecturer);
+                userRepository.Save();
             }
 
             // Prevent user from editing the last Faculty board role

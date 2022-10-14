@@ -38,6 +38,21 @@ namespace TeachingAssignmentManagement.DAL
             return context.AspNetRoles.Find(id);
         }
 
+        public lecturer GetLecturerByID(string id)
+        {
+            return context.lecturers.Find(id);
+        }
+
+        public void InsertLecturer(lecturer lecturer)
+        {
+            context.lecturers.Add(lecturer);
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing)

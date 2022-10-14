@@ -9,7 +9,9 @@ namespace TeachingAssignmentManagement.DAL
     {
         IEnumerable GetUsers();
         IEnumerable<AspNetRole> GetRoles();
+        lecturer GetLecturerByID(string lecturerId);
         AspNetRole GetRoleByID(string roleId);
-
+        void InsertLecturer(lecturer lecturer);
+        void Save();
     }
 }
