@@ -15,6 +15,68 @@
         <div class="content-body">
             <!-- users list start -->
             <section class="app-user-list">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="card-body d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h3 class="fw-bolder mb-75" id="totalFBoard"></h3>
+                                    <span>Total Users</span>
+                                </div>
+                                <div class="avatar bg-light-primary p-50">
+                                    <span class="avatar-content">
+                                        <i data-feather="user" class="font-medium-4"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="card-body d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h3 class="fw-bolder mb-75" id="totalDHead"></h3>
+                                    <span>Paid Users</span>
+                                </div>
+                                <div class="avatar bg-light-danger p-50">
+                                    <span class="avatar-content">
+                                        <i data-feather="user-plus" class="font-medium-4"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="card-body d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h3 class="fw-bolder mb-75" id="totalLecturer"></h3>
+                                    <span>Active Users</span>
+                                </div>
+                                <div class="avatar bg-light-success p-50">
+                                    <span class="avatar-content">
+                                        <i data-feather="user-check" class="font-medium-4"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="card-body d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h3 class="fw-bolder mb-75" id="totalUnassigned"></h3>
+                                    <span>Pending Users</span>
+                                </div>
+                                <div class="avatar bg-light-warning p-50">
+                                    <span class="avatar-content">
+                                        <i data-feather="user-x" class="font-medium-4"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- list and filter start -->
                 <div class="card">
                     <div class="card-body border-bottom">
@@ -159,6 +221,15 @@
                 dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
                     cell.innerHTML = i + 1;
                 });
+                // Get user count
+                var countFBoard = dataTable.column(4).data().filter(function (value, index) { return value === "BCN khoa" ? true : false; }).length;
+                var countDHead = dataTable.column(4).data().filter(function (value, index) { return value === "Bộ môn" ? true : false; }).length;
+                var countLecturer = dataTable.column(4).data().filter(function (value, index) { return value === "Giảng viên" ? true : false; }).length;
+                var countUnassigned = dataTable.column(4).data().filter(function (value, index) { return value === "Chưa phân quyền" ? true : false; }).length;
+                $('#totalFBoard').text(countFBoard);
+                $('#totalDHead').text(countDHead);
+                $('#totalLecturer').text(countLecturer);
+                $('#totalUnassigned').text(countUnassigned);
             });
         });
 
