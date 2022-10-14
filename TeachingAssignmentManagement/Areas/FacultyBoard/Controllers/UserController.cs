@@ -54,7 +54,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.role_id = new SelectList(db.AspNetRoles, "id", "name");
+            ViewBag.role_id = new SelectList(userRepository.GetRoles(), "id", "name");
             return View(new lecturer());
         }
 
@@ -64,7 +64,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Declare variables
             string txtStaffId = SetNullOnEmpty(staff_id);
             string txtFullName = SetNullOnEmpty(full_name);
-            var role = db.AspNetRoles.Find(role_id);
+            var role = userRepository.GetRoleByID(role_id);
 
             // Get user information
             var user = new ApplicationUser
@@ -77,7 +77,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             var currentUser = UserManager.FindByEmail(user.Email);
             if (currentUser != null)
             {
-                return Json(new { error = true, message = "lỗi rồi ạ" }, JsonRequestBehavior.AllowGet);
+                return Json(new { error = true, message = "Người dùng đã có trong hệ thống!" }, JsonRequestBehavior.AllowGet);
             }
             else
             {

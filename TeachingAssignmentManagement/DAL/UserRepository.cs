@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using TeachingAssignmentManagement.Models;
 
@@ -25,6 +26,16 @@ namespace TeachingAssignmentManagement.DAL
                 query_lecturer.FirstOrDefault(l => l.id == u.Id).staff_id,
                 query_lecturer.FirstOrDefault(l => l.id == u.Id).full_name
             }).ToList();
+        }
+
+        public IEnumerable<AspNetRole> GetRoles()
+        {
+            return context.AspNetRoles;
+        }
+
+        public AspNetRole GetRoleByID(string id)
+        {
+            return context.AspNetRoles.Find(id);
         }
 
         private bool disposed = false;
