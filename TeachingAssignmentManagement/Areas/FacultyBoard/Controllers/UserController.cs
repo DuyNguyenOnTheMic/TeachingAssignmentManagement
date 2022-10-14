@@ -152,8 +152,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
 
             // Prevent user from editing the last faculty board role
-            int fBoardCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN khoa").Count();
-            if (fBoardCount <= 1 && oldRole == "BCN khoa" && role.Name != "BCN khoa")
+            int facultyBoardCount = userRepository.GetFacultyBoards().Count();
+            if (facultyBoardCount <= 1 && oldRole == "BCN khoa" && role.Name != "BCN khoa")
             {
                 return Json(new { error = true, message = "Bạn không thể sửa BCN khoa cuối cùng!" }, JsonRequestBehavior.AllowGet);
             }
@@ -180,8 +180,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             var role = UserManager.GetRoles(id).FirstOrDefault();
 
             // Prevent user from deleting the last faculty board role
-            int fBoardCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN khoa").Count();
-            if (fBoardCount <= 1 && role == "BCN khoa")
+            int facultyBoardCount = userRepository.GetFacultyBoards().Count();
+            if (facultyBoardCount <= 1 && role == "BCN khoa")
             {
                 return Json(new { error = true, message = "Bạn không thể xoá BCN khoa cuối cùng!" }, JsonRequestBehavior.AllowGet);
             }
