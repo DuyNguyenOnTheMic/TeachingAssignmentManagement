@@ -138,8 +138,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             var result = new IdentityResult();
 
             // Prevent user from deleting the last admin role
-            int adminCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN Khoa").Count();
-            if (adminCount <= 1 && role == "BCN Khoa")
+            int adminCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN khoa").Count();
+            if (adminCount <= 1 && role == "BCN khoa")
             {
                 return Json(new { result.Errors, message = "Bạn không thể xoá BCN khoa cuối cùng!" }, JsonRequestBehavior.AllowGet);
             }
