@@ -176,7 +176,10 @@
                     buttons: [
                         {
                             text: 'Thêm người dùng',
-                            className: 'createNew btn btn-primary'
+                            className: 'createNew btn btn-primary',
+                            attr: {
+                                'onclick': "PopupForm('@Url.Action("Create", "Major")')"
+                            },
                         }
                     ],
 
