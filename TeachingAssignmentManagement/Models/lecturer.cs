@@ -20,10 +20,9 @@ namespace TeachingAssignmentManagement.Models
             this.curriculum_class = new HashSet<curriculum_class>();
         }
     
-        public int id { get; set; }
+        public string id { get; set; }
         public string staff_id { get; set; }
         public string full_name { get; set; }
-        public string email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<curriculum_class> curriculum_class { get; set; }

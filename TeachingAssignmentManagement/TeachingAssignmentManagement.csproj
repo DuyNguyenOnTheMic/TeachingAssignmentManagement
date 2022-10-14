@@ -1969,6 +1969,8 @@
     <Content Include="app-assets\vendors\js\editors\quill\assets\snow\toolbar.styl" />
     <Content Include="app-assets\vendors\js\editors\quill\assets\snow\tooltip.styl" />
     <Content Include="Areas\FacultyBoard\Views\web.config" />
+    <Content Include="Areas\FacultyBoard\Views\User\Index.cshtml" />
+    <Content Include="Areas\FacultyBoard\Views\User\Edit.cshtml" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -1976,8 +1978,6 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\FacultyBoard\Views\User\Index.cshtml" />
-    <Content Include="Areas\FacultyBoard\Views\User\Edit.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />

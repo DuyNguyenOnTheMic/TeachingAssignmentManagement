@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CP25Team03Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CP25Team03Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -105,17 +105,16 @@
           <Property Name="note_2" Type="nvarchar(max)" />
           <Property Name="term_id" Type="int" Nullable="false" />
           <Property Name="major_id" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="lecturer_id" Type="int" />
+          <Property Name="lecturer_id" Type="nvarchar" MaxLength="128" />
           <Property Name="curriculum_id" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="lecturer">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="staff_id" Type="varchar" MaxLength="50" />
           <Property Name="full_name" Type="nvarchar" MaxLength="255" />
-          <Property Name="email" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="major">
           <Key>
@@ -294,7 +293,8 @@
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CP25Team03Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -397,7 +397,7 @@
           <Property Name="note_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="term_id" Type="Int32" Nullable="false" />
           <Property Name="major_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="lecturer_id" Type="Int32" />
+          <Property Name="lecturer_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="curriculum_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="curriculum" Relationship="Self.FK_curriculum_class_curriculum" FromRole="curriculum_class" ToRole="curriculum" />
           <NavigationProperty Name="lecturer" Relationship="Self.FK_curriculum_class_lecturer" FromRole="curriculum_class" ToRole="lecturer" />
@@ -408,10 +408,9 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="staff_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="curriculum_class" Relationship="Self.FK_curriculum_class_lecturer" FromRole="lecturer" ToRole="curriculum_class" />
         </EntityType>
         <EntityType Name="major">
@@ -675,7 +674,6 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="staff_id" ColumnName="staff_id" />
                 <ScalarProperty Name="full_name" ColumnName="full_name" />
-                <ScalarProperty Name="email" ColumnName="email" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

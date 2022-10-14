@@ -41,7 +41,7 @@ namespace TeachingAssignmentManagement.Models
         public string note_2 { get; set; }
         public int term_id { get; set; }
         public string major_id { get; set; }
-        public Nullable<int> lecturer_id { get; set; }
+        public string lecturer_id { get; set; }
         public string curriculum_id { get; set; }
     
         public virtual curriculum curriculum { get; set; }
