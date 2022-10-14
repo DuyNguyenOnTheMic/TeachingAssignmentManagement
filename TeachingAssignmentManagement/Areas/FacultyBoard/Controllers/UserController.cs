@@ -44,14 +44,14 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public JsonResult GetData()
         {
             // Get user data from datatabse
-            var query_studyResult = db.lecturers;
+            var query_lecturer = db.lecturers;
             return Json(db.AspNetUsers.Select(u => new
             {
                 id = u.Id,
                 email = u.Email,
                 role = u.AspNetRoles.FirstOrDefault().Name,
-                query_studyResult.FirstOrDefault(l => l.email == u.Email).staff_id,
-                query_studyResult.FirstOrDefault(l => l.email == u.Email).full_name
+                query_lecturer.FirstOrDefault(l => l.id == u.Id).staff_id,
+                query_lecturer.FirstOrDefault(l => l.id == u.Id).full_name
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
@@ -60,7 +60,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             // Get user role
             var query_user = UserManager.FindById(id);
-            var query_lecturer = db.lecturers.FirstOrDefault(l => l.email == query_user.Email);
+            var query_lecturer = db.lecturers.Find(id);
             if (query_user.Roles.Count > 0)
             {
                 // Set selected role
@@ -81,10 +81,10 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Declare variables
             string txtStaffId = SetNullOnEmpty(staff_id);
             string txtFullName = SetNullOnEmpty(full_name);
-            var oldUser = UserManager.FindByEmail(email);
-            var oldRole = UserManager.GetRoles(oldUser.Id).FirstOrDefault();
+            var userId = UserManager.FindByEmail(email).Id;
+            var oldRole = UserManager.GetRoles(userId).FirstOrDefault();
             var role = db.AspNetRoles.Find(role_id);
-            var query_lecturer = db.lecturers.FirstOrDefault(l => l.email == email);
+            var query_lecturer = db.lecturers.Find(userId);
             var result = new IdentityResult();
 
             if (query_lecturer != null)
@@ -99,9 +99,9 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 // Add a new lecturer
                 var lecturer = new lecturer
                 {
+                    id = userId,
                     staff_id = txtStaffId,
-                    full_name = txtFullName,
-                    email = email
+                    full_name = txtFullName
                 };
                 db.lecturers.Add(lecturer);
                 db.SaveChanges();
@@ -117,15 +117,14 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             if (oldRole == null)
             {
                 // Add user to role
-                result = UserManager.AddToRole(oldUser.Id, role.Name);
+                result = UserManager.AddToRole(userId, role.Name);
             }
             else
             {
                 // Update user role
-                UserManager.RemoveFromRole(oldUser.Id, oldRole);
-                result = UserManager.AddToRole(oldUser.Id, role.Name);
+                UserManager.RemoveFromRole(userId, oldRole);
+                result = UserManager.AddToRole(userId, role.Name);
             }
-
             return Json(new { result.Succeeded, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
