@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity.Owin;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
@@ -11,15 +12,18 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
     public class UserController : Controller
     {
         readonly CP25Team03Entities db = new CP25Team03Entities();
+        private readonly IUserRepository userRepository;
         private ApplicationUserManager _userManager;
 
         public UserController()
         {
+            this.userRepository = new UserRepository(new CP25Team03Entities());
         }
 
-        public UserController(ApplicationUserManager userManager)
+        public UserController(ApplicationUserManager userManager, IUserRepository userRepository)
         {
             UserManager = userManager;
+            this.userRepository = userRepository;
         }
 
         public ApplicationUserManager UserManager
@@ -44,15 +48,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public JsonResult GetData()
         {
             // Get user data from datatabse
-            var query_lecturer = db.lecturers;
-            return Json(db.AspNetUsers.Select(u => new
-            {
-                id = u.Id,
-                email = u.Email,
-                role = u.AspNetRoles.FirstOrDefault().Name,
-                query_lecturer.FirstOrDefault(l => l.id == u.Id).staff_id,
-                query_lecturer.FirstOrDefault(l => l.id == u.Id).full_name
-            }).ToList(), JsonRequestBehavior.AllowGet);
+            return Json(userRepository.GetUsers(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
