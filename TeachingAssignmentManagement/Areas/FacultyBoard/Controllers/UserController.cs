@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
 using System.Linq;
-using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.Models;
@@ -189,12 +187,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             int adminCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN khoa").Count();
             if (adminCount <= 1 && role == "BCN khoa")
             {
-                return Json(new { result.Errors, message = "Bạn không thể xoá BCN khoa cuối cùng!" }, JsonRequestBehavior.AllowGet);
+                return Json(new { error = true, message = "Bạn không thể xoá BCN khoa cuối cùng!" }, JsonRequestBehavior.AllowGet);
             }
 
             // Delete user
             UserManager.Delete(user);
-            return Json(new { result.Succeeded, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
         public static string SetNullOnEmpty(string value)
