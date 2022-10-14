@@ -60,7 +60,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             // Get user role
             var query_user = UserManager.FindById(id);
-            var query_lecturer = db.lecturers.Find(id);
             if (query_user.Roles.Count > 0)
             {
                 // Set selected role
@@ -72,7 +71,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 ViewBag.role_id = new SelectList(db.AspNetRoles, "id", "name");
             }
             ViewBag.email = query_user.Email;
-            return View(query_lecturer);
+            return View(db.lecturers.Find(id));
         }
 
         [HttpPost]
