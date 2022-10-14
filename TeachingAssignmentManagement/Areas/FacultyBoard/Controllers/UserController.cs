@@ -7,7 +7,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 {
-    [Authorize(Roles = "BCN Khoa")]
+    [Authorize(Roles = "BCN khoa")]
     public class UserController : Controller
     {
         readonly CP25Team03Entities db = new CP25Team03Entities();
@@ -108,8 +108,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
 
             // Prevent user from editing the last Faculty board role
-            int adminCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN Khoa").Count();
-            if (adminCount <= 1 && oldRole == "BCN Khoa" && role.Name != "BCN Khoa")
+            int adminCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN khoa").Count();
+            if (adminCount <= 1 && oldRole == "BCN khoa" && role.Name != "BCN khoa")
             {
                 return Json(new { result.Errors, message = "Bạn không thể sửa BCN khoa cuối cùng!" }, JsonRequestBehavior.AllowGet);
             }
