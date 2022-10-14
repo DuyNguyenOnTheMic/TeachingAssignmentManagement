@@ -58,6 +58,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            ViewBag.role_id = new SelectList(db.AspNetRoles, "id", "name");
             return View(new lecturer());
         }
 

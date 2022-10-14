@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("Edit", "User", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+@using (Html.BeginForm("Create", "User", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
 {
     <div class="mb-1">
         <label class="form-label font-small-4" for="staff_id">Mã giảng viên: </label>
@@ -20,7 +20,7 @@
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="email">Email: </label>
-        <input type="text" class="form-control" id="email" name="email" readonly="readonly" value="@ViewBag.email" />
+        <input type="text" class="form-control" id="email" name="email" placeholder="Nhập email" />
     </div>
 
     <div class="mb-1">
