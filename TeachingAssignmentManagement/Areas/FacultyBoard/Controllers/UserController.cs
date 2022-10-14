@@ -56,6 +56,57 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         }
 
         [HttpGet]
+        public ActionResult Create()
+        {
+            return View(new lecturer());
+        }
+
+        [HttpPost]
+        public ActionResult Create(string staff_id, string full_name, string email, string role_id)
+        {
+            // Declare variables
+            string txtStaffId = SetNullOnEmpty(staff_id);
+            string txtFullName = SetNullOnEmpty(full_name);
+            var userId = UserManager.FindByEmail(email).Id;
+            var oldRole = UserManager.GetRoles(userId).FirstOrDefault();
+            var role = db.AspNetRoles.Find(role_id);
+            var result = new IdentityResult();
+
+            if (txtStaffId != null || txtFullName != null)
+            {
+                // Add a new lecturer
+                var lecturer = new lecturer
+                {
+                    id = userId,
+                    staff_id = txtStaffId,
+                    full_name = txtFullName
+                };
+                db.lecturers.Add(lecturer);
+                db.SaveChanges();
+            }
+
+            // Prevent user from editing the last Faculty board role
+            int adminCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN khoa").Count();
+            if (adminCount <= 1 && oldRole == "BCN khoa" && role.Name != "BCN khoa")
+            {
+                return Json(new { result.Errors, message = "Bạn không thể sửa BCN khoa cuối cùng!" }, JsonRequestBehavior.AllowGet);
+            }
+
+            if (oldRole == null)
+            {
+                // Add user to role
+                result = UserManager.AddToRole(userId, role.Name);
+            }
+            else
+            {
+                // Update user role
+                UserManager.RemoveFromRole(userId, oldRole);
+                result = UserManager.AddToRole(userId, role.Name);
+            }
+            return Json(new { result.Succeeded, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public ActionResult Edit(string id)
         {
             // Get user role
