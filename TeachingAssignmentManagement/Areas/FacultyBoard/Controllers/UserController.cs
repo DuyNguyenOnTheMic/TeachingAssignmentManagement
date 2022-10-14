@@ -11,7 +11,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
     [Authorize(Roles = "BCN khoa")]
     public class UserController : Controller
     {
-        readonly CP25Team03Entities db = new CP25Team03Entities();
         private readonly IUserRepository userRepository;
         private ApplicationUserManager _userManager;
 
@@ -109,12 +108,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             if (query_user.Roles.Count > 0)
             {
                 // Set selected role
-                ViewBag.role_id = new SelectList(db.AspNetRoles, "id", "name", query_user.Roles.FirstOrDefault().RoleId);
+                ViewBag.role_id = new SelectList(userRepository.GetRoles(), "id", "name", query_user.Roles.FirstOrDefault().RoleId);
             }
             else
             {
                 // Populate new role select list
-                ViewBag.role_id = new SelectList(db.AspNetRoles, "id", "name");
+                ViewBag.role_id = new SelectList(userRepository.GetRoles(), "id", "name");
             }
             ViewBag.email = query_user.Email;
             return View(userRepository.GetLecturerByID(id));
@@ -206,7 +205,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     _userManager.Dispose();
                     _userManager = null;
                 }
-                db.Dispose();
+                userRepository.Dispose();
             }
 
             base.Dispose(disposing);
