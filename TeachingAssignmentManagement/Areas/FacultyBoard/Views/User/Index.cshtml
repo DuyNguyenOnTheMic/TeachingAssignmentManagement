@@ -176,7 +176,7 @@
                     buttons: [
                         {
                             text: 'Thêm người dùng',
-                            className: 'add-new btn btn-primary'
+                            className: 'createNew btn btn-primary'
                         }
                     ],
 
@@ -245,6 +245,7 @@
                                 .addClass("btn-close");
 
                             // Prevent user from add edit delete while dialog is populated
+                            $('.createNew').prop('disabled', true);
                             $('.editRow').each(function () {
                                 this.style.pointerEvents = 'none';
                             });
@@ -256,6 +257,7 @@
                             popup.dialog('destroy').remove();
 
                             // Re-enable buttons when user closes the dialog
+                            $('.createNew').prop('disabled', false);
                             $('.editRow').each(function () {
                                 this.style.pointerEvents = 'auto';
                             });
