@@ -11,8 +11,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
     [Authorize(Roles = "BCN khoa")]
     public class UserController : Controller
     {
-        private readonly IUserRepository userRepository;
         private ApplicationUserManager _userManager;
+        private readonly IUserRepository userRepository;
 
         public UserController()
         {
