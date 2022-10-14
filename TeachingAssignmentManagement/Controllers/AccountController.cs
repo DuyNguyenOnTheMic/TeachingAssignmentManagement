@@ -77,26 +77,27 @@ namespace TeachingAssignmentManagement.Controllers
 
             // Check if user exists
             var currentUser = await UserManager.FindByEmailAsync(user.Email);
+            ClaimsIdentity identity = (ClaimsIdentity)User.Identity;
             if (currentUser != null)
             {
                 if (currentUser.Roles.Count != 0)
                 {
                     // Add role claim to user
-                    ClaimsIdentity identity = (ClaimsIdentity)User.Identity;
-
                     var currentRole = await UserManager.GetRolesAsync(currentUser.Id);
                     identity.AddClaim(new Claim(ClaimTypes.Role, currentRole[0]));
-                    IOwinContext context = HttpContext.GetOwinContext();
-
-                    context.Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                    context.Authentication.SignIn(identity);
                 }
             }
             else
             {
                 // Create new user
+                string newUserRole = "Chưa phân quyền";
                 await UserManager.CreateAsync(user);
+                await UserManager.AddToRoleAsync(user.Id, newUserRole);
+                identity.AddClaim(new Claim(ClaimTypes.Role, newUserRole));
             }
+            IOwinContext context = HttpContext.GetOwinContext();
+            context.Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            context.Authentication.SignIn(identity);
 
             return RedirectToAction("Index", "Home");
         }
