@@ -151,9 +151,9 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 userRepository.Save();
             }
 
-            // Prevent user from editing the last Faculty board role
-            int adminCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN khoa").Count();
-            if (adminCount <= 1 && oldRole == "BCN khoa" && role.Name != "BCN khoa")
+            // Prevent user from editing the last faculty board role
+            int fBoardCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN khoa").Count();
+            if (fBoardCount <= 1 && oldRole == "BCN khoa" && role.Name != "BCN khoa")
             {
                 return Json(new { error = true, message = "Bạn không thể sửa BCN khoa cuối cùng!" }, JsonRequestBehavior.AllowGet);
             }
@@ -179,9 +179,9 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             var user = UserManager.FindById(id);
             var role = UserManager.GetRoles(id).FirstOrDefault();
 
-            // Prevent user from deleting the last admin role
-            int adminCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN khoa").Count();
-            if (adminCount <= 1 && role == "BCN khoa")
+            // Prevent user from deleting the last faculty board role
+            int fBoardCount = db.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN khoa").Count();
+            if (fBoardCount <= 1 && role == "BCN khoa")
             {
                 return Json(new { error = true, message = "Bạn không thể xoá BCN khoa cuối cùng!" }, JsonRequestBehavior.AllowGet);
             }
