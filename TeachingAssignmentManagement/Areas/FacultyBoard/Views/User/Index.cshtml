@@ -17,8 +17,14 @@
             <section class="app-user-list">
                 <!-- list and filter start -->
                 <div class="card">
+                    <div class="card-body border-bottom">
+                        <h4 class="card-title">Search & Filter</h4>
+                        <div class="row">
+                            <div class="col-md-4 user_role"></div>
+                        </div>
+                    </div>
                     <div class="card-datatable table-responsive pt-0">
-                        <table class="user-list-table table"  id="tblUser">
+                        <table class="user-list-table table" id="tblUser">
                             <thead class="table-light">
                                 <tr>
                                     <th></th>
@@ -121,6 +127,30 @@
 
                     language: {
                         'url': '@Url.Content("~/app-assets/language/vi.json")'
+                    },
+                    initComplete: function () {
+                        // Adding role filter once table initialized
+                        this.api()
+                            .columns(4)
+                            .every(function () {
+                                var column = this;
+                                var select = $(
+                                    '<select id="UserRole" class="form-select mb-md-0 mb-2"><option value=""> Chọn role để lọc </option></select>'
+                                )
+                                    .appendTo('.user_role')
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                                        column.search(val ? '^' + val + '$' : '', true, false).draw();
+                                    });
+
+                                column
+                                    .data()
+                                    .unique()
+                                    .sort()
+                                    .each(function (d, j) {
+                                        select.append('<option value="' + d + '" class="text-capitalize">' + d + '</option>');
+                                    });
+                            });
                     }
                 });
 
