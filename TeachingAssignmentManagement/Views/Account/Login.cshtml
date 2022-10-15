@@ -47,12 +47,7 @@
         <script src="~/app-assets/vendors/js/waves/waves.min.js"></script>
         <script type="text/javascript">
             Waves.init();
-            Waves.attach(
-                ".btn:not([class*='btn-relief-']):not([class*='btn-gradient-']):not([class*='btn-outline-']):not([class*='btn-flat-'])",
-                ['waves-float', 'waves-light']
-            );
-            Waves.attach("[class*='btn-outline-']");
-            Waves.attach("[class*='btn-flat-']");
+            Waves.attach(".btn", ['waves-float', 'waves-light']);
         </script>
     </body>
     <!-- END: Body-->
