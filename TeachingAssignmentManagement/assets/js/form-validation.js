@@ -36,7 +36,7 @@
     }
 
     // Form validation for user
-    var userForm = $('#major-form');
+    var userForm = $('#user-form');
     if (userForm.length) {
         userForm.validate({
             rules: {
