@@ -80,6 +80,24 @@
                                 <a class="d-flex align-items-center" href="@Url.Action("Index", "User", new { Area = "FacultyBoard" })"><i class="feather feather-user"></i><span class="menu-title text-truncate">Quản lý người dùng</span></a>
                             </li>
                         }
+                        else if (User.IsInRole("Bộ môn"))
+                        {
+                            <li class="nav-item @(ViewBag.Title == "Email" ? "active" : "")">
+                                <a class="d-flex align-items-center" href="@Url.Action("About", "Home", new { Area = "" })"><i class="feather feather-mail"></i><span class="menu-title text-truncate">Email</span></a>
+                            </li>
+                        }
+                        else if (User.IsInRole("Giảng viên"))
+                        {
+                            <li class="nav-item @(ViewBag.Title == "Email" ? "active" : "")">
+                                <a class="d-flex align-items-center" href="@Url.Action("About", "Home", new { Area = "" })"><i class="feather feather-mail"></i><span class="menu-title text-truncate">Email</span></a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item @(ViewBag.Title == "Email" ? "active" : "")">
+                                <a class="d-flex align-items-center" href="@Url.Action("About", "Home", new { Area = "" })"><i class="feather feather-mail"></i><span class="menu-title text-truncate">Email</span></a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
