@@ -21,45 +21,5 @@
     </div>
 }
 
-@Html.HtmlMinify(@<text>
-    <link rel="stylesheet" type="text/css" href="~/app-assets/css/plugins/forms/form-validation.min.css" />
-
-    <script type="text/javascript">
-        var jqForm = $('#jquery-val-form');
-        var regexp = "^[A-Za-z0-9_@@./#&+-]*$";
-
-        // Create custom regex check
-        jQuery.validator.addMethod("idCheck", function (value, element) {
-            var re = new RegExp(regexp);
-            return this.optional(element) || re.test(value);
-        });
-
-        // Form validation
-        if (jqForm.length) {
-            jqForm.validate({
-                rules: {
-                    id: {
-                        required: true,
-                        idCheck: true,
-                        maxlength: 50
-                    },
-                    name: {
-                        required: true,
-                        maxlength: 255
-                    }
-                },
-                messages: {
-                    id: {
-                        required: "Bạn chưa nhập mã ngành",
-                        idCheck: "Chỉ được nhập chữ cái không dấu và không có khoảng trắng!",
-                        maxlength: "Tối đa 50 kí tự được cho phép"
-                    },
-                    name: {
-                        required: "Bạn chưa nhập tên ngành",
-                        maxlength: "Tối đa 255 kí tự được cho phép"
-                    }
-                }
-            });
-        }
-    </script>
-</text>)
+<link rel="stylesheet" type="text/css" href="~/app-assets/css/plugins/forms/form-validation.min.css" />
+<script src="~/assets/js/form-validation.js"></script>
