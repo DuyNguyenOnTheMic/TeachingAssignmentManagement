@@ -31,47 +31,49 @@
     </div>
 }
 
-<link rel="stylesheet" type="text/css" href="~/app-assets/css/plugins/forms/form-validation.min.css" />
+@Html.HtmlMinify(@<text>
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css/plugins/forms/form-validation.min.css" />
 
-<script type="text/javascript">
-    var jqForm = $('#jquery-val-form');
-    var regexp = "^[A-Za-z0-9_@@./#&+-]*$";
+    <script type="text/javascript">
+        var jqForm = $('#jquery-val-form');
+        var regexp = "^[A-Za-z0-9_@@./#&+-]*$";
 
-    // Create custom regex check
-    jQuery.validator.addMethod("idCheck", function (value, element) {
-        var re = new RegExp(regexp);
-        return this.optional(element) || re.test(value);
-    });
-
-    // Form validation
-    if (jqForm.length) {
-        jqForm.validate({
-            rules: {
-                staff_id: {
-                    idCheck: true,
-                    maxlength: 50
-                },
-                full_name: {
-                    maxlength: 255
-                },
-                email: {
-                    required: true,
-                    email: true
-                }
-            },
-            messages: {
-                staff_id: {
-                    idCheck: "Chỉ được nhập chữ cái không dấu và không có khoảng trắng!",
-                    maxlength: "Tối đa 50 kí tự được cho phép!"
-                },
-                full_name: {
-                    maxlength: "Tối đa 255 kí tự được cho phép!"
-                },
-                email: {
-                    required: "Vui lòng điền email!",
-                    email: "Vui lòng nhập email hợp lệ!"
-                }
-            }
+        // Create custom regex check
+        jQuery.validator.addMethod("idCheck", function (value, element) {
+            var re = new RegExp(regexp);
+            return this.optional(element) || re.test(value);
         });
-    }
-</script>
+
+        // Form validation
+        if (jqForm.length) {
+            jqForm.validate({
+                rules: {
+                    staff_id: {
+                        idCheck: true,
+                        maxlength: 50
+                    },
+                    full_name: {
+                        maxlength: 255
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    }
+                },
+                messages: {
+                    staff_id: {
+                        idCheck: "Chỉ được nhập chữ cái không dấu và không có khoảng trắng!",
+                        maxlength: "Tối đa 50 kí tự được cho phép!"
+                    },
+                    full_name: {
+                        maxlength: "Tối đa 255 kí tự được cho phép!"
+                    },
+                    email: {
+                        required: "Vui lòng điền email!",
+                        email: "Vui lòng nhập email hợp lệ!"
+                    }
+                }
+            });
+        }
+    </script>
+</text>)

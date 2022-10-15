@@ -4,26 +4,26 @@
     Layout = null;
 }
 
+@using (Html.BeginForm("Create", "Major", FormMethod.Post, new { onsubmit = "return SubmitForm(this)", id = "jquery-val-form" }))
+{
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="id">Mã ngành: </label>
+        @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập mã ngành", @aria_label = "Nhập mã ngành" } })
+        @Html.ValidationMessageFor(model => model.id, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="name">Tên ngành: </label>
+        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tên ngành", @aria_label = "Nhập tên ngành" } })
+        @Html.ValidationMessageFor(model => model.name, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="float-end">
+        <button type="submit" class="btn btn-success waves-effect waves-float waves-light">Lưu</button>
+    </div>
+}
+
 @Html.HtmlMinify(@<text>
-    @using (Html.BeginForm("Create", "Major", FormMethod.Post, new { onsubmit = "return SubmitForm(this)", id = "jquery-val-form" }))
-    {
-        <div class="mb-1">
-            <label class="form-label font-small-4" for="id">Mã ngành: </label>
-            @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập mã ngành", @aria_label = "Nhập mã ngành" } })
-            @Html.ValidationMessageFor(model => model.id, null, new { @class = "text-danger" })
-        </div>
-
-        <div class="mb-1">
-            <label class="form-label font-small-4" for="name">Tên ngành: </label>
-            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tên ngành", @aria_label = "Nhập tên ngành" } })
-            @Html.ValidationMessageFor(model => model.name, null, new { @class = "text-danger" })
-        </div>
-
-        <div class="float-end">
-            <button type="submit" class="btn btn-success waves-effect waves-float waves-light">Lưu</button>
-        </div>
-    }
-
     <link rel="stylesheet" type="text/css" href="~/app-assets/css/plugins/forms/form-validation.min.css" />
 
     <script type="text/javascript">
