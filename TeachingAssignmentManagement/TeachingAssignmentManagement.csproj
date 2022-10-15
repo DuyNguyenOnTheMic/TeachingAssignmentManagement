@@ -1880,6 +1880,7 @@
     <Content Include="app-assets\vendors\js\unison-js\unison-js.min.js" />
     <Content Include="app-assets\vendors\js\vendors.min.js" />
     <Content Include="app-assets\vendors\js\waves\waves.min.js" />
+    <Content Include="assets\images\img_login_background.jpg" />
     <Content Include="assets\images\img_login_banner.svg" />
     <Content Include="assets\images\img_sidebar_background.jpg" />
     <Content Include="assets\images\img_vlu_logo.png" />
