@@ -48,7 +48,8 @@
         jqForm.validate({
             rules: {
                 staff_id: {
-                    idCheck: true
+                    idCheck: true,
+                    maxlength: 50
                 },
                 email: {
                     required: true,
@@ -56,6 +57,9 @@
                 }
             },
             messages: {
+                staff_id: {
+                    maxlength: "Tối đa 50 kí tự được cho phép!"
+                },
                 email: {
                     required: "Vui lòng điền email!",
                     email: "Vui lòng nhập email hợp lệ!"
