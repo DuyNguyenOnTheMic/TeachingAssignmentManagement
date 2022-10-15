@@ -1840,6 +1840,7 @@
     <Content Include="app-assets\vendors\js\forms\toggle\switchery.js" />
     <Content Include="app-assets\vendors\js\forms\toggle\switchery.min.js" />
     <Content Include="app-assets\vendors\js\forms\validation\jquery.validate.min.js" />
+    <Content Include="app-assets\vendors\js\forms\validation\jquery.validate.unobtrusive.min.js" />
     <Content Include="app-assets\vendors\js\forms\wizard\bs-stepper.min.js" />
     <Content Include="app-assets\vendors\js\hammer\hammer.min.js" />
     <Content Include="app-assets\vendors\js\internationalization\i18n-jquery.min.js" />
