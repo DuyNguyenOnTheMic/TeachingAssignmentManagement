@@ -34,4 +34,37 @@
             }
         });
     }
+
+    // Form validation for user
+    var userForm = $('#major-form');
+    if (userForm.length) {
+        userForm.validate({
+            rules: {
+                staff_id: {
+                    idCheck: true,
+                    maxlength: 50
+                },
+                full_name: {
+                    maxlength: 255
+                },
+                email: {
+                    required: true,
+                    email: true
+                }
+            },
+            messages: {
+                staff_id: {
+                    idCheck: "Chỉ được nhập chữ cái không dấu và không có khoảng trắng!",
+                    maxlength: "Tối đa 50 kí tự được cho phép!"
+                },
+                full_name: {
+                    maxlength: "Tối đa 255 kí tự được cho phép!"
+                },
+                email: {
+                    required: "Vui lòng điền email!",
+                    email: "Vui lòng nhập email hợp lệ!"
+                }
+            }
+        });
+    }
 });
