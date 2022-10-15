@@ -23,6 +23,14 @@ namespace TeachingAssignmentManagement
                        "~/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js",
                        "~/app-assets/vendors/js/tables/datatable/dataTables.bootstrap5.min.js"));
 
+            bundles.Add(new MyStyleBundle("~/Content/loginCss").Include(
+                        "~/app-assets/vendors/css/vendors.min.css",
+                        "~/app-assets/css/bootstrap.min.css",
+                        "~/app-assets/css/bootstrap-extended.min.css",
+                        "~/app-assets/css/colors.min.css",
+                        "~/app-assets/css/components.min.css",
+                        "~/app-assets/css/pages/authentication.min.css"));
+
             bundles.Add(new MyStyleBundle("~/Content/themeCss").Include(
                         "~/app-assets/vendors/css/vendors.min.css",
                         "~/app-assets/vendors/css/tables/datatable/dataTables.bootstrap5.min.css",

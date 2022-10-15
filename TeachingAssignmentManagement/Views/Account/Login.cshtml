@@ -15,8 +15,7 @@
     <meta name="author" content="PIXINVENT">
     <title>Login Page - Vuexy - Bootstrap HTML admin template</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
-    <link href="~/app-assets/css/pages/authentication.min.css" rel="stylesheet">
-    @Styles.Render("~/Content/themeCss")
+    @Styles.Render("~/Content/loginCss")
 </head>
 @Html.HtmlMinify(@<text>
     <!-- BEGIN: Body-->
@@ -35,7 +34,7 @@
                             <div class="card mb-0">
                                 <div class="card-body">
                                     <h2 class="text-center text-uppercase m-2">Website phân công giảng dạy VLU</h2>
-                                    <img class="w-100 p-2" src="~/assets/images/img_login_banner.svg" alt="Login welcome image"/>
+                                    <img class="w-100 p-2" src="~/assets/images/img_login_banner.svg" alt="Login welcome image" />
                                     @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
                                 </div>
                             </div>
@@ -45,8 +44,16 @@
                 </div>
             </div>
         </div>
-        @Scripts.Render("~/bundles/vendorJs")
-        @Scripts.Render("~/bundles/appJs")
+        <script src="~/app-assets/vendors/js/waves/waves.min.js"></script>
+        <script type="text/javascript">
+            Waves.init();
+            Waves.attach(
+                ".btn:not([class*='btn-relief-']):not([class*='btn-gradient-']):not([class*='btn-outline-']):not([class*='btn-flat-'])",
+                ['waves-float', 'waves-light']
+            );
+            Waves.attach("[class*='btn-outline-']");
+            Waves.attach("[class*='btn-flat-']");
+        </script>
     </body>
     <!-- END: Body-->
 </text>)
