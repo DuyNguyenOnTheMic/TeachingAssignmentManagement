@@ -34,7 +34,7 @@
                             <!-- Login basic -->
                             <div class="card mb-0">
                                 <div class="card-body">
-                                    <h1 class="text-center text-uppercase mb-1">Website phân công giảng dạy VLU</h1>
+                                    <h2 class="text-center text-uppercase m-2">Website phân công giảng dạy VLU</h2>
                                     <img class="w-100" src="~/assets/images/img_welcome.svg" alt="Login welcome image"/>
                                     @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
                                 </div>
@@ -45,10 +45,8 @@
                 </div>
             </div>
         </div>
-
         @Scripts.Render("~/bundles/vendorJs")
         @Scripts.Render("~/bundles/appJs")
-
     </body>
     <!-- END: Body-->
 </text>)
