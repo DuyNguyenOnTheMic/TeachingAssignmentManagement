@@ -38,7 +38,7 @@ namespace TeachingAssignmentManagement
                         "~/app-assets/vendors/css/extensions/sweetalert2.min.css",
                         "~/app-assets/css/plugins/extensions/ext-component-sweet-alerts.min.css"));
 
-            BundleTable.EnableOptimizations = true;
+            //BundleTable.EnableOptimizations = true;
         }
     }
 }
