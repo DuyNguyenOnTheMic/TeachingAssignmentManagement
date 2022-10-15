@@ -1883,6 +1883,7 @@
     <Content Include="assets\images\img_login_background.jpg" />
     <Content Include="assets\images\img_login_banner.svg" />
     <Content Include="assets\images\img_sidebar_background.jpg" />
+    <Content Include="assets\images\img_user_avatar.jpg" />
     <Content Include="assets\images\img_vlu_logo.png" />
     <Content Include="assets\images\img_vlu_name.png" />
     <Content Include="assets\images\img_welcome.svg" />
