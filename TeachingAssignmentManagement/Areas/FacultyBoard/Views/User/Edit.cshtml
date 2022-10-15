@@ -41,7 +41,7 @@
     jQuery.validator.addMethod("idCheck", function (value, element) {
         var re = new RegExp(regexp);
         return this.optional(element) || re.test(value);
-    }, "Chỉ được nhập chữ cái không dấu và không có khoảng trắng!");
+    });
 
     // Form validation
     if (jqForm.length) {
@@ -58,6 +58,7 @@
             },
             messages: {
                 staff_id: {
+                    idCheck: "Chỉ được nhập chữ cái không dấu và không có khoảng trắng!",
                     maxlength: "Tối đa 50 kí tự được cho phép!"
                 },
                 email: {
