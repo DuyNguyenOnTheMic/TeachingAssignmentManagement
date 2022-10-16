@@ -16,8 +16,9 @@
         @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tên ngành", @aria_label = "Nhập tên ngành" } })
     </div>
 
-    <div class="float-end">
-        <button type="submit" class="btn btn-success waves-effect waves-float waves-light">Lưu</button>
+    <div class="float-end m-1">
+        <button type="button" class="btn btn-outline-secondary waves-effect me-1" id="btnClose">Huỷ</button>
+        <button type="submit" class="btn btn-primary waves-effect waves-float waves-light">Lưu</button>
     </div>
 }
 

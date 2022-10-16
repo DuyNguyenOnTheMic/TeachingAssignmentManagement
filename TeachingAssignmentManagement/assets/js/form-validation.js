@@ -4,6 +4,11 @@
     var majorForm = $('#major-form'),
         userForm = $('#user-form');
 
+    // Close dialog on button click
+    $('#btnClose').click(function () {
+        $('.ui-dialog-titlebar-close').click();
+    });
+
     // Create custom regex check
     var regexp = "^[A-Za-z0-9_@@./#&+-]*$";
     jQuery.validator.addMethod("idCheck", function (value, element) {
