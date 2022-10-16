@@ -87,7 +87,7 @@
             $.connection.hub.start();
             // Notify while anyChanges
             hubNotif.client.updatedData = function () {
-                RefreshTable();
+                refreshTable();
             };
 
             // Populate Major datatable
@@ -105,7 +105,7 @@
                         { 'data': 'name' },
                         {
                             'data': 'id', 'render': function (data) {
-                                return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=PopupForm('@Url.Action("Edit","Major")/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' data-original-title='Delete' title='Delete' onclick=Delete('" + data + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
+                                return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=popupForm('@Url.Action("Edit","Major")/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' data-original-title='Delete' title='Delete' onclick=deleteMajor('" + data + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
                             }
                         }
                     ],
@@ -168,7 +168,7 @@
                             text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Add New Record',
                             className: 'createNew btn btn-primary',
                             attr: {
-                                'onclick': "PopupForm('@Url.Action("Create", "Major")')"
+                                'onclick': "popupForm('@Url.Action("Create", "Major")')"
                             }
                         }
                     ],
@@ -188,12 +188,12 @@
             });
         });
 
-        function RefreshTable() {
+        function refreshTable() {
             $('#tblMajor').DataTable().ajax.reload();
         }
 
         // Show Create and Edit form
-        function PopupForm(url) {
+        function popupForm(url) {
             var formDiv = $('<div/>')
             $.get(url)
                 .done(function (response) {
@@ -235,7 +235,7 @@
                 });
         }
 
-        function SubmitForm(form) {
+        function submitForm(form) {
             $.validator.unobtrusive.parse(form);
 
             if ($(form).valid()) {
@@ -269,7 +269,7 @@
             return false;
         }
 
-        function Delete(id) {
+        function deleteMajor(id) {
             Swal.fire({
                 title: 'Thông báo',
                 text: 'Bạn có chắc muốn xoá ngành này?',

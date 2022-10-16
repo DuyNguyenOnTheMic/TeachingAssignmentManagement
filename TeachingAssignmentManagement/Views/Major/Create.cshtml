@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("Create", "Major", FormMethod.Post, new { onsubmit = "return SubmitForm(this)", id = "major-form" }))
+@using (Html.BeginForm("Create", "Major", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "major-form" }))
 {
     <div class="mb-1">
         <label class="form-label font-small-4" for="id">Mã ngành: </label>
