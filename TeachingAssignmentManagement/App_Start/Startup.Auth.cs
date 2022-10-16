@@ -42,6 +42,8 @@ namespace TeachingAssignmentManagement
                     }
                 });
 
+            app.MapSignalR();
+
         }
 
         private static string EnsureTrailingSlash(string value)
