@@ -189,7 +189,7 @@
         });
 
         function refreshTable() {
-            $('#tblMajor').DataTable().ajax.reload();
+            dataTable.ajax.reload();
         }
 
         // Show Create and Edit form
@@ -246,7 +246,7 @@
                     success: function (data) {
                         if (data.success) {
                             popup.dialog('close');
-                            dataTable.ajax.reload();
+                            refreshTable();
 
                             // Show message when create or edit succeeded
                             toastr.options.positionClass = 'toast-bottom-right';
@@ -289,7 +289,7 @@
                         url: '@Url.Action("Delete", "Major")/' + id,
                         success: function (data) {
                             if (data.success) {
-                                dataTable.ajax.reload();
+                                refreshTable();
 
                                 // Show message when delete succeeded
                                 toastr.options.positionClass = 'toast-bottom-right';
