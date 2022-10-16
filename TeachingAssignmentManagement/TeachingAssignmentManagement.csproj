@@ -1867,6 +1867,7 @@
     <Content Include="app-assets\vendors\js\popper\popper.min.js" />
     <Content Include="app-assets\vendors\js\promises\promises.min.js" />
     <Content Include="app-assets\vendors\js\screenfull\screenfull.min.js" />
+    <Content Include="app-assets\vendors\js\signalr\jquery.signalR.min.js" />
     <Content Include="app-assets\vendors\js\tables\datatable\buttons.bootstrap5.min.js" />
     <Content Include="app-assets\vendors\js\tables\datatable\buttons.html5.min.js" />
     <Content Include="app-assets\vendors\js\tables\datatable\buttons.print.min.js" />
@@ -1920,7 +1921,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app-assets\vendors\css\tables\datatable\extensions\" />
-    <Folder Include="app-assets\vendors\js\signalr\" />
     <Folder Include="App_Data\" />
     <Folder Include="Areas\FacultyBoard\Data\" />
     <Folder Include="Areas\FacultyBoard\Views\Shared\" />
