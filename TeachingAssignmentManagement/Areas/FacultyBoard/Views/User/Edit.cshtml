@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("Edit", "User", FormMethod.Post, new { onsubmit = "return SubmitForm(this)", id = "user-form" }))
+@using (Html.BeginForm("Edit", "User", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "user-form" }))
 {
     <div class="mb-1">
         <label class="form-label font-small-4" for="staff_id">Mã giảng viên: </label>

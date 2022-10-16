@@ -139,7 +139,7 @@
                         { 'data': 'role' },
                         {
                             'data': 'id', 'render': function (data, type, row) {
-                                return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=PopupForm('@Url.Action("Edit","User")/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' data-original-title='Delete' title='Delete' onclick=Delete('" + data + "','" + row.email + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
+                                return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=popupForm('@Url.Action("Edit","User")/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' data-original-title='Delete' title='Delete' onclick=deleteUser('" + data + "','" + row.email + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
                             }
                         }
                     ],
@@ -178,8 +178,8 @@
                             text: 'Thêm người dùng',
                             className: 'createNew btn btn-primary',
                             attr: {
-                                'onclick': "PopupForm('@Url.Action("Create", "User")')"
-                            },
+                                'onclick': "popupForm('@Url.Action("Create", "User")')"
+                            }
                         }
                     ],
 
@@ -230,7 +230,7 @@
         });
 
         // Show Edit form
-        function PopupForm(url) {
+        function popupForm(url) {
             var formDiv = $('<div/>')
             $.get(url)
                 .done(function (response) {
@@ -272,7 +272,7 @@
                 });
         }
 
-        function SubmitForm(form) {
+        function submitForm(form) {
             $.validator.unobtrusive.parse(form);
 
             if ($(form).valid()) {
@@ -306,7 +306,7 @@
             return false;
         }
 
-        function Delete(id, email) {
+        function deleteUser(id, email) {
             Swal.fire({
                 title: 'Thông báo',
                 text: 'Bạn có chắc muốn xoá người dùng ' + email + ' này?',
