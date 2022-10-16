@@ -1,4 +1,9 @@
 ﻿$(function () {
+    'use strict';
+
+    var majorForm = $('#major-form'),
+        userForm = $('#user-form');
+
     // Create custom regex check
     var regexp = "^[A-Za-z0-9_@@./#&+-]*$";
     jQuery.validator.addMethod("idCheck", function (value, element) {
@@ -7,7 +12,6 @@
     });
 
     // Form validation for major
-    var majorForm = $('#major-form');
     if (majorForm.length) {
         majorForm.validate({
             rules: {
@@ -36,7 +40,6 @@
     }
 
     // Form validation for user
-    var userForm = $('#user-form');
     if (userForm.length) {
         userForm.validate({
             rules: {
