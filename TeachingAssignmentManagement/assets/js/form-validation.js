@@ -63,13 +63,13 @@
             messages: {
                 staff_id: {
                     idCheck: "Chỉ được nhập chữ cái không dấu và không có khoảng trắng!",
-                    maxlength: "Tối đa 50 kí tự được cho phép!"
+                    maxlength: "Tối đa 50 kí tự được cho phép"
                 },
                 full_name: {
-                    maxlength: "Tối đa 255 kí tự được cho phép!"
+                    maxlength: "Tối đa 255 kí tự được cho phép"
                 },
                 email: {
-                    required: "Vui lòng điền email!",
+                    required: "Bạn chưa nhập email",
                     email: "Vui lòng nhập email hợp lệ!"
                 }
             }
