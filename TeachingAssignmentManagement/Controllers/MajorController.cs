@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Hubs;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
@@ -45,6 +46,7 @@ namespace TeachingAssignmentManagement.Controllers
                 // Create new major
                 majorRepository.InsertMajor(major);
                 majorRepository.Save();
+                MajorHub.BroadcastData();
                 return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
             }
             catch
@@ -65,6 +67,7 @@ namespace TeachingAssignmentManagement.Controllers
             // Update major
             majorRepository.UpdateMajor(major);
             majorRepository.Save();
+            MajorHub.BroadcastData();
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
@@ -76,6 +79,7 @@ namespace TeachingAssignmentManagement.Controllers
                 // Delete major
                 majorRepository.DeleteMajor(id);
                 majorRepository.Save();
+                MajorHub.BroadcastData();
             }
             catch
             {

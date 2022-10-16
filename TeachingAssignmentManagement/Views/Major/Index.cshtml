@@ -75,10 +75,21 @@
     <script src="~/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
     <script src="~/app-assets/vendors/js/forms/validation/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/app-assets/vendors/js/jquery-ui/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signalr@2.4.3/jquery.signalR.min.js"></script>
+    <script src="~/signalr/hubs"></script>
 
     <script type="text/javascript">
         var popup, dataTable;
         $(document).ready(function () {
+            // Reference the hub
+            var hubNotif = $.connection.majorHub;
+            // Start the connection
+            $.connection.hub.start();
+            // Notify while anyChanges
+            hubNotif.client.updatedData = function () {
+                RefreshTable();
+            };
+
             // Populate Major datatable
             dataTable = $('#tblMajor').DataTable(
                 {
@@ -176,6 +187,10 @@
                 $('div.head-label').html('<h6 class="mb-0">Demo thử table nè</h6>');
             });
         });
+
+        function RefreshTable() {
+            $('#tblMajor').DataTable().ajax.reload();
+        }
 
         // Show Create and Edit form
         function PopupForm(url) {

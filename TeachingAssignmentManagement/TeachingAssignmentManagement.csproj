@@ -1920,6 +1920,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app-assets\vendors\css\tables\datatable\extensions\" />
+    <Folder Include="app-assets\vendors\js\signalr\" />
     <Folder Include="App_Data\" />
     <Folder Include="Areas\FacultyBoard\Data\" />
     <Folder Include="Areas\FacultyBoard\Views\Shared\" />
