@@ -93,11 +93,11 @@
             // Populate Major datatable
             dataTable = $('#tblMajor').DataTable(
                 {
-                     ajax: {
-                        dataSrc: '',
-                        type: 'POST',
+                    ajax: {
                         url: '@Url.Action("GetData", "Major")',
+                        type: 'GET',
                         dataType: 'json',
+                        dataSrc: ''
                     },
                     columns: [
                         { 'data': '', defaultContent: '' },

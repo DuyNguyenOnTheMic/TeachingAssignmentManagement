@@ -25,7 +25,6 @@ namespace TeachingAssignmentManagement.Controllers
             return View();
         }
 
-        [HttpPost]
         public JsonResult GetData()
         {
             // Get majors data from datatabse
