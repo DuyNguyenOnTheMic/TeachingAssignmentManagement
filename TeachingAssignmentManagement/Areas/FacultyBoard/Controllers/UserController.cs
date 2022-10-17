@@ -43,7 +43,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             return View();
         }
 
-        [HttpPost]
         public JsonResult GetData()
         {
             // Get user data from datatabse

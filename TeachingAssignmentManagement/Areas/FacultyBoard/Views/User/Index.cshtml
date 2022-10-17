@@ -124,11 +124,11 @@
             // Populate User datatable
             dataTable = $('#tblUser').DataTable(
                 {
-                     ajax: {
-                        dataSrc: '',
-                        type: 'POST',
+                    ajax: {
                         url: '@Url.Action("GetData", "User")',
-                        dataType: "json",
+                        type: 'GET',
+                        dataType: 'json',
+                        dataSrc: ''
                     },
                     columns: [
                         { 'data': '', defaultContent: '' },
