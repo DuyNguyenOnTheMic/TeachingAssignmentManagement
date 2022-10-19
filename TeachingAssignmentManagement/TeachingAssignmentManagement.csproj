@@ -229,8 +229,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\FacultyBoard\Controllers\MajorController.cs" />
     <Compile Include="DAL\IMajorRepository.cs" />
+    <Compile Include="DAL\ITermRepository.cs" />
     <Compile Include="DAL\IUserRepository.cs" />
     <Compile Include="DAL\MajorRepository.cs" />
+    <Compile Include="DAL\TermRepository.cs" />
     <Compile Include="DAL\UserRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
