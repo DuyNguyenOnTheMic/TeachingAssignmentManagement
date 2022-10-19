@@ -178,6 +178,13 @@
                             className: 'createNew btn btn-primary',
                             attr: {
                                 'onclick': "popupForm('@Url.Action("Create", "User")')"
+                            },
+                            init: function (api, node, config) {
+                                $(node).removeClass('btn-secondary');
+                                $(node).parent().removeClass('btn-group');
+                                setTimeout(function () {
+                                    $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex mt-50');
+                                }, 50);
                             }
                         }
                     ],
