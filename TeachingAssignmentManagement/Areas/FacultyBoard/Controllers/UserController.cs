@@ -37,7 +37,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
         }
 
-        // GET: Admin/Role
+        // GET: FacultyBoard/User
         public ActionResult Index()
         {
             return View();

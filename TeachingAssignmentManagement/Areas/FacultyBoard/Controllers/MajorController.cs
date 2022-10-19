@@ -20,6 +20,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             this.majorRepository = majorRepository;
         }
 
+        // GET: FacultyBoard/Major
         public ActionResult Index()
         {
             return View();
