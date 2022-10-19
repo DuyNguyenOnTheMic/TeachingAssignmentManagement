@@ -58,31 +58,15 @@
 <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/jquery-ui/jquery-ui.min.css">
 
 @section scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script src="~/app-assets/vendors/js/extensions/moment.min.js"></script>
     <script src="~/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
-    <script src="~/app-assets/vendors/js/tables/datatable/jszip.min.js"></script>
-    <script src="~/app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
-    <script src="~/app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
-    <script src="~/app-assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
-    <script src="~/app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
     <script src="~/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
     <script src="~/app-assets/vendors/js/forms/validation/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/app-assets/vendors/js/jquery-ui/jquery-ui.min.js"></script>
-    <script src="~/app-assets/vendors/js/signalr/jquery.signalR.min.js"></script>
-    <script src="~/signalr/hubs"></script>
 
     <script type="text/javascript">
         var popup, dataTable;
         $(document).ready(function () {
-            // Reference the hub
-            var hubNotif = $.connection.majorHub;
-            // Start the connection
-            $.connection.hub.start();
-            // Notify while anyChanges
-            hubNotif.client.updatedData = function () {
-                refreshTable();
-            };
-
             // Populate Major datatable
             dataTable = $('#tblMajor').DataTable(
                 {
@@ -123,49 +107,17 @@
                     lengthMenu: [7, 10, 25, 50, 75, 100],
                     buttons: [
                         {
-                            extend: 'collection',
-                            className: 'btn btn-outline-secondary dropdown-toggle me-2',
-                            text: feather.icons['share'].toSvg({ class: 'font-small-4 me-50' }) + 'Export',
-                            buttons: [
-                                {
-                                    extend: 'print',
-                                    className: 'dropdown-item'
-                                },
-                                {
-                                    extend: 'csv',
-                                    className: 'dropdown-item'
-                                },
-                                {
-                                    extend: 'excel',
-                                    className: 'dropdown-item',
-                                    title: '',
-                                    customize: function (xlsx) {
-                                        var sheet = xlsx.xl.worksheets['sheet1.xml'];
-                                        $('row:first c', sheet).attr('s', '42');
-                                    }
-                                },
-                                {
-                                    extend: 'pdf',
-                                    className: 'dropdown-item'
-                                },
-                                {
-                                    extend: 'copy',
-                                    className: 'dropdown-item'
-                                }
-                            ],
+                            text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Thêm ngành mới',
+                            className: 'createNew btn btn-primary',
+                            attr: {
+                                'onclick': "popupForm('@Url.Action("Create", "Major")')"
+                            },
                             init: function (api, node, config) {
                                 $(node).removeClass('btn-secondary');
                                 $(node).parent().removeClass('btn-group');
                                 setTimeout(function () {
                                     $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex mt-50');
                                 }, 50);
-                            }
-                        },
-                        {
-                            text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Thêm ngành mới',
-                            className: 'createNew btn btn-primary',
-                            attr: {
-                                'onclick': "popupForm('@Url.Action("Create", "Major")')"
                             }
                         }
                     ],
@@ -179,14 +131,9 @@
             dataTable.on('draw.dt', function () {
                 dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
                     cell.innerHTML = i + 1;
-                    dataTable.cell(cell).invalidate('dom');
                 });
             });
         });
-
-        function refreshTable() {
-            dataTable.ajax.reload();
-        }
 
         // Show Create and Edit form
         function popupForm(url) {
@@ -242,7 +189,7 @@
                     success: function (data) {
                         if (data.success) {
                             popup.dialog('close');
-                            refreshTable();
+                            dataTable.ajax.reload();
 
                             // Show message when create or edit succeeded
                             toastr.options.positionClass = 'toast-bottom-right';
@@ -285,7 +232,7 @@
                         url: '@Url.Action("Delete", "Major")/' + id,
                         success: function (data) {
                             if (data.success) {
-                                refreshTable();
+                                dataTable.ajax.reload();
 
                                 // Show message when delete succeeded
                                 toastr.options.positionClass = 'toast-bottom-right';
