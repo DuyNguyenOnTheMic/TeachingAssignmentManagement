@@ -138,7 +138,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="start_year" Type="datetime" Nullable="false" />
+          <Property Name="start_year" Type="int" Nullable="false" />
           <Property Name="end_year" Type="int" Nullable="false" />
           <Property Name="start_week" Type="int" Nullable="false" />
           <Property Name="start_date" Type="datetime" Nullable="false" />
@@ -436,7 +436,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="start_year" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="start_year" Type="Int32" Nullable="false" />
           <Property Name="end_year" Type="Int32" Nullable="false" />
           <Property Name="start_week" Type="Int32" Nullable="false" />
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />

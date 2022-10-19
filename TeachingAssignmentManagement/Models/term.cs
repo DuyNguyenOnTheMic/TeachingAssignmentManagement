@@ -21,7 +21,7 @@ namespace TeachingAssignmentManagement.Models
         }
     
         public int id { get; set; }
-        public System.DateTime start_year { get; set; }
+        public int start_year { get; set; }
         public int end_year { get; set; }
         public int start_week { get; set; }
         public System.DateTime start_date { get; set; }
