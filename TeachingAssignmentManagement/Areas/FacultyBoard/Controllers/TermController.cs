@@ -4,7 +4,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 {
-    [Authorize(Roles = "BCN Khoa")]
+    [Authorize(Roles = "BCN khoa")]
     public class TermController : Controller
     {
         private readonly ITermRepository termRepository;
@@ -30,6 +30,5 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Get majors data from datatabse
             return Json(termRepository.GetTerms(), JsonRequestBehavior.AllowGet);
         }
-
     }
 }
