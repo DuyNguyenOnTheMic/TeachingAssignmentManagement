@@ -3,7 +3,7 @@ using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Hubs;
 using TeachingAssignmentManagement.Models;
 
-namespace TeachingAssignmentManagement.Controllers
+namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 {
     [Authorize]
     public class MajorController : Controller

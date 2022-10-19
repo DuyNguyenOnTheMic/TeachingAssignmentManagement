@@ -226,7 +226,7 @@
     <Compile Include="Areas\FacultyBoard\FacultyBoardAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MajorController.cs" />
+    <Compile Include="Areas\FacultyBoard\Controllers\MajorController.cs" />
     <Compile Include="DAL\IMajorRepository.cs" />
     <Compile Include="DAL\IUserRepository.cs" />
     <Compile Include="DAL\MajorRepository.cs" />
@@ -1993,9 +1993,9 @@
     <None Include="packages.config" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Major\Index.cshtml" />
-    <Content Include="Views\Major\Create.cshtml" />
-    <Content Include="Views\Major\Edit.cshtml" />
+    <Content Include="Areas\FacultyBoard\Views\Major\Index.cshtml" />
+    <Content Include="Areas\FacultyBoard\Views\Major\Create.cshtml" />
+    <Content Include="Areas\FacultyBoard\Views\Major\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
