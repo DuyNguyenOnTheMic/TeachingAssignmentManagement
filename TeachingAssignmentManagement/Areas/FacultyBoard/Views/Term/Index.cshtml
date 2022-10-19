@@ -8,7 +8,7 @@
 <div class="app-content content ">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
-    <div class="content-wrapper container-xxl p-0">
+    <div class="content-wrapper p-0">
         <div class="content-header row">
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
@@ -27,14 +27,6 @@
                                 </li>
                             </ol>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
-                <div class="mb-1 breadcrumb-right">
-                    <div class="dropdown">
-                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="grid"></i></button>
-                        <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="app-todo.html"><i class="me-1" data-feather="check-square"></i><span class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i class="me-1" data-feather="message-square"></i><span class="align-middle">Chat</span></a><a class="dropdown-item" href="app-email.html"><i class="me-1" data-feather="mail"></i><span class="align-middle">Email</span></a><a class="dropdown-item" href="app-calendar.html"><i class="me-1" data-feather="calendar"></i><span class="align-middle">Calendar</span></a></div>
                     </div>
                 </div>
             </div>
@@ -60,15 +52,20 @@
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="home" aria-labelledby="home-tab" role="tabpanel">
-                                        <p>
-                                            Candy canes donut chupa chups candy canes lemon drops oat cake wafer. Cotton candy candy canes marzipan
-                                            carrot cake. Sesame snaps lemon drops candy marzipan donut brownie tootsie roll. Icing croissant bonbon
-                                            biscuit gummi bears. Pudding candy canes sugar plum cookie chocolate cake powder croissant.
-                                        </p>
-                                        <p>
-                                            Carrot cake tiramisu danish candy cake muffin croissant tart dessert. Tiramisu caramels candy canes
-                                            chocolate cake sweet roll liquorice icing cupcake. Candy cookie sweet roll bear claw sweet roll.
-                                        </p>
+                                        <div class="card-datatable table-responsive pt-0">
+                                            <table class="table" id="tblTerm">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Mã giảng viên</th>
+                                                        <th>Tên giảng viên</th>
+                                                        <th>Email</th>
+                                                        <th>Role</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
                                     </div>
                                     <div class="tab-pane" id="profile" aria-labelledby="profile-tab" role="tabpanel">
                                         <p>
