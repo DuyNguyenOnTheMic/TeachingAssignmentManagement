@@ -73,11 +73,11 @@
                             <li class="nav-item @(ViewBag.Title == "Contact" ? "active" : "")">
                                 <a class="d-flex align-items-center" href="@Url.Action("Contact", "Home", new { Area = "" })"><i class="feather feather-message-square"></i><span class="menu-title text-truncate">Chat</span></a>
                             </li>
-                            <li class="nav-item @(ViewBag.Title == "Quản lý ngành" ? "active" : "")">
-                                <a class="d-flex align-items-center" href="@Url.Action("Index", "Major", new { Area = "FacultyBoard" })"><i class="feather feather-book-open"></i><span class="menu-title text-truncate">Quản lý ngành học</span></a>
+                            <li class="nav-item @(ViewBag.Title == "Quản lý học kỳ" || ViewBag.Title == "Quản lý ngành" ? "active" : "")">
+                                <a class="d-flex align-items-center" href="@Url.Action("Index", "Major", new { Area = "FacultyBoard" })"><i class="feather feather-book-open"></i><span class="menu-title text-truncate">Ngành và học kỳ</span></a>
                             </li>
                             <li class="nav-item @(ViewBag.Title == "Quản lý người dùng" ? "active" : "")">
-                                <a class="d-flex align-items-center" href="@Url.Action("Index", "User", new { Area = "FacultyBoard" })"><i class="feather feather-user"></i><span class="menu-title text-truncate">Quản lý người dùng</span></a>
+                                <a class="d-flex align-items-center" href="@Url.Action("Index", "User", new { Area = "FacultyBoard" })"><i class="feather feather-user"></i><span class="menu-title text-truncate">Người dùng</span></a>
                             </li>
                         }
                         else if (User.IsInRole("Bộ môn"))
