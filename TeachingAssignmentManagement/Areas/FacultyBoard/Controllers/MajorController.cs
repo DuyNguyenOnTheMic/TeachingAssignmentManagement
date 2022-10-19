@@ -5,7 +5,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "BCN Khoa")]
     public class MajorController : Controller
     {
         private readonly IMajorRepository majorRepository;

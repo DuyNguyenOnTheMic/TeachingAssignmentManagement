@@ -4,6 +4,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 {
+    [Authorize(Roles = "BCN Khoa")]
     public class TermController : Controller
     {
         private readonly ITermRepository termRepository;
