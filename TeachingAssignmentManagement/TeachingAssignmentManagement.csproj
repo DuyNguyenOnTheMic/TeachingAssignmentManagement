@@ -238,6 +238,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlMinifierExtensions.cs" />
+    <Compile Include="Helpers\IdentityExtensions.cs" />
     <Compile Include="Hubs\MajorHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRole.cs">
