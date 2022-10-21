@@ -30,7 +30,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable<AspNetRole> GetRoles()
         {
-            return context.AspNetRoles;
+            return context.AspNetRoles.OrderBy(r => r.Id);
         }
 
         public AspNetRole GetRoleByID(string id)
