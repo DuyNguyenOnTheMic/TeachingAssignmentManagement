@@ -132,31 +132,38 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             var role = userRepository.GetRoleByID(role_id);
             var query_lecturer = userRepository.GetLecturerByID(userId);
 
-            if (query_lecturer != null)
-            {
-                // Edit lecturer info
-                query_lecturer.staff_id = txtStaffId;
-                query_lecturer.full_name = txtFullName;
-                userRepository.Save();
-            }
-            else if (txtStaffId != null || txtFullName != null)
-            {
-                // Add a new lecturer
-                var lecturer = new lecturer
-                {
-                    id = userId,
-                    staff_id = txtStaffId,
-                    full_name = txtFullName
-                };
-                userRepository.InsertLecturer(lecturer);
-                userRepository.Save();
-            }
-
             // Prevent user from editing the last faculty board role
             int facultyBoardCount = userRepository.GetFacultyBoards().Count();
             if (facultyBoardCount <= 1 && oldRole == "BCN khoa" && role.Name != "BCN khoa")
             {
                 return Json(new { error = true, message = "Bạn không thể sửa BCN khoa cuối cùng!" }, JsonRequestBehavior.AllowGet);
+            }
+
+            try
+            {
+                if (query_lecturer != null)
+                {
+                    // Edit lecturer info
+                    query_lecturer.staff_id = txtStaffId;
+                    query_lecturer.full_name = txtFullName;
+                    userRepository.Save();
+                }
+                else if (txtStaffId != null || txtFullName != null)
+                {
+                    // Add a new lecturer
+                    var lecturer = new lecturer
+                    {
+                        id = userId,
+                        staff_id = txtStaffId,
+                        full_name = txtFullName
+                    };
+                    userRepository.InsertLecturer(lecturer);
+                    userRepository.Save();
+                }
+            }
+            catch
+            {
+                return Json(new { error = true, message = "Mã giảng viên này đã có trong hệ thống!" }, JsonRequestBehavior.AllowGet);
             }
 
             if (oldRole == null)
