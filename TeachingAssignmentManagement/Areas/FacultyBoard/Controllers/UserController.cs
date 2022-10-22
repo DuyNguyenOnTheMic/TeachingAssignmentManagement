@@ -77,25 +77,28 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             {
                 return Json(new { error = true, message = "Người dùng đã có trong hệ thống!" }, JsonRequestBehavior.AllowGet);
             }
-            else
+            else if (txtStaffId != null || txtFullName != null)
             {
-                // Create new user
-                UserManager.Create(user);
-                UserManager.AddToRole(user.Id, role.Name);
-            }
-
-            if (txtStaffId != null || txtFullName != null)
-            {
-                // Add a new lecturer
-                var lecturer = new lecturer
+                try
                 {
-                    id = user.Id,
-                    staff_id = txtStaffId,
-                    full_name = txtFullName
-                };
-                userRepository.InsertLecturer(lecturer);
-                userRepository.Save();
+                    // Add a new lecturer
+                    var lecturer = new lecturer
+                    {
+                        id = user.Id,
+                        staff_id = txtStaffId,
+                        full_name = txtFullName
+                    };
+                    userRepository.InsertLecturer(lecturer);
+                    userRepository.Save();
+                }
+                catch
+                {
+                    return Json(new { error = true, message = "Mã giảng viên này đã có trong hệ thống!" }, JsonRequestBehavior.AllowGet);
+                }
             }
+            // Create new user
+            UserManager.Create(user);
+            UserManager.AddToRole(user.Id, role.Name);
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
