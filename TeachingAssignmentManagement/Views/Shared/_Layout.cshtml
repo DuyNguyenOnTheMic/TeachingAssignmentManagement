@@ -16,8 +16,8 @@
     <title>@ViewBag.Title</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
     <link href="~/app-assets/fonts/feather/iconfont.css" rel="stylesheet" />
-    @Styles.Render("~/Content/themeCss")
-    @Styles.Render("~/Content/extensionsCss")
+    @Styles.Render("~/Content/theme")
+    @Styles.Render("~/Content/extensions")
 </head>
 @Html.HtmlMinify(@<text>
     <!-- BEGIN: Body-->
@@ -132,10 +132,10 @@
                 </p>
             </font>
         </noscript>
-        @Scripts.Render("~/bundles/vendorJs")
-        @Scripts.Render("~/bundles/datatablesJs")
-        @Scripts.Render("~/bundles/appJs")
-        @Scripts.Render("~/bundles/extensionsJs")
+        @Scripts.Render("~/bundles/vendors")
+        @Scripts.Render("~/bundles/datatables")
+        @Scripts.Render("~/bundles/app")
+        @Scripts.Render("~/bundles/extensions")
         @RenderSection("scripts", required: false)
     </body>
     <!-- END: Body-->
