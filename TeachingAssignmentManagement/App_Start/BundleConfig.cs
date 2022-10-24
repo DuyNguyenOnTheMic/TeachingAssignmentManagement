@@ -19,9 +19,20 @@ namespace TeachingAssignmentManagement
                        "~/app-assets/vendors/js/extensions/toastr.min.js",
                        "~/app-assets/vendors/js/extensions/sweetalert2.min.js"));
 
+            bundles.Add(new MyScriptBundle("~/bundles/jqueryValJs").Include(
+                       "~/app-assets/vendors/js/forms/validation/jquery.validate.min.js",
+                       "~/app-assets/vendors/js/forms/validation/jquery.validate.unobtrusive.min.js"));
+
             bundles.Add(new MyScriptBundle("~/bundles/datatablesJs").Include(
                        "~/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js",
                        "~/app-assets/vendors/js/tables/datatable/dataTables.bootstrap5.min.js"));
+
+            bundles.Add(new MyScriptBundle("~/bundles/exportJs").Include(
+                       "~/app-assets/vendors/js/tables/datatable/jszip.min.js",
+                       "~/app-assets/vendors/js/tables/datatable/pdfmake.min.js",
+                       "~/app-assets/vendors/js/tables/datatable/vfs_fonts.js",
+                       "~/app-assets/vendors/js/tables/datatable/buttons.html5.min.js",
+                       "~/app-assets/vendors/js/tables/datatable/buttons.print.min.js"));
 
             bundles.Add(new MyStyleBundle("~/Content/loginCss").Include(
                         "~/app-assets/vendors/css/vendors.min.css",
