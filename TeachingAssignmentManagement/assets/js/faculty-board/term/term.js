@@ -3,11 +3,11 @@
 $(function () {
     'use strict';
 
-    // Populate User datatable
-    dataTable = $('#tblUser').DataTable(
+    // Populate Term datatable
+    dataTable = $('#tblTerm').DataTable(
         {
             ajax: {
-                url: 'User/GetData',
+                url: 'Term/GetData',
                 type: 'GET',
                 dataType: 'json',
                 dataSrc: ''
@@ -15,50 +15,39 @@ $(function () {
             deferRender: true,
             columns: [
                 { 'data': '', defaultContent: '' },
-                { 'data': 'staff_id' },
-                { 'data': 'full_name' },
-                { 'data': 'email' },
-                { 'data': 'role' },
+                { 'data': 'id' },
+                { 'data': 'start_year' },
+                { 'data': 'end_year' },
+                { 'data': 'start_week' },
+                { 'data': 'start_date' },
                 {
-                    'data': 'id', 'render': function (data, type, row) {
-                        return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=popupForm('User/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' data-original-title='Delete' title='Delete' onclick=deleteUser('" + data + "','" + row.email + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
+                    'data': 'id', 'render': function (data) {
+                        return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=popupForm('Term/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' data-original-title='Delete' title='Delete' onclick=deleteTerm('" + data + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
                     }
                 }
             ],
+
             columnDefs: [
-                {
-                    // User Role
-                    targets: 4,
-                    render: function (data, type, full, meta) {
-                        var $role = full['role'];
-                        var roleBadgeObj = {
-                            'BCN khoa': feather.icons['command'].toSvg({ class: 'font-medium-3 text-primary me-50' }),
-                            'Bộ môn': feather.icons['book'].toSvg({ class: 'font-medium-3 text-danger me-50' }),
-                            'Giảng viên': feather.icons['edit-2'].toSvg({ class: 'font-medium-3 text-success me-50' }),
-                            'Chưa phân quyền': feather.icons['help-circle'].toSvg({ class: 'font-medium-3 text-warning me-50' })
-                        };
-                        return "<span class='text-truncate align-middle'>" + roleBadgeObj[$role] + $role + '</span>';
-                    }
-                },
                 {
                     searchable: false,
                     orderable: false,
                     className: 'text-center',
-                    targets: [0, 5]
+                    targets: [0, 6]
                 },
                 { width: '5%', targets: 0 },
-                { width: '10%', targets: 5 }
+                { width: '10%', targets: 6 },
+                { render: DataTable.render.date(), targets: 5 }
             ],
-
-            order: [[3, 'asc']],
+            order: [[1, 'asc']],
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 ps-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "tất cả"]],
+            displayLength: 7,
+            lengthMenu: [7, 10, 25, 50, 75, 100],
             buttons: [
                 {
-                    text: 'Thêm người dùng',
+                    text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Thêm học kỳ mới',
                     className: 'createNew btn btn-primary',
                     attr: {
-                        'onclick': "popupForm('User/Create')"
+                        'onclick': "popupForm('Term/Create')"
                     },
                     init: function (api, node, config) {
                         $(node).removeClass('btn-secondary');
@@ -72,30 +61,6 @@ $(function () {
 
             language: {
                 'url': '/app-assets/language/vi.json'
-            },
-            initComplete: function () {
-                // Adding role filter once table initialized
-                this.api()
-                    .columns(4)
-                    .every(function () {
-                        var column = this;
-                        var select = $(
-                            '<select id="UserRole" class="form-select text-capitalize mb-md-0 mb-2"><option value=""> Chọn role để lọc </option></select>'
-                        )
-                            .appendTo('.user_role')
-                            .on('change', function () {
-                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                                column.search(val ? '^' + val + '$' : '', true, false).draw();
-                            });
-
-                        column
-                            .data()
-                            .unique()
-                            .sort()
-                            .each(function (d, j) {
-                                select.append('<option value="' + d + '" class="text-capitalize">' + d + '</option>');
-                            });
-                    });
             }
         });
 
@@ -104,19 +69,11 @@ $(function () {
         dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1;
         });
-        // Get user count
-        var countFBoard = dataTable.column(4).data().filter(function (value, index) { return value === "BCN khoa" ? true : false; }).length;
-        var countDHead = dataTable.column(4).data().filter(function (value, index) { return value === "Bộ môn" ? true : false; }).length;
-        var countLecturer = dataTable.column(4).data().filter(function (value, index) { return value === "Giảng viên" ? true : false; }).length;
-        var countUnassigned = dataTable.column(4).data().filter(function (value, index) { return value === "Chưa phân quyền" ? true : false; }).length;
-        $('#totalFBoard').text(countFBoard);
-        $('#totalDHead').text(countDHead);
-        $('#totalLecturer').text(countLecturer);
-        $('#totalUnassigned').text(countUnassigned);
     });
 });
 
-// Show Edit form
+
+// Show Create and Edit form
 function popupForm(url) {
     var formDiv = $('<div />')
     $.get(url)
@@ -126,7 +83,7 @@ function popupForm(url) {
             popup = formDiv.dialog({
                 autoOpen: true,
                 resizable: false,
-                title: 'Quản lý người dùng',
+                title: 'Quản lý học kỳ',
                 width: 550,
                 open: function () {
                     // Add close icon class
@@ -170,17 +127,17 @@ function submitForm(form) {
             success: function (data) {
                 if (data.success) {
                     popup.dialog('close');
-                    dataTable.ajax.reload(null, false);
+                    dataTable.ajax.reload();
 
-                    // Show message when edit succeeded
+                    // Show message when create or edit succeeded
                     toastr.options.positionClass = 'toast-bottom-right';
                     toastr["success"](data.message);
                 }
                 else {
-                    // Show message when edit failed
+                    // Show message when create failed
                     Swal.fire({
                         title: 'Thông báo',
-                        text: data.message,
+                        text: 'Mã ngành này đã tồn tại!',
                         icon: 'error',
                         customClass: {
                             confirmButton: 'btn btn-primary'
@@ -193,10 +150,10 @@ function submitForm(form) {
     return false;
 }
 
-function deleteUser(id, email) {
+function deleteTerm(id) {
     Swal.fire({
         title: 'Thông báo',
-        text: 'Bạn có chắc muốn xoá người dùng ' + email + ' này?',
+        text: 'Bạn có chắc muốn xoá học kỳ này?',
         icon: 'warning',
         showCancelButton: true,
         cancelButtonText: 'Huỷ',
@@ -210,10 +167,10 @@ function deleteUser(id, email) {
             // Delete item
             $.ajax({
                 type: 'POST',
-                url: 'User/Delete/' + id,
+                url: 'Term/Delete/' + id,
                 success: function (data) {
                     if (data.success) {
-                        dataTable.ajax.reload(null, false);
+                        dataTable.ajax.reload();
 
                         // Show message when delete succeeded
                         toastr.options.positionClass = 'toast-bottom-right';
@@ -223,7 +180,7 @@ function deleteUser(id, email) {
                         // Show message when delete failed
                         Swal.fire({
                             title: 'Thông báo',
-                            text: data.message,
+                            text: 'Không thể xoá do đã có sinh viên học ngành này!',
                             icon: 'error',
                             customClass: {
                                 confirmButton: 'btn btn-primary'
