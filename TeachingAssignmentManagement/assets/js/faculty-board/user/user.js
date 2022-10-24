@@ -71,7 +71,7 @@ $(function () {
             ],
 
             language: {
-                'url': '~/app-assets/language/vi.json")'
+                'url': '/app-assets/language/vi.json'
             },
             initComplete: function () {
                 // Adding role filter once table initialized
