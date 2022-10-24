@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="avatar bg-light-primary p-50">
                                     <span class="avatar-content">
-                                        <i data-feather="user" class="font-medium-4"></i>
+                                        <i data-feather="command" class="font-medium-4"></i>
                                     </span>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="avatar bg-light-danger p-50">
                                     <span class="avatar-content">
-                                        <i data-feather="user-plus" class="font-medium-4"></i>
+                                        <i data-feather="book" class="font-medium-4"></i>
                                     </span>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="avatar bg-light-success p-50">
                                     <span class="avatar-content">
-                                        <i data-feather="user-check" class="font-medium-4"></i>
+                                        <i data-feather="edit-2" class="font-medium-4"></i>
                                     </span>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="avatar bg-light-warning p-50">
                                     <span class="avatar-content">
-                                        <i data-feather="user-x" class="font-medium-4"></i>
+                                        <i data-feather="help-circle" class="font-medium-4"></i>
                                     </span>
                                 </div>
                             </div>
@@ -151,8 +151,8 @@
                                 var $role = full['role'];
                                 var roleBadgeObj = {
                                     'BCN khoa': feather.icons['command'].toSvg({ class: 'font-medium-3 text-primary me-50' }),
-                                    'Bộ môn': feather.icons['book-open'].toSvg({ class: 'font-medium-3 text-danger me-50' }),
-                                    'Giảng viên': feather.icons['edit-2'].toSvg({ class: 'font-medium-3 text-info me-50' }),
+                                    'Bộ môn': feather.icons['book'].toSvg({ class: 'font-medium-3 text-danger me-50' }),
+                                    'Giảng viên': feather.icons['edit-2'].toSvg({ class: 'font-medium-3 text-success me-50' }),
                                     'Chưa phân quyền': feather.icons['help-circle'].toSvg({ class: 'font-medium-3 text-warning me-50' })
                                 };
                                 return "<span class='text-truncate align-middle'>" + roleBadgeObj[$role] + $role + '</span>';
