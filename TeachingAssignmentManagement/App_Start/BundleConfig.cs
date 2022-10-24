@@ -34,7 +34,7 @@ namespace TeachingAssignmentManagement
                        "~/app-assets/vendors/js/tables/datatable/buttons.html5.min.js",
                        "~/app-assets/vendors/js/tables/datatable/buttons.print.min.js"));
 
-            bundles.Add(new MyStyleBundle("~/Content/login-css").Include(
+            bundles.Add(new MyStyleBundle("~/Content/login-theme").Include(
                         "~/app-assets/vendors/css/vendors.min.css",
                         "~/app-assets/css/bootstrap.min.css",
                         "~/app-assets/css/bootstrap-extended.min.css",
