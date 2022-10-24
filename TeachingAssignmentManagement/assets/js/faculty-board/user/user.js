@@ -7,7 +7,7 @@ $(function () {
     dataTable = $('#tblUser').DataTable(
         {
             ajax: {
-                url: '/User/GetData',
+                url: 'User/GetData',
                 type: 'GET',
                 dataType: 'json',
                 dataSrc: ''
@@ -21,7 +21,7 @@ $(function () {
                 { 'data': 'role' },
                 {
                     'data': 'id', 'render': function (data, type, row) {
-                        return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=popupForm('/User/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' data-original-title='Delete' title='Delete' onclick=deleteUser('" + data + "','" + row.email + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
+                        return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=popupForm('User/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' data-original-title='Delete' title='Delete' onclick=deleteUser('" + data + "','" + row.email + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
                     }
                 }
             ],
@@ -58,7 +58,7 @@ $(function () {
                     text: 'Thêm người dùng',
                     className: 'createNew btn btn-primary',
                     attr: {
-                        'onclick': "popupForm('/User/Create')"
+                        'onclick': "popupForm('User/Create')"
                     },
                     init: function (api, node, config) {
                         $(node).removeClass('btn-secondary');
@@ -210,7 +210,7 @@ function deleteUser(id, email) {
             // Delete item
             $.ajax({
                 type: 'POST',
-                url: '/User/Delete/' + id,
+                url: 'User/Delete/' + id,
                 success: function (data) {
                     if (data.success) {
                         dataTable.ajax.reload(null, false);
