@@ -1897,8 +1897,11 @@
     <Content Include="assets\images\img_vlu_name.png" />
     <Content Include="assets\images\img_welcome.svg" />
     <Content Include="assets\js\faculty-board\major\major.js" />
+    <Content Include="assets\js\faculty-board\major\major.min.js" />
     <Content Include="assets\js\faculty-board\term\term.js" />
+    <Content Include="assets\js\faculty-board\term\term.min.js" />
     <Content Include="assets\js\faculty-board\user\user.js" />
+    <Content Include="assets\js\faculty-board\user\user.min.js" />
     <Content Include="assets\js\form-validation.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
