@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Hubs;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
@@ -27,8 +28,30 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
         public JsonResult GetData()
         {
-            // Get majors data from datatabse
+            // Get terms data from datatabse
             return Json(termRepository.GetTerms(), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View(new term());
+        }
+
+        [HttpPost]
+        public ActionResult Create(term term)
+        {
+            try
+            {
+                // Create new major
+                termRepository.InsertTerm(term);
+                termRepository.Save();
+                return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new { error = true }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

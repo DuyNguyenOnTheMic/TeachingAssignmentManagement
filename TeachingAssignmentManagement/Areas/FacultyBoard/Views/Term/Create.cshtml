@@ -1,0 +1,52 @@
+﻿@model TeachingAssignmentManagement.Models.term
+
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("Create", "Term", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "term-form" }))
+{
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="id">Học kỳ: </label>
+        @Html.EditorFor(model => model.id, new { htmlAttributes = new { @type = "number", @class = "form-control", @placeholder = "Nhập học kỳ (VD: 221)", @aria_label = "Nhập học kỳ (VD: 221)" } })
+    </div>
+
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="name">Năm bắt đầu: </label>
+        @Html.EditorFor(model => model.start_year, new { htmlAttributes = new { @type = "number", @class = "form-control", @placeholder = "Nhập năm bắt đầu", @aria_label = "Nhập năm bắt đầu" } })
+    </div>
+
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="name">Năm kết thúc: </label>
+        @Html.EditorFor(model => model.end_year, new { htmlAttributes = new { @type = "number", @class = "form-control", @placeholder = "Nhập năm kết thúc", @aria_label = "Nhập năm kết thúc" } })
+    </div>
+
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="name">Tuần bắt đầu: </label>
+        <div class="input-group">
+            @Html.EditorFor(model => model.start_week, new { htmlAttributes = new { @type = "number", @class = "form-control touchspin", @aria_label = "Nhập tuần bắt đầu" } })
+        </div>
+    </div>
+
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="name">Ngày bắt đầu: </label>
+        @Html.EditorFor(model => model.start_date, new { htmlAttributes = new { @type = "date", @class = "form-control", @placeholder = "Nhập ngày bắt đầu", @aria_label = "Nhập ngày bắt đầu" } })
+    </div>
+
+    <div class="float-end m-1">
+        <button type="button" class="btn btn-outline-secondary waves-effect me-1" id="btnClose">Huỷ</button>
+        <button type="submit" class="btn btn-primary waves-effect waves-float waves-light">Lưu</button>
+    </div>
+}
+
+<link rel="stylesheet" type="text/css" href="~/app-assets/css/plugins/forms/form-validation.min.css" />
+<script src="~/assets/js/form-validation.min.js"></script>
+<script>
+    // Default Spin
+    $('.touchspin').TouchSpin({
+        buttondown_class: 'btn btn-primary',
+        buttonup_class: 'btn btn-primary',
+        buttondown_txt: feather.icons['minus'].toSvg(),
+        buttonup_txt: feather.icons['plus'].toSvg()
+    });
+</script>
