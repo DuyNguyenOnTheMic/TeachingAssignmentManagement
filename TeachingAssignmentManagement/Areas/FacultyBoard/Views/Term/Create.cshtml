@@ -12,24 +12,24 @@
     </div>
 
     <div class="mb-1">
-        <label class="form-label font-small-4" for="name">Năm bắt đầu: </label>
-        <input type="number" class="form-control" id="start_year" name="start_year" placeholder="Nhập năm bắt đầu" aria-label="Nhập năm bắt đầu" />
+        <label class="form-label font-small-4" for="start_year">Năm bắt đầu: </label>
+        <select class="form-select" id="start_year" name="start_year" aria-label="Nhập năm bắt đầu"></select>
     </div>
 
     <div class="mb-1">
-        <label class="form-label font-small-4" for="name">Năm kết thúc: </label>
+        <label class="form-label font-small-4" for="end_year">Năm kết thúc: </label>
         <input type="number" class="form-control" id="end_year" name="end_year" placeholder="Nhập năm kết thúc" aria-label="Nhập năm kết thúc" />
     </div>
 
     <div class="mb-1">
-        <label class="form-label font-small-4" for="name">Tuần bắt đầu: </label>
+        <label class="form-label font-small-4" for="start_week">Tuần bắt đầu: </label>
         <div class="input-group">
             <input type="number" class="touchspin-min-max" id="start_week" name="start_week" value="1" aria-label="Nhập tuần bắt đầu" />
         </div>
     </div>
 
     <div class="mb-1">
-        <label class="form-label font-small-4" for="name">Ngày bắt đầu: </label>
+        <label class="form-label font-small-4" for="start_date">Ngày bắt đầu: </label>
         <input type="text" class="form-control picker" id="start_date" name="start_date" placeholder="Nhập ngày bắt đầu" aria-label="Nhập ngày bắt đầu" />
     </div>
 
@@ -47,7 +47,16 @@
 <script>
 
     var touchspin = $('.touchspin'),
-        picker = $('.picker');
+        picker = $('.picker'),
+        startYear = $('#start_year');
+
+    //Determine the Current Year.
+    var currentYear = (new Date()).getFullYear();
+
+    //Loop and add the Year values to DropDownList.
+    for (var i = currentYear; i <= currentYear + 10; i++) {
+        startYear.append('<option value="' + i + '">' + i + '</option>');
+    }
 
     // Default Spin
     touchspin.TouchSpin({
