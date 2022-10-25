@@ -39,10 +39,7 @@
     </div>
 }
 
-<link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css" />
 <link rel="stylesheet" type="text/css" href="~/app-assets/css/plugins/forms/form-validation.min.css" />
-<link rel="stylesheet" type="text/css" href="~/app-assets/css/plugins/forms/pickers/form-flat-pickr.min.css" />
-<script src="~/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
 <script src="~/assets/js/form-validation.min.js"></script>
 <script>
 
@@ -50,10 +47,10 @@
         picker = $('.picker'),
         startYear = $('#start_year');
 
-    //Determine the Current Year.
+    // Determine the current year.
     var currentYear = (new Date()).getFullYear();
 
-    //Loop and add the Year values to DropDownList.
+    // Loop and add the year values to dropDownList.
     for (var i = currentYear; i <= currentYear + 10; i++) {
         startYear.append('<option value="' + i + '">' + i + '</option>');
     }
