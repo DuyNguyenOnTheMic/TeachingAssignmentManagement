@@ -7,7 +7,7 @@ $(function () {
     dataTable = $('#tblTerm').DataTable(
         {
             ajax: {
-                url: 'Term/GetData',
+                url: '/FacultyBoard/Term/GetData',
                 type: 'GET',
                 dataType: 'json',
                 dataSrc: ''
@@ -22,7 +22,7 @@ $(function () {
                 { 'data': 'start_date' },
                 {
                     'data': 'id', 'render': function (data) {
-                        return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=popupForm('Term/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' data-original-title='Delete' title='Delete' onclick=deleteTerm('" + data + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
+                        return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=popupForm('/FacultyBoard/Term/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' data-original-title='Delete' title='Delete' onclick=deleteTerm('" + data + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
                     }
                 }
             ],
@@ -47,7 +47,7 @@ $(function () {
                     text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Thêm học kỳ mới',
                     className: 'createNew btn btn-primary',
                     attr: {
-                        'onclick': "popupForm('Term/Create')"
+                        'onclick': "popupForm('/FacultyBoard/Term/Create')"
                     },
                     init: function (api, node, config) {
                         $(node).removeClass('btn-secondary');
@@ -167,7 +167,7 @@ function deleteTerm(id) {
             // Delete item
             $.ajax({
                 type: 'POST',
-                url: 'Term/Delete/' + id,
+                url: '/FacultyBoard/Term/Delete/' + id,
                 success: function (data) {
                     if (data.success) {
                         dataTable.ajax.reload();
