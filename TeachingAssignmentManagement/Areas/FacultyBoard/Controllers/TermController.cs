@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
@@ -80,6 +79,22 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                // Delete major
+                termRepository.DeleteTerm(id);
+                termRepository.Save();
+            }
+            catch
+            {
+                return Json(new { error = true }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
         public List<SelectListItem> PopulateYears(int startYear)
         {
             // Create year select list
@@ -90,6 +105,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 years.Add(new SelectListItem() { Text = sYear, Value = sYear });
             }
             return years;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            termRepository.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
