@@ -45,6 +45,7 @@ namespace TeachingAssignmentManagement
             bundles.Add(new MyStyleBundle("~/Content/theme").Include(
                         "~/app-assets/vendors/css/vendors.min.css",
                         "~/app-assets/vendors/css/tables/datatable/dataTables.bootstrap5.min.css",
+                        "~/app-assets/vendors/css/forms/select/select2.min.css",
                         "~/app-assets/css/bootstrap.min.css",
                         "~/app-assets/css/bootstrap-extended.min.css",
                         "~/app-assets/css/colors.min.css",

@@ -13,12 +13,12 @@
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="start_year">Năm bắt đầu: </label>
-        <select class="form-select" id="start_year" name="start_year" aria-label="Nhập năm bắt đầu"></select>
+        <select class="year-select form-select" id="start_year" name="start_year" aria-label="Chọn năm bắt đầu"></select>
     </div>
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="end_year">Năm kết thúc: </label>
-        <input type="number" class="form-control" id="end_year" name="end_year" placeholder="Nhập năm kết thúc" aria-label="Nhập năm kết thúc" />
+        <select class="year-select form-control" id="end_year" name="end_year" aria-label="Chọn năm kết thúc"></select>
     </div>
 
     <div class="mb-1">
@@ -43,17 +43,25 @@
 <script src="~/assets/js/form-validation.min.js"></script>
 <script>
 
-    var touchspin = $('.touchspin'),
-        picker = $('.picker'),
-        startYear = $('#start_year');
+    var yearSelect = $('.year-select'),
+        touchspin = $('.touchspin'),
+        picker = $('.picker');
 
-    // Determine the current year.
     var currentYear = (new Date()).getFullYear();
-
-    // Loop and add the year values to dropDownList.
-    for (var i = currentYear; i <= currentYear + 10; i++) {
-        startYear.append('<option value="' + i + '">' + i + '</option>');
-    }
+    yearSelect.each(function () {
+        // Select2 without search bar
+        var $this = $(this);
+        $this.wrap('<div class="position-relative"></div>');
+        $this.select2({
+            dropdownAutoWidth: true,
+            dropdownParent: $this.parent(),
+            minimumResultsForSearch: Infinity
+        });
+        // Create year dropDownList.
+        for (var i = currentYear; i <= currentYear + 10; i++) {
+            $this.append('<option value="' + i + '">' + i + '</option>');
+        }
+    });
 
     // Default Spin
     touchspin.TouchSpin({
@@ -91,7 +99,7 @@
     }
 
     // Custom vietnamese language for flatpickr
-    var customLocale = {
+    const vn = {
         weekdays: {
             shorthand: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
             longhand: [
@@ -141,7 +149,7 @@
     // Picker
     if (picker.length) {
         picker.flatpickr({
-            locale: customLocale,
+            locale: vn,
             formatDate: dateObj => dateObj.toLocaleDateString(),
             onReady: function (selectedDates, dateStr, instance) {
                 if (instance.isMobile) {
