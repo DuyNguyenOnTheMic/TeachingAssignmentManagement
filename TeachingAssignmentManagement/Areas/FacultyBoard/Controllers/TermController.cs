@@ -42,7 +42,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             try
             {
-                // Create new major
+                // Create new term
                 termRepository.InsertTerm(term);
                 termRepository.Save();
                 return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
@@ -62,7 +62,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         [HttpPost]
         public ActionResult Edit(term term)
         {
-            // Update major
+            // Update term
             termRepository.UpdateTerm(term);
             termRepository.Save();
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
