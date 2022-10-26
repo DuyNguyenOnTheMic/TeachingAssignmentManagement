@@ -13,12 +13,12 @@
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="start_year">Năm bắt đầu: </label>
-        @Html.EditorFor(model => model.start_year, new { htmlAttributes = new { @type = "number", @class = "form-control", @placeholder = "Nhập năm bắt đầu", @aria_label = "Nhập năm bắt đầu" } })
+        @Html.DropDownList("start_year", null, htmlAttributes: new { @class = "year-select form-select", @aria_label = "Chọn năm bắt đầu" })
     </div>
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="end_year">Năm kết thúc: </label>
-        @Html.EditorFor(model => model.end_year, new { htmlAttributes = new { @type = "number", @class = "form-control", @placeholder = "Nhập năm kết thúc", @aria_label = "Nhập năm kết thúc" } })
+        @Html.DropDownList("end_year", null, htmlAttributes: new { @class = "year-select form-select", @aria_label = "Chọn năm kết thúc" })
     </div>
 
     <div class="mb-1">
