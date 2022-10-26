@@ -8,7 +8,7 @@
 {
     <div class="mb-1">
         <label class="form-label font-small-4" for="id">Học kỳ: </label>
-        <input type="number" class="form-control" id="id" name="id" placeholder="Nhập học kỳ (VD: 221)" aria-label="Nhập học kỳ (VD: 221)" disabled />
+        @Html.EditorFor(model => model.id, new { htmlAttributes = new { @type = "number", @class = "form-control", @aria_label = "Nhập học kỳ (VD: 221)", @disabled = "@disabled" } })
     </div>
 
     <div class="mb-1">
@@ -24,13 +24,13 @@
     <div class="mb-1">
         <label class="form-label font-small-4" for="start_week">Tuần bắt đầu: </label>
         <div class="input-group">
-            <input type="number" class="touchspin-min-max" id="start_week" name="start_week" value="1" aria-label="Nhập tuần bắt đầu" />
+            @Html.EditorFor(model => model.start_week, new { htmlAttributes = new { @type = "number", @class = "touchspin-min-max", @aria_label = "Nhập tuần bắt đầu" } })
         </div>
     </div>
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="start_date">Ngày bắt đầu: </label>
-        <input type="text" class="form-control picker" id="start_date" name="start_date" placeholder="Nhập ngày bắt đầu" aria-label="Nhập ngày bắt đầu" />
+        @Html.EditorFor(model => model.start_date, new { htmlAttributes = new { @class = "form-control picker", @placeholder = "Chọn ngày bắt đầu", @aria_label = "Chọn ngày bắt đầu" } })
     </div>
 
     <div class="float-end m-1">
@@ -151,11 +151,18 @@
         picker.flatpickr({
             locale: vn,
             formatDate: dateObj => dateObj.toLocaleDateString(),
+            defaultDate: toDate('#start_date'),
             onReady: function (selectedDates, dateStr, instance) {
                 if (instance.isMobile) {
                     $(instance.mobileInput).attr('step', null);
                 }
             },
         });
+    }
+
+    // Convert string to date
+    function toDate(selector) {
+        var from = $(selector).val().split("/")
+        return new Date(from[2], from[1] - 1, from[0])
     }
 </script>
