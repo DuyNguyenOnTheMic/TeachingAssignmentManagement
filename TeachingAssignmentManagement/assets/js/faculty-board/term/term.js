@@ -14,7 +14,6 @@ $(function () {
             },
             deferRender: true,
             columns: [
-                { 'data': '', defaultContent: '' },
                 { 'data': 'id' },
                 { 'data': 'start_year' },
                 { 'data': 'end_year' },
@@ -31,12 +30,11 @@ $(function () {
                 {
                     searchable: false,
                     orderable: false,
-                    className: 'text-center',
-                    targets: [0, 6]
+                    width: '10%',
+                    targets: 5
                 },
-                { width: '5%', targets: 0 },
-                { width: '10%', targets: 6 },
-                { render: DataTable.render.date(), targets: 5 }
+                { className: 'text-center', targets: [0, 1, 2, 3, 4, 5] },
+                { render: DataTable.render.date(), targets: 4 }
             ],
             order: [[1, 'asc']],
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 ps-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
@@ -63,13 +61,6 @@ $(function () {
                 'url': '/app-assets/language/vi.json'
             }
         });
-
-    // Create Index column datatable
-    dataTable.on('draw.dt', function () {
-        dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-            cell.innerHTML = i + 1;
-        });
-    });
 });
 
 
