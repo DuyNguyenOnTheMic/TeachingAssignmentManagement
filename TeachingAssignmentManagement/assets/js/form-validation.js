@@ -10,7 +10,7 @@
     });
 
     // Create custom regex check
-    var regexp = "^[a-zA-Z0-9]*$";
+    var regexp = "^[a-zA-Z0-9_-]*$";
     jQuery.validator.addMethod("idCheck", function (value, element) {
         var re = new RegExp(regexp);
         return this.optional(element) || re.test(value);
