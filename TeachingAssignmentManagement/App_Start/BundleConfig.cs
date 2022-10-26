@@ -17,7 +17,8 @@ namespace TeachingAssignmentManagement
 
             bundles.Add(new MyScriptBundle("~/bundles/extensions").Include(
                        "~/app-assets/vendors/js/extensions/toastr.min.js",
-                       "~/app-assets/vendors/js/extensions/sweetalert2.min.js"));
+                       "~/app-assets/vendors/js/extensions/sweetalert2.min.js",
+                       "~/app-assets/vendors/js/forms/select/select2.full.min.js"));
 
             bundles.Add(new MyScriptBundle("~/bundles/jqueryval").Include(
                        "~/app-assets/vendors/js/forms/validation/jquery.validate.min.js",
