@@ -30,7 +30,7 @@
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="start_date">Ngày bắt đầu: </label>
-        <input type="text" class="form-control picker flatpickr-input" id="start_date" name="start_date" placeholder="Chọn ngày bắt đầu" aria-label="Chọn ngày bắt đầu" />
+        @Html.EditorFor(model => model.start_date, new { htmlAttributes = new { @class = "form-control picker flatpickr-input", @placeholder = "Chọn ngày bắt đầu", @aria_label = "Chọn ngày bắt đầu" } })
     </div>
 
     <div class="float-end m-1">
@@ -150,9 +150,9 @@
     if (picker.length) {
         picker.flatpickr({
             locale: vn,
-            dateFormat: "d/m/y",
             altInput: true,
             altFormat: "j F, Y",
+            dateFormat: "d/m/y",
             defaultDate: toDate('#start_date'),
             onReady: function (selectedDates, dateStr, instance) {
                 if (instance.isMobile) {
@@ -164,7 +164,8 @@
 
     // Convert string to date
     function toDate(selector) {
-        var from = $(selector).val().split("-");
-        return new Date(from[0], from[1] - 1, from[2]);
+        var from = $(selector).val().split("/");
+        alert(from);
+        return new Date(from[2], from[1] - 1, from[0]);
     }
 </script>
