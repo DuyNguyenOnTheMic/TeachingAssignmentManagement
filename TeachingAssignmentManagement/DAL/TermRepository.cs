@@ -27,7 +27,7 @@ namespace TeachingAssignmentManagement.DAL
             }).ToList();
         }
 
-        public term GetTermByID(string id)
+        public term GetTermByID(int id)
         {
             return context.terms.Find(id);
         }
@@ -37,7 +37,7 @@ namespace TeachingAssignmentManagement.DAL
             context.terms.Add(term);
         }
 
-        public void DeleteTerm(string termId)
+        public void DeleteTerm(int termId)
         {
             term term = context.terms.Find(termId);
             context.terms.Remove(term);

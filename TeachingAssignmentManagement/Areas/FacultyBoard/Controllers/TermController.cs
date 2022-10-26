@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
-using TeachingAssignmentManagement.Hubs;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
@@ -52,6 +51,21 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             {
                 return Json(new { error = true }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            return View(termRepository.GetTermByID(id));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(term term)
+        {
+            // Update major
+            termRepository.UpdateTerm(term);
+            termRepository.Save();
+            return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
     }
 }

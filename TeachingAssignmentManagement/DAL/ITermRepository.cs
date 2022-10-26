@@ -7,9 +7,9 @@ namespace TeachingAssignmentManagement.DAL
     public interface ITermRepository : IDisposable
     {
         IEnumerable GetTerms();
-        term GetTermByID(string termId);
+        term GetTermByID(int termId);
         void InsertTerm(term term);
-        void DeleteTerm(string termId);
+        void DeleteTerm(int termId);
         void UpdateTerm(term term);
         void Save();
     }
