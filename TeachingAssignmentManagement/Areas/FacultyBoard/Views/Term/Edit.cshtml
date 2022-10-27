@@ -152,8 +152,10 @@
             locale: vn,
             altInput: true,
             altFormat: "j F, Y",
-            dateFormat: "d/m/y",
             defaultDate: toDate('#start_date'),
+            parseDate: (datestr, format) => {
+                return new Date(datestr.replace(/(\d{2})-(\d{2})-(\d{4})/, "$1/$2/$3"));
+            },
             onReady: function (selectedDates, dateStr, instance) {
                 if (instance.isMobile) {
                     $(instance.mobileInput).attr('step', null);
