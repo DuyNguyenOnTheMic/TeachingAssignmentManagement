@@ -1426,23 +1426,6 @@
     <Folder Include="Areas\FacultyBoard\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app-assets\data\ajax.php" />
-    <Content Include="app-assets\data\fullcalendar\json\events.json" />
-    <Content Include="app-assets\data\fullcalendar\php\get-events.php" />
-    <Content Include="app-assets\data\fullcalendar\php\get-timezones.php" />
-    <Content Include="app-assets\data\fullcalendar\php\utils.php" />
-    <Content Include="app-assets\data\invoice-list.json" />
-    <Content Include="app-assets\data\jstree-data.json" />
-    <Content Include="app-assets\data\kanban.json" />
-    <Content Include="app-assets\data\locales\de.json" />
-    <Content Include="app-assets\data\locales\en.json" />
-    <Content Include="app-assets\data\locales\fr.json" />
-    <Content Include="app-assets\data\locales\pt.json" />
-    <Content Include="app-assets\data\permissions-list.json" />
-    <Content Include="app-assets\data\projects-list.json" />
-    <Content Include="app-assets\data\search.json" />
-    <Content Include="app-assets\data\table-datatable.json" />
-    <Content Include="app-assets\data\user-list.json" />
     <Content Include="app-assets\fonts\feather\fonts\feather.eot" />
     <Content Include="app-assets\fonts\feather\fonts\feather.ttf" />
     <Content Include="app-assets\fonts\feather\fonts\feather.woff" />
