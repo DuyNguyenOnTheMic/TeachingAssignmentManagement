@@ -1995,6 +1995,8 @@
     <Content Include="Areas\FacultyBoard\Views\User\Edit.cshtml" />
     <Content Include="Areas\FacultyBoard\Views\User\Create.cshtml" />
     <Content Include="Areas\FacultyBoard\Views\Term\Index.cshtml" />
+    <Content Include="Areas\FacultyBoard\Views\Term\Create.cshtml" />
+    <Content Include="Areas\FacultyBoard\Views\Term\Edit.cshtml" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -2002,8 +2004,6 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\FacultyBoard\Views\Term\Create.cshtml" />
-    <Content Include="Areas\FacultyBoard\Views\Term\Edit.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
