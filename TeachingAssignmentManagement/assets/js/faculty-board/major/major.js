@@ -1,4 +1,5 @@
 ﻿var popup, dataTable;
+var rootUrl = $('#loader').data('request-url');
 
 $(function () {
     'use strict';
@@ -16,7 +17,7 @@ $(function () {
     dataTable = $('#tblMajor').DataTable(
         {
             ajax: {
-                url: '/FacultyBoard/Major/GetData',
+                url: rootUrl + 'FacultyBoard/Major/GetData',
                 type: 'GET',
                 dataType: 'json',
                 dataSrc: ''
@@ -28,7 +29,7 @@ $(function () {
                 { 'data': 'name' },
                 {
                     'data': 'id', 'render': function (data) {
-                        return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=popupForm('/FacultyBoard/Major/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' data-original-title='Delete' title='Delete' onclick=deleteMajor('" + data + "') > <i class='feather feather-trash-2 font-medium-3 me-1'></i></a > ";
+                        return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=popupForm('" + rootUrl + "FacultyBoard/Major/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' data-original-title='Delete' title='Delete' onclick=deleteMajor('" + data + "') > <i class='feather feather-trash-2 font-medium-3 me-1'></i></a > ";
                     }
                 }
             ],
@@ -91,7 +92,7 @@ $(function () {
                     text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Thêm ngành mới',
                     className: 'createNew btn btn-primary',
                     attr: {
-                        'onclick': "popupForm('/FacultyBoard/Major/Create')"
+                        'onclick': "popupForm('" + rootUrl + "FacultyBoard/Major/Create')"
                             }
                 }
             ],
@@ -208,7 +209,7 @@ function deleteMajor(id) {
             // Delete item
             $.ajax({
                 type: 'POST',
-                url: '/FacultyBoard/Major/Delete/' + id,
+                url: rootUrl + 'FacultyBoard/Major/Delete/' + id,
                 success: function (data) {
                     if (data.success) {
                         refreshTable();
