@@ -41,7 +41,7 @@
             messages: {
                 id: {
                     required: "Bạn chưa nhập mã ngành",
-                    idCheck: "Chỉ được nhập chữ cái không dấu và không có khoảng trắng!",
+                    idCheck: "Chỉ được nhập số-chữ không dấu và không có khoảng trắng!",
                     maxlength: "Tối đa 50 kí tự được cho phép"
                 },
                 name: {
@@ -70,7 +70,7 @@
             },
             messages: {
                 staff_id: {
-                    idCheck: "Chỉ được nhập số, chữ không dấu và không có khoảng trắng!",
+                    idCheck: "Chỉ được nhập số-chữ không dấu và không có khoảng trắng!",
                     maxlength: "Tối đa 50 kí tự được cho phép"
                 },
                 full_name: {
