@@ -9,10 +9,18 @@
         $('.ui-dialog-titlebar-close').click();
     });
 
-    // Create custom regex check
-    var regexp = "^[a-zA-Z0-9_-]*$";
+    // Create custom id check
+    var regexpId = "^[a-zA-Z0-9_-]*$";
     jQuery.validator.addMethod("idCheck", function (value, element) {
-        var re = new RegExp(regexp);
+        var re = new RegExp(regexpId);
+        return this.optional(element) || re.test(value);
+    });
+
+    // Create custom email check for VLU
+    const email_domain = ["vlu.edu", "vanlanguni"]
+    var regexpEmail = "^[A-Za-z0-9._%+-]+@(" + email_domain[0] + "|" + email_domain[1] + ").vn$";
+    jQuery.validator.addMethod("emailCheck", function (value, element) {
+        var re = new RegExp(regexpEmail);
         return this.optional(element) || re.test(value);
     });
 
@@ -57,12 +65,12 @@
                 },
                 email: {
                     required: true,
-                    email: true
+                    emailCheck: true
                 }
             },
             messages: {
                 staff_id: {
-                    idCheck: "Chỉ được nhập chữ cái không dấu và không có khoảng trắng!",
+                    idCheck: "Chỉ được nhập số, chữ không dấu và không có khoảng trắng!",
                     maxlength: "Tối đa 50 kí tự được cho phép"
                 },
                 full_name: {
@@ -70,7 +78,7 @@
                 },
                 email: {
                     required: "Bạn chưa nhập email",
-                    email: "Vui lòng nhập email hợp lệ!"
+                    emailCheck: "Vui lòng nhập email Văn Lang hợp lệ!"
                 }
             }
         });
