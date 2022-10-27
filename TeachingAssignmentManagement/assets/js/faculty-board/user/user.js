@@ -1,4 +1,5 @@
 ﻿var popup, dataTable;
+var rootUrl = $('#loader').data('request-url');
 
 $(function () {
     'use strict';
@@ -7,7 +8,7 @@ $(function () {
     dataTable = $('#tblUser').DataTable(
         {
             ajax: {
-                url: '/FacultyBoard/User/GetData',
+                url: rootUrl + 'FacultyBoard/User/GetData',
                 type: 'GET',
                 dataType: 'json',
                 dataSrc: ''
@@ -21,7 +22,7 @@ $(function () {
                 { 'data': 'role' },
                 {
                     'data': 'id', 'render': function (data, type, row) {
-                        return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=popupForm('/FacultyBoard/User/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' data-original-title='Delete' title='Delete' onclick=deleteUser('" + data + "','" + row.email + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
+                        return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=popupForm('" + rootUrl + "FacultyBoard/User/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' data-original-title='Delete' title='Delete' onclick=deleteUser('" + data + "','" + row.email + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
                     }
                 }
             ],
@@ -58,7 +59,7 @@ $(function () {
                     text: 'Thêm người dùng',
                     className: 'createNew btn btn-primary',
                     attr: {
-                        'onclick': "popupForm('/FacultyBoard/User/Create')"
+                        'onclick': "popupForm('" + rootUrl + "FacultyBoard/User/Create')"
                     },
                     init: function (api, node, config) {
                         $(node).removeClass('btn-secondary');
@@ -71,7 +72,7 @@ $(function () {
             ],
 
             language: {
-                'url': '/app-assets/language/vi.json'
+                'url': rootUrl + 'app-assets/language/vi.json'
             },
             initComplete: function () {
                 // Adding role filter once table initialized
@@ -210,7 +211,7 @@ function deleteUser(id, email) {
             // Delete item
             $.ajax({
                 type: 'POST',
-                url: '/FacultyBoard/User/Delete/' + id,
+                url: rootUrl + 'FacultyBoard/User/Delete/' + id,
                 success: function (data) {
                     if (data.success) {
                         dataTable.ajax.reload(null, false);
