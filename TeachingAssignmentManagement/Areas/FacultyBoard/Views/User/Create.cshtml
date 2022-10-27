@@ -17,13 +17,13 @@
     </div>
 
     <div class="mb-1">
-        <label class="form-label font-small-4" for="email">Email: </label>
+        <label class="form-label font-small-4" for="email"><span class="text-danger">*</span> Email: </label>
         <input type="text" class="form-control" id="email" name="email" placeholder="Nhập email" />
     </div>
 
     <div class="mb-1">
-        <label class="form-label font-small-4" for="role_id">Role: </label>
-        @Html.DropDownList("role_id", null, htmlAttributes: new { @class = "form-select" })
+        <label class="form-label font-small-4" for="role_id"><span class="text-danger">*</span> Role: </label>
+        @Html.DropDownList("role_id", null, "---- Chọn role ----", htmlAttributes: new { @class = "form-select" })
     </div>
 
     <div class="float-end m-1">
