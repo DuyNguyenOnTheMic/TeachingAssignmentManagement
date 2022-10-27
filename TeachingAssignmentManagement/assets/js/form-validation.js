@@ -66,6 +66,9 @@
                 email: {
                     required: true,
                     emailCheck: true
+                },
+                role_id: {
+                    required: true
                 }
             },
             messages: {
@@ -79,6 +82,9 @@
                 email: {
                     required: "Bạn chưa nhập email",
                     emailCheck: "Vui lòng nhập email Văn Lang hợp lệ!"
+                },
+                role_id: {
+                    required: "Bạn chưa chọn role"
                 }
             }
         });
