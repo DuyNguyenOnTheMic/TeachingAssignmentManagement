@@ -86,6 +86,13 @@
                 role_id: {
                     required: "Bạn chưa chọn role"
                 }
+            },
+            errorPlacement: function (error, element) {
+                if (element.hasClass("select2")) {
+                    error.appendTo(element.siblings(".select2"));
+                } else {
+                    error.insertAfter(element);
+                }
             }
         });
     }
