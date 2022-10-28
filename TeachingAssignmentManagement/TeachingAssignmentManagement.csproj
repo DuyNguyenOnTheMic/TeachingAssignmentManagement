@@ -1392,8 +1392,8 @@
     <Content Include="assets\js\faculty-board\term\term.min.js" />
     <Content Include="assets\js\faculty-board\user\user.js" />
     <Content Include="assets\js\faculty-board\user\user.min.js" />
-    <Content Include="assets\js\form-validation.min.js" />
-    <Content Include="assets\js\form-validation.js" />
+    <Content Include="assets\js\form-loader.min.js" />
+    <Content Include="assets\js\form-loader.js" />
     <Content Include="Global.asax" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
