@@ -5,6 +5,7 @@ namespace TeachingAssignmentManagement.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        [OutputCache(Duration = 600, VaryByCustom = "userName")]
         public ActionResult Index()
         {
             return View();

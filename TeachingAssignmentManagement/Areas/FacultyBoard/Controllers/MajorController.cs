@@ -21,6 +21,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         }
 
         // GET: FacultyBoard/Major
+        [OutputCache(Duration = 600, VaryByCustom = "userName")]
         public ActionResult Index()
         {
             return View();
@@ -33,6 +34,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration = 600, VaryByParam = "none")]
         public ActionResult Create()
         {
             return View(new major());

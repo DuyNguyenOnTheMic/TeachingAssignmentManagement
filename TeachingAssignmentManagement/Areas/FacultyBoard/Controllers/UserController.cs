@@ -38,6 +38,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         }
 
         // GET: FacultyBoard/User
+        [OutputCache(Duration = 600, VaryByCustom = "userName")]
         public ActionResult Index()
         {
             return View();
@@ -50,6 +51,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration = 600, VaryByParam = "none")]
         public ActionResult Create()
         {
             ViewBag.role_id = new SelectList(userRepository.GetRoles(), "id", "name");
