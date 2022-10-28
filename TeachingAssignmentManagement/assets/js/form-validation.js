@@ -63,6 +63,7 @@
             $this
                 .select2({
                     placeholder: "---- Chọn role ----",
+                    minimumResultsForSearch: Infinity,
                     forceabove: true,
                     dropdownParent: $this.parent()
                 })
