@@ -55,15 +55,20 @@
     // Form validation for user
     if (userForm.length) {
 
-         // Populate role select
-        var select = $('.role-select');
-        select.wrap('<div class="position-relative"></div>').select2({
-            placeholder: "---- Chọn role ----",
-            minimumResultsForSearch: Infinity,
-            forceabove: true,
-            dropdownParent: select.parent()
-        }).change(function () {
-            select.valid();
+        var select = $('.select2');
+        // select2
+        select.each(function () {
+            var $this = $(this);
+            $this.wrap('<div class="position-relative"></div>');
+            $this
+                .select2({
+                    placeholder: "---- Chọn role ----",
+                    forceabove: true,
+                    dropdownParent: $this.parent()
+                })
+                .change(function () {
+                    $(this).valid();
+                });
         });
 
         userForm.validate({
