@@ -22,6 +22,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         }
 
         // GET: FacultyBoard/Term
+        [OutputCache(Duration = 600, VaryByCustom = "userName")]
         public ActionResult Index()
         {
             return View();
@@ -34,6 +35,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration = 600, VaryByParam = "none")]
         public ActionResult Create()
         {
             // Populate year dropdown for create view

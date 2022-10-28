@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -16,6 +17,15 @@ namespace TeachingAssignmentManagement
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
+        }
+
+        public override string GetVaryByCustomString(HttpContext context, string arg)
+        {
+            if (arg == "userName")
+            {
+                return context.User.Identity.Name;
+            }
+            return string.Empty;
         }
     }
 }
