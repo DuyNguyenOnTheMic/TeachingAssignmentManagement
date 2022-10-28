@@ -23,7 +23,7 @@
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="role_id"><span class="text-danger">*</span> Role: </label>
-        @Html.DropDownList("role_id", null, "---- Chọn role ----", htmlAttributes: new { @class = "select2 form-select" })
+        @Html.DropDownList("role_id", null, "---- Chọn role ----", htmlAttributes: new { @class = "role-select form-select" })
     </div>
 
     <div class="float-end m-1">
@@ -34,20 +34,3 @@
 
 <link rel="stylesheet" type="text/css" href="~/app-assets/css/plugins/forms/form-validation.min.css" />
 <script src="~/assets/js/form-validation.min.js"></script>
-<script>
-    var select = $('.select2');
-    // select2
-    select.each(function () {
-        var $this = $(this);
-        $this.wrap('<div class="position-relative"></div>');
-        $this
-            .select2({
-                placeholder: "---- Chọn role ----",
-                forceabove: true,
-                dropdownParent: $this.parent()
-            })
-            .change(function () {
-                $(this).valid();
-            });
-    });
-</script>

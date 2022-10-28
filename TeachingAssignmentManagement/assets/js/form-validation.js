@@ -54,6 +54,18 @@
 
     // Form validation for user
     if (userForm.length) {
+
+         // Populate role select
+        var select = $('.role-select');
+        select.wrap('<div class="position-relative"></div>').select2({
+            placeholder: "---- Chọn role ----",
+            minimumResultsForSearch: Infinity,
+            forceabove: true,
+            dropdownParent: select.parent()
+        }).change(function () {
+            select.valid();
+        });
+
         userForm.validate({
             rules: {
                 staff_id: {
