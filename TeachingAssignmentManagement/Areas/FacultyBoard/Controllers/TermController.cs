@@ -39,7 +39,9 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Populate year dropdown for create view
             int currentYear = DateTime.Now.Year;
             List<SelectListItem> startYear = PopulateYears(currentYear);
-            List<SelectListItem> endYear = PopulateYears(currentYear + 1);
+            List<SelectListItem> endYear = PopulateYears(currentYear);
+            startYear.Find(s => s.Value == currentYear.ToString()).Selected = true;
+            endYear.Find(s => s.Value == (currentYear + 1).ToString()).Selected = true;
 
             ViewBag.start_year = startYear;
             ViewBag.end_year = endYear;
@@ -68,8 +70,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             var term = termRepository.GetTermByID(id);
 
             // Set selected year on edit view
-            List<SelectListItem> startYear = PopulateYears(term.start_year - 10);
-            List<SelectListItem> endYear = PopulateYears(term.end_year - 10);
+            List<SelectListItem> startYear = PopulateYears(term.start_year);
+            List<SelectListItem> endYear = PopulateYears(term.end_year);
             startYear.Find(s => s.Value == term.start_year.ToString()).Selected = true;
             endYear.Find(s => s.Value == term.end_year.ToString()).Selected = true;
 
@@ -107,7 +109,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             // Create year select list
             List<SelectListItem> years = new List<SelectListItem>();
-            for (int year = startYear; year <= startYear + 20; year++)
+            for (int year = startYear - 10; year <= startYear + 10; year++)
             {
                 string sYear = year.ToString();
                 years.Add(new SelectListItem() { Text = sYear, Value = sYear });
