@@ -47,7 +47,6 @@
         touchspin = $('.touchspin'),
         picker = $('.picker');
 
-    var currentYear = (new Date()).getFullYear();
     yearSelect.each(function () {
         // Select2 without search bar
         var $this = $(this);
@@ -57,10 +56,6 @@
             dropdownParent: $this.parent(),
             minimumResultsForSearch: Infinity
         });
-        // Create year dropDownList.
-        for (var i = currentYear; i <= currentYear + 10; i++) {
-            $this.append('<option value="' + i + '">' + i + '</option>');
-        }
     });
 
     // Default Spin
