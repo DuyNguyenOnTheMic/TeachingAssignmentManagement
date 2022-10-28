@@ -15,7 +15,7 @@ jQuery.validator.addMethod("idCheck", function (value, element) {
 });
 
 // Create custom email check for VLU
-const email_domain = ["vlu.edu", "vanlanguni"]
+var email_domain = ["vlu.edu", "vanlanguni"]
 var regexpEmail = "^[A-Za-z0-9._%+-]+@(" + email_domain[0] + "|" + email_domain[1] + ").vn$";
 jQuery.validator.addMethod("emailCheck", function (value, element) {
     var re = new RegExp(regexpEmail);
