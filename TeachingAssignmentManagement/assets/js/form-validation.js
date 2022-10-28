@@ -22,8 +22,8 @@ jQuery.validator.addMethod("emailCheck", function (value, element) {
     return this.optional(element) || re.test(value);
 });
 
-// Form validation for major
 if (majorForm.length) {
+    // Form validation for major
     majorForm.validate({
         rules: {
             id: {
@@ -51,6 +51,7 @@ if (majorForm.length) {
 }
 
 if (termForm.length) {
+    // Populate term form
     var yearSelect = $('.year-select'),
         touchspin = $('.touchspin'),
         picker = $('.picker');
@@ -162,7 +163,10 @@ if (termForm.length) {
             if (instance.isMobile) {
                 $(instance.mobileInput).attr('step', null);
             }
-        },
+        }
+    });
+    picker.change(function () {
+        $(this).valid();
     });
 
     // Convert string to date
@@ -174,11 +178,41 @@ if (termForm.length) {
             return new Date(from[2], from[1] - 1, from[0]);
         }
     }
+
+    // Form validation for term
+    termForm.validate({
+        ignore: [],
+        rules: {
+            id: {
+                required: true,
+                minlength: 3,
+                maxlength: 3
+            },
+            start_date: {
+                required: true
+            }
+        },
+        messages: {
+            id: {
+                required: "Bạn chưa nhập học kỳ",
+                minlength: "Tối đa 3 kí tự được cho phép",
+                maxlength: "Tối đa 3 kí tự được cho phép"
+            },
+            start_date: {
+                required: "Bạn chưa chọn ngày bắt đầu"
+            }
+        },
+        errorPlacement: function (error, element) {
+            if (element.hasClass("picker")) {
+                error.insertAfter(element.siblings(".picker"));
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
 }
 
-// Form validation for user
 if (userForm.length) {
-
     var select = $('.select2');
     // select2
     select.each(function () {
@@ -196,6 +230,7 @@ if (userForm.length) {
             });
     });
 
+    // Form validation for user
     userForm.validate({
         rules: {
             staff_id: {
