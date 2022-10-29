@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
@@ -16,12 +17,14 @@ namespace TeachingAssignmentManagement.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
+        private readonly IUserRepository userRepository;
 
         public AccountController()
         {
+            this.userRepository = new UserRepository(new CP25Team03Entities());
         }
 
-        public AccountController(ApplicationUserManager userManager)
+        public AccountController(ApplicationUserManager userManager, IUserRepository userRepository)
         {
             UserManager = userManager;
         }
@@ -112,6 +115,13 @@ namespace TeachingAssignmentManagement.Controllers
                         .Authentication
                         .SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Redirect("Login");
+        }
+
+        //
+        // GET: /Account/Update
+        public ActionResult Update()
+        {
+            return View();
         }
 
         protected override void Dispose(bool disposing)
