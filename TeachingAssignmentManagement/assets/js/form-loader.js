@@ -53,6 +53,7 @@ if (profileForm.length) {
                 type: request_method,
                 data: form_data,
                 success: function (data) {
+                    $("input").blur();
                     if (data.success) {
                         // Show message when update succeeded
                         Swal.fire({
