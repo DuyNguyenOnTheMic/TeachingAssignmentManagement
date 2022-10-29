@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
-using TeachingAssignmentManagement.Hubs;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
@@ -137,7 +136,6 @@ namespace TeachingAssignmentManagement.Controllers
                 // Update major
                 userRepository.UpdateLecturer(lecturer);
                 userRepository.Save();
-                MajorHub.BroadcastData();
                 return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
             }
             catch
