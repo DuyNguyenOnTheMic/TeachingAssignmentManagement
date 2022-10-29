@@ -195,8 +195,8 @@ if (termForm.length) {
         messages: {
             id: {
                 required: "Bạn chưa nhập học kỳ",
-                minlength: "Tối đa 3 kí tự được cho phép",
-                maxlength: "Tối đa 3 kí tự được cho phép"
+                minlength: "Vui lòng nhập đúng 3 kí tự!",
+                maxlength: "Vui lòng nhập đúng 3 kí tự!"
             },
             start_date: {
                 required: "Bạn chưa chọn ngày bắt đầu"
