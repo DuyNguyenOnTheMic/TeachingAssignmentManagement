@@ -45,8 +45,8 @@ if (profileForm.length) {
         },
         submitHandler: function (form, e) {
             e.preventDefault();
-            var post_url = $(form).attr("action");
-            var request_method = $(form).attr("method");
+            var post_url = $(form).attr('action');
+            var request_method = $(form).attr('method');
             var form_data = $(form).serialize();
             $.ajax({
                 url: post_url,
