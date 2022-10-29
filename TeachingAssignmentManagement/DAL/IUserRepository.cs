@@ -13,6 +13,7 @@ namespace TeachingAssignmentManagement.DAL
         lecturer GetLecturerByID(string lecturerId);
         IEnumerable<AspNetUser> GetFacultyBoards();
         void InsertLecturer(lecturer lecturer);
+        void UpdateLecturer(lecturer lecturer);
         void Save();
     }
 }

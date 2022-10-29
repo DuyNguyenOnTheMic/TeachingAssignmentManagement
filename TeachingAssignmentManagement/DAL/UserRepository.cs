@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using TeachingAssignmentManagement.Models;
 
@@ -51,6 +52,11 @@ namespace TeachingAssignmentManagement.DAL
         public void InsertLecturer(lecturer lecturer)
         {
             context.lecturers.Add(lecturer);
+        }
+
+        public void UpdateLecturer(lecturer lecturer)
+        {
+            context.Entry(lecturer).State = EntityState.Modified;
         }
 
         public void Save()

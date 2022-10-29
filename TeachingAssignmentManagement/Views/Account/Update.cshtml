@@ -1,4 +1,5 @@
-﻿
+﻿@model TeachingAssignmentManagement.Models.lecturer
+
 @{
     ViewBag.Title = "Cập nhật hồ sơ người dùng";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -25,27 +26,21 @@
                         <div class="col-md-5 order-md-0 order-1">
                             <div class="card-body">
                                 <!-- form -->
-                                <form id="createApiForm" onsubmit="return false">
+                                @using (Html.BeginForm("Update", "Account", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "user-form" }))
+                                {
+                                    @Html.HiddenFor(model => model.id)
                                     <div class="mb-2">
-                                        <label for="ApiKeyType" class="form-label">Choose the Api key type you want to create</label>
-                                        <select class="select2 form-select" id="ApiKeyType">
-                                            <option value="">Choose Key Type</option>
-                                            <option value="full">Full Control</option>
-                                            <option value="modify">Modify</option>
-                                            <option value="read-execute">Read &amp; Execute</option>
-                                            <option value="folders">List Folder Contents</option>
-                                            <option value="read">Read Only</option>
-                                            <option value="read-write">Read &amp; Write</option>
-                                        </select>
+                                        <label class="form-label font-small-4" for="staff_id">Mã giảng viên: </label>
+                                        @Html.EditorFor(model => model.staff_id, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập mã giảng viên", @aria_label = "Nhập mã giảng viên" } })
                                     </div>
 
                                     <div class="mb-2">
-                                        <label for="nameApiKey" class="form-label">Name the API key</label>
-                                        <input class="form-control" type="text" name="apiKeyName" placeholder="Server Key 1" id="nameApiKey" data-msg="Please enter API key name" />
+                                        <label class="form-label font-small-4" for="full_name">Tên giảng viên: </label>
+                                        @Html.EditorFor(model => model.full_name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tên giảng viên", @aria_label = "Nhập tên giảng viên" } })
                                     </div>
 
                                     <button type="submit" class="btn btn-primary w-100">Create Key</button>
-                                </form>
+                                }
                             </div>
                         </div>
                         <div class="col-md-7 order-md-1 order-0">

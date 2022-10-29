@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Hubs;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
@@ -121,7 +122,28 @@ namespace TeachingAssignmentManagement.Controllers
         // GET: /Account/Update
         public ActionResult Update()
         {
-            return View();
+            // Return update user profile view
+            var userId = UserManager.FindByEmail(User.Identity.Name).Id;
+            return View(userRepository.GetLecturerByID(userId));
+        }
+
+        //
+        // POST: /Account/Update
+        [HttpPost]
+        public ActionResult Update(lecturer lecturer)
+        {
+            try
+            {
+                // Update major
+                userRepository.UpdateLecturer(lecturer);
+                userRepository.Save();
+                MajorHub.BroadcastData();
+                return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new { error = true, message = "Mã giảng viên này đã có trong hệ thống!" }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -133,6 +155,7 @@ namespace TeachingAssignmentManagement.Controllers
                     _userManager.Dispose();
                     _userManager = null;
                 }
+                userRepository.Dispose();
             }
 
             base.Dispose(disposing);
