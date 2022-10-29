@@ -9,18 +9,12 @@
 <div class="app-content content ">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
-    <div class="content-wrapper container-xxl p-0">
-        <div class="content-header row">
-            <div class="content-header-left col-md-9 col-12 mb-2">
-                <h2>Cập nhật hồ sơ người dùng</h2>
-            </div>
-        </div>
+    <div class="content-wrapper p-0">
         <div class="content-body">
             <section>
-                <!-- create API key -->
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h4 class="card-title">Create an API Key</h4>
+                        <h4 class="card-title">Cập nhật hồ sơ người dùng</h4>
                     </div>
                     <div class="row">
                         <div class="col-md-5 order-md-0 order-1">
@@ -55,3 +49,10 @@
     </div>
 </div>
 <!-- END: Content-->
+
+<link rel="stylesheet" type="text/css" href="~/app-assets/css/plugins/forms/form-validation.min.css" />
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/assets/js/form-loader.min.js"></script>
+}
