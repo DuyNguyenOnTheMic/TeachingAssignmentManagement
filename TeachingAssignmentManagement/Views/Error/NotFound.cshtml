@@ -17,7 +17,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="~/app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
     @Styles.Render("~/Content/theme")
-    <link rel="stylesheet" type="text/css" href="~/app-assets/css/pages/page-misc.css">
+    <link href="~/app-assets/css/pages/page-misc.min.css" rel="stylesheet" />
 </head>
 @Html.HtmlMinify(@<text>
     <!-- BEGIN: Body-->
@@ -35,7 +35,7 @@
                         <div class="misc-inner p-2 p-sm-3">
                             <div class="w-100 text-center">
                                 <h2 class="mb-1">Không thể tìm thấy trang 🕵🏻‍♀️</h2>
-                                <p class="mb-2">Oops! 😖 Yêu cầu của bạn không được tìm thấy.</p><a class="btn btn-primary mb-2 btn-sm-block" href="@Url.Action("Index", "Home")">Quay về trang chủ</a><img class="img-fluid" src="~/assets/images/img_error.svg" alt="Error page" />
+                                <p class="mb-2">Oops! 😖 Yêu cầu của bạn không được tìm thấy.</p><a class="btn btn-primary mb-2 btn-sm-block" href="@Url.Action("Index", "Home")">Quay về trang chủ</a><img class="w-100" src="~/assets/images/img_error.svg" alt="Error page" />
                             </div>
                         </div>
                     </div>
