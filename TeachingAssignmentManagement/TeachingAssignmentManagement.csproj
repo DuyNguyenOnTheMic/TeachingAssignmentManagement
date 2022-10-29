@@ -226,6 +226,7 @@
     <Compile Include="Areas\FacultyBoard\Controllers\UserController.cs" />
     <Compile Include="Areas\FacultyBoard\FacultyBoardAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\FacultyBoard\Controllers\MajorController.cs" />
     <Compile Include="DAL\IMajorRepository.cs" />
@@ -1475,6 +1476,7 @@
     <Content Include="Areas\FacultyBoard\Views\Major\Index.cshtml" />
     <Content Include="Areas\FacultyBoard\Views\Major\Create.cshtml" />
     <Content Include="Areas\FacultyBoard\Views\Major\Edit.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
