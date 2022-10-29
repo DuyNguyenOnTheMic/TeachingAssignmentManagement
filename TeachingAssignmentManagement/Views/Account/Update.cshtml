@@ -20,7 +20,7 @@
                         <div class="col-md-5 order-md-0 order-1">
                             <div class="card-body">
                                 <!-- form -->
-                                @using (Html.BeginForm("Update", "Account", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "user-form" }))
+                                @using (Html.BeginForm("Update", "Account", FormMethod.Post, new { id = "profile-form" }))
                                 {
                                     @Html.HiddenFor(model => model.id)
                                     <div class="mb-2">
@@ -33,7 +33,7 @@
                                         @Html.EditorFor(model => model.full_name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tên giảng viên", @aria_label = "Nhập tên giảng viên" } })
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary w-100">Create Key</button>
+                                    <button type="submit" class="btn btn-primary w-100">Cập nhật</button>
                                 }
                             </div>
                         </div>
@@ -54,5 +54,5 @@
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/assets/js/form-loader.min.js"></script>
+    <script src="~/assets/js/form-loader.js"></script>
 }

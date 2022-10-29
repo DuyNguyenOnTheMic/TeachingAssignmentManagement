@@ -1,4 +1,5 @@
-﻿var majorForm = $('#major-form'),
+﻿var profileForm = $('#profile-form'),
+    majorForm = $('#major-form'),
     termForm = $('#term-form'),
     userForm = $('#user-form');
 
@@ -21,6 +22,64 @@ jQuery.validator.addMethod("emailCheck", function (value, element) {
     var re = new RegExp(regexpEmail);
     return this.optional(element) || re.test(value);
 });
+
+if (profileForm.length) {
+    profileForm.validate({
+        rules: {
+            staff_id: {
+                idCheck: true,
+                maxlength: 50
+            },
+            full_name: {
+                maxlength: 255
+            }
+        },
+        messages: {
+            staff_id: {
+                idCheck: "Chỉ được nhập số-chữ không dấu và không có khoảng trắng!",
+                maxlength: "Tối đa 50 kí tự được cho phép"
+            },
+            full_name: {
+                maxlength: "Tối đa 255 kí tự được cho phép"
+            }
+        },
+        submitHandler: function (form, e) {
+            e.preventDefault();
+            var post_url = $(form).attr("action");
+            var request_method = $(form).attr("method");
+            var form_data = $(form).serialize();
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data: form_data,
+                success: function (data) {
+                    if (data.success) {
+                        // Show message when update succeeded
+                        Swal.fire({
+                            title: 'Thông báo',
+                            text: data.message,
+                            icon: 'success',
+                            customClass: {
+                                confirmButton: 'btn btn-primary'
+                            }
+                        })
+                    } else {
+                        // Show message when update succeeded
+                        Swal.fire({
+                            title: 'Thông báo',
+                            text: data.message,
+                            icon: 'error',
+                            customClass: {
+                                confirmButton: 'btn btn-primary'
+                            }
+                        })
+                    }
+                }
+            });
+            return false;
+        }
+    });
+}
 
 if (majorForm.length) {
     // Form validation for major
