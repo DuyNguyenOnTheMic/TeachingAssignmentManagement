@@ -42,6 +42,8 @@
                                 <div class="user-nav d-sm-flex d-none"><span class="user-name fw-bolder">@User.Identity.Name</span><span class="user-status">@roleName</span></div><span class="avatar"><img class="round" src="~/assets/images/img_user_avatar.jpg" alt="avatar" width="33"><span class="avatar-status-online"></span></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
+                                <a class="dropdown-item" href="@Url.Action("Update", "Account", new { Area = "" })"><i class="me-50 feather feather-user"></i> Hồ sơ</a>
+                                <div class="dropdown-divider"></div>
                                 @using (Html.BeginForm("SignOut", "Account", new { Area = "" }, FormMethod.Post, new { id = "logoutForm" }))
                                 {
                                     <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()"><i class="me-50 feather feather-power"></i> Đăng xuất</a>
