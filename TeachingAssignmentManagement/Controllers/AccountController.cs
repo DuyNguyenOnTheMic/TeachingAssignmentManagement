@@ -153,9 +153,9 @@ namespace TeachingAssignmentManagement.Controllers
                     _userManager.Dispose();
                     _userManager = null;
                 }
-                userRepository.Dispose();
             }
 
+            userRepository.Dispose();
             base.Dispose(disposing);
         }
     }
