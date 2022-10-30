@@ -19,6 +19,7 @@
     <link href="~/app-assets/fonts/feather/iconfont.css" rel="stylesheet" />
     @Styles.Render("~/Content/theme")
     @Styles.Render("~/Content/extensions")
+    @RenderSection("styles", required: false)
 </head>
 @Html.HtmlMinify(@<text>
     <!-- BEGIN: Body-->
@@ -139,7 +140,6 @@
         @Scripts.Render("~/bundles/datatables")
         @Scripts.Render("~/bundles/app")
         @Scripts.Render("~/bundles/extensions")
-        @RenderSection("styles", required: false)
         @RenderSection("scripts", required: false)
     </body>
     <!-- END: Body-->
