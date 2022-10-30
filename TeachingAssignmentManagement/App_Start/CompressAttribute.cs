@@ -1,4 +1,5 @@
-﻿using System.IO.Compression;
+﻿using Brotli;
+using System.IO.Compression;
 using System.Web.Mvc;
 
 public class CompressAttribute : ActionFilterAttribute
@@ -11,7 +12,12 @@ public class CompressAttribute : ActionFilterAttribute
         encodingsAccepted = encodingsAccepted.ToLowerInvariant();
         var response = filterContext.HttpContext.Response;
 
-        if (encodingsAccepted.Contains("gzip"))
+        if (encodingsAccepted.Contains("br") || encodingsAccepted.Contains("brotli"))
+        {
+            response.AppendHeader("Content-Encoding", "br");
+            response.Filter = new BrotliStream(response.Filter, CompressionMode.Compress);
+        }
+        else if (encodingsAccepted.Contains("gzip"))
         {
             response.AppendHeader("Content-encoding", "gzip");
             response.Filter = new GZipStream(response.Filter, CompressionMode.Compress);
