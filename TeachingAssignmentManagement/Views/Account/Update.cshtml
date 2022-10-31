@@ -22,13 +22,16 @@
                                 @using (Html.BeginForm("Update", "Account", FormMethod.Post, new { id = "profile-form" }))
                                 {
                                     @Html.HiddenFor(model => model.id)
-                                    <div class="mb-2">
-                                        <label class="form-label font-small-4" for="staff_id">Mã giảng viên: </label>
+
+                                    <label class="form-label font-small-4" for="staff_id">Mã giảng viên: </label>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text"><i data-feather="tag"></i></span>
                                         @Html.EditorFor(model => model.staff_id, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập mã giảng viên", @aria_label = "Nhập mã giảng viên" } })
                                     </div>
 
-                                    <div class="mb-2">
-                                        <label class="form-label font-small-4" for="full_name">Tên giảng viên: </label>
+                                    <label class="form-label font-small-4" for="full_name">Tên giảng viên: </label>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text"><i data-feather="user"></i></span>
                                         @Html.EditorFor(model => model.full_name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tên giảng viên", @aria_label = "Nhập tên giảng viên" } })
                                     </div>
 
