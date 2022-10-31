@@ -112,7 +112,7 @@ $(function () {
 });
 
 function refreshTable() {
-    dataTable.ajax.reload();
+    dataTable.ajax.reload(null, false);
 }
 
 // Show Create and Edit form

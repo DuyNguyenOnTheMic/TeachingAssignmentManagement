@@ -119,7 +119,7 @@ function submitForm(form) {
             success: function (data) {
                 if (data.success) {
                     popup.dialog('close');
-                    dataTable.ajax.reload();
+                    dataTable.ajax.reload(null, false);
 
                     // Show message when create or edit succeeded
                     toastr.options.positionClass = 'toast-bottom-right';
@@ -162,7 +162,7 @@ function deleteTerm(id) {
                 url: rootUrl + 'FacultyBoard/Term/Delete/' + id,
                 success: function (data) {
                     if (data.success) {
-                        dataTable.ajax.reload();
+                        dataTable.ajax.reload(null, false);
 
                         // Show message when delete succeeded
                         toastr.options.positionClass = 'toast-bottom-right';
