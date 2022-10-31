@@ -1388,6 +1388,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <Content Include="Areas\FacultyBoard\Views\Timetable\Import.cshtml" />
+    <Content Include="Areas\FacultyBoard\Views\_ViewStart.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
