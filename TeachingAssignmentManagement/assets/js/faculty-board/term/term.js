@@ -62,8 +62,36 @@ $(function () {
                 'url': rootUrl + 'app-assets/language/vi.json'
             }
         });
+
+    dataTable.on('draw.dt', function () {
+        if ($('.ui-dialog-content').dialog("isOpen") === true) {
+            // Prevent user from add edit delete while dialog is populated
+            disableButtons(true);
+        }
+    });
 });
 
+function disableButtons(state) {
+    if (state === true) {
+        // disable buttons
+        $('.createNew').prop('disabled', true);
+        $('.editRow').each(function () {
+            this.style.pointerEvents = 'none';
+        });
+        $('.deleteRow').each(function () {
+            this.style.pointerEvents = 'none';
+        });
+    } else {
+        // enable buttons
+        $('.createNew').prop('disabled', false);
+        $('.editRow').each(function () {
+            this.style.pointerEvents = 'auto';
+        });
+        $('.deleteRow').each(function () {
+            this.style.pointerEvents = 'auto';
+        });
+    }
+}
 
 // Show Create and Edit form
 function popupForm(url) {
@@ -84,25 +112,13 @@ function popupForm(url) {
                         .addClass("btn-close");
 
                     // Prevent user from add edit delete while dialog is populated
-                    $('.createNew').prop('disabled', true);
-                    $('.editRow').each(function () {
-                        this.style.pointerEvents = 'none';
-                    });
-                    $('.deleteRow').each(function () {
-                        this.style.pointerEvents = 'none';
-                    });
+                    disableButtons(true);
                 },
                 close: function () {
                     popup.dialog('destroy').remove();
 
                     // Re-enable buttons when user closes the dialog
-                    $('.createNew').prop('disabled', false);
-                    $('.editRow').each(function () {
-                        this.style.pointerEvents = 'auto';
-                    });
-                    $('.deleteRow').each(function () {
-                        this.style.pointerEvents = 'auto';
-                    });
+                    disableButtons(false);
                 }
             });
         });
