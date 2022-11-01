@@ -943,7 +943,7 @@
     <Content Include="app-assets\vendors\css\extensions\tether.min.css" />
     <Content Include="app-assets\vendors\css\extensions\toastr.min.css" />
     <Content Include="app-assets\vendors\css\feather-icons\feather-icons.min.css" />
-    <Content Include="app-assets\vendors\css\file-uploaders\dropzone.min.css" />
+    <Content Include="app-assets\vendors\css\file-uploaders\dropzone.css" />
     <Content Include="app-assets\vendors\css\forms\select\select2.min.css" />
     <Content Include="app-assets\vendors\css\forms\spinner\jquery.bootstrap-touchspin.css" />
     <Content Include="app-assets\vendors\css\forms\toggle\switchery.css" />
@@ -1008,7 +1008,7 @@
     <Content Include="app-assets\vendors\js\extensions\transition.js" />
     <Content Include="app-assets\vendors\js\extensions\wNumb.min.js" />
     <Content Include="app-assets\vendors\js\feather-icons\feather-icons.min.js" />
-    <Content Include="app-assets\vendors\js\file-uploaders\dropzone.min.js" />
+    <Content Include="app-assets\vendors\js\file-uploaders\dropzone-min.js" />
     <Content Include="app-assets\vendors\js\forms\cleave\addons\cleave-phone.ac.js" />
     <Content Include="app-assets\vendors\js\forms\cleave\addons\cleave-phone.ad.js" />
     <Content Include="app-assets\vendors\js\forms\cleave\addons\cleave-phone.ae.js" />
