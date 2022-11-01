@@ -72,7 +72,7 @@ $(function () {
             ],
 
             language: {
-                'url': rootUrl + 'app-assets/language/vi.json'
+                'url': rootUrl + 'app-assets/language/datatables/vi.json'
             },
             initComplete: function () {
                 // Adding role filter once table initialized
