@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
 
@@ -32,6 +33,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             ViewBag.term = new SelectList(termRepository.GetTerms(), "id", "id");
             ViewBag.major = new SelectList(majorRepository.GetMajors(), "id", "name");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Import(HttpPostedFileBase postedFile)
+        {
             return View();
         }
     }
