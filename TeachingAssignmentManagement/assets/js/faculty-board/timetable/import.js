@@ -64,9 +64,13 @@ myDropzone.dropzone({
 
                 _this.on("success", function () {
                     Swal.fire({
-                        didOpen: () => {
-                            Swal.showLoading();
-                        }
+                        title: 'Good job!',
+                        text: 'You clicked the button!',
+                        icon: 'success',
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
                     });
                     window.onbeforeunload = null;
                 });
