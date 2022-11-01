@@ -27,7 +27,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
         public ActionResult Import()
         {
-            ViewBag.term = termRepository.GetTerms();
+            ViewBag.term = new SelectList(termRepository.GetTerms(), "id", "id");
             return View();
         }
     }
