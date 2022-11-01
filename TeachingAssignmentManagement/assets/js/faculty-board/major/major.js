@@ -197,7 +197,8 @@ function submitForm(form) {
                         icon: 'error',
                         customClass: {
                             confirmButton: 'btn btn-primary'
-                        }
+                        },
+                        buttonsStyling: false
                     })
                 }
             }
@@ -217,7 +218,8 @@ function deleteMajor(id) {
         customClass: {
             confirmButton: 'btn btn-primary',
             cancelButton: 'btn btn-outline-danger ms-1'
-        }
+        },
+        buttonsStyling: false
     }).then((result) => {
         if (result.isConfirmed) {
             // Delete item
@@ -240,7 +242,8 @@ function deleteMajor(id) {
                             icon: 'error',
                             customClass: {
                                 confirmButton: 'btn btn-primary'
-                            }
+                            },
+                            buttonsStyling: false
                         })
                     }
                 }
