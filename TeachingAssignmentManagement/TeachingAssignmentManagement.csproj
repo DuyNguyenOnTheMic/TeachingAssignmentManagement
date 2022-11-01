@@ -922,6 +922,7 @@
     <Content Include="app-assets\js\scripts\tables\table-datatables-basic.min.js" />
     <Content Include="app-assets\js\scripts\ui\ui-feather.js" />
     <Content Include="app-assets\js\scripts\ui\ui-feather.min.js" />
+    <Content Include="app-assets\language\select2\vi.min.js" />
     <Content Include="app-assets\vendors\css\animate\animate.css" />
     <Content Include="app-assets\vendors\css\animate\animate.min.css" />
     <Content Include="app-assets\vendors\css\calendars\fullcalendar.min.css" />
@@ -1369,7 +1370,7 @@
     <Content Include="app-assets\fonts\font-awesome\webfonts\fa-solid-900.ttf" />
     <Content Include="app-assets\fonts\font-awesome\webfonts\fa-solid-900.woff" />
     <Content Include="app-assets\fonts\font-awesome\webfonts\fa-solid-900.woff2" />
-    <Content Include="app-assets\language\vi.json" />
+    <Content Include="app-assets\language\datatables\vi.json" />
     <Content Include="app-assets\vendors\css\extensions\dd-icon\dd-icon.eot" />
     <Content Include="app-assets\vendors\css\extensions\dd-icon\dd-icon.ttf" />
     <Content Include="app-assets\vendors\css\extensions\dd-icon\dd-icon.woff" />

@@ -18,17 +18,17 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="row mb-2">
-                                    <div class="col-md-6">
-                                        <label class="form-label font-small-4" for="select2-basic">Học kỳ: </label>
-                                        <select class="select2 form-select" id="select2-basic">
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <label class="form-label font-small-4" for="term">Học kỳ: </label>
+                                        <select class="select2 form-select" id="term" name="term">
                                             <option value="AK">Alaska</option>
                                             <option value="HI">Hawaii</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label font-small-4" for="select2-basic">Ngành: </label>
-                                        <select class="select2 form-select" id="select2-basic">
+                                    <div class="col-md-6 mb-2">
+                                        <label class="form-label font-small-4" for="major">Ngành: </label>
+                                        <select class="select2 form-select" id="major" name="major">
                                             <option value="AK">Alaska</option>
                                             <option value="HI">Hawaii</option>
                                         </select>
@@ -55,4 +55,20 @@
 @section scripts {
     <script src="~/app-assets/vendors/js/file-uploaders/dropzone-min.js"></script>
     <script src="~/app-assets/js/scripts/forms/form-file-uploader.js"></script>
+    <script src="~/app-assets/language/select2/vi.min.js"></script>
+    <script>
+        var select = $('.select2');
+        select.each(function () {
+            var $this = $(this);
+            $this.wrap('<div class="position-relative"></div>');
+            $this.select2({
+                // the following code is used to disable x-scrollbar when click in select input and
+                // take 100% width in responsive also
+                language: 'vi',
+                dropdownAutoWidth: true,
+                width: '100%',
+                dropdownParent: $this.parent()
+            });
+        })
+    </script>
 }
