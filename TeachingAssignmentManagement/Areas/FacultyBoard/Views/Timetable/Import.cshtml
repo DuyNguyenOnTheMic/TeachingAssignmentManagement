@@ -18,24 +18,28 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="row mb-1">
-                                    <div class="col-md-6 mb-2">
-                                        <label class="form-label font-small-4" for="term">Học kỳ: </label>
-                                        @Html.DropDownList("term", null, "---- Chọn học kỳ ----", htmlAttributes: new { @class = "select2 form-select" })
+                                @using (Html.BeginForm("Import", "Timetable", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                                {
+                                    <div class="row mb-1">
+                                        <div class="col-md-6 mb-2">
+                                            <label class="form-label font-small-4" for="term">Học kỳ: </label>
+                                            @Html.DropDownList("term", null, "---- Chọn học kỳ ----", htmlAttributes: new { @class = "select2 form-select" })
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <label class="form-label font-small-4" for="major">Ngành: </label>
+                                            @Html.DropDownList("major", null, "---- Chọn ngành ----", htmlAttributes: new { @class = "select2 form-select" })
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 mb-2">
-                                        <label class="form-label font-small-4" for="major">Ngành: </label>
-                                        @Html.DropDownList("major", null, "---- Chọn ngành ----", htmlAttributes: new { @class = "select2 form-select" })
+                                    <div class="dropzone dropzone-area" id="dpz-single-file">
+                                        <div class="dz-message">Kéo thả hoặc nhấn chọn để upload.</div>
                                     </div>
-                                </div>
-                                <form action="#" class="dropzone dropzone-area" id="dpz-single-file">
-                                    <div class="dz-message">Kéo thả hoặc nhấn chọn để upload.</div>
-                                </form>
-                                <div class="d-grid mt-2">
-                                    <button type="submit" class="btn btn-primary font-medium-3">
-                                    <i data-feather="thumbs-up" class="me-25 font-medium-3"></i>
-                                    <span>Import</span></button>
-                                </div>
+                                    <div class="d-grid mt-2">
+                                        <button type="submit" class="btn btn-primary font-medium-3">
+                                            <i data-feather="thumbs-up" class="me-25 font-medium-3"></i>
+                                            <span>Import</span>
+                                        </button>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
