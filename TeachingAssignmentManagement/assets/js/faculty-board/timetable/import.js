@@ -9,3 +9,12 @@ select.each(function () {
         placeholder: $this[0][0].innerHTML
     });
 })
+
+var singleFile = $('#dpz-single-file');
+
+// Basic example
+singleFile.dropzone({
+    url: '/FacultyBoard/Timetable/Import',
+    paramName: 'file', // The name that will be used to transfer the file
+    maxFiles: 1
+});

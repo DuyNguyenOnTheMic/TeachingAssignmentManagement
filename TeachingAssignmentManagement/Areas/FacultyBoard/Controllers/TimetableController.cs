@@ -39,7 +39,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         [HttpPost]
         public ActionResult Import(HttpPostedFileBase postedFile)
         {
-            return View();
+            return RedirectToAction("Import");
         }
     }
 }
