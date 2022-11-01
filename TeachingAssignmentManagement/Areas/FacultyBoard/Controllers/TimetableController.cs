@@ -8,15 +8,18 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
     public class TimetableController : Controller
     {
         private readonly ITermRepository termRepository;
+        private readonly IMajorRepository majorRepository;
 
         public TimetableController()
         {
             this.termRepository = new TermRepository(new CP25Team03Entities());
+            this.majorRepository = new MajorRepository(new CP25Team03Entities());
         }
 
-        public TimetableController(ITermRepository termRepository)
+        public TimetableController(ITermRepository termRepository, IMajorRepository majorRepository)
         {
             this.termRepository = termRepository;
+            this.majorRepository = majorRepository;
         }
 
         // GET: FacultyBoard/Timetable
@@ -28,6 +31,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public ActionResult Import()
         {
             ViewBag.term = new SelectList(termRepository.GetTerms(), "id", "id");
+            ViewBag.major = new SelectList(majorRepository.GetMajors(), "id", "name");
             return View();
         }
     }

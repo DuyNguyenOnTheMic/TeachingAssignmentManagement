@@ -25,10 +25,7 @@
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <label class="form-label font-small-4" for="major">Ngành: </label>
-                                        <select class="select2 form-select" id="major" name="major">
-                                            <option value="AK">Alaska</option>
-                                            <option value="HI">Hawaii</option>
-                                        </select>
+                                        @Html.DropDownList("major", null, "---- Chọn ngành ----", htmlAttributes: new { @class = "select2 form-select" })
                                     </div>
                                 </div>
                                 <form action="#" class="dropzone dropzone-area" id="dpz-single-file">
