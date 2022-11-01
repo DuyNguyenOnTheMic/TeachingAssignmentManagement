@@ -59,17 +59,5 @@
     <script src="~/app-assets/vendors/js/file-uploaders/dropzone-min.js"></script>
     <script src="~/app-assets/js/scripts/forms/form-file-uploader.js"></script>
     <script src="~/app-assets/language/select2/vi.min.js"></script>
-    <script>
-        var select = $('.select2');
-        select.each(function () {
-            var $this = $(this);
-            $this.wrap('<div class="position-relative"></div>');
-            $this.select2({
-                language: 'vi',
-                dropdownAutoWidth: true,
-                dropdownParent: $this.parent(),
-                placeholder: $this[0][0].innerHTML
-            });
-        })
-    </script>
+    <script src="~/assets/js/faculty-board/timetable/import.js"></script>
 }
