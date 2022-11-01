@@ -1,22 +1,20 @@
 ﻿@{
-    ViewBag.Title = "Import thời khoá biểu";
+    ViewBag.Title = "Import TKB";
 }
 
 <div class="app-content content ">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper p-0">
-        <div class="content-header row">
-            <div class="content-header-left col-md-9 col-12 mb-2">
-                <h3>Import TKB</h3>
-            </div>
-        </div>
         <div class="content-body">
             <!-- Dropzone section start -->
             <section>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">@ViewBag.Title</h4>
+                            </div>
                             <div class="card-body">
                                 @using (Html.BeginForm("Import", "Timetable", FormMethod.Post, new { @enctype = "multipart/form-data" }))
                                 {
