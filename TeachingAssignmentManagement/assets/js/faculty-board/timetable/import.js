@@ -100,5 +100,29 @@ myDropzone.dropzone({
                 };
             })
         });
+
+        this.on('error', function (data, errorMessage, xhr) {
+
+            Swal.close();
+            window.onbeforeunload = null;
+
+            if (xhr) {
+                if (xhr.status === 417) {
+                    // Show message if the file is not in the right format (like missing columns, etc, ...)
+                    var errorDisplay = document.querySelectorAll('[data-dz-errormessage]');
+                    errorDisplay[errorDisplay.length - 1].innerHTML = 'Đã xảy ra lỗi, vui lòng kiểm tra lại tệp tin';
+
+                    Swal.fire({
+                        title: 'Thông báo',
+                        html: errorMessage,
+                        icon: 'error',
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    });
+                }
+            }
+        });
     }
 });
