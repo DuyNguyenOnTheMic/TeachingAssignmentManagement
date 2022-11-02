@@ -37,7 +37,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         }
 
         [HttpPost]
-        public ActionResult Import(HttpPostedFileBase postedFile, string term, string major)
+        public ActionResult Import(HttpPostedFileBase postedFile, int term, int major)
         {
             return RedirectToAction("Import");
         }
