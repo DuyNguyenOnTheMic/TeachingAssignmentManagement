@@ -142,12 +142,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             DataColumnCollection columns = dt.Columns;
             // Validate all columns in excel file
-            for (int i = 0; i < columnNames.Length; i++)
+            foreach(string columnName in columnNames)
             {
-                if (!columns.Contains(columnNames[i]))
+                if (!columns.Contains(columnName))
                 {
                     // Return error message
-                    return columns[i].ColumnName + " (cột thứ " + (i + 1) + ")";
+                    return columnName;
                 }
             }
             return null;
