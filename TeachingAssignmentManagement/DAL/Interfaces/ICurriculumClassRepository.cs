@@ -1,6 +1,10 @@
-﻿namespace TeachingAssignmentManagement.DAL
+﻿using System;
+using TeachingAssignmentManagement.Models;
+
+namespace TeachingAssignmentManagement.DAL
 {
-    public class ICurriculumClassRepository
+    public interface ICurriculumClassRepository: IDisposable
     {
+        void InsertCurriculumClass(curriculum_class curriculum_Class);
     }
 }
