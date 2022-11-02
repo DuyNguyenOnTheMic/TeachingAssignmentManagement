@@ -538,8 +538,6 @@ window.colors = {
     function setLayout(currentLocalStorageLayout) {
         var navLinkStyle = $('.nav-link-style'),
             currentLayout = getCurrentLayout(),
-            mainMenu = $('.main-menu'),
-            navbar = $('.header-navbar'),
             // Witch to local storage layout if we have else current layout
             switchToLayout = currentLocalStorageLayout ? currentLocalStorageLayout : currentLayout;
 
@@ -547,13 +545,9 @@ window.colors = {
 
         if (switchToLayout === 'dark-layout') {
             $html.addClass('dark-layout');
-            mainMenu.removeClass('menu-light').addClass('menu-dark');
-            navbar.removeClass('navbar-light').addClass('navbar-dark');
             navLinkStyle.find('.ficon').replaceWith(feather.icons['sun'].toSvg({ class: 'ficon' }));
         } else {
             $html.addClass('light-layout');
-            mainMenu.removeClass('menu-dark').addClass('menu-light');
-            navbar.removeClass('navbar-dark').addClass('navbar-light');
             navLinkStyle.find('.ficon').replaceWith(feather.icons['moon'].toSvg({ class: 'ficon' }));
         }
         // Set radio in customizer if we have
