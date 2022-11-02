@@ -86,8 +86,16 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 }
             }
 
+            // Declare the original column names
+            string[] columnNames = {
+                "MaGocLHP", "Mã MH", "Mã LHP", "Tên HP", "Số TC", "Loại HP", "Mã Lớp", "TSMH",
+                "Số Tiết Đã xếp", "PH", "Thứ", "Tiết BĐ", "Số Tiết", "Tiết Học", "Phòng", "Mã CBGD",
+                "Tên CBGD", "PH_X", "Sức Chứa", "SiSoTKB", "Trống", "Tình Trạng LHP", "TuanHoc2", "ThuS",
+                "TietS", "Số SVĐK", "Tuần BD", "Tuần KT", "Ghi Chú 1", "Ghi chú 2"
+            };
+
             // Validate all columns
-            string isValid = ValidateColumns(dt);
+            string isValid = ValidateColumns(dt, columnNames);
             if (isValid != null)
             {
                 Response.Write($"Có vẻ như bạn đã sai tên cột <strong>" + isValid + "</strong>, vui lòng kiểm tra lại tệp tin! 😟");
@@ -130,14 +138,13 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             return RedirectToAction("Import");
         }
 
-        private string ValidateColumns(DataTable dt)
+        private string ValidateColumns(DataTable dt, string[] columnNames)
         {
-            string[] heeh = { "MaGocLHP", "Mã MH", "Mã LH" };
             DataColumnCollection columns = dt.Columns;
             // Validate all columns in excel file
-            for (int i = 0; i < heeh.Length; i++)
+            for (int i = 0; i < columnNames.Length; i++)
             {
-                if (!columns.Contains(heeh[i]))
+                if (!columns.Contains(columnNames[i]))
                 {
                     // Return error message
                     return columns[i].ColumnName + " (cột thứ " + (i + 1) + ")";
