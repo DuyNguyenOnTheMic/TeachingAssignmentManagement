@@ -238,14 +238,14 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\FacultyBoard\Controllers\MajorController.cs" />
-    <Compile Include="DAL\CurriculumClassRepository.cs" />
-    <Compile Include="DAL\ICurriculumClassRepository.cs" />
-    <Compile Include="DAL\IMajorRepository.cs" />
-    <Compile Include="DAL\ITermRepository.cs" />
-    <Compile Include="DAL\IUserRepository.cs" />
-    <Compile Include="DAL\MajorRepository.cs" />
-    <Compile Include="DAL\TermRepository.cs" />
-    <Compile Include="DAL\UserRepository.cs" />
+    <Compile Include="DAL\Repositories\CurriculumClassRepository.cs" />
+    <Compile Include="DAL\Interfaces\ICurriculumClassRepository.cs" />
+    <Compile Include="DAL\Interfaces\IMajorRepository.cs" />
+    <Compile Include="DAL\Interfaces\ITermRepository.cs" />
+    <Compile Include="DAL\Interfaces\IUserRepository.cs" />
+    <Compile Include="DAL\Repositories\MajorRepository.cs" />
+    <Compile Include="DAL\Repositories\TermRepository.cs" />
+    <Compile Include="DAL\Repositories\UserRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
