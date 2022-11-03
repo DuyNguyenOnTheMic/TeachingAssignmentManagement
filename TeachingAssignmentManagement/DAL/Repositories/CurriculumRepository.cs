@@ -1,7 +1,7 @@
 ﻿using System;
 using TeachingAssignmentManagement.Models;
 
-namespace TeachingAssignmentManagement.DAL.Repositories
+namespace TeachingAssignmentManagement.DAL
 {
     public class CurriculumRepository : ICurriculumRepository, IDisposable
     {
