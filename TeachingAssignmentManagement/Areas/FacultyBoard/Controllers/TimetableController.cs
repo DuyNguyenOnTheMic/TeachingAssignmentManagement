@@ -184,5 +184,15 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Check if string is empty
             return value != null && string.IsNullOrEmpty(value.Trim()) ? null : value;
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            curriculumClassRepository.Dispose();
+            curriculumRepository.Dispose();
+            majorRepository.Dispose();
+            termRepository.Dispose();
+            userRepository.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }
