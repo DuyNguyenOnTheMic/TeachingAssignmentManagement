@@ -7,36 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
-using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 {
     [Authorize(Roles = "BCN khoa")]
     public class TimetableController : Controller
     {
-        private readonly ICurriculumClassRepository curriculumClassRepository;
-        private readonly ICurriculumRepository curriculumRepository;
-        private readonly IMajorRepository majorRepository;
-        private readonly ITermRepository termRepository;
-        private readonly IUserRepository userRepository;
-
-        public TimetableController()
-        {
-            this.curriculumClassRepository = new CurriculumClassRepository(new CP25Team03Entities());
-            this.curriculumRepository = new CurriculumRepository(new CP25Team03Entities());
-            this.majorRepository = new MajorRepository(new CP25Team03Entities());
-            this.termRepository = new TermRepository(new CP25Team03Entities());
-            this.userRepository = new UserRepository(new CP25Team03Entities());
-        }
-
-        public TimetableController(ICurriculumClassRepository curriculumClassRepository, ICurriculumRepository curriculumRepository, IMajorRepository majorRepository, ITermRepository termRepository, IUserRepository userRepository)
-        {
-            this.curriculumClassRepository = curriculumClassRepository;
-            this.curriculumRepository = curriculumRepository;
-            this.majorRepository = majorRepository;
-            this.termRepository = termRepository;
-            this.userRepository = userRepository;
-        }
+        private readonly UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: FacultyBoard/Timetable
         public ActionResult Index()
@@ -46,8 +23,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
         public ActionResult Import()
         {
-            ViewBag.term = new SelectList(termRepository.GetTerms(), "id", "id");
-            ViewBag.major = new SelectList(majorRepository.GetMajors(), "id", "name");
+            ViewBag.term = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
+            ViewBag.major = new SelectList(unitOfWork.MajorRepository.GetMajors(), "id", "name");
             return View();
         }
 
@@ -187,11 +164,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            curriculumClassRepository.Dispose();
-            curriculumRepository.Dispose();
-            majorRepository.Dispose();
-            termRepository.Dispose();
-            userRepository.Dispose();
+            unitOfWork.Dispose();
             base.Dispose(disposing);
         }
     }
