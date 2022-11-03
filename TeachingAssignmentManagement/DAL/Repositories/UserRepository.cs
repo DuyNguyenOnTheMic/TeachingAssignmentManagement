@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -7,7 +6,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.DAL
 {
-    public class UserRepository : IUserRepository, IDisposable
+    public class UserRepository
     {
         private readonly CP25Team03Entities context;
 
@@ -57,31 +56,6 @@ namespace TeachingAssignmentManagement.DAL
         public void UpdateLecturer(lecturer lecturer)
         {
             context.Entry(lecturer).State = EntityState.Modified;
-        }
-
-        public void Save()
-        {
-            context.SaveChanges();
-        }
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
     }
 }

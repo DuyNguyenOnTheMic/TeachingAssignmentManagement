@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Data.Entity;
 using System.Linq;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.DAL
 {
-    public class MajorRepository : IMajorRepository, IDisposable
+    public class MajorRepository
     {
         private readonly CP25Team03Entities context;
 
@@ -43,31 +42,6 @@ namespace TeachingAssignmentManagement.DAL
         public void UpdateMajor(major major)
         {
             context.Entry(major).State = EntityState.Modified;
-        }
-
-        public void Save()
-        {
-            context.SaveChanges();
-        }
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
     }
 }
