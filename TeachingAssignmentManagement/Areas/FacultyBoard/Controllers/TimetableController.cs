@@ -16,17 +16,20 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
     {
         private readonly ITermRepository termRepository;
         private readonly IMajorRepository majorRepository;
+        private readonly ICurriculumClassRepository curriculumClassRepository;
 
         public TimetableController()
         {
             this.termRepository = new TermRepository(new CP25Team03Entities());
             this.majorRepository = new MajorRepository(new CP25Team03Entities());
+            this.curriculumClassRepository = new CurriculumClassRepository(new CP25Team03Entities());
         }
 
-        public TimetableController(ITermRepository termRepository, IMajorRepository majorRepository)
+        public TimetableController(ITermRepository termRepository, IMajorRepository majorRepository, ICurriculumClassRepository curriculumClassRepository)
         {
             this.termRepository = termRepository;
             this.majorRepository = majorRepository;
+            this.curriculumClassRepository = curriculumClassRepository;
         }
 
         // GET: FacultyBoard/Timetable
