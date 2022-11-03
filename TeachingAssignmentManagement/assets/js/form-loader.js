@@ -15,14 +15,6 @@ jQuery.validator.addMethod("idCheck", function (value, element) {
     return this.optional(element) || re.test(value);
 });
 
-// Create custom email check for VLU
-var email_domain = ["vlu.edu", "vanlanguni"]
-var regexpEmail = "^[A-Za-z0-9._%+-]+@(" + email_domain[0] + "|" + email_domain[1] + ").vn$";
-jQuery.validator.addMethod("emailCheck", function (value, element) {
-    var re = new RegExp(regexpEmail);
-    return this.optional(element) || re.test(value);
-});
-
 if (profileForm.length) {
     profileForm.validate({
         rules: {
@@ -112,7 +104,7 @@ if (majorForm.length) {
 
 if (termForm.length) {
     // Populate term form
-    var yearSelect = $('.year-select'),
+    var yearSelect = $('.select2'),
         touchspin = $('.touchspin'),
         picker = $('.picker');
 
@@ -124,6 +116,10 @@ if (termForm.length) {
             dropdownAutoWidth: true,
             dropdownParent: $this.parent(),
             minimumResultsForSearch: Infinity
+        }).change(function () {
+            if ($('#start_year').val() <= $('#end_year').val()) {
+                $(this).valid();
+            }
         });
     });
 
@@ -239,6 +235,10 @@ if (termForm.length) {
         }
     }
 
+    jQuery.validator.addMethod('moreCheck', function (value, element, param) {
+        return this.optional(element) || parseInt(value) >= parseInt($(param).val());
+    });
+
     // Form validation for term
     termForm.validate({
         ignore: [],
@@ -250,6 +250,9 @@ if (termForm.length) {
             },
             start_date: {
                 required: true
+            },
+            end_year: {
+                moreCheck: "#start_year"
             }
         },
         messages: {
@@ -260,10 +263,15 @@ if (termForm.length) {
             },
             start_date: {
                 required: "Bạn chưa chọn ngày bắt đầu"
+            },
+            end_year: {
+                moreCheck: "Năm kết thúc không thể nhỏ hơn năm bắt đầu!"
             }
         },
         errorPlacement: function (error, element) {
-            if (element.hasClass("picker")) {
+            if (element.hasClass("select2")) {
+                error.insertAfter(element.siblings(".select2"));
+            } else if (element.hasClass("picker")) {
                 error.insertAfter(element.siblings(".picker"));
             } else {
                 error.insertAfter(element);
@@ -288,6 +296,14 @@ if (userForm.length) {
             .change(function () {
                 $(this).valid();
             });
+    });
+
+    // Create custom email check for VLU
+    var email_domain = ["vlu.edu", "vanlanguni"]
+    var regexpEmail = "^[A-Za-z0-9._%+-]+@(" + email_domain[0] + "|" + email_domain[1] + ").vn$";
+    jQuery.validator.addMethod("emailCheck", function (value, element) {
+        var re = new RegExp(regexpEmail);
+        return this.optional(element) || re.test(value);
     });
 
     // Form validation for user
