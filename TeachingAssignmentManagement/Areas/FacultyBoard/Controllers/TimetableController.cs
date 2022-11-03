@@ -14,25 +14,25 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
     [Authorize(Roles = "BCN khoa")]
     public class TimetableController : Controller
     {
-        private readonly ITermRepository termRepository;
-        private readonly IMajorRepository majorRepository;
         private readonly ICurriculumClassRepository curriculumClassRepository;
         private readonly ICurriculumRepository curriculumRepository;
+        private readonly IMajorRepository majorRepository;
+        private readonly ITermRepository termRepository;
 
         public TimetableController()
         {
-            this.termRepository = new TermRepository(new CP25Team03Entities());
-            this.majorRepository = new MajorRepository(new CP25Team03Entities());
             this.curriculumClassRepository = new CurriculumClassRepository(new CP25Team03Entities());
             this.curriculumRepository = new CurriculumRepository(new CP25Team03Entities());
+            this.majorRepository = new MajorRepository(new CP25Team03Entities());
+            this.termRepository = new TermRepository(new CP25Team03Entities());
         }
 
-        public TimetableController(ITermRepository termRepository, IMajorRepository majorRepository, ICurriculumClassRepository curriculumClassRepository, ICurriculumRepository curriculumRepository)
+        public TimetableController(ICurriculumClassRepository curriculumClassRepository, ICurriculumRepository curriculumRepository, IMajorRepository majorRepository, ITermRepository termRepository)
         {
-            this.termRepository = termRepository;
-            this.majorRepository = majorRepository;
             this.curriculumClassRepository = curriculumClassRepository;
             this.curriculumRepository = curriculumRepository;
+            this.majorRepository = majorRepository;
+            this.termRepository = termRepository;
         }
 
         // GET: FacultyBoard/Timetable
