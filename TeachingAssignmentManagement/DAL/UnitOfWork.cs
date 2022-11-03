@@ -8,6 +8,7 @@ namespace TeachingAssignmentManagement.DAL
         private readonly CP25Team03Entities context = new CP25Team03Entities();
         private CurriculumClassRepository curriculumClassRepository;
         private CurriculumRepository curriculumRepository;
+        private MajorRepository majorRepository;
 
         public CurriculumClassRepository CurriculumClassRepository
         {
@@ -30,6 +31,18 @@ namespace TeachingAssignmentManagement.DAL
                     this.curriculumRepository = new CurriculumRepository(context);
                 }
                 return curriculumRepository;
+            }
+        }
+
+        public MajorRepository MajorRepository
+        {
+            get
+            {
+                if (this.majorRepository == null)
+                {
+                    this.majorRepository = new MajorRepository(context);
+                }
+                return majorRepository;
             }
         }
 

@@ -8,17 +8,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
     [Authorize(Roles = "BCN khoa")]
     public class MajorController : Controller
     {
-        private readonly IMajorRepository majorRepository;
-
-        public MajorController()
-        {
-            this.majorRepository = new MajorRepository(new CP25Team03Entities());
-        }
-
-        public MajorController(IMajorRepository majorRepository)
-        {
-            this.majorRepository = majorRepository;
-        }
+        private readonly UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: FacultyBoard/Major
         [OutputCache(Duration = 600, VaryByCustom = "userName")]
@@ -30,7 +20,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public JsonResult GetData()
         {
             // Get majors data from datatabse
-            return Json(majorRepository.GetMajors(), JsonRequestBehavior.AllowGet);
+            return Json(unitOfWork.MajorRepository.GetMajors(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -46,8 +36,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             try
             {
                 // Create new major
-                majorRepository.InsertMajor(major);
-                majorRepository.Save();
+                unitOfWork.MajorRepository.InsertMajor(major);
+                unitOfWork.Save();
                 MajorHub.BroadcastData();
                 return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
             }
@@ -60,15 +50,15 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         [HttpGet]
         public ActionResult Edit(string id)
         {
-            return View(majorRepository.GetMajorByID(id));
+            return View(unitOfWork.MajorRepository.GetMajorByID(id));
         }
 
         [HttpPost]
         public ActionResult Edit(major major)
         {
             // Update major
-            majorRepository.UpdateMajor(major);
-            majorRepository.Save();
+            unitOfWork.MajorRepository.UpdateMajor(major);
+            unitOfWork.Save();
             MajorHub.BroadcastData();
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
@@ -79,8 +69,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             try
             {
                 // Delete major
-                majorRepository.DeleteMajor(id);
-                majorRepository.Save();
+                unitOfWork.MajorRepository.DeleteMajor(id);
+                unitOfWork.Save();
                 MajorHub.BroadcastData();
             }
             catch
@@ -92,7 +82,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            majorRepository.Dispose();
+            unitOfWork.Dispose();
             base.Dispose(disposing);
         }
     }
