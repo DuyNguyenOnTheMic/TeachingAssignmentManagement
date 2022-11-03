@@ -248,6 +248,7 @@
     <Compile Include="DAL\Repositories\MajorRepository.cs" />
     <Compile Include="DAL\Repositories\TermRepository.cs" />
     <Compile Include="DAL\Repositories\UserRepository.cs" />
+    <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
