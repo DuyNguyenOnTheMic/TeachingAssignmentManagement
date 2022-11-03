@@ -12,17 +12,15 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
     public class UserController : Controller
     {
         private ApplicationUserManager _userManager;
-        private readonly IUserRepository userRepository;
+        private readonly UnitOfWork unitOfWork = new UnitOfWork();
 
         public UserController()
         {
-            this.userRepository = new UserRepository(new CP25Team03Entities());
         }
 
-        public UserController(ApplicationUserManager userManager, IUserRepository userRepository)
+        public UserController(ApplicationUserManager userManager)
         {
             UserManager = userManager;
-            this.userRepository = userRepository;
         }
 
         public ApplicationUserManager UserManager
@@ -47,14 +45,14 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public JsonResult GetData()
         {
             // Get user data from datatabse
-            return Json(userRepository.GetUsers(), JsonRequestBehavior.AllowGet);
+            return Json(unitOfWork.UserRepository.GetUsers(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         [OutputCache(Duration = 600, VaryByParam = "none")]
         public ActionResult Create()
         {
-            ViewBag.role_id = new SelectList(userRepository.GetRoles(), "id", "name");
+            ViewBag.role_id = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name");
             return View(new lecturer());
         }
 
@@ -64,7 +62,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Declare variables
             string txtStaffId = SetNullOnEmpty(staff_id);
             string txtFullName = SetNullOnEmpty(full_name);
-            var role = userRepository.GetRoleByID(role_id);
+            var role = unitOfWork.UserRepository.GetRoleByID(role_id);
 
             // Get user information
             var user = new ApplicationUser
@@ -90,8 +88,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         staff_id = txtStaffId,
                         full_name = txtFullName
                     };
-                    userRepository.InsertLecturer(lecturer);
-                    userRepository.Save();
+                    unitOfWork.UserRepository.InsertLecturer(lecturer);
+                    unitOfWork.Save();
                 }
                 catch
                 {
@@ -112,15 +110,15 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             if (query_user.Roles.Count > 0)
             {
                 // Set selected role
-                ViewBag.role_id = new SelectList(userRepository.GetRoles(), "id", "name", query_user.Roles.FirstOrDefault().RoleId);
+                ViewBag.role_id = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name", query_user.Roles.FirstOrDefault().RoleId);
             }
             else
             {
                 // Populate new role select list
-                ViewBag.role_id = new SelectList(userRepository.GetRoles(), "id", "name");
+                ViewBag.role_id = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name");
             }
             ViewBag.email = query_user.Email;
-            return View(userRepository.GetLecturerByID(id));
+            return View(unitOfWork.UserRepository.GetLecturerByID(id));
         }
 
         [HttpPost]
@@ -131,11 +129,11 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             string txtFullName = SetNullOnEmpty(full_name);
             var userId = UserManager.FindByEmail(email).Id;
             var oldRole = UserManager.GetRoles(userId).FirstOrDefault();
-            var role = userRepository.GetRoleByID(role_id);
-            var query_lecturer = userRepository.GetLecturerByID(userId);
+            var role = unitOfWork.UserRepository.GetRoleByID(role_id);
+            var query_lecturer = unitOfWork.UserRepository.GetLecturerByID(userId);
 
             // Prevent user from editing the last faculty board role
-            int facultyBoardCount = userRepository.GetFacultyBoards().Count();
+            int facultyBoardCount = unitOfWork.UserRepository.GetFacultyBoards().Count();
             if (facultyBoardCount <= 1 && oldRole == "BCN khoa" && role.Name != "BCN khoa")
             {
                 return Json(new { error = true, message = "Bạn không thể sửa BCN khoa cuối cùng!" }, JsonRequestBehavior.AllowGet);
@@ -148,7 +146,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     // Edit lecturer info
                     query_lecturer.staff_id = txtStaffId;
                     query_lecturer.full_name = txtFullName;
-                    userRepository.Save();
+                    unitOfWork.Save();
                 }
                 else if (txtStaffId != null || txtFullName != null)
                 {
@@ -159,8 +157,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         staff_id = txtStaffId,
                         full_name = txtFullName
                     };
-                    userRepository.InsertLecturer(lecturer);
-                    userRepository.Save();
+                    unitOfWork.UserRepository.InsertLecturer(lecturer);
+                    unitOfWork.Save();
                 }
             }
             catch
@@ -190,7 +188,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             var role = UserManager.GetRoles(id).FirstOrDefault();
 
             // Prevent user from deleting the last faculty board role
-            int facultyBoardCount = userRepository.GetFacultyBoards().Count();
+            int facultyBoardCount = unitOfWork.UserRepository.GetFacultyBoards().Count();
             if (facultyBoardCount <= 1 && role == "BCN khoa")
             {
                 return Json(new { error = true, message = "Bạn không thể xoá BCN khoa cuối cùng!" }, JsonRequestBehavior.AllowGet);
@@ -218,7 +216,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 }
             }
 
-            userRepository.Dispose();
+            unitOfWork.Dispose();
             base.Dispose(disposing);
         }
     }
