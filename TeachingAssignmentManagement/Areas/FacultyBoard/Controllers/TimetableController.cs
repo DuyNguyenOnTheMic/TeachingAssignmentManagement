@@ -6,6 +6,7 @@ using System.IO;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
 
@@ -91,8 +92,14 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 "MaGocLHP", "Mã MH", "Mã LHP", "Tên HP", "Số TC", "Loại HP", "Mã Lớp", "TSMH",
                 "Số Tiết Đã xếp", "PH", "Thứ", "Tiết BĐ", "Số Tiết", "Tiết Học", "Phòng", "Mã CBGD",
                 "Tên CBGD", "PH_X", "Sức Chứa", "SiSoTKB", "Trống", "Tình Trạng LHP", "TuanHoc2", "ThuS",
-                "TietS", "Số SVĐK", "Tuần BD", "Tuần KT", "Ghi Chú 1", "Ghi chú 2"
+                "TietS", "Số SVĐK", "Tuần BD", "Tuần KT", "Ghi Chú"
             };
+
+            // Trim column name string
+            foreach (DataColumn col in dt.Columns)
+            {
+                col.ColumnName = col.ColumnName.Trim();
+            }
 
             // Validate all columns
             string isValid = ValidateColumns(dt, columnNames);
@@ -151,6 +158,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 }
             }
             return null;
+        }
+
+        public static string ToNullableString(string value)
+        {
+            // Check if string is empty
+            return value != null && string.IsNullOrEmpty(value.Trim()) ? null : value;
         }
     }
 }
