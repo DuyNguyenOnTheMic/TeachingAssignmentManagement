@@ -17,14 +17,13 @@ namespace TeachingAssignmentManagement.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
-        private readonly IUserRepository userRepository;
+        private readonly UnitOfWork unitOfWork = new UnitOfWork();
 
         public AccountController()
         {
-            this.userRepository = new UserRepository(new CP25Team03Entities());
         }
 
-        public AccountController(ApplicationUserManager userManager, IUserRepository userRepository)
+        public AccountController(ApplicationUserManager userManager)
         {
             UserManager = userManager;
         }
@@ -123,7 +122,7 @@ namespace TeachingAssignmentManagement.Controllers
         {
             // Return update user profile view
             var userId = UserManager.FindByEmail(User.Identity.Name).Id;
-            return View(userRepository.GetLecturerByID(userId));
+            return View(unitOfWork.UserRepository.GetLecturerByID(userId));
         }
 
         //
@@ -134,8 +133,8 @@ namespace TeachingAssignmentManagement.Controllers
             try
             {
                 // Update major
-                userRepository.UpdateLecturer(lecturer);
-                userRepository.Save();
+                unitOfWork.UserRepository.UpdateLecturer(lecturer);
+                unitOfWork.Save();
                 return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
             }
             catch
@@ -155,7 +154,7 @@ namespace TeachingAssignmentManagement.Controllers
                 }
             }
 
-            userRepository.Dispose();
+            unitOfWork.Dispose();
             base.Dispose(disposing);
         }
     }
