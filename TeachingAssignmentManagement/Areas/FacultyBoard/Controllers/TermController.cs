@@ -62,7 +62,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
             catch
             {
-                return Json(new { error = true }, JsonRequestBehavior.AllowGet);
+                return Json(new { error = true, message = "Học kỳ này đã được tạo trong hệ thống!" }, JsonRequestBehavior.AllowGet);
             }
         }
 

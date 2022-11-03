@@ -145,7 +145,7 @@ function submitForm(form) {
                     // Show message when create failed
                     Swal.fire({
                         title: 'Thông báo',
-                        text: 'Mã ngành này đã tồn tại!',
+                        text: data.message,
                         icon: 'error',
                         customClass: {
                             confirmButton: 'btn btn-primary'
