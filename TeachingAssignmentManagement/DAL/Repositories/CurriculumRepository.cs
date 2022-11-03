@@ -15,5 +15,10 @@ namespace TeachingAssignmentManagement.DAL
         {
             context.curricula.Add(curriculum);
         }
+
+        public curriculum GetCurriculumByID(string id)
+        {
+            return context.curricula.Find(id);
+        }
     }
 }
