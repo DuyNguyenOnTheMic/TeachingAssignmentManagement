@@ -9,17 +9,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
     [Authorize(Roles = "BCN khoa")]
     public class TermController : Controller
     {
-        private readonly ITermRepository termRepository;
-
-        public TermController()
-        {
-            this.termRepository = new TermRepository(new CP25Team03Entities());
-        }
-
-        public TermController(ITermRepository termRepository)
-        {
-            this.termRepository = termRepository;
-        }
+        private readonly UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: FacultyBoard/Term
         [OutputCache(Duration = 600, VaryByCustom = "userName")]
@@ -31,7 +21,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public JsonResult GetData()
         {
             // Get terms data from datatabse
-            return Json(termRepository.GetTerms(), JsonRequestBehavior.AllowGet);
+            return Json(unitOfWork.TermRepository.GetTerms(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -56,8 +46,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             try
             {
                 // Create new term
-                termRepository.InsertTerm(term);
-                termRepository.Save();
+                unitOfWork.TermRepository.InsertTerm(term);
+                unitOfWork.Save();
                 return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
             }
             catch
@@ -69,7 +59,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var term = termRepository.GetTermByID(id);
+            var term = unitOfWork.TermRepository.GetTermByID(id);
 
             // Set selected year on edit view
             List<SelectListItem> startYear = PopulateYears(term.start_year);
@@ -86,8 +76,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public ActionResult Edit(term term)
         {
             // Update term
-            termRepository.UpdateTerm(term);
-            termRepository.Save();
+            unitOfWork.TermRepository.UpdateTerm(term);
+            unitOfWork.Save();
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
@@ -97,8 +87,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             try
             {
                 // Delete major
-                termRepository.DeleteTerm(id);
-                termRepository.Save();
+                unitOfWork.TermRepository.DeleteTerm(id);
+                unitOfWork.Save();
             }
             catch
             {
@@ -121,7 +111,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            termRepository.Dispose();
+            unitOfWork.Dispose();
             base.Dispose(disposing);
         }
     }
