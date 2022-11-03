@@ -6,7 +6,6 @@ using System.IO;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
 
@@ -160,7 +159,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             DataColumnCollection columns = dt.Columns;
             // Validate all columns in excel file
-            foreach(string validColumn in validColumns)
+            foreach (string validColumn in validColumns)
             {
                 if (!columns.Contains(validColumn))
                 {
