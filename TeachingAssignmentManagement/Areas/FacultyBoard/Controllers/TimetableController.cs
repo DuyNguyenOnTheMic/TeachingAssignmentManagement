@@ -115,23 +115,36 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 foreach (DataRow row in dt.Rows)
                 {
                     // Declare all columns
-                    string knowledgeTypeAlias = row["Mã loại kiến thức"].ToString();
-                    string knowledgeTypeName = row["Tên loại kiến thức"].ToString();
-                    string compulsoryCredits = row["Số chỉ BB"].ToString();
-                    string optionalCredits = row["Số chỉ TC"].ToString();
-                    string curriculumId = row["Mã học phần"].ToString();
-                    string curriculumName = row["Tên học phần (Tiếng Việt)"].ToString();
-                    string curriculumNameEnglish = row["Tên học phần (Tiếng Anh)"].ToString();
-                    string credits = row["TC"].ToString();
-                    string theoreticalHours = row["LT"].ToString();
-                    string practiceHours = row["TH"].ToString();
-                    string internshipHours = row["TT"].ToString();
-                    string projectHours = row["DA"].ToString();
-                    string compulsoryOrOptional = row["Bắt buộc/ Tự chọn"].ToString();
-                    string prerequisites = row["Điều kiện tiên quyết"].ToString();
-                    string learnBefore = row["Học trước – học sau"].ToString();
-                    string editingNotes = row["Ghi chú chỉnh sửa"].ToString();
-
+                    string originalId = row["MaGocLHP"].ToString();
+                    string curriculumId = row["Mã MH"].ToString();
+                    string id = row["Mã LHP"].ToString();
+                    string name = row["Tên HP"].ToString();
+                    string credits = row["Số TC"].ToString();
+                    string type = row["Loại HP"].ToString();
+                    string studentClassId = row["Mã Lớp"].ToString();
+                    string minimumStudent = row["TSMH"].ToString();
+                    string totalLesson = row["MaGocLHP"].ToString();
+                    string room = row["MaGocLHP"].ToString();
+                    string day = row["MaGocLHP"].ToString();
+                    string startLesson = row["MaGocLHP"].ToString();
+                    string lessonNumber = row["MaGocLHP"].ToString();
+                    string lessonTime = row["MaGocLHP"].ToString();
+                    string room2 = row["MaGocLHP"].ToString();
+                    string lecturerId = row["MaGocLHP"].ToString();
+                    string fullName = row["MaGocLHP"].ToString();
+                    string roomType = row["MaGocLHP"].ToString();
+                    string capacity = row["MaGocLHP"].ToString();
+                    string studentNumber = row["MaGocLHP"].ToString();
+                    string freeSlot = row["MaGocLHP"].ToString();
+                    string state = row["MaGocLHP"].ToString();
+                    string learnWeek = row["MaGocLHP"].ToString();
+                    string day2 = row["MaGocLHP"].ToString();
+                    string startLesson2 = row["MaGocLHP"].ToString();
+                    string studentRegisteredNumber = row["MaGocLHP"].ToString();
+                    string startWeek = row["MaGocLHP"].ToString();
+                    string endWeek = row["MaGocLHP"].ToString();
+                    string note1 = row["MaGocLHP"].ToString();
+                    string note2 = row["MaGocLHP"].ToString();
 
 
                 }
