@@ -238,12 +238,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\FacultyBoard\Controllers\MajorController.cs" />
-    <Compile Include="DAL\Interfaces\ICurriculumRepository.cs" />
     <Compile Include="DAL\Repositories\CurriculumClassRepository.cs" />
-    <Compile Include="DAL\Interfaces\ICurriculumClassRepository.cs" />
-    <Compile Include="DAL\Interfaces\IMajorRepository.cs" />
-    <Compile Include="DAL\Interfaces\ITermRepository.cs" />
-    <Compile Include="DAL\Interfaces\IUserRepository.cs" />
     <Compile Include="DAL\Repositories\CurriculumRepository.cs" />
     <Compile Include="DAL\Repositories\MajorRepository.cs" />
     <Compile Include="DAL\Repositories\TermRepository.cs" />
