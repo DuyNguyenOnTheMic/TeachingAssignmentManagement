@@ -162,6 +162,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             return value != null && string.IsNullOrEmpty(value.Trim()) ? null : value;
         }
 
+        public static int? ToNullableInt(string value)
+        {
+            // Convert string to nullable int
+            return value != null && string.IsNullOrEmpty(value.Trim()) ? (int?)null : int.Parse(value);
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
