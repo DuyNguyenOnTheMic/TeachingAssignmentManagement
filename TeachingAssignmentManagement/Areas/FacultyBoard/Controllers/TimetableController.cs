@@ -94,7 +94,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             string isValid = ValidateColumns(dt);
             if (isValid != null)
             {
-                Response.Write($"Có vẻ như bạn đã sai tên cột <strong>" + isValid + "</strong>, vui lòng kiểm tra lại tệp tin! 😟");
+                Response.Write($"Có vẻ như bạn đã sai hoặc thiếu tên cột <strong>" + isValid + "</strong>, vui lòng kiểm tra lại tệp tin! 😟");
                 return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
             }
 
