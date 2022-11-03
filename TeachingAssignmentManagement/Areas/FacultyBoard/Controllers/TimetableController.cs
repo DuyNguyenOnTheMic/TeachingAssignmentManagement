@@ -18,6 +18,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         private readonly ICurriculumRepository curriculumRepository;
         private readonly IMajorRepository majorRepository;
         private readonly ITermRepository termRepository;
+        private readonly IUserRepository userRepository;
 
         public TimetableController()
         {
@@ -25,14 +26,16 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             this.curriculumRepository = new CurriculumRepository(new CP25Team03Entities());
             this.majorRepository = new MajorRepository(new CP25Team03Entities());
             this.termRepository = new TermRepository(new CP25Team03Entities());
+            this.userRepository = new UserRepository(new CP25Team03Entities());
         }
 
-        public TimetableController(ICurriculumClassRepository curriculumClassRepository, ICurriculumRepository curriculumRepository, IMajorRepository majorRepository, ITermRepository termRepository)
+        public TimetableController(ICurriculumClassRepository curriculumClassRepository, ICurriculumRepository curriculumRepository, IMajorRepository majorRepository, ITermRepository termRepository, IUserRepository userRepository)
         {
             this.curriculumClassRepository = curriculumClassRepository;
             this.curriculumRepository = curriculumRepository;
             this.majorRepository = majorRepository;
             this.termRepository = termRepository;
+            this.userRepository = userRepository;
         }
 
         // GET: FacultyBoard/Timetable
