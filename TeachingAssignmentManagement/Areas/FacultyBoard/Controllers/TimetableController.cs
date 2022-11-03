@@ -46,15 +46,13 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         [HttpPost]
         public ActionResult Import(HttpPostedFileBase postedFile, int term, int major)
         {
-            string filePath = string.Empty;
             string path = Server.MapPath("~/Uploads/");
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
 
-            filePath = path + Path.GetFileName(postedFile.FileName);
-            string extension = Path.GetExtension(postedFile.FileName);
+            string filePath = path + Path.GetFileName(postedFile.FileName);
             postedFile.SaveAs(filePath);
 
             string conString = ConfigurationManager.ConnectionStrings["ExcelConString"].ConnectionString;
@@ -87,12 +85,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 }
             }
 
-            // Declare the original column names
-            string[] columnNames = {
+            // Declare the valid column names
+            string[] validColumns = {
                 "MaGocLHP", "Mã MH", "Mã LHP", "Tên HP", "Số TC", "Loại HP", "Mã Lớp", "TSMH",
                 "Số Tiết Đã xếp", "PH", "Thứ", "Tiết BĐ", "Số Tiết", "Tiết Học", "Phòng", "Mã CBGD",
                 "Tên CBGD", "PH_X", "Sức Chứa", "SiSoTKB", "Trống", "Tình Trạng LHP", "TuanHoc2", "ThuS",
-                "TietS", "Số SVĐK", "Tuần BD", "Tuần KT", "Ghi Chú"
+                "TietS", "Số SVĐK", "Tuần BD", "Tuần KT", "Ghi Chú 1", "Ghi chú 2"
             };
 
             // Trim column name string
@@ -102,7 +100,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
 
             // Validate all columns
-            string isValid = ValidateColumns(dt, columnNames);
+            string isValid = ValidateColumns(dt, validColumns);
             if (isValid != null)
             {
                 Response.Write($"Có vẻ như bạn đã sai tên cột <strong>" + isValid + "</strong>, vui lòng kiểm tra lại tệp tin! 😟");
@@ -145,16 +143,16 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             return RedirectToAction("Import");
         }
 
-        private string ValidateColumns(DataTable dt, string[] columnNames)
+        private string ValidateColumns(DataTable dt, string[] validColumns)
         {
             DataColumnCollection columns = dt.Columns;
             // Validate all columns in excel file
-            foreach(string columnName in columnNames)
+            foreach(string validColumn in validColumns)
             {
-                if (!columns.Contains(columnName))
+                if (!columns.Contains(validColumn))
                 {
                     // Return error message
-                    return columnName;
+                    return validColumn;
                 }
             }
             return null;
