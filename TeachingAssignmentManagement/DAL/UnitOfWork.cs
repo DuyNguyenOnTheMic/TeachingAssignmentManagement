@@ -16,9 +16,9 @@ namespace TeachingAssignmentManagement.DAL
         {
             get
             {
-                if (this.curriculumClassRepository == null)
+                if (curriculumClassRepository == null)
                 {
-                    this.curriculumClassRepository = new CurriculumClassRepository(context);
+                    curriculumClassRepository = new CurriculumClassRepository(context);
                 }
                 return curriculumClassRepository;
             }
@@ -28,9 +28,9 @@ namespace TeachingAssignmentManagement.DAL
         {
             get
             {
-                if (this.curriculumRepository == null)
+                if (curriculumRepository == null)
                 {
-                    this.curriculumRepository = new CurriculumRepository(context);
+                    curriculumRepository = new CurriculumRepository(context);
                 }
                 return curriculumRepository;
             }
@@ -40,9 +40,9 @@ namespace TeachingAssignmentManagement.DAL
         {
             get
             {
-                if (this.majorRepository == null)
+                if (majorRepository == null)
                 {
-                    this.majorRepository = new MajorRepository(context);
+                    majorRepository = new MajorRepository(context);
                 }
                 return majorRepository;
             }
@@ -52,9 +52,9 @@ namespace TeachingAssignmentManagement.DAL
         {
             get
             {
-                if (this.termRepository == null)
+                if (termRepository == null)
                 {
-                    this.termRepository = new TermRepository(context);
+                    termRepository = new TermRepository(context);
                 }
                 return termRepository;
             }
@@ -64,9 +64,9 @@ namespace TeachingAssignmentManagement.DAL
         {
             get
             {
-                if (this.userRepository == null)
+                if (userRepository == null)
                 {
-                    this.userRepository = new UserRepository(context);
+                    userRepository = new UserRepository(context);
                 }
                 return userRepository;
             }
@@ -81,14 +81,14 @@ namespace TeachingAssignmentManagement.DAL
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!disposed)
             {
                 if (disposing)
                 {
                     context.Dispose();
                 }
             }
-            this.disposed = true;
+            disposed = true;
         }
 
         public void Dispose()
