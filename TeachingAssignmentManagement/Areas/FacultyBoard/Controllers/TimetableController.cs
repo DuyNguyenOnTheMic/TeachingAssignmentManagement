@@ -92,36 +92,36 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 foreach (DataRow row in dt.Rows)
                 {
                     // Declare all columns
-                    string originalId = row["MaGocLHP"].ToString();
-                    string curriculumId = row["Mã MH"].ToString();
-                    string id = row["Mã LHP"].ToString();
-                    string name = row["Tên HP"].ToString();
-                    string credits = row["Số TC"].ToString();
-                    string type = row["Loại HP"].ToString();
-                    string studentClassId = row["Mã Lớp"].ToString();
-                    string minimumStudent = row["TSMH"].ToString();
-                    string totalLesson = row["Số Tiết Đã xếp"].ToString();
-                    string room = row["PH"].ToString();
-                    string day = row["Thứ"].ToString();
-                    string startLesson = row["Tiết BĐ"].ToString();
-                    string lessonNumber = row["Số Tiết"].ToString();
-                    string lessonTime = row["Tiết Học"].ToString();
-                    string room2 = row["Phòng"].ToString();
-                    string lecturerId = row["Mã CBGD"].ToString();
-                    string fullName = row["Tên CBGD"].ToString();
-                    string roomType = row["PH_X"].ToString();
-                    string capacity = row["Sức Chứa"].ToString();
-                    string studentNumber = row["SiSoTKB"].ToString();
-                    string freeSlot = row["Trống"].ToString();
-                    string state = row["Tình Trạng LHP"].ToString();
-                    string learnWeek = row["TuanHoc2"].ToString();
-                    string day2 = row["ThuS"].ToString();
-                    string startLesson2 = row["TietS"].ToString();
-                    string studentRegisteredNumber = row["Số SVĐK"].ToString();
-                    string startWeek = row["Tuần BD"].ToString();
-                    string endWeek = row["Tuần KT"].ToString();
-                    string note1 = row["Ghi Chú 1"].ToString();
-                    string note2 = row["Ghi chú 2"].ToString();
+                    string originalId = ToNullableString(row["MaGocLHP"].ToString());
+                    string curriculumId = ToNullableString(row["Mã MH"].ToString());
+                    string id = ToNullableString(row["Mã LHP"].ToString());
+                    string name = ToNullableString(row["Tên HP"].ToString());
+                    int? credits = ToNullableInt(row["Số TC"].ToString());
+                    string type = ToNullableString(row["Loại HP"].ToString());
+                    string studentClassId = ToNullableString(row["Mã Lớp"].ToString());
+                    int? minimumStudent = ToNullableInt(row["TSMH"].ToString());
+                    int? totalLesson = ToNullableInt(row["Số Tiết Đã xếp"].ToString());
+                    string room = ToNullableString(row["PH"].ToString());
+                    string day = ToNullableString(row["Thứ"].ToString());
+                    int? startLesson = ToNullableInt(row["Tiết BĐ"].ToString());
+                    int? lessonNumber = ToNullableInt(row["Số Tiết"].ToString());
+                    string lessonTime = ToNullableString(row["Tiết Học"].ToString());
+                    string room2 = ToNullableString(row["Phòng"].ToString());
+                    string lecturerId = ToNullableString(row["Mã CBGD"].ToString());
+                    string fullName = ToNullableString(row["Tên CBGD"].ToString());
+                    string roomType = ToNullableString(row["PH_X"].ToString());
+                    int? capacity = ToNullableInt(row["Sức Chứa"].ToString());
+                    string studentNumber = ToNullableString(row["SiSoTKB"].ToString());
+                    int? freeSlot = ToNullableInt(row["Trống"].ToString());
+                    string state = ToNullableString(row["Tình Trạng LHP"].ToString());
+                    string learnWeek = ToNullableString(row["TuanHoc2"].ToString());
+                    string day2 = ToNullableString(row["ThuS"].ToString());
+                    int? startLesson2 = ToNullableInt(row["TietS"].ToString());
+                    int? studentRegisteredNumber = ToNullableInt(row["Số SVĐK"].ToString());
+                    int? startWeek = ToNullableInt(row["Tuần BD"].ToString());
+                    int? endWeek = ToNullableInt(row["Tuần KT"].ToString());
+                    string note1 = ToNullableString(row["Ghi Chú 1"].ToString());
+                    string note2 = ToNullableString(row["Ghi chú 2"].ToString());
 
 
                 }
