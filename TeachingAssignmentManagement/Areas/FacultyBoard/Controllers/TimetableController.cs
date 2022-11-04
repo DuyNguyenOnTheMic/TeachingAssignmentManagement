@@ -141,6 +141,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     var query_curriculumClass = unitOfWork.CurriculumClassRepository.GetCurriculumClassByID(id);
                     if (query_curriculumClass == null)
                     {
+                        var query_lecturer = unitOfWork.UserRepository.GetLecturerByStaffId(lecturerId);
                         curriculum_class curriculumClass = new curriculum_class()
                         {
                             id = ToNullableString(id),
@@ -170,10 +171,9 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                             note_2 = ToNullableString(note2),
                             term_id = term,
                             major_id = major,
-                            lecturer_id = ToNullableString(lecturerId),
+                            lecturer_id = query_lecturer.id,
                             curriculum_id = ToNullableString(curriculumId)
                         };
-                        var query_lecturer = unitOfWork.UserRepository.GetLecturerByStaffId(lecturerId);
                         if (query_lecturer == null)
                         {
                             curriculumClass.lecturer_id = null;
