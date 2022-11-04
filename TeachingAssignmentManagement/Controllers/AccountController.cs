@@ -130,9 +130,10 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpPost]
         public ActionResult Update(lecturer lecturer)
         {
+            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
             try
             {
-                var query_lecturer = unitOfWork.UserRepository.GetLecturerByStaffId(lecturer.staff_id);
+                var query_lecturer = unitOfWork.UserRepository.GetLecturerByID(userId);
                 if (query_lecturer != null)
                 {
                     // Edit lecturer info
@@ -141,7 +142,7 @@ namespace TeachingAssignmentManagement.Controllers
                 else
                 {
                     // Create a new lecturer
-                    string userId = UserManager.FindByEmail(User.Identity.Name).Id;
+                    lecturer.id = userId;
                     unitOfWork.UserRepository.InsertLecturer(lecturer);
                 }
                 unitOfWork.Save();
