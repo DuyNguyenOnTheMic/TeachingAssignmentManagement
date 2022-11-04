@@ -144,23 +144,21 @@ myDropzone.dropzone({
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Update timetable
-                            $.ajax({
-                                type: 'POST',
-                                url: rootUrl + 'FacultyBoard/Timetable/Import',
-                                data: { 'haveData': true },
-                                success: function (data) {
-                                    alert('hehe');
-                                    $.each(myDropzone.files, function (i, file) {
-                                        file.status = Dropzone.QUEUED
-                                        file.previewElement.classList.remove("dz-error");
-                                        return file.previewElement.classList.add("dz-success");
-                                    });
-                                    myDropzone.processQueue();
+                            $.each(myDropzone.files, function (i, file) {
+                                // Add file to Dropzone again
+                                file.status = Dropzone.QUEUED
+                                file.previewElement.classList.remove("dz-error");
+                                return file.previewElement.classList.add("dz-success");
+                            });
+                            myDropzone.on('sending', function (data, xhr, formData) {
+                                // Append a boolean to Import action
+                                formData.append('haveData', true);
+                            });
+                            // Process import
+                            myDropzone.processQueue();
 
-                                    myDropzone.on("success", function (file) {
-                                        Swal.fire("Thông báo", "Import lại CTĐT thành công!", "success");
-                                    });
-                                }
+                            myDropzone.on("success", function (file) {
+                                Swal.fire("Thông báo", "Import lại CTĐT thành công!", "success");
                             });
                         } else if (result.isDenied) {
                             // Replace timetable
