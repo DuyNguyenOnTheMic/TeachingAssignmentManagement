@@ -125,8 +125,9 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     string note2 = row["Ghi chú 2"].ToString();
 
                     var query_curriculum = unitOfWork.CurriculumRepository.GetCurriculumByID(curriculumId);
-                    if (query_curriculum != null)
+                    if (query_curriculum == null)
                     {
+                        // Create new curriculum
                         curriculum curriculum = new curriculum()
                         {
                             id = ToNullableString(curriculumId),
@@ -136,7 +137,11 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         unitOfWork.CurriculumRepository.InsertCurriculum(curriculum);
                     }
 
+                    var query_curriculumClass = unitOfWork.CurriculumClassRepository.GetCurriculumClassByID(id);
+                    if (query_curriculumClass == null)
+                    {
 
+                    }
                 }
             }
             catch (Exception)

@@ -15,5 +15,10 @@ namespace TeachingAssignmentManagement.DAL
         {
             context.curriculum_class.Add(curriculum_Class);
         }
+
+        public curriculum_class GetCurriculumClassByID(string id)
+        {
+            return context.curriculum_class.Find(id);
+        }
     }
 }
