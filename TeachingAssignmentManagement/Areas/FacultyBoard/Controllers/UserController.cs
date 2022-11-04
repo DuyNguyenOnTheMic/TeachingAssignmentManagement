@@ -127,8 +127,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Declare variables
             string txtStaffId = SetNullOnEmpty(staff_id);
             string txtFullName = SetNullOnEmpty(full_name);
-            var userId = UserManager.FindByEmail(email).Id;
-            var oldRole = UserManager.GetRoles(userId).FirstOrDefault();
+            string userId = UserManager.FindByEmail(email).Id;
+            string oldRole = UserManager.GetRoles(userId).FirstOrDefault();
             var role = unitOfWork.UserRepository.GetRoleByID(role_id);
             var query_lecturer = unitOfWork.UserRepository.GetLecturerByID(userId);
 
@@ -185,7 +185,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             // Declare variables
             var user = UserManager.FindById(id);
-            var role = UserManager.GetRoles(id).FirstOrDefault();
+            string role = UserManager.GetRoles(id).FirstOrDefault();
 
             // Prevent user from deleting the last faculty board role
             int facultyBoardCount = unitOfWork.UserRepository.GetFacultyBoards().Count();

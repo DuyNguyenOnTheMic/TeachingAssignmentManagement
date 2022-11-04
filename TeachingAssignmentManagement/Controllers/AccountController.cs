@@ -121,7 +121,7 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult Update()
         {
             // Return update user profile view
-            var userId = UserManager.FindByEmail(User.Identity.Name).Id;
+            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
             return View(unitOfWork.UserRepository.GetLecturerByID(userId));
         }
 
@@ -132,8 +132,18 @@ namespace TeachingAssignmentManagement.Controllers
         {
             try
             {
-                // Update major
-                unitOfWork.UserRepository.UpdateLecturer(lecturer);
+                var query_lecturer = unitOfWork.UserRepository.GetLecturerByStaffId(lecturer.staff_id);
+                if (query_lecturer != null)
+                {
+                    // Edit lecturer info
+                    query_lecturer = lecturer;
+                }
+                else
+                {
+                    // Create a new lecturer
+                    string userId = UserManager.FindByEmail(User.Identity.Name).Id;
+                    unitOfWork.UserRepository.InsertLecturer(lecturer);
+                }
                 unitOfWork.Save();
                 return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
             }
