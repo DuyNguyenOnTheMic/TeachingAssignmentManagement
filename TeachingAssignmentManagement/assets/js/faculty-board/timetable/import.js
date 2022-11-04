@@ -108,9 +108,9 @@ myDropzone.dropzone({
             window.onbeforeunload = null;
 
             if (xhr) {
-                if (xhr.status === 417) {
+                var errorDisplay = document.querySelectorAll('[data-dz-errormessage]');
+                if (xhr.status == 417) {
                     // Show message if the file is not in the right format (like missing columns, etc, ...)
-                    var errorDisplay = document.querySelectorAll('[data-dz-errormessage]');
                     errorDisplay[errorDisplay.length - 1].innerHTML = 'Đã xảy ra lỗi, vui lòng kiểm tra lại tệp tin';
 
                     Swal.fire({
@@ -122,6 +122,32 @@ myDropzone.dropzone({
                         },
                         buttonsStyling: false
                     });
+                } else if (xhr.status == 409) {
+                    // Handle alternative flows when user chooses term and major which already has data
+                    errorDisplay[errorDisplay.length - 1].innerHTML = 'Đã xảy ra lỗi!';
+
+                    Swal.fire({
+                        title: 'Thông báo',
+                        text: 'Học kỳ và ngành này đã có dữ liệu trong hệ thống, bạn muốn cập nhật hay thay thế thời khoá biểu?',
+                        icon: 'question',
+                        showDenyButton: true,
+                        showCancelButton: true,
+                        confirmButtonText: 'Cập nhật',
+                        denyButtonText: 'Thay thế',
+                        cancelButtonText: 'Huỷ',
+                        customClass: {
+                            confirmButton: 'btn btn-primary',
+                            denyButton: 'btn btn-success ms-1',
+                            cancelButton: 'btn btn-outline-danger ms-1'
+                        },
+                        buttonsStyling: false
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire('Saved!', '', 'success')
+                        } else if (result.isDenied) {
+                            Swal.fire('Changes are not saved', '', 'info')
+                        }
+                    })
                 }
             }
         });
