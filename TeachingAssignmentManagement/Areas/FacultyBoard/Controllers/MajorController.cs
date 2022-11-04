@@ -11,7 +11,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         private readonly UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: FacultyBoard/Major
-        [OutputCache(Duration = 600, VaryByCustom = "userName")]
         public ActionResult Index()
         {
             return View();
