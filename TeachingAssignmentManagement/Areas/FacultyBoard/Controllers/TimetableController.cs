@@ -171,13 +171,9 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                             note_2 = ToNullableString(note2),
                             term_id = term,
                             major_id = major,
-                            lecturer_id = query_lecturer.id,
+                            lecturer_id = query_lecturer?.id,
                             curriculum_id = ToNullableString(curriculumId)
                         };
-                        if (query_lecturer == null)
-                        {
-                            curriculumClass.lecturer_id = null;
-                        }
                         unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
                         unitOfWork.Save();
                     }
