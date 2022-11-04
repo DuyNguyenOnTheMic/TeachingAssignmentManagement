@@ -128,7 +128,7 @@ myDropzone.dropzone({
 
                     Swal.fire({
                         title: 'Thông báo',
-                        text: 'Học kỳ và ngành này đã có dữ liệu trong hệ thống, bạn muốn cập nhật hay thay thế thời khoá biểu?',
+                        text: errorMessage,
                         icon: 'question',
                         showDenyButton: true,
                         showCancelButton: true,
