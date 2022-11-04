@@ -175,7 +175,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                             curriculum_id = ToNullableString(curriculumId)
                         };
                         unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
-                        unitOfWork.Save();
                     }
                 }
                 unitOfWork.Save();
