@@ -152,7 +152,7 @@ myDropzone.dropzone({
                             });
                             myDropzone.on('sending', function (data, xhr, formData) {
                                 // Append a boolean to Import action
-                                formData.append('haveData', true);
+                                formData.append('isUpdate', true);
                             });
                             // Process import
                             myDropzone.processQueue();

@@ -30,7 +30,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         }
 
         [HttpPost]
-        public ActionResult Import(HttpPostedFileBase postedFile, int term, string major, bool? haveData)
+        public ActionResult Import(HttpPostedFileBase postedFile, int term, string major, bool? isUpdate)
         {
             string path = Server.MapPath("~/Uploads/");
             if (!Directory.Exists(path))
@@ -71,7 +71,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 }
             }
 
-            if (haveData != true)
+            if (isUpdate == null)
             {
                 // Check if this term and major already has data
                 var query_term_major = unitOfWork.CurriculumClassRepository.CheckTermMajor(term, major);
