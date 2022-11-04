@@ -71,12 +71,15 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 }
             }
 
-            // Check if this term and major already has data
-            var query_term_major = unitOfWork.CurriculumClassRepository.CheckTermMajor(term, major);
-            if (query_term_major != null)
+            if (haveData != true)
             {
-                Response.Write($"Học kỳ và ngành này đã có dữ liệu trong hệ thống, bạn muốn cập nhật hay thay thế thời khoá biểu?");
-                return new HttpStatusCodeResult(HttpStatusCode.Conflict);
+                // Check if this term and major already has data
+                var query_term_major = unitOfWork.CurriculumClassRepository.CheckTermMajor(term, major);
+                if (query_term_major != null)
+                {
+                    Response.Write($"Học kỳ và ngành này đã có dữ liệu trong hệ thống, bạn muốn cập nhật hay thay thế thời khoá biểu?");
+                    return new HttpStatusCodeResult(HttpStatusCode.Conflict);
+                }
             }
 
             // Trim column name string
