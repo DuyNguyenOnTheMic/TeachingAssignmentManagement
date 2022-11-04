@@ -107,7 +107,6 @@ if (majorForm.length) {
 if (termForm.length) {
     // Populate term form
     var yearSelect = $('.select2'),
-        touchspin = $('.touchspin'),
         picker = $('.picker');
 
     yearSelect.each(function () {
@@ -123,14 +122,6 @@ if (termForm.length) {
                 $(this).valid();
             }
         });
-    });
-
-    // Default Spin
-    touchspin.TouchSpin({
-        buttondown_class: 'btn btn-primary',
-        buttonup_class: 'btn btn-primary',
-        buttondown_txt: feather.icons['minus'].toSvg(),
-        buttonup_txt: feather.icons['plus'].toSvg()
     });
 
     var touchspinValue = $('.touchspin-min-max'),
@@ -247,6 +238,8 @@ if (termForm.length) {
         rules: {
             id: {
                 required: true,
+                digits: true,
+                number: false,
                 minlength: 3,
                 maxlength: 3
             },
@@ -255,11 +248,16 @@ if (termForm.length) {
             },
             end_year: {
                 moreCheck: "#start_year"
+            },
+            start_week: {
+                required: true,
+                number: false
             }
         },
         messages: {
             id: {
                 required: "Bạn chưa nhập học kỳ",
+                digits: "Vui lòng nhập số!",
                 minlength: "Vui lòng nhập đúng 3 kí tự!",
                 maxlength: "Vui lòng nhập đúng 3 kí tự!"
             },
@@ -268,6 +266,9 @@ if (termForm.length) {
             },
             end_year: {
                 moreCheck: "Năm kết thúc không thể nhỏ hơn năm bắt đầu!"
+            },
+            start_week: {
+                required: "Bạn chưa nhập tuần bắt đầu"
             }
         },
         errorPlacement: function (error, element) {
@@ -275,6 +276,8 @@ if (termForm.length) {
                 error.insertAfter(element.siblings(".select2"));
             } else if (element.hasClass("picker")) {
                 error.insertAfter(element.siblings(".picker"));
+            } else if (element.hasClass("touchspin-min-max")) {
+                error.insertAfter(".bootstrap-touchspin");
             } else {
                 error.insertAfter(element);
             }
