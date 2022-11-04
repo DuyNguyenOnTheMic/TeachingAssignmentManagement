@@ -1,5 +1,6 @@
 ﻿var select = $('.select2'),
     myDropzone = $('#dpz-single-file');
+var rootUrl = $('#loader').data('request-url');
 
 // Populate select2 for choosing term and major
 select.each(function () {
@@ -15,7 +16,7 @@ select.each(function () {
 
 // Populate Dropzone
 myDropzone.dropzone({
-    url: '/FacultyBoard/Timetable/Import',
+    url: rootUrl + 'FacultyBoard/Timetable/Import',
     autoProcessQueue: false,
     paramName: 'postedFile',
     timeout: null,
