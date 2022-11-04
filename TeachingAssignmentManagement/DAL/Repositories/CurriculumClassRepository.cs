@@ -1,4 +1,5 @@
-﻿using TeachingAssignmentManagement.Models;
+﻿using System.Linq;
+using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.DAL
 {
@@ -19,6 +20,11 @@ namespace TeachingAssignmentManagement.DAL
         public curriculum_class GetCurriculumClassByID(string id)
         {
             return context.curriculum_class.Find(id);
+        }
+
+        public curriculum_class CheckTermMajor(int termId, string majorId)
+        {
+            return context.curriculum_class.FirstOrDefault(c => c.term_id == termId && c.major_id == majorId);
         }
     }
 }

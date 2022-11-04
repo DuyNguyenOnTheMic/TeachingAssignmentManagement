@@ -71,6 +71,13 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 }
             }
 
+            // Check if this term and major already has data
+            var query_term_major = unitOfWork.CurriculumClassRepository.CheckTermMajor(term, major);
+            if (query_term_major != null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Conflict);
+            }
+
             // Trim column name string
             foreach (DataColumn col in dt.Columns)
             {
