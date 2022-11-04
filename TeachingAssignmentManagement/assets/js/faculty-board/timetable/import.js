@@ -28,12 +28,12 @@ myDropzone.dropzone({
     init: function () {
 
         // Using a closure
-        var _this = this;
+        var myDropzone = this;
 
         this.on('maxfilesexceeded', function (file) {
             // Remove file and add again if user input more than 1
-            _this.removeAllFiles();
-            _this.addFile(file);
+            myDropzone.removeAllFiles();
+            myDropzone.addFile(file);
         });
 
         $("#submit-all").click(function (e) {
@@ -41,7 +41,7 @@ myDropzone.dropzone({
             e.preventDefault();
             e.stopPropagation();
 
-            var count = _this.getQueuedFiles().length;
+            var count = myDropzone.getQueuedFiles().length;
 
             var termId = $("#term").val();
             var majorId = $("#major").val();
@@ -61,9 +61,9 @@ myDropzone.dropzone({
             }
             else {
                 // Begin to import file
-                _this.processQueue();
+                myDropzone.processQueue();
 
-                _this.on("success", function () {
+                myDropzone.on("success", function () {
                     Swal.fire({
                         title: 'Good job!',
                         text: 'You clicked the button!',
@@ -143,8 +143,27 @@ myDropzone.dropzone({
                         buttonsStyling: false
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            Swal.fire('Saved!', '', 'success')
+                            // Update timetable
+                            $.ajax({
+                                type: 'POST',
+                                url: rootUrl + 'FacultyBoard/Timetable/Import',
+                                data: { 'haveData': true },
+                                success: function (data) {
+                                    alert('hehe');
+                                    $.each(myDropzone.files, function (i, file) {
+                                        file.status = Dropzone.QUEUED
+                                        file.previewElement.classList.remove("dz-error");
+                                        return file.previewElement.classList.add("dz-success");
+                                    });
+                                    myDropzone.processQueue();
+
+                                    myDropzone.on("success", function (file) {
+                                        Swal.fire("Thông báo", "Import lại CTĐT thành công!", "success");
+                                    });
+                                }
+                            });
                         } else if (result.isDenied) {
+                            // Replace timetable
                             Swal.fire('Changes are not saved', '', 'info')
                         }
                     })

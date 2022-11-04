@@ -30,7 +30,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         }
 
         [HttpPost]
-        public ActionResult Import(HttpPostedFileBase postedFile, int term, string major)
+        public ActionResult Import(HttpPostedFileBase postedFile, int term, string major, bool? haveData)
         {
             string path = Server.MapPath("~/Uploads/");
             if (!Directory.Exists(path))
