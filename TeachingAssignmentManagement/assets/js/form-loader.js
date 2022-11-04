@@ -54,7 +54,8 @@ if (profileForm.length) {
                             icon: 'success',
                             customClass: {
                                 confirmButton: 'btn btn-primary'
-                            }
+                            },
+                            buttonsStyling: false
                         })
                     } else {
                         // Show message when update succeeded
@@ -64,7 +65,8 @@ if (profileForm.length) {
                             icon: 'error',
                             customClass: {
                                 confirmButton: 'btn btn-primary'
-                            }
+                            },
+                            buttonsStyling: false
                         })
                     }
                 }
