@@ -173,6 +173,11 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                             lecturer_id = ToNullableString(lecturerId),
                             curriculum_id = ToNullableString(curriculumId)
                         };
+                        var query_lecturer = unitOfWork.UserRepository.GetLecturerByStaffId(lecturerId);
+                        if (query_lecturer == null)
+                        {
+                            curriculumClass.lecturer_id = null;
+                        }
                         unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
                         unitOfWork.Save();
                     }

@@ -43,6 +43,11 @@ namespace TeachingAssignmentManagement.DAL
             return context.lecturers.Find(id);
         }
 
+        public lecturer GetLecturerByStaffId(string id)
+        {
+            return context.lecturers.FirstOrDefault(l => l.staff_id == id);
+        }
+
         public IEnumerable<AspNetUser> GetFacultyBoards()
         {
             return context.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN khoa");
