@@ -137,7 +137,8 @@ namespace TeachingAssignmentManagement.Controllers
                 if (query_lecturer != null)
                 {
                     // Edit lecturer info
-                    query_lecturer = lecturer;
+                    query_lecturer.staff_id = lecturer.staff_id;
+                    query_lecturer.full_name = lecturer.full_name;
                 }
                 else
                 {

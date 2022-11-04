@@ -146,7 +146,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     // Edit lecturer info
                     query_lecturer.staff_id = txtStaffId;
                     query_lecturer.full_name = txtFullName;
-                    unitOfWork.Save();
                 }
                 else if (txtStaffId != null || txtFullName != null)
                 {
@@ -158,8 +157,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         full_name = txtFullName
                     };
                     unitOfWork.UserRepository.InsertLecturer(lecturer);
-                    unitOfWork.Save();
                 }
+                unitOfWork.Save();
             }
             catch
             {
