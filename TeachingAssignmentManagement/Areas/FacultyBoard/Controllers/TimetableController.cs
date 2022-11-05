@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -33,7 +32,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         }
 
         [HttpPost]
-        public ActionResult Import(HttpPostedFileBase postedFile, int term, string major, bool? isUpdate)
+        public ActionResult Import(HttpPostedFileBase postedFile, int term, string major, bool isUpdate)
         {
             string path = Server.MapPath("~/Uploads/");
             if (!Directory.Exists(path))
@@ -74,7 +73,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 }
             }
 
-            if (isUpdate == null)
+            if (!isUpdate)
             {
                 // Check if this term and major already has data
                 var query_term_major = unitOfWork.CurriculumClassRepository.CheckTermMajor(term, major);
@@ -103,7 +102,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
             List<curriculum_class> curriculumClassList = new List<curriculum_class>();
             IEnumerable<curriculum_class> query_curriculumClassWhere = curriculumClassList;
-            if (isUpdate == true)
+            if (isUpdate)
             {
                 // Query Curriculum classes of this term and major
                 query_curriculumClassWhere = unitOfWork.CurriculumClassRepository.GetClassesInTermMajor(term, major);
@@ -194,12 +193,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         curriculum_id = ToNullableString(curriculumId)
                     };
 
-                    if (isUpdate == null)
+                    if (!isUpdate)
                     {
                         // Create new curriculum class
                         unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
                     }
-                    else 
+                    else
                     {
                         var query_curriculumClass = unitOfWork.CurriculumClassRepository.FindCurriculumClass(query_curriculumClassWhere, curriculumClass.curriculum_class_id, curriculumClass.day_2);
                         if (query_curriculumClass?.lecturer_id == null)

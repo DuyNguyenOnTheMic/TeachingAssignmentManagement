@@ -172,7 +172,7 @@ myDropzone.dropzone({
 
                                         // Import timetable again
                                         var message = "Thay thế thời khoá biểu thành công!"
-                                        importAgain(myDropzone, message);
+                                        importAgain(myDropzone, message, false);
                                     }
                                 }
                             });
@@ -215,13 +215,13 @@ function importAgain(myDropzone, message, state) {
         file.previewElement.classList.remove("dz-error");
         return file.previewElement.classList.add("dz-success");
     });
-    // Update timetable
+    // Set state for isUpdate
     isUpdate.val(state);
     // Process import
     myDropzone.processQueue();
 
     myDropzone.on("success", function (file) {
-        isUpdate.val(null);
+        isUpdate.val(false);
         Swal.fire("Thông báo", message, "success");
     });
 }
