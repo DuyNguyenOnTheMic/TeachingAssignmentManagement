@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Linq;
 using TeachingAssignmentManagement.Models;
 
@@ -19,11 +18,6 @@ namespace TeachingAssignmentManagement.DAL
             context.curriculum_class.Add(curriculum_Class);
         }
 
-        public curriculum_class FindCurriculumClass(IEnumerable<curriculum_class> curriculumClass, string curriculumClassId, int day2)
-        {
-            return curriculumClass.FirstOrDefault(c => c.curriculum_class_id == curriculumClassId && c.day_2 == day2);
-        }
-
         public curriculum_class CheckTermMajor(int termId, string majorId)
         {
             return context.curriculum_class.FirstOrDefault(c => c.term_id == termId && c.major_id == majorId);
@@ -34,9 +28,9 @@ namespace TeachingAssignmentManagement.DAL
             return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId);
         }
 
-        public void UpdateCurriculumClass(curriculum_class curriculumClass)
+        public curriculum_class FindCurriculumClass(IEnumerable<curriculum_class> curriculumClass, string curriculumClassId, int day2)
         {
-            context.Set<curriculum_class>().AddOrUpdate(curriculumClass);
+            return curriculumClass.FirstOrDefault(c => c.curriculum_class_id == curriculumClassId && c.day_2 == day2);
         }
     }
 }

@@ -204,8 +204,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         if (query_curriculumClass?.lecturer_id == null)
                         {
                             // Update curriculum class
-                            curriculumClass.id = query_curriculumClass.id;
-                            unitOfWork.CurriculumClassRepository.UpdateCurriculumClass(curriculumClass);
+                            query_curriculumClass.lecturer_id = curriculumClass.lecturer_id;
+                            query_curriculumClass.lecturer.full_name = ToNullableString(name);
                         }
                     }
                 }
