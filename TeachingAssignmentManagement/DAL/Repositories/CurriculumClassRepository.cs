@@ -32,5 +32,10 @@ namespace TeachingAssignmentManagement.DAL
         {
             return curriculumClass.FirstOrDefault(c => c.curriculum_class_id == curriculumClassId && c.day_2 == day2);
         }
+
+        public void DeleteAllClasses(int term, string major)
+        {
+            context.curriculum_class.RemoveRange(context.curriculum_class.Where(c => c.term_id == term && c.major_id == major));
+        }
     }
 }

@@ -222,7 +222,9 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         [HttpPost]
         public ActionResult DeleteAll(int term, string major)
         {
-            // Delete all records and all other study results and registration results
+            // Delete all records in curriculum class table
+            unitOfWork.CurriculumClassRepository.DeleteAllClasses(term, major);
+            unitOfWork.Save();
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
