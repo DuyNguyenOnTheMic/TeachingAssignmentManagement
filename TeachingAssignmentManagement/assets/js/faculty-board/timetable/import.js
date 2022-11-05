@@ -98,7 +98,7 @@ myDropzone.dropzone({
 
             // Show confirmation message when user closes tab
             window.onbeforeunload = function () {
-                return "Changes you made may not be saved";
+                return "Bạn có chắc muốn thoát, tiến trình import có thể sẽ không được lưu?";
             };
         });
 
@@ -145,21 +145,7 @@ myDropzone.dropzone({
                         var isUpdate = $('#isUpdate');
                         if (result.isConfirmed) {
                             // Update timetable
-                            $.each(myDropzone.files, function (i, file) {
-                                // Add file to Dropzone again
-                                file.status = Dropzone.QUEUED
-                                file.previewElement.classList.remove("dz-error");
-                                return file.previewElement.classList.add("dz-success");
-                            });
-                            // Set boolean flag to true
                             isUpdate.val(true);
-                            // Process import
-                            myDropzone.processQueue();
-
-                            myDropzone.on("success", function (file) {
-                                isUpdate.val(null);
-                                Swal.fire("Thông báo", "Import lại CTĐT thành công!", "success");
-                            });
                         } else if (result.isDenied) {
                             // Show waiting message while delete
                             Swal.fire({
@@ -170,7 +156,34 @@ myDropzone.dropzone({
                                     Swal.showLoading();
                                 }
                             })
+
+                            var term = $('#term').val();
+                            var major = $('#major').val();
+
+                            $.ajax({
+                                type: 'POST',
+                                url: rootUrl + 'FacultyBoard/Timetable/DeleteAll',
+                                data: { term, major },
+                                success: function (data) {
+                                    if (data.success) {
+                                        Swal.close();
+                                    }
+                                }
+                            });
                         }
+                        $.each(myDropzone.files, function (i, file) {
+                            // Add file to Dropzone again
+                            file.status = Dropzone.QUEUED
+                            file.previewElement.classList.remove("dz-error");
+                            return file.previewElement.classList.add("dz-success");
+                        });
+                        // Process import
+                        myDropzone.processQueue();
+
+                        myDropzone.on("success", function (file) {
+                            isUpdate.val(null);
+                            Swal.fire("Thông báo", "Import lại CTĐT thành công!", "success");
+                        });
                     })
                 }
             }

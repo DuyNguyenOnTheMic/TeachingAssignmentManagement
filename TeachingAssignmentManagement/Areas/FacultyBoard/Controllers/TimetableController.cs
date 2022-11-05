@@ -220,7 +220,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteAll(int id)
+        public ActionResult DeleteAll(int term, string major)
         {
             // Delete all records and all other study results and registration results
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
