@@ -9,6 +9,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Hubs;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
@@ -207,6 +208,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                             query_curriculumClass.lecturer_id = curriculumClass.lecturer_id;
                         }
                     }
+                    ProgressHub.SendProgress("Đang import...", dt.Rows.IndexOf(row), itemsCount);
                 }
                 unitOfWork.Save();
             }
