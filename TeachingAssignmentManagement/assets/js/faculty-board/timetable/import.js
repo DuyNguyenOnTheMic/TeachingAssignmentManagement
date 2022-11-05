@@ -94,7 +94,7 @@ myDropzone.dropzone({
                 }
             })
 
-            StartProgressBar();
+            startProgressBar();
 
             // Show confirmation message when user closes tab
             window.onbeforeunload = function () {
@@ -142,24 +142,11 @@ myDropzone.dropzone({
                         },
                         buttonsStyling: false
                     }).then((result) => {
-                        var isUpdate = $('#isUpdate');
                         if (result.isConfirmed) {
+
                             // Update timetable
-                            isUpdate.val(true);
-
-                            $.each(myDropzone.files, function (i, file) {
-                                // Add file to Dropzone again
-                                file.status = Dropzone.QUEUED
-                                file.previewElement.classList.remove("dz-error");
-                                return file.previewElement.classList.add("dz-success");
-                            });
-                            // Process import
-                            myDropzone.processQueue();
-
-                            myDropzone.on("success", function (file) {
-                                isUpdate.val(null);
-                                Swal.fire("Thông báo", "Cập nhật thời khoá biểu thành công!", "success");
-                            });
+                            var message = "Cập nhật thời khoá biểu thành công!"
+                            importAgain(myDropzone, message, true);
 
                         } else if (result.isDenied) {
                             // Show waiting message while delete
@@ -183,19 +170,9 @@ myDropzone.dropzone({
                                     if (data.success) {
                                         Swal.close();
 
-                                        $.each(myDropzone.files, function (i, file) {
-                                            // Add file to Dropzone again
-                                            file.status = Dropzone.QUEUED
-                                            file.previewElement.classList.remove("dz-error");
-                                            return file.previewElement.classList.add("dz-success");
-                                        });
-                                        // Process import
-                                        myDropzone.processQueue();
-
-                                        myDropzone.on("success", function (file) {
-                                            isUpdate.val(null);
-                                            Swal.fire("Thông báo", "Thay thế thời khoá biểu thành công!", "success");
-                                        });
+                                        // Import timetable again
+                                        var message = "Thay thế thời khoá biểu thành công!"
+                                        importAgain(myDropzone, message);
                                     }
                                 }
                             });
@@ -207,7 +184,7 @@ myDropzone.dropzone({
     }
 });
 
-function StartProgressBar() {
+function startProgressBar() {
     // Reference the auto-generated proxy for the hub.
     var progress = $.connection.progressHub;
 
@@ -225,4 +202,26 @@ function StartProgressBar() {
     };
 
     $.connection.hub.start();
+}
+
+function importAgain(myDropzone, message, state) {
+
+    // Get state of isUpdate
+    var isUpdate = $('#isUpdate');
+
+    $.each(myDropzone.files, function (i, file) {
+        // Add file to Dropzone again
+        file.status = Dropzone.QUEUED
+        file.previewElement.classList.remove("dz-error");
+        return file.previewElement.classList.add("dz-success");
+    });
+    // Update timetable
+    isUpdate.val(state);
+    // Process import
+    myDropzone.processQueue();
+
+    myDropzone.on("success", function (file) {
+        isUpdate.val(null);
+        Swal.fire("Thông báo", message, "success");
+    });
 }
