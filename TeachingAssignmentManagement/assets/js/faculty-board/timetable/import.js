@@ -161,8 +161,15 @@ myDropzone.dropzone({
                                 Swal.fire("Thông báo", "Import lại CTĐT thành công!", "success");
                             });
                         } else if (result.isDenied) {
-                            // Replace timetable
-                            Swal.fire('Changes are not saved', '', 'info')
+                            // Show waiting message while delete
+                            Swal.fire({
+                                title: 'Đang xoá dữ liệu...',
+                                allowEscapeKey: false,
+                                allowOutsideClick: false,
+                                didOpen: () => {
+                                    Swal.showLoading();
+                                }
+                            })
                         }
                     })
                 }

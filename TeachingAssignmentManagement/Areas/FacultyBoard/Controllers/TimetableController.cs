@@ -219,6 +219,13 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             return RedirectToAction("Import");
         }
 
+        [HttpPost]
+        public ActionResult DeleteAll(int id)
+        {
+            // Delete all records and all other study results and registration results
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
         private string ValidateColumns(DataTable dt)
         {
             // Declare the valid column names
