@@ -146,6 +146,21 @@ myDropzone.dropzone({
                         if (result.isConfirmed) {
                             // Update timetable
                             isUpdate.val(true);
+
+                            $.each(myDropzone.files, function (i, file) {
+                                // Add file to Dropzone again
+                                file.status = Dropzone.QUEUED
+                                file.previewElement.classList.remove("dz-error");
+                                return file.previewElement.classList.add("dz-success");
+                            });
+                            // Process import
+                            myDropzone.processQueue();
+
+                            myDropzone.on("success", function (file) {
+                                isUpdate.val(null);
+                                Swal.fire("Thông báo", "Cập nhật thời khoá biểu thành công!", "success");
+                            });
+
                         } else if (result.isDenied) {
                             // Show waiting message while delete
                             Swal.fire({
@@ -167,23 +182,24 @@ myDropzone.dropzone({
                                 success: function (data) {
                                     if (data.success) {
                                         Swal.close();
+
+                                        $.each(myDropzone.files, function (i, file) {
+                                            // Add file to Dropzone again
+                                            file.status = Dropzone.QUEUED
+                                            file.previewElement.classList.remove("dz-error");
+                                            return file.previewElement.classList.add("dz-success");
+                                        });
+                                        // Process import
+                                        myDropzone.processQueue();
+
+                                        myDropzone.on("success", function (file) {
+                                            isUpdate.val(null);
+                                            Swal.fire("Thông báo", "Thay thế thời khoá biểu thành công!", "success");
+                                        });
                                     }
                                 }
                             });
                         }
-                        $.each(myDropzone.files, function (i, file) {
-                            // Add file to Dropzone again
-                            file.status = Dropzone.QUEUED
-                            file.previewElement.classList.remove("dz-error");
-                            return file.previewElement.classList.add("dz-success");
-                        });
-                        // Process import
-                        myDropzone.processQueue();
-
-                        myDropzone.on("success", function (file) {
-                            isUpdate.val(null);
-                            Swal.fire("Thông báo", "Import lại CTĐT thành công!", "success");
-                        });
                     })
                 }
             }
