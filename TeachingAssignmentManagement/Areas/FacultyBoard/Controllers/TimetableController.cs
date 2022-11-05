@@ -188,14 +188,15 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     {
                         // Create new curriculum class
                         unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
+                        unitOfWork.Save();
                     }
                     else if (query_curriculumClass.lecturer_id == null)
                     {
                         // Update curriculum class
                         unitOfWork.CurriculumClassRepository.UpdateCurriculumClass(curriculumClass);
+                        unitOfWork.Save();
                     }
                 }
-                unitOfWork.Save();
             }
             catch (Exception)
             {
