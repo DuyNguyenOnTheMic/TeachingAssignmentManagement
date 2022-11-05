@@ -94,7 +94,7 @@ myDropzone.dropzone({
                 }
             })
 
-            //StartProgressBar();
+            StartProgressBar();
 
             // Show confirmation message when user closes tab
             window.onbeforeunload = function () {
@@ -170,3 +170,23 @@ myDropzone.dropzone({
         });
     }
 });
+
+function StartProgressBar() {
+    // Reference the auto-generated proxy for the hub.
+    var progress = $.connection.progressHub;
+
+    // Create a function that the hub can call back to display messages.
+    progress.client.AddProgress = function (message, percentage) {
+        if (percentage >= 100) {
+            return;
+        }
+        else {
+            $('#myprogress')
+                .attr({ 'aria-valuenow': percentage })
+                .text(message + ' ' + percentage + ' %')
+                .width(percentage);
+        }
+    };
+
+    $.connection.hub.start();
+}
