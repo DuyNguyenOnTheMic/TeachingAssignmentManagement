@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
@@ -98,6 +100,14 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
             int itemsCount = dt.Rows.Count;
 
+            List<curriculum_class> curriculumClassList = new List<curriculum_class>();
+            IEnumerable<curriculum_class> query_curriculumClassWhere = curriculumClassList;
+            if (isUpdate == true)
+            {
+                // Query Curriculum classes of this term and major
+                query_curriculumClassWhere = unitOfWork.CurriculumClassRepository.GetClassesInTermMajor(term, major);
+            }
+
             try
             {
                 //Insert records to database table.
@@ -183,17 +193,18 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         curriculum_id = ToNullableString(curriculumId)
                     };
 
-                    // Create new curriculum class
                     if (isUpdate == null)
                     {
+                        // Create new curriculum class
                         unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
                     }
                     else 
                     {
-                        var query_curriculumClass = unitOfWork.CurriculumClassRepository.FindCurriculumClass(curriculumClass.curriculum_class_id, curriculumClass.day_2);
+                        var query_curriculumClass = unitOfWork.CurriculumClassRepository.FindCurriculumClass(query_curriculumClassWhere, curriculumClass.curriculum_class_id, curriculumClass.day_2);
                         if (query_curriculumClass?.lecturer_id == null)
                         {
                             // Update curriculum class
+                            curriculumClass.id = query_curriculumClass.id;
                             unitOfWork.CurriculumClassRepository.UpdateCurriculumClass(curriculumClass);
                         }
                     }
