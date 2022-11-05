@@ -183,20 +183,16 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         curriculum_id = ToNullableString(curriculumId)
                     };
 
-                    var query_curriculumClass = unitOfWork.CurriculumClassRepository.GetCurriculumClassByID(curriculumClassid);
-                    if (query_curriculumClass == null)
-                    {
-                        // Create new curriculum class
-                        unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
-                        unitOfWork.Save();
-                    }
-                    else if (isUpdate == true && query_curriculumClass.lecturer_id == null)
+                    // Create new curriculum class
+                    unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
+                    /*else if (isUpdate == true && query_curriculumClass.lecturer_id == null)
                     {
                         // Update curriculum class
                         unitOfWork.CurriculumClassRepository.UpdateCurriculumClass(curriculumClass);
                         unitOfWork.Save();
-                    }
+                    }*/
                 }
+                unitOfWork.Save();
             }
             catch (Exception)
             {
