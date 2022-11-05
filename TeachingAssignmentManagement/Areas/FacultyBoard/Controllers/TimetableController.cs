@@ -149,43 +149,50 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         unitOfWork.Save();
                     }
 
+                    var query_lecturer = unitOfWork.UserRepository.GetLecturerByStaffId(lecturerId);
+                    curriculum_class curriculumClass = new curriculum_class()
+                    {
+                        id = ToNullableString(id),
+                        original_id = ToNullableString(originalId),
+                        type = ToNullableString(type),
+                        student_class_id = ToNullableString(studentClassId),
+                        minimum_student = ToNullableInt(minimumStudent),
+                        total_lesson = ToNullableInt(totalLesson),
+                        room = ToNullableString(room),
+                        day = ToNullableString(day),
+                        start_lesson = (int)ToNullableInt(startLesson),
+                        lesson_number = ToNullableInt(lessonNumber),
+                        lesson_time = ToNullableString(lessonTime),
+                        room_2 = ToNullableString(room2),
+                        room_type = ToNullableString(roomType),
+                        capacity = ToNullableInt(capacity),
+                        student_number = ToNullableInt(studentNumber),
+                        free_slot = ToNullableInt(freeSlot),
+                        state = ToNullableString(state),
+                        learn_week = ToNullableString(learnWeek),
+                        day_2 = (int)ToNullableInt(day2),
+                        start_lesson_2 = (int)ToNullableInt(startLesson2),
+                        student_registered_number = ToNullableInt(studentRegisteredNumber),
+                        start_week = ToNullableInt(startWeek),
+                        end_week = ToNullableInt(endWeek),
+                        note_1 = ToNullableString(note1),
+                        note_2 = ToNullableString(note2),
+                        term_id = term,
+                        major_id = major,
+                        lecturer_id = query_lecturer?.id,
+                        curriculum_id = ToNullableString(curriculumId)
+                    };
+
                     var query_curriculumClass = unitOfWork.CurriculumClassRepository.GetCurriculumClassByID(id);
                     if (query_curriculumClass == null)
                     {
-                        var query_lecturer = unitOfWork.UserRepository.GetLecturerByStaffId(lecturerId);
-                        curriculum_class curriculumClass = new curriculum_class()
-                        {
-                            id = ToNullableString(id),
-                            original_id = ToNullableString(originalId),
-                            type = ToNullableString(type),
-                            student_class_id = ToNullableString(studentClassId),
-                            minimum_student = ToNullableInt(minimumStudent),
-                            total_lesson = ToNullableInt(totalLesson),
-                            room = ToNullableString(room),
-                            day = ToNullableString(day),
-                            start_lesson = (int)ToNullableInt(startLesson),
-                            lesson_number = ToNullableInt(lessonNumber),
-                            lesson_time = ToNullableString(lessonTime),
-                            room_2 = ToNullableString(room2),
-                            room_type = ToNullableString(roomType),
-                            capacity = ToNullableInt(capacity),
-                            student_number = ToNullableInt(studentNumber),
-                            free_slot = ToNullableInt(freeSlot),
-                            state = ToNullableString(state),
-                            learn_week = ToNullableString(learnWeek),
-                            day_2 = (int)ToNullableInt(day2),
-                            start_lesson_2 = (int)ToNullableInt(startLesson2),
-                            student_registered_number = ToNullableInt(studentRegisteredNumber),
-                            start_week = ToNullableInt(startWeek),
-                            end_week = ToNullableInt(endWeek),
-                            note_1 = ToNullableString(note1),
-                            note_2 = ToNullableString(note2),
-                            term_id = term,
-                            major_id = major,
-                            lecturer_id = query_lecturer?.id,
-                            curriculum_id = ToNullableString(curriculumId)
-                        };
+                        // Create new curriculum class
                         unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
+                    }
+                    else
+                    {
+                        // Update curriculum class
+                        unitOfWork.CurriculumClassRepository.UpdateCurriculumClass(curriculumClass);
                     }
                 }
                 unitOfWork.Save();

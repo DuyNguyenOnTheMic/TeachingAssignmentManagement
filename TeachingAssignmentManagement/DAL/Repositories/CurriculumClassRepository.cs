@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.DAL
@@ -25,6 +26,11 @@ namespace TeachingAssignmentManagement.DAL
         public curriculum_class CheckTermMajor(int termId, string majorId)
         {
             return context.curriculum_class.FirstOrDefault(c => c.term_id == termId && c.major_id == majorId);
+        }
+
+        public void UpdateCurriculumClass(curriculum_class curriculumClass)
+        {
+            context.Entry(curriculumClass).State = EntityState.Modified;
         }
     }
 }
