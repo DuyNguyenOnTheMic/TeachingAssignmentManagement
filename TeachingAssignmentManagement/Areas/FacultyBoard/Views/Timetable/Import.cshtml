@@ -21,16 +21,17 @@
                                     <div class="row mb-1">
                                         <div class="col-md-6 mb-2">
                                             <label class="form-label font-small-4" for="term">Học kỳ: </label>
-                                            @Html.DropDownList("term", null, "---- Chọn học kỳ ----", htmlAttributes: new { @class = "select2 form-select" })
+                                            @Html.DropDownList("term", null, "---- Chọn học kỳ ----", htmlAttributes: new { @class = "select2 form-select form-data" })
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label class="form-label font-small-4" for="major">Ngành: </label>
-                                            @Html.DropDownList("major", null, "---- Chọn ngành ----", htmlAttributes: new { @class = "select2 form-select" })
+                                            @Html.DropDownList("major", null, "---- Chọn ngành ----", htmlAttributes: new { @class = "select2 form-select form-data" })
                                         </div>
                                     </div>
                                     <div class="dropzone dropzone-area" id="dpz-single-file">
                                         <div class="dz-message">Kéo thả hoặc nhấn chọn để upload.</div>
                                     </div>
+                                    <input class="form-data" type="hidden" id="isUpdate" name="isUpdate"/>
                                     <div class="d-grid mt-2">
                                         <button type="submit" class="btn btn-primary font-medium-2" id="submit-all">
                                             <i data-feather="thumbs-up" class="me-25 font-medium-2"></i>

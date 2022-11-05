@@ -79,27 +79,27 @@ myDropzone.dropzone({
         });
 
         this.on('sending', function (data, xhr, formData) {
-            $('.form-select').each(function () {
+            $('.form-data').each(function () {
                 // Send form data along with submit
                 formData.append($(this).attr('name'), $(this).val());
+            });
 
-                Swal.fire({
-                    title: 'Vui lòng đợi...',
-                    allowEscapeKey: false,
-                    allowOutsideClick: false,
-                    html: '<div class="progress mb-2 mt-4" style="height: 30px"><div id="myprogress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>',
-                    didOpen: () => {
-                        Swal.showLoading();
-                    }
-                })
-
-                //StartProgressBar();
-
-                // Show confirmation message when user closes tab
-                window.onbeforeunload = function () {
-                    return "Changes you made may not be saved";
-                };
+            Swal.fire({
+                title: 'Vui lòng đợi...',
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                html: '<div class="progress mb-2 mt-4" style="height: 30px"><div id="myprogress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>',
+                didOpen: () => {
+                    Swal.showLoading();
+                }
             })
+
+            //StartProgressBar();
+
+            // Show confirmation message when user closes tab
+            window.onbeforeunload = function () {
+                return "Changes you made may not be saved";
+            };
         });
 
         this.on('error', function (data, errorMessage, xhr) {
@@ -142,6 +142,7 @@ myDropzone.dropzone({
                         },
                         buttonsStyling: false
                     }).then((result) => {
+                        var isUpdate = $('#isUpdate');
                         if (result.isConfirmed) {
                             // Update timetable
                             $.each(myDropzone.files, function (i, file) {
@@ -150,14 +151,13 @@ myDropzone.dropzone({
                                 file.previewElement.classList.remove("dz-error");
                                 return file.previewElement.classList.add("dz-success");
                             });
-                            myDropzone.on('sending', function (data, xhr, formData) {
-                                // Append a boolean to Import action
-                                formData.append('isUpdate', true);
-                            });
+                            // Set boolean flag to true
+                            isUpdate.val(true);
                             // Process import
                             myDropzone.processQueue();
 
                             myDropzone.on("success", function (file) {
+                                isUpdate.val(null);
                                 Swal.fire("Thông báo", "Import lại CTĐT thành công!", "success");
                             });
                         } else if (result.isDenied) {
