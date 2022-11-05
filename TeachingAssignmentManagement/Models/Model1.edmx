@@ -78,7 +78,8 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="curriculum_class_id" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="original_id" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="type" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="student_class_id" Type="nvarchar(max)" />
@@ -370,7 +371,8 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="curriculum_class_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="original_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="student_class_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -637,6 +639,7 @@
             <EntityTypeMapping TypeName="CP25Team03Model.curriculum_class">
               <MappingFragment StoreEntitySet="curriculum_class">
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="curriculum_class_id" ColumnName="curriculum_class_id" />
                 <ScalarProperty Name="original_id" ColumnName="original_id" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="student_class_id" ColumnName="student_class_id" />

@@ -14,7 +14,8 @@ namespace TeachingAssignmentManagement.Models
     
     public partial class curriculum_class
     {
-        public string id { get; set; }
+        public int id { get; set; }
+        public string curriculum_class_id { get; set; }
         public string original_id { get; set; }
         public string type { get; set; }
         public string student_class_id { get; set; }
