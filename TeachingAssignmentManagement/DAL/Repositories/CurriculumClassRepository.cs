@@ -1,4 +1,4 @@
-﻿using System.Data.Entity;
+﻿using System.Data.Entity.Migrations;
 using System.Linq;
 using TeachingAssignmentManagement.Models;
 
@@ -30,7 +30,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public void UpdateCurriculumClass(curriculum_class curriculumClass)
         {
-            context.Entry(curriculumClass).State = EntityState.Modified;
+            context.Set<curriculum_class>().AddOrUpdate(curriculumClass);
         }
     }
 }
