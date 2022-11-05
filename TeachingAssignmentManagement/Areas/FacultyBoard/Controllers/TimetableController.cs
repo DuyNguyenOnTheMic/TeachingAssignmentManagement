@@ -205,7 +205,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         {
                             // Update curriculum class
                             query_curriculumClass.lecturer_id = curriculumClass.lecturer_id;
-                            query_curriculumClass.lecturer.full_name = ToNullableString(name);
                         }
                     }
                 }
