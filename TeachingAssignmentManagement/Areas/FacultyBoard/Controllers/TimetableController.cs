@@ -184,13 +184,16 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     };
 
                     // Create new curriculum class
-                    unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
-                    /*else if (isUpdate == true && query_curriculumClass.lecturer_id == null)
+                    if (isUpdate == null)
+                    {
+                        unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
+                    }
+                    else if (curriculumClass.lecturer_id != null)
                     {
                         // Update curriculum class
+                        var query_curriculumClass = unitOfWork.CurriculumClassRepository.FindCurriculumClass(curriculumClass.curriculum_class_id, curriculumClass.day_2);
                         unitOfWork.CurriculumClassRepository.UpdateCurriculumClass(curriculumClass);
-                        unitOfWork.Save();
-                    }*/
+                    }
                 }
                 unitOfWork.Save();
             }

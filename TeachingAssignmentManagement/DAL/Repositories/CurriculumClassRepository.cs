@@ -18,9 +18,9 @@ namespace TeachingAssignmentManagement.DAL
             context.curriculum_class.Add(curriculum_Class);
         }
 
-        public curriculum_class GetCurriculumClassByID(string id)
+        public curriculum_class FindCurriculumClass(string curriculumId, int day2)
         {
-            return context.curriculum_class.Find(id);
+            return context.curriculum_class.FirstOrDefault(c => c.curriculum_id == curriculumId && c.day_2 == day2);
         }
 
         public curriculum_class CheckTermMajor(int termId, string majorId)
