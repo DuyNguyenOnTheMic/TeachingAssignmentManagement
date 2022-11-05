@@ -189,7 +189,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         // Create new curriculum class
                         unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
                     }
-                    else
+                    else if (query_curriculumClass.lecturer_id == null)
                     {
                         // Update curriculum class
                         unitOfWork.CurriculumClassRepository.UpdateCurriculumClass(curriculumClass);
