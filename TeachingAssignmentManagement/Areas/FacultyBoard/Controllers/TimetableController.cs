@@ -106,7 +106,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     // Declare all columns
                     string originalId = row["MaGocLHP"].ToString();
                     string curriculumId = row["Mã MH"].ToString();
-                    string id = row["Mã LHP"].ToString();
+                    string curriculumClassid = row["Mã LHP"].ToString();
                     string name = row["Tên HP"].ToString();
                     string credits = row["Số TC"].ToString();
                     string type = row["Loại HP"].ToString();
@@ -152,7 +152,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     var query_lecturer = unitOfWork.UserRepository.GetLecturerByStaffId(lecturerId);
                     curriculum_class curriculumClass = new curriculum_class()
                     {
-                        id = ToNullableString(id),
+                        curriculum_class_id = ToNullableString(curriculumClassid),
                         original_id = ToNullableString(originalId),
                         type = ToNullableString(type),
                         student_class_id = ToNullableString(studentClassId),
@@ -183,7 +183,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         curriculum_id = ToNullableString(curriculumId)
                     };
 
-                    var query_curriculumClass = unitOfWork.CurriculumClassRepository.GetCurriculumClassByID(id);
+                    var query_curriculumClass = unitOfWork.CurriculumClassRepository.GetCurriculumClassByID(curriculumClassid);
                     if (query_curriculumClass == null)
                     {
                         // Create new curriculum class
