@@ -67,7 +67,7 @@ myDropzone.dropzone({
                     console.log(data);
                     if (data.length) {
                         // Show lecturers which hasn't been imported into the system
-                        Swal.fire("Thông báo!", "Đã import dữ liệu! \nCó một số học phần không nằm trong chương trình đào tạo, vui lòng xem chi tiết ở cuối trang.", "error");
+                        Swal.fire("Thông báo!", "Đã import dữ liệu! \nCó một số giảng viên chưa có trong hệ thống, vui lòng xem chi tiết ở cuối trang.", "error");
 
                         $('#errorLecturers-section').show();
                         var dataTable;
