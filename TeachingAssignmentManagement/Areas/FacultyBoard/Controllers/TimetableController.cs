@@ -154,7 +154,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     string checkNull = ValidateNotNull(validRows);
                     if (checkNull != null)
                     {
-                        Response.Write($"Oopps, có lỗi đã xảy ra ở dòng số " + dt.Rows.IndexOf(row));
+                        int excelRow = dt.Rows.IndexOf(row) + 2;
+                        Response.Write($"Oopps, có lỗi đã xảy ra ở dòng số <strong>" + excelRow + "</strong>, vui lòng kiểm tra lại tệp tin 🥹");
                         return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
                     }
 
