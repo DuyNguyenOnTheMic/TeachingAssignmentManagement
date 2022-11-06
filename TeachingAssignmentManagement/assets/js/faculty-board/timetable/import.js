@@ -274,7 +274,7 @@ function populateDatatable(data) {
                 buttons: [
                     {
                         extend: 'collection',
-                        className: 'btn btn-outline-secondary dropdown-toggle me-2',
+                        className: 'btn btn-outline-secondary dropdown-toggle',
                         text: feather.icons['share'].toSvg({ class: 'font-small-4 me-50' }) + 'Export',
                         buttons: [
                             {
