@@ -109,7 +109,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 query_curriculumClassWhere = unitOfWork.CurriculumClassRepository.GetClassesInTermMajor(term, major);
             }
 
-            List<Tuple<string, string>> hehe = new List<Tuple<string, string>>();
+            // Create a list for storing error Lecturers
+            List<Tuple<string, string>> errorLecturerList = new List<Tuple<string, string>>();
 
             try
             {
@@ -148,6 +149,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     string note1 = row["Ghi Chú 1"].ToString();
                     string note2 = row["Ghi chú 2"].ToString();
 
+                    string checkNull = ValidateNotNull(originalId, curriculumId, curriculumClassid, name, credits, type, day, startLesson, room2, day2, startLesson2);
+
                     var query_curriculum = unitOfWork.CurriculumRepository.GetCurriculumByID(curriculumId);
                     if (query_curriculum == null)
                     {
@@ -166,7 +169,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     if (query_lecturer == null && (ToNullableString(lecturerId) != null || ToNullableString(fullName) != null))
                     {
                         // Add record to error list
-                        hehe.Add(Tuple.Create(ToNullableString(lecturerId), ToNullableString(fullName)));
+                        errorLecturerList.Add(Tuple.Create(ToNullableString(lecturerId), ToNullableString(fullName)));
                     }
                     curriculum_class curriculumClass = new curriculum_class()
                     {
@@ -218,12 +221,17 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     ProgressHub.SendProgress("Đang import...", dt.Rows.IndexOf(row), itemsCount);
                 }
                 unitOfWork.Save();
-                return Json(hehe.Distinct(), JsonRequestBehavior.AllowGet);
+                return Json(errorLecturerList.Distinct(), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
             }
+        }
+
+        private string ValidateNotNull(string originalId, string curriculumId, string curriculumClassid, string name, string credits, string type, string day, string startLesson, string room2, string day2, string startLesson2)
+        {
+            throw new NotImplementedException();
         }
 
         [HttpPost]
