@@ -1,5 +1,6 @@
 ﻿var select = $('.select2'),
-    myDropzone = $('#dpz-single-file');
+    myDropzone = $('#dpz-single-file')
+    isUpdate = $('#isUpdate');
 var rootUrl = $('#loader').data('request-url');
 
 // Populate select2 for choosing term and major
@@ -64,6 +65,9 @@ myDropzone.dropzone({
                 myDropzone.processQueue();
 
                 myDropzone.on("success", function (response, data) {
+                    // Reset state of isUpdate
+                    isUpdate.val(false);
+
                     console.log(data);
                     if (data.length) {
                         Swal.fire({
@@ -166,8 +170,7 @@ myDropzone.dropzone({
                         if (result.isConfirmed) {
 
                             // Update timetable
-                            var message = "Cập nhật thời khoá biểu thành công!"
-                            importAgain(myDropzone, message, true);
+                            importAgain(myDropzone, true);
 
                         } else if (result.isDenied) {
                             // Show waiting message while delete
@@ -183,6 +186,7 @@ myDropzone.dropzone({
                             var term = $('#term').val();
                             var major = $('#major').val();
 
+                            // Send ajax request to delete all curriculum classes
                             $.ajax({
                                 type: 'POST',
                                 url: rootUrl + 'FacultyBoard/Timetable/DeleteAll',
@@ -192,8 +196,7 @@ myDropzone.dropzone({
                                         Swal.close();
 
                                         // Import timetable again
-                                        var message = "Thay thế thời khoá biểu thành công!"
-                                        importAgain(myDropzone, message, false);
+                                        importAgain(myDropzone, false);
                                     }
                                 }
                             });
@@ -225,11 +228,7 @@ function startProgressBar() {
     $.connection.hub.start();
 }
 
-function importAgain(myDropzone, message, state) {
-
-    // Get state of isUpdate
-    var isUpdate = $('#isUpdate');
-
+function importAgain(myDropzone, state) {
     $.each(myDropzone.files, function (i, file) {
         // Add file to Dropzone again
         file.status = Dropzone.QUEUED
@@ -240,11 +239,6 @@ function importAgain(myDropzone, message, state) {
     isUpdate.val(state);
     // Process import
     myDropzone.processQueue();
-
-    myDropzone.on("success", function (file) {
-        isUpdate.val(false);
-        Swal.fire("Thông báo", message, "success");
-    });
 }
 
 function populateDatatable(data) {
