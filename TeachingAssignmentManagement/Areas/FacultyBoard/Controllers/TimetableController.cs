@@ -237,19 +237,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
         }
 
-        private string ValidateNotNull(string[] validRows)
-        {
-            foreach (var validRow in validRows)
-            {
-                // Check if string is null
-                if (ToNullableString(validRow) == null)
-                {
-                    return validRow;
-                }
-            }
-            return null;
-        }
-
         [HttpPost]
         public ActionResult DeleteAll(int term, string major)
         {
@@ -277,6 +264,19 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 {
                     // Return error message
                     return validColumn;
+                }
+            }
+            return null;
+        }
+
+        private string ValidateNotNull(string[] validRows)
+        {
+            foreach (var validRow in validRows)
+            {
+                // Check if string is null
+                if (ToNullableString(validRow) == null)
+                {
+                    return validRow;
                 }
             }
             return null;
