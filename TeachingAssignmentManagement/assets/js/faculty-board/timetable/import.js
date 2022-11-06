@@ -26,6 +26,10 @@ myDropzone.dropzone({
     acceptedFiles: '.xlsx, .xls',
     dictFileTooBig: "Tệp quá lớn ({{filesize}}MB). Kích thước tối đa: {{maxFilesize}}MB.",
     dictInvalidFileType: "Tệp tin sai định dạng, chỉ được upload file excel",
+    success: function (response, data) {
+        // Do actions after Dropzone import Succeeded
+        importSucceeded(data);
+    },
     init: function () {
 
         // Using a closure
@@ -50,11 +54,11 @@ myDropzone.dropzone({
             // Validation for form
             if (termId == '') {
                 toastr.options.positionClass = 'toast-bottom-right';
-                toastr.warning('Bạn chưa chọn ngành và khoá');
+                toastr.warning('Bạn chưa chọn học kỳ và ngành');
             }
             else if (majorId == '') {
                 toastr.options.positionClass = 'toast-bottom-right';
-                toastr.warning('Bạn chưa chọn khoá');
+                toastr.warning('Bạn chưa chọn ngành');
             }
             else if (count == 0) {
                 toastr.options.positionClass = 'toast-bottom-right';
@@ -63,42 +67,6 @@ myDropzone.dropzone({
             else {
                 // Begin to import file
                 myDropzone.processQueue();
-
-                myDropzone.on("success", function (response, data) {
-                    // Reset state of isUpdate
-                    isUpdate.val(false);
-
-                    if (data.length) {
-                        Swal.fire({
-                            title: 'Thông báo',
-                            text: 'Đã import dữ liệu! \nCó một số giảng viên chưa có trong hệ thống, vui lòng xem chi tiết ở cuối trang.',
-                            icon: 'error',
-                            customClass: {
-                                confirmButton: 'btn btn-primary'
-                            },
-                            buttonsStyling: false
-                        });
-                        // Show section
-                        $('#errorLecturers-section').show();
-
-                        // Show lecturers which hasn't been imported into the system
-                        populateDatatable(data);
-
-                    } else {
-                        Swal.fire({
-                            title: 'Thông báo',
-                            text: 'Import thời khoá biểu thành công!',
-                            icon: 'success',
-                            customClass: {
-                                confirmButton: 'btn btn-primary'
-                            },
-                            buttonsStyling: false
-                        });
-                        // Hide section
-                        $('#errorLecturers-section').hide();
-                    }
-                    window.onbeforeunload = null;
-                });
             }
         });
 
@@ -225,6 +193,42 @@ function startProgressBar() {
     };
 
     $.connection.hub.start();
+}
+
+function importSucceeded(data) {
+    // Reset state of isUpdate
+    isUpdate.val(false);
+
+    if (data.length) {
+        Swal.fire({
+            title: 'Thông báo',
+            text: 'Đã import dữ liệu! \nCó một số giảng viên chưa có trong hệ thống, vui lòng xem chi tiết ở cuối trang.',
+            icon: 'error',
+            customClass: {
+                confirmButton: 'btn btn-primary'
+            },
+            buttonsStyling: false
+        });
+        // Show section
+        $('#errorLecturers-section').show();
+
+        // Show lecturers which hasn't been imported into the system
+        populateDatatable(data);
+
+    } else {
+        Swal.fire({
+            title: 'Thông báo',
+            text: 'Import thời khoá biểu thành công!',
+            icon: 'success',
+            customClass: {
+                confirmButton: 'btn btn-primary'
+            },
+            buttonsStyling: false
+        });
+        // Hide section
+        $('#errorLecturers-section').hide();
+    }
+    window.onbeforeunload = null;
 }
 
 function importAgain(myDropzone, state) {
