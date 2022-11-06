@@ -221,6 +221,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 }
                 catch (Exception)
                 {
+                    // Return error message of row which causes error
                     int rowNumber = dt.Rows.IndexOf(row) + 2;
                     Response.Write("Oops! có vẻ như có lỗi đã xảy ra ở dòng số <strong>" + rowNumber + "</strong>, bạn kiểm tra lại file nhé 🫢");
                     return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
