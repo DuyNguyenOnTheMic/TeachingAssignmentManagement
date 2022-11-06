@@ -111,11 +111,14 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
             List<Tuple<string, string>> hehe = new List<Tuple<string, string>>();
 
-            try
+
+            //Insert records to database table.
+            foreach (DataRow row in dt.Rows)
             {
-                //Insert records to database table.
-                foreach (DataRow row in dt.Rows)
+                try
                 {
+
+
                     // Declare all columns
                     string originalId = row["MaGocLHP"].ToString();
                     string curriculumId = row["Mã MH"].ToString();
@@ -215,15 +218,17 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                             query_curriculumClass.lecturer_id = curriculumClass.lecturer_id;
                         }
                     }
+                    unitOfWork.Save();
                     ProgressHub.SendProgress("Đang import...", dt.Rows.IndexOf(row), itemsCount);
                 }
-                unitOfWork.Save();
-                return Json(hehe.Distinct(), JsonRequestBehavior.AllowGet);
+                catch (Exception)
+                {
+                    int rowNumber = dt.Rows.IndexOf(row) + 2;
+                    Response.Write("Oops! có vẻ như có lỗi đã xảy ra ở dòng số <strong>" + rowNumber + "</strong>, bạn kiểm tra lại file nhé 🫢");
+                    return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
+                }
             }
-            catch (Exception)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
-            }
+            return Json(hehe.Distinct(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
