@@ -69,92 +69,7 @@ myDropzone.dropzone({
                         // Show lecturers which hasn't been imported into the system
                         Swal.fire("Thông báo!", "Đã import dữ liệu! \nCó một số giảng viên chưa có trong hệ thống, vui lòng xem chi tiết ở cuối trang.", "error");
 
-                        $('#errorLecturers-section').show();
-                        var dataTable;
-
-                        if (!$.fn.DataTable.isDataTable('#tblErrorLecturers')) {
-                            // Populate Major datatable
-                            dataTable = $('#tblErrorLecturers').DataTable(
-                                {
-                                    deferRender: true,
-                                    columns: [
-                                        { 'data': '', defaultContent: '' },
-                                        { 'data': 'Item1' },
-                                        { 'data': 'Item2' }
-                                    ],
-
-                                    columnDefs: [
-                                        {
-                                            searchable: false,
-                                            orderable: false,
-                                            className: 'text-center',
-                                            width: '5%',
-                                            targets: 0
-                                        }
-                                    ],
-                                    order: [[1, 'asc']],
-                                    dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 ps-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-                                    displayLength: 7,
-                                    lengthMenu: [7, 10, 25, 50, 75, 100],
-                                    buttons: [
-                                        {
-                                            extend: 'collection',
-                                            className: 'btn btn-outline-secondary dropdown-toggle me-2',
-                                            text: feather.icons['share'].toSvg({ class: 'font-small-4 me-50' }) + 'Export',
-                                            buttons: [
-                                                {
-                                                    extend: 'print',
-                                                    className: 'dropdown-item'
-                                                },
-                                                {
-                                                    extend: 'csv',
-                                                    className: 'dropdown-item'
-                                                },
-                                                {
-                                                    extend: 'excel',
-                                                    className: 'dropdown-item',
-                                                    title: '',
-                                                    customize: function (xlsx) {
-                                                        var sheet = xlsx.xl.worksheets['sheet1.xml'];
-                                                        $('row:first c', sheet).attr('s', '42');
-                                                    }
-                                                },
-                                                {
-                                                    extend: 'pdf',
-                                                    className: 'dropdown-item'
-                                                },
-                                                {
-                                                    extend: 'copy',
-                                                    className: 'dropdown-item'
-                                                }
-                                            ],
-                                            init: function (api, node, config) {
-                                                $(node).removeClass('btn-secondary');
-                                                $(node).parent().removeClass('btn-group');
-                                                setTimeout(function () {
-                                                    $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex mt-50');
-                                                }, 50);
-                                            }
-                                        }
-                                    ],
-
-                                    language: {
-                                        'url': rootUrl + 'app-assets/language/datatables/vi.json'
-                                    }
-                                });
-                        }
-
-                        // Update current datatable
-                        dataTable = $('#tblErrorLecturers').DataTable();
-                        dataTable.clear().rows.add(data).draw();
-
-                        // Create Index column datatable
-                        dataTable.on('draw.dt', function () {
-                            dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-                                cell.innerHTML = i + 1;
-                                dataTable.cell(cell).invalidate('dom');
-                            });
-                        });
+                        populateDatatable(data);
 
                     } else {
                         Swal.fire({
@@ -317,5 +232,94 @@ function importAgain(myDropzone, message, state) {
     myDropzone.on("success", function (file) {
         isUpdate.val(false);
         Swal.fire("Thông báo", message, "success");
+    });
+}
+
+function populateDatatable(data) {
+    $('#errorLecturers-section').show();
+    var dataTable;
+
+    if (!$.fn.DataTable.isDataTable('#tblErrorLecturers')) {
+        // Populate Error lecturers datatable
+        dataTable = $('#tblErrorLecturers').DataTable(
+            {
+                deferRender: true,
+                columns: [
+                    { 'data': '', defaultContent: '' },
+                    { 'data': 'Item1' },
+                    { 'data': 'Item2' }
+                ],
+
+                columnDefs: [
+                    {
+                        searchable: false,
+                        orderable: false,
+                        className: 'text-center',
+                        width: '5%',
+                        targets: 0
+                    }
+                ],
+                order: [[1, 'asc']],
+                dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 ps-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+                displayLength: 7,
+                lengthMenu: [7, 10, 25, 50, 75, 100],
+                buttons: [
+                    {
+                        extend: 'collection',
+                        className: 'btn btn-outline-secondary dropdown-toggle me-2',
+                        text: feather.icons['share'].toSvg({ class: 'font-small-4 me-50' }) + 'Export',
+                        buttons: [
+                            {
+                                extend: 'print',
+                                className: 'dropdown-item'
+                            },
+                            {
+                                extend: 'csv',
+                                className: 'dropdown-item'
+                            },
+                            {
+                                extend: 'excel',
+                                className: 'dropdown-item',
+                                title: '',
+                                customize: function (xlsx) {
+                                    var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                                    $('row:first c', sheet).attr('s', '42');
+                                }
+                            },
+                            {
+                                extend: 'pdf',
+                                className: 'dropdown-item'
+                            },
+                            {
+                                extend: 'copy',
+                                className: 'dropdown-item'
+                            }
+                        ],
+                        init: function (api, node, config) {
+                            $(node).removeClass('btn-secondary');
+                            $(node).parent().removeClass('btn-group');
+                            setTimeout(function () {
+                                $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex mt-50');
+                            }, 50);
+                        }
+                    }
+                ],
+
+                language: {
+                    'url': rootUrl + 'app-assets/language/datatables/vi.json'
+                }
+            });
+    }
+
+    // Update current datatable
+    dataTable = $('#tblErrorLecturers').DataTable();
+    dataTable.clear().rows.add(data).draw();
+
+    // Create Index column datatable
+    dataTable.on('draw.dt', function () {
+        dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            dataTable.cell(cell).invalidate('dom');
+        });
     });
 }
