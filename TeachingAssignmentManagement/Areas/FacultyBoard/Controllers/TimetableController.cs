@@ -163,7 +163,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     }
 
                     var query_lecturer = unitOfWork.UserRepository.GetLecturerByStaffId(lecturerId);
-                    if (query_lecturer == null)
+                    if (query_lecturer == null && (ToNullableString(lecturerId) != null || ToNullableString(fullName) != null))
                     {
                         // Add record to error list
                         hehe.Add(Tuple.Create(ToNullableString(lecturerId), ToNullableString(fullName)));
