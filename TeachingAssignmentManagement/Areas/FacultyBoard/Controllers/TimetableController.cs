@@ -149,7 +149,13 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     string note1 = row["Ghi Chú 1"].ToString();
                     string note2 = row["Ghi chú 2"].ToString();
 
-                    string checkNull = ValidateNotNull(originalId, curriculumId, curriculumClassid, name, credits, type, day, startLesson, room2, day2, startLesson2);
+                    string[] validRows = { originalId, curriculumId, curriculumClassid, name, credits, type, day, startLesson, room2, day2, startLesson2 };
+                    string checkNull = ValidateNotNull(validRows);
+                    if (checkNull != null)
+                    {
+                        Response.Write($"Oopps, có lỗi đã xảy ra ở dòng số " + dt.Rows.IndexOf(row));
+                        return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
+                    }
 
                     var query_curriculum = unitOfWork.CurriculumRepository.GetCurriculumByID(curriculumId);
                     if (query_curriculum == null)
@@ -229,9 +235,17 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
         }
 
-        private string ValidateNotNull(string originalId, string curriculumId, string curriculumClassid, string name, string credits, string type, string day, string startLesson, string room2, string day2, string startLesson2)
+        private string ValidateNotNull(string[] validRows)
         {
-            throw new NotImplementedException();
+            foreach (var validRow in validRows)
+            {
+                // Check if string is null
+                if (ToNullableString(validRow) == null)
+                {
+                    return validRow;
+                }
+            }
+            return null;
         }
 
         [HttpPost]
