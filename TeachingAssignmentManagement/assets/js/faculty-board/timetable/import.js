@@ -63,7 +63,8 @@ myDropzone.dropzone({
                 // Begin to import file
                 myDropzone.processQueue();
 
-                myDropzone.on("success", function () {
+                myDropzone.on("success", function (response, data) {
+                    console.log(data);
                     Swal.fire({
                         title: 'Good job!',
                         text: 'You clicked the button!',

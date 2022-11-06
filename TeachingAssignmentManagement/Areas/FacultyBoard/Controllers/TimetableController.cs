@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -108,6 +109,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 query_curriculumClassWhere = unitOfWork.CurriculumClassRepository.GetClassesInTermMajor(term, major);
             }
 
+            List<Tuple<string, string>> hehe = new List<Tuple<string, string>>();
+
             try
             {
                 //Insert records to database table.
@@ -160,6 +163,11 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     }
 
                     var query_lecturer = unitOfWork.UserRepository.GetLecturerByStaffId(lecturerId);
+                    if (query_lecturer == null)
+                    {
+                        // Add record to error list
+                        hehe.Add(Tuple.Create(ToNullableString(lecturerId), ToNullableString(fullName)));
+                    }
                     curriculum_class curriculumClass = new curriculum_class()
                     {
                         curriculum_class_id = ToNullableString(curriculumClassid),
@@ -203,19 +211,19 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         var query_curriculumClass = unitOfWork.CurriculumClassRepository.FindCurriculumClass(query_curriculumClassWhere, curriculumClass.curriculum_class_id, curriculumClass.day_2);
                         if (query_curriculumClass?.lecturer_id == null)
                         {
-                            // Update curriculum class
+                            // Update curriculum class's lecturer
                             query_curriculumClass.lecturer_id = curriculumClass.lecturer_id;
                         }
                     }
                     ProgressHub.SendProgress("Đang import...", dt.Rows.IndexOf(row), itemsCount);
                 }
                 unitOfWork.Save();
+                return Json(hehe.Distinct(), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
             }
-            return RedirectToAction("Import");
         }
 
         [HttpPost]
