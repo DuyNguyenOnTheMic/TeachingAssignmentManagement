@@ -66,9 +66,16 @@ myDropzone.dropzone({
                 myDropzone.on("success", function (response, data) {
                     console.log(data);
                     if (data.length) {
+                        Swal.fire({
+                            title: 'Thông báo',
+                            text: 'Đã import dữ liệu! \nCó một số giảng viên chưa có trong hệ thống, vui lòng xem chi tiết ở cuối trang.',
+                            icon: 'error',
+                            customClass: {
+                                confirmButton: 'btn btn-primary'
+                            },
+                            buttonsStyling: false
+                        });
                         // Show lecturers which hasn't been imported into the system
-                        Swal.fire("Thông báo!", "Đã import dữ liệu! \nCó một số giảng viên chưa có trong hệ thống, vui lòng xem chi tiết ở cuối trang.", "error");
-
                         $('#errorLecturers-section').show();
 
                         // Show lecturers who has's been imported
