@@ -68,7 +68,6 @@ myDropzone.dropzone({
                     // Reset state of isUpdate
                     isUpdate.val(false);
 
-                    console.log(data);
                     if (data.length) {
                         Swal.fire({
                             title: 'Thông báo',
