@@ -69,18 +69,22 @@ myDropzone.dropzone({
                         // Show lecturers which hasn't been imported into the system
                         Swal.fire("Thông báo!", "Đã import dữ liệu! \nCó một số giảng viên chưa có trong hệ thống, vui lòng xem chi tiết ở cuối trang.", "error");
 
+                        $('#errorLecturers-section').show();
+
+                        // Show lecturers who has's been imported
                         populateDatatable(data);
 
                     } else {
                         Swal.fire({
-                            title: 'Good job!',
-                            text: 'You clicked the button!',
+                            title: 'Thông báo',
+                            text: 'Import thời khoá biểu thành công!',
                             icon: 'success',
                             customClass: {
                                 confirmButton: 'btn btn-primary'
                             },
                             buttonsStyling: false
                         });
+                        $('#errorLecturers-section').hide();
                     }
                     window.onbeforeunload = null;
                 });
@@ -236,7 +240,6 @@ function importAgain(myDropzone, message, state) {
 }
 
 function populateDatatable(data) {
-    $('#errorLecturers-section').show();
     var dataTable;
 
     if (!$.fn.DataTable.isDataTable('#tblErrorLecturers')) {
