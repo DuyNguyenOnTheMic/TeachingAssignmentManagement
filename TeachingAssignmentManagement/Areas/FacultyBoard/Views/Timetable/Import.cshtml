@@ -45,6 +45,31 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row" id="errorLecturers-section" style="display: none">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title-wrap">
+                                    <h4 class="card-title">Những giảng viên không được import</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-datatable table-responsive pt-0">
+                                    <table class="table" id="tblErrorLecturers">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th></th>
+                                                <th>Mã giảng viên</th>
+                                                <th>Tên giảng viên</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
             <!-- Dropzone section end -->
         </div>
@@ -54,12 +79,15 @@
 <div id="loader" data-request-url="@Url.Content("~/")"></div>
 
 @section styles {
+    <link href="~/app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css" rel="stylesheet" />
     <link href="~/app-assets/vendors/css/file-uploaders/dropzone.css" rel="stylesheet" />
     <link href="~/app-assets/css/plugins/forms/form-file-uploader.min.css" rel="stylesheet" />
 }
 
 @section scripts {
     <script src="~/app-assets/vendors/js/file-uploaders/dropzone-min.js"></script>
+    <script src="~/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
+    @Scripts.Render("~/bundles/export-dt")
     <script src="~/app-assets/language/select2/vi.min.js"></script>
     <script src="~/app-assets/vendors/js/signalr/jquery.signalR.min.js"></script>
     <script src="~/signalr/hubs"></script>
