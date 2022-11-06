@@ -75,10 +75,10 @@ myDropzone.dropzone({
                             },
                             buttonsStyling: false
                         });
-                        // Show lecturers which hasn't been imported into the system
+                        // Show section
                         $('#errorLecturers-section').show();
 
-                        // Show lecturers who has's been imported
+                        // Show lecturers which hasn't been imported into the system
                         populateDatatable(data);
 
                     } else {
@@ -91,6 +91,7 @@ myDropzone.dropzone({
                             },
                             buttonsStyling: false
                         });
+                        // Hide section
                         $('#errorLecturers-section').hide();
                     }
                     window.onbeforeunload = null;
