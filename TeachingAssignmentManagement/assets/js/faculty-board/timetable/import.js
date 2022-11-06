@@ -97,7 +97,6 @@ myDropzone.dropzone({
         this.on('error', function (data, errorMessage, xhr) {
 
             Swal.close();
-            isUpdate.val(false);
             window.onbeforeunload = null;
 
             if (xhr) {
