@@ -115,40 +115,40 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             //Insert records to database table.
             foreach (DataRow row in dt.Rows)
             {
+                // Declare all columns
+                string originalId = row["MaGocLHP"].ToString();
+                string curriculumId = row["Mã MH"].ToString();
+                string curriculumClassid = row["Mã LHP"].ToString();
+                string name = row["Tên HP"].ToString();
+                string credits = row["Số TC"].ToString();
+                string type = row["Loại HP"].ToString();
+                string studentClassId = row["Mã Lớp"].ToString();
+                string minimumStudent = row["TSMH"].ToString();
+                string totalLesson = row["Số Tiết Đã xếp"].ToString();
+                string room = row["PH"].ToString();
+                string day = row["Thứ"].ToString();
+                string startLesson = row["Tiết BĐ"].ToString();
+                string lessonNumber = row["Số Tiết"].ToString();
+                string lessonTime = row["Tiết Học"].ToString();
+                string room2 = row["Phòng"].ToString();
+                string lecturerId = row["Mã CBGD"].ToString();
+                string fullName = row["Tên CBGD"].ToString();
+                string roomType = row["PH_X"].ToString();
+                string capacity = row["Sức Chứa"].ToString();
+                string studentNumber = row["SiSoTKB"].ToString();
+                string freeSlot = row["Trống"].ToString();
+                string state = row["Tình Trạng LHP"].ToString();
+                string learnWeek = row["TuanHoc2"].ToString();
+                string day2 = row["ThuS"].ToString();
+                string startLesson2 = row["TietS"].ToString();
+                string studentRegisteredNumber = row["Số SVĐK"].ToString();
+                string startWeek = row["Tuần BD"].ToString();
+                string endWeek = row["Tuần KT"].ToString();
+                string note1 = row["Ghi Chú 1"].ToString();
+                string note2 = row["Ghi chú 2"].ToString();
+
                 try
                 {
-                    // Declare all columns
-                    string originalId = row["MaGocLHP"].ToString();
-                    string curriculumId = row["Mã MH"].ToString();
-                    string curriculumClassid = row["Mã LHP"].ToString();
-                    string name = row["Tên HP"].ToString();
-                    string credits = row["Số TC"].ToString();
-                    string type = row["Loại HP"].ToString();
-                    string studentClassId = row["Mã Lớp"].ToString();
-                    string minimumStudent = row["TSMH"].ToString();
-                    string totalLesson = row["Số Tiết Đã xếp"].ToString();
-                    string room = row["PH"].ToString();
-                    string day = row["Thứ"].ToString();
-                    string startLesson = row["Tiết BĐ"].ToString();
-                    string lessonNumber = row["Số Tiết"].ToString();
-                    string lessonTime = row["Tiết Học"].ToString();
-                    string room2 = row["Phòng"].ToString();
-                    string lecturerId = row["Mã CBGD"].ToString();
-                    string fullName = row["Tên CBGD"].ToString();
-                    string roomType = row["PH_X"].ToString();
-                    string capacity = row["Sức Chứa"].ToString();
-                    string studentNumber = row["SiSoTKB"].ToString();
-                    string freeSlot = row["Trống"].ToString();
-                    string state = row["Tình Trạng LHP"].ToString();
-                    string learnWeek = row["TuanHoc2"].ToString();
-                    string day2 = row["ThuS"].ToString();
-                    string startLesson2 = row["TietS"].ToString();
-                    string studentRegisteredNumber = row["Số SVĐK"].ToString();
-                    string startWeek = row["Tuần BD"].ToString();
-                    string endWeek = row["Tuần KT"].ToString();
-                    string note1 = row["Ghi Chú 1"].ToString();
-                    string note2 = row["Ghi chú 2"].ToString();
-
                     var query_curriculum = unitOfWork.CurriculumRepository.GetCurriculumByID(curriculumId);
                     if (query_curriculum == null)
                     {
