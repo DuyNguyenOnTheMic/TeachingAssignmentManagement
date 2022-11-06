@@ -117,8 +117,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             {
                 try
                 {
-
-
                     // Declare all columns
                     string originalId = row["MaGocLHP"].ToString();
                     string curriculumId = row["Mã MH"].ToString();
