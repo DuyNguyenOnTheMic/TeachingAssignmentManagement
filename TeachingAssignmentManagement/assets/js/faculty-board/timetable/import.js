@@ -276,7 +276,7 @@ function populateDatatable(data) {
                 buttons: [
                     {
                         extend: 'collection',
-                        className: 'btn btn-outline-secondary dropdown-toggle',
+                        className: 'btn btn-outline-secondary dropdown-toggle me-2',
                         text: feather.icons['share'].toSvg({ class: 'font-small-4 me-50' }) + 'Export',
                         buttons: [
                             {
@@ -311,6 +311,13 @@ function populateDatatable(data) {
                             setTimeout(function () {
                                 $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex mt-50');
                             }, 50);
+                        }
+                    },
+                    {
+                        text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Import vào hệ thống',
+                        className: 'importUser btn btn-primary',
+                        attr: {
+                            'onclick': ""
                         }
                     }
                 ],
