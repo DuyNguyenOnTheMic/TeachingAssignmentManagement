@@ -80,7 +80,7 @@ myDropzone.dropzone({
                 title: 'Vui lòng đợi...',
                 allowEscapeKey: false,
                 allowOutsideClick: false,
-                html: '<div class="progress mb-2 mt-4" style="height: 30px"><div id="myprogress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>',
+                html: '<div class="progress progress-bar-primary my-2" style="height: 30px"><div id="myProgress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>',
                 didOpen: () => {
                     Swal.showLoading();
                 }
@@ -187,7 +187,7 @@ function startProgressBar() {
             return;
         }
         else {
-            $('#myprogress')
+            $('#myProgress')
                 .attr({ 'aria-valuenow': percentage })
                 .text(message + ' ' + percentage + ' %')
                 .width(percentage);
