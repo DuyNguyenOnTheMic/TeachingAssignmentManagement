@@ -192,6 +192,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
                 // Update email of user
                 user.Email = email;
+                user.UserName = email;
                 UserManager.Update(user);
             }
             catch
