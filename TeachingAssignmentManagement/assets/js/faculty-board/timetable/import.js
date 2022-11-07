@@ -317,7 +317,7 @@ function populateDatatable(data) {
                         text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Import vào hệ thống',
                         className: 'importUser btn btn-primary',
                         attr: {
-                            'onclick': ""
+                            'onclick': "importUsers(" + data + ")"
                         }
                     }
                 ],
@@ -338,5 +338,24 @@ function populateDatatable(data) {
             cell.innerHTML = i + 1;
             dataTable.cell(cell).invalidate('dom');
         });
+    });
+}
+
+function importUsers(data) {
+
+    // Send ajax request to import users
+    $.ajax({
+        type: 'POST',
+        url: rootUrl + 'FacultyBoard/User/Import',
+        data: { 'userList': data },
+        success: function (data) {
+            if (data.success) {
+
+                alert('hehe');
+
+                // Import timetable again
+                //importAgain(myDropzone, false);
+            }
+        }
     });
 }
