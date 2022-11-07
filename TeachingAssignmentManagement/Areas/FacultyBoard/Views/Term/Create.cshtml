@@ -13,12 +13,12 @@
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="start_year">Năm bắt đầu: </label>
-        @Html.DropDownList("start_year", null, htmlAttributes: new { @class = "select2 form-select" })
+        @Html.DropDownList("start_year", null, htmlAttributes: new { @class = "select2 form-select", @aria_label = "Chọn năm bắt đầu" })
     </div>
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="end_year">Năm kết thúc: </label>
-        @Html.DropDownList("end_year", null, htmlAttributes: new { @class = "select2 form-select" })
+        @Html.DropDownList("end_year", null, htmlAttributes: new { @class = "select2 form-select", @aria_label = "Chọn năm kết thúc" })
     </div>
 
     <div class="mb-1">
