@@ -317,7 +317,7 @@ function populateDatatable(data) {
                         text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Import vào hệ thống',
                         className: 'importUser btn btn-primary',
                         attr: {
-                            'onclick': "importUsers(" + data + ")"
+                            'onclick': "importUsers(" + JSON.stringify(data) + ")"
                         }
                     }
                 ],
@@ -343,11 +343,18 @@ function populateDatatable(data) {
 
 function importUsers(data) {
 
+    var item1 = $(data).map(function () {
+        return this.Item1;
+    }).get();
+    var item2 = $(data).map(function () {
+        return this.Item2;
+    }).get()
+
     // Send ajax request to import users
     $.ajax({
         type: 'POST',
         url: rootUrl + 'FacultyBoard/User/Import',
-        data: { 'userList': data },
+        data: { 'lecturerId': item1, 'lecturerName': item2 },
         success: function (data) {
             if (data.success) {
 

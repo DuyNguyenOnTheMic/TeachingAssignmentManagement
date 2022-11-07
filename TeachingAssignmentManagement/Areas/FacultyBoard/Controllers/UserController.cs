@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -46,6 +48,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             // Get user data from datatabse
             return Json(unitOfWork.UserRepository.GetUsers(), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Import(string[] lecturerId, string[] lecturerName)
+        {
+            return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
