@@ -151,12 +151,13 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(string staff_id, string full_name, string email, string role_id)
+        public ActionResult Edit(string staff_id, string full_name, string oldEmail, string email, string role_id)
         {
             // Declare variables
             string txtStaffId = SetNullOnEmpty(staff_id);
             string txtFullName = SetNullOnEmpty(full_name);
-            string userId = UserManager.FindByEmail(email).Id;
+            var user = UserManager.FindByEmail(oldEmail);
+            string userId = user.Id;
             string oldRole = UserManager.GetRoles(userId).FirstOrDefault();
             var role = unitOfWork.UserRepository.GetRoleByID(role_id);
             var query_lecturer = unitOfWork.UserRepository.GetLecturerByID(userId);
@@ -188,6 +189,10 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     unitOfWork.UserRepository.InsertLecturer(lecturer);
                 }
                 unitOfWork.Save();
+
+                // Update email of user
+                user.Email = email;
+                UserManager.Update(user);
             }
             catch
             {

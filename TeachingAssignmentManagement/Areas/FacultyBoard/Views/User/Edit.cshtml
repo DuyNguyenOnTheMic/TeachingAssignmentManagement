@@ -16,9 +16,11 @@
         @Html.EditorFor(model => model.full_name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tên giảng viên", @aria_label = "Nhập tên giảng viên" } })
     </div>
 
+    <input type="hidden" value="@ViewBag.email" id="oldEmail" name="oldEmail" />
+
     <div class="mb-1">
         <label class="form-label font-small-4" for="email">Email: </label>
-        <input type="text" class="form-control" id="email" name="email" readonly="readonly" value="@ViewBag.email" />
+        <input type="text" class="form-control" id="email" name="email" value="@ViewBag.email" />
     </div>
 
     <div class="mb-1">
