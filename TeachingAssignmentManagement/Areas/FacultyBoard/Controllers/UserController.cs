@@ -156,7 +156,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Declare variables
             string txtStaffId = SetNullOnEmpty(staff_id);
             string txtFullName = SetNullOnEmpty(full_name);
-            var user = UserManager.FindByEmail(oldEmail);
+            ApplicationUser user = UserManager.FindByEmail(oldEmail) != null ? UserManager.FindByEmail(oldEmail) : UserManager.FindByName(staff_id);
             string userId = user.Id;
             string oldRole = UserManager.GetRoles(userId).FirstOrDefault();
             var role = unitOfWork.UserRepository.GetRoleByID(role_id);
