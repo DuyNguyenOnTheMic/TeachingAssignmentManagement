@@ -18,12 +18,12 @@
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="email"><span class="text-danger">*</span> Email: </label>
-        <input type="text" class="form-control" id="email" name="email" placeholder="Nhập email" />
+        <input type="text" class="form-control" id="email" name="email" placeholder="Nhập email" aria-label="Nhập email" />
     </div>
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="role_id"><span class="text-danger">*</span> Role: </label>
-        @Html.DropDownList("role_id", null, "---- Chọn role ----", htmlAttributes: new { @class = "select2 form-select" })
+        @Html.DropDownList("role_id", null, "---- Chọn role ----", htmlAttributes: new { @class = "select2 form-select", @aria_label = "Chọn role" })
     </div>
 
     <div class="float-end m-1">
