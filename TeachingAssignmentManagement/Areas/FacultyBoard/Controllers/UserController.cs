@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
+using System.Web.Helpers;
 
 namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 {
@@ -53,6 +54,26 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         [HttpPost]
         public ActionResult Import(string[] lecturerId, string[] lecturerName)
         {
+            for (int i = 0; i < lecturerId.Length; i++)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = lecturerId[i]
+                };
+                // Create new user
+                UserManager.Create(user);
+                UserManager.AddToRole(user.Id, "Giảng viên");
+
+                // Add to lecturer table
+                var lecturer = new lecturer
+                {
+                    id = user.Id,
+                    staff_id = lecturerId[i],
+                    full_name = lecturerName[i]
+                };
+                unitOfWork.UserRepository.InsertLecturer(lecturer);
+                unitOfWork.Save();
+            }
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
