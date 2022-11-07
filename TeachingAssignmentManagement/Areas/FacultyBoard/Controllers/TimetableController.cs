@@ -220,7 +220,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     else
                     {
                         var query_curriculumClass = unitOfWork.CurriculumClassRepository.FindCurriculumClass(query_curriculumClassWhere, curriculumClass.curriculum_class_id, curriculumClass.day_2);
-                        if (query_curriculumClass?.lecturer_id == null)
+                        if (query_curriculumClass?.lecturer_id == null && curriculumClass.lecturer_id != null)
                         {
                             // Update curriculum class's lecturer
                             query_curriculumClass.lecturer_id = curriculumClass.lecturer_id;

@@ -98,6 +98,7 @@ myDropzone.dropzone({
 
             Swal.close();
             isUpdate.val(false);
+            $('#errorLecturers-section').hide();
             window.onbeforeunload = null;
 
             if (xhr) {
@@ -271,7 +272,7 @@ function populateDatatable(data) {
                 order: [[1, 'asc']],
                 dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 ps-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
                 displayLength: 7,
-                lengthMenu: [7, 10, 25, 50, 75, 100],
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "tất cả"]],
                 buttons: [
                     {
                         extend: 'collection',
