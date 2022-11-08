@@ -350,7 +350,7 @@ function importUsers() {
     }).get();
     var lecturerName = $(data).map(function () {
         return this.Item2;
-    }).get()
+    }).get();
 
     // Send ajax request to import users
     $.ajax({
