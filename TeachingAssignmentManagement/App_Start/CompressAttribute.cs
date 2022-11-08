@@ -6,11 +6,11 @@ public class CompressAttribute : ActionFilterAttribute
 {
     public override void OnActionExecuting(ActionExecutingContext filterContext)
     {
-        var encodingsAccepted = filterContext.HttpContext.Request.Headers["Accept-Encoding"];
+        string encodingsAccepted = filterContext.HttpContext.Request.Headers["Accept-Encoding"];
         if (string.IsNullOrEmpty(encodingsAccepted)) return;
 
         encodingsAccepted = encodingsAccepted.ToLowerInvariant();
-        var response = filterContext.HttpContext.Response;
+        System.Web.HttpResponseBase response = filterContext.HttpContext.Response;
 
         if (encodingsAccepted.Contains("br") || encodingsAccepted.Contains("brotli"))
         {

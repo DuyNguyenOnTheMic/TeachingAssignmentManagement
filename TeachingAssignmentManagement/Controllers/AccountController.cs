@@ -71,21 +71,21 @@ namespace TeachingAssignmentManagement.Controllers
         public async Task<ActionResult> SignInCallBack()
         {
             // Get user information
-            var user = new ApplicationUser
+            ApplicationUser user = new ApplicationUser
             {
                 Email = User.Identity.Name,
                 UserName = User.Identity.Name
             };
 
             // Check if user exists
-            var currentUser = await UserManager.FindByEmailAsync(user.Email);
+            ApplicationUser currentUser = await UserManager.FindByEmailAsync(user.Email);
             ClaimsIdentity identity = (ClaimsIdentity)User.Identity;
             if (currentUser != null)
             {
                 if (currentUser.Roles.Count != 0)
                 {
                     // Add role claim to user
-                    var currentRole = await UserManager.GetRolesAsync(currentUser.Id);
+                    System.Collections.Generic.IList<string> currentRole = await UserManager.GetRolesAsync(currentUser.Id);
                     identity.AddClaim(new Claim(ClaimTypes.Role, currentRole[0]));
                 }
             }
@@ -133,7 +133,7 @@ namespace TeachingAssignmentManagement.Controllers
             string userId = UserManager.FindByEmail(User.Identity.Name).Id;
             try
             {
-                var query_lecturer = unitOfWork.UserRepository.GetLecturerByID(userId);
+                lecturer query_lecturer = unitOfWork.UserRepository.GetLecturerByID(userId);
                 if (query_lecturer != null)
                 {
                     // Edit lecturer info

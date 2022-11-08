@@ -53,7 +53,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             for (int i = 0; i < lecturerId.Length; i++)
             {
-                var user = new ApplicationUser
+                ApplicationUser user = new ApplicationUser
                 {
                     UserName = lecturerId[i]
                 };
@@ -62,7 +62,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 UserManager.AddToRole(user.Id, "Giảng viên");
 
                 // Add to lecturer table
-                var lecturer = new lecturer
+                lecturer lecturer = new lecturer
                 {
                     id = user.Id,
                     staff_id = lecturerId[i],
@@ -88,17 +88,17 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Declare variables
             string txtStaffId = SetNullOnEmpty(staff_id);
             string txtFullName = SetNullOnEmpty(full_name);
-            var role = unitOfWork.UserRepository.GetRoleByID(role_id);
+            AspNetRole role = unitOfWork.UserRepository.GetRoleByID(role_id);
 
             // Get user information
-            var user = new ApplicationUser
+            ApplicationUser user = new ApplicationUser
             {
                 Email = email,
                 UserName = email
             };
 
             // Check if user exists
-            var currentUser = UserManager.FindByEmail(user.Email);
+            ApplicationUser currentUser = UserManager.FindByEmail(user.Email);
             if (currentUser != null)
             {
                 return Json(new { error = true, message = "Người dùng đã có trong hệ thống!" }, JsonRequestBehavior.AllowGet);
@@ -108,7 +108,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 try
                 {
                     // Add a new lecturer
-                    var lecturer = new lecturer
+                    lecturer lecturer = new lecturer
                     {
                         id = user.Id,
                         staff_id = txtStaffId,
@@ -132,33 +132,33 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public ActionResult Edit(string id)
         {
             // Get user role
-            var query_user = UserManager.FindById(id);
-            if (query_user.Roles.Count > 0)
+            ApplicationUser user = UserManager.FindById(id);
+            if (user.Roles.Count > 0)
             {
                 // Set selected role
-                ViewBag.role_id = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name", query_user.Roles.FirstOrDefault().RoleId);
+                ViewBag.role_id = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name", user.Roles.FirstOrDefault().RoleId);
             }
             else
             {
                 // Populate new role select list
                 ViewBag.role_id = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name");
             }
-            ViewData["id"] = query_user.Id;
-            ViewData["email"] = query_user.Email;
+            ViewData["id"] = user.Id;
+            ViewData["email"] = user.Email;
             return View(unitOfWork.UserRepository.GetLecturerByID(id));
         }
 
         [HttpPost]
-        public ActionResult Edit(string staff_id, string full_name, string oldEmail, string email, string role_id)
+        public ActionResult Edit(string id, string staff_id, string full_name, string email, string role_id)
         {
             // Declare variables
             string txtStaffId = SetNullOnEmpty(staff_id);
             string txtFullName = SetNullOnEmpty(full_name);
-            ApplicationUser user = UserManager.FindByEmail(oldEmail) != null ? UserManager.FindByEmail(oldEmail) : UserManager.FindByName(staff_id);
+            ApplicationUser user = UserManager.FindById(id);
             string userId = user.Id;
             string oldRole = UserManager.GetRoles(userId).FirstOrDefault();
-            var role = unitOfWork.UserRepository.GetRoleByID(role_id);
-            var query_lecturer = unitOfWork.UserRepository.GetLecturerByID(userId);
+            AspNetRole role = unitOfWork.UserRepository.GetRoleByID(role_id);
+            lecturer query_lecturer = unitOfWork.UserRepository.GetLecturerByID(userId);
 
             // Prevent user from editing the last faculty board role
             int facultyBoardCount = unitOfWork.UserRepository.GetFacultyBoards().Count();
@@ -178,7 +178,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 else if (txtStaffId != null || txtFullName != null)
                 {
                     // Add a new lecturer
-                    var lecturer = new lecturer
+                    lecturer lecturer = new lecturer
                     {
                         id = userId,
                         staff_id = txtStaffId,
@@ -216,7 +216,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public ActionResult Delete(string id)
         {
             // Declare variables
-            var user = UserManager.FindById(id);
+            ApplicationUser user = UserManager.FindById(id);
             string role = UserManager.GetRoles(id).FirstOrDefault();
 
             // Prevent user from deleting the last faculty board role

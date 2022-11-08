@@ -7,7 +7,7 @@ namespace TeachingAssignmentManagement.Helpers
     {
         public static string GetRole(this IIdentity identity)
         {
-            var claim = ((ClaimsIdentity)identity).FindFirst(ClaimTypes.Role);
+            Claim claim = ((ClaimsIdentity)identity).FindFirst(ClaimTypes.Role);
             return (claim != null) ? claim.Value : string.Empty;
         }
     }

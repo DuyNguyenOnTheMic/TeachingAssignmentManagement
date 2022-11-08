@@ -77,7 +77,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             if (!isUpdate)
             {
                 // Check if this term and major already has data
-                var query_term_major = unitOfWork.CurriculumClassRepository.CheckTermMajor(term, major);
+                curriculum_class query_term_major = unitOfWork.CurriculumClassRepository.CheckTermMajor(term, major);
                 if (query_term_major != null)
                 {
                     Response.Write($"Học kỳ và ngành này đã có dữ liệu trong hệ thống, bạn muốn cập nhật hay thay thế thời khoá biểu?");
@@ -159,7 +159,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
                     }
 
-                    var query_curriculum = unitOfWork.CurriculumRepository.GetCurriculumByID(curriculumId);
+                    curriculum query_curriculum = unitOfWork.CurriculumRepository.GetCurriculumByID(curriculumId);
                     if (query_curriculum == null)
                     {
                         // Create new curriculum
@@ -173,7 +173,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         unitOfWork.Save();
                     }
 
-                    var query_lecturer = unitOfWork.UserRepository.GetLecturerByStaffId(lecturerId);
+                    lecturer query_lecturer = unitOfWork.UserRepository.GetLecturerByStaffId(lecturerId);
                     if (query_lecturer == null && ToNullableString(lecturerId) != null && ToNullableString(fullName) != null)
                     {
                         // Add record to error list
@@ -219,7 +219,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     }
                     else
                     {
-                        var query_curriculumClass = unitOfWork.CurriculumClassRepository.FindCurriculumClass(query_curriculumClassWhere, curriculumClass.curriculum_class_id, curriculumClass.day_2);
+                        curriculum_class query_curriculumClass = unitOfWork.CurriculumClassRepository.FindCurriculumClass(query_curriculumClassWhere, curriculumClass.curriculum_class_id, curriculumClass.day_2);
                         if (query_curriculumClass?.lecturer_id == null && curriculumClass.lecturer_id != null)
                         {
                             // Update curriculum class's lecturer
@@ -271,7 +271,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
         private string ValidateNotNull(string[] validRows)
         {
-            foreach (var validRow in validRows)
+            foreach (string validRow in validRows)
             {
                 // Check if string is null
                 if (ToNullableString(validRow) == null)

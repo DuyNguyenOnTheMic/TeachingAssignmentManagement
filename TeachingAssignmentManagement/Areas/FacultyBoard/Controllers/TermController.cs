@@ -59,7 +59,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var term = unitOfWork.TermRepository.GetTermByID(id);
+            term term = unitOfWork.TermRepository.GetTermByID(id);
 
             // Set selected year on edit view
             List<SelectListItem> startYear = PopulateYears(term.start_year);

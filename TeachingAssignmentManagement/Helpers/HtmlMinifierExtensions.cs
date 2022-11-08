@@ -10,7 +10,7 @@ namespace System.Web.Mvc
             string notMinifiedHtml =
              markup.Invoke(helper.ViewContext)?.ToString() ?? "";
 
-            var minifiedHtml = Uglify.Html(notMinifiedHtml).ToString();
+            string minifiedHtml = Uglify.Html(notMinifiedHtml).ToString();
             return new MvcHtmlString(minifiedHtml);
         }
     }

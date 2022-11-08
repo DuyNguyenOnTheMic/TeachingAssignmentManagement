@@ -17,7 +17,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable GetUsers()
         {
-            var query_lecturer = context.lecturers;
+            DbSet<lecturer> query_lecturer = context.lecturers;
             return context.AspNetUsers.Select(u => new
             {
                 id = u.Id,
