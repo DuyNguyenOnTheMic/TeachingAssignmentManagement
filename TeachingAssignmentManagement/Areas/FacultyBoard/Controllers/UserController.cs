@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Hubs;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
@@ -53,23 +55,33 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             for (int i = 0; i < lecturerId.Length; i++)
             {
-                ApplicationUser user = new ApplicationUser
+                string id = lecturerId[i].Trim();
+                string fullName = lecturerName[i].Trim();
+                try
                 {
-                    UserName = lecturerId[i]
-                };
-                // Create new user
-                UserManager.Create(user);
-                UserManager.AddToRole(user.Id, "Giảng viên");
+                    ApplicationUser user = new ApplicationUser
+                    {
+                        UserName = id
+                    };
+                    // Create new user
+                    UserManager.Create(user);
+                    UserManager.AddToRole(user.Id, "Giảng viên");
 
-                // Add to lecturer table
-                lecturer lecturer = new lecturer
+                    // Add to lecturer table
+                    lecturer lecturer = new lecturer
+                    {
+                        id = user.Id,
+                        staff_id = id,
+                        full_name = fullName
+                    };
+                    unitOfWork.UserRepository.InsertLecturer(lecturer);
+                    unitOfWork.Save();
+                    ProgressHub.SendProgress("Đang import...", i, lecturerId.Length);
+                }
+                catch
                 {
-                    id = user.Id,
-                    staff_id = lecturerId[i],
-                    full_name = lecturerName[i]
-                };
-                unitOfWork.UserRepository.InsertLecturer(lecturer);
-                unitOfWork.Save();
+                    return Json(new { error = true, message = "Có lỗi đã xảy ra ở giảng viên <strong>" + id + " - " + fullName + "</strong>" }, JsonRequestBehavior.AllowGet);
+                }
             }
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }

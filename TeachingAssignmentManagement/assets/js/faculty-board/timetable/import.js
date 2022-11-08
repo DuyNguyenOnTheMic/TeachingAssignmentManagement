@@ -343,6 +343,24 @@ function populateDatatable(data) {
 
 function importUsers() {
 
+    // Show waiting message while import
+    Swal.fire({
+        title: 'Đang import giảng viên...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        html: '<div class="progress progress-bar-primary my-2" style="height: 30px"><div id="myProgress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>',
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    })
+
+    startProgressBar();
+
+    // Show confirmation message when user closes tab
+    window.onbeforeunload = function () {
+        return "Bạn có chắc muốn thoát, tiến trình import có thể sẽ không được lưu?";
+    };
+
     // Get data from datatables
     var data = $('#tblErrorLecturers').DataTable().rows().data().toArray();
     var lecturerId = $(data).map(function () {
@@ -358,12 +376,36 @@ function importUsers() {
         url: rootUrl + 'FacultyBoard/User/Import',
         data: { lecturerId, lecturerName },
         success: function (data) {
+            window.onbeforeunload = null;
+
             if (data.success) {
 
-                alert('hehe');
+                // Hide error lecturers section
+                $('#errorLecturers-section').hide();
+
+                // Show succeeded message
+                Swal.fire({
+                    title: 'Thông báo',
+                    text: 'Import giảng viên thành công!',
+                    icon: 'success',
+                    customClass: {
+                        confirmButton: 'btn btn-primary'
+                    },
+                    buttonsStyling: false
+                });
 
                 // Import timetable again
                 //importAgain(myDropzone, false);
+            } else {
+                Swal.fire({
+                    title: 'Thông báo',
+                    html: data.message,
+                    icon: 'error',
+                    customClass: {
+                        confirmButton: 'btn btn-primary'
+                    },
+                    buttonsStyling: false
+                });
             }
         }
     });
