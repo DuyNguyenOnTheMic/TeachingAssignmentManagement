@@ -35,8 +35,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             startYear.Find(s => s.Value == currentYear.ToString()).Selected = true;
             endYear.Find(s => s.Value == (currentYear + 1).ToString()).Selected = true;
 
-            ViewBag.start_year = startYear;
-            ViewBag.end_year = endYear;
+            ViewData["start_year"] = startYear;
+            ViewData["end_year"] = endYear;
             return View(new term());
         }
 
@@ -67,8 +67,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             startYear.Find(s => s.Value == term.start_year.ToString()).Selected = true;
             endYear.Find(s => s.Value == term.end_year.ToString()).Selected = true;
 
-            ViewBag.start_year = startYear;
-            ViewBag.end_year = endYear;
+            ViewData["start_year"] = startYear;
+            ViewData["end_year"] = endYear;
             return View(term);
         }
 
