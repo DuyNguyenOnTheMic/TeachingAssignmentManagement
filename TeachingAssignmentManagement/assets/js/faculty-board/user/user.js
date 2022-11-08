@@ -115,8 +115,8 @@ $(function () {
         $('#totalLecturer').text(countLecturer);
         $('#totalUnassigned').text(countUnassigned);
 
+        // Prevent user from add edit delete while dialog is populated
         if ($('.ui-dialog-content').dialog("isOpen") === true) {
-            // Prevent user from add edit delete while dialog is populated
             disableButtons(true);
         } else {
             disableButtons(false);
