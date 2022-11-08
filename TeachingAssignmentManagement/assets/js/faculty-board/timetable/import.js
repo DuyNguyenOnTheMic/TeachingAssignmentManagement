@@ -1,6 +1,6 @@
 ﻿var select = $('.select2'),
     myDropzone = $('#dpz-single-file')
-    isUpdate = $('#isUpdate');
+isUpdate = $('#isUpdate');
 var rootUrl = $('#loader').data('request-url');
 
 // Populate select2 for choosing term and major
@@ -343,12 +343,12 @@ function populateDatatable(data) {
 
 function importUsers() {
 
+    // Get data from datatables
     var data = $('#tblErrorLecturers').DataTable().rows().data().toArray();
-
-    var item1 = $(data).map(function () {
+    var lecturerId = $(data).map(function () {
         return this.Item1;
     }).get();
-    var item2 = $(data).map(function () {
+    var lecturerName = $(data).map(function () {
         return this.Item2;
     }).get()
 
@@ -356,7 +356,7 @@ function importUsers() {
     $.ajax({
         type: 'POST',
         url: rootUrl + 'FacultyBoard/User/Import',
-        data: { 'lecturerId': item1, 'lecturerName': item2 },
+        data: { lecturerId, lecturerName },
         success: function (data) {
             if (data.success) {
 
