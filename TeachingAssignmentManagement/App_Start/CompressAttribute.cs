@@ -1,5 +1,6 @@
 ﻿using Brotli;
 using System.IO.Compression;
+using System.Web;
 using System.Web.Mvc;
 
 public class CompressAttribute : ActionFilterAttribute
@@ -10,7 +11,7 @@ public class CompressAttribute : ActionFilterAttribute
         if (string.IsNullOrEmpty(encodingsAccepted)) return;
 
         encodingsAccepted = encodingsAccepted.ToLowerInvariant();
-        System.Web.HttpResponseBase response = filterContext.HttpContext.Response;
+        HttpResponseBase response = filterContext.HttpContext.Response;
 
         if (encodingsAccepted.Contains("br") || encodingsAccepted.Contains("brotli"))
         {
