@@ -317,7 +317,7 @@ function populateDatatable(data) {
                         text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Import vào hệ thống',
                         className: 'importUser btn btn-primary',
                         attr: {
-                            'onclick': "importUsers(" + JSON.stringify(data) + ")"
+                            'onclick': "importUsers()"
                         }
                     }
                 ],
@@ -341,7 +341,9 @@ function populateDatatable(data) {
     });
 }
 
-function importUsers(data) {
+function importUsers() {
+
+    var data = $('#tblErrorLecturers').DataTable().rows().data().toArray();
 
     var item1 = $(data).map(function () {
         return this.Item1;
