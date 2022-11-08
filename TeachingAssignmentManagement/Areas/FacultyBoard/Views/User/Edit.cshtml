@@ -6,7 +6,7 @@
 
 @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "user-form" }))
 {
-    <input type="hidden" value="@ViewData["id"]" id="id" name="id" />
+    @Html.HiddenFor(model => model.id)
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="staff_id">Mã giảng viên: </label>

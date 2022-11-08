@@ -155,7 +155,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 // Populate new role select list
                 ViewData["role_id"] = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name");
             }
-            ViewData["id"] = user.Id;
             ViewData["email"] = user.Email;
             return View(unitOfWork.UserRepository.GetLecturerByID(id));
         }
