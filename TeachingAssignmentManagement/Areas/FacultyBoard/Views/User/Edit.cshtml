@@ -6,6 +6,8 @@
 
 @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "user-form" }))
 {
+    <input type="hidden" value="@ViewData["id"]" id="id" name="id" />
+
     <div class="mb-1">
         <label class="form-label font-small-4" for="staff_id">Mã giảng viên: </label>
         @Html.EditorFor(model => model.staff_id, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập mã giảng viên", @aria_label = "Nhập mã giảng viên" } })
@@ -16,11 +18,9 @@
         @Html.EditorFor(model => model.full_name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tên giảng viên", @aria_label = "Nhập tên giảng viên" } })
     </div>
 
-    <input type="hidden" value="@ViewBag.email" id="oldEmail" name="oldEmail" />
-
     <div class="mb-1">
         <label class="form-label font-small-4" for="email">Email: </label>
-        <input type="text" class="form-control" id="email" name="email" placeholder = "Nhập email" aria-label="Nhập email" value="@ViewBag.email" />
+        <input type="text" class="form-control" id="email" name="email" placeholder="Nhập email" aria-label="Nhập email" value="@ViewData["email"]" />
     </div>
 
     <div class="mb-1">

@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using System.Collections.Generic;
-using System;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
-using System.Web.Helpers;
 
 namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 {
@@ -146,7 +143,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 // Populate new role select list
                 ViewBag.role_id = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name");
             }
-            ViewBag.email = query_user.Email;
+            ViewData["id"] = query_user.Id;
+            ViewData["email"] = query_user.Email;
             return View(unitOfWork.UserRepository.GetLecturerByID(id));
         }
 
