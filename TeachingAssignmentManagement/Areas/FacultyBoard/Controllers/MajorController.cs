@@ -38,13 +38,13 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 // Create new major
                 unitOfWork.MajorRepository.InsertMajor(major);
                 unitOfWork.Save();
-                MajorHub.BroadcastData();
-                return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
             }
             catch
             {
                 return Json(new { error = true }, JsonRequestBehavior.AllowGet);
             }
+            MajorHub.BroadcastData();
+            return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -71,12 +71,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 // Delete major
                 unitOfWork.MajorRepository.DeleteMajor(id);
                 unitOfWork.Save();
-                MajorHub.BroadcastData();
             }
             catch
             {
                 return Json(new { error = true, message = "Không thể xoá do ngành này đã có dữ liệu!" }, JsonRequestBehavior.AllowGet);
             }
+            MajorHub.BroadcastData();
             return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
