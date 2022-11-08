@@ -233,6 +233,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
             catch
             {
+                Response.Write($"Oopps, có lỗi đã xảy ra, vui lòng kiểm tra lại tệp tin 🥹");
                 return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
             }
         }
