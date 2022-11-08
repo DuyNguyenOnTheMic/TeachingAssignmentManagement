@@ -23,13 +23,13 @@
                                 {
                                     @Html.HiddenFor(model => model.id)
 
-                                    <label class="form-label font-small-4" for="staff_id"><i class="feather feather-tag me-50"></i>Mã giảng viên:</label>
                                     <div class="mb-2">
+                                        <label class="form-label font-small-4" for="staff_id"><i class="feather feather-tag me-50"></i>Mã giảng viên:</label>
                                         @Html.EditorFor(model => model.staff_id, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập mã giảng viên", @aria_label = "Nhập mã giảng viên" } })
                                     </div>
 
-                                    <label class="form-label font-small-4" for="full_name"><i class="feather feather-user me-50"></i>Tên giảng viên: </label>
                                     <div class="mb-2">
+                                        <label class="form-label font-small-4" for="full_name"><i class="feather feather-user me-50"></i>Tên giảng viên: </label>
                                         @Html.EditorFor(model => model.full_name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tên giảng viên", @aria_label = "Nhập tên giảng viên" } })
                                     </div>
 
