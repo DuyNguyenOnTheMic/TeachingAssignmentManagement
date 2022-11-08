@@ -164,11 +164,18 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             // Declare variables
             ApplicationUser user = UserManager.FindById(id);
+            ApplicationUser newUser = UserManager.FindByEmail(email);
             string txtStaffId = SetNullOnEmpty(staff_id);
             string txtFullName = SetNullOnEmpty(full_name);
             string oldRole = UserManager.GetRoles(id).FirstOrDefault();
             AspNetRole role = unitOfWork.UserRepository.GetRoleByID(role_id);
             lecturer query_lecturer = unitOfWork.UserRepository.GetLecturerByID(id);
+
+            // Check if user exists in the system
+            if (newUser != null)
+            {
+                return Json(new { error = true, message = "Người dùng đã có trong hệ thống!" }, JsonRequestBehavior.AllowGet);
+            }
 
             // Prevent user from editing the last faculty board role
             int facultyBoardCount = unitOfWork.UserRepository.GetFacultyBoards().Count();
