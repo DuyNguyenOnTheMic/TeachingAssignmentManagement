@@ -137,38 +137,11 @@ myDropzone.dropzone({
                         buttonsStyling: false
                     }).then((result) => {
                         if (result.isConfirmed) {
-
                             // Update timetable
                             importAgain(myDropzone, true);
-
                         } else if (result.isDenied) {
-                            // Show waiting message while delete
-                            Swal.fire({
-                                title: 'Đang xoá dữ liệu...',
-                                allowEscapeKey: false,
-                                allowOutsideClick: false,
-                                didOpen: () => {
-                                    Swal.showLoading();
-                                }
-                            })
-
-                            var term = $('#term').val();
-                            var major = $('#major').val();
-
-                            // Send ajax request to delete all curriculum classes
-                            $.ajax({
-                                type: 'POST',
-                                url: rootUrl + 'FacultyBoard/Timetable/DeleteAll',
-                                data: { term, major },
-                                success: function (data) {
-                                    if (data.success) {
-                                        Swal.close();
-
-                                        // Import timetable again
-                                        importAgain(myDropzone, false);
-                                    }
-                                }
-                            });
+                            // Delete and import timetable again
+                            deleteAndImport(myDropzone);
                         }
                     })
                 }
@@ -244,6 +217,36 @@ function importAgain(myDropzone, state) {
     isUpdate.val(state);
     // Process import
     myDropzone.processQueue();
+}
+
+function deleteAndImport(myDropzone) {
+    // Show waiting message while delete
+    Swal.fire({
+        title: 'Đang xoá dữ liệu...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    })
+
+    var term = $('#term').val();
+    var major = $('#major').val();
+
+    // Send ajax request to delete all curriculum classes
+    $.ajax({
+        type: 'POST',
+        url: rootUrl + 'FacultyBoard/Timetable/DeleteAll',
+        data: { term, major },
+        success: function (data) {
+            if (data.success) {
+                Swal.close();
+
+                // Import timetable again
+                importAgain(myDropzone, false);
+            }
+        }
+    });
 }
 
 function populateDatatable(data) {
@@ -383,20 +386,28 @@ function importUsers() {
                 // Hide error lecturers section
                 $('#errorLecturers-section').hide();
 
-                // Show succeeded message
+                // Show confirm message
                 Swal.fire({
                     title: 'Thông báo',
-                    text: 'Import giảng viên thành công!',
-                    icon: 'success',
+                    text: 'Import giảng viên thành công, bạn có muốn import lại file không?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Import lại',
+                    cancelButtonText: 'Huỷ',
                     customClass: {
-                        confirmButton: 'btn btn-primary'
+                        confirmButton: 'btn btn-primary',
+                        cancelButton: 'btn btn-outline-danger ms-1'
                     },
                     buttonsStyling: false
-                });
-
-                // Import timetable again
-                //importAgain(myDropzone, false);
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Delete and import timetable again
+                        var myDropzone = Dropzone.forElement("#dpz-single-file");
+                        deleteAndImport(myDropzone);
+                    }
+                })
             } else {
+                // Show error message
                 Swal.fire({
                     title: 'Thông báo',
                     html: data.message,
