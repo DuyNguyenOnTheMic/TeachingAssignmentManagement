@@ -238,7 +238,7 @@ function deleteMajor(id) {
                         // Show message when delete failed
                         Swal.fire({
                             title: 'Thông báo',
-                            text: 'Không thể xoá do đã có sinh viên học ngành này!',
+                            text: data.message,
                             icon: 'error',
                             customClass: {
                                 confirmButton: 'btn btn-primary'

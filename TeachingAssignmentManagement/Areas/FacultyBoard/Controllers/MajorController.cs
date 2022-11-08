@@ -75,7 +75,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
             catch
             {
-                return Json(new { error = true }, JsonRequestBehavior.AllowGet);
+                return Json(new { error = true, message = "Không thể xoá do ngành này đã có dữ liệu!" }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
         }
