@@ -225,8 +225,15 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 return Json(new { error = true, message = "Bạn không thể xoá BCN khoa cuối cùng!" }, JsonRequestBehavior.AllowGet);
             }
 
-            // Delete user
-            UserManager.Delete(user);
+            try
+            {
+                // Delete user
+                UserManager.Delete(user);
+            }
+            catch
+            {
+                return Json(new { error = true, message = "Không thể xoá do giảng viên này đã được phân công trong hệ thống!" }, JsonRequestBehavior.AllowGet);
+            }
             return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
