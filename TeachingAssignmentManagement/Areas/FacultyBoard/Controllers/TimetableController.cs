@@ -27,8 +27,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
         public ActionResult Import()
         {
-            ViewBag.term = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
-            ViewBag.major = new SelectList(unitOfWork.MajorRepository.GetMajors(), "id", "name");
+            ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
+            ViewData["major"] = new SelectList(unitOfWork.MajorRepository.GetMajors(), "id", "name");
             return View();
         }
 
