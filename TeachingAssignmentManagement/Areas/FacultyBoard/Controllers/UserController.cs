@@ -78,7 +78,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         [OutputCache(Duration = 600, VaryByParam = "none")]
         public ActionResult Create()
         {
-            ViewBag.role_id = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name");
+            ViewData["role_id"] = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name");
             return View(new lecturer());
         }
 
@@ -136,12 +136,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             if (user.Roles.Count > 0)
             {
                 // Set selected role
-                ViewBag.role_id = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name", user.Roles.FirstOrDefault().RoleId);
+                ViewData["role_id"] = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name", user.Roles.FirstOrDefault().RoleId);
             }
             else
             {
                 // Populate new role select list
-                ViewBag.role_id = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name");
+                ViewData["role_id"] = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name");
             }
             ViewData["id"] = user.Id;
             ViewData["email"] = user.Email;
