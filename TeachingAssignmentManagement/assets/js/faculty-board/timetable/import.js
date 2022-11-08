@@ -52,19 +52,16 @@ myDropzone.dropzone({
             var majorId = $("#major").val();
 
             // Validation for form
-            if (termId == '') {
-                toastr.options.positionClass = 'toast-bottom-right';
+            toastr.options.positionClass = 'toast-bottom-right';
+            if (termId == '' && majorId == '') {
                 toastr.warning('Bạn chưa chọn học kỳ và ngành');
-            }
-            else if (majorId == '') {
-                toastr.options.positionClass = 'toast-bottom-right';
+            } else if (termId == '') {
+                toastr.warning('Bạn chưa chọn học kỳ');
+            } else if (majorId == '') {
                 toastr.warning('Bạn chưa chọn ngành');
-            }
-            else if (count == 0) {
-                toastr.options.positionClass = 'toast-bottom-right';
+            } else if (count == 0) {
                 toastr.warning('File chưa được upload hoặc sai định dạng ');
-            }
-            else {
+            } else {
                 // Begin to import file
                 myDropzone.processQueue();
             }
