@@ -118,6 +118,8 @@ $(function () {
         if ($('.ui-dialog-content').dialog("isOpen") === true) {
             // Prevent user from add edit delete while dialog is populated
             disableButtons(true);
+        } else {
+            disableButtons(false);
         }
     });
 });
