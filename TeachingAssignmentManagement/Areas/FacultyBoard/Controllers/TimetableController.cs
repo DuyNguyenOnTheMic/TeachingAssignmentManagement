@@ -231,7 +231,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 unitOfWork.Save();
                 return Json(errorLecturerList.Distinct(), JsonRequestBehavior.AllowGet);
             }
-            catch (Exception)
+            catch
             {
                 return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
             }
