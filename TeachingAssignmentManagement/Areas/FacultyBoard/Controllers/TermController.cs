@@ -48,12 +48,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 // Create new term
                 unitOfWork.TermRepository.InsertTerm(term);
                 unitOfWork.Save();
-                return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
             }
             catch
             {
                 return Json(new { error = true, message = "Học kỳ này đã được tạo trong hệ thống!" }, JsonRequestBehavior.AllowGet);
             }
+            return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
