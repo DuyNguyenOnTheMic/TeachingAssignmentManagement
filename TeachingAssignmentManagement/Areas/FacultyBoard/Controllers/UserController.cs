@@ -152,10 +152,10 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public ActionResult Edit(string id, string staff_id, string full_name, string email, string role_id)
         {
             // Declare variables
-            string txtStaffId = SetNullOnEmpty(staff_id);
-            string txtFullName = SetNullOnEmpty(full_name);
             ApplicationUser user = UserManager.FindById(id);
             string userId = user.Id;
+            string txtStaffId = SetNullOnEmpty(staff_id);
+            string txtFullName = SetNullOnEmpty(full_name);
             string oldRole = UserManager.GetRoles(userId).FirstOrDefault();
             AspNetRole role = unitOfWork.UserRepository.GetRoleByID(role_id);
             lecturer query_lecturer = unitOfWork.UserRepository.GetLecturerByID(userId);
