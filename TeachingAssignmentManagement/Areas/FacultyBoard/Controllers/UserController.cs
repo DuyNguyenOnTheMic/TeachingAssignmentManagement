@@ -153,12 +153,11 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             // Declare variables
             ApplicationUser user = UserManager.FindById(id);
-            string userId = user.Id;
             string txtStaffId = SetNullOnEmpty(staff_id);
             string txtFullName = SetNullOnEmpty(full_name);
-            string oldRole = UserManager.GetRoles(userId).FirstOrDefault();
+            string oldRole = UserManager.GetRoles(id).FirstOrDefault();
             AspNetRole role = unitOfWork.UserRepository.GetRoleByID(role_id);
-            lecturer query_lecturer = unitOfWork.UserRepository.GetLecturerByID(userId);
+            lecturer query_lecturer = unitOfWork.UserRepository.GetLecturerByID(id);
 
             // Prevent user from editing the last faculty board role
             int facultyBoardCount = unitOfWork.UserRepository.GetFacultyBoards().Count();
@@ -180,7 +179,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     // Add a new lecturer
                     lecturer lecturer = new lecturer
                     {
-                        id = userId,
+                        id = id,
                         staff_id = txtStaffId,
                         full_name = txtFullName
                     };
@@ -201,13 +200,13 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             if (oldRole == null)
             {
                 // Add user to role
-                UserManager.AddToRole(userId, role.Name);
+                UserManager.AddToRole(id, role.Name);
             }
             else
             {
                 // Update user role
-                UserManager.RemoveFromRole(userId, oldRole);
-                UserManager.AddToRole(userId, role.Name);
+                UserManager.RemoveFromRole(id, oldRole);
+                UserManager.AddToRole(id, role.Name);
             }
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
