@@ -64,9 +64,11 @@ $(function () {
         });
 
     dataTable.on('draw.dt', function () {
+        // Prevent user from add edit delete while dialog is populated
         if ($('.ui-dialog-content').dialog("isOpen") === true) {
-            // Prevent user from add edit delete while dialog is populated
             disableButtons(true);
+        } else {
+            disableButtons(false);
         }
     });
 });
