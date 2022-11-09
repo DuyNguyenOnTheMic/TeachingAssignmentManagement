@@ -254,7 +254,6 @@ function populateDatatable(data) {
         // Populate Error lecturers datatable
         dataTable = $('#tblErrorLecturers').DataTable(
             {
-                deferRender: true,
                 columns: [
                     { 'data': '', defaultContent: '' },
                     { 'data': 'Item1' },
