@@ -35,10 +35,6 @@ window.colors = {
     var $body = $('body');
     var $textcolor = '#4e5154';
 
-    if ($('body').attr('data-framework') === 'laravel') {
-        assetPath = $('body').attr('data-asset-path');
-    }
-
     // to remove sm control classes from datatables
     if ($.fn.dataTable) {
         $.extend($.fn.dataTable.ext.classes, {
@@ -46,7 +42,6 @@ window.colors = {
             sLengthSelect: 'form-select'
         });
     }
-
 
     $(window).on('load', function () {
         var compactMenu = false;
@@ -171,14 +166,6 @@ window.colors = {
         var menuType = $body.data('menu');
         if (menuType != 'horizontal-menu' && compactMenu === false) {
             $('.main-menu-content').find('li.active').parents('li').addClass('open');
-        }
-        if (menuType == 'horizontal-menu') {
-            $('.main-menu-content').find('li.active').parents('li:not(.nav-item)').addClass('open');
-            $('.main-menu-content').find('li.active').closest('li.nav-item').addClass('sidebar-group-active open');
-            // $(".main-menu-content")
-            //   .find("li.active")
-            //   .parents("li")
-            //   .addClass("active");
         }
 
         //  Dynamic height for the chartjs div for the chart animations to work
@@ -382,30 +369,13 @@ window.colors = {
         return false;
     });
 
+    // Add active class to menu
+    $('#main-menu-navigation').find('[href="' + window.location.pathname + '"]').parent().addClass('active');
     // Add Children Class
     $('.navigation').find('li').has('ul').addClass('has-sub');
     // Update manual scroller when window is resized
     $(window).resize(function () {
         $.app.menu.manualScroller.updateHeight();
-    });
-
-    $('#sidebar-page-navigation').on('click', 'a.nav-link', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var $this = $(this),
-            href = $this.attr('href');
-        var offset = $(href).offset();
-        var scrollto = offset.top - 80; // minus fixed header height
-        $('html, body').animate(
-            {
-                scrollTop: scrollto
-            },
-            0
-        );
-        setTimeout(function () {
-            $this.parent('.nav-item').siblings('.nav-item').children('.nav-link').removeClass('active');
-            $this.addClass('active');
-        }, 100);
     });
 
     // Waves Effect
@@ -558,40 +528,3 @@ window.colors = {
         }
     }
 })(window, document, jQuery);
-
-
-// jQuery Validation Global Defaults
-if (typeof jQuery.validator === 'function') {
-    jQuery.validator.setDefaults({
-        errorElement: 'span',
-        errorPlacement: function (error, element) {
-            if (
-                element.parent().hasClass('input-group') ||
-                element.hasClass('select2') ||
-                element.attr('type') === 'checkbox'
-            ) {
-                error.insertAfter(element.parent());
-            } else if (element.hasClass('form-check-input')) {
-                error.insertAfter(element.parent().siblings(':last'));
-            } else {
-                error.insertAfter(element);
-            }
-
-            if (element.parent().hasClass('input-group')) {
-                element.parent().addClass('is-invalid');
-            }
-        },
-        highlight: function (element, errorClass, validClass) {
-            $(element).addClass('error');
-            if ($(element).parent().hasClass('input-group')) {
-                $(element).parent().addClass('is-invalid');
-            }
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).removeClass('error');
-            if ($(element).parent().hasClass('input-group')) {
-                $(element).parent().removeClass('is-invalid');
-            }
-        }
-    });
-}
