@@ -172,7 +172,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             lecturer query_lecturer = unitOfWork.UserRepository.GetLecturerByID(id);
 
             // Check if user exists in the system
-            if (newUser != null)
+            if (newUser != null && email != user.Email)
             {
                 return Json(new { error = true, message = "Người dùng đã có trong hệ thống!" }, JsonRequestBehavior.AllowGet);
             }
