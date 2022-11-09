@@ -73,22 +73,22 @@
                 </div>
                 <div class="main-menu-content">
                     <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                        <li class="nav-item @(ViewBag.Title == "Trang chủ" ? "active" : "")">
+                        <li class="nav-item">
                             <a class="d-flex align-items-center" href="@Url.Action("Index", "Home", new { Area = "" })"><i class="feather feather-home"></i><span class="menu-title text-truncate">Trang chủ</span></a>
                         </li>
                         @switch (roleName)
                         {
                             case "BCN khoa":
-                                <li class="nav-item @(ViewBag.Title == "Email" ? "active" : "")">
+                                <li class="nav-item">
                                     <a class="d-flex align-items-center" href="@Url.Action("About", "Home", new { Area = "" })"><i class="feather feather-mail"></i><span class="menu-title text-truncate">Email</span></a>
                                 </li>
-                                <li class="nav-item @(ViewBag.Title == "Contact" ? "active" : "")">
+                                <li class="nav-item">
                                     <a class="d-flex align-items-center" href="@Url.Action("Contact", "Home", new { Area = "" })"><i class="feather feather-message-square"></i><span class="menu-title text-truncate">Chat</span></a>
                                 </li>
                                 <li class=" nav-item">
                                     <a class="d-flex align-items-center" href="#"><i class="feather feather-clock"></i><span class="menu-title text-truncate">Thời khoá biểu</span></a>
                                     <ul class="menu-content">
-                                        <li class="@(ViewBag.Title == "Import TKB" ? "active" : "")">
+                                        <li>
                                             <a class="d-flex align-items-center" href="@Url.Action("Import", "Timetable", new { Area = "FacultyBoard" })"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Import TKB</span></a>
                                         </li>
                                         <li>
@@ -99,25 +99,25 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item @(ViewBag.Title == "Quản lý học kỳ" || ViewBag.Title == "Quản lý ngành" ? "active" : "")">
+                                <li class="nav-item">
                                     <a class="d-flex align-items-center" href="@Url.Action("Index", "Term", new { Area = "FacultyBoard" })"><i class="feather feather-layers"></i><span class="menu-title text-truncate">Học kỳ và ngành</span></a>
                                 </li>
-                                <li class="nav-item @(ViewBag.Title == "Quản lý người dùng" ? "active" : "")">
+                                <li class="nav-item">
                                     <a class="d-flex align-items-center" href="@Url.Action("Index", "User", new { Area = "FacultyBoard" })"><i class="feather feather-user"></i><span class="menu-title text-truncate">Người dùng</span></a>
                                 </li>
                                 break;
                             case "Bộ môn":
-                                <li class="nav-item @(ViewBag.Title == "Email" ? "active" : "")">
+                                <li>
                                     <a class="d-flex align-items-center" href="@Url.Action("About", "Home", new { Area = "" })"><i class="feather feather-mail"></i><span class="menu-title text-truncate">Email</span></a>
                                 </li>
                                 break;
                             case "Giảng viên":
-                                <li class="nav-item @(ViewBag.Title == "Email" ? "active" : "")">
+                                <li>
                                     <a class="d-flex align-items-center" href="@Url.Action("About", "Home", new { Area = "" })"><i class="feather feather-mail"></i><span class="menu-title text-truncate">Email</span></a>
                                 </li>
                                 break;
                             default:
-                                <li class="nav-item @(ViewBag.Title == "Email" ? "active" : "")">
+                                <li>
                                     <a class="d-flex align-items-center" href="@Url.Action("About", "Home", new { Area = "" })"><i class="feather feather-mail"></i><span class="menu-title text-truncate">Email</span></a>
                                 </li>
                                 break;
@@ -152,6 +152,9 @@
             </font>
         </noscript>
         @Scripts.Render("~/bundles/vendors")
+        <script>
+            $('#main-menu-navigation').find('[href="' + window.location.pathname + '"]').parent().addClass('active');
+        </script>
         @Scripts.Render("~/bundles/datatables")
         @Scripts.Render("~/bundles/app")
         @Scripts.Render("~/bundles/extensions")
