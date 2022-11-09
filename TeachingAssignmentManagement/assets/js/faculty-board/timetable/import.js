@@ -248,6 +248,7 @@ function deleteAndImport(myDropzone) {
 
 function populateDatatable(data) {
     var dataTable;
+    var fileName = $('#lblErrorLecturers').text();
 
     if (!$.fn.DataTable.isDataTable('#tblErrorLecturers')) {
         // Populate Error lecturers datatable
@@ -281,28 +282,23 @@ function populateDatatable(data) {
                         buttons: [
                             {
                                 extend: 'print',
-                                className: 'dropdown-item'
-                            },
-                            {
-                                extend: 'csv',
-                                className: 'dropdown-item'
+                                className: 'dropdown-item',
+                                title: fileName
                             },
                             {
                                 extend: 'excel',
                                 className: 'dropdown-item',
-                                title: '',
-                                customize: function (xlsx) {
-                                    var sheet = xlsx.xl.worksheets['sheet1.xml'];
-                                    $('row:first c', sheet).attr('s', '42');
-                                }
+                                title: fileName
                             },
                             {
                                 extend: 'pdf',
-                                className: 'dropdown-item'
+                                className: 'dropdown-item',
+                                title: fileName
                             },
                             {
                                 extend: 'copy',
-                                className: 'dropdown-item'
+                                className: 'dropdown-item',
+                                title: fileName
                             }
                         ],
                         init: function (api, node, config) {
