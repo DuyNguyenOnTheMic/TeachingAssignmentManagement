@@ -50,36 +50,11 @@ $(function () {
             lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "tất cả"]],
             buttons: [
                 {
-                    extend: 'collection',
-                    className: 'btn btn-outline-secondary dropdown-toggle me-2',
-                    text: feather.icons['share'].toSvg({ class: 'font-small-4 me-50' }) + 'Export',
-                    buttons: [
-                        {
-                            extend: 'print',
-                            className: 'dropdown-item'
-                        },
-                        {
-                            extend: 'csv',
-                            className: 'dropdown-item'
-                        },
-                        {
-                            extend: 'excel',
-                            className: 'dropdown-item',
-                            title: '',
-                            customize: function (xlsx) {
-                                var sheet = xlsx.xl.worksheets['sheet1.xml'];
-                                $('row:first c', sheet).attr('s', '42');
-                            }
-                        },
-                        {
-                            extend: 'pdf',
-                            className: 'dropdown-item'
-                        },
-                        {
-                            extend: 'copy',
-                            className: 'dropdown-item'
-                        }
-                    ],
+                    text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Thêm ngành mới',
+                    className: 'createNew btn btn-primary',
+                    attr: {
+                        'onclick': "popupForm('" + rootUrl + "FacultyBoard/Major/Create')"
+                    },
                     init: function (api, node, config) {
                         $(node).removeClass('btn-secondary');
                         $(node).parent().removeClass('btn-group');
@@ -87,13 +62,6 @@ $(function () {
                             $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex mt-50');
                         }, 50);
                     }
-                },
-                {
-                    text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Thêm ngành mới',
-                    className: 'createNew btn btn-primary',
-                    attr: {
-                        'onclick': "popupForm('" + rootUrl + "FacultyBoard/Major/Create')"
-                            }
                 }
             ],
 
@@ -106,7 +74,6 @@ $(function () {
     dataTable.on('draw.dt', function () {
         dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1;
-            dataTable.cell(cell).invalidate('dom');
         });
 
         // Prevent user from add edit delete while dialog is populated
