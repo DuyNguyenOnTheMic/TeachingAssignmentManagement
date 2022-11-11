@@ -213,6 +213,7 @@ function submitForm(form) {
 }
 
 function deleteUser(id, email) {
+    "null" == email && (email = "");
     Swal.fire({
         title: 'Thông báo',
         text: 'Bạn có chắc muốn xoá người dùng ' + email + ' này?',
