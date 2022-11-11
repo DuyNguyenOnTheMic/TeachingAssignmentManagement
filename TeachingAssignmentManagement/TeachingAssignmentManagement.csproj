@@ -1147,6 +1147,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <Content Include="assets\files\CNTT UIS-ThoiKhoaBieu_TieuChuan_Mau.xlsx" />
+    <Content Include="assets\js\faculty-board\timetable\import.min.js" />
     <None Include="packages.config" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />

@@ -1,6 +1,6 @@
 ﻿var select = $('.select2'),
     myDropzone = $('#dpz-single-file')
-isUpdate = $('#isUpdate');
+    isUpdate = $('#isUpdate');
 var rootUrl = $('#loader').data('request-url');
 
 // Populate select2 for choosing term and major
