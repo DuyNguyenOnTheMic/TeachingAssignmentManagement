@@ -295,6 +295,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\room.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1139,6 +1142,8 @@
     <Content Include="Areas\FacultyBoard\Views\Term\Edit.cshtml" />
     <Content Include="Areas\FacultyBoard\Views\Timetable\Import.cshtml" />
     <Content Include="Areas\FacultyBoard\Views\_ViewStart.cshtml" />
+    <Content Include="assets\files\CNTT UIS-ThoiKhoaBieu_TieuChuan_Mau.xlsx" />
+    <Content Include="assets\js\faculty-board\timetable\import.min.js" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -1146,8 +1151,6 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="assets\files\CNTT UIS-ThoiKhoaBieu_TieuChuan_Mau.xlsx" />
-    <Content Include="assets\js\faculty-board\timetable\import.min.js" />
     <None Include="packages.config" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />

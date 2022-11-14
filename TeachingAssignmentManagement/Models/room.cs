@@ -12,18 +12,18 @@ namespace TeachingAssignmentManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class curriculum
+    public partial class room
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public curriculum()
+        public room()
         {
             this.curriculum_class = new HashSet<curriculum_class>();
         }
     
         public string id { get; set; }
-        public string name { get; set; }
-        public int credits { get; set; }
+        public string room_2 { get; set; }
         public string type { get; set; }
+        public Nullable<int> capacity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<curriculum_class> curriculum_class { get; set; }

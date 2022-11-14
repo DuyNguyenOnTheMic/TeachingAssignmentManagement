@@ -73,26 +73,22 @@
           <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="credits" Type="int" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="curriculum_class">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="curriculum_class_id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="curriculum_class_id" Type="varbinary" MaxLength="100" Nullable="false" />
           <Property Name="original_id" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="type" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="student_class_id" Type="nvarchar(max)" />
+          <Property Name="student_class_id" Type="varchar(max)" />
           <Property Name="minimum_student" Type="int" />
           <Property Name="total_lesson" Type="int" />
-          <Property Name="room" Type="nvarchar" MaxLength="100" />
           <Property Name="day" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="start_lesson" Type="int" Nullable="false" />
           <Property Name="lesson_number" Type="int" />
           <Property Name="lesson_time" Type="nvarchar" MaxLength="100" />
-          <Property Name="room_2" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="room_type" Type="nvarchar" MaxLength="100" />
-          <Property Name="capacity" Type="int" />
           <Property Name="student_number" Type="int" />
           <Property Name="free_slot" Type="int" />
           <Property Name="state" Type="nvarchar" MaxLength="255" />
@@ -108,6 +104,7 @@
           <Property Name="major_id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="lecturer_id" Type="nvarchar" MaxLength="128" />
           <Property Name="curriculum_id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="room_id" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="lecturer">
           <Key>
@@ -123,6 +120,15 @@
           </Key>
           <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="room">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="room_2" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="capacity" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -177,6 +183,18 @@
             </Principal>
             <Dependent Role="curriculum_class">
               <PropertyRef Name="major_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_curriculum_class_room">
+          <End Role="room" Type="Self.room" Multiplicity="1" />
+          <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="curriculum_class">
+              <PropertyRef Name="room_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -259,6 +277,7 @@
           <EntitySet Name="curriculum_class" EntityType="Self.curriculum_class" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lecturer" EntityType="Self.lecturer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="major" EntityType="Self.major" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="room" EntityType="Self.room" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="term" EntityType="Self.term" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_curriculum_class_curriculum" Association="Self.FK_curriculum_class_curriculum">
@@ -271,6 +290,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_curriculum_class_major" Association="Self.FK_curriculum_class_major">
             <End Role="major" EntitySet="major" />
+            <End Role="curriculum_class" EntitySet="curriculum_class" />
+          </AssociationSet>
+          <AssociationSet Name="FK_curriculum_class_room" Association="Self.FK_curriculum_class_room">
+            <End Role="room" EntitySet="room" />
             <End Role="curriculum_class" EntitySet="curriculum_class" />
           </AssociationSet>
           <AssociationSet Name="FK_curriculum_class_term" Association="Self.FK_curriculum_class_term">
@@ -365,6 +388,7 @@
           <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="credits" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="curriculum_class" Relationship="Self.FK_curriculum_class_curriculum" FromRole="curriculum" ToRole="curriculum_class" />
         </EntityType>
         <EntityType Name="curriculum_class">
@@ -372,20 +396,15 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="curriculum_class_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="curriculum_class_id" Type="Binary" MaxLength="100" FixedLength="false" Nullable="false" />
           <Property Name="original_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="student_class_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="student_class_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="minimum_student" Type="Int32" />
           <Property Name="total_lesson" Type="Int32" />
-          <Property Name="room" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="day" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="start_lesson" Type="Int32" Nullable="false" />
           <Property Name="lesson_number" Type="Int32" />
           <Property Name="lesson_time" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="room_2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="room_type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="capacity" Type="Int32" />
           <Property Name="student_number" Type="Int32" />
           <Property Name="free_slot" Type="Int32" />
           <Property Name="state" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -401,9 +420,11 @@
           <Property Name="major_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="lecturer_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="curriculum_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="room_id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="curriculum" Relationship="Self.FK_curriculum_class_curriculum" FromRole="curriculum_class" ToRole="curriculum" />
           <NavigationProperty Name="lecturer" Relationship="Self.FK_curriculum_class_lecturer" FromRole="curriculum_class" ToRole="lecturer" />
           <NavigationProperty Name="major" Relationship="Self.FK_curriculum_class_major" FromRole="curriculum_class" ToRole="major" />
+          <NavigationProperty Name="room" Relationship="Self.FK_curriculum_class_room" FromRole="curriculum_class" ToRole="room" />
           <NavigationProperty Name="term" Relationship="Self.FK_curriculum_class_term" FromRole="curriculum_class" ToRole="term" />
         </EntityType>
         <EntityType Name="lecturer">
@@ -422,6 +443,16 @@
           <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="curriculum_class" Relationship="Self.FK_curriculum_class_major" FromRole="major" ToRole="curriculum_class" />
+        </EntityType>
+        <EntityType Name="room">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="room_2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="capacity" Type="Int32" />
+          <NavigationProperty Name="curriculum_class" Relationship="Self.FK_curriculum_class_room" FromRole="room" ToRole="curriculum_class" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -508,6 +539,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_curriculum_class_room">
+          <End Role="room" Type="Self.room" Multiplicity="1" />
+          <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="curriculum_class">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_curriculum_class_term">
           <End Role="term" Type="Self.term" Multiplicity="1" />
           <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
@@ -534,6 +577,7 @@
           <EntitySet Name="curriculum_class" EntityType="Self.curriculum_class" />
           <EntitySet Name="lecturers" EntityType="Self.lecturer" />
           <EntitySet Name="majors" EntityType="Self.major" />
+          <EntitySet Name="rooms" EntityType="Self.room" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="terms" EntityType="Self.term" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -554,6 +598,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_curriculum_class_major" Association="Self.FK_curriculum_class_major">
             <End Role="major" EntitySet="majors" />
+            <End Role="curriculum_class" EntitySet="curriculum_class" />
+          </AssociationSet>
+          <AssociationSet Name="FK_curriculum_class_room" Association="Self.FK_curriculum_class_room">
+            <End Role="room" EntitySet="rooms" />
             <End Role="curriculum_class" EntitySet="curriculum_class" />
           </AssociationSet>
           <AssociationSet Name="FK_curriculum_class_term" Association="Self.FK_curriculum_class_term">
@@ -632,6 +680,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="credits" ColumnName="credits" />
+                <ScalarProperty Name="type" ColumnName="type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -641,18 +690,13 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="curriculum_class_id" ColumnName="curriculum_class_id" />
                 <ScalarProperty Name="original_id" ColumnName="original_id" />
-                <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="student_class_id" ColumnName="student_class_id" />
                 <ScalarProperty Name="minimum_student" ColumnName="minimum_student" />
                 <ScalarProperty Name="total_lesson" ColumnName="total_lesson" />
-                <ScalarProperty Name="room" ColumnName="room" />
                 <ScalarProperty Name="day" ColumnName="day" />
                 <ScalarProperty Name="start_lesson" ColumnName="start_lesson" />
                 <ScalarProperty Name="lesson_number" ColumnName="lesson_number" />
                 <ScalarProperty Name="lesson_time" ColumnName="lesson_time" />
-                <ScalarProperty Name="room_2" ColumnName="room_2" />
-                <ScalarProperty Name="room_type" ColumnName="room_type" />
-                <ScalarProperty Name="capacity" ColumnName="capacity" />
                 <ScalarProperty Name="student_number" ColumnName="student_number" />
                 <ScalarProperty Name="free_slot" ColumnName="free_slot" />
                 <ScalarProperty Name="state" ColumnName="state" />
@@ -668,6 +712,7 @@
                 <ScalarProperty Name="major_id" ColumnName="major_id" />
                 <ScalarProperty Name="lecturer_id" ColumnName="lecturer_id" />
                 <ScalarProperty Name="curriculum_id" ColumnName="curriculum_id" />
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -685,6 +730,16 @@
               <MappingFragment StoreEntitySet="major">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rooms">
+            <EntityTypeMapping TypeName="CP25Team03Model.room">
+              <MappingFragment StoreEntitySet="room">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="room_2" ColumnName="room_2" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

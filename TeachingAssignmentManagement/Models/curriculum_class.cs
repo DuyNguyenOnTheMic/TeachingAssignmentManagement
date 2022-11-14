@@ -15,20 +15,15 @@ namespace TeachingAssignmentManagement.Models
     public partial class curriculum_class
     {
         public int id { get; set; }
-        public string curriculum_class_id { get; set; }
+        public byte[] curriculum_class_id { get; set; }
         public string original_id { get; set; }
-        public string type { get; set; }
         public string student_class_id { get; set; }
         public Nullable<int> minimum_student { get; set; }
         public Nullable<int> total_lesson { get; set; }
-        public string room { get; set; }
         public string day { get; set; }
         public int start_lesson { get; set; }
         public Nullable<int> lesson_number { get; set; }
         public string lesson_time { get; set; }
-        public string room_2 { get; set; }
-        public string room_type { get; set; }
-        public Nullable<int> capacity { get; set; }
         public Nullable<int> student_number { get; set; }
         public Nullable<int> free_slot { get; set; }
         public string state { get; set; }
@@ -44,10 +39,12 @@ namespace TeachingAssignmentManagement.Models
         public string major_id { get; set; }
         public string lecturer_id { get; set; }
         public string curriculum_id { get; set; }
+        public string room_id { get; set; }
     
         public virtual curriculum curriculum { get; set; }
         public virtual lecturer lecturer { get; set; }
         public virtual major major { get; set; }
+        public virtual room room { get; set; }
         public virtual term term { get; set; }
     }
 }

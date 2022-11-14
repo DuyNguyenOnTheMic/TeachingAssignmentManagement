@@ -34,6 +34,7 @@ namespace TeachingAssignmentManagement.Models
         public virtual DbSet<curriculum_class> curriculum_class { get; set; }
         public virtual DbSet<lecturer> lecturers { get; set; }
         public virtual DbSet<major> majors { get; set; }
+        public virtual DbSet<room> rooms { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<term> terms { get; set; }
     }
