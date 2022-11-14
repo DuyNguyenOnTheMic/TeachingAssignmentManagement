@@ -80,7 +80,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="curriculum_class_id" Type="varbinary" MaxLength="100" Nullable="false" />
+          <Property Name="curriculum_class_id" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="original_id" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="student_class_id" Type="varchar(max)" />
           <Property Name="minimum_student" Type="int" />
@@ -396,7 +396,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="curriculum_class_id" Type="Binary" MaxLength="100" FixedLength="false" Nullable="false" />
+          <Property Name="curriculum_class_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="original_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="student_class_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="minimum_student" Type="Int32" />
