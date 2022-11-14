@@ -174,7 +174,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         unitOfWork.Save();
                     }
 
-                    room query_room = unitOfWork.RoomRepository.GetRoomByID(room2);
+                    room query_room = unitOfWork.RoomRepository.GetRoomByID(roomId);
                     if (query_room == null)
                     {
                         // Create new room
