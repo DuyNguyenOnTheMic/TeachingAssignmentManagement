@@ -174,21 +174,28 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         unitOfWork.Save();
                     }
 
+                    room query_room = unitOfWork.RoomRepository.GetRoomByID(room2);
+                    if (query_room == null)
+                    {
+                        // Create new room
+                        room room = new room()
+                        {
+                            // Add record to error list
+                            id = ToNullableString(room2),
+                            room_2 = ToNullableString(room1),
+                            type = ToNullableString(roomType),
+                            capacity = ToNullableInt(capacity)
+                        };
+                        unitOfWork.RoomRepository.InsertRoom(room);
+                        unitOfWork.Save();
+                    }
+
                     lecturer query_lecturer = unitOfWork.UserRepository.GetLecturerByStaffId(lecturerId);
                     if (query_lecturer == null && ToNullableString(lecturerId) != null && ToNullableString(fullName) != null)
                     {
                         // Add record to error list
                         errorLecturerList.Add(Tuple.Create(ToNullableString(lecturerId), ToNullableString(fullName)));
                     }
-
-                    // Declare room
-                    room room = new room()
-                    {
-                        id = ToNullableString(room2),
-                        room_2 = ToNullableString(room1),
-                        type = ToNullableString(roomType),
-                        capacity = ToNullableInt(capacity)
-                    };
 
                     // Declare curriculum class
                     curriculum_class curriculumClass = new curriculum_class()
@@ -217,13 +224,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         major_id = major,
                         lecturer_id = query_lecturer?.id,
                         curriculum_id = ToNullableString(curriculumId),
-                        room_id = room.id
-                    };                  
+                        room_id = ToNullableString(room2)
+                    };
 
                     if (!isUpdate)
                     {
                         // Create new curriculum class
-                        unitOfWork.RoomRepository.InsertRoom(room);
                         unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
                     }
                     else

@@ -11,6 +11,11 @@ namespace TeachingAssignmentManagement.DAL
             this.context = context;
         }
 
+        public room GetRoomByID(string id)
+        {
+            return context.rooms.Find(id);
+        }
+
         public void InsertRoom(room room)
         {
             context.rooms.Add(room);
