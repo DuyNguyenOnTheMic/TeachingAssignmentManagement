@@ -224,7 +224,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         major_id = major,
                         lecturer_id = query_lecturer?.id,
                         curriculum_id = ToNullableString(curriculumId),
-                        room_id = ToNullableString(room2)
+                        room_id = ToNullableString(roomId)
                     };
 
                     if (!isUpdate)
