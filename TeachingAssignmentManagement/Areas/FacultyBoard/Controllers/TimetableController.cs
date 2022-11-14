@@ -127,12 +127,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     string studentClassId = row["Mã Lớp"].ToString();
                     string minimumStudent = row["TSMH"].ToString();
                     string totalLesson = row["Số Tiết Đã xếp"].ToString();
-                    string room1 = row["PH"].ToString();
+                    string room2 = row["PH"].ToString();
                     string day = row["Thứ"].ToString();
                     string startLesson = row["Tiết BĐ"].ToString();
                     string lessonNumber = row["Số Tiết"].ToString();
                     string lessonTime = row["Tiết Học"].ToString();
-                    string room2 = row["Phòng"].ToString();
+                    string roomId = row["Phòng"].ToString();
                     string lecturerId = row["Mã CBGD"].ToString();
                     string fullName = row["Tên CBGD"].ToString();
                     string roomType = row["PH_X"].ToString();
@@ -181,8 +181,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         room room = new room()
                         {
                             // Add record to error list
-                            id = ToNullableString(room2),
-                            room_2 = ToNullableString(room1),
+                            id = ToNullableString(roomId),
+                            room_2 = ToNullableString(room2),
                             type = ToNullableString(roomType),
                             capacity = ToNullableInt(capacity)
                         };
