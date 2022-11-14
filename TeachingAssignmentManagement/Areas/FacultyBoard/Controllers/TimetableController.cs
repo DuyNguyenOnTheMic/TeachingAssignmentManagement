@@ -150,7 +150,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     string note2 = row["Ghi chú 2"].ToString();
 
                     // Check if values is null
-                    string[] validRows = { originalId, curriculumId, curriculumClassid, name, credits, type, day, startLesson, room2, day2, startLesson2 };
+                    string[] validRows = { originalId, curriculumId, curriculumClassid, name, credits, type, day, startLesson, roomId, day2, startLesson2 };
                     string checkNull = ValidateNotNull(validRows);
                     if (checkNull != null)
                     {
