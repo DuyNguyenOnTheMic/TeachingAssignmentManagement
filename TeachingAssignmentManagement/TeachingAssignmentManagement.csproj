@@ -241,6 +241,7 @@
     <Compile Include="DAL\Repositories\CurriculumClassRepository.cs" />
     <Compile Include="DAL\Repositories\CurriculumRepository.cs" />
     <Compile Include="DAL\Repositories\MajorRepository.cs" />
+    <Compile Include="DAL\Repositories\RoomRepository.cs" />
     <Compile Include="DAL\Repositories\TermRepository.cs" />
     <Compile Include="DAL\Repositories\UserRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />

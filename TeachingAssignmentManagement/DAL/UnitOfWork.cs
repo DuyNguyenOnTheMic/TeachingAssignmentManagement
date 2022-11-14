@@ -9,6 +9,7 @@ namespace TeachingAssignmentManagement.DAL
         private CurriculumClassRepository curriculumClassRepository;
         private CurriculumRepository curriculumRepository;
         private MajorRepository majorRepository;
+        private RoomRepository roomRepository;
         private TermRepository termRepository;
         private UserRepository userRepository;
 
@@ -45,6 +46,18 @@ namespace TeachingAssignmentManagement.DAL
                     majorRepository = new MajorRepository(context);
                 }
                 return majorRepository;
+            }
+        }
+
+        public RoomRepository RoomRepository
+        {
+            get
+            {
+                if (roomRepository == null)
+                {
+                    roomRepository = new RoomRepository(context);
+                }
+                return roomRepository;
             }
         }
 

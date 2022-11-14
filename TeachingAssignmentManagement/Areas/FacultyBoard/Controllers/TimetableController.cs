@@ -181,6 +181,15 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         errorLecturerList.Add(Tuple.Create(ToNullableString(lecturerId), ToNullableString(fullName)));
                     }
 
+                    // Declare room
+                    room room = new room()
+                    {
+                        id = ToNullableString(room2),
+                        room_2 = ToNullableString(room1),
+                        type = ToNullableString(roomType),
+                        capacity = ToNullableInt(capacity)
+                    };
+
                     // Declare curriculum class
                     curriculum_class curriculumClass = new curriculum_class()
                     {
@@ -207,21 +216,14 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         term_id = term,
                         major_id = major,
                         lecturer_id = query_lecturer?.id,
-                        curriculum_id = ToNullableString(curriculumId)
-                    };
-
-                    // Declare room
-                    room room = new room()
-                    {
-                        id = ToNullableString(room2),
-                        room_2 = ToNullableString(room1),
-                        type = ToNullableString(roomType),
-                        capacity= ToNullableInt(capacity)
-                    };
+                        curriculum_id = ToNullableString(curriculumId),
+                        room_id = room.id
+                    };                  
 
                     if (!isUpdate)
                     {
                         // Create new curriculum class
+                        unitOfWork.RoomRepository.InsertRoom(room);
                         unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
                     }
                     else
