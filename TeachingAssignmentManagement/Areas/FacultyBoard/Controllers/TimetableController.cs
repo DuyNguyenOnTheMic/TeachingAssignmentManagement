@@ -127,7 +127,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     string studentClassId = row["Mã Lớp"].ToString();
                     string minimumStudent = row["TSMH"].ToString();
                     string totalLesson = row["Số Tiết Đã xếp"].ToString();
-                    string room = row["PH"].ToString();
+                    string room1 = row["PH"].ToString();
                     string day = row["Thứ"].ToString();
                     string startLesson = row["Tiết BĐ"].ToString();
                     string lessonNumber = row["Số Tiết"].ToString();
@@ -167,7 +167,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         {
                             id = ToNullableString(curriculumId),
                             name = ToNullableString(name),
-                            credits = (int)ToNullableInt(credits)
+                            credits = (int)ToNullableInt(credits),
+                            type = ToNullableString(type)
                         };
                         unitOfWork.CurriculumRepository.InsertCurriculum(curriculum);
                         unitOfWork.Save();
@@ -179,22 +180,19 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         // Add record to error list
                         errorLecturerList.Add(Tuple.Create(ToNullableString(lecturerId), ToNullableString(fullName)));
                     }
+
+                    // Declare curriculum class
                     curriculum_class curriculumClass = new curriculum_class()
                     {
                         curriculum_class_id = ToNullableString(curriculumClassid),
                         original_id = ToNullableString(originalId),
-                        type = ToNullableString(type),
                         student_class_id = ToNullableString(studentClassId),
                         minimum_student = ToNullableInt(minimumStudent),
                         total_lesson = ToNullableInt(totalLesson),
-                        room = ToNullableString(room),
                         day = ToNullableString(day),
                         start_lesson = (int)ToNullableInt(startLesson),
                         lesson_number = ToNullableInt(lessonNumber),
                         lesson_time = ToNullableString(lessonTime),
-                        room_2 = ToNullableString(room2),
-                        room_type = ToNullableString(roomType),
-                        capacity = ToNullableInt(capacity),
                         student_number = ToNullableInt(studentNumber),
                         free_slot = ToNullableInt(freeSlot),
                         state = ToNullableString(state),
@@ -210,6 +208,15 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         major_id = major,
                         lecturer_id = query_lecturer?.id,
                         curriculum_id = ToNullableString(curriculumId)
+                    };
+
+                    // Declare room
+                    room room = new room()
+                    {
+                        id = ToNullableString(room2),
+                        room_2 = ToNullableString(room1),
+                        type = ToNullableString(roomType),
+                        capacity= ToNullableInt(capacity)
                     };
 
                     if (!isUpdate)
