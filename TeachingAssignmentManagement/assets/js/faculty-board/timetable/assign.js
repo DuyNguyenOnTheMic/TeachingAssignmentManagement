@@ -13,7 +13,6 @@ $(function () {
                 dataType: 'json',
                 dataSrc: ''
             },
-            deferRender: true,
             paging: false,
             ordering: false,
             info: false,
