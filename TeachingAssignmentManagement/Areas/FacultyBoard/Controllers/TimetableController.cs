@@ -22,6 +22,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         // GET: FacultyBoard/Timetable
         public ActionResult Index()
         {
+            ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
+            ViewData["major"] = new SelectList(unitOfWork.MajorRepository.GetMajors(), "id", "name");
             return View();
         }
 
