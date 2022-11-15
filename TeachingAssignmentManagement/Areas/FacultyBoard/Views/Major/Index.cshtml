@@ -17,8 +17,8 @@
                                     <h4 class="card-title">@ViewBag.Title</h4>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <ul class="nav nav-tabs" role="tablist">
+                            <div class="card-datatable">
+                                <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <a class="nav-link" href="@Url.Action("Index", "Term")"><i class="feather feather-calendar"></i> Học kỳ</a>
                                     </li>
@@ -26,20 +26,16 @@
                                         <a class="nav-link active" href="@Url.Action("Index", "Major")"><i class="feather feather-list"></i> Ngành</a>
                                     </li>
                                 </ul>
-                                <div class="tab-content">
-                                    <div class="card-datatable table-responsive pt-0">
-                                        <table class="table" id="tblMajor">
-                                            <thead class="table-light">
-                                                <tr>
-                                                    <th></th>
-                                                    <th>Mã ngành</th>
-                                                    <th>Tên ngành</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                    </div>
-                                </div>
+                                <table class="datatables-ajax table table-responsive" id="tblMajor">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th></th>
+                                            <th>Mã ngành</th>
+                                            <th>Tên ngành</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                </table>
                             </div>
                         </div>
                     </div>

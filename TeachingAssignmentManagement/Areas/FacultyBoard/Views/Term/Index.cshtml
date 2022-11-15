@@ -17,7 +17,7 @@
                                     <h4 class="card-title">@ViewBag.Title</h4>
                                 </div>
                             </div>
-                            <div class="card-body">
+                            <div class="card-datatable">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <a class="nav-link active" href="@Url.Action("Index", "Term")"><i class="feather feather-calendar"></i> Học kỳ</a>
@@ -26,22 +26,18 @@
                                         <a class="nav-link" href="@Url.Action("Index", "Major")"><i class="feather feather-list"></i> Ngành</a>
                                     </li>
                                 </ul>
-                                <div class="tab-content">
-                                    <div class="card-datatable table-responsive pt-0">
-                                        <table class="table" id="tblTerm">
-                                            <thead class="table-light">
-                                                <tr>
-                                                    <th>Học kỳ</th>
-                                                    <th>Năm bắt đầu</th>
-                                                    <th>Năm kết thúc</th>
-                                                    <th>Tuần bắt đầu</th>
-                                                    <th>Ngày bắt đầu</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                    </div>
-                                </div>
+                                <table class="datatables-ajax table table-responsive" id="tblTerm">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Học kỳ</th>
+                                            <th>Năm bắt đầu</th>
+                                            <th>Năm kết thúc</th>
+                                            <th>Tuần bắt đầu</th>
+                                            <th>Ngày bắt đầu</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                </table>
                             </div>
                         </div>
                     </div>
