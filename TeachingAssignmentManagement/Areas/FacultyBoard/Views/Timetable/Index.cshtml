@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Phân công giảng dạy";
+}
+
+<div class="app-content content ">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper p-0">
+        <div class="content-body">
+            <!-- Basic table -->
+            <section>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title-wrap">
+                                    <h4 class="card-title">@ViewBag.Title</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-1">
+                                    <div class="col-md-6 mb-2">
+                                        <label class="form-label font-small-4" for="term">Học kỳ: </label>
+                                        @Html.DropDownList("term", null, "---- Chọn học kỳ ----", htmlAttributes: new { @class = "select2 form-select" })
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label class="form-label font-small-4" for="major">Ngành: </label>
+                                        @Html.DropDownList("major", null, "---- Chọn ngành ----", htmlAttributes: new { @class = "select2 form-select" })
+                                    </div>
+                                </div>
+                                <div class="card-datatable table-responsive pt-0">
+                                    <table class="table" id="tblAssign">
+                                        <thead class="table-light">
+                                            <tr class="text-center">
+                                                <th>THỨ</th>
+                                                @for (int i = 2; i <= 7; i++)
+                                                {
+                                                    <th colspan="5">THỨ @i</th>
+                                                }
+                                            </tr>
+                                            <tr class="text-center text-nowrap">
+                                                <th>TIẾT</th>
+                                                @for (int i = 0; i <= 5; i++)
+                                                {
+                                                    <th>1-3</th>
+                                                    <th>4-6</th>
+                                                    <th>7-9</th>
+                                                    <th>10-12</th>
+                                                    <th>13-15</th>
+                                                }
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="card assign-card">
+                                                        <div class="item-img">
+                                                            <a href="app-ecommerce-details.html">
+                                                                <img src="../../../app-assets/images/pages/eCommerce/1.png" alt="img-placeholder" />
+                                                            </a>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="item-name">
+                                                                <h6 class="mb-0"><a href="app-ecommerce-details.html" class="text-body">Apple Watch Series 5</a></h6>
+                                                                <span class="item-company">By <a href="#" class="company-name">Apple</a></span>
+                                                                <div class="item-rating">
+                                                                    <ul class="unstyled-list list-inline">
+                                                                        <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
+                                                                        <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
+                                                                        <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
+                                                                        <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
+                                                                        <li class="ratings-list-item"><i data-feather="star" class="unfilled-star"></i></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ Basic table -->
+        </div>
+    </div>
+</div>
+
+<div id="loader" data-request-url="@Url.Content("~/")"></div>
+
+@section styles {
+    <link href="~/app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css" rel="stylesheet" />
+}
+
+@section scripts {
+    <script src="~/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
+    <script src="~/app-assets/vendors/js/signalr/jquery.signalR.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+}
