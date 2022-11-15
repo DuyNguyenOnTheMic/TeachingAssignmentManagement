@@ -1065,6 +1065,7 @@
     <Content Include="app-assets\vendors\js\unison-js\unison-js.min.js" />
     <Content Include="app-assets\vendors\js\vendors.min.js" />
     <Content Include="app-assets\vendors\js\waves\waves.min.js" />
+    <Content Include="assets\css\timetable.css" />
     <Content Include="assets\images\img_error.svg" />
     <Content Include="assets\images\img_excel.svg" />
     <Content Include="assets\images\img_login_background.jpg" />

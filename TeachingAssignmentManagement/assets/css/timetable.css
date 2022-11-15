@@ -1,0 +1,4 @@
+﻿.assign-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 25px 0 rgba(34, 41, 47, 0.25);
+}
