@@ -16,38 +16,46 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable GetCurriculumClasses()
         {
-            return context.curriculum_class.Select(c => new
+            IQueryable<curriculum_class> query_curriculumClass_mon = context.curriculum_class.Where(x => x.day_2 == 2);
+            IQueryable<curriculum_class> query_curriculumClass_tues = context.curriculum_class.Where(x => x.day_2 == 3);
+            IQueryable<curriculum_class> query_curriculumClass_wed = context.curriculum_class.Where(x => x.day_2 == 4);
+            IQueryable<curriculum_class> query_curriculumClass_thurs = context.curriculum_class.Where(x => x.day_2 == 5);
+            IQueryable<curriculum_class> query_curriculumClass_fri = context.curriculum_class.Where(x => x.day_2 == 6);
+            IQueryable<curriculum_class> query_curriculumClass_sat = context.curriculum_class.Where(x => x.day_2 == 7);
+            return context.curricula.Select(c => new
             {
-                c.original_id,
-                curriculum_id = c.curriculum.id,
-                c.curriculum_class_id,
-                c.curriculum.name,
-                c.curriculum.credits,
-                curriculum_type = c.curriculum.type,
-                c.student_class_id,
-                c.minimum_student,
-                c.total_lesson,
-                c.room.room_2,
-                c.day,
-                c.start_lesson,
-                c.lesson_number,
-                c.lesson_time,
-                room_id = c.room.id,
-                c.lecturer.staff_id,
-                c.lecturer.full_name,
-                room_type = c.room.type,
-                c.room.capacity,
-                c.student_number,
-                c.free_slot,
-                c.state,
-                c.learn_week,
-                c.day_2,
-                c.start_lesson_2,
-                c.student_registered_number,
-                c.start_week,
-                c.end_week,
-                c.note_1,
-                c.note_2
+                c.id,
+                c.name,
+                mon1 = query_curriculumClass_mon.FirstOrDefault(m => m.start_lesson_2 == 1 && m.curriculum_id == c.id).curriculum_class_id,
+                mon4 = query_curriculumClass_mon.FirstOrDefault(m => m.start_lesson_2 == 4 && m.curriculum_id == c.id).curriculum_class_id,
+                mon7 = query_curriculumClass_mon.FirstOrDefault(m => m.start_lesson_2 == 7 && m.curriculum_id == c.id).curriculum_class_id,
+                mon10 = query_curriculumClass_mon.FirstOrDefault(m => m.start_lesson_2 == 10 && m.curriculum_id == c.id).curriculum_class_id,
+                mon13 = query_curriculumClass_mon.FirstOrDefault(m => m.start_lesson_2 == 13 && m.curriculum_id == c.id).curriculum_class_id,
+                tues1 = query_curriculumClass_tues.FirstOrDefault(m => m.start_lesson_2 == 1 && m.curriculum_id == c.id).curriculum_class_id,
+                tues4 = query_curriculumClass_tues.FirstOrDefault(m => m.start_lesson_2 == 4 && m.curriculum_id == c.id).curriculum_class_id,
+                tues7 = query_curriculumClass_tues.FirstOrDefault(m => m.start_lesson_2 == 7 && m.curriculum_id == c.id).curriculum_class_id,
+                tues10 = query_curriculumClass_tues.FirstOrDefault(m => m.start_lesson_2 == 10 && m.curriculum_id == c.id).curriculum_class_id,
+                tues13 = query_curriculumClass_tues.FirstOrDefault(m => m.start_lesson_2 == 13 && m.curriculum_id == c.id).curriculum_class_id,
+                wed1 = query_curriculumClass_wed.FirstOrDefault(m => m.start_lesson_2 == 1 && m.curriculum_id == c.id).curriculum_class_id,
+                wed4 = query_curriculumClass_wed.FirstOrDefault(m => m.start_lesson_2 == 4 && m.curriculum_id == c.id).curriculum_class_id,
+                wed7 = query_curriculumClass_wed.FirstOrDefault(m => m.start_lesson_2 == 7 && m.curriculum_id == c.id).curriculum_class_id,
+                wed10 = query_curriculumClass_wed.FirstOrDefault(m => m.start_lesson_2 == 10 && m.curriculum_id == c.id).curriculum_class_id,
+                wed13 = query_curriculumClass_wed.FirstOrDefault(m => m.start_lesson_2 == 13 && m.curriculum_id == c.id).curriculum_class_id,
+                thurs1 = query_curriculumClass_thurs.FirstOrDefault(m => m.start_lesson_2 == 1 && m.curriculum_id == c.id).curriculum_class_id,
+                thurs4 = query_curriculumClass_thurs.FirstOrDefault(m => m.start_lesson_2 == 4 && m.curriculum_id == c.id).curriculum_class_id,
+                thurs7 = query_curriculumClass_thurs.FirstOrDefault(m => m.start_lesson_2 == 7 && m.curriculum_id == c.id).curriculum_class_id,
+                thurs10 = query_curriculumClass_thurs.FirstOrDefault(m => m.start_lesson_2 == 10 && m.curriculum_id == c.id).curriculum_class_id,
+                thurs13 = query_curriculumClass_thurs.FirstOrDefault(m => m.start_lesson_2 == 13 && m.curriculum_id == c.id).curriculum_class_id,
+                fri1 = query_curriculumClass_fri.FirstOrDefault(m => m.start_lesson_2 == 1 && m.curriculum_id == c.id).curriculum_class_id,
+                fri4 = query_curriculumClass_fri.FirstOrDefault(m => m.start_lesson_2 == 4 && m.curriculum_id == c.id).curriculum_class_id,
+                fri7 = query_curriculumClass_fri.FirstOrDefault(m => m.start_lesson_2 == 7 && m.curriculum_id == c.id).curriculum_class_id,
+                fri10 = query_curriculumClass_fri.FirstOrDefault(m => m.start_lesson_2 == 10 && m.curriculum_id == c.id).curriculum_class_id,
+                fri13 = query_curriculumClass_fri.FirstOrDefault(m => m.start_lesson_2 == 13 && m.curriculum_id == c.id).curriculum_class_id,
+                sat1 = query_curriculumClass_sat.FirstOrDefault(m => m.start_lesson_2 == 1 && m.curriculum_id == c.id).curriculum_class_id,
+                sat4 = query_curriculumClass_sat.FirstOrDefault(m => m.start_lesson_2 == 4 && m.curriculum_id == c.id).curriculum_class_id,
+                sat7 = query_curriculumClass_sat.FirstOrDefault(m => m.start_lesson_2 == 7 && m.curriculum_id == c.id).curriculum_class_id,
+                sat10 = query_curriculumClass_sat.FirstOrDefault(m => m.start_lesson_2 == 10 && m.curriculum_id == c.id).curriculum_class_id,
+                sat13 = query_curriculumClass_sat.FirstOrDefault(m => m.start_lesson_2 == 13 && m.curriculum_id == c.id).curriculum_class_id,
             }).ToList();
         }
 
