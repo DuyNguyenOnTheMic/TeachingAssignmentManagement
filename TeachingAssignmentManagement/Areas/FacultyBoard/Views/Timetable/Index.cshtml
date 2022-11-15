@@ -2,5 +2,56 @@
     ViewBag.Title = "Phân công giảng dạy";
 }
 
-<h2>Index</h2>
+<div class="app-content content ">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper p-0">
+        <div class="content-body">
+            <!-- Basic table -->
+            <section>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title-wrap">
+                                    <h4 class="card-title">@ViewBag.Title</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-datatable table-responsive pt-0">
+                                    <table class="table" id="tblAssign">
+                                        <thead class="table-light">
+                                            <tr class="text-center">
+                                                <th>THỨ</th>
+                                                <th colspan="5">THỨ 2</th>
+                                                <th colspan="5">THỨ 3</th>
+                                                <th colspan="5">THỨ 4</th>
+                                                <th colspan="5">THỨ 5</th>
+                                                <th colspan="5">THỨ 6</th>
+                                                <th colspan="5">THỨ 7</th>
+                                            </tr>
+                                            <tr>
+                                                <th>TIẾT</th>
+                                                @for (int i = 0; i < 6; i++)
+                                                {
+                                                    <th style="white-space: nowrap;">1-3</th>
+                                                    <th style="white-space: nowrap;">4-6</th>
+                                                    <th style="white-space: nowrap;">7-9</th>
+                                                    <th style="white-space: nowrap;">10-12</th>
+                                                    <th style="white-space: nowrap;">13-15</th>
+                                                }
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ Basic table -->
+        </div>
+    </div>
+</div>
 
+<div id="loader" data-request-url="@Url.Content("~/")"></div>
