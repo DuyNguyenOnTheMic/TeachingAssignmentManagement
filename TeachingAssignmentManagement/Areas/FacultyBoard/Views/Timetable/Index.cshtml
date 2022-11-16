@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Phân công giảng dạy";
+    int[] days = { 2, 3, 4, 5, 6, 7 };
     int[] startLessons = { 1, 4, 7, 10, 13 };
 }
 
@@ -36,20 +37,19 @@
                                         <thead class="table-light">
                                             <tr class="text-center">
                                                 <th>THỨ</th>
-                                                @for (int i = 2; i <= 7; i++)
+                                                @foreach (var day in days)
                                                 {
-                                                    <th colspan="5">THỨ @i</th>
+                                                    <th colspan="5">THỨ @day</th>
                                                 }
                                             </tr>
                                             <tr class="text-center text-nowrap">
                                                 <th>TIẾT</th>
-                                                @for (int i = 0; i <= 5; i++)
+                                                @foreach (var day in days)
                                                 {
-                                                    <th>1-3</th>
-                                                    <th>4-6</th>
-                                                    <th>7-9</th>
-                                                    <th>10-12</th>
-                                                    <th>13-15</th>
+                                                    foreach (var startLesson in startLessons)
+                                                    {
+                                                        <th>@startLesson-@(startLesson + 2)</th>
+                                                    }
                                                 }
                                             </tr>
                                         </thead>
@@ -58,11 +58,11 @@
                                             {
                                                 <tr>
                                                     <td>@curriculum.name</td>
-                                                    @for (int i = 2; i <= 7; i++)
+                                                    @foreach (var day in days)
                                                     {
                                                         foreach (var startLesson in startLessons)
                                                         {
-                                                            var classes = curriculum.curriculum_class.Where(x => x.day_2 == i && x.start_lesson_2 == startLesson).ToList();
+                                                            var classes = curriculum.curriculum_class.Where(x => x.day_2 == day && x.start_lesson_2 == startLesson).ToList();
                                                             if (classes.Count > 0)
                                                             {
                                                                 <td>
