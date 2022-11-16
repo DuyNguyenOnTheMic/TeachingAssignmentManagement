@@ -3,7 +3,35 @@
     box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
 }
 
-.assign-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 25px 0 rgba(34, 41, 47, 0.25);
+    .assign-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 25px 0 rgba(34, 41, 47, 0.25);
+    }
+
+.assign-table {
+    max-height: 75vh;
+    overflow: scroll;
 }
+
+    .assign-table th:first-child, td:first-child {
+        position: sticky;
+        left: 0px;
+        background-color: lightgray;
+    }
+
+thead {
+    position: -webkit-sticky; /* for Safari */
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+    thead th {
+        position: -webkit-sticky; /* for Safari */
+        position: sticky;
+        top: 0;
+    }
+
+    thead th {
+        left: 0;
+    }
