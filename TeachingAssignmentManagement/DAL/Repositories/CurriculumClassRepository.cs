@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TeachingAssignmentManagement.Models;
 
@@ -12,11 +11,6 @@ namespace TeachingAssignmentManagement.DAL
         public CurriculumClassRepository(CP25Team03Entities context)
         {
             this.context = context;
-        }
-
-        public IEnumerable<curriculum> GetCurriculumClasses()
-        {
-            return context.curricula.ToList();
         }
 
         public void InsertCurriculumClass(curriculum_class curriculum_Class)

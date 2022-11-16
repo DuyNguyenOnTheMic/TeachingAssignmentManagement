@@ -24,13 +24,13 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
             ViewData["major"] = new SelectList(unitOfWork.MajorRepository.GetMajors(), "id", "name");
-            return View(unitOfWork.CurriculumClassRepository.GetCurriculumClasses());
+            return View(unitOfWork.CurriculumRepository.GetCurriculums());
         }
 
         public JsonResult GetData()
         {
             // Get timetable data from database
-            return Json(unitOfWork.CurriculumClassRepository.GetCurriculumClasses(), JsonRequestBehavior.AllowGet);
+            return Json(unitOfWork.CurriculumRepository.GetCurriculums(), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Import()
