@@ -13,10 +13,10 @@
     overflow: scroll;
 }
 
-    .assign-table table td:first-child {
-        position: relative;
-        left: 0;
-        background-color: #ddd;
+    .assign-table th:first-child, td:first-child {
+        position: sticky;
+        left: 0px;
+        background-color: lightgray;
     }
 
 thead {
