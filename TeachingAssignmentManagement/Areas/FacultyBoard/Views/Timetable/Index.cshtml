@@ -75,7 +75,20 @@
                                                                             </div>
                                                                             <div class="card-body pt-0">
                                                                                 <div class="item-name">
-                                                                                    @Html.DropDownList("lecturer", null, "--- Chưa phân công ---", htmlAttributes: new { @class = "select2 form-select" })
+                                                                                    <select class="select2 form-select" id="lecturer" name="lecturer">
+                                                                                        <option value="">--- Chưa phân công ---</option>
+                                                                                        @foreach (var lecturer in ViewBag.lecturers)
+                                                                                        {
+                                                                                            if (lecturer.Value == item.lecturer_id)
+                                                                                            {
+                                                                                                <option value='@lecturer.Value' selected>@lecturer.Text</option>
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                <option value='@lecturer.Value'>@lecturer.Text</option>
+                                                                                            }
+                                                                                        }
+                                                                                    </select>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -114,7 +127,7 @@
     <script src="~/app-assets/vendors/js/signalr/jquery.signalR.min.js"></script>
     <script src="~/signalr/hubs"></script>
     <script>
-                // function uses for real time update
+                    // function uses for real time update
         /*setInterval(function () {
             $("#tblAssign").load("Timetable/Index #tblAssign");
         }, 2000); //refresh every 2 seconds*/
