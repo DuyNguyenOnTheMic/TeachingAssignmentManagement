@@ -69,12 +69,13 @@
                                                                     @foreach (var item in classes)
                                                                     {
                                                                         <div class="assign-card m-1">
-                                                                            <div class="modal-header bg-transparent">
+                                                                            <div class="modal-header">
+                                                                                <h6 class="text-center">@item.curriculum_class_id</h6>
                                                                                 <button type="button" class="btn-close" aria-label="Close"></button>
                                                                             </div>
-                                                                            <div class="card-body">
+                                                                            <div class="card-body pt-0">
                                                                                 <div class="item-name">
-                                                                                    <h6 class="mb-0">@item.curriculum_class_id</h6>
+                                                                                    @Html.DropDownList("major", null, "---- Chọn ngành ----", htmlAttributes: new { @class = "select2 form-select" })
                                                                                 </div>
                                                                             </div>
                                                                         </div>
