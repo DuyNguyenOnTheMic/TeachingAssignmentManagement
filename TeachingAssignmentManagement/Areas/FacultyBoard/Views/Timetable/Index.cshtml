@@ -33,7 +33,7 @@
                                     </div>
                                 </div>
                                 <div class="table-responsive assign-table">
-                                    <table class="table">
+                                    <table class="table" id="tblAssign">
                                         <thead class="table-light">
                                             <tr class="text-center">
                                                 <th>THỨ</th>
@@ -102,4 +102,9 @@
 @section scripts {
     <script src="~/app-assets/vendors/js/signalr/jquery.signalR.min.js"></script>
     <script src="~/signalr/hubs"></script>
+    <script>
+        /*setInterval(function () {
+            $("#tblAssign").load("Timetable/Index #mytable");
+        }, 2000);*/
+    </script>
 }
