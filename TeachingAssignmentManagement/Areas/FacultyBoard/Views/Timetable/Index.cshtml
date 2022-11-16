@@ -68,7 +68,17 @@
                                                                 <td>
                                                                     @foreach (var item in classes)
                                                                     {
-                                                                        @item.curriculum_class_id <br />
+                                                                        <div class="assign-card m-1">
+                                                                            <div class="modal-header bg-transparent">
+                                                                                <button type="button" class="btn-close" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="card-body">
+                                                                                <div class="item-name">
+                                                                                    <h6 class="mb-0">@item.curriculum_class_id</h6>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
                                                                     }
                                                                 </td>
                                                             }
@@ -103,7 +113,7 @@
     <script src="~/app-assets/vendors/js/signalr/jquery.signalR.min.js"></script>
     <script src="~/signalr/hubs"></script>
     <script>
-            // function uses for real time update
+                // function uses for real time update
         /*setInterval(function () {
             $("#tblAssign").load("Timetable/Index #tblAssign");
         }, 2000); //refresh every 2 seconds*/
