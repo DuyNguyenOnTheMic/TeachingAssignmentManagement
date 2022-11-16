@@ -1,5 +1,8 @@
-﻿@{
+﻿@model IEnumerable<TeachingAssignmentManagement.Models.curriculum>
+
+@{
     ViewBag.Title = "Phân công giảng dạy";
+    int[] startLessons = { 1, 4, 7, 10, 13 };
 }
 
 <div class="app-content content ">
@@ -51,35 +54,32 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="assign-card">
-                                                        <div class="modal-header bg-transparent">
-                                                            <button type="button" class="btn-close" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="item-img">
-                                                            <a href="app-ecommerce-details.html">
-                                                                <img src="../../../app-assets/images/pages/eCommerce/1.png" alt="img-placeholder" />
-                                                            </a>
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <div class="item-name">
-                                                                <h6 class="mb-0"><a href="app-ecommerce-details.html" class="text-body">Apple Watch Series 5</a></h6>
-                                                                <span class="item-company">By <a href="#" class="company-name">Apple</a></span>
-                                                                <div class="item-rating">
-                                                                    <ul class="unstyled-list list-inline">
-                                                                        <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
-                                                                        <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
-                                                                        <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
-                                                                        <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
-                                                                        <li class="ratings-list-item"><i data-feather="star" class="unfilled-star"></i></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            @foreach (var curriculum in Model)
+                                            {
+                                                <tr>
+                                                    <td>@curriculum.name</td>
+                                                    @for (int i = 2; i <= 7; i++)
+                                                    {
+                                                        foreach (var startLesson in startLessons)
+                                                        {
+                                                            var classes = curriculum.curriculum_class.Where(x => x.day_2 == i && x.start_lesson_2 == startLesson).ToList();
+                                                            if (classes.Count > 0)
+                                                            {
+                                                                <td>
+                                                                    @foreach (var item in classes)
+                                                                    {
+                                                                        @item.curriculum_class_id <br />
+                                                                    }
+                                                                </td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td></td>
+                                                            }
+                                                        }
+                                                    }
+                                                </tr>
+                                            }
                                         </tbody>
                                     </table>
                                 </div>
@@ -105,5 +105,4 @@
     @Scripts.Render("~/bundles/export-dt")
     <script src="~/app-assets/vendors/js/signalr/jquery.signalR.min.js"></script>
     <script src="~/signalr/hubs"></script>
-    <script src="~/assets/js/faculty-board/timetable/assign.js"></script>
 }

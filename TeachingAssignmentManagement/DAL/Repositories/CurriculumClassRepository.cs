@@ -14,49 +14,9 @@ namespace TeachingAssignmentManagement.DAL
             this.context = context;
         }
 
-        public IEnumerable GetCurriculumClasses()
+        public IEnumerable<curriculum> GetCurriculumClasses()
         {
-            IQueryable<curriculum_class> query_curriculumClass_mon = context.curriculum_class.Where(x => x.day_2 == 2);
-            IQueryable<curriculum_class> query_curriculumClass_tues = context.curriculum_class.Where(x => x.day_2 == 3);
-            IQueryable<curriculum_class> query_curriculumClass_wed = context.curriculum_class.Where(x => x.day_2 == 4);
-            IQueryable<curriculum_class> query_curriculumClass_thurs = context.curriculum_class.Where(x => x.day_2 == 5);
-            IQueryable<curriculum_class> query_curriculumClass_fri = context.curriculum_class.Where(x => x.day_2 == 6);
-            IQueryable<curriculum_class> query_curriculumClass_sat = context.curriculum_class.Where(x => x.day_2 == 7);
-            return context.curricula.Select(c => new
-            {
-                c.id,
-                c.name,
-                mon1 = query_curriculumClass_mon.Where(m => m.start_lesson_2 == 1 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                mon4 = query_curriculumClass_mon.Where(m => m.start_lesson_2 == 4 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                mon7 = query_curriculumClass_mon.Where(m => m.start_lesson_2 == 7 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                mon10 = query_curriculumClass_mon.Where(m => m.start_lesson_2 == 10 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                mon13 = query_curriculumClass_mon.Where(m => m.start_lesson_2 == 13 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                tues1 = query_curriculumClass_tues.Where(m => m.start_lesson_2 == 1 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                tues4 = query_curriculumClass_tues.Where(m => m.start_lesson_2 == 4 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                tues7 = query_curriculumClass_tues.Where(m => m.start_lesson_2 == 7 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                tues10 = query_curriculumClass_tues.Where(m => m.start_lesson_2 == 10 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                tues13 = query_curriculumClass_tues.Where(m => m.start_lesson_2 == 13 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                wed1 = query_curriculumClass_wed.Where(m => m.start_lesson_2 == 1 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                wed4 = query_curriculumClass_wed.Where(m => m.start_lesson_2 == 4 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                wed7 = query_curriculumClass_wed.Where(m => m.start_lesson_2 == 7 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                wed10 = query_curriculumClass_wed.Where(m => m.start_lesson_2 == 10 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                wed13 = query_curriculumClass_wed.Where(m => m.start_lesson_2 == 13 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                thurs1 = query_curriculumClass_thurs.Where(m => m.start_lesson_2 == 1 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                thurs4 = query_curriculumClass_thurs.Where(m => m.start_lesson_2 == 4 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                thurs7 = query_curriculumClass_thurs.Where(m => m.start_lesson_2 == 7 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                thurs10 = query_curriculumClass_thurs.Where(m => m.start_lesson_2 == 10 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                thurs13 = query_curriculumClass_thurs.Where(m => m.start_lesson_2 == 13 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                fri1 = query_curriculumClass_fri.Where(m => m.start_lesson_2 == 1 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                fri4 = query_curriculumClass_fri.Where(m => m.start_lesson_2 == 4 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                fri7 = query_curriculumClass_fri.Where(m => m.start_lesson_2 == 7 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                fri10 = query_curriculumClass_fri.Where(m => m.start_lesson_2 == 10 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                fri13 = query_curriculumClass_fri.Where(m => m.start_lesson_2 == 13 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                sat1 = query_curriculumClass_sat.Where(m => m.start_lesson_2 == 1 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                sat4 = query_curriculumClass_sat.Where(m => m.start_lesson_2 == 4 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                sat7 = query_curriculumClass_sat.Where(m => m.start_lesson_2 == 7 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                sat10 = query_curriculumClass_sat.Where(m => m.start_lesson_2 == 10 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-                sat13 = query_curriculumClass_sat.Where(m => m.start_lesson_2 == 13 && m.curriculum_id == c.id).Select(x => x.curriculum_class_id),
-            }).ToList();
+            return context.curricula.ToList();
         }
 
         public void InsertCurriculumClass(curriculum_class curriculum_Class)
