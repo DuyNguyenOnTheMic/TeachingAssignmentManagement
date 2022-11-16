@@ -36,3 +36,26 @@ thead {
     thead th {
         left: 0;
     }
+
+.modal-header .btn-close {
+    padding: .8rem;
+    box-shadow: 0 5px 20px 0 rgb(34 41 47 / 10%);
+    border-radius: .357rem;
+    background-color: #FFF;
+    opacity: 1;
+    -webkit-transition: all .23s ease .1s;
+    transition: all .23s ease .1s;
+    position: relative;
+    -webkit-transform: translate(18px,-10px);
+    -ms-transform: translate(18px,-10px);
+    transform: translate(18px,-10px);
+}
+
+.modal-header .btn-close:hover {
+    opacity: 1;
+    outline: 0;
+    -webkit-transform: translate(15px,-2px);
+    -ms-transform: translate(15px,-2px);
+    transform: translate(15px,-2px);
+    box-shadow: none;
+}
