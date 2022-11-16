@@ -22,8 +22,9 @@
     .assign-table td:first-child {
         position: sticky;
         left: 0px;
-        background-color: #7367f0 !important;
-        color: #fff !important;
+        background-color: #f3f2f7;
+        color: #22292f;
+        font-weight: bold;
         z-index: 1;
     }
 
