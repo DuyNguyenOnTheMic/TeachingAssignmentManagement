@@ -24,6 +24,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
             ViewData["major"] = new SelectList(unitOfWork.MajorRepository.GetMajors(), "id", "name");
+            ViewData["lecturer"] = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
             return View(unitOfWork.CurriculumRepository.GetCurriculums());
         }
 

@@ -38,6 +38,11 @@ namespace TeachingAssignmentManagement.DAL
             return context.AspNetRoles.Find(id);
         }
 
+        public IEnumerable<lecturer> GetLecturers()
+        {
+            return context.lecturers.ToList();
+        }
+
         public lecturer GetLecturerByID(string id)
         {
             return context.lecturers.Find(id);
