@@ -28,6 +28,11 @@
         z-index: 1;
     }
 
+.dark-layout .assign-table td:first-child {
+    background-color: #343d55;
+    color: #22292f;
+}
+
 thead {
     position: -webkit-sticky; /* for Safari */
     position: sticky;
