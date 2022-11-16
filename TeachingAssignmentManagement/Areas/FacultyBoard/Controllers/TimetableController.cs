@@ -28,12 +28,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             return View(unitOfWork.CurriculumRepository.GetCurriculums());
         }
 
-        public JsonResult GetData()
-        {
-            // Get timetable data from database
-            return Json(unitOfWork.CurriculumRepository.GetCurriculums(), JsonRequestBehavior.AllowGet);
-        }
-
         public ActionResult Import()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
