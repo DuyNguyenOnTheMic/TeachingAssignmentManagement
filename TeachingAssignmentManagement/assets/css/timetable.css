@@ -13,10 +13,17 @@
     overflow: scroll;
 }
 
-    .assign-table th:first-child, td:first-child {
+    .assign-table th:first-child {
         position: sticky;
         left: 0px;
-        background-color: lightgray;
+        z-index: 1;
+    }
+
+    .assign-table td:first-child {
+        position: sticky;
+        left: 0px;
+        background-color: #7367f0 !important;
+        color: #fff !important;
         z-index: 1;
     }
 
