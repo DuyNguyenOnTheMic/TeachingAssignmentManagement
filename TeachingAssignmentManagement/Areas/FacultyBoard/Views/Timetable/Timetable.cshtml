@@ -1,0 +1,82 @@
+﻿@model IEnumerable<TeachingAssignmentManagement.Models.curriculum>
+
+@{
+    int[] days = { 2, 3, 4, 5, 6, 7 };
+    int[] startLessons = { 1, 4, 7, 10, 13 };
+}
+
+<div class="table-responsive assign-table">
+    <table class="table table-bordered dataTable" id="tblAssign">
+        <thead class="table-light">
+            <tr class="text-center">
+                <th>THỨ</th>
+                @foreach (var day in days)
+                {
+                    <th colspan="5">THỨ @day</th>
+                }
+            </tr>
+            <tr class="text-center text-nowrap">
+                <th>TIẾT</th>
+                @foreach (var day in days)
+                {
+                    foreach (var startLesson in startLessons)
+                    {
+                        <th>@startLesson-@(startLesson + 2)</th>
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var curriculum in Model)
+            {
+                <tr>
+                    <td>@curriculum.name</td>
+                    @foreach (var day in days)
+                    {
+                        foreach (var startLesson in startLessons)
+                        {
+                            var classes = curriculum.curriculum_class.Where(x => x.day_2 == day && x.start_lesson_2 == startLesson).ToList();
+                            if (classes.Count > 0)
+                            {
+                                <td>
+                                    @foreach (var item in classes)
+                                    {
+                                        <div class="assign-card m-1">
+                                            <div class="modal-header">
+                                                <h6 class="text-center">@item.curriculum_class_id</h6>
+                                                <button type="button" class="btn-close" aria-label="Close"></button>
+                                            </div>
+                                            <div class="card-body pt-0">
+                                                <div class="item-name">
+                                                    <select class="select2 form-select" id="lecturer" name="lecturer">
+                                                        <option value="">--- Chưa phân công ---</option>
+                                                        @foreach (var lecturer in ViewBag.lecturers)
+                                                        {
+                                                            if (lecturer.Value == item.lecturer_id)
+                                                            {
+                                                                <option value='@lecturer.Value' selected>@lecturer.Text</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value='@lecturer.Value'>@lecturer.Text</option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    }
+                                </td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
