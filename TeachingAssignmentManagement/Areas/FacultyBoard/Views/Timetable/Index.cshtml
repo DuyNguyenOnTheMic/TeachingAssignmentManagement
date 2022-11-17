@@ -30,14 +30,7 @@
                                         @Html.DropDownList("major", null, "---- Chọn ngành ----", htmlAttributes: new { @class = "select2 form-select" })
                                     </div>
                                 </div>
-                                <div id="assignLecturerDiv">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="spinner-border text-primary me-1" role="status">
-                                            <span class="visually-hidden">Loading...</span>
-                                        </div>
-                                        <p class="mt-25">Đang tải...</p>
-                                    </div>
-                                </div>
+                                <div id="assignLecturerDiv"></div>
                             </div>
                         </div>
                     </div>
@@ -68,6 +61,10 @@
                 var majorId = $('#major').val();
 
                 if (termId && majorId) {
+
+                    // Display loading message while fetching data
+                    assignLecturerDiv.html('<div class="d-flex justify-content-center"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-25">Đang tải...</p></div>');
+
                     // Get Partial View timetable data
                     $.get(url, { termId, majorId }, function (data) {
                         assignLecturerDiv.html(data);
