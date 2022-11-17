@@ -89,15 +89,26 @@
         $("#tblAssign").load("Timetable/GetData #tblAssign", { termId, majorId });
     }, 2000); //refresh every 2 seconds*/
     //alert($('#tblAssign tbody tr').length)
-    $("table .form-select option:selected").each(function () {
+    $('table .form-select option:selected').each(function () {
         var selectedLecturer = $(this);
         selectedLecturer.closest('.assign-card').append('<p>' + selectedLecturer.text() + '</p>');
-        if (selectedLecturer.val() != "") {
+        if (selectedLecturer.val() != '') {
             var lecturerName = selectedLecturer.text();
             // Split lecture name
-            var removeLastWord = lecturerName.substring(0, lecturerName.lastIndexOf(" "));
+            var removeLastWord = lecturerName.substring(0, lecturerName.lastIndexOf(' '));
             var result = removeLastWord.split(' ').map(function (item) { return item[0] }).join('.');
             $(this).text(result + " " + lecturerName.split(' ').pop());
         }
+    });
+
+    var prevSelect = '';
+    var prevId = '';
+    $("table .form-select").on('focusin', function () {
+        prevSelect = $(this).find(':selected').text();
+        prevId = $(this).find(':selected').val();
+    });
+
+    $("table .form-select").on('change', function () {
+        $(this).children('option[value = "' + prevId + '"]').text("Bà dà");
     });
 </script>
