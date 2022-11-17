@@ -89,26 +89,17 @@
         $("#tblAssign").load("Timetable/GetData #tblAssign", { termId, majorId });
     }, 2000); //refresh every 2 seconds*/
     //alert($('#tblAssign tbody tr').length)
-    $('table .form-select option:selected').each(function () {
-        var selectedLecturer = $(this);
-        selectedLecturer.closest('.assign-card').append('<p class="d-none">' + selectedLecturer.text() + '</p>');
-        if (selectedLecturer.val() != '') {
-            var lecturerName = selectedLecturer.text();
-            // Split lecture name
-            var removeLastWord = lecturerName.substring(0, lecturerName.lastIndexOf(' '));
-            var result = removeLastWord.split(' ').map(function (item) { return item[0] }).join('.');
-            $(this).text(result + " " + lecturerName.split(' ').pop());
-        }
-    });
-
-    var previousId,
-        previousText;
-    $('table .form-select').on('focus', function () {
-        // Store previous selected lecturer name
-        previousId = $(this).find(':selected').val();
-        previousText = $(this).closest('.assign-card').find('p').text();
-    }).change(function () {
-        // Change lecturer name back again on select change
-        $(this).children('option[value = "' + previousId + '"]').text(previousText);
+    $(function () {
+        var select = $('.select2');
+        // select2
+        select.each(function () {
+            var $this = $(this);
+            $this.wrap('<div class="position-relative"></div>');
+            $this
+                .select2({
+                    placeholder: "--- Chưa phân công ---",
+                    dropdownParent: $this.parent()
+                })
+        });
     });
 </script>
