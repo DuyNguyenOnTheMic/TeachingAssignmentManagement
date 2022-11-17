@@ -54,11 +54,12 @@
     <script src="~/signalr/hubs"></script>
     <script>        
         $(function () {
-            var $detailDiv = $('#assignLecturerDiv'),
+            var assignLecturerDiv = $('#assignLecturerDiv'),
                 url = "Timetable/Timetable";
 
+            // Get Partial View timetable data
             $.get(url, function (data) {
-                $detailDiv.replaceWith(data);
+                assignLecturerDiv.replaceWith(data);
             });
         });
     </script>
