@@ -59,12 +59,20 @@
     <script src="~/signalr/hubs"></script>
     <script>
         $(function () {
-            var assignLecturerDiv = $('#assignLecturerDiv'),
+            var formSelect = $('.form-select'),
+                assignLecturerDiv = $('#assignLecturerDiv'),
                 url = "Timetable/GetData";
 
-            // Get Partial View timetable data
-            $.get(url, function (data) {
-                assignLecturerDiv.replaceWith(data);
+            formSelect.change(function () {
+                var termId = $('#term').val();
+                var majorId = $('#major').val();
+
+                if (termId && majorId) {
+                    // Get Partial View timetable data
+                    $.get(url, { termId, majorId }, function (data) {
+                        assignLecturerDiv.replaceWith(data);
+                    });
+                }
             });
         });
     </script>
