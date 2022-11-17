@@ -88,9 +88,13 @@
     }, 2000); //refresh every 2 seconds*/
     //alert($('#tblAssign tbody tr').length)
     $("table .form-select option:selected").each(function () {
-        var lecturer = $(this);
-        if (lecturer.val() != "") {
-            lecturer.text('hehe');
+        var selectedLecturer = $(this);
+        if (selectedLecturer.val() != "") {
+            var lecturerName = selectedLecturer.text();
+            // Split lecture name
+            var removeLastWord = lecturerName.substring(0, lecturerName.lastIndexOf(" "));
+            var result = removeLastWord.split(' ').map(function (item) { return item[0] }).join('.');
+            $(this).text(result + " " + lecturerName.split(' ').pop());
         }
     });
 </script>
