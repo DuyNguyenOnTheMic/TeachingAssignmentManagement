@@ -271,6 +271,11 @@ window.colors = {
         return false;
     });
 
+    // Set focus for select2 search field
+    $(document).on('select2:open', () => {
+        document.querySelector('.select2-search__field').focus();
+    });
+
     // Execute below code only if we find hammer js for touch swipe feature on small screen
     if (typeof Hammer !== 'undefined') {
         var rtl;
