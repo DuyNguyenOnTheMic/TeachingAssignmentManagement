@@ -27,7 +27,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             return View();
         }
 
-        public ActionResult Timetable()
+        public ActionResult GetData()
         {
             ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
             return PartialView("Timetable", unitOfWork.CurriculumRepository.GetCurriculums());
