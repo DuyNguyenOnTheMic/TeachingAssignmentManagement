@@ -91,6 +91,7 @@
     //alert($('#tblAssign tbody tr').length)
     $("table .form-select option:selected").each(function () {
         var selectedLecturer = $(this);
+        selectedLecturer.closest('.assign-card').append('<p>' + selectedLecturer.text() + '</p>');
         if (selectedLecturer.val() != "") {
             var lecturerName = selectedLecturer.text();
             // Split lecture name
