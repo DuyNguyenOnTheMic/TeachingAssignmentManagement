@@ -108,6 +108,7 @@
         previousId = $(this).find(':selected').val();
         previousText = $(this).closest('.assign-card').find('p').text();
     }).change(function () {
+        // Change lecturer name back again on select change
         $(this).children('option[value = "' + previousId + '"]').text(previousText);
     });
 </script>
