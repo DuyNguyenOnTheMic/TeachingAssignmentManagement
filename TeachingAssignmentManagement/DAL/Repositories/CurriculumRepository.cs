@@ -13,9 +13,9 @@ namespace TeachingAssignmentManagement.DAL
             this.context = context;
         }
 
-        public IEnumerable<curriculum> GetCurriculums()
+        public IEnumerable<curriculum> GetCurriculums(int termId, string majorId)
         {
-            return context.curriculum_class.Where(c => c.term_id == 222).Select(x => x.curriculum).Distinct().ToList();
+            return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId).Select(x => x.curriculum).Distinct().ToList();
         }
 
         public void InsertCurriculum(curriculum curriculum)

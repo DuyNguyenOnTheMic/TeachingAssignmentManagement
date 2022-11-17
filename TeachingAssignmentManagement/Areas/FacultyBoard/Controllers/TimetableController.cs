@@ -30,7 +30,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public ActionResult GetData(int termId, string majorId)
         {
             ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
-            return PartialView("Timetable", unitOfWork.CurriculumRepository.GetCurriculums());
+            return PartialView("Timetable", unitOfWork.CurriculumRepository.GetCurriculums(termId, majorId));
         }
 
         public ActionResult Import()

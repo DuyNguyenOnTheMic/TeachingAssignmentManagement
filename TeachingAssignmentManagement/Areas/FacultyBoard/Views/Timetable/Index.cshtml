@@ -70,7 +70,7 @@
                 if (termId && majorId) {
                     // Get Partial View timetable data
                     $.get(url, { termId, majorId }, function (data) {
-                        assignLecturerDiv.replaceWith(data);
+                        assignLecturerDiv.html(data);
                     });
                 }
             });
