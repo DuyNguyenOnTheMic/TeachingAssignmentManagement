@@ -29,10 +29,10 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
         public ActionResult GetData(int termId, string majorId)
         {
-            ViewData["term"] = termId;
-            ViewData["major"] = majorId;
+            IEnumerable<curriculum_class> query_classes = unitOfWork.CurriculumRepository.GetCurriculumClasses(termId, majorId);
+            ViewBag.curriculums = new SelectList(unitOfWork.CurriculumRepository.GetCurriculums(query_classes));
             ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
-            return PartialView("Timetable", unitOfWork.CurriculumRepository.GetCurriculums(termId, majorId));
+            return PartialView("Timetable", query_classes.ToList());
         }
 
         public ActionResult Import()
