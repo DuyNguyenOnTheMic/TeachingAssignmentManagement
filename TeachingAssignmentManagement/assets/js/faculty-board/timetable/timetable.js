@@ -39,7 +39,6 @@ $('table .form-select').on('select2:select select2:unselecting', function () {
     // Change previous selected option value and text
     var preVal = $this.data('preval');
     var preText = $this.data('pretext');
-    console.log(preText);
     $this.children('option[value = "' + preVal + '"]').text(preText);
 
     // Set data for preval and pretext
