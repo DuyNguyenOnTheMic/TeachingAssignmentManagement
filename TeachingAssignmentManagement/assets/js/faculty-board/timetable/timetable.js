@@ -13,11 +13,8 @@ $('table .form-select option:selected').each(function () {
         selectedLecturer.closest('.form-select').attr('data-preval', selectedLecturer.val());
         selectedLecturer.closest('.form-select').attr('data-pretext', selectedLecturer.text());
 
-        var lecturerName = selectedLecturer.text();
-        // Split lecture name
-        var removeLastWord = lecturerName.substring(0, lecturerName.lastIndexOf(' '));
-        var result = removeLastWord.split(' ').map(function (item) { return item[0] }).join('.');
-        $(this).text(result + " " + lecturerName.split(' ').pop());
+        var lecturerName = splitString(selectedLecturer.text());
+        $(this).text(lecturerName);
     }
 });
 
@@ -48,4 +45,12 @@ function populateSelect($this) {
         dropdownParent: $this.parent(),
         placeholder: $this[0][0].innerHTML
     })
+}
+
+function splitString(lecturerName) {
+    // Split lecture name
+    var removeLastWord = lecturerName.substring(0, lecturerName.lastIndexOf(' '));
+    var splitName = removeLastWord.split(' ').map(function (item) { return item[0] }).join('.');
+    var result = splitName + " " + lecturerName.split(' ').pop();
+    return result;
 }
