@@ -261,6 +261,11 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
         }
 
+        public JsonResult Assign(string curriculumClassId, int day, string roomId)
+        {
+            return Json("hehe", JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult DeleteAll(int term, string major)
         {
