@@ -5,6 +5,18 @@ $(function () {
         assignLecturerDiv = $('#assignLecturerDiv'),
         url = rootUrl + 'FacultyBoard/Timetable/GetData';
 
+    // select2
+    formSelect.each(function () {
+        var $this = $(this);
+        $this.wrap('<div class="position-relative"></div>');
+        $this.select2({
+            language: 'vi',
+            dropdownAutoWidth: true,
+            dropdownParent: $this.parent(),
+            placeholder: $this[0][0].innerHTML
+        });
+    })
+
     formSelect.change(function () {
         var termId = $('#term').val(),
             majorId = $('#major').val();
