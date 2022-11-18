@@ -5,7 +5,7 @@ namespace TeachingAssignmentManagement.Hubs
 {
     public class ProgressHub : Hub
     {
-        [HubMethodName("SendProgress")]
+        [HubMethodName("sendProgress")]
         public static void SendProgress(string progressMessage, int progressCount, int totalItems)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<ProgressHub>();

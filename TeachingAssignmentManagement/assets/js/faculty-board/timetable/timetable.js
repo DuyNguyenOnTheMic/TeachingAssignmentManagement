@@ -75,7 +75,6 @@ $('.btn-assign').on('click', function () {
             }
         });
     }
-
 });
 
 function populateSelect($this) {
