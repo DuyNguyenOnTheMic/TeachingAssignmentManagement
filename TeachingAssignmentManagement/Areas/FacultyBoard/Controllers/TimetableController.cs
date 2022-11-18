@@ -265,6 +265,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             IEnumerable<curriculum_class> query_curriculumClassWhere = unitOfWork.CurriculumClassRepository.GetClassesInTermMajor(termId, majorId);
             curriculum_class query_curriculumClass = unitOfWork.CurriculumClassRepository.FindCurriculumClass(query_curriculumClassWhere, curriculumClassId, day, roomId);
+            query_curriculumClass.lecturer_id = lecturerId;
+            unitOfWork.Save();
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
