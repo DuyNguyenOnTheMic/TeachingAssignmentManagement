@@ -56,6 +56,8 @@ $('.btn-assign').on('click', function () {
     var curriculumClassId = $this.data('class');
     var day = $this.data('day');
     var roomId = $this.data('room');
+    var lecturerId = $this.parent().find('.select2 :selected').val();
+
 });
 
 function populateSelect($this) {
