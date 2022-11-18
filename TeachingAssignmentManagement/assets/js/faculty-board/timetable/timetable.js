@@ -1,12 +1,12 @@
-﻿/*var termId = $('#term').val(),
-    majorId = $('#major').val();
-// function uses for real time update
+﻿/*// function uses for real time update
 setInterval(function () {
     $("#tblAssign").load("Timetable/GetData #tblAssign", { termId, majorId });
 }, 2000); //refresh every 2 seconds*/
 //alert($('#tblAssign tbody tr').length)
 
-var rootUrl = $('#loader').data('request-url');
+var termId = $('#term').val(),
+    majorId = $('#major').val(),
+    rootUrl = $('#loader').data('request-url');
 
 $('table .form-select option:selected').each(function () {
     var selectedLecturer = $(this);
@@ -66,10 +66,10 @@ $('.btn-assign').on('click', function () {
         $.ajax({
             type: 'POST',
             url: rootUrl + 'FacultyBoard/Timetable/Assign',
-            data: { curriculumClassId, day, roomId, lecturerId },
+            data: { termId, majorId, curriculumClassId, day, roomId, lecturerId },
             success: function (data) {
                 if (data.success) {
-
+                    alert('thành công');
                 }
             }
         });
