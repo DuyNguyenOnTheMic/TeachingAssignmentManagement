@@ -29,7 +29,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
         public ActionResult GetData(int termId, string majorId)
         {
-            IEnumerable<curriculum_class> query_classes = unitOfWork.CurriculumRepository.GetCurriculumClasses(termId, majorId);
+            IEnumerable<curriculum_class> query_classes = unitOfWork.CurriculumClassRepository.GetClassesInTermMajor(termId, majorId);
             ViewBag.curriculums = unitOfWork.CurriculumRepository.GetCurriculums(query_classes);
             ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
             return PartialView("Timetable", query_classes.ToList());
