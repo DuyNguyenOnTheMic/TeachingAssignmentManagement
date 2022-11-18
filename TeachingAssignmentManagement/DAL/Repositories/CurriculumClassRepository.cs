@@ -28,9 +28,9 @@ namespace TeachingAssignmentManagement.DAL
             return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId);
         }
 
-        public curriculum_class FindCurriculumClass(IEnumerable<curriculum_class> curriculumClass, string curriculumClassId, int day2)
+        public curriculum_class FindCurriculumClass(IEnumerable<curriculum_class> curriculumClass, string curriculumClassId, int day2, string roomId)
         {
-            return curriculumClass.FirstOrDefault(c => c.curriculum_class_id == curriculumClassId && c.day_2 == day2);
+            return curriculumClass.FirstOrDefault(c => c.curriculum_class_id == curriculumClassId && c.day_2 == day2 && c.room_id == roomId);
         }
 
         public void DeleteAllClasses(int term, string major)

@@ -242,7 +242,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     }
                     else
                     {
-                        curriculum_class query_curriculumClass = unitOfWork.CurriculumClassRepository.FindCurriculumClass(query_curriculumClassWhere, curriculumClass.curriculum_class_id, curriculumClass.day_2);
+                        curriculum_class query_curriculumClass = unitOfWork.CurriculumClassRepository.FindCurriculumClass(query_curriculumClassWhere, curriculumClass.curriculum_class_id, curriculumClass.day_2, curriculumClass.room_id);
                         if (query_curriculumClass?.lecturer_id == null && curriculumClass.lecturer_id != null)
                         {
                             // Update curriculum class's lecturer
