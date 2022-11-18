@@ -77,6 +77,28 @@ $('.btn-assign').on('click', function () {
     }
 });
 
+$('btn-delete').on('click', function () {
+    $this = $(this);
+
+    // Get values
+    var curriculumClassId = $this.data('class');
+    var day = $this.data('day');
+    var roomId = $this.data('room');
+
+    // Send ajax request to delete class
+    $.ajax({
+        type: 'POST',
+        url: rootUrl + 'FacultyBoard/Timetable/Assign',
+        data: { termId, majorId, curriculumClassId, day, roomId, lecturerId },
+        success: function (data) {
+            if (data.success) {
+                toastr.options.positionClass = 'toast-bottom-right';
+                toastr.success('Thành công!');
+            }
+        }
+    });
+});
+
 function populateSelect($this) {
     // Populate select2
     $this.wrap('<div class="position-relative"></div>');
