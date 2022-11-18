@@ -26,7 +26,7 @@ $('table .form-select').each(function () {
     populateSelect($(this));
 })
 
-$('table .form-select').on('change.select2', function () {
+$('table .form-select').on('select2:select select2:unselecting', function () {
     var $this = $(this);
 
     // Destroy select2 to update option text
