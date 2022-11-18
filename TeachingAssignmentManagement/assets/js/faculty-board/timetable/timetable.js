@@ -55,8 +55,7 @@ function populateSelect($this) {
     $this.select2({
         language: 'vi',
         dropdownAutoWidth: true,
-        dropdownParent: $this.parent(),
-        placeholder: $this[0][0].innerHTML
+        dropdownParent: $this.parent()
     })
 }
 
