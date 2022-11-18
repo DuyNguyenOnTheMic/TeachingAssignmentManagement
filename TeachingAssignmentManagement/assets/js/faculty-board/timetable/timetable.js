@@ -6,6 +6,8 @@ setInterval(function () {
 }, 2000); //refresh every 2 seconds*/
 //alert($('#tblAssign tbody tr').length)
 
+var rootUrl = $('#loader').data('request-url');
+
 $('table .form-select option:selected').each(function () {
     var selectedLecturer = $(this);
     if (selectedLecturer.val() != '') {
@@ -57,6 +59,21 @@ $('.btn-assign').on('click', function () {
     var day = $this.data('day');
     var roomId = $this.data('room');
     var lecturerId = $this.parent().find('.select2 :selected').val();
+
+    if (lecturerId) {
+
+        // Send ajax request to assign lecturer
+        $.ajax({
+            type: 'POST',
+            url: rootUrl + 'FacultyBoard/Timetable/Assign',
+            data: { curriculumClassId, day, roomId, lecturerId },
+            success: function (data) {
+                if (data.success) {
+
+                }
+            }
+        });
+    }
 
 });
 

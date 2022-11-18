@@ -261,9 +261,9 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
         }
 
-        public JsonResult Assign(string curriculumClassId, int day, string roomId)
+        public JsonResult Assign(string curriculumClassId, int day, string roomId, string lecturerId)
         {
-            return Json("hehe", JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
