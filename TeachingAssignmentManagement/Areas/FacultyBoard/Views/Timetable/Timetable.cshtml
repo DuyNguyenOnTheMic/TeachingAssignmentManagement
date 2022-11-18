@@ -48,20 +48,23 @@
                                             </div>
                                             <div class="card-body pt-0">
                                                 <div class="item-name">
-                                                    <select class="select2 form-select" name="lecturer">
-                                                        <option value="">--- Chưa phân công ---</option>
-                                                        @foreach (var lecturer in ViewBag.lecturers)
-                                                        {
-                                                            if (lecturer.Value == item.lecturer_id)
+                                                    <div class="d-flex justify-content-center">
+                                                        <select class="select2 form-select" name="lecturer">
+                                                            <option value="">--- Chưa phân công ---</option>
+                                                            @foreach (var lecturer in ViewBag.lecturers)
                                                             {
-                                                                <option value='@lecturer.Value' selected>@lecturer.Text</option>
+                                                                if (lecturer.Value == item.lecturer_id)
+                                                                {
+                                                                    <option value='@lecturer.Value' selected>@lecturer.Text</option>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <option value='@lecturer.Value'>@lecturer.Text</option>
+                                                                }
                                                             }
-                                                            else
-                                                            {
-                                                                <option value='@lecturer.Value'>@lecturer.Text</option>
-                                                            }
-                                                        }
-                                                    </select>
+                                                        </select>
+                                                        <button class="btn btn-outline-primary" id="button-addon2" type="button">Go</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
