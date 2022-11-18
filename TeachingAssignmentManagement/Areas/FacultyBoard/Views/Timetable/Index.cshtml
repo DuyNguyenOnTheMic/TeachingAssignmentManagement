@@ -55,27 +55,5 @@
 @section scripts {
     <script src="~/app-assets/vendors/js/signalr/jquery.signalR.min.js"></script>
     <script src="~/signalr/hubs"></script>
-    <script>
-        $(function () {
-            var formSelect = $('.form-select'),
-                assignLecturerDiv = $('#assignLecturerDiv'),
-                url = 'Timetable/GetData';
-
-            formSelect.change(function () {
-                var termId = $('#term').val(),
-                    majorId = $('#major').val();
-
-                if (termId && majorId) {
-
-                    // Display loading message while fetching data
-                    assignLecturerDiv.html('<div class="d-flex justify-content-center"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-25">Đang tải...</p></div>');
-
-                    // Get Partial View timetable data
-                    $.get(url, { termId, majorId }, function (data) {
-                        assignLecturerDiv.html(data);
-                    });
-                }
-            });
-        });
-    </script>
+    <script src="~/assets/js/faculty-board/timetable/timetable-load.js"></script>
 }
