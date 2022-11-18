@@ -29,6 +29,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
         public ActionResult GetData(int termId, string majorId)
         {
+            ViewData["term"] = termId;
+            ViewData["major"] = majorId;
             ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
             return PartialView("Timetable", unitOfWork.CurriculumRepository.GetCurriculums(termId, majorId));
         }

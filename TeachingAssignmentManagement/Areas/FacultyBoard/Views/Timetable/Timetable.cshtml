@@ -3,6 +3,8 @@
 @{
     int[] days = { 2, 3, 4, 5, 6, 7 };
     int[] startLessons = { 1, 4, 7, 10, 13 };
+    int termId = (int)ViewData["term"];
+    string majorId = ViewData["major"].ToString();
 }
 
 <div class="table-responsive assign-table">
@@ -29,13 +31,14 @@
         <tbody>
             @foreach (var curriculum in Model)
             {
+                var query_termMajor = curriculum.curriculum_class.Where(x => x.term_id == termId && x.major_id == majorId);
                 <tr>
                     <td>@curriculum.name</td>
                     @foreach (var day in days)
                     {
                         foreach (var startLesson in startLessons)
                         {
-                            var classes = curriculum.curriculum_class.Where(x => x.day_2 == day && x.start_lesson_2 == startLesson).ToList();
+                            var classes = query_termMajor.Where(x => x.day_2 == day && x.start_lesson_2 == startLesson).ToList();
                             if (classes.Count > 0)
                             {
                                 <td>
