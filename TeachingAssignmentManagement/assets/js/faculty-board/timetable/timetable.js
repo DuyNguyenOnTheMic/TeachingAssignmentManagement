@@ -69,7 +69,8 @@ $('.btn-assign').on('click', function () {
             data: { termId, majorId, curriculumClassId, day, roomId, lecturerId },
             success: function (data) {
                 if (data.success) {
-                    alert('thành công');
+                    toastr.options.positionClass = 'toast-bottom-right';
+                    toastr.success('Thành công!');
                 }
             }
         });
