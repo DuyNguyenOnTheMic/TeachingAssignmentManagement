@@ -51,8 +51,11 @@ $('table .form-select').on('select2:select select2:unselecting', function () {
 
 $('.btn-assign').on('click', function () {
     $this = $(this);
-    var classIndex = $this.data('room');
-    alert(classIndex);
+
+    // Get values
+    var curriculumClassId = $this.data('class');
+    var day = $this.data('day');
+    var roomId = $this.data('room');
 });
 
 function populateSelect($this) {
