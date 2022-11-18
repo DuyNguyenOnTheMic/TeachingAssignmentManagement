@@ -3,6 +3,7 @@
 @{
     int[] days = { 2, 3, 4, 5, 6, 7 };
     int[] startLessons = { 1, 4, 7, 10, 13 };
+    int index = 0;
 }
 
 <div class="table-responsive assign-table">
@@ -41,11 +42,13 @@
                                 <td>
                                     @foreach (var item in classes)
                                     {
+                                        index++;
                                         <div class="assign-card m-1">
                                             <div class="modal-header">
                                                 <h6 class="text-center">@item.curriculum_class_id</h6>
                                                 <button type="button" class="btn-close" aria-label="Close"></button>
                                             </div>
+                                            <input type="hidden" id="class-@index" value="@item.curriculum_class_id" />
                                             <div class="card-body pt-0">
                                                 <div class="item-name">
                                                     <div class="d-flex justify-content-center">
@@ -68,7 +71,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     }
                                 </td>
                             }
