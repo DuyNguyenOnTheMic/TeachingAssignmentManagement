@@ -49,6 +49,12 @@ $('table .form-select').on('select2:select select2:unselecting', function () {
     populateSelect($this);
 });
 
+$('.btn-assign').on('click', function () {
+    $this = $(this);
+    var classIndex = $this.data('room');
+    alert(classIndex);
+});
+
 function populateSelect($this) {
     // Populate select2
     $this.wrap('<div class="position-relative"></div>');
