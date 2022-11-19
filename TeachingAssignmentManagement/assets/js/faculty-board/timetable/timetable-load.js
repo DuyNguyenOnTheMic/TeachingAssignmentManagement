@@ -9,7 +9,9 @@ hubNotif.client.updatedData = function (id, lecturerId, isUpdate) {
     var element = $('#' + id);
     if (element.length) {
         if (isUpdate) {
-            alert(lecturerId);
+            var select2 = element.find('.select2');
+            select2.val(lecturerId).trigger('change'); // Notify any JS components that the value changed
+
         } else {
             element.remove();
         }

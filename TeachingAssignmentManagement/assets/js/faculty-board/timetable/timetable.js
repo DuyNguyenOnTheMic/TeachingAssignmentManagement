@@ -113,7 +113,7 @@ function splitString(lecturerName) {
     return result;
 }
 
-function changeLecturer() {
+function changeLecturer($this) {
     // Destroy select2 to update option text
     $this.select2('destroy');
 
