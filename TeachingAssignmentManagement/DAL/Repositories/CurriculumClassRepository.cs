@@ -15,7 +15,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable<CurriculumClassDTO> GetTimetable(int termId, string majorId)
         {
-            return context.curriculum_class.Select(c => new CurriculumClassDTO
+            return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId).Select(c => new CurriculumClassDTO
             {
                 Id = c.id,
                 CurriculumClassId = c.curriculum_class_id,
@@ -27,7 +27,7 @@ namespace TeachingAssignmentManagement.DAL
                 CurriculumId = c.curriculum_id,
                 RoomId = c.room_id,
                 Curriculum = c.curriculum
-            }).Where(c => c.TermId == termId && c.MajorId == majorId);
+            });
         }
 
         public IEnumerable<curriculum_class> GetClassesInTermMajor(int termId, string majorId)
