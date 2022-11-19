@@ -25,6 +25,7 @@ namespace TeachingAssignmentManagement.DAL
                 MajorId = majorId,
                 LecturerId = c.lecturer_id,
                 CurriculumId = c.curriculum_id,
+                RoomId = c.room_id,
                 Curriculum = c.curriculum
             }).Where(c => c.TermId == termId && c.MajorId == majorId);
         }
