@@ -121,7 +121,7 @@ function changeLecturer($this) {
     var newSelected = $this.find(':selected');
     var currentVal = newSelected.val();
     var currentText = newSelected.text();
-    var newSelectedText = splitString(newSelected.text());
+    var newSelectedText = splitString(currentText);
     newSelected.text(newSelectedText);
 
     // Change previous selected option value and text
