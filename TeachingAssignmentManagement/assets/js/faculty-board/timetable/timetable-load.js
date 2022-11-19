@@ -8,7 +8,7 @@ $.connection.hub.start();
 hubNotif.client.deletedData = function (id, isUpdate) {
     var element = $('#' + id);
     if (element.length) {
-        alert('haha');
+        alert(isUpdate);
         element.closest('.assign-card').remove();
     }
 }

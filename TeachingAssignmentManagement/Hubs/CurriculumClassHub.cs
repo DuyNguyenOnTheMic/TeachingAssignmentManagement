@@ -9,7 +9,7 @@ namespace TeachingAssignmentManagement.Hubs
         public static void BroadcastDelete(int id, bool isUpdate)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<CurriculumClassHub>();
-            context.Clients.All.deletedData(id);
+            context.Clients.All.deletedData(id, isUpdate);
         }
     }
 }
