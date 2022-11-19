@@ -1,5 +1,14 @@
 ﻿var rootUrl = $('#loader').data('request-url');
 
+// Reference the hub
+var hubNotif = $.connection.curriculumClassHub;
+// Start the connection
+$.connection.hub.start();
+// Notify while anyChanges
+hubNotif.client.updatedData = function () {
+    alert('hehe');
+}
+
 $(function () {
     var formSelect = $('.form-select'),
         assignLecturerDiv = $('#assignLecturerDiv'),

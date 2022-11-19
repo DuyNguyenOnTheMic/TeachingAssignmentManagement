@@ -6,15 +6,6 @@
     }
 });
 
-// Reference the hub
-var hubNotif = $.connection.curriculumClassHub;
-// Start the connection
-$.connection.hub.start();
-// Notify while anyChanges
-hubNotif.client.updatedData = function () {
-    alert('hehe');
-}
-
 var termId = $('#term').val(),
     majorId = $('#major').val(),
     rootUrl = $('#loader').data('request-url');
