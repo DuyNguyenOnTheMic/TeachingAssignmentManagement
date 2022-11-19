@@ -10,7 +10,7 @@ namespace TeachingAssignmentManagement.Hubs
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<ProgressHub>();
             int percentage = (progressCount * 100) / totalItems;
-            context.Clients.All.AddProgress(progressMessage, percentage + "%");
+            context.Clients.All.addProgress(progressMessage, percentage + "%");
         }
     }
 }

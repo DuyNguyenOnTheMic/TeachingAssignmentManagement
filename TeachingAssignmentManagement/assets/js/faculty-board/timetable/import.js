@@ -152,7 +152,7 @@ function startProgressBar() {
     var progress = $.connection.progressHub;
 
     // Create a function that the hub can call back to display messages.
-    progress.client.AddProgress = function (message, percentage) {
+    progress.client.addProgress = function (message, percentage) {
         if (percentage >= 100) {
             return;
         }
