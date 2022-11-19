@@ -9,9 +9,12 @@ hubNotif.client.updatedData = function (id, lecturerId, isUpdate) {
     var element = $('#' + id);
     if (element.length) {
         if (isUpdate) {
-            var select2 = element.find('.form-select');
-            select2.val(lecturerId).trigger('change'); // Notify any JS components that the value changed
-            changeLecturer(select2);
+            var $this = element.find('.form-select');
+            $this.select2('destroy');
+            $this.val(lecturerId); // Notify any JS components that the value changed
+            alert($this.data('pretext'));
+            $this.children('option[value = "' + lecturerId + '"]').text('hehe');
+            $this.trigger('change');
         } else {
             element.remove();
         }
