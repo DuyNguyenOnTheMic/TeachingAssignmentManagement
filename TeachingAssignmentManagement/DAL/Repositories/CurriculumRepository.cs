@@ -18,14 +18,14 @@ namespace TeachingAssignmentManagement.DAL
             return curriculumClass.Select(c => c.curriculum).Distinct().ToList();
         }
 
-        public void InsertCurriculum(curriculum curriculum)
-        {
-            context.curricula.Add(curriculum);
-        }
-
         public curriculum GetCurriculumByID(string id)
         {
             return context.curricula.Find(id);
+        }
+
+        public void InsertCurriculum(curriculum curriculum)
+        {
+            context.curricula.Add(curriculum);
         }
     }
 }
