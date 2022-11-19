@@ -10,10 +10,19 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) 
     if (element.length) {
         if (isUpdate) {
             var $this = element.find('.form-select');
+
+            // Destroy select2 to update option text
             $this.select2('destroy');
-            $this.val(lecturerId); // Notify any JS components that the value changed
+
+            // Set new selected values and change old value text
+            $this.val(lecturerId);
             $this.children('option[value = "' + $this.data('preval') + '"]').text($this.data('pretext'));
             $this.children('option[value = "' + lecturerId + '"]').text(splitString(lecturerName));
+            // Set data for preval and pretext
+            $this.data('preval', lecturerId);
+            $this.data('pretext', lecturerName);
+
+            // Populate select2 dropdown again
             populateSelect($this);
         } else {
             element.remove();
