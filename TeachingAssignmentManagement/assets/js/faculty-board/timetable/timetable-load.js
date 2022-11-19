@@ -5,7 +5,7 @@ var hubNotif = $.connection.curriculumClassHub;
 // Start the connection
 $.connection.hub.start();
 // Notify while anyChanges
-hubNotif.client.updatedData = function (id) {
+hubNotif.client.deletedData = function (id) {
     var element = $('#' + id);
     if (element.length) {
         alert('haha');

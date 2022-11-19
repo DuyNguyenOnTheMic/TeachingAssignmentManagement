@@ -277,7 +277,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Delete class
             unitOfWork.CurriculumClassRepository.DeleteClass(id);
             unitOfWork.Save();
-            CurriculumClassHub.BroadcastData(id);
+            CurriculumClassHub.BroadcastDelete(id);
             return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
