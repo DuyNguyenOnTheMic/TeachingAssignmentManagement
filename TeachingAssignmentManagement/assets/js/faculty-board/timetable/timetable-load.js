@@ -10,7 +10,7 @@ hubNotif.client.updatedData = function (id, isUpdate) {
     if (element.length) {
         if (isUpdate) {
             alert(termId + ' ' + majorId);
-            element.load(rootUrl + 'FacultyBoard/Timetable/GetData?termId=' + termId + '&majorId=' + majorId + ' #' + id);
+            element.parent().load(rootUrl + 'FacultyBoard/Timetable/GetData?termId=' + termId + '&majorId=' + majorId + ' #' + id);
         } else {
             element.remove();
         }
