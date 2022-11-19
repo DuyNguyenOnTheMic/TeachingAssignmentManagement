@@ -30,27 +30,8 @@ $('table .form-select').each(function () {
 $('table .form-select').on('select2:select select2:unselecting', function () {
     var $this = $(this);
 
-    // Destroy select2 to update option text
-    $this.select2('destroy');
-
-    // Split new selected lecturer name
-    var newSelected = $this.find(':selected');
-    var currentVal = newSelected.val();
-    var currentText = newSelected.text();
-    var newSelectedText = splitString(newSelected.text());
-    newSelected.text(newSelectedText);
-
-    // Change previous selected option value and text
-    var preVal = $this.data('preval');
-    var preText = $this.data('pretext');
-    $this.children('option[value = "' + preVal + '"]').text(preText);
-
-    // Set data for preval and pretext
-    $this.data('preval', currentVal);
-    $this.data('pretext', currentText);
-
-    // Populate select2 dropdown again
-    populateSelect($this);
+    // Call function to change lecturer
+    changeLecturer($this);
 });
 
 $('.btn-assign').on('click', function () {
@@ -130,4 +111,28 @@ function splitString(lecturerName) {
     var splitName = removeLastWord.split(' ').map(function (item) { return item[0] }).join('.');
     var result = splitName + " " + lecturerName.split(' ').pop();
     return result;
+}
+
+function changeLecturer() {
+    // Destroy select2 to update option text
+    $this.select2('destroy');
+
+    // Split new selected lecturer name
+    var newSelected = $this.find(':selected');
+    var currentVal = newSelected.val();
+    var currentText = newSelected.text();
+    var newSelectedText = splitString(newSelected.text());
+    newSelected.text(newSelectedText);
+
+    // Change previous selected option value and text
+    var preVal = $this.data('preval');
+    var preText = $this.data('pretext');
+    $this.children('option[value = "' + preVal + '"]').text(preText);
+
+    // Set data for preval and pretext
+    $this.data('preval', currentVal);
+    $this.data('pretext', currentText);
+
+    // Populate select2 dropdown again
+    populateSelect($this);
 }

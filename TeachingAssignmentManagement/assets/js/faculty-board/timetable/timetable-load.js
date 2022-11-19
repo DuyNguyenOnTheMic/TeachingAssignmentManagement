@@ -9,7 +9,7 @@ hubNotif.client.updatedData = function (id, lecturerId, isUpdate) {
     var element = $('#' + id);
     if (element.length) {
         if (isUpdate) {
-            element.parent().load(rootUrl + 'FacultyBoard/Timetable/GetData?termId=' + termId + '&majorId=' + majorId + ' #' + id);
+            alert(lecturerId);
         } else {
             element.remove();
         }
