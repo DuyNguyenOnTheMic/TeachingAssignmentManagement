@@ -13,6 +13,7 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) 
             $this.select2('destroy');
             $this.val(lecturerId); // Notify any JS components that the value changed
             alert($this.data('pretext'));
+            $this.children('option[value = "' + $this.data('preval') + '"]').text($this.data('pretext'));
             $this.children('option[value = "' + lecturerId + '"]').text(splitString(lecturerName));
             $this.trigger('change');
         } else {
