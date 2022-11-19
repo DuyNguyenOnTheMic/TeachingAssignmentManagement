@@ -78,9 +78,7 @@ $('btn-delete').on('click', function () {
     $this = $(this);
 
     // Get values
-    var curriculumClassId = $this.data('class');
-    var day = $this.data('day');
-    var roomId = $this.data('room');
+    var id = $this.data('id');
 
     // Send ajax request to delete class
     $.ajax({
