@@ -272,7 +272,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
             // Delete class
             unitOfWork.CurriculumClassRepository.DeleteClass(id);
