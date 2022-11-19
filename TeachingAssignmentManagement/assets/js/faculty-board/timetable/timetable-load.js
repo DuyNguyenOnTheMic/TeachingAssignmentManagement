@@ -5,7 +5,7 @@ var hubNotif = $.connection.curriculumClassHub;
 // Start the connection
 $.connection.hub.start();
 // Notify while anyChanges
-hubNotif.client.updatedData = function (id, lecturerId, isUpdate) {
+hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) {
     var element = $('#' + id);
     if (element.length) {
         if (isUpdate) {
@@ -13,7 +13,7 @@ hubNotif.client.updatedData = function (id, lecturerId, isUpdate) {
             $this.select2('destroy');
             $this.val(lecturerId); // Notify any JS components that the value changed
             alert($this.data('pretext'));
-            $this.children('option[value = "' + lecturerId + '"]').text('hehe');
+            $this.children('option[value = "' + lecturerId + '"]').text(splitString(lecturerName));
             $this.trigger('change');
         } else {
             element.remove();
