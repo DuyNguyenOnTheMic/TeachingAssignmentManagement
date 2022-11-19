@@ -55,18 +55,15 @@ $('.btn-assign').on('click', function () {
     $this = $(this);
 
     // Get values
-    var curriculumClassId = $this.data('class');
-    var day = $this.data('day');
-    var roomId = $this.data('room');
+    var id = $this.data('id');
     var lecturerId = $this.parent().find('.select2 :selected').val();
 
     if (lecturerId) {
-
         // Send ajax request to assign lecturer
         $.ajax({
             type: 'POST',
             url: rootUrl + 'FacultyBoard/Timetable/Assign',
-            data: { termId, majorId, curriculumClassId, day, roomId, lecturerId },
+            data: { id, lecturerId },
             success: function (data) {
                 if (data.success) {
                     toastr.options.positionClass = 'toast-bottom-right';
