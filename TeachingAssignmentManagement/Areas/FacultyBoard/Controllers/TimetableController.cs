@@ -263,11 +263,10 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
         }
 
-        public JsonResult Assign(int termId, string majorId, string curriculumClassId, int day, string roomId, string lecturerId)
+        public JsonResult Assign(int id, string lecturerId)
         {
-            IEnumerable<curriculum_class> query_curriculumClassWhere = unitOfWork.CurriculumClassRepository.GetClassesInTermMajor(termId, majorId);
-            curriculum_class query_curriculumClass = unitOfWork.CurriculumClassRepository.FindCurriculumClass(query_curriculumClassWhere, curriculumClassId, day, roomId);
-            query_curriculumClass.lecturer_id = lecturerId;
+            curriculum_class curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
+            curriculumClass.lecturer_id = lecturerId;
             unitOfWork.Save();
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
