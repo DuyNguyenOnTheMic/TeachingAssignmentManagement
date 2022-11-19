@@ -13,7 +13,7 @@ namespace TeachingAssignmentManagement.DAL
             this.context = context;
         }
 
-        public IEnumerable<curriculum> GetCurriculums(IEnumerable<curriculum_class> curriculumClass)
+        public IEnumerable<curriculum> GetCurriculums(IEnumerable<CurriculumClassDTO> curriculumClass)
         {
             return curriculumClass.Select(c => c.curriculum).Distinct().ToList();
         }
