@@ -9,7 +9,11 @@ hubNotif.client.updatedData = function (id, isUpdate) {
     var element = $('#' + id);
     if (element.length) {
         alert(isUpdate);
-        element.closest('.assign-card').remove();
+        if (isUpdate) {
+            alert('update hả');
+        } else {
+            element.remove();
+        }
     }
 }
 
