@@ -1,7 +1,4 @@
-﻿/*// function uses for real time update
-setInterval(function () {
-    $("#tblAssign").load("Timetable/GetData #tblAssign", { termId, majorId });
-}, 2000); //refresh every 2 seconds*/
+﻿
 //alert($('#tblAssign tbody tr').length)
 
 var termId = $('#term').val(),
@@ -55,7 +52,7 @@ $('.btn-assign').on('click', function () {
     $this = $(this);
 
     // Get values
-    var id = $this.closest('.assign-card').data('id');
+    var id = $this.closest('.assign-card').attr('id');
     var lecturerId = $this.parent().find('.select2 :selected').val();
 
     if (lecturerId) {
@@ -78,7 +75,7 @@ $('.btn-delete').on('click', function () {
     $this = $(this);
 
     // Get values
-    var id = $this.closest('.assign-card').data('id');
+    var id = $this.closest('.assign-card').attr('id');
 
     // Show confirm message
     Swal.fire({
@@ -102,6 +99,7 @@ $('.btn-delete').on('click', function () {
                 data: { id },
                 success: function (data) {
                     if (data.success) {
+                        $('#' + id).load("Timetable/GetData #" + id, { termId, majorId });
                         toastr.options.positionClass = 'toast-bottom-right';
                         toastr.success('Xoá lớp thành công!');
                     }
