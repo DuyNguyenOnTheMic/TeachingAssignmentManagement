@@ -55,6 +55,12 @@ namespace TeachingAssignmentManagement.DAL
             context.curriculum_class.Add(curriculum_Class);
         }
 
+        public void DeleteClass(string id)
+        {
+            curriculum_class curriculumClass = context.curriculum_class.Find(id);
+            context.curriculum_class.Remove(curriculumClass);
+        }
+
         public void DeleteAllClasses(int term, string major)
         {
             context.curriculum_class.RemoveRange(context.curriculum_class.Where(c => c.term_id == term && c.major_id == major));

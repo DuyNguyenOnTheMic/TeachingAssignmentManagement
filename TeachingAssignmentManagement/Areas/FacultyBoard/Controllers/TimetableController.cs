@@ -272,6 +272,16 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         }
 
         [HttpPost]
+        public ActionResult Delete(string id)
+        {
+            // Delete class
+            unitOfWork.CurriculumClassRepository.DeleteClass(id);
+            unitOfWork.Save();
+            return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
         public ActionResult DeleteAll(int term, string major)
         {
             // Delete all records in curriculum class table

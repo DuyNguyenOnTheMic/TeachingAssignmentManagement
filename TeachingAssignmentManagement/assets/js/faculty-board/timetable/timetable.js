@@ -74,24 +74,41 @@ $('.btn-assign').on('click', function () {
     }
 });
 
-$('btn-delete').on('click', function () {
+$('.btn-delete').on('click', function () {
     $this = $(this);
 
     // Get values
     var id = $this.data('id');
 
-    // Send ajax request to delete class
-    $.ajax({
-        type: 'POST',
-        url: rootUrl + 'FacultyBoard/Timetable/Assign',
-        data: { termId, majorId, curriculumClassId, day, roomId, lecturerId },
-        success: function (data) {
-            if (data.success) {
-                toastr.options.positionClass = 'toast-bottom-right';
-                toastr.success('Thành công!');
-            }
+    // Show confirm message
+    Swal.fire({
+        title: 'Thông báo',
+        text: 'Bạn có chắc muốn xoá lớp học phần này?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Xoá',
+        cancelButtonText: 'Huỷ',
+        customClass: {
+            confirmButton: 'btn btn-primary',
+            cancelButton: 'btn btn-outline-danger ms-1'
+        },
+        buttonsStyling: false
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Send ajax request to delete class
+            $.ajax({
+                type: 'POST',
+                url: rootUrl + 'FacultyBoard/Timetable/Delete',
+                data: { id },
+                success: function (data) {
+                    if (data.success) {
+                        toastr.options.positionClass = 'toast-bottom-right';
+                        toastr.success('Xoá lớp thành công!');
+                    }
+                }
+            });
         }
-    });
+    })
 });
 
 function populateSelect($this) {
