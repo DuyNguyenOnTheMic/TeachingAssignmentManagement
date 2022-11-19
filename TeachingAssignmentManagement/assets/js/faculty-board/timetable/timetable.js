@@ -55,7 +55,7 @@ $('.btn-assign').on('click', function () {
     $this = $(this);
 
     // Get values
-    var id = $this.data('id');
+    var id = $this.closest('.assign-card').data('id');
     var lecturerId = $this.parent().find('.select2 :selected').val();
 
     if (lecturerId) {
@@ -78,7 +78,7 @@ $('.btn-delete').on('click', function () {
     $this = $(this);
 
     // Get values
-    var id = $this.data('id');
+    var id = $this.closest('.assign-card').data('id');
 
     // Show confirm message
     Swal.fire({
