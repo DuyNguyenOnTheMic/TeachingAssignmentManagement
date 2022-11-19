@@ -5,8 +5,12 @@ var hubNotif = $.connection.curriculumClassHub;
 // Start the connection
 $.connection.hub.start();
 // Notify while anyChanges
-hubNotif.client.updatedData = function () {
-    alert('hehe');
+hubNotif.client.updatedData = function (id) {
+    var element = $('#' + id);
+    if (element.length) {
+        alert('haha');
+        $this.closest('.assign-card').remove();
+    }
 }
 
 $(function () {

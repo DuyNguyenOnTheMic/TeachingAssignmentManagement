@@ -80,8 +80,7 @@ $('.btn-delete').on('click', function () {
     $this = $(this);
 
     // Get values
-    var assignCard = $this.closest('.assign-card');
-    var id = assignCard.attr('id');
+    var id = $this.closest('.assign-card').attr('id');
 
     // Show confirm message
     Swal.fire({
@@ -106,7 +105,6 @@ $('.btn-delete').on('click', function () {
                 success: function (data) {
                     if (data.success) {
                         // Remove element when delete succeeded
-                        assignCard.remove();
                         toastr.options.positionClass = 'toast-bottom-right';
                         toastr.success('Xoá lớp thành công!');
                     }
