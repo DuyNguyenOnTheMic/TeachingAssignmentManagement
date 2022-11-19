@@ -5,11 +5,10 @@ var hubNotif = $.connection.curriculumClassHub;
 // Start the connection
 $.connection.hub.start();
 // Notify while anyChanges
-hubNotif.client.updatedData = function (id, isUpdate) {
+hubNotif.client.updatedData = function (id, lecturerId, isUpdate) {
     var element = $('#' + id);
     if (element.length) {
         if (isUpdate) {
-            alert(termId + ' ' + majorId);
             element.parent().load(rootUrl + 'FacultyBoard/Timetable/GetData?termId=' + termId + '&majorId=' + majorId + ' #' + id);
         } else {
             element.remove();
