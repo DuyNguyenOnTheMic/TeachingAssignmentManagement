@@ -9,7 +9,7 @@ hubNotif.client.deletedData = function (id) {
     var element = $('#' + id);
     if (element.length) {
         alert('haha');
-        $this.closest('.assign-card').remove();
+        element.closest('.assign-card').remove();
     }
 }
 
