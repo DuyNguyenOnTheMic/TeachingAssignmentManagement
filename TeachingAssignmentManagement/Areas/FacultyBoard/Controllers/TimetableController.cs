@@ -263,11 +263,13 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
         }
 
+        [HttpPost]
         public JsonResult Assign(int id, string lecturerId)
         {
             curriculum_class curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
             curriculumClass.lecturer_id = lecturerId;
             unitOfWork.Save();
+            CurriculumClassHub.BroadcastDelete(id, true);
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
@@ -277,7 +279,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Delete class
             unitOfWork.CurriculumClassRepository.DeleteClass(id);
             unitOfWork.Save();
-            CurriculumClassHub.BroadcastDelete(id);
+            CurriculumClassHub.BroadcastDelete(id, false);
             return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
