@@ -15,7 +15,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable<curriculum> GetCurriculums(IEnumerable<CurriculumClassDTO> curriculumClass)
         {
-            return curriculumClass.Select(c => c.curriculum).Distinct().ToList();
+            return curriculumClass.Select(c => c.Curriculum).Distinct().ToList();
         }
 
         public curriculum GetCurriculumByID(string id)

@@ -35,7 +35,7 @@
                     {
                         foreach (var startLesson in startLessons)
                         {
-                            var classes = Model.Where(x => x.curriculum_id == curriculum.id && x.day_2 == day && x.start_lesson_2 == startLesson).ToList();
+                            var classes = Model.Where(x => x.TermId == curriculum.id && x.Day2 == day && x.StartLesson2 == startLesson).ToList();
                             if (classes.Count > 0)
                             {
                                 <td>
@@ -43,7 +43,7 @@
                                     {
                                         <div class="assign-card m-1">
                                             <div class="modal-header">
-                                                <h6 class="text-center">@item.curriculum_class_id</h6>
+                                                <h6 class="text-center">@item.CurriculumClassId</h6>
                                                 <button type="button" class="btn-close btn-delete" aria-label="Close"></button>
                                             </div>
                                             <div class="card-body pt-0">
@@ -53,7 +53,7 @@
                                                             <option value="">-- Chưa phân công --</option>
                                                             @foreach (var lecturer in ViewBag.lecturers)
                                                             {
-                                                                if (lecturer.Value == item.lecturer_id)
+                                                                if (lecturer.Value == item.LecturerId)
                                                                 {
                                                                     <option value='@lecturer.Value' selected>@lecturer.Text</option>
                                                                 }
@@ -63,7 +63,7 @@
                                                                 }
                                                             }
                                                         </select>
-                                                        <button class="btn btn-outline-primary btn-assign" type="button" data-id="@item.id">Go</button>
+                                                        <button class="btn btn-outline-primary btn-assign" type="button" data-id="@item.Id">Go</button>
                                                     </div>
                                                 </div>
                                             </div>

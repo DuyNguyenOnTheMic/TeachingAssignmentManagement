@@ -17,16 +17,16 @@ namespace TeachingAssignmentManagement.DAL
         {
             return context.curriculum_class.Select(c => new CurriculumClassDTO
             {
-                id = c.id,
-                curriculum_class_id = c.curriculum_class_id,
-                curriculum_id = c.curriculum_id,
-                curriculum = c.curriculum,
-                day_2 = c.day_2,
-                start_lesson_2 = c.start_lesson_2,
-                lecturer_id = c.lecturer_id,
-                term_id = c.term_id,
-                major_id = majorId
-            }).Where(c => c.term_id == termId && c.major_id == majorId);
+                Id = c.id,
+                CurriculumClassId = c.curriculum_class_id,
+                Day2 = c.day_2,
+                StartLesson2 = c.start_lesson_2,
+                TermId = c.term_id,
+                MajorId = majorId,
+                LecturerId = c.lecturer_id,
+                CurriculumId = c.curriculum_id,
+                Curriculum = c.curriculum
+            }).Where(c => c.TermId == termId && c.MajorId == majorId);
         }
 
         public IEnumerable<curriculum_class> GetClassesInTermMajor(int termId, string majorId)

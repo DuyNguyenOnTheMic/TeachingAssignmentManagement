@@ -2,15 +2,15 @@
 {
     public class CurriculumClassDTO
     {
-        public int id { get; set; }
-        public string curriculum_class_id { get; set; }
-        public int day_2 { get; set; }
-        public int start_lesson_2 { get; set; }
-        public string room_id { get; set; }
-        public int term_id { get; set; }
-        public string major_id { get; set; }
-        public string lecturer_id { get; set; }
-        public string curriculum_id { get; set; }
-        public curriculum curriculum { get; internal set; }
+        public int Id { get; set; }
+        public string CurriculumClassId { get; set; }
+        public int Day2 { get; set; }
+        public int StartLesson2 { get; set; }
+        public string RoomId { get; set; }
+        public int TermId { get; set; }
+        public string MajorId { get; set; }
+        public string LecturerId { get; set; }
+        public string CurriculumId { get; set; }
+        public curriculum Curriculum { get; internal set; }
     }
 }
