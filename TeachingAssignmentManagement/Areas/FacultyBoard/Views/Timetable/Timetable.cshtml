@@ -35,7 +35,7 @@
                     {
                         foreach (var startLesson in startLessons)
                         {
-                            var classes = Model.Where(x => x.TermId == curriculum.id && x.Day2 == day && x.StartLesson2 == startLesson).ToList();
+                            var classes = Model.Where(x => x.CurriculumId == curriculum.id && x.Day2 == day && x.StartLesson2 == startLesson).ToList();
                             if (classes.Count > 0)
                             {
                                 <td>
