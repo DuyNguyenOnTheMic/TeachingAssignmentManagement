@@ -13,6 +13,21 @@ namespace TeachingAssignmentManagement.DAL
             this.context = context;
         }
 
+        public IEnumerable<CurriculumClassDTO> Blabla(int termId, string majorId)
+        {
+            return context.curriculum_class.Select(c => new CurriculumClassDTO
+            {
+                Id = c.id,
+                Curriculum_class_id = c.curriculum_class_id,
+                Curriculum_id = c.curriculum_id,
+                Day_2 = c.day_2,
+                Start_lesson_2 = c.start_lesson_2,
+                Lecturer_id = c.lecturer_id,
+                Term_id = c.term_id,
+                Major_id = majorId
+            }).Where(c => c.Term_id == termId && c.Major_id == majorId);
+        }
+
         public IEnumerable<curriculum_class> GetClassesInTermMajor(int termId, string majorId)
         {
             return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId);

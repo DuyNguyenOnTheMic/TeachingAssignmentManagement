@@ -238,6 +238,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\FacultyBoard\Controllers\MajorController.cs" />
+    <Compile Include="Models\CurriculumClassDTO.cs" />
     <Compile Include="DAL\Repositories\CurriculumClassRepository.cs" />
     <Compile Include="DAL\Repositories\CurriculumRepository.cs" />
     <Compile Include="DAL\Repositories\MajorRepository.cs" />
