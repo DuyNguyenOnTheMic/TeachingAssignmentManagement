@@ -13,7 +13,7 @@ namespace TeachingAssignmentManagement.DAL
             this.context = context;
         }
 
-        public IEnumerable<CurriculumClassDTO> Blabla(int termId, string majorId)
+        public IEnumerable<CurriculumClassDTO> GetTimetable(int termId, string majorId)
         {
             return context.curriculum_class.Select(c => new CurriculumClassDTO
             {
