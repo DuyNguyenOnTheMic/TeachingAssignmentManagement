@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CP25Team03Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CP25Team03Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -73,7 +73,6 @@
           <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="credits" Type="int" Nullable="false" />
-          <Property Name="type" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="curriculum_class">
           <Key>
@@ -82,6 +81,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="curriculum_class_id" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="original_id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="student_class_id" Type="varchar(max)" />
           <Property Name="minimum_student" Type="int" />
           <Property Name="total_lesson" Type="int" />
@@ -317,7 +317,8 @@
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CP25Team03Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -387,7 +388,6 @@
           <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="credits" Type="Int32" Nullable="false" />
-          <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="curriculum_class" Relationship="Self.FK_curriculum_class_curriculum" FromRole="curriculum" ToRole="curriculum_class" />
         </EntityType>
         <EntityType Name="curriculum_class">
@@ -397,6 +397,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="curriculum_class_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="original_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="student_class_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="minimum_student" Type="Int32" />
           <Property Name="total_lesson" Type="Int32" />
@@ -679,7 +680,6 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="credits" ColumnName="credits" />
-                <ScalarProperty Name="type" ColumnName="type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -689,6 +689,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="curriculum_class_id" ColumnName="curriculum_class_id" />
                 <ScalarProperty Name="original_id" ColumnName="original_id" />
+                <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="student_class_id" ColumnName="student_class_id" />
                 <ScalarProperty Name="minimum_student" ColumnName="minimum_student" />
                 <ScalarProperty Name="total_lesson" ColumnName="total_lesson" />
