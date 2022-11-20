@@ -129,7 +129,7 @@ function changeLecturer($this) {
     var currentVal = newSelected.val();
     var currentText = newSelected.text();
     var newSelectedText = splitString(currentText);
-    newSelected.text(newSelectedText);
+    "" != currentVal && newSelected.text(newSelectedText);
 
     // Change previous selected option value and text
     var preVal = $this.data('preval');
