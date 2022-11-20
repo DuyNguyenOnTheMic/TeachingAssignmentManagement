@@ -177,8 +177,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         {
                             id = ToNullableString(curriculumId),
                             name = ToNullableString(name),
-                            credits = (int)ToNullableInt(credits),
-                            type = ToNullableString(type)
+                            credits = (int)ToNullableInt(credits)
                         };
                         unitOfWork.CurriculumRepository.InsertCurriculum(curriculum);
                         unitOfWork.Save();
@@ -212,6 +211,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     {
                         curriculum_class_id = ToNullableString(curriculumClassid),
                         original_id = ToNullableString(originalId),
+                        type = ToNullableString(type),
                         student_class_id = ToNullableString(studentClassId),
                         minimum_student = ToNullableInt(minimumStudent),
                         total_lesson = ToNullableInt(totalLesson),
