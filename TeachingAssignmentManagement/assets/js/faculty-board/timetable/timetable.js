@@ -51,10 +51,12 @@ $('.btn-assign').on('click', function () {
         data: { id, lecturerId },
         success: function (data) {
             if (data.success) {
-                // Remove card opacity background
                 var assignCard = $this.closest('.assign-card');
-                if (assignCard.hasClass('bg-opacity-50')) {
-                    assignCard.removeClass('bg-opacity-50');
+                var opacityClass = 'bg-opacity-50';
+                if (lecturerId == '') {
+                    assignCard.addClass(opacityClass);
+                } else if (assignCard.hasClass(opacityClass)) {
+                    assignCard.removeClass(opacityClass);
                 }
                 // Display success message
                 toastr.options.positionClass = 'toast-bottom-right';
