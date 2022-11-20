@@ -266,10 +266,16 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         [HttpPost]
         public JsonResult Assign(int id, string lecturerId)
         {
+            // Declare variables
             curriculum_class curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
+            lecturerId = ToNullableString(lecturerId);
+
+            // Update lecturer id of curriculum class
             curriculumClass.lecturer_id = lecturerId;
             unitOfWork.Save();
-            CurriculumClassHub.BroadcastData(id, lecturerId, curriculumClass.lecturer.full_name, true);
+
+            // Send signal to SignalR Hub
+            CurriculumClassHub.BroadcastData(id, lecturerId, curriculumClass.lecturer?.full_name, true);
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
@@ -279,6 +285,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Delete class
             unitOfWork.CurriculumClassRepository.DeleteClass(id);
             unitOfWork.Save();
+
+            // Send signal to SignalR Hub
             CurriculumClassHub.BroadcastData(id, null, null, false);
             return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
         }
