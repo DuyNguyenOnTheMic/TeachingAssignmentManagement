@@ -1,4 +1,6 @@
-﻿$(function () {
+﻿var rootUrl = $('#loader').data('request-url');
+
+$(function () {
     // Display message when table have no data
     var rowCount = $('#tblAssign tbody tr').length;
     if (rowCount == 0) {
@@ -13,10 +15,6 @@
         Waves.attach(".btn-assign", ['waves-float', 'waves-light']);
     }
 });
-
-var termId = $('#term').val(),
-    majorId = $('#major').val(),
-    rootUrl = $('#loader').data('request-url');
 
 $('table .form-select option:selected').each(function () {
     var selectedLecturer = $(this);
