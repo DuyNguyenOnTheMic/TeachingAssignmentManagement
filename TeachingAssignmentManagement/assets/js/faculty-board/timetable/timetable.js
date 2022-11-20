@@ -27,6 +27,8 @@ $('table .form-select option:selected').each(function () {
 
         var lecturerName = splitString(selectedLecturer.text());
         $(this).text(lecturerName);
+    } else {
+        selectedLecturer.closest('.assign-card').addClass('bg-opacity-50');
     }
 });
 
