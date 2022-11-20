@@ -8,6 +8,9 @@
         $('table .form-select').each(function () {
             populateSelect($(this));
         })
+        // Waves Effect
+        Waves.init();
+        Waves.attach(".btn-assign", ['waves-float', 'waves-light']);
     }
 });
 
