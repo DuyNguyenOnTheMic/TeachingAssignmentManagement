@@ -122,7 +122,7 @@ function splitString(lecturerName) {
 
 function changeLecturer($this) {
     // Destroy select2 to update option text
-    $this.select2('destroy');
+    $this.select2('destroy').unwrap();
 
     // Split new selected lecturer name
     var newSelected = $this.find(':selected');

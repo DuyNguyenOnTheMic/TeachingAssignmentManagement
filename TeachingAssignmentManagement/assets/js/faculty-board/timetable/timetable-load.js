@@ -12,7 +12,7 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) 
             var $this = element.find('.form-select');
 
             // Destroy select2 to update option text
-            $this.select2('destroy');
+            $this.select2('destroy').unwrap();
 
             // Set new selected values and change old value text
             $this.val(lecturerId);
@@ -26,6 +26,7 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) 
             // Populate select2 dropdown again
             populateSelect($this);
         } else {
+            // Delete curriculum class
             element.remove();
         }
     }
