@@ -41,33 +41,66 @@
                                 <td>
                                     @foreach (var item in classes)
                                     {
-                                        <div class="assign-card m-1" id="@item.Id">
-                                            <div class="modal-header">
-                                                <h6 class="text-center">@item.CurriculumClassId</h6>
-                                                <button type="button" class="btn-close btn-delete" aria-label="Close"></button>
-                                            </div>
-                                            <div class="card-body pt-0">
-                                                <div class="item-name">
-                                                    <div class="d-flex justify-content-center">
-                                                        <select class="select2 form-select" name="lecturer">
-                                                            <option value="">-- Chưa phân công --</option>
-                                                            @foreach (var lecturer in ViewBag.lecturers)
-                                                            {
-                                                                if (lecturer.Value == item.LecturerId)
+                                        if (item.Type == "Lý thuyết")
+                                        {
+                                            <div class="assign-card m-1 bg-success" id="@item.Id">
+                                                <div class="modal-header">
+                                                    <h6 class="text-center">@item.CurriculumClassId</h6>
+                                                    <button type="button" class="btn-close btn-delete" aria-label="Close"></button>
+                                                </div>
+                                                <div class="card-body pt-0">
+                                                    <div class="item-name">
+                                                        <div class="d-flex justify-content-center">
+                                                            <select class="select2 form-select" name="lecturer">
+                                                                <option value="">-- Chưa phân công --</option>
+                                                                @foreach (var lecturer in ViewBag.lecturers)
                                                                 {
-                                                                    <option value='@lecturer.Value' selected>@lecturer.Text</option>
+                                                                    if (lecturer.Value == item.LecturerId)
+                                                                    {
+                                                                        <option value='@lecturer.Value' selected>@lecturer.Text</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option value='@lecturer.Value'>@lecturer.Text</option>
+                                                                    }
                                                                 }
-                                                                else
-                                                                {
-                                                                    <option value='@lecturer.Value'>@lecturer.Text</option>
-                                                                }
-                                                            }
-                                                        </select>
-                                                        <button class="btn btn-outline-primary btn-assign" type="button">Go</button>
+                                                            </select>
+                                                            <button class="btn btn-outline-primary btn-assign" type="button">Go</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="assign-card m-1 bg-warning" id="@item.Id">
+                                                <div class="modal-header">
+                                                    <h6 class="text-center">@item.CurriculumClassId</h6>
+                                                    <button type="button" class="btn-close btn-delete" aria-label="Close"></button>
+                                                </div>
+                                                <div class="card-body pt-0">
+                                                    <div class="item-name">
+                                                        <div class="d-flex justify-content-center">
+                                                            <select class="select2 form-select" name="lecturer">
+                                                                <option value="">-- Chưa phân công --</option>
+                                                                @foreach (var lecturer in ViewBag.lecturers)
+                                                                {
+                                                                    if (lecturer.Value == item.LecturerId)
+                                                                    {
+                                                                        <option value='@lecturer.Value' selected>@lecturer.Text</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option value='@lecturer.Value'>@lecturer.Text</option>
+                                                                    }
+                                                                }
+                                                            </select>
+                                                            <button class="btn btn-outline-primary btn-assign" type="button">Go</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
                                     }
                                 </td>
                             }

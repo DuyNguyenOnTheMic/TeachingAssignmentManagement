@@ -3,29 +3,29 @@
     var rowCount = $('#tblAssign tbody tr').length;
     if (rowCount == 0) {
         $('#assignLecturerDiv').append('<h4 class="text-center mt-2">Học kỳ này chưa có dữ liệu <i class="feather feather-help-circle"></i></h4>');
+    } else {
+        $('table .form-select option:selected').each(function () {
+            var selectedLecturer = $(this);
+            if (selectedLecturer.val() != '') {
+                // Add previous selected value to jquery data
+                selectedLecturer.closest('.form-select').attr('data-preval', selectedLecturer.val());
+                selectedLecturer.closest('.form-select').attr('data-pretext', selectedLecturer.text());
+
+                var lecturerName = splitString(selectedLecturer.text());
+                $(this).text(lecturerName);
+            }
+        });
+
+        $('table .form-select').each(function () {
+            // Populate select2 dropdown
+            populateSelect($(this));
+        })
     }
 });
 
 var termId = $('#term').val(),
     majorId = $('#major').val(),
     rootUrl = $('#loader').data('request-url');
-
-$('table .form-select option:selected').each(function () {
-    var selectedLecturer = $(this);
-    if (selectedLecturer.val() != '') {
-        // Add previous selected value to jquery data
-        selectedLecturer.closest('.form-select').attr('data-preval', selectedLecturer.val());
-        selectedLecturer.closest('.form-select').attr('data-pretext', selectedLecturer.text());
-
-        var lecturerName = splitString(selectedLecturer.text());
-        $(this).text(lecturerName);
-    }
-});
-
-$('table .form-select').each(function () {
-    // Populate select2 dropdown
-    populateSelect($(this));
-})
 
 $('table .form-select').on('select2:select select2:unselecting', function () {
     var $this = $(this);
