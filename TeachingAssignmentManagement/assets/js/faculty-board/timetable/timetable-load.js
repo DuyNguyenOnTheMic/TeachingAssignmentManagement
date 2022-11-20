@@ -19,6 +19,11 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) 
             $this.children('option[value = "' + $this.data('preval') + '"]').text($this.data('pretext'));
             null != lecturerName && $this.children('option[value = "' + lecturerId + '"]').text(splitString(lecturerName));
 
+            var assignCard = $this.closest('.assign-card');
+            var opacityClass = 'bg-opacity-50';
+            // Add class to assign card if value is null and remove if assigned
+            lecturerId ? assignCard.hasClass(opacityClass) && assignCard.removeClass(opacityClass) : assignCard.addClass(opacityClass);
+
             // Set data for preval and pretext
             $this.data('preval', lecturerId);
             $this.data('pretext', lecturerName);

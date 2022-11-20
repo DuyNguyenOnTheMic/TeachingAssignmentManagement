@@ -53,11 +53,9 @@ $('.btn-assign').on('click', function () {
             if (data.success) {
                 var assignCard = $this.closest('.assign-card');
                 var opacityClass = 'bg-opacity-50';
-                if (lecturerId == '') {
-                    assignCard.addClass(opacityClass);
-                } else if (assignCard.hasClass(opacityClass)) {
-                    assignCard.removeClass(opacityClass);
-                }
+                // Add class to assign card if value is empty and remove if assigned
+                "" == lecturerId ? assignCard.addClass(opacityClass) : assignCard.hasClass(opacityClass) && assignCard.removeClass(opacityClass);
+
                 // Display success message
                 toastr.options.positionClass = 'toast-bottom-right';
                 toastr.success('Thành công!');
