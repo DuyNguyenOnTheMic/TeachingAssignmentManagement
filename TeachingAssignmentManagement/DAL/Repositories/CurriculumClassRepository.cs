@@ -19,6 +19,7 @@ namespace TeachingAssignmentManagement.DAL
             {
                 Id = c.id,
                 CurriculumClassId = c.curriculum_class_id,
+                Type = c.type,
                 Day2 = c.day_2,
                 StartLesson2 = c.start_lesson_2,
                 TermId = c.term_id,
