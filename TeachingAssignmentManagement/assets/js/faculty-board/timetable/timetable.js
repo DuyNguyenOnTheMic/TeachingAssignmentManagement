@@ -46,21 +46,24 @@ $('.btn-assign').on('click', function () {
     var id = $this.closest('.assign-card').attr('id');
     var lecturerId = $this.parent().find('.select2 :selected').val();
 
-    if (lecturerId) {
-        // Send ajax request to assign lecturer
-        $.ajax({
-            type: 'POST',
-            url: rootUrl + 'FacultyBoard/Timetable/Assign',
-            data: { id, lecturerId },
-            success: function (data) {
-                if (data.success) {
-                    toastr.options.positionClass = 'toast-bottom-right';
-                    toastr.success('Thành công!');
-                    $this.closest('.assign-card').removeClass('bg-opacity-50');
+    // Send ajax request to assign lecturer
+    $.ajax({
+        type: 'POST',
+        url: rootUrl + 'FacultyBoard/Timetable/Assign',
+        data: { id, lecturerId },
+        success: function (data) {
+            if (data.success) {
+                // Remove card opacity background
+                var assignCard = $this.closest('.assign-card');
+                if (assignCard.hasClass('bg-opacity-50')) {
+                    assignCard.removeClass('bg-opacity-50');
                 }
+                // Display success message
+                toastr.options.positionClass = 'toast-bottom-right';
+                toastr.success('Thành công!');
             }
-        });
-    }
+        }
+    });
 });
 
 $('.btn-delete').on('click', function () {
