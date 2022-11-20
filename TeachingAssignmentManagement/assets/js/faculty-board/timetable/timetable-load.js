@@ -17,7 +17,8 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) 
             // Set new selected values and change old value text
             $this.val(lecturerId);
             $this.children('option[value = "' + $this.data('preval') + '"]').text($this.data('pretext'));
-            $this.children('option[value = "' + lecturerId + '"]').text(splitString(lecturerName));
+            null != lecturerName && $this.children('option[value = "' + lecturerId + '"]').text(splitString(lecturerName));
+
             // Set data for preval and pretext
             $this.data('preval', lecturerId);
             $this.data('pretext', lecturerName);
