@@ -5,7 +5,7 @@ namespace TeachingAssignmentManagement.Hubs
 {
     public class CurriculumClassHub : Hub
     {
-        [HubMethodName("broadcastDelete")]
+        [HubMethodName("broadcastData")]
         public static void BroadcastData(int id, string lecturerId, string lecturerName, bool isUpdate)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<CurriculumClassHub>();
