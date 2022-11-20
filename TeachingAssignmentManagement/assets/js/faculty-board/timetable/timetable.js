@@ -56,6 +56,7 @@ $('.btn-assign').on('click', function () {
                 if (data.success) {
                     toastr.options.positionClass = 'toast-bottom-right';
                     toastr.success('Thành công!');
+                    $this.closest('.assign-card').removeClass('bg-opacity-50');
                 }
             }
         });
