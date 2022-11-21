@@ -25,6 +25,14 @@ $(function () {
     }
 });
 
+$('.assign-card').on('show.bs.popover', function () {
+    // Apply select2
+    setTimeout(() => {
+        var formSelect = $('.popover-body .form-select');
+        populateSelect(formSelect);
+    }, 0);
+});
+
 $('table .form-select option:selected').each(function () {
     var selectedLecturer = $(this);
     if (selectedLecturer.val() != '') {
@@ -72,21 +80,6 @@ $('.btn-assign').on('click', function () {
         }
     });
 });
-
-/*$('.assign-card').on('click', function () {
-    $('[data-bs-toggle="popover"]').not(this).popover('hide');
-    // declare variables
-    var assignCard = $(this);
-    var url = rootUrl + 'FacultyBoard/Timetable/Assign';
-    var lecturerId = assignCard.text();
-
-    // Get Partial View timetable data
-    $.get(url, { lecturerId }, function (data) {
-        var popover = bootstrap.Popover.getInstance(assignCard);
-        popover._config.content = data;//set content
-        popover.setContent();
-    });
-});*/
 
 $('.btn-delete').on('click', function () {
     $this = $(this);
