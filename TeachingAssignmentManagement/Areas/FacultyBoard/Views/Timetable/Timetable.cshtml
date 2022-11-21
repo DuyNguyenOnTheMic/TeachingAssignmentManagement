@@ -42,7 +42,7 @@
                                     @foreach (var item in classes)
                                     {
                                         string cardClass = "Lý thuyết" == item.Type ? "bg-success" : "bg-warning";
-                                        <div class="assign-card m-1 @cardClass" id="@item.Id" data-bs-toggle="popover" data-bs-content="Tart macaroon marzipan I love soufflé apple pie wafer. Chocolate bar jelly caramels jujubes chocolate cake gummies." title="Click Triggered" data-bs-trigger="click" data-bs-placement="bottom">
+                                        <div class="assign-card m-1 @cardClass" id="@item.Id" data-bs-toggle="popover" data-bs-html="true" data-bs-content="<b>Bà nội cha nó </b>Tart macaroon marzipan I love soufflé apple pie wafer. Chocolate bar jelly caramels jujubes chocolate cake gummies." title="Click Triggered" data-bs-trigger="click" data-bs-placement="bottom">
                                             <div class="card-body">
                                                 <div class="item-name">
                                                     <div class="d-flex justify-content-center">
