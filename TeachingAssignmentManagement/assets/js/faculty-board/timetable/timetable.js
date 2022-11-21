@@ -77,7 +77,7 @@ $('.assign-card').on('click', function () {
 
     var assignCard = $(this);
     var url = rootUrl + 'FacultyBoard/Timetable/Assign';
-    var lecturerId = assignCard.attr('id');
+    var lecturerId = assignCard.text();
     // Get Partial View timetable data
     $.get(url, { lecturerId }, function (data) {
         var popover = bootstrap.Popover.getInstance(assignCard);
