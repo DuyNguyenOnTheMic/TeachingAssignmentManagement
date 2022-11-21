@@ -42,7 +42,7 @@
                                     @foreach (var item in classes)
                                     {
                                         string cardClass = "Lý thuyết" == item.Type ? "bg-success" : "bg-warning";
-                                        <div class="assign-card m-1 @cardClass" id="@item.Id">
+                                        <div class="assign-card m-1 @cardClass" id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="Loại HP: @item.Type">
                                             <div class="modal-header">
                                                 <h6 class="text-white">@item.CurriculumClassId</h6>
                                                 <button type="button" class="btn-close btn-delete" aria-label="Close"></button>

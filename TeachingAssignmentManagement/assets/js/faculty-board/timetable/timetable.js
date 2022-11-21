@@ -13,6 +13,11 @@ $(function () {
         // Waves Effect
         Waves.init();
         Waves.attach(".btn-assign", ['waves-float', 'waves-light']);
+        // Trigger tooltip for card when document on ready
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
     }
 });
 
