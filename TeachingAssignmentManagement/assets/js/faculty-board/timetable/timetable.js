@@ -73,7 +73,7 @@ $('.btn-assign').on('click', function () {
     });
 });
 
-$('.assign-card').on('click', function () {
+/*$('.assign-card').on('click', function () {
     $('[data-bs-toggle="popover"]').not(this).popover('hide');
     // declare variables
     var assignCard = $(this);
@@ -86,7 +86,7 @@ $('.assign-card').on('click', function () {
         popover._config.content = data;//set content
         popover.setContent();
     });
-});
+});*/
 
 $('.btn-delete').on('click', function () {
     $this = $(this);

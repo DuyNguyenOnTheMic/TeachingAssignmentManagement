@@ -32,6 +32,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             IEnumerable<CurriculumClassDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, majorId);
             ViewBag.curriculums = unitOfWork.CurriculumRepository.GetCurriculums(query_classes);
+            ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
             return PartialView("Timetable", query_classes.ToList());
         }
 
@@ -268,7 +269,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public ActionResult Assign(string lecturerId)
         {
             ViewData["lecturerId"] = lecturerId;
-            ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
             return PartialView("Assign");
         }
 
