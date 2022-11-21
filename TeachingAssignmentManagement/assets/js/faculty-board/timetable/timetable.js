@@ -13,6 +13,15 @@ $(function () {
         // Waves Effect
         Waves.init();
         Waves.attach(".btn-assign", ['waves-float', 'waves-light']);
+        // Basic Initialization
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl, {
+                html: true,
+                sanitize: false
+            });
+        });
     }
 });
 
@@ -65,13 +74,15 @@ $('.btn-assign').on('click', function () {
 });
 
 $('.assign-card').on('click', function () {
-    var togglePopoverMethod = new bootstrap.Popover($(this), {
-        title: 'Popover Show Event',
-        trigger: 'focus',
-        placement: 'right',
-        html: true,
-        sanitize: false,
-        content: " <select name='cars' id='cars'> <option value='volvo'>Volvo</option> <option value='saab'>Saab</option> <option value='opel'>Opel</option> <option value='audi'>Audi</option> </select>"
+
+    var assignCard = $(this);
+    var url = rootUrl + 'FacultyBoard/Timetable/Assign';
+    var lecturerId = assignCard.attr('id');
+    // Get Partial View timetable data
+    $.get(url, { lecturerId }, function (data) {
+        var popover = bootstrap.Popover.getInstance(assignCard);
+        popover._config.content = data;//set content
+        popover.setContent();
     });
 });
 
