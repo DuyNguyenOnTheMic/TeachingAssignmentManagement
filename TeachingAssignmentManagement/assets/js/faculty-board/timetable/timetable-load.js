@@ -42,6 +42,11 @@ $(function () {
         assignLecturerDiv = $('#assignLecturerDiv'),
         url = rootUrl + 'FacultyBoard/Timetable/GetData';
 
+    // Populate select2 dropdown
+    formSelect.each(function () {
+        populateSelect($(this));
+    })
+
     formSelect.change(function () {
         var termId = $('#term').val(),
             majorId = $('#major').val();
@@ -57,3 +62,13 @@ $(function () {
         }
     });
 });
+
+function populateSelect($this) {
+    // Populate select2
+    $this.wrap('<div class="position-relative"></div>');
+    $this.select2({
+        language: 'vi',
+        dropdownAutoWidth: true,
+        dropdownParent: $this.parent()
+    })
+}

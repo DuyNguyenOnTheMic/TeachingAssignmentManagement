@@ -5,11 +5,7 @@ $(function () {
     var rowCount = $('#tblAssign tbody tr').length;
     if (rowCount == 0) {
         $('#assignLecturerDiv').append('<h4 class="text-center mt-2">Học kỳ này chưa có dữ liệu <i class="feather feather-help-circle"></i></h4>');
-    } else {
-        // Populate select2 dropdown
-        $('table .form-select').each(function () {
-            populateSelect($(this));
-        })
+    } else {      
         // Waves Effect
         Waves.init();
         Waves.attach(".btn-assign", ['waves-float', 'waves-light']);
@@ -105,16 +101,6 @@ $('.btn-delete').on('click', function () {
         }
     })
 });
-
-function populateSelect($this) {
-    // Populate select2
-    $this.wrap('<div class="position-relative"></div>');
-    $this.select2({
-        language: 'vi',
-        dropdownAutoWidth: true,
-        dropdownParent: $this.parent()
-    })
-}
 
 function splitString(lecturerName) {
     // Split lecture name
