@@ -74,6 +74,7 @@ $('.btn-assign').on('click', function () {
 });
 
 $('.assign-card').on('click', function () {
+    $('[data-bs-toggle="popover"]').not(this).popover('hide');
     // declare variables
     var assignCard = $(this);
     var url = rootUrl + 'FacultyBoard/Timetable/Assign';
