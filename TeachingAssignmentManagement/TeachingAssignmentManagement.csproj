@@ -1084,7 +1084,9 @@
     <Content Include="assets\js\faculty-board\term\term.min.js" />
     <Content Include="assets\js\faculty-board\timetable\timetable-load.js" />
     <Content Include="assets\js\faculty-board\timetable\import.js" />
+    <Content Include="assets\js\faculty-board\timetable\timetable-load.min.js" />
     <Content Include="assets\js\faculty-board\timetable\timetable.js" />
+    <Content Include="assets\js\faculty-board\timetable\timetable.min.js" />
     <Content Include="assets\js\faculty-board\user\user.js" />
     <Content Include="assets\js\faculty-board\user\user.min.js" />
     <Content Include="assets\js\form-loader.min.js" />
