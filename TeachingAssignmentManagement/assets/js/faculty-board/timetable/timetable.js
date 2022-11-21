@@ -64,6 +64,17 @@ $('.btn-assign').on('click', function () {
     });
 });
 
+$('.assign-card').on('click', function () {
+    var togglePopoverMethod = new bootstrap.Popover($(this), {
+        title: 'Popover Show Event',
+        trigger: 'focus',
+        placement: 'right',
+        html: true,
+        sanitize: false,
+        content: " <select name='cars' id='cars'> <option value='volvo'>Volvo</option> <option value='saab'>Saab</option> <option value='opel'>Opel</option> <option value='audi'>Audi</option> </select>"
+    });
+});
+
 $('.btn-delete').on('click', function () {
     $this = $(this);
 
