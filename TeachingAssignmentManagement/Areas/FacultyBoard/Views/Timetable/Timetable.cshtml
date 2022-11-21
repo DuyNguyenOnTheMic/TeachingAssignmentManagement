@@ -42,9 +42,8 @@
                                     @foreach (var item in classes)
                                     {
                                         string cardClass = "Lý thuyết" == item.Type ? "bg-success" : "bg-warning";
-                                        <div class="assign-card m-1 @cardClass" id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>Loại HP:</b> @item.Type <br /><b>Phòng:</b> @item.RoomId">
+                                        <div class="assign-card m-1 @cardClass" id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>Lớp HP: </b> @item.CurriculumClassId<br /><b>Loại HP:</b> @item.Type<br /><b>Phòng:</b> @item.RoomId">
                                             <div class="modal-header">
-                                                <h6 class="text-white">@item.CurriculumClassId</h6>
                                                 <button type="button" class="btn-close btn-delete" aria-label="Close"></button>
                                             </div>
                                             <div class="card-body pt-0">
