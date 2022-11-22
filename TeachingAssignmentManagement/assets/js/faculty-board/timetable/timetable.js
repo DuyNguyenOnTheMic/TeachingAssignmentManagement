@@ -33,8 +33,9 @@ $(function () {
     }
 });
 
-$(document).unbind('click').on('click', '.btn-assign', function () {
+$(document).unbind().on('click', '.btn-assign', function () {
     $this = $(this);
+    alert('hehe');
 
     // Get values
     var id = $this.data('id');
