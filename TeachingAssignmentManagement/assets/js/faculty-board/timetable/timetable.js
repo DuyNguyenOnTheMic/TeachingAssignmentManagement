@@ -35,7 +35,6 @@ $(function () {
 
 $(document).unbind().on('click', '.btn-assign', function () {
     $this = $(this);
-    alert('hehe');
 
     // Get values
     var id = $this.data('id');
@@ -54,6 +53,7 @@ $(document).unbind().on('click', '.btn-assign', function () {
                 var assignCard = $('#' + id);
                 assignCard.data('lecturerid', lecturerId);
                 assignCard.text(splitString(lecturerName));
+                assignCard.popover('update');
 
                 // Display success message
                 toastr.options.positionClass = 'toast-bottom-right';
