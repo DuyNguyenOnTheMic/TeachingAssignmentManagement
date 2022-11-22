@@ -51,8 +51,15 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
             if (data.success) {
                 // Update assign card data
                 var assignCard = $('#' + id);
-                assignCard.data("lecturerid", lecturerId), "" != lecturerId ? assignCard.text(splitString(lecturerName)) : assignCard.text(lecturerName);
+                assignCard.data("lecturerid", lecturerId);
+                if (lecturerId != '') {
+                    lecturerName = splitString(lecturerName);
+                } else {
+                    assignCard.removeClass('btn-success btn-warning').addClass('btn-secondary');
+                }
+                assignCard.text(lecturerName);
                 assignCard.popover('update');
+
                 // Display success message
                 toastr.options.positionClass = 'toast-bottom-right';
                 toastr.success('Thành công!');
