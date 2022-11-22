@@ -25,10 +25,13 @@ $(function () {
 
         // Split lecturerName
         $('.assign-card').each(function () {
-            var lecturerId = $(this).data('lecturerid');
-            var lecturerName = $(this).text();
+            var $this = $(this);
+            var lecturerId = $this.data('lecturerid');
+            var lecturerName = $this.text();
             if (lecturerId != '') {
-                $(this).text(splitString(lecturerName));
+                $this.text(splitString(lecturerName));
+            } else {
+                $this.removeClass('btn-success btn-warning').addClass('btn-secondary');
             }
         });
     }
