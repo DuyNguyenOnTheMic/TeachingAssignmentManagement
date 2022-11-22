@@ -37,6 +37,33 @@ $(function () {
     }
 });
 
+$(document).on("click", ".btn-assign", function () {
+    $this = $(this);
+
+    // Get values
+    var id = $this.closest('.assign-card').attr('id');
+    var lecturerId = $this.parent().find('.select2 :selected').val();
+
+    // Send ajax request to assign lecturer
+    $.ajax({
+        type: 'POST',
+        url: rootUrl + 'FacultyBoard/Timetable/Assign',
+        data: { id, lecturerId },
+        success: function (data) {
+            if (data.success) {
+                var assignCard = $this.closest('.assign-card');
+                var opacityClass = 'bg-opacity-50';
+                // Add class to assign card if value is empty and remove if assigned
+                "" == lecturerId ? assignCard.addClass(opacityClass) : assignCard.hasClass(opacityClass) && assignCard.removeClass(opacityClass);
+
+                // Display success message
+                toastr.options.positionClass = 'toast-bottom-right';
+                toastr.success('Thành công!');
+            }
+        }
+    });
+});
+
 $('.assign-card').on('click', function () {
     // Hide other popovers when a popover is clicked
     $('[data-bs-toggle="popover"]').not(this).popover('hide');
@@ -71,33 +98,6 @@ $('table .form-select').on('select2:select select2:unselecting', function () {
 
     // Call function to change lecturer
     changeLecturer($this);
-});
-
-$('.btn-assign').on('click', function () {
-    $this = $(this);
-
-    // Get values
-    var id = $this.closest('.assign-card').attr('id');
-    var lecturerId = $this.parent().find('.select2 :selected').val();
-
-    // Send ajax request to assign lecturer
-    $.ajax({
-        type: 'POST',
-        url: rootUrl + 'FacultyBoard/Timetable/Assign',
-        data: { id, lecturerId },
-        success: function (data) {
-            if (data.success) {
-                var assignCard = $this.closest('.assign-card');
-                var opacityClass = 'bg-opacity-50';
-                // Add class to assign card if value is empty and remove if assigned
-                "" == lecturerId ? assignCard.addClass(opacityClass) : assignCard.hasClass(opacityClass) && assignCard.removeClass(opacityClass);
-
-                // Display success message
-                toastr.options.positionClass = 'toast-bottom-right';
-                toastr.success('Thành công!');
-            }
-        }
-    });
 });
 
 $('.btn-delete').on('click', function () {
