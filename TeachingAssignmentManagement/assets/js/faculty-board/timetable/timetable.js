@@ -68,12 +68,13 @@ $('.assign-card').on('click', function () {
 });
 
 $('.assign-card').on('show.bs.popover', function () {
-    // Apply select2
     setTimeout(() => {
         var formSelect = $('.popover-body .form-select');
         if (!$(formSelect).hasClass("select2-hidden-accessible")) {
+            // Apply select2
             populateSelect(formSelect);
         } else {
+            // Set selected value for dropdown
             var lecturerId = $(this).data('lecturerid');
             formSelect.val(lecturerId);
         }
