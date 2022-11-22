@@ -39,7 +39,9 @@ $(document).unbind().on('click', '.btn-assign', function () {
 
     // Get values
     var id = $this.data('id');
-    var lecturerId = $this.parent().find('.select2 :selected').val();
+    var lecturerSelect = $this.parent().find('.select2 :selected');
+    var lecturerId = lecturerSelect.val();
+    var lecturerName = lecturerSelect.text();
 
     // Send ajax request to assign lecturer
     $.ajax({
@@ -48,8 +50,10 @@ $(document).unbind().on('click', '.btn-assign', function () {
         data: { id, lecturerId },
         success: function (data) {
             if (data.success) {
-                // Update assign card lecturer id data
-                $('#' + id).data('lecturerid', lecturerId);
+                // Update assign card data
+                var assignCard = $('#' + id);
+                assignCard.data('lecturerid', lecturerId);
+                assignCard.text(splitString(lecturerName));
 
                 // Display success message
                 toastr.options.positionClass = 'toast-bottom-right';
