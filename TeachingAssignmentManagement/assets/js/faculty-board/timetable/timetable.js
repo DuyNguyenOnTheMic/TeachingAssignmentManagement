@@ -38,7 +38,6 @@ $(document).on("click", ".btn-assign", function () {
 
     // Get values
     var id = $this.data('id');
-    alert(id);
     var lecturerId = $this.parent().find('.select2 :selected').val();
 
     // Send ajax request to assign lecturer
