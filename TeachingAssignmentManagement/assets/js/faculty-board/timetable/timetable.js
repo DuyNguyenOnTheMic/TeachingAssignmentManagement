@@ -33,7 +33,7 @@ $(function () {
     }
 });
 
-$(document).on("click", ".btn-assign", function () {
+$(document).unbind('click').on('click', '.btn-assign', function () {
     $this = $(this);
 
     // Get values
@@ -49,7 +49,6 @@ $(document).on("click", ".btn-assign", function () {
             if (data.success) {
                 // Update assign card lecturer id data
                 $('#' + id).data('lecturerid', lecturerId);
-                alert('hehe');
 
                 // Display success message
                 toastr.options.positionClass = 'toast-bottom-right';

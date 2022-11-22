@@ -11,7 +11,7 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) 
         if (isUpdate) {
             var $this = element.find('.form-select');
 
-            // Destroy select2 to update option text
+          // Destroy select2 to update option text
             $this.select2('destroy').unwrap();
 
             // Set new selected values and change old value text
@@ -59,7 +59,7 @@ $(function () {
             majorId = $('#major').val();
 
         // Hide all popovers
-        $("[data-bs-toggle='popover']").popover('hide');
+        $("[data-bs-toggle='popover']").popover('dispose');
 
         if (termId && majorId) {
             // Display loading message while fetching data
