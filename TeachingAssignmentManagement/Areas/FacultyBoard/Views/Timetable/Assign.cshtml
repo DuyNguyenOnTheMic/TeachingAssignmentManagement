@@ -1,21 +1,18 @@
-﻿@model string
+﻿@{
+    string classId = this.ViewData.ContainsKey("id") ? this.ViewData["id"].ToString() : string.Empty;
+    string lecturerId = this.ViewData.ContainsKey("lecturerId") ? this.ViewData["lecturerId"].ToString() : string.Empty;
+    SelectList select = (SelectList)ViewData["lecturer"];
+}
 
 <div class="d-flex justify-content-center">
     <select class="select2 form-select" name="lecturer">
         <option value="">Chưa phân công</option>
-        @foreach (var lecturer in ViewBag.lecturers)
+        @foreach (SelectListItem option in select)
         {
-            if (lecturer.Value == Model)
-            {
-                <option value='@lecturer.Value' selected>@lecturer.Text</option>
-            }
-            else
-            {
-                <option value='@lecturer.Value'>@lecturer.Text</option>
-            }
+            <option value="@option.Value" @(option.Value == lecturerId ? "selected" : "")>@option.Text</option>
         }
     </select>
-    <button class="btn btn-primary btn-icon btn-assign ms-25" type="button" aria-label="Assign">
+    <button class="btn btn-primary btn-icon btn-assign ms-25" data-id="@classId" type="button" aria-label="Assign">
         <i class="feather feather-check"></i>
     </button>
 </div>
