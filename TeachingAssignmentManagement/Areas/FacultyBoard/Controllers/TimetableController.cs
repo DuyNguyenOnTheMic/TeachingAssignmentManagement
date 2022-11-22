@@ -265,13 +265,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult Assign(string lecturerId)
-        {
-            ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
-            return PartialView("Assign");
-        }
-
         [HttpPost]
         public JsonResult Assign(int id, string lecturerId)
         {
