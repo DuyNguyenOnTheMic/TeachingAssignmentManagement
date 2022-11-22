@@ -42,13 +42,8 @@ $('.assign-card').on('show.bs.popover', function () {
     // Apply select2
     setTimeout(() => {
         var formSelect = $('.popover-body .form-select');
-        formSelect.wrap('<div class="position-relative"></div>').select2({
-            language: 'vi',
-            dropdownAutoWidth: true,
-            width: '100px !important',
-            dropdownParent: formSelect.parent()
-        });
-    }, 200);
+        populateSelect(formSelect);
+    }, 180);
 });
 
 $('table .form-select option:selected').each(function () {
