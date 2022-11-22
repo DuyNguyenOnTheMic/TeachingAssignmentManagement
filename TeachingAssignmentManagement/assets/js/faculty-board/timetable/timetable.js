@@ -51,6 +51,9 @@ $(document).on("click", ".btn-assign", function () {
                 // Add class to assign card if value is empty and remove if assigned
                 "" == lecturerId ? $this.addClass(opacityClass) : $this.hasClass(opacityClass) && $this.removeClass(opacityClass);
 
+                // Update assign card lecturer id data
+                $('#' + id).data('lecturerid', lecturerId);
+
                 // Display success message
                 toastr.options.positionClass = 'toast-bottom-right';
                 toastr.success('Thành công!');
@@ -70,6 +73,9 @@ $('.assign-card').on('show.bs.popover', function () {
         var formSelect = $('.popover-body .form-select');
         if (!$(formSelect).hasClass("select2-hidden-accessible")) {
             populateSelect(formSelect);
+        } else {
+            var lecturerId = $(this).data('lecturerid');
+            formSelect.val(lecturerId);
         }
     }, 0);
 });
