@@ -10,16 +10,16 @@
         <thead class="table-light">
             <tr class="text-center">
                 <th>THỨ</th>
-                @foreach (var day in days)
+                @foreach (int day in days)
                 {
                     <th colspan="5">THỨ @day</th>
                 }
             </tr>
             <tr class="text-center text-nowrap">
                 <th>TIẾT</th>
-                @foreach (var day in days)
+                @foreach (int day in days)
                 {
-                    foreach (var startLesson in startLessons)
+                    foreach (int startLesson in startLessons)
                     {
                         <th>@startLesson-@(startLesson + 2)</th>
                     }
@@ -31,9 +31,9 @@
             {
                 <tr>
                     <td>@curriculum.name</td>
-                    @foreach (var day in days)
+                    @foreach (int day in days)
                     {
-                        foreach (var startLesson in startLessons)
+                        foreach (int startLesson in startLessons)
                         {
                             var classes = Model.Where(x => x.CurriculumId == curriculum.id && x.Day2 == day && x.StartLesson2 == startLesson).ToList();
                             if (classes.Count > 0)
