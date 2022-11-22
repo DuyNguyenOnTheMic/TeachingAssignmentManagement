@@ -1,6 +1,4 @@
-﻿@{
-    string lecturerId = ViewData["lecturerId"].ToString();
-}
+﻿@model string
 
 <div class="card-body">
     <div class="item-name">
@@ -9,7 +7,7 @@
                 <option value="">Chưa phân công</option>
                 @foreach (var lecturer in ViewBag.lecturers)
                 {
-                    if (lecturer.Value == lecturerId)
+                    if (lecturer.Value == Model)
                     {
                         <option value='@lecturer.Value' selected>@lecturer.Text</option>
                     }
