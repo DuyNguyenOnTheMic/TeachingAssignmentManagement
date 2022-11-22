@@ -1,23 +1,19 @@
 ﻿@model string
 
-<div class="card-body">
-    <div class="item-name">
-        <div class="d-flex justify-content-center">
-            <select class="select2 form-select" name="lecturer">
-                <option value="">Chưa phân công</option>
-                @foreach (var lecturer in ViewBag.lecturers)
-                {
-                    if (lecturer.Value == Model)
-                    {
-                        <option value='@lecturer.Value' selected>@lecturer.Text</option>
-                    }
-                    else
-                    {
-                        <option value='@lecturer.Value'>@lecturer.Text</option>
-                    }
-                }
-            </select>
-            <button class="btn btn-primary btn-icon btn-assign ms-25" type="button" aria-label="Assign"><i class="feather feather-check"></i></button>
-        </div>
-    </div>
+<div class="d-flex justify-content-center">
+    <select class="select2 form-select" name="lecturer">
+        <option value="">Chưa phân công</option>
+        @foreach (var lecturer in ViewBag.lecturers)
+        {
+            if (lecturer.Value == Model)
+            {
+                <option value='@lecturer.Value' selected>@lecturer.Text</option>
+            }
+            else
+            {
+                <option value='@lecturer.Value'>@lecturer.Text</option>
+            }
+        }
+    </select>
+    <button class="btn btn-primary btn-icon btn-assign ms-25" type="button" aria-label="Assign"><i class="feather feather-check"></i></button>
 </div>

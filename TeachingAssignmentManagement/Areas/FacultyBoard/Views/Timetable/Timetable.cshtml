@@ -41,9 +41,9 @@
                                 <td>
                                     @foreach (var item in classes)
                                     {
-                                        string hehe = item.LecturerId?.ToString() ?? "";
-                                        string cardClass = "Lý thuyết" == item.Type ? "bg-success" : "bg-warning";
-                                        <button class="btn btn-primary assign-card m-1 @cardClass" type="button" id="@item.Id" data-bs-toggle="popover" data-bs-content="@Html.Partial("Assign", hehe).ToString()" title="Click Triggered" data-bs-trigger="click">@item.LecturerId</button>
+                                        string lecturerId = item.LecturerId?.ToString() ?? "";
+                                        string cardClass = "Lý thuyết" == item.Type ? "btn-success" : "btn-warning";
+                                        <button class="btn @cardClass assign-card m-1" type="button" id="@item.Id" data-bs-toggle="popover" data-bs-content="@Html.Partial("Assign", lecturerId).ToString()" title="Click Triggered" data-bs-trigger="click">@item.LecturerId</button>
                                     }
                                 </td>
                             }
