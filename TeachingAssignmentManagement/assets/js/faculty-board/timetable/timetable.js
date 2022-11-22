@@ -33,7 +33,7 @@ $(function () {
     }
 });
 
-$(document).unbind().on('click', '.btn-assign', function () {
+$(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
     $this = $(this);
 
     // Get values
