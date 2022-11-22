@@ -58,6 +58,9 @@ $(function () {
         var termId = $('#term').val(),
             majorId = $('#major').val();
 
+        // Hide all popovers
+        $("[data-bs-toggle='popover']").popover('hide');
+
         if (termId && majorId) {
             // Display loading message while fetching data
             assignLecturerDiv.html('<div class="d-flex justify-content-center"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-25">Đang tải...</p></div>');
