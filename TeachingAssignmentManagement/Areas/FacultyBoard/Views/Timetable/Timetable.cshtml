@@ -41,7 +41,7 @@
                                 <td>
                                     @foreach (var item in classes)
                                     {
-                                        string lecturerId = item.LecturerId ?? "";
+                                        string lecturerId = item.LecturerId ?? string.Empty;
                                         string lecturerName = item.LecturerName ?? "Chưa phân";
                                         string cardClass = "Lý thuyết" == item.Type ? "btn-success" : "btn-warning";
                                         <button class="btn @cardClass assign-card text-nowrap m-25" type="button" id="@item.Id" data-bs-toggle="popover" data-lecturerid="@lecturerId" data-bs-content="@Html.Partial("Assign", new ViewDataDictionary { { "lecturer", ViewBag.lecturers }, { "classId", item.Id }, { "lecturerId", lecturerId } }).ToString()" title="Click Triggered" data-bs-delay="160" data-bs-trigger="click">@lecturerName</button>
