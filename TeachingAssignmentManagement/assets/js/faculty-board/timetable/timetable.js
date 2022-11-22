@@ -47,12 +47,9 @@ $(document).on("click", ".btn-assign", function () {
         data: { id, lecturerId },
         success: function (data) {
             if (data.success) {
-                var opacityClass = 'bg-opacity-50';
-                // Add class to assign card if value is empty and remove if assigned
-                "" == lecturerId ? $this.addClass(opacityClass) : $this.hasClass(opacityClass) && $this.removeClass(opacityClass);
-
                 // Update assign card lecturer id data
                 $('#' + id).data('lecturerid', lecturerId);
+                alert('hehe');
 
                 // Display success message
                 toastr.options.positionClass = 'toast-bottom-right';
