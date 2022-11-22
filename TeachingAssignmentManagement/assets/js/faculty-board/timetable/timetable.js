@@ -38,6 +38,7 @@ $(function () {
 });
 
 $('.assign-card').on('show.bs.popover', function () {
+    // Hide other popovers
     $('[data-bs-toggle="popover"]').not(this).popover('hide');
     // Apply select2
     setTimeout(() => {
