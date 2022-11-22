@@ -42,8 +42,10 @@ $('.assign-card').on('show.bs.popover', function () {
     // Apply select2
     setTimeout(() => {
         var formSelect = $('.popover-body .form-select');
-        populateSelect(formSelect);
-    }, 180);
+        if (!$(formSelect).hasClass("select2-hidden-accessible")) {
+            populateSelect(formSelect);
+        }
+    }, 160);
 });
 
 $('table .form-select option:selected').each(function () {
