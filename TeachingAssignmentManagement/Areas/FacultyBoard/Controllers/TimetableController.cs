@@ -32,6 +32,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             IEnumerable<CurriculumClassDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, majorId);
             ViewBag.curriculums = unitOfWork.CurriculumRepository.GetCurriculums(query_classes);
+            ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
             return PartialView("Timetable", query_classes.ToList());
         }
 
@@ -262,13 +263,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 Response.Write($"Oops, có lỗi đã xảy ra, vui lòng kiểm tra lại tệp tin 🥹");
                 return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
             }
-        }
-
-        [HttpGet]
-        public ActionResult Assign(string lecturerId)
-        {
-            ViewData["lecturer"] = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name", lecturerId);
-            return PartialView("Assign");
         }
 
         [HttpPost]
