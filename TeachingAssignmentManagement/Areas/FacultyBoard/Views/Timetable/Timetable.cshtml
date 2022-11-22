@@ -44,7 +44,7 @@
                                         string lecturerId = item.LecturerId ?? "";
                                         string lecturerName = item.LecturerName ?? "Chưa phân";
                                         string cardClass = "Lý thuyết" == item.Type ? "btn-success" : "btn-warning";
-                                        <button class="btn @cardClass assign-card m-1" type="button" id="@item.Id" data-bs-toggle="popover" data-bs-content="@Html.Partial("Assign", lecturerId).ToString()" title="Click Triggered" data-bs-trigger="click">@lecturerName</button>
+                                        <button class="btn @cardClass assign-card m-1" type="button" id="@item.Id" data-bs-toggle="popover" data-lecturerid="@lecturerId" data-bs-content="@Html.Partial("Assign", lecturerId).ToString()" title="Click Triggered" data-bs-trigger="click">@lecturerName</button>
                                     }
                                 </td>
                             }
