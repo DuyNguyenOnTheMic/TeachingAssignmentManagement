@@ -37,16 +37,19 @@ $(function () {
     }
 });
 
-$('.assign-card').on('show.bs.popover', function () {
-    // Hide other popovers
+$('.assign-card').on('click', function () {
+    // Hide other popovers when a popover is clicked
     $('[data-bs-toggle="popover"]').not(this).popover('hide');
+});
+
+$('.assign-card').on('show.bs.popover', function () {
     // Apply select2
     setTimeout(() => {
         var formSelect = $('.popover-body .form-select');
         if (!$(formSelect).hasClass("select2-hidden-accessible")) {
             populateSelect(formSelect);
         }
-    }, 160);
+    }, 0);
 });
 
 $('table .form-select option:selected').each(function () {
