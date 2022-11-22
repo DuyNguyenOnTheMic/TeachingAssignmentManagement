@@ -51,10 +51,8 @@ $(document).unbind().on('click', '.btn-assign', function () {
             if (data.success) {
                 // Update assign card data
                 var assignCard = $('#' + id);
-                assignCard.data('lecturerid', lecturerId);
-                assignCard.text(splitString(lecturerName));
+                assignCard.data("lecturerid", lecturerId), "" != lecturerId ? assignCard.text(splitString(lecturerName)) : assignCard.text(lecturerName);
                 assignCard.popover('update');
-
                 // Display success message
                 toastr.options.positionClass = 'toast-bottom-right';
                 toastr.success('Thành công!');
