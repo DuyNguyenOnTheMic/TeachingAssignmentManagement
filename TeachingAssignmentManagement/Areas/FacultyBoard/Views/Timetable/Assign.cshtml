@@ -1,5 +1,5 @@
 ﻿@{
-    string classId = this.ViewData.ContainsKey("id") ? this.ViewData["id"].ToString() : string.Empty;
+    string classId = this.ViewData.ContainsKey("classId") ? this.ViewData["id"].ToString() : string.Empty;
     string lecturerId = this.ViewData.ContainsKey("lecturerId") ? this.ViewData["lecturerId"].ToString() : string.Empty;
     SelectList select = (SelectList)ViewData["lecturer"];
 }

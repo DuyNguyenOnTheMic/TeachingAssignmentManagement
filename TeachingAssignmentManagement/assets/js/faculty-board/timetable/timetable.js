@@ -37,7 +37,8 @@ $(document).on("click", ".btn-assign", function () {
     $this = $(this);
 
     // Get values
-    var id = $this.closest('.assign-card').attr('id');
+    var id = $this.data('id');
+    alert(id);
     var lecturerId = $this.parent().find('.select2 :selected').val();
 
     // Send ajax request to assign lecturer
@@ -47,10 +48,9 @@ $(document).on("click", ".btn-assign", function () {
         data: { id, lecturerId },
         success: function (data) {
             if (data.success) {
-                var assignCard = $this.closest('.assign-card');
                 var opacityClass = 'bg-opacity-50';
                 // Add class to assign card if value is empty and remove if assigned
-                "" == lecturerId ? assignCard.addClass(opacityClass) : assignCard.hasClass(opacityClass) && assignCard.removeClass(opacityClass);
+                "" == lecturerId ? $this.addClass(opacityClass) : $this.hasClass(opacityClass) && $this.removeClass(opacityClass);
 
                 // Display success message
                 toastr.options.positionClass = 'toast-bottom-right';
