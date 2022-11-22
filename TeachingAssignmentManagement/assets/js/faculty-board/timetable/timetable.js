@@ -38,11 +38,17 @@ $(function () {
 });
 
 $('.assign-card').on('show.bs.popover', function () {
+    $('[data-bs-toggle="popover"]').not(this).popover('hide');
     // Apply select2
     setTimeout(() => {
         var formSelect = $('.popover-body .form-select');
-        populateSelect(formSelect);
-    }, 0);
+        formSelect.wrap('<div class="position-relative"></div>').select2({
+            language: 'vi',
+            dropdownAutoWidth: true,
+            width: '100px !important',
+            dropdownParent: formSelect.parent()
+        });
+    }, 200);
 });
 
 $('table .form-select option:selected').each(function () {
