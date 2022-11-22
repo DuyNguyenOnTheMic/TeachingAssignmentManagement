@@ -53,6 +53,15 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
                 var assignCard = $('#' + id);
                 assignCard.data("lecturerid", lecturerId);
                 if (lecturerId != '') {
+                    var classType = assignCard.data('classtype');
+                    assignCard.removeClass('btn-success btn-warning btn-secondary');
+                    if (classType == 'Lý thuyết') {
+                        // color of theory class
+                        assignCard.addClass('btn-success');
+                    } else {
+                        // color of practical class
+                        assignCard.addClass('btn-warning');
+                    }
                     lecturerName = splitString(lecturerName);
                 } else {
                     assignCard.removeClass('btn-success btn-warning').addClass('btn-secondary');
