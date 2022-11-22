@@ -6,10 +6,6 @@ $(function () {
     if (rowCount == 0) {
         $('#assignLecturerDiv').append('<h4 class="text-center mt-2">Học kỳ này chưa có dữ liệu <i class="feather feather-help-circle"></i></h4>');
     } else {
-        // Populate select2 dropdown
-        $('table .form-select').each(function () {
-            populateSelect($(this));
-        })
         // Waves Effect
         Waves.init();
         Waves.attach(".btn-assign", ['waves-float', 'waves-light']);
