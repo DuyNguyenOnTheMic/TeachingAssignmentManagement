@@ -10,7 +10,7 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) 
     if (element.length) {
         if (isUpdate) {
             element.data("lecturerid", lecturerId);
-            if (lecturerId != '') {
+            if (lecturerId != null) {
                 var classType = element.data('classtype');
                 element.removeClass('btn-success btn-warning btn-secondary');
                 if (classType == 'Lý thuyết') {
@@ -22,6 +22,7 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) 
                 }
                 lecturerName = splitString(lecturerName);
             } else {
+                lecturerName = "Chưa phân";
                 element.removeClass('btn-success btn-warning').addClass('btn-secondary');
             }
             element.text(lecturerName);

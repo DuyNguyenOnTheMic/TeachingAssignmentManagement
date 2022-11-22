@@ -6,7 +6,7 @@
 
 <div class="d-flex justify-content-center">
     <select class="select2 form-select" name="lecturer">
-        <option value="">Chưa phân</option>
+        <option value="">Chưa phân công</option>
         @foreach (SelectListItem option in select)
         {
             <option value="@option.Value" @(option.Value == lecturerId ? "selected" : "")>@option.Text</option>

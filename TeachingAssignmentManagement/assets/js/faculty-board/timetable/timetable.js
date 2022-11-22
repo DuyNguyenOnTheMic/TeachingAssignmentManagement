@@ -64,6 +64,7 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
                     }
                     lecturerName = splitString(lecturerName);
                 } else {
+                    lecturerName = "Chưa phân";
                     assignCard.removeClass('btn-success btn-warning').addClass('btn-secondary');
                 }
                 assignCard.text(lecturerName);
