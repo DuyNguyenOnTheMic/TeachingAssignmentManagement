@@ -25,6 +25,7 @@ namespace TeachingAssignmentManagement.DAL
                 TermId = c.term_id,
                 MajorId = majorId,
                 LecturerId = c.lecturer_id,
+                LecturerName = c.lecturer.full_name,
                 CurriculumId = c.curriculum_id,
                 RoomId = c.room_id,
                 Curriculum = c.curriculum

@@ -10,6 +10,7 @@
         public int TermId { get; set; }
         public string MajorId { get; set; }
         public string LecturerId { get; set; }
+        public string LecturerName { get; set; }
         public string CurriculumId { get; set; }
         public string RoomId { get; set; }
         public curriculum Curriculum { get; set; }
