@@ -58,6 +58,7 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
                 // Call function to assign lecturer
                 assignLecturer(id, lecturerId, lecturerName);
             } else {
+                // Populate error message into table
                 let errorMessage = data.message + '<div class="table-responsive mt-2"><table class="table"><thead><tr><th>Mã LHP</th><th>Tên HP</th><th>Ngành</th></tr></thead><tbody>';
                 data.classList.forEach(function (item, index) {
                     errorMessage += '<tr><td>' + item.classId + '</td><td>' + item.curriculumName + '</td><td>' + item.majorName + '</td></tr>';
