@@ -48,20 +48,30 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
         lecturerId = lecturerSelect.val(),
         lecturerName = lecturerSelect.text();
 
-    // Send ajax request to assign lecturer
+    // Send ajax request to check state of lecturer
     $.ajax({
-        type: 'POST',
-        url: rootUrl + 'FacultyBoard/Timetable/Assign',
-        data: { id, termId, lecturerId },
+        type: 'GET',
+        url: rootUrl + 'FacultyBoard/Timetable/CheckState',
+        data: { termId, lecturerId },
         success: function (data) {
             if (data.success) {
-                // Update assign card data
-                var assignCard = $('#' + id);
-                updateClass(assignCard, lecturerId, lecturerName);
+                // Send ajax request to assign lecturer
+                $.ajax({
+                    type: 'POST',
+                    url: rootUrl + 'FacultyBoard/Timetable/Assign',
+                    data: { id, lecturerId },
+                    success: function (data) {
+                        if (data.success) {
+                            // Update assign card data
+                            var assignCard = $('#' + id);
+                            updateClass(assignCard, lecturerId, lecturerName);
 
-                // Display success message
-                toastr.options.positionClass = 'toast-bottom-right';
-                toastr.success('Thành công!');
+                            // Display success message
+                            toastr.options.positionClass = 'toast-bottom-right';
+                            toastr.success('Thành công!');
+                        }
+                    }
+                });
             }
         }
     });
