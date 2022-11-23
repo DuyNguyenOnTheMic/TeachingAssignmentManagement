@@ -83,9 +83,7 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
 $('.assign-card').on('click', function () {
     // Hide other popovers when a popover is clicked
     $('[data-bs-toggle="popover"]').not(this).popover('hide');
-});
-
-$('.assign-card').on('show.bs.popover', function () {
+}).on('show.bs.popover', function () {
     setTimeout(() => {
         var formSelect = $('.popover-body .form-select');
         if (!$(formSelect).hasClass("select2-hidden-accessible")) {
