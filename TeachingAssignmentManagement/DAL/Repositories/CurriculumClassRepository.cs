@@ -37,6 +37,11 @@ namespace TeachingAssignmentManagement.DAL
             return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
         }
 
+        public IEnumerable<curriculum_class> GetClassesInDay(int day, string lecturerId)
+        {
+            return context.curriculum_class.Where(c => c.day_2 == day && c.lecturer_id == lecturerId);
+        }
+
         public IEnumerable<curriculum_class> GetClassesByTermMajor(int termId, string majorId)
         {
             return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId);

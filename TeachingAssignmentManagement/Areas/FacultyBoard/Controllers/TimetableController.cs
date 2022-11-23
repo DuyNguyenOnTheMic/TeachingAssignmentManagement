@@ -285,12 +285,30 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         [HttpGet]
         public JsonResult CheckState(int id, int termId, string lecturerId)
         {
+            // Declare variables
             curriculum_class curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
             term term = unitOfWork.TermRepository.GetTermByID(termId);
-            IEnumerable<curriculum_class> query_curriculumClass = unitOfWork.CurriculumClassRepository.GetClassesInWeek(termId, lecturerId);
-            if (query_curriculumClass.Count() >= term.max_class)
+            IEnumerable<curriculum_class> curriculumClassWeek = unitOfWork.CurriculumClassRepository.GetClassesInWeek(termId, lecturerId);
+            IEnumerable<curriculum_class> curriculumClassDay = unitOfWork.CurriculumClassRepository.GetClassesInDay(curriculumClass.day_2, lecturerId);
+            int maxLessons = term.max_lesson / 3;
+            int maxClasses = term.max_class;
+
+            // Check maximum lessons in a day
+            if (curriculumClassDay.Count() >= maxLessons)
             {
-                IEnumerable classes = query_curriculumClass.Select(c => new
+                IEnumerable classes = curriculumClassDay.Select(c => new
+                {
+                    classId = c.curriculum_class_id,
+                    curriculumName = c.curriculum.name,
+                    majorName = c.major.name
+                }).ToList();
+                return Json(new { maxLesson = true, message = "Giảng viên này đã dạy quá số tiết tối đa trong 1 ngày!", classList = classes }, JsonRequestBehavior.AllowGet);
+            }
+
+            // Check maximum classes in a week
+            if (curriculumClassWeek.Count() >= maxClasses)
+            {
+                IEnumerable classes = curriculumClassWeek.Select(c => new
                 {
                     classId = c.curriculum_class_id,
                     curriculumName = c.curriculum.name,

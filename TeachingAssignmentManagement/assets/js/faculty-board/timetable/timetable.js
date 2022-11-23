@@ -57,7 +57,7 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
             if (data.success) {
                 // Call function to assign lecturer
                 assignLecturer(id, lecturerId, lecturerName);
-            } else {
+            } else if (data.maxLesson || data.maxCLass) {
                 let errorMessage = data.message + '<br />';
                 data.classList.forEach(function (item, index) {
                     errorMessage += '<p class="text-start mb-0">' + item.classId + ' - ' + item.curriculumName + ' - ' + item.majorName + '</p>';
