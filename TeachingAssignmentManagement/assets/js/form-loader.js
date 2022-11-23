@@ -319,7 +319,7 @@ if (termForm.length) {
                 error.insertAfter(element.siblings(".select2"));
             } else if (element.hasClass("picker")) {
                 error.insertAfter(element.siblings(".picker"));
-            } else if (element.hasClass("touchspin-min-max")) {
+            } else if (element.hasClass("touchspin")) {
                 error.insertAfter(element.closest(".bootstrap-touchspin"));
             } else {
                 error.insertAfter(element);
