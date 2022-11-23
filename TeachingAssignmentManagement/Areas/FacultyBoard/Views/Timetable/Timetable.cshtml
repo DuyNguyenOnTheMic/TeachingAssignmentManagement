@@ -36,9 +36,10 @@
                         foreach (int startLesson in startLessons)
                         {
                             var classes = Model.Where(x => x.CurriculumId == curriculum.id && x.Day2 == day && x.StartLesson2 == startLesson).ToList();
+                            string dividerClass = startLesson == 1 ? "table-vertical-divider" : "";
                             if (classes.Count > 0)
                             {
-                                <td>
+                                <td class="@dividerClass">
                                     @foreach (var item in classes)
                                     {
                                         string lecturerId = item.LecturerId ?? string.Empty;
@@ -52,7 +53,7 @@
                             }
                             else
                             {
-                                <td></td>
+                                <td class="@dividerClass"></td>
                             }
                         }
                     }
