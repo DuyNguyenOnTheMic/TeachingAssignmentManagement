@@ -47,11 +47,6 @@ namespace TeachingAssignmentManagement.DAL
             return curriculumClasses.Where(c => c.day_2 == day);
         }
 
-        public IEnumerable<curriculum_class> GetClassesInWeek(IEnumerable<curriculum_class> curriculumClasses, int termId)
-        {
-            return curriculumClasses.Where(c => c.term_id == termId);
-        }
-
         public IEnumerable<curriculum_class> GetClassesByTermMajor(int termId, string majorId)
         {
             return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId);
