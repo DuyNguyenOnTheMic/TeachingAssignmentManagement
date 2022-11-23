@@ -106,27 +106,6 @@ $('.assign-card').on('show.bs.popover', function () {
     }, 0);
 });
 
-$('table .form-select option:selected').each(function () {
-    var selectedLecturer = $(this);
-    if (selectedLecturer.val() != '') {
-        // Add previous selected value to jquery data
-        selectedLecturer.closest('.form-select').attr('data-preval', selectedLecturer.val());
-        selectedLecturer.closest('.form-select').attr('data-pretext', selectedLecturer.text());
-
-        var lecturerName = splitString(selectedLecturer.text());
-        $(this).text(lecturerName);
-    } else {
-        selectedLecturer.closest('.assign-card').addClass('bg-opacity-50');
-    }
-});
-
-$('table .form-select').on('select2:select select2:unselecting', function () {
-    var $this = $(this);
-
-    // Call function to change lecturer
-    changeLecturer($this);
-});
-
 $('.btn-delete').on('click', function () {
     $this = $(this);
 
