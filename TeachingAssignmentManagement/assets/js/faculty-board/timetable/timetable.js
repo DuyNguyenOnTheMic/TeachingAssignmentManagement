@@ -151,27 +151,3 @@ function splitString(lecturerName) {
     var result = splitName + " " + lecturerName.split(' ').pop();
     return result;
 }
-
-function changeLecturer($this) {
-    // Destroy select2 to update option text
-    $this.select2('destroy').unwrap();
-
-    // Split new selected lecturer name
-    var newSelected = $this.find(':selected');
-    var currentVal = newSelected.val();
-    var currentText = newSelected.text();
-    var newSelectedText = splitString(currentText);
-    "" != currentVal && newSelected.text(newSelectedText);
-
-    // Change previous selected option value and text
-    var preVal = $this.data('preval');
-    var preText = $this.data('pretext');
-    $this.children('option[value = "' + preVal + '"]').text(preText);
-
-    // Set data for preval and pretext
-    $this.data('preval', currentVal);
-    $this.data('pretext', currentText);
-
-    // Populate select2 dropdown again
-    populateSelect($this);
-}
