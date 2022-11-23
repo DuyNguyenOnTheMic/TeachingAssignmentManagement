@@ -295,7 +295,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     curriculumName = c.curriculum.name,
                     majorName = c.major.name
                 }).ToList();
-                return Json(new { error = true, message = "Giảng viên này đã dạy quá số lớp tối đa trong 1 tuần!", data = classes }, JsonRequestBehavior.AllowGet);
+                return Json(new { maxCLass = true, message = "Giảng viên này đã dạy quá số lớp tối đa trong 1 tuần!", data = classes }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
