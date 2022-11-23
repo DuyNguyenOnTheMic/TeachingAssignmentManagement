@@ -42,16 +42,17 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
     $this = $(this);
 
     // Get values
-    var id = $this.data('id');
-    var lecturerSelect = $this.parent().find('.select2 :selected');
-    var lecturerId = lecturerSelect.val();
-    var lecturerName = lecturerSelect.text();
+    var id = $this.data('id'),
+        termId = $('#term').val(),
+        lecturerSelect = $this.parent().find('.select2 :selected'),
+        lecturerId = lecturerSelect.val(),
+        lecturerName = lecturerSelect.text();
 
     // Send ajax request to assign lecturer
     $.ajax({
         type: 'POST',
         url: rootUrl + 'FacultyBoard/Timetable/Assign',
-        data: { id, lecturerId },
+        data: { id, termId, lecturerId },
         success: function (data) {
             if (data.success) {
                 // Update assign card data
