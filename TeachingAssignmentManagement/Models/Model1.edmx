@@ -375,7 +375,7 @@
           <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
           <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
@@ -474,7 +474,7 @@
           <Property Name="start_year" Type="Int32" Nullable="false" />
           <Property Name="end_year" Type="Int32" Nullable="false" />
           <Property Name="start_week" Type="Int32" Nullable="false" />
-          <Property Name="start_date" Type="DateTime" Nullable="false" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="max_lesson" Type="Int32" Nullable="false" />
           <Property Name="max_class" Type="Int32" Nullable="false" />
           <NavigationProperty Name="curriculum_class" Relationship="Self.FK_curriculum_class_term" FromRole="term" ToRole="curriculum_class" />
@@ -796,6 +796,7 @@
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
