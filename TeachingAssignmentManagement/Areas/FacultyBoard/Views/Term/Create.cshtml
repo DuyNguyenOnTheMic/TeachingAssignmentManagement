@@ -33,6 +33,21 @@
         <input type="text" class="form-control picker flatpickr-input" id="start_date" name="start_date" placeholder="Chọn ngày bắt đầu" aria-label="Chọn ngày bắt đầu" />
     </div>
 
+    <div class="row">
+        <div class="col-sm-3 col-12">
+            <label class="form-label font-small-4" for="max_lesson">Tiết tối đa: </label>
+            <div class="input-group">
+                <input type="number" class="touchspin-min-max" id="max_lesson" name="max_lesson" value="1" aria-label="Nhập tiết tối đa" />
+            </div>
+        </div>
+        <div class="col-sm-3 col-12">
+            <label class="form-label font-small-4" for="max_class">Lớp tối đa: </label>
+            <div class="input-group">
+                <input type="number" class="touchspin-min-max" id="max_class" name="max_class" value="1" aria-label="Nhập lớp tối đa" />
+            </div>
+        </div>
+    </div>
+
     <div class="float-end m-1">
         <button type="button" class="btn btn-outline-secondary waves-effect me-1" id="btnClose">Huỷ</button>
         <button type="submit" class="btn btn-primary waves-effect waves-float waves-light">Lưu</button>
