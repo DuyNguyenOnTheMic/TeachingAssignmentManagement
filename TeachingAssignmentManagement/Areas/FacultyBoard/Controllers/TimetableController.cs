@@ -294,6 +294,18 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             int maxLessons = term.max_lesson / 3;
             int maxClasses = term.max_class;
 
+            // Check not duplicate class in the same time
+            if (curriculumClassLesson.Count() >= 1)
+            {
+                IEnumerable classes = curriculumClassLesson.Select(c => new
+                {
+                    classId = c.curriculum_class_id,
+                    curriculumName = c.curriculum.name,
+                    majorName = c.major.name
+                }).ToList();
+                return Json(new { duplicate = true, message = "Giảng viên này đã có lớp trong tiết học này!", classList = classes }, JsonRequestBehavior.AllowGet);
+            }
+
             // Check maximum lessons in a day
             if (curriculumClassDay.Count() >= maxLessons)
             {
