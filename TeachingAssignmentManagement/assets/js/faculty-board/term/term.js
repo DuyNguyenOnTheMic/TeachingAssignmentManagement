@@ -20,6 +20,8 @@ $(function () {
                 { 'data': 'end_year' },
                 { 'data': 'start_week' },
                 { 'data': 'start_date' },
+                { 'data': 'max_lesson' },
+                { 'data': 'max_class' },
                 {
                     'data': 'id', 'render': function (data) {
                         return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=popupForm('" + rootUrl + "FacultyBoard/Term/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' data-original-title='Delete' title='Delete' onclick=deleteTerm('" + data + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
@@ -32,9 +34,9 @@ $(function () {
                     searchable: false,
                     orderable: false,
                     width: '10%',
-                    targets: 5
+                    targets: 7
                 },
-                { className: 'text-center', targets: [0, 1, 2, 3, 4, 5] },
+                { className: 'text-center', targets: [0, 1, 2, 3, 4, 5, 6, 7] },
                 { render: DataTable.render.date(), targets: 4 }
             ],
             order: [[0, 'asc']],
