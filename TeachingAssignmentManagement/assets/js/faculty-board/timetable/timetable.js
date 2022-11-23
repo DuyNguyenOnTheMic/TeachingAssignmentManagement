@@ -23,18 +23,18 @@ $(function () {
                 sanitize: false
             });
         });
+    }
+});
 
-        // Split lecturerName
-        $('.assign-card').each(function () {
-            var $this = $(this);
-            var lecturerId = $this.data('lecturerid');
-            var lecturerName = $this.text();
-            if (lecturerId != '') {
-                $this.text(splitString(lecturerName));
-            } else {
-                $this.removeClass('btn-success btn-warning').addClass('btn-secondary');
-            }
-        });
+// Split lecturerName
+$('.assign-card').each(function () {
+    var $this = $(this);
+    var lecturerId = $this.data('lecturerid');
+    var lecturerName = $this.text();
+    if (lecturerId != '') {
+        $this.text(splitString(lecturerName));
+    } else {
+        $this.removeClass('btn-success btn-warning').addClass('btn-secondary');
     }
 });
 
