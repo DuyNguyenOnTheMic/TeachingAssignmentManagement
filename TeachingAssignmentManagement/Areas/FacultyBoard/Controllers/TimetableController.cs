@@ -288,8 +288,9 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Declare variables
             curriculum_class curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
             term term = unitOfWork.TermRepository.GetTermByID(termId);
-            IEnumerable<curriculum_class> curriculumClassWeek = unitOfWork.CurriculumClassRepository.GetClassesInWeek(termId, lecturerId);
+            IEnumerable<curriculum_class> curriculumClassLesson = unitOfWork.CurriculumClassRepository.GetClassesInLesson(curriculumClass.start_lesson_2, lecturerId);
             IEnumerable<curriculum_class> curriculumClassDay = unitOfWork.CurriculumClassRepository.GetClassesInDay(curriculumClass.day_2, lecturerId);
+            IEnumerable<curriculum_class> curriculumClassWeek = unitOfWork.CurriculumClassRepository.GetClassesInWeek(termId, lecturerId);
             int maxLessons = term.max_lesson / 3;
             int maxClasses = term.max_class;
 
