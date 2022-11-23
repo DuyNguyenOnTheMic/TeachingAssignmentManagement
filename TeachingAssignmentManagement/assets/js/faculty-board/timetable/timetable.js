@@ -58,7 +58,20 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
                 // Call function to assign lecturer
                 assignLecturer(id, lecturerId, lecturerName);
             } else {
-                console.log(data.classList);
+                let errorMessage = data.message;
+                data.classList.forEach(function (item, index) {
+                    errorMessage += '<p class="text-nowrap mb-0">' + item.classId + ' - ' + item.curriculumName + ' - ' + item.majorName + '</p>';
+                });
+                // Show message when delete failed
+                Swal.fire({
+                    title: 'Thông báo',
+                    html: errorMessage,
+                    icon: 'error',
+                    customClass: {
+                        confirmButton: 'btn btn-primary'
+                    },
+                    buttonsStyling: false
+                })
             }
         }
     });
