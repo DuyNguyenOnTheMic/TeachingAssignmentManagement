@@ -42,7 +42,6 @@ namespace TeachingAssignmentManagement.DAL
             return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
         }
 
-
         public curriculum_class GetClassByID(int id)
         {
             return context.curriculum_class.Find(id);
