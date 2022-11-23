@@ -61,13 +61,13 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
                 // Populate error message into table
                 let errorMessage = data.message + '<div class="table-responsive mt-2"><table class="table"><thead><tr><th>Mã LHP</th><th>Tên HP</th><th>Ngành</th></tr></thead><tbody>';
                 data.classList.forEach(function (item, index) {
-                    errorMessage += '<tr><td>' + item.classId + '</td><td>' + item.curriculumName + '</td><td>' + item.majorName + '</td></tr>';
+                    errorMessage += '<tr class="font-small-3"><td>' + item.classId + '</td><td>' + item.curriculumName + '</td><td>' + item.majorName + '</td></tr>';
                 });
                 errorMessage += '</tbody></table></div>';
                 // Show message when assign failed
                 Swal.fire({
                     title: 'Thông báo',
-                    width: 600,
+                    width: 800,
                     html: errorMessage,
                     icon: 'error',
                     customClass: {
