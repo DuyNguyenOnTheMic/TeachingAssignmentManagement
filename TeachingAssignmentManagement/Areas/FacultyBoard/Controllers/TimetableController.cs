@@ -285,49 +285,52 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         [HttpGet]
         public JsonResult CheckState(int id, int termId, string lecturerId)
         {
-            // Declare variables
-            curriculum_class curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
-            term term = unitOfWork.TermRepository.GetTermByID(termId);
-            IEnumerable<curriculum_class> query_classWeek = unitOfWork.CurriculumClassRepository.GetClassesInTerm(termId, lecturerId);
-            IEnumerable<curriculum_class> query_classDay = unitOfWork.CurriculumClassRepository.GetClassesInDay(query_classWeek, curriculumClass.day_2);
-            IEnumerable<curriculum_class> query_classLesson = unitOfWork.CurriculumClassRepository.GetClassesInLesson(query_classDay, curriculumClass.start_lesson_2);
-            int maxLessons = term.max_lesson / 3;
-            int maxClasses = term.max_class;
-
-            // Check not duplicate class in the same time
-            if (query_classLesson.Count() >= 1)
+            if (lecturerId != "")
             {
-                IEnumerable classes = query_classLesson.Select(c => new
-                {
-                    classId = c.curriculum_class_id,
-                    curriculumName = c.curriculum.name,
-                    majorName = c.major.name
-                }).ToList();
-                return Json(new { duplicate = true, message = "Giảng viên này đã có lớp trong tiết học này!", classList = classes }, JsonRequestBehavior.AllowGet);
-            }
+                // Declare variables
+                curriculum_class curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
+                term term = unitOfWork.TermRepository.GetTermByID(termId);
+                IEnumerable<curriculum_class> query_classWeek = unitOfWork.CurriculumClassRepository.GetClassesInTerm(termId, lecturerId);
+                IEnumerable<curriculum_class> query_classDay = unitOfWork.CurriculumClassRepository.GetClassesInDay(query_classWeek, curriculumClass.day_2);
+                IEnumerable<curriculum_class> query_classLesson = unitOfWork.CurriculumClassRepository.GetClassesInLesson(query_classDay, curriculumClass.start_lesson_2);
+                int maxLessons = term.max_lesson / 3;
+                int maxClasses = term.max_class;
 
-            // Check maximum lessons in a day
-            if (query_classDay.Count() >= maxLessons)
-            {
-                IEnumerable classes = query_classDay.Select(c => new
+                // Check not duplicate class in the same time
+                if (query_classLesson.Count() >= 1)
                 {
-                    classId = c.curriculum_class_id,
-                    curriculumName = c.curriculum.name,
-                    majorName = c.major.name
-                }).ToList();
-                return Json(new { maxLesson = true, message = "Giảng viên này đã đạt số tiết tối đa trong 1 ngày!", classList = classes }, JsonRequestBehavior.AllowGet);
-            }
+                    IEnumerable classes = query_classLesson.Select(c => new
+                    {
+                        classId = c.curriculum_class_id,
+                        curriculumName = c.curriculum.name,
+                        majorName = c.major.name
+                    }).ToList();
+                    return Json(new { duplicate = true, message = "Giảng viên này đã có lớp trong tiết học này!", classList = classes }, JsonRequestBehavior.AllowGet);
+                }
 
-            // Check maximum classes in a week
-            if (query_classWeek.Count() >= maxClasses)
-            {
-                IEnumerable classes = query_classWeek.Select(c => new
+                // Check maximum lessons in a day
+                if (query_classDay.Count() >= maxLessons)
                 {
-                    classId = c.curriculum_class_id,
-                    curriculumName = c.curriculum.name,
-                    majorName = c.major.name
-                }).ToList();
-                return Json(new { maxCLass = true, message = "Giảng viên này đạt số lớp tối đa trong 1 tuần!", classList = classes }, JsonRequestBehavior.AllowGet);
+                    IEnumerable classes = query_classDay.Select(c => new
+                    {
+                        classId = c.curriculum_class_id,
+                        curriculumName = c.curriculum.name,
+                        majorName = c.major.name
+                    }).ToList();
+                    return Json(new { maxLesson = true, message = "Giảng viên này đã đạt số tiết tối đa trong 1 ngày!", classList = classes }, JsonRequestBehavior.AllowGet);
+                }
+
+                // Check maximum classes in a week
+                if (query_classWeek.Count() >= maxClasses)
+                {
+                    IEnumerable classes = query_classWeek.Select(c => new
+                    {
+                        classId = c.curriculum_class_id,
+                        curriculumName = c.curriculum.name,
+                        majorName = c.major.name
+                    }).ToList();
+                    return Json(new { maxCLass = true, message = "Giảng viên này đạt số lớp tối đa trong 1 tuần!", classList = classes }, JsonRequestBehavior.AllowGet);
+                }
             }
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
