@@ -52,7 +52,7 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
     $.ajax({
         type: 'GET',
         url: rootUrl + 'FacultyBoard/Timetable/CheckState',
-        data: { termId, lecturerId },
+        data: { id, termId, lecturerId },
         success: function (data) {
             if (data.success) {
                 // Call function to assign lecturer

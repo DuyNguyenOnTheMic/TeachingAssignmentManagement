@@ -283,8 +283,9 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         }
 
         [HttpGet]
-        public JsonResult CheckState(int termId, string lecturerId)
+        public JsonResult CheckState(int id, int termId, string lecturerId)
         {
+            curriculum_class curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
             term term = unitOfWork.TermRepository.GetTermByID(termId);
             IEnumerable<curriculum_class> query_curriculumClass = unitOfWork.CurriculumClassRepository.GetClassesInTerm(termId, lecturerId);
             if (query_curriculumClass.Count() >= term.max_class)
