@@ -55,23 +55,8 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
         data: { termId, lecturerId },
         success: function (data) {
             if (data.success) {
-                // Send ajax request to assign lecturer
-                $.ajax({
-                    type: 'POST',
-                    url: rootUrl + 'FacultyBoard/Timetable/Assign',
-                    data: { id, lecturerId },
-                    success: function (data) {
-                        if (data.success) {
-                            // Update assign card data
-                            var assignCard = $('#' + id);
-                            updateClass(assignCard, lecturerId, lecturerName);
-
-                            // Display success message
-                            toastr.options.positionClass = 'toast-bottom-right';
-                            toastr.success('Thành công!');
-                        }
-                    }
-                });
+                // Call function to assign lecturer
+                assignLecturer(id, lecturerId, lecturerName);
             }
         }
     });
@@ -144,4 +129,24 @@ function splitString(lecturerName) {
     var splitName = removeLastWord.split(' ').map(function (item) { return item[0] }).join('.');
     var result = splitName + " " + lecturerName.split(' ').pop();
     return result;
+}
+
+function assignLecturer(id, lecturerId, lecturerName) {
+    // Send ajax request to assign lecturer
+    $.ajax({
+        type: 'POST',
+        url: rootUrl + 'FacultyBoard/Timetable/Assign',
+        data: { id, lecturerId },
+        success: function (data) {
+            if (data.success) {
+                // Update assign card data
+                var assignCard = $('#' + id);
+                updateClass(assignCard, lecturerId, lecturerName);
+
+                // Display success message
+                toastr.options.positionClass = 'toast-bottom-right';
+                toastr.success('Thành công!');
+            }
+        }
+    });
 }
