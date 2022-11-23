@@ -82,5 +82,5 @@ function updateClass(element, lecturerId, lecturerName) {
         element.removeClass('btn-success btn-warning').addClass('btn-secondary');
     }
     element.text(lecturerName);
-    element.popover('update');
+    $('[data-bs-toggle="popover"]').popover('update');
 }
