@@ -11,6 +11,7 @@ namespace TeachingAssignmentManagement.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class term
     {
@@ -24,6 +25,7 @@ namespace TeachingAssignmentManagement.Models
         public int start_year { get; set; }
         public int end_year { get; set; }
         public int start_week { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime start_date { get; set; }
         public int max_lesson { get; set; }
         public int max_class { get; set; }
