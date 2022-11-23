@@ -172,7 +172,7 @@ if (termForm.length) {
     });
 
     // Populate touchspin for max class number
-    var maxClass = $('.touchspin-maxClass'),
+    var maxClass = $('.touchspin-maxclass'),
         maxClassMin = 1,
         maxClassMax = 30;
     maxClass.TouchSpin({
