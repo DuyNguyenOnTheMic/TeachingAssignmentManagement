@@ -58,10 +58,11 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
                 // Call function to assign lecturer
                 assignLecturer(id, lecturerId, lecturerName);
             } else {
-                let errorMessage = data.message + '<br />';
+                let errorMessage = data.message + '<div class="table-responsive mt-2"><table class="table"><thead><tr><th>Mã LHP</th><th>Tên HP</th><th>Ngành</th></tr></thead><tbody>';
                 data.classList.forEach(function (item, index) {
-                    errorMessage += '<p class="text-start mb-0">' + item.classId + ' - ' + item.curriculumName + ' - ' + item.majorName + '</p>';
+                    errorMessage += '<tr><td>' + item.classId + '</td><td>' + item.curriculumName + '</td><td>' + item.majorName + '</td></tr>';
                 });
+                errorMessage += '</tbody></table></div>';
                 // Show message when delete failed
                 Swal.fire({
                     title: 'Thông báo',
