@@ -57,6 +57,8 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
             if (data.success) {
                 // Call function to assign lecturer
                 assignLecturer(id, lecturerId, lecturerName);
+            } else {
+                console.log(data.classList);
             }
         }
     });
