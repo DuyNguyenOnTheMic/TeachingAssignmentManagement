@@ -285,7 +285,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         [HttpGet]
         public JsonResult CheckState(int id, int termId, string lecturerId)
         {
-            if (lecturerId != "")
+            if (lecturerId != string.Empty)
             {
                 // Declare variables
                 curriculum_class curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
