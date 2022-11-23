@@ -46,7 +46,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
         public JsonResult GetData()
         {
-            // Get user data from datatabse
+            // Get user data from database
             return Json(unitOfWork.UserRepository.GetUsers(), JsonRequestBehavior.AllowGet);
         }
 

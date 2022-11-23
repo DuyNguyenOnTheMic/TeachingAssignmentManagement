@@ -19,7 +19,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
         public JsonResult GetData()
         {
-            // Get majors data from datatabse
+            // Get majors data from database
             return Json(unitOfWork.MajorRepository.GetMajors(), JsonRequestBehavior.AllowGet);
         }
 

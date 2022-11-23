@@ -20,7 +20,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
         public JsonResult GetData()
         {
-            // Get terms data from datatabse
+            // Get terms data from database
             return Json(unitOfWork.TermRepository.GetTerms(), JsonRequestBehavior.AllowGet);
         }
 
