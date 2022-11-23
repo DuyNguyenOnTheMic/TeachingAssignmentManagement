@@ -288,16 +288,16 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Declare variables
             curriculum_class curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
             term term = unitOfWork.TermRepository.GetTermByID(termId);
-            IEnumerable<curriculum_class> query_curriculumClass = unitOfWork.CurriculumClassRepository.GetClassesInTerm(termId, lecturerId);
-            IEnumerable<curriculum_class> curriculumClassLesson = unitOfWork.CurriculumClassRepository.GetClassesInLesson(query_curriculumClass, curriculumClass.start_lesson_2);
-            IEnumerable<curriculum_class> curriculumClassDay = unitOfWork.CurriculumClassRepository.GetClassesInDay(query_curriculumClass, curriculumClass.day_2);
+            IEnumerable<curriculum_class> query_classWeek = unitOfWork.CurriculumClassRepository.GetClassesInTerm(termId, lecturerId);
+            IEnumerable<curriculum_class> query_classDay = unitOfWork.CurriculumClassRepository.GetClassesInDay(query_classWeek, curriculumClass.day_2);
+            IEnumerable<curriculum_class> query_classLesson = unitOfWork.CurriculumClassRepository.GetClassesInLesson(query_classDay, curriculumClass.start_lesson_2);
             int maxLessons = term.max_lesson / 3;
             int maxClasses = term.max_class;
 
             // Check not duplicate class in the same time
-            if (curriculumClassLesson.Count() >= 1)
+            if (query_classLesson.Count() >= 2)
             {
-                IEnumerable classes = curriculumClassLesson.Select(c => new
+                IEnumerable classes = query_classLesson.Select(c => new
                 {
                     classId = c.curriculum_class_id,
                     curriculumName = c.curriculum.name,
@@ -307,9 +307,9 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
 
             // Check maximum lessons in a day
-            if (curriculumClassDay.Count() >= maxLessons)
+            if (query_classDay.Count() >= maxLessons)
             {
-                IEnumerable classes = curriculumClassDay.Select(c => new
+                IEnumerable classes = query_classDay.Select(c => new
                 {
                     classId = c.curriculum_class_id,
                     curriculumName = c.curriculum.name,
@@ -319,9 +319,9 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
 
             // Check maximum classes in a week
-            if (query_curriculumClass.Count() >= maxClasses)
+            if (query_classWeek.Count() >= maxClasses)
             {
-                IEnumerable classes = query_curriculumClass.Select(c => new
+                IEnumerable classes = query_classWeek.Select(c => new
                 {
                     classId = c.curriculum_class_id,
                     curriculumName = c.curriculum.name,
