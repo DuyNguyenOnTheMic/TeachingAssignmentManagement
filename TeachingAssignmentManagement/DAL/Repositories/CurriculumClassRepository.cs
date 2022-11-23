@@ -32,19 +32,24 @@ namespace TeachingAssignmentManagement.DAL
             });
         }
 
-        public IEnumerable<curriculum_class> GetClassesInLesson(int lesson, string lecturerId)
-        {
-            return context.curriculum_class.Where(c => c.start_lesson_2 == lesson && c.lecturer_id == lecturerId);
-        }
-
-        public IEnumerable<curriculum_class> GetClassesInDay(int day, string lecturerId)
-        {
-            return context.curriculum_class.Where(c => c.day_2 == day && c.lecturer_id == lecturerId);
-        }
-
-        public IEnumerable<curriculum_class> GetClassesInWeek(int termId, string lecturerId)
+        public IEnumerable<curriculum_class> GetClassesInTerm(int termId, string lecturerId)
         {
             return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
+        }
+
+        public IEnumerable<curriculum_class> GetClassesInLesson(IEnumerable<curriculum_class> curriculumClasses, int lesson)
+        {
+            return curriculumClasses.Where(c => c.start_lesson_2 == lesson);
+        }
+
+        public IEnumerable<curriculum_class> GetClassesInDay(IEnumerable<curriculum_class> curriculumClasses, int day)
+        {
+            return curriculumClasses.Where(c => c.day_2 == day);
+        }
+
+        public IEnumerable<curriculum_class> GetClassesInWeek(IEnumerable<curriculum_class> curriculumClasses, int termId)
+        {
+            return curriculumClasses.Where(c => c.term_id == termId);
         }
 
         public IEnumerable<curriculum_class> GetClassesByTermMajor(int termId, string majorId)
