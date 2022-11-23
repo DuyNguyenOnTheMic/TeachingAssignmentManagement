@@ -96,7 +96,7 @@ $('.assign-card').on('click', function () {
         } else {
             // Set selected value for dropdown
             var lecturerId = $(this).data('lecturerid');
-            formSelect.val(lecturerId);
+            formSelect.val(lecturerId).trigger('change');
         }
     }, 0);
 });
