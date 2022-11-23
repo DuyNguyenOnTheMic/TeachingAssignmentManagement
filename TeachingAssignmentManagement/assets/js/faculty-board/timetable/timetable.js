@@ -63,7 +63,7 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
                     errorMessage += '<tr><td>' + item.classId + '</td><td>' + item.curriculumName + '</td><td>' + item.majorName + '</td></tr>';
                 });
                 errorMessage += '</tbody></table></div>';
-                // Show message when delete failed
+                // Show message when assign failed
                 Swal.fire({
                     title: 'Thông báo',
                     width: 600,
