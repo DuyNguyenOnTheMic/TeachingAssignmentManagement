@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -278,6 +279,22 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
             // Send signal to SignalR Hub
             CurriculumClassHub.BroadcastData(id, lecturerId, curriculumClass.lecturer?.full_name, true);
+            return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CheckState(int termId, string lecturerId)
+        {
+            term term = unitOfWork.TermRepository.GetTermByID(termId);
+            IEnumerable<curriculum_class> query_curriculumClass = unitOfWork.CurriculumClassRepository.GetClassesInTerm(termId, lecturerId);
+            if (query_curriculumClass.Count() > term.max_lesson)
+            {
+                IEnumerable classes = query_curriculumClass.Select(c => new
+                {
+                    c.curriculum_class_id,
+                    c.curriculum.name
+                }).ToList();
+                return Json(new { error = true, message = "Giảng viên này đã dạy quá số lớp tối đa trong 1 tuần!", data = classes }, JsonRequestBehavior.AllowGet);
+            }
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
