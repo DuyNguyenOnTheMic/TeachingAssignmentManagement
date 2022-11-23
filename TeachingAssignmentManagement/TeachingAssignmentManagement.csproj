@@ -238,8 +238,6 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\FacultyBoard\Controllers\MajorController.cs" />
-    <Compile Include="Models\CurriculumClassDTO.cs" />
-    <Compile Include="Hubs\CurriculumClassHub.cs" />
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -255,6 +253,8 @@
     <Compile Include="Models\curriculum.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CurriculumClassDTO.cs" />
+    <Compile Include="Hubs\CurriculumClassHub.cs" />
     <Compile Include="DAL\Repositories\CurriculumClassRepository.cs" />
     <Compile Include="DAL\Repositories\CurriculumRepository.cs" />
     <Compile Include="DAL\Repositories\MajorRepository.cs" />
@@ -1155,6 +1155,7 @@
     <Content Include="assets\js\faculty-board\timetable\import.min.js" />
     <Content Include="Areas\FacultyBoard\Views\Timetable\Index.cshtml" />
     <Content Include="Areas\FacultyBoard\Views\Timetable\Timetable.cshtml" />
+    <Content Include="Areas\FacultyBoard\Views\Timetable\Assign.cshtml" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -1162,7 +1163,6 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\FacultyBoard\Views\Timetable\Assign.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />

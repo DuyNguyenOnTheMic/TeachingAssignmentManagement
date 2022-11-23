@@ -149,6 +149,8 @@
           <Property Name="end_year" Type="int" Nullable="false" />
           <Property Name="start_week" Type="int" Nullable="false" />
           <Property Name="start_date" Type="datetime" Nullable="false" />
+          <Property Name="max_lesson" Type="int" Nullable="false" />
+          <Property Name="max_class" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_curriculum_class_curriculum">
           <End Role="curriculum" Type="Self.curriculum" Multiplicity="1" />
@@ -373,7 +375,7 @@
           <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
           <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" />
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
@@ -472,7 +474,9 @@
           <Property Name="start_year" Type="Int32" Nullable="false" />
           <Property Name="end_year" Type="Int32" Nullable="false" />
           <Property Name="start_week" Type="Int32" Nullable="false" />
-          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" />
+          <Property Name="max_lesson" Type="Int32" Nullable="false" />
+          <Property Name="max_class" Type="Int32" Nullable="false" />
           <NavigationProperty Name="curriculum_class" Relationship="Self.FK_curriculum_class_term" FromRole="term" ToRole="curriculum_class" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -762,6 +766,8 @@
                 <ScalarProperty Name="end_year" ColumnName="end_year" />
                 <ScalarProperty Name="start_week" ColumnName="start_week" />
                 <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="max_lesson" ColumnName="max_lesson" />
+                <ScalarProperty Name="max_class" ColumnName="max_class" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -790,7 +796,6 @@
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
