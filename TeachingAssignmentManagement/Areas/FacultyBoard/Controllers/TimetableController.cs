@@ -119,7 +119,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             if (isUpdate)
             {
                 // Query Curriculum classes of this term and major
-                query_curriculumClassWhere = unitOfWork.CurriculumClassRepository.GetClassesInTermMajor(term, major);
+                query_curriculumClassWhere = unitOfWork.CurriculumClassRepository.GetClassesByTermMajor(term, major);
             }
 
             // Create a list for storing error Lecturers
@@ -287,7 +287,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             curriculum_class curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
             term term = unitOfWork.TermRepository.GetTermByID(termId);
-            IEnumerable<curriculum_class> query_curriculumClass = unitOfWork.CurriculumClassRepository.GetClassesInTerm(termId, lecturerId);
+            IEnumerable<curriculum_class> query_curriculumClass = unitOfWork.CurriculumClassRepository.GetClassesInWeek(termId, lecturerId);
             if (query_curriculumClass.Count() >= term.max_class)
             {
                 IEnumerable classes = query_curriculumClass.Select(c => new
