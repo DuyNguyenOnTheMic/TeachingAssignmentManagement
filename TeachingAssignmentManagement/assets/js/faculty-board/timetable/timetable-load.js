@@ -65,8 +65,8 @@ function populateSelect($this) {
 }
 
 function updateClass(element, lecturerId, lecturerName) {
-    element.data("lecturerid", lecturerId);
-    if (lecturerId != null) {
+    element.data('lecturerid', lecturerId);
+    if (lecturerId) {
         var classType = element.data('classtype');
         element.removeClass('btn-success btn-warning btn-secondary');
         if (classType == 'Lý thuyết') {
