@@ -9,24 +9,8 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) 
     var element = $('#' + id);
     if (element.length) {
         if (isUpdate) {
-            element.data("lecturerid", lecturerId);
-            if (lecturerId != null) {
-                var classType = element.data('classtype');
-                element.removeClass('btn-success btn-warning btn-secondary');
-                if (classType == 'Lý thuyết') {
-                    // color of theory class
-                    element.addClass('btn-success');
-                } else {
-                    // color of practical class
-                    element.addClass('btn-warning');
-                }
-                lecturerName = splitString(lecturerName);
-            } else {
-                lecturerName = "Chưa phân";
-                element.removeClass('btn-success btn-warning').addClass('btn-secondary');
-            }
-            element.text(lecturerName);
-            element.popover('update');
+            // Update curriculum class
+            updateClass(element, lecturerId, lecturerName);
         } else {
             // Delete curriculum class
             element.remove();
@@ -78,4 +62,25 @@ function populateSelect($this) {
         dropdownAutoWidth: true,
         dropdownParent: $this.parent()
     })
+}
+
+function updateClass(element, lecturerId, lecturerName) {
+    element.data("lecturerid", lecturerId);
+    if (lecturerId != null) {
+        var classType = element.data('classtype');
+        element.removeClass('btn-success btn-warning btn-secondary');
+        if (classType == 'Lý thuyết') {
+            // color of theory class
+            element.addClass('btn-success');
+        } else {
+            // color of practical class
+            element.addClass('btn-warning');
+        }
+        lecturerName = splitString(lecturerName);
+    } else {
+        lecturerName = "Chưa phân";
+        element.removeClass('btn-success btn-warning').addClass('btn-secondary');
+    }
+    element.text(lecturerName);
+    element.popover('update');
 }

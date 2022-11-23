@@ -56,24 +56,7 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
             if (data.success) {
                 // Update assign card data
                 var assignCard = $('#' + id);
-                assignCard.data("lecturerid", lecturerId);
-                if (lecturerId != '') {
-                    var classType = assignCard.data('classtype');
-                    assignCard.removeClass('btn-success btn-warning btn-secondary');
-                    if (classType == 'Lý thuyết') {
-                        // color of theory class
-                        assignCard.addClass('btn-success');
-                    } else {
-                        // color of practical class
-                        assignCard.addClass('btn-warning');
-                    }
-                    lecturerName = splitString(lecturerName);
-                } else {
-                    lecturerName = "Chưa phân";
-                    assignCard.removeClass('btn-success btn-warning').addClass('btn-secondary');
-                }
-                assignCard.text(lecturerName);
-                assignCard.popover('update');
+                updateClass(assignCard, lecturerId, lecturerName);
 
                 // Display success message
                 toastr.options.positionClass = 'toast-bottom-right';
