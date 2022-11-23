@@ -147,7 +147,7 @@ if (termForm.length) {
         }
     });
 
-    // Populate touchspin for start week
+    // Populate touchspin for max lesson number
     var maxLesson = $('.touchspin-maxlesson'),
         maxLessonMin = 3,
         maxLessonMax = 15;
@@ -171,6 +171,28 @@ if (termForm.length) {
         }
     });
 
+    // Populate touchspin for max class number
+    var maxClass = $('.touchspin-maxClass'),
+        maxClassMin = 1,
+        maxClassMax = 30;
+    maxClass.TouchSpin({
+        min: maxClassMin,
+        max: maxClassMax,
+        buttondown_txt: feather.icons['minus'].toSvg(),
+        buttonup_txt: feather.icons['plus'].toSvg()
+    }).on('touchspin.on.startdownspin', function () {
+        var $this = $(this);
+        $('.bootstrap-touchspin-up').removeClass('disabled-max-min');
+        if ($this.val() == maxClassMin) {
+            $(this).siblings().find('.bootstrap-touchspin-down').addClass('disabled-max-min');
+        }
+    }).on('touchspin.on.startupspin', function () {
+        var $this = $(this);
+        $('.bootstrap-touchspin-down').removeClass('disabled-max-min');
+        if ($this.val() == maxClassMax) {
+            $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
+        }
+    });
 
     // Custom vietnamese language for flatpickr
     var vn = {
