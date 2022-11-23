@@ -125,30 +125,52 @@ if (termForm.length) {
     });
 
     // Populate touchspin for start week
-    var touchspinValue = $('.touchspin-startweek'),
-        startWeekrMin = 1,
-        startWeekrMax = 52;
-    touchspinValue
-        .TouchSpin({
-            min: startWeekrMin,
-            max: startWeekrMax,
-            buttondown_txt: feather.icons['minus'].toSvg(),
-            buttonup_txt: feather.icons['plus'].toSvg()
-        })
-        .on('touchspin.on.startdownspin', function () {
-            var $this = $(this);
-            $('.bootstrap-touchspin-up').removeClass('disabled-max-min');
-            if ($this.val() == startWeekrMin) {
-                $(this).siblings().find('.bootstrap-touchspin-down').addClass('disabled-max-min');
-            }
-        })
-        .on('touchspin.on.startupspin', function () {
-            var $this = $(this);
-            $('.bootstrap-touchspin-down').removeClass('disabled-max-min');
-            if ($this.val() == startWeekrMax) {
-                $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
-            }
-        });
+    var startWeek = $('.touchspin-startweek'),
+        startWeekMin = 1,
+        startWeekMax = 52;
+    startWeek.TouchSpin({
+        min: startWeekMin,
+        max: startWeekMax,
+        buttondown_txt: feather.icons['minus'].toSvg(),
+        buttonup_txt: feather.icons['plus'].toSvg()
+    }).on('touchspin.on.startdownspin', function () {
+        var $this = $(this);
+        $('.bootstrap-touchspin-up').removeClass('disabled-max-min');
+        if ($this.val() == startWeekMin) {
+            $(this).siblings().find('.bootstrap-touchspin-down').addClass('disabled-max-min');
+        }
+    }).on('touchspin.on.startupspin', function () {
+        var $this = $(this);
+        $('.bootstrap-touchspin-down').removeClass('disabled-max-min');
+        if ($this.val() == startWeekMax) {
+            $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
+        }
+    });
+
+    // Populate touchspin for start week
+    var maxLesson = $('.touchspin-maxlesson'),
+        maxLessonMin = 3,
+        maxLessonMax = 15;
+    maxLesson.TouchSpin({
+        step: 3,
+        min: maxLessonMin,
+        max: maxLessonMax,
+        buttondown_txt: feather.icons['minus'].toSvg(),
+        buttonup_txt: feather.icons['plus'].toSvg()
+    }).on('touchspin.on.startdownspin', function () {
+        var $this = $(this);
+        $('.bootstrap-touchspin-up').removeClass('disabled-max-min');
+        if ($this.val() == maxLessonMin) {
+            $(this).siblings().find('.bootstrap-touchspin-down').addClass('disabled-max-min');
+        }
+    }).on('touchspin.on.startupspin', function () {
+        var $this = $(this);
+        $('.bootstrap-touchspin-down').removeClass('disabled-max-min');
+        if ($this.val() == maxLessonMax) {
+            $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
+        }
+    });
+
 
     // Custom vietnamese language for flatpickr
     var vn = {
