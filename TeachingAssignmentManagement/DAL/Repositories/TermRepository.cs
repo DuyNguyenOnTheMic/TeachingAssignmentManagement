@@ -22,7 +22,9 @@ namespace TeachingAssignmentManagement.DAL
                 t.start_year,
                 t.end_year,
                 t.start_week,
-                t.start_date
+                t.start_date,
+                t.max_lesson,
+                t.max_class
             }).ToList();
         }
 
