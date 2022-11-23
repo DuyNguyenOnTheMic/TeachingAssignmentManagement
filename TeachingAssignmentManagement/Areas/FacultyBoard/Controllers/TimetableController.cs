@@ -287,7 +287,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             term term = unitOfWork.TermRepository.GetTermByID(termId);
             IEnumerable<curriculum_class> query_curriculumClass = unitOfWork.CurriculumClassRepository.GetClassesInTerm(termId, lecturerId);
-            if (query_curriculumClass.Count() > term.max_class)
+            if (query_curriculumClass.Count() >= term.max_class)
             {
                 IEnumerable classes = query_curriculumClass.Select(c => new
                 {
