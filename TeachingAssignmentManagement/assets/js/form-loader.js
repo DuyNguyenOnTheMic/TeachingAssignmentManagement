@@ -124,32 +124,31 @@ if (termForm.length) {
         });
     });
 
-    var touchspinValue = $('.touchspin-min-max'),
-        counterMin = 1,
-        counterMax = 52;
-    if (touchspinValue.length > 0) {
-        touchspinValue
-            .TouchSpin({
-                min: counterMin,
-                max: counterMax,
-                buttondown_txt: feather.icons['minus'].toSvg(),
-                buttonup_txt: feather.icons['plus'].toSvg()
-            })
-            .on('touchspin.on.startdownspin', function () {
-                var $this = $(this);
-                $('.bootstrap-touchspin-up').removeClass('disabled-max-min');
-                if ($this.val() == counterMin) {
-                    $(this).siblings().find('.bootstrap-touchspin-down').addClass('disabled-max-min');
-                }
-            })
-            .on('touchspin.on.startupspin', function () {
-                var $this = $(this);
-                $('.bootstrap-touchspin-down').removeClass('disabled-max-min');
-                if ($this.val() == counterMax) {
-                    $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
-                }
-            });
-    }
+    // Populate touchspin for start week
+    var touchspinValue = $('.touchspin-startweek'),
+        startWeekrMin = 1,
+        startWeekrMax = 52;
+    touchspinValue
+        .TouchSpin({
+            min: startWeekrMin,
+            max: startWeekrMax,
+            buttondown_txt: feather.icons['minus'].toSvg(),
+            buttonup_txt: feather.icons['plus'].toSvg()
+        })
+        .on('touchspin.on.startdownspin', function () {
+            var $this = $(this);
+            $('.bootstrap-touchspin-up').removeClass('disabled-max-min');
+            if ($this.val() == startWeekrMin) {
+                $(this).siblings().find('.bootstrap-touchspin-down').addClass('disabled-max-min');
+            }
+        })
+        .on('touchspin.on.startupspin', function () {
+            var $this = $(this);
+            $('.bootstrap-touchspin-down').removeClass('disabled-max-min');
+            if ($this.val() == startWeekrMax) {
+                $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
+            }
+        });
 
     // Custom vietnamese language for flatpickr
     var vn = {
@@ -277,7 +276,7 @@ if (termForm.length) {
             } else if (element.hasClass("picker")) {
                 error.insertAfter(element.siblings(".picker"));
             } else if (element.hasClass("touchspin-min-max")) {
-                error.insertAfter(".bootstrap-touchspin");
+                error.insertAfter(element.closest(".bootstrap-touchspin"));
             } else {
                 error.insertAfter(element);
             }
