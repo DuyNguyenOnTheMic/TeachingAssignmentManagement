@@ -295,6 +295,14 @@ if (termForm.length) {
             start_week: {
                 required: true,
                 number: false
+            },
+            max_lesson: {
+                required: true,
+                number: false
+            },
+            max_class: {
+                required: true,
+                number: false
             }
         },
         messages: {
@@ -312,6 +320,12 @@ if (termForm.length) {
             },
             start_week: {
                 required: "Bạn chưa nhập tuần bắt đầu"
+            },
+            max_lesson: {
+                required: "Bạn chưa nhập số tiết tối đa"
+            },
+            max_class: {
+                required: "Bạn chưa nhập số lớp tối đa"
             }
         },
         errorPlacement: function (error, element) {
