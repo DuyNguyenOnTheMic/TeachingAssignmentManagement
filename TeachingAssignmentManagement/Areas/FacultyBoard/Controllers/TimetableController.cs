@@ -270,7 +270,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         [HttpGet]
         public FileResult Export(int termId, string majorId)
         {
-            DataTable dt = new DataTable("Grid");
+            DataTable dt = new DataTable("PHÂN CÔNG HK" + termId);
             dt.Columns.AddRange(new DataColumn[3] { new DataColumn("SrNo"),
                                                      new DataColumn("Title"),
                                                      new DataColumn("NomineeRelationship")});
@@ -287,8 +287,9 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 workbook.Worksheets.Add(dt);
                 using (MemoryStream stream = new MemoryStream())
                 {
+                    string fileName = "CNTT ThoiKhoaBieu_HK" + termId + "_Nganh" + majorId + ".xlsx";
                     workbook.SaveAs(stream);
-                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ExcelFile.xlsx");
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
                 }
             }
         }
