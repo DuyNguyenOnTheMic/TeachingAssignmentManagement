@@ -84,16 +84,22 @@ $(document).off('click', '.btn-delete').on('click', '.btn-delete', function () {
 
     // Show confirm message
     Swal.fire({
-        title: 'Hãy nhập lại tên lớp học phần ' + curriculumClassId + ' để xác nhận xoá',
+        title: 'Thông báo',
+        text: 'Hãy nhập lại mã lớp học phần, ' + curriculumClassId + ' để xác nhận xoá',
+        icon: 'warning',
         input: 'text',
         inputAttributes: {
             autocapitalize: 'off'
         },
         showCancelButton: true,
-        confirmButtonText: 'Look up',
-        showLoaderOnConfirm: true,
+        cancelButtonText: 'Huỷ',
+        confirmButtonText: 'Xoá',
+        customClass: {
+            confirmButton: 'btn btn-primary',
+            cancelButton: 'btn btn-outline-danger ms-1'
+        },
+        buttonsStyling: false,
         preConfirm: (classId) => {
-            toastr.options.positionClass = 'toast-bottom-right';
             if (classId === curriculumClassId) {
                 // Send ajax request to delete class
                 $.ajax({
@@ -102,23 +108,16 @@ $(document).off('click', '.btn-delete').on('click', '.btn-delete', function () {
                     data: { id },
                     success: function (data) {
                         if (data.success) {
-                            // Remove element when delete succeeded
+                            // Show success message
+                            toastr.options.positionClass = 'toast-bottom-right';
                             toastr.success('Xoá lớp thành công!');
                         }
                     }
                 });
             } else {
-                toastr.warning('Xác nhận xoá thất bại!');
+                Swal.showValidationMessage('Xác nhận xoá thất bại!');
                 return false;
             }
-        },
-        allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                title: `${result.value.login}'s avatar`,
-                imageUrl: result.value.avatar_url
-            })
         }
     })
 });
