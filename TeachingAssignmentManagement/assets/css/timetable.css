@@ -38,16 +38,6 @@ thead {
     z-index: 2;
 }
 
-    thead th {
-        position: -webkit-sticky; /* for Safari */
-        position: sticky;
-        top: 0;
-    }
-
-    thead th {
-        left: 0;
-    }
-
 .modal-header .btn-close {
     padding: .8rem;
     box-shadow: 0 5px 20px 0 rgb(34 41 47 / 10%);
