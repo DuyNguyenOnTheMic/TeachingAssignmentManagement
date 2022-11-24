@@ -24,11 +24,11 @@
 }
 
 .assign-table .table-vertical-divider {
-    border-left: 2px solid black !important;
+    border-left: 2px solid #4B4B4B !important;
 }
 
 .dark-layout .assign-table .table-vertical-divider {
-    border-left: 2px solid white !important;
+    border-left: 2px solid #fff !important;
 }
 
 thead {
