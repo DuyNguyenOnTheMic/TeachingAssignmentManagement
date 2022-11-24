@@ -267,6 +267,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
         }
 
+        [HttpGet]
         public FileResult Export(int termId, string majorId)
         {
             DataTable dt = new DataTable("Grid");
@@ -276,15 +277,15 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
             IEnumerable<CurriculumClassDTO> classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, majorId);
 
-            foreach (var item in classes)
+            foreach (CurriculumClassDTO item in classes)
             {
                 dt.Rows.Add(item.Id, item.CurriculumClassId, item.LecturerName);
             }
 
-            using (XLWorkbook workbook = new XLWorkbook()) //Install ClosedXml from Nuget for XLWorkbook  
+            using (XLWorkbook workbook = new XLWorkbook())
             {
                 workbook.Worksheets.Add(dt);
-                using (MemoryStream stream = new MemoryStream()) //using System.IO;  
+                using (MemoryStream stream = new MemoryStream())
                 {
                     workbook.SaveAs(stream);
                     return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ExcelFile.xlsx");
