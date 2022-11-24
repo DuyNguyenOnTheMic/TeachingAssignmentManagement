@@ -23,6 +23,14 @@
     color: #22292f;
 }
 
+.assign-table .table-vertical-divider {
+    border-left: 2px solid black !important;
+}
+
+.dark-layout .assign-table .table-vertical-divider {
+    border-left: 2px solid white !important;
+}
+
 thead {
     position: -webkit-sticky; /* for Safari */
     position: sticky;
@@ -69,12 +77,4 @@ thead {
     color: #B4B7BD;
     box-shadow: 0 3px 8px 0 rgba(11,10,25,.49) !important;
     background-image: url('data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 16 16\' fill=\'%23b4b7bd\'><path d=\'M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z\'/></svg>');
-}
-
-.assign-table .table-vertical-divider {
-    border-left: 2px solid black !important;
-}
-
-.dark-layout .assign-table .table-vertical-divider {
-    border-left: 2px solid white !important;
 }
