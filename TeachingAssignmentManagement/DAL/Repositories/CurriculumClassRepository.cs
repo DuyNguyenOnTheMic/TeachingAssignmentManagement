@@ -33,41 +33,9 @@ namespace TeachingAssignmentManagement.DAL
             });
         }
 
-        public IEnumerable GetExportData(int termId, string majorId)
+        public IEnumerable<curriculum_class> GetExportData(int termId, string majorId)
         {
-            return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId).Select(c => new
-            {
-                c.original_id,
-                c.curriculum_id,
-                c.curriculum_class_id,
-                c.curriculum.name,
-                c.curriculum.credits,
-                c.type,
-                c.student_class_id,
-                c.minimum_student,
-                c.total_lesson,
-                c.room.room_2,
-                c.day,
-                c.start_lesson,
-                c.lesson_number,
-                c.lesson_time,
-                c.room.id,
-                c.lecturer_id,
-                c.lecturer.full_name,
-                room_type = c.room.type,
-                c.room.capacity,
-                c.student_number,
-                c.free_slot,
-                c.state,
-                c.learn_week,
-                c.day_2,
-                c.start_lesson_2,
-                c.student_registered_number,
-                c.start_week,
-                c.end_week,
-                c.note_1,
-                c.note_2
-            });
+            return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId);
         }
 
         public IEnumerable<curriculum_class> GetClassesInTerm(int termId, string lecturerId)
