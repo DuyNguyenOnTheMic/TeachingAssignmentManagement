@@ -52,7 +52,7 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
         success: function (data) {
             if (data.success) {
                 // Call function to assign lecturer
-                assignLecturer(id, lecturerId, lecturerName);
+                assignLecturer(id, lecturerId);
             } else {
                 // Populate error message into table
                 let errorMessage = data.message + '<div class="table-responsive mt-2"><table class="table"><thead><tr><th>Mã LHP</th><th>Tên HP</th><th>Ngành</th></tr></thead><tbody>';
@@ -153,7 +153,7 @@ function splitString(lecturerName) {
     return result;
 }
 
-function assignLecturer(id, lecturerId, lecturerName) {
+function assignLecturer(id, lecturerId) {
     // Send ajax request to assign lecturer
     $.ajax({
         type: 'POST',
@@ -161,10 +161,6 @@ function assignLecturer(id, lecturerId, lecturerName) {
         data: { id, lecturerId },
         success: function (data) {
             if (data.success) {
-                // Update assign card data
-                var assignCard = $('#' + id);
-                updateClass(assignCard, lecturerId, lecturerName);
-
                 // Display success message
                 toastr.options.positionClass = 'toast-bottom-right';
                 toastr.success('Thành công!');
