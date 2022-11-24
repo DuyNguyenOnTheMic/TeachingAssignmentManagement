@@ -146,8 +146,7 @@ $('.assign-card').on('click', function () {
 
 $('.btn-export').on('click', function () {
     var url = rootUrl + 'FacultyBoard/TimeTable/Export?termId=' + termId + '&majorId=' + majorId;
-    console.log(url);
-
+    window.location = url;
 });
 
 function splitString(lecturerName) {
