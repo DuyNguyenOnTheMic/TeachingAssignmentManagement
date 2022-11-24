@@ -284,7 +284,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
             using (XLWorkbook workbook = new XLWorkbook())
             {
-                workbook.Worksheets.Add(dt);
+                var worksheet = workbook.Worksheets.Add(dt);
+                worksheet.Columns().AdjustToContents();
                 using (MemoryStream stream = new MemoryStream())
                 {
                     string fileName = "CNTT ThoiKhoaBieu_HK" + termId + "_Nganh" + majorId + ".xlsx";
