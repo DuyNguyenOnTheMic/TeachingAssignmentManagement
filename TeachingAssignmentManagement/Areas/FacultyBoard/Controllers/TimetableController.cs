@@ -298,6 +298,13 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             using (XLWorkbook workbook = new XLWorkbook())
             {
                 IXLWorksheet worksheet = workbook.Worksheets.Add(dt);
+                for (int row = 1; row < dt.Rows.Count; row++)
+                {
+                    if (worksheet.Cell(row, 16).Value.Equals(string.Empty))
+                    {
+                        worksheet.Cell(row, 16).Style.Fill.BackgroundColor = XLColor.Yellow;
+                    }
+                }
                 worksheet.Tables.FirstOrDefault().Theme = XLTableTheme.None;
                 using (MemoryStream stream = new MemoryStream())
                 {
