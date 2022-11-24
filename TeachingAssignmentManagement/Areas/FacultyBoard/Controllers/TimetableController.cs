@@ -297,7 +297,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 int maxClasses = term.max_class;
 
                 // Check not duplicate class in the same time
-                if (query_classLesson.Count() >= 1)
+                if (query_classLesson.Count() >= 1 && query_classLesson.First().curriculum_class_id != curriculumClass.curriculum_class_id)
                 {
                     IEnumerable classes = query_classLesson.Select(c => new
                     {
