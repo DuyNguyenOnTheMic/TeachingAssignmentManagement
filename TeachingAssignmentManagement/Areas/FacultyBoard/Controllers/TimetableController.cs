@@ -276,10 +276,9 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 new DataColumn("MaGocLHP"), new DataColumn("Mã MH"), new DataColumn("Mã LHP"), new DataColumn("Tên HP"),
                 new DataColumn("Số TC"), new DataColumn("Loại HP"), new DataColumn("Mã Lớp"), new DataColumn("TSMH"),
                 new DataColumn("Số Tiết Đã xếp"), new DataColumn("PH"), new DataColumn("Thứ"), new DataColumn("Tiết BĐ"),
-                new DataColumn("Số Tiết"), new DataColumn("Tiết Học"), new DataColumn("Phòng"),
-                new DataColumn("Mã CBGD"), new DataColumn("Tên CBGD"), new DataColumn("PH_X"),
-                new DataColumn("Sức Chứa"), new DataColumn("SiSoTKB"), new DataColumn("Trống"),
-                new DataColumn("Tình Trạng LHP"), new DataColumn("TuanHoc2"), new DataColumn("ThuS"),
+                new DataColumn("Số Tiết"), new DataColumn("Tiết Học"), new DataColumn("Phòng"), new DataColumn("Mã CBGD"),
+                new DataColumn("Tên CBGD"), new DataColumn("PH_X"), new DataColumn("Sức Chứa"), new DataColumn("SiSoTKB"),
+                new DataColumn("Trống"), new DataColumn("Tình Trạng LHP"), new DataColumn("TuanHoc2"), new DataColumn("ThuS"),
                 new DataColumn("TietS"), new DataColumn("Số SVĐK"), new DataColumn("Tuần BD"), new DataColumn("Tuần KT"),
                 new DataColumn("Ghi Chú 1"), new DataColumn("Ghi chú 2")
             });
