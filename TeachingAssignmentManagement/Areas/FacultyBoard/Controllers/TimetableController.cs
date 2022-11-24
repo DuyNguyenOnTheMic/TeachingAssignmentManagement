@@ -299,12 +299,14 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             using (XLWorkbook workbook = new XLWorkbook())
             {
                 IXLWorksheet worksheet = workbook.Worksheets.Add(dt);
-                for (int row = 1; row < dt.Rows.Count; row++)
+                for (int row = 1; row <= dt.Rows.Count; row++)
                 {
-                    var cell = worksheet.Cell(row, 16);
-                    if (string.IsNullOrEmpty(cell.Value.ToString()))
+                    IXLCell lecturerId = worksheet.Cell(row, 16);
+                    IXLCell lecturerName = worksheet.Cell(row, 17);
+                    if (string.IsNullOrEmpty(lecturerId.Value.ToString()))
                     {
-                        cell.Style.Fill.BackgroundColor = XLColor.Yellow;
+                        lecturerId.Style.Fill.BackgroundColor = XLColor.Yellow;
+                        lecturerName.Style.Fill.BackgroundColor = XLColor.Yellow;
                     }
                 }
                 worksheet.Tables.FirstOrDefault().Theme = XLTableTheme.None;
