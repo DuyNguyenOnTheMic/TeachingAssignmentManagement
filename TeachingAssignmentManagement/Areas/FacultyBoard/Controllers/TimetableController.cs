@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -300,9 +301,10 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 IXLWorksheet worksheet = workbook.Worksheets.Add(dt);
                 for (int row = 1; row < dt.Rows.Count; row++)
                 {
-                    if (worksheet.Cell(row, 16).Value.Equals(string.Empty))
+                    var cell = worksheet.Cell(row, 16);
+                    if (string.IsNullOrEmpty(cell.Value.ToString()))
                     {
-                        worksheet.Cell(row, 16).Style.Fill.BackgroundColor = XLColor.Yellow;
+                        cell.Style.Fill.BackgroundColor = XLColor.Yellow;
                     }
                 }
                 worksheet.Tables.FirstOrDefault().Theme = XLTableTheme.None;
