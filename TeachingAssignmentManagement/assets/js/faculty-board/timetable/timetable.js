@@ -1,4 +1,6 @@
-﻿var rootUrl = $('#loader').data('request-url');
+﻿var termId = $('#term').val(),
+    majorId = $('#major').val(),
+    rootUrl = $('#loader').data('request-url');
 
 $(function () {
     // Display message when table have no data
@@ -39,7 +41,6 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
 
     // Get values
     var id = $this.data('id'),
-        termId = $('#term').val(),
         lecturerSelect = $this.parent().find('.select2 :selected'),
         lecturerId = lecturerSelect.val();
 
@@ -141,6 +142,12 @@ $('.assign-card').on('click', function () {
             formSelect.val(lecturerId).trigger('change');
         }
     }, 0);
+});
+
+$('.btn-export').on('click', function () {
+    var url = rootUrl + 'FacultyBoard/TimeTable/Export?termId=' + termId + '&majorId=' + majorId;
+    console.log(url);
+
 });
 
 function splitString(lecturerName) {

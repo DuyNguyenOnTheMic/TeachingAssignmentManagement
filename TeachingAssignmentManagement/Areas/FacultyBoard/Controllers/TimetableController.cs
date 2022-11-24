@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClosedXML.Excel;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
@@ -263,6 +264,31 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             {
                 Response.Write($"Oops, có lỗi đã xảy ra, vui lòng kiểm tra lại tệp tin 🥹");
                 return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
+            }
+        }
+
+        public FileResult Export(int termId, string majorId)
+        {
+            DataTable dt = new DataTable("Grid");
+            dt.Columns.AddRange(new DataColumn[3] { new DataColumn("SrNo"),
+                                                     new DataColumn("Title"),
+                                                     new DataColumn("NomineeRelationship")});
+
+            IEnumerable<CurriculumClassDTO> classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, majorId);
+
+            foreach (var item in classes)
+            {
+                dt.Rows.Add(item.Id, item.CurriculumClassId, item.LecturerName);
+            }
+
+            using (XLWorkbook workbook = new XLWorkbook()) //Install ClosedXml from Nuget for XLWorkbook  
+            {
+                workbook.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream()) //using System.IO;  
+                {
+                    workbook.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ExcelFile.xlsx");
+                }
             }
         }
 
