@@ -284,7 +284,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
             using (XLWorkbook workbook = new XLWorkbook())
             {
-                var worksheet = workbook.Worksheets.Add(dt);
+                IXLWorksheet worksheet = workbook.Worksheets.Add(dt);
                 worksheet.Columns().AdjustToContents();
                 using (MemoryStream stream = new MemoryStream())
                 {
