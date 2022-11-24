@@ -41,8 +41,7 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
     var id = $this.data('id'),
         termId = $('#term').val(),
         lecturerSelect = $this.parent().find('.select2 :selected'),
-        lecturerId = lecturerSelect.val(),
-        lecturerName = lecturerSelect.text();
+        lecturerId = lecturerSelect.val();
 
     // Send ajax request to check state of lecturer
     $.ajax({
