@@ -284,7 +284,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             });
 
             IEnumerable<curriculum_class> classes = unitOfWork.CurriculumClassRepository.GetExportData(termId, majorId);
-            foreach (var item in classes)
+            foreach (curriculum_class item in classes)
             {
                 // Add data to table
                 dt.Rows.Add(item.original_id, item.curriculum_id, item.curriculum_class_id, item.curriculum.name,
@@ -300,6 +300,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 IXLWorksheet worksheet = workbook.Worksheets.Add(dt);
                 for (int row = 1; row <= dt.Rows.Count; row++)
                 {
+                    // Color lecturer id and Lecturer name if null
                     IXLCell lecturerId = worksheet.Cell(row, 16);
                     IXLCell lecturerName = worksheet.Cell(row, 17);
                     if (string.IsNullOrEmpty(lecturerId.Value.ToString()))
@@ -308,7 +309,9 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         lecturerName.Style.Fill.BackgroundColor = XLColor.Yellow;
                     }
                 }
-                worksheet.Tables.FirstOrDefault().Theme = XLTableTheme.None;
+                IXLTable table = worksheet.Table(0);
+                table.HeadersRow().Style.Font.Bold = true;
+                table.Theme = XLTableTheme.None;
                 using (MemoryStream stream = new MemoryStream())
                 {
                     // Export to Excel file
