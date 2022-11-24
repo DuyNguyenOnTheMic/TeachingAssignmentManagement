@@ -298,6 +298,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             using (XLWorkbook workbook = new XLWorkbook())
             {
                 IXLWorksheet worksheet = workbook.Worksheets.Add(dt);
+                worksheet.Tables.FirstOrDefault().Theme = XLTableTheme.None;
                 using (MemoryStream stream = new MemoryStream())
                 {
                     // Export to Excel file
