@@ -35,12 +35,12 @@
                     {
                         foreach (int startLesson in startLessons)
                         {
-                            var classes = Model.Where(x => x.CurriculumId == curriculum.id && x.Day2 == day && x.StartLesson2 == startLesson).ToList();
+                            var classes = Model.Where(x => x.CurriculumId == curriculum.id && x.Day2 == day && x.StartLesson2 == startLesson);
                             string dividerClass = startLesson == 1 ? "table-vertical-divider" : "";
-                            if (classes.Count > 0)
+                            if (classes.Count() > 0)
                             {
                                 <td class="@dividerClass">
-                                    @foreach (var item in classes)
+                                    @foreach (var item in classes.ToList())
                                     {
                                         string lecturerId = item.LecturerId ?? string.Empty;
                                         string lecturerName = item.LecturerName ?? "Chưa phân";
