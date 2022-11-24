@@ -312,7 +312,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 dt.Rows.Add(item.original_id, item.curriculum_id, item.curriculum_class_id, item.curriculum.name,
                     item.curriculum.credits, item.type, item.student_class_id, item.minimum_student, item.total_lesson,
                     item.room.room_2, item.day, item.start_lesson, item.lesson_number, item.lesson_time, item.room_id,
-                    item.lecturer_id, item.lecturer.full_name, item.room.type, item.room.capacity, item.student_number,
+                    item.lecturer?.staff_id, item.lecturer?.full_name, item.room.type, item.room.capacity, item.student_number,
                     item.free_slot, item.state, item.learn_week, item.day_2, item.start_lesson_2,
                     item.student_registered_number, item.start_week, item.end_week, item.note_1, item.note_2);
             }
@@ -320,7 +320,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             using (XLWorkbook workbook = new XLWorkbook())
             {
                 IXLWorksheet worksheet = workbook.Worksheets.Add(dt);
-                worksheet.Columns().AdjustToContents();
                 using (MemoryStream stream = new MemoryStream())
                 {
                     // Export to Excel file
