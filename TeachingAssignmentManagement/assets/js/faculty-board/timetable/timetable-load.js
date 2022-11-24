@@ -13,6 +13,7 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) 
             updateClass(element, lecturerId, lecturerName);
         } else {
             // Delete curriculum class
+            element.popover('dispose');
             element.remove();
         }
     }
