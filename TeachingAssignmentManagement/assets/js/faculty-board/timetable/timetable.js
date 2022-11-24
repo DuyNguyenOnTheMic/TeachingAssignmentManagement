@@ -76,6 +76,54 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
     });
 });
 
+$(document).off('click', '.btn-delete').on('click', '.btn-delete', function () {
+    $this = $(this);
+
+    // Get values
+    var id = $this.data('id');
+    var curriculumClassId = $this.parents().find('.popover-header').text();
+
+    // Show confirm message
+    Swal.fire({
+        title: 'Hãy nhập lại tên lớp học phần ' + curriculumClassId + ' để xác nhận xoá',
+        input: 'text',
+        inputAttributes: {
+            autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Look up',
+        showLoaderOnConfirm: true,
+        preConfirm: (classId) => {
+            toastr.options.positionClass = 'toast-bottom-right';
+            if (classId === curriculumClassId) {
+                // Send ajax request to delete class
+                $.ajax({
+                    type: 'POST',
+                    url: rootUrl + 'FacultyBoard/Timetable/Delete',
+                    data: { id },
+                    success: function (data) {
+                        if (data.success) {
+                            // Remove element when delete succeeded
+                            toastr.success('Xoá lớp thành công!');
+                        }
+                    }
+                });
+            } else {
+                toastr.warning('Xác nhận xoá thất bại!');
+                return false;
+            }
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: `${result.value.login}'s avatar`,
+                imageUrl: result.value.avatar_url
+            })
+        }
+    })
+});
+
 $('.assign-card').on('click', function () {
     // Hide other popovers when a popover is clicked
     $('[data-bs-toggle="popover"]').not(this).popover('hide');
@@ -95,44 +143,6 @@ $('.assign-card').on('click', function () {
             formSelect.val(lecturerId).trigger('change');
         }
     }, 0);
-});
-
-$('.btn-delete').on('click', function () {
-    $this = $(this);
-
-    // Get values
-    var id = $this.closest('.assign-card').attr('id');
-
-    // Show confirm message
-    Swal.fire({
-        title: 'Thông báo',
-        text: 'Bạn có chắc muốn xoá lớp học phần này?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Xoá',
-        cancelButtonText: 'Huỷ',
-        customClass: {
-            confirmButton: 'btn btn-primary',
-            cancelButton: 'btn btn-outline-danger ms-1'
-        },
-        buttonsStyling: false
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Send ajax request to delete class
-            $.ajax({
-                type: 'POST',
-                url: rootUrl + 'FacultyBoard/Timetable/Delete',
-                data: { id },
-                success: function (data) {
-                    if (data.success) {
-                        // Remove element when delete succeeded
-                        toastr.options.positionClass = 'toast-bottom-right';
-                        toastr.success('Xoá lớp thành công!');
-                    }
-                }
-            });
-        }
-    })
 });
 
 function splitString(lecturerName) {
