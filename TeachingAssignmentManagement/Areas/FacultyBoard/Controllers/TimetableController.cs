@@ -271,11 +271,43 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public FileResult Export(int termId, string majorId)
         {
             DataTable dt = new DataTable("PHÂN CÔNG HK" + termId);
-            dt.Columns.AddRange(new DataColumn[3] { new DataColumn("SrNo"),
-                                                     new DataColumn("Title"),
-                                                     new DataColumn("NomineeRelationship")});
+            dt.Columns.AddRange(new DataColumn[32]
+            {
+                new DataColumn("MaGocLHP"),
+                new DataColumn("Mã MH"),
+                new DataColumn("Mã LHP"),
+                new DataColumn("Tên HP"),
+                new DataColumn("Số TC"),
+                new DataColumn("Loại HP"),
+                new DataColumn("Mã Lớp"),
+                new DataColumn("TSMH"),
+                new DataColumn("Số Tiết Đã xếp"),
+                new DataColumn("PH"),
+                new DataColumn("Thứ"),
+                new DataColumn("Tiết BĐ"),
+                new DataColumn("Số Tiết"),
+                new DataColumn("Tiết Học"),
+                new DataColumn("Phòng"),
+                new DataColumn("Mã CBGD"),
+                new DataColumn("Tên CBGD"),
+                new DataColumn("PH_X"),
+                new DataColumn("Sức Chứa"),
+                new DataColumn("SiSoTKB"),
+                new DataColumn("Trống"),
+                new DataColumn("Tình Trạng LHP"),
+                new DataColumn("TuanHoc2"),
+                new DataColumn("ThuS"),
+                new DataColumn("TietS"),
+                new DataColumn("Số SVĐK"),
+                new DataColumn("Tuần BD"),
+                new DataColumn("Tuần KT"),
+                new DataColumn("Mã Ngành"),
+                new DataColumn("Tên Ngành"),
+                new DataColumn("Ghi Chú 1"),
+                new DataColumn("Ghi chú 2")
+            });
 
-            IEnumerable<CurriculumClassDTO> classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, majorId);
+            IEnumerable classes = unitOfWork.CurriculumClassRepository.GetExportData(termId, majorId);
 
             foreach (CurriculumClassDTO item in classes)
             {
