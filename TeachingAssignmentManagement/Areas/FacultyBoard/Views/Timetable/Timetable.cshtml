@@ -36,7 +36,7 @@
                         foreach (int startLesson in startLessons)
                         {
                             var classes = Model.Where(x => x.CurriculumId == curriculum.id && x.Day2 == day && x.StartLesson2 == startLesson);
-                            string dividerClass = startLesson == 1 ? "table-vertical-divider" : "";
+                            string dividerClass = startLesson == 1 ? "table-vertical-divider" : string.Empty;
                             if (classes.Any())
                             {
                                 <td class="@dividerClass">
