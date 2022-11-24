@@ -5,9 +5,18 @@
     int[] startLessons = { 1, 4, 7, 10, 13 };
 }
 
-<div class="d-flex justify-content-end mb-2">
-    <button type="button" class="btn btn-outline-secondary waves-effect btn-export"><i class="feather feather-file me-50"></i>Export</button>
+<div class="d-flex justify-content-between align-items-center row">
+    <div class="col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start">
+        <button class="btn btn-success btn-sm text-nowrap" type="button">Lớp lý thuyết</button>
+        <button class="btn btn-warning btn-sm text-nowrap" type="button">Lớp thực hành</button>
+    </div>
+    <div class="col-sm-12 col-lg-8">
+        <div class="d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap">
+            <button type="button" class="btn btn-outline-secondary waves-effect btn-export mt-50"><i class="feather feather-file me-50"></i>Export</button>
+        </div>
+    </div>
 </div>
+
 <div class="table-responsive assign-table">
     <table class="table table-bordered dataTable" id="tblAssign">
         <thead class="table-light">
