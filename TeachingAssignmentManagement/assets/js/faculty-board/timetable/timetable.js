@@ -86,7 +86,7 @@ $(document).off('click', '.btn-delete').on('click', '.btn-delete', function () {
     // Show confirm message
     Swal.fire({
         title: 'Thông báo',
-        text: 'Hãy nhập lại mã lớp học phần, ' + curriculumClassId + ' để xác nhận xoá',
+        html: '<p class="text-danger mb-0">Hãy nhập lại mã lớp học phần, ' + curriculumClassId + ' để xác nhận xoá.</p>',
         icon: 'warning',
         input: 'text',
         inputAttributes: {
