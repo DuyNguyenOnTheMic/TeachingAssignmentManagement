@@ -359,6 +359,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     {
                         classId = c.curriculum_class_id,
                         curriculumName = c.curriculum.name,
+                        classDay = c.day,
+                        lessonTime = c.lesson_time,
                         majorName = c.major.name
                     }).ToList();
                     return Json(new { duplicate = true, message = "Giảng viên này đã có lớp trong tiết học này!", classList = classes }, JsonRequestBehavior.AllowGet);
@@ -371,6 +373,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     {
                         classId = c.curriculum_class_id,
                         curriculumName = c.curriculum.name,
+                        classDay = c.day,
+                        lessonTime = c.lesson_time,
                         majorName = c.major.name
                     }).ToList();
                     return Json(new { maxLesson = true, message = "Giảng viên này đã đạt số tiết tối đa trong 1 ngày!", classList = classes }, JsonRequestBehavior.AllowGet);
@@ -383,6 +387,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     {
                         classId = c.curriculum_class_id,
                         curriculumName = c.curriculum.name,
+                        classDay = c.day,
+                        lessonTime = c.lesson_time,
                         majorName = c.major.name
                     }).ToList();
                     return Json(new { maxCLass = true, message = "Giảng viên này đạt số lớp tối đa trong 1 tuần!", classList = classes }, JsonRequestBehavior.AllowGet);

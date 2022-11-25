@@ -53,9 +53,9 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
                 assignLecturer(id, lecturerId);
             } else {
                 // Populate error message into table
-                let errorMessage = data.message + '<div class="table-responsive mt-2"><table class="table"><thead><tr><th>Mã LHP</th><th>Tên HP</th><th>Ngành</th></tr></thead><tbody>';
+                let errorMessage = data.message + '<div class="table-responsive mt-2"><table class="table"><thead><tr><th>Mã LHP</th><th>Tên HP</th><th>Thứ</th><th>Tiết</th><th>Ngành</th></tr></thead><tbody>';
                 data.classList.forEach(function (item, index) {
-                    errorMessage += '<tr class="font-small-3"><td>' + item.classId + '</td><td>' + item.curriculumName + '</td><td>' + item.majorName + '</td></tr>';
+                    errorMessage += '<tr class="font-small-3"><td>' + item.classId + '</td><td>' + item.curriculumName + '</td><td class="text-nowrap">' + item.classDay + '</td><td class="text-nowrap">' + item.lessonTime + '</td><td>' + item.majorName + '</td></tr>';
                 });
                 errorMessage += '</tbody></table></div>';
                 // Show message when assign failed
