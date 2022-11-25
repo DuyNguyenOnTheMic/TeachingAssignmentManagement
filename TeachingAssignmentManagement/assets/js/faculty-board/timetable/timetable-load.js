@@ -7,6 +7,11 @@ $.connection.hub.start();
 // Notify while anyChanges
 hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) {
     var element = $('#' + id);
+    var assignedCount = $('#assignedCount'),
+        totalCount = $('#totalCount'),
+        allClass = $('table .assign-card'),
+        theoryClass = $('table .btn-success'),
+        practicalClass = $('table .btn-warning');
     if (element.length) {
         if (isUpdate) {
             // Update curriculum class
@@ -16,6 +21,8 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) 
             element.popover('dispose');
             element.remove();
         }
+        assignedCount.text(theoryClass.length + practicalClass.length);
+        totalCount.text(allClass.length);
     }
 }
 
@@ -66,9 +73,6 @@ function populateSelect($this) {
 }
 
 function updateClass(element, lecturerId, lecturerName) {
-    var assignedCount = $('#assignedCount'),
-        theoryClass = $('table .btn-success'),
-        practicalClass = $('table .btn-warning');
     element.data('lecturerid', lecturerId);
     if (lecturerId) {
         var classType = element.data('classtype');
@@ -87,5 +91,4 @@ function updateClass(element, lecturerId, lecturerName) {
     }
     element.text(lecturerName);
     $('[data-bs-toggle="popover"]').popover('update');
-    assignedCount.text(theoryClass.length + practicalClass.length);
 }
