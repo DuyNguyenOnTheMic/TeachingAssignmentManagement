@@ -2,27 +2,25 @@
     majorId = $('#major').val(),
     rootUrl = $('#loader').data('request-url');
 
-$(function () {
-    // Display message when table have no data
-    var rowCount = $('#tblAssign tbody tr').length;
-    if (rowCount == 0) {
-        $('#assignLecturerDiv').append('<h4 class="text-center mt-2">Học kỳ này chưa có dữ liệu <i class="feather feather-help-circle"></i></h4>');
-    } else {
-        // Initialize Tooltip
-        $('[data-bs-toggle="tooltip"]').tooltip({
-            trigger: 'hover'
-        });
+// Display message when table have no data
+var rowCount = $('#tblAssign tbody tr').length;
+if (rowCount == 0) {
+    $('#assignLecturerDiv').empty().append('<h4 class="text-center mt-2">Học kỳ này chưa có dữ liệu <i class="feather feather-help-circle"></i></h4>');
+} else {
+    // Initialize Tooltip
+    $('[data-bs-toggle="tooltip"]').tooltip({
+        trigger: 'hover'
+    });
 
-        // Initialize Popover
-        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-            return new bootstrap.Popover(popoverTriggerEl, {
-                html: true,
-                sanitize: false
-            });
+    // Initialize Popover
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl, {
+            html: true,
+            sanitize: false
         });
-    }
-});
+    });
+}
 
 // Split lecturerName
 $('.assign-card').each(function () {
