@@ -1,15 +1,15 @@
-.assign-table {
+.assign-table-div {
     max-height: 75vh;
     overflow: scroll;
 }
 
-    .assign-table th:first-child {
+    .assign-table-div th:first-child {
         position: sticky;
         left: 0px;
         z-index: 1;
     }
 
-    .assign-table td:first-child {
+    .assign-table-div td:first-child {
         position: sticky;
         left: 0px;
         background-color: #f3f2f7;
@@ -18,24 +18,48 @@
         z-index: 1;
     }
 
-.dark-layout .assign-table td:first-child {
+.dark-layout .assign-table-div td:first-child {
     background-color: #343d55;
     color: #22292f;
 }
 
-.assign-table .table-vertical-divider {
+.assign-table-div .table-vertical-divider {
     border-left: 2px solid #4B4B4B !important;
 }
 
-.dark-layout .assign-table .table-vertical-divider {
+.dark-layout .assign-table-div .table-vertical-divider {
     border-left: 2px solid #fff !important;
 }
 
-thead {
-    position: -webkit-sticky; /* for Safari */
-    position: sticky;
-    top: 0;
-    z-index: 2;
+table.assign-table {
+    clear: both;
+    margin-top: 6px !important;
+    margin-bottom: 6px !important;
+    max-width: none !important;
+    border-collapse: separate !important;
+    width: 100% !important;
+    border-spacing: 0;
+}
+
+    table.assign-table thead {
+        position: -webkit-sticky; /* for Safari */
+        position: sticky;
+        top: 0;
+        z-index: 2;
+    }
+
+    table.assign-table td, table.assign-table th {
+        padding: .72rem 1.5rem;
+        vertical-align: middle;
+    }
+
+    table.assign-table td, table.assign-table th {
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
+    }
+
+table.table-bordered.assign-table th, table.table-bordered.assign-table td {
+    border-bottom-width: 1px;
 }
 
 .modal-header .btn-close {
@@ -52,14 +76,14 @@ thead {
     transform: translate(18px,-10px);
 }
 
-.modal-header .btn-close:hover {
-    opacity: 1;
-    outline: 0;
-    -webkit-transform: translate(15px,-2px);
-    -ms-transform: translate(15px,-2px);
-    transform: translate(15px,-2px);
-    box-shadow: none;
-}
+    .modal-header .btn-close:hover {
+        opacity: 1;
+        outline: 0;
+        -webkit-transform: translate(15px,-2px);
+        -ms-transform: translate(15px,-2px);
+        transform: translate(15px,-2px);
+        box-shadow: none;
+    }
 
 .dark-layout .modal-header .btn-close {
     text-shadow: none;
