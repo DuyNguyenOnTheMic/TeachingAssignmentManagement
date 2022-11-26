@@ -29,11 +29,6 @@ namespace TeachingAssignmentManagement.DAL
             }).ToList();
         }
 
-        public term GetLatestTerms()
-        {
-            return context.terms.OrderByDescending(t => t.id).FirstOrDefault();
-        }
-
         public term GetTermByID(int id)
         {
             return context.terms.Find(id);
