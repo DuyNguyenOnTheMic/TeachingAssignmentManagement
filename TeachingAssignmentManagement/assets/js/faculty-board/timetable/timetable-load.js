@@ -1,4 +1,6 @@
-﻿var rootUrl = $('#loader').data('request-url');
+﻿var rootUrl = $('#loader').data('request-url'),
+    assignLecturerDiv = $('#assignLecturerDiv'),
+    url = rootUrl + 'FacultyBoard/Timetable/GetData';
 
 // Reference the hub
 var hubNotif = $.connection.curriculumClassHub;
@@ -20,10 +22,13 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) 
     }
 }
 
+hubNotif.client.refreshedData = function () {
+    // Refresh timetable after someone import or re-import data
+    getTimetable();
+}
+
 $(function () {
-    var formSelect = $('.form-select'),
-        assignLecturerDiv = $('#assignLecturerDiv'),
-        url = rootUrl + 'FacultyBoard/Timetable/GetData';
+    var formSelect = $('.form-select');
 
     // Populate select2 for choosing term and major
     formSelect.each(function () {
@@ -38,21 +43,7 @@ $(function () {
     })
 
     formSelect.change(function () {
-        var termId = $('#term').val(),
-            majorId = $('#major').val();
-
-        // Hide all popovers
-        $("[data-bs-toggle='popover']").popover('dispose');
-
-        if (termId && majorId) {
-            // Display loading message while fetching data
-            assignLecturerDiv.html('<div class="d-flex justify-content-center"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-25">Đang tải...</p></div>');
-
-            // Get Partial View timetable data
-            $.get(url, { termId, majorId }, function (data) {
-                assignLecturerDiv.html(data);
-            });
-        }
+        getTimetable();
     });
 });
 
@@ -95,4 +86,22 @@ function updateCount() {
         practicalClass = $('#tblAssign tbody .btn-warning');
     assignedCount.text(theoryClass.length + practicalClass.length);
     totalCount.text(allClass.length);
+}
+
+function getTimetable() {
+    var termId = $('#term').val(),
+        majorId = $('#major').val();
+
+    // Hide all popovers
+    $("[data-bs-toggle='popover']").popover('dispose');
+
+    if (termId && majorId) {
+        // Display loading message while fetching data
+        assignLecturerDiv.html('<div class="d-flex justify-content-center"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-25">Đang tải...</p></div>');
+
+        // Get Partial View timetable data
+        $.get(url, { termId, majorId }, function (data) {
+            assignLecturerDiv.html(data);
+        });
+    }
 }

@@ -11,5 +11,12 @@ namespace TeachingAssignmentManagement.Hubs
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<CurriculumClassHub>();
             context.Clients.All.updatedData(id, lecturerId, lecturerName, isUpdate);
         }
+
+        [HubMethodName("refreshData")]
+        public static void RefreshData()
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<CurriculumClassHub>();
+            context.Clients.All.refreshedData();
+        }
     }
 }

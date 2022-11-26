@@ -258,6 +258,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     ProgressHub.SendProgress("Đang import...", dt.Rows.IndexOf(row), itemsCount);
                 }
                 unitOfWork.Save();
+                CurriculumClassHub.RefreshData();
                 return Json(errorLecturerList.Distinct(), JsonRequestBehavior.AllowGet);
             }
             catch
