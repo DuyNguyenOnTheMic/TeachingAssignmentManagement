@@ -57,16 +57,6 @@ namespace TeachingAssignmentManagement.DAL
             return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId);
         }
 
-        public int GetClassesAssignedCount(IEnumerable<CurriculumClassDTO> curriculumClasses)
-        {
-            return curriculumClasses.Count(c => c.LecturerId != null);
-        }
-
-        public int GetClassesTotalCount(IEnumerable<CurriculumClassDTO> curriculumClasses)
-        {
-            return curriculumClasses.Count();
-        }
-
         public curriculum_class GetClassByID(int id)
         {
             return context.curriculum_class.Find(id);

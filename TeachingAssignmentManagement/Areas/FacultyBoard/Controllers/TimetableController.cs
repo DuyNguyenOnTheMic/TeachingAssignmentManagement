@@ -33,8 +33,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public ActionResult GetData(int termId, string majorId)
         {
             IEnumerable<CurriculumClassDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, majorId);
-            ViewData["assignedCount"] = unitOfWork.CurriculumClassRepository.GetClassesAssignedCount(query_classes);  
-            ViewData["totalCount"] = unitOfWork.CurriculumClassRepository.GetClassesTotalCount(query_classes);  
             ViewBag.curriculums = unitOfWork.CurriculumRepository.GetCurriculums(query_classes);
             ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
             return PartialView("Timetable", query_classes.ToList());
