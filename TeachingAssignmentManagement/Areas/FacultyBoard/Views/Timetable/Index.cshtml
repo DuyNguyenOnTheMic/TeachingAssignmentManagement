@@ -24,7 +24,7 @@
                                         @Html.DropDownList("term", null, "---- Chọn học kỳ ----", htmlAttributes: new { @class = "select2 form-select" })
                                     </div>
                                 </div>
-                                <div id="PersonalTimetableDiv">
+                                <div id="personalTimetableDiv">
                                     <div class="d-flex justify-content-center mt-2">
                                         <div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div>
                                         <p class="my-auto">Đang tải...</p>
@@ -48,4 +48,5 @@
 
 @section scripts {
     <script src="~/app-assets/language/select2/vi.min.js"></script>
+    <script src="~/assets/js/faculty-board/timetable/personal-timetable-load.js"></script>
 }

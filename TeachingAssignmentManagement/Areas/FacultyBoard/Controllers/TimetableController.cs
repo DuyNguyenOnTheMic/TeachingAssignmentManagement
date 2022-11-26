@@ -51,7 +51,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             return View();
         }
 
-        public ActionResult GetPersonalTimetable(int termId)
+        public ActionResult GetPersonalData(int termId)
         {
             string userId = "687aef9d-f6b9-4179-a7a8-64d917c3a953";
             term term = unitOfWork.TermRepository.GetTermByID(termId);
