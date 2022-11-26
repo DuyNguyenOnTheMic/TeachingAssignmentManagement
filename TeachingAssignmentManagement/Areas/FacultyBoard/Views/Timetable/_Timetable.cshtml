@@ -1,9 +1,4 @@
-﻿@model IEnumerable<TeachingAssignmentManagement.Models.CurriculumClassDTO>
-
-@{
-    int[] days = { 2, 3, 4, 5, 6, 7 };
-    int[] startLessons = { 1, 4, 7, 10, 13 };
-}
+﻿@model TeachingAssignmentManagement.Models.TimetableViewModels
 
 <div class="d-flex justify-content-between align-items-center row mb-1">
     <div class="col-sm-12 col-lg-6 d-flex justify-content-center justify-content-lg-start flex-lg-nowrap flex-wrap">
@@ -29,16 +24,16 @@
         <thead class="table-light">
             <tr class="text-center">
                 <th>THỨ</th>
-                @foreach (int day in days)
+                @foreach (int day in Model.days)
                 {
                     <th colspan="5">THỨ @day</th>
                 }
             </tr>
             <tr class="text-center text-nowrap">
                 <th>TIẾT</th>
-                @foreach (int day in days)
+                @foreach (int day in Model.days)
                 {
-                    foreach (int startLesson in startLessons)
+                    foreach (int startLesson in Model.startLessons)
                     {
                         <th>@startLesson-@(startLesson + 2)</th>
                     }
@@ -50,11 +45,11 @@
             {
                 <tr>
                     <td>@curriculum.name</td>
-                    @foreach (int day in days)
+                    @foreach (int day in Model.days)
                     {
-                        foreach (int startLesson in startLessons)
+                        foreach (int startLesson in Model.startLessons)
                         {
-                            var classes = Model.Where(x => x.CurriculumId == curriculum.id && x.Day2 == day && x.StartLesson2 == startLesson);
+                            var classes = Model.CurriculumClassDTOs.Where(x => x.CurriculumId == curriculum.id && x.Day2 == day && x.StartLesson2 == startLesson);
                             string dividerClass = startLesson == 1 ? "table-vertical-divider" : string.Empty;
                             if (classes.Any())
                             {

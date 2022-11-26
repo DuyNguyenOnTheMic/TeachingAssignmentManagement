@@ -77,7 +77,10 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             IEnumerable<CurriculumClassDTO> query_classes = unitOfWork.CurriculumClassRepository.GetAssignTimetable(termId, majorId);
             ViewBag.curriculums = unitOfWork.CurriculumRepository.GetCurriculums(query_classes);
             ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
-            return PartialView("_Timetable", query_classes.ToList());
+            return PartialView("_Timetable", new TimetableViewModels
+            {
+                CurriculumClassDTOs = query_classes.ToList()
+            });
         }
 
         [HttpGet]
