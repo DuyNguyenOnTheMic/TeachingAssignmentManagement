@@ -7,6 +7,8 @@
         public string Type { get; set; }
         public int Day2 { get; set; }
         public int StartLesson2 { get; set; }
+        public int StartWeek { get; set; }
+        public int EndWeek { get; set; }
         public string LecturerId { get; set; }
         public string LecturerName { get; set; }
         public string CurriculumId { get; set; }
