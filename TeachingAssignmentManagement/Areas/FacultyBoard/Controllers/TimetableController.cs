@@ -47,7 +47,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         // GET: FacultyBoard/Timetable
         public ActionResult Index()
         {
-            PopulatePersonalData();
+            ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
             return View();
         }
 
@@ -67,7 +67,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     Value = i.ToString()
                 });
             }
-            ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
             ViewData["week"] = weekList;
         }
 
