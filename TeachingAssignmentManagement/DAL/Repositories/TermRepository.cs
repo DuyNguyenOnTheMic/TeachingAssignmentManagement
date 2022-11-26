@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using TeachingAssignmentManagement.Models;
@@ -26,6 +27,11 @@ namespace TeachingAssignmentManagement.DAL
                 t.max_lesson,
                 t.max_class
             }).ToList();
+        }
+
+        public term GetLatestTerms()
+        {
+            return context.terms.OrderByDescending(t => t.id).FirstOrDefault();
         }
 
         public term GetTermByID(int id)

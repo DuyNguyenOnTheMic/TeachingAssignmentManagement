@@ -48,9 +48,10 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public ActionResult Index()
         {
             string userId = "687aef9d-f6b9-4179-a7a8-64d917c3a953";
-            IEnumerable<CurriculumClassDTO> classes = unitOfWork.CurriculumClassRepository.GetTimetable(223, userId);
+            term term = unitOfWork.TermRepository.GetLatestTerms();
+            IEnumerable<CurriculumClassDTO> classes = unitOfWork.CurriculumClassRepository.GetTimetable(term.id, userId);
             List<SelectListItem> weekList = new List<SelectListItem>();
-            int startWeek = 1;
+            int startWeek = term.start_week;
             int endWeek = classes.Max(c => c.EndWeek);
             for (int i = startWeek; i <= endWeek; i++)
             {
