@@ -1,4 +1,6 @@
 ﻿using ClosedXML.Excel;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,14 +21,37 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
     [Authorize(Roles = "BCN khoa")]
     public class TimetableController : Controller
     {
+        private ApplicationUserManager _userManager;
         private readonly UnitOfWork unitOfWork = new UnitOfWork();
+
+        public TimetableController()
+        {
+        }
+
+        public TimetableController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: FacultyBoard/Timetable
         public ActionResult Index()
         {
-            IEnumerable term = unitOfWork.TermRepository.GetTerms();
+            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
+            IEnumerable<CurriculumClassDTO> timetable = unitOfWork.CurriculumClassRepository.GetTimetable(223, userId);
             List<SelectListItem> list = new List<SelectListItem>();
-            ViewData["term"] = new SelectList(term, "id", "id");
+            ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
             ViewData["major"] = new SelectList(unitOfWork.MajorRepository.GetMajors(), "id", "name");
             return View();
         }
@@ -480,6 +505,15 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
         protected override void Dispose(bool disposing)
         {
+            if (disposing)
+            {
+                if (_userManager != null)
+                {
+                    _userManager.Dispose();
+                    _userManager = null;
+                }
+            }
+
             unitOfWork.Dispose();
             base.Dispose(disposing);
         }

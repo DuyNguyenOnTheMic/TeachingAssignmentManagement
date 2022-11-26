@@ -13,9 +13,9 @@ namespace TeachingAssignmentManagement.DAL
             this.context = context;
         }
 
-        public IEnumerable<CurriculumClassDTO> GetTimetable(int termId)
+        public IEnumerable<CurriculumClassDTO> GetTimetable(int termId, string lecturerId)
         {
-            return context.curriculum_class.Where(c => c.term_id == termId).Select(c => new CurriculumClassDTO
+            return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id == lecturerId).Select(c => new CurriculumClassDTO
             {
                 CurriculumClassId = c.curriculum_class_id,
                 Type = c.type,
