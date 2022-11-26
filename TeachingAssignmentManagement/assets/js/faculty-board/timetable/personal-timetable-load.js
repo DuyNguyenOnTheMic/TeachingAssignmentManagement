@@ -17,8 +17,9 @@ $(function () {
         });
     })
 
-    var termId = $('#term').val();
-    // Get Partial View timetable data
+    var termId = $('#term option:last-child').val();
+    $('#term').val(termId).trigger('change');
+    // Get Partial View personal timetable data
     $.get(url, { termId }, function (data) {
         personalTimetableDiv.html(data);
     });
