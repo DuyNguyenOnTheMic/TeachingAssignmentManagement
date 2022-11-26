@@ -7,51 +7,21 @@
                 <th>THỨ</th>
                 @foreach (int day in Model.days)
                 {
-                    <th colspan="5">THỨ @day</th>
-                }
-            </tr>
-            <tr class="text-center text-nowrap">
-                <th>TIẾT</th>
-                @foreach (int day in Model.days)
-                {
-                    foreach (int startLesson in Model.startLessons)
-                    {
-                        <th>@startLesson-@(startLesson + 2)</th>
-                    }
+                    <th>THỨ @day</th>
                 }
             </tr>
         </thead>
         <tbody>
-            @foreach (var curriculum in ViewBag.curriculums)
+            @foreach (int startLesson in Model.startLessons)
             {
                 <tr>
-                    <td>@curriculum.name</td>
-                    @foreach (int day in Model.days)
-                    {
-                        foreach (int startLesson in Model.startLessons)
-                        {
-                            var classes = Model.CurriculumClassDTOs.Where(x => x.CurriculumId == curriculum.id && x.Day2 == day && x.StartLesson2 == startLesson);
-                            string dividerClass = startLesson == 1 ? "table-vertical-divider" : string.Empty;
-                            if (classes.Any())
-                            {
-                                <td class="@dividerClass">
-                                    @foreach (var item in classes.ToList())
-                                    {
-                                        string lecturerId = item.LecturerId ?? string.Empty;
-                                        string lecturerName = item.LecturerName ?? "Chưa phân";
-                                        string cardClass = "Lý thuyết" == item.Type ? "btn-success" : "btn-warning";
-                                        <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>Loại HP:</b> @item.Type <br /><b>Phòng:</b> @item.RoomId">
-                                            <button class="btn @cardClass btn-sm assign-card text-nowrap m-25" type="button" id="@item.Id" data-lecturerid="@lecturerId" data-classtype="@item.Type" data-bs-toggle="popover" data-bs-content="@Html.Partial("_Assign", new ViewDataDictionary { { "lecturer", ViewBag.lecturers }, { "classId", item.Id }, { "lecturerId", lecturerId } }).ToString()" title="@item.CurriculumClassId" data-bs-delay="160" data-bs-trigger="click">@lecturerName</button>
-                                        </div>
-                                    }
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="@dividerClass"></td>
-                            }
-                        }
-                    }
+                    <td>@startLesson-@(startLesson + 2)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>hehe</td>
+                    <td>hehe</td>
+                    <td>hehe</td>
                 </tr>
             }
         </tbody>
