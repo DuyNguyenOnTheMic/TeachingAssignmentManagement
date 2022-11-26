@@ -13,6 +13,22 @@ namespace TeachingAssignmentManagement.DAL
             this.context = context;
         }
 
+        public IEnumerable<CurriculumClassDTO> GetTimetable(int termId)
+        {
+            return context.curriculum_class.Where(c => c.term_id == termId).Select(c => new CurriculumClassDTO
+            {
+                CurriculumClassId = c.curriculum_class_id,
+                Type = c.type,
+                Day2 = c.day_2,
+                StartLesson2 = c.start_lesson_2,
+                StartWeek = (int)c.start_week,
+                EndWeek = (int)c.end_week,
+                CurriculumId = c.curriculum_id,
+                RoomId = c.room_id,
+                Curriculum = c.curriculum
+            });
+        }
+
         public IEnumerable<CurriculumClassDTO> GetAssignTimetable(int termId, string majorId)
         {
             return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId).Select(c => new CurriculumClassDTO
