@@ -48,11 +48,21 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         // GET: FacultyBoard/Timetable
         public ActionResult Index()
         {
-            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
-            IEnumerable<CurriculumClassDTO> timetable = unitOfWork.CurriculumClassRepository.GetTimetable(223, userId);
-            List<SelectListItem> list = new List<SelectListItem>();
+            string userId = "687aef9d-f6b9-4179-a7a8-64d917c3a953";
+            IEnumerable<CurriculumClassDTO> classes = unitOfWork.CurriculumClassRepository.GetTimetable(223, userId);
+            List<SelectListItem> weekList = new List<SelectListItem>();
+            int startWeek = 1;
+            int endWeek = classes.Max(c => c.EndWeek);   
+            for (int i = startWeek; i <= endWeek; i++)
+            {
+                weekList.Add(new SelectListItem()
+                {
+                    Text = "Tuần " + i,
+                    Value = i.ToString()
+                });
+            }
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
-            ViewData["major"] = new SelectList(unitOfWork.MajorRepository.GetMajors(), "id", "name");
+            ViewData["week"] = weekList;
             return View();
         }
 
