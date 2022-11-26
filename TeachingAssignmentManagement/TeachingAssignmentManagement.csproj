@@ -1180,8 +1180,8 @@
     <Content Include="assets\files\CNTT UIS-ThoiKhoaBieu_TieuChuan_Mau.xlsx" />
     <Content Include="assets\js\faculty-board\timetable\import.min.js" />
     <Content Include="Areas\FacultyBoard\Views\Timetable\Index.cshtml" />
-    <Content Include="Areas\FacultyBoard\Views\Timetable\Timetable.cshtml" />
-    <Content Include="Areas\FacultyBoard\Views\Timetable\Assign.cshtml" />
+    <Content Include="Areas\FacultyBoard\Views\Timetable\_Timetable.cshtml" />
+    <Content Include="Areas\FacultyBoard\Views\Timetable\_Assign.cshtml" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>

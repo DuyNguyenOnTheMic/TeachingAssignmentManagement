@@ -35,7 +35,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             IEnumerable<CurriculumClassDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, majorId);
             ViewBag.curriculums = unitOfWork.CurriculumRepository.GetCurriculums(query_classes);
             ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
-            return PartialView("Timetable", query_classes.ToList());
+            return PartialView("_Timetable", query_classes.ToList());
         }
 
         [HttpGet]
