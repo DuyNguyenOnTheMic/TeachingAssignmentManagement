@@ -1203,6 +1203,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\FacultyBoard\Views\Timetable\Assign.cshtml" />
+    <Content Include="Areas\FacultyBoard\Views\Timetable\_PersonalTimetable.cshtml" />
     <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>

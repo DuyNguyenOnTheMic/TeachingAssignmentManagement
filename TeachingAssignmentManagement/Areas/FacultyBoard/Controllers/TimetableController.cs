@@ -51,11 +51,11 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             return View();
         }
 
-        public void PopulatePersonalData()
+        public ActionResult GetPersonalTimetable(int termId)
         {
             string userId = "687aef9d-f6b9-4179-a7a8-64d917c3a953";
-            term term = unitOfWork.TermRepository.GetLatestTerms();
-            IEnumerable<CurriculumClassDTO> classes = unitOfWork.CurriculumClassRepository.GetTimetable(term.id, userId);
+            term term = unitOfWork.TermRepository.GetTermByID(termId);
+            IEnumerable<CurriculumClassDTO> classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, userId);
             List<SelectListItem> weekList = new List<SelectListItem>();
             int startWeek = term.start_week;
             int endWeek = classes.Max(c => c.EndWeek);
@@ -68,6 +68,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 });
             }
             ViewData["week"] = weekList;
+            return PartialView("_PersonalTimetable", classes);
         }
 
         [HttpGet]
