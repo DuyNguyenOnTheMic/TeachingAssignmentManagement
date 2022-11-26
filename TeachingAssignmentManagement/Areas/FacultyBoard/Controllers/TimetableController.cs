@@ -323,6 +323,14 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Assign()
+        {
+            ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
+            ViewData["major"] = new SelectList(unitOfWork.MajorRepository.GetMajors(), "id", "name");
+            return View();
+        }
+
         [HttpPost]
         public JsonResult Assign(int id, string lecturerId)
         {

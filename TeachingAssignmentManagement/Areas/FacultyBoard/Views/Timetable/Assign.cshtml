@@ -1,0 +1,60 @@
+﻿@model IEnumerable<TeachingAssignmentManagement.Models.curriculum>
+
+@{
+    ViewBag.Title = "Phân công giảng dạy";
+}
+
+<div class="app-content content ">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper p-0">
+        <div class="content-body">
+            <!-- Basic table -->
+            <section>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title-wrap">
+                                    <h4 class="card-title">@ViewBag.Title</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-1">
+                                        <label class="form-label font-small-4" for="term">Học kỳ: </label>
+                                        @Html.DropDownList("term", null, "---- Chọn học kỳ ----", htmlAttributes: new { @class = "select2 form-select" })
+                                    </div>
+                                    <div class="col-md-6 mb-1">
+                                        <label class="form-label font-small-4" for="major">Ngành: </label>
+                                        @Html.DropDownList("major", null, "---- Chọn ngành ----", htmlAttributes: new { @class = "select2 form-select" })
+                                    </div>
+                                </div>
+                                <div id="assignLecturerDiv">
+                                    <h3 class="text-center mt-1">Chọn học kỳ và ngành để bắt đầu phân công</h3>
+                                    <div class="card-body">
+                                        <img class="mx-auto p-3 d-block w-50" alt="Welcome" src="~/assets/images/img_assign.svg" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ Basic table -->
+        </div>
+    </div>
+</div>
+
+<div id="loader" data-request-url="@Url.Content("~/")"></div>
+
+@section styles {
+    <link href="~/assets/css/timetable.css" rel="stylesheet" />
+}
+
+@section scripts {
+    <script src="~/app-assets/vendors/js/signalr/jquery.signalR.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/app-assets/language/select2/vi.min.js"></script>
+    <script src="~/assets/js/faculty-board/timetable/timetable-load.js"></script>
+}
