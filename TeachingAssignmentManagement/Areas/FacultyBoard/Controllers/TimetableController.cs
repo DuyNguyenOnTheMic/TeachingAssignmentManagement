@@ -47,6 +47,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         // GET: FacultyBoard/Timetable
         public ActionResult Index()
         {
+            PopulatePersonalData();
+            return View();
+        }
+
+        public void PopulatePersonalData()
+        {
             string userId = "687aef9d-f6b9-4179-a7a8-64d917c3a953";
             term term = unitOfWork.TermRepository.GetLatestTerms();
             IEnumerable<CurriculumClassDTO> classes = unitOfWork.CurriculumClassRepository.GetTimetable(term.id, userId);
@@ -63,7 +69,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
             ViewData["week"] = weekList;
-            return View();
         }
 
         [HttpGet]
