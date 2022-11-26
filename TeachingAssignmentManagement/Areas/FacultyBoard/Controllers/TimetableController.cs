@@ -410,7 +410,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
-
         [HttpPost]
         public ActionResult DeleteAll(int term, string major)
         {
