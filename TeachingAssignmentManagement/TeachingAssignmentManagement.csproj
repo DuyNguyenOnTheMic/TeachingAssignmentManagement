@@ -1111,6 +1111,7 @@
     <Content Include="assets\js\faculty-board\term\term.js" />
     <Content Include="assets\js\faculty-board\term\term.min.js" />
     <Content Include="assets\js\faculty-board\timetable\personal-timetable-load.js" />
+    <Content Include="assets\js\faculty-board\timetable\personal-timetable.js" />
     <Content Include="assets\js\faculty-board\timetable\timetable-load.js" />
     <Content Include="assets\js\faculty-board\timetable\import.js" />
     <Content Include="assets\js\faculty-board\timetable\timetable-load.min.js" />
