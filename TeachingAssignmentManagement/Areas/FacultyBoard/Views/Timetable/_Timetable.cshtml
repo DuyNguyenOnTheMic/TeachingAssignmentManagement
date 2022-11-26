@@ -54,7 +54,7 @@
                             if (classes.Any())
                             {
                                 <td class="@dividerClass">
-                                    @foreach (var item in classes.ToList())
+                                    @foreach (var item in classes)
                                     {
                                         string lecturerId = item.LecturerId ?? string.Empty;
                                         string lecturerName = item.LecturerName ?? "Chưa phân";

@@ -4,7 +4,7 @@
     <table class="table table-bordered personal-timetable" id="tblTimetable">
         <thead class="table-light">
             <tr class="text-center">
-                <th>THỨ</th>
+                <th>TIẾT</th>
                 @foreach (int day in Model.days)
                 {
                     <th>THỨ @day</th>
@@ -16,12 +16,23 @@
             {
                 <tr>
                     <td>@startLesson-@(startLesson + 2)</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>hehe</td>
-                    <td>hehe</td>
-                    <td>hehe</td>
+                    @foreach (int day in Model.days)
+                    {
+                        var classes = Model.CurriculumClassDTOs.Where(x => x.Day2 == day && x.StartLesson2 == startLesson);
+                        if (classes.Any())
+                        {
+                            <td>
+                                @foreach (var item in classes)
+                                {
+                                    @item.CurriculumClassId
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    }
                 </tr>
             }
         </tbody>
