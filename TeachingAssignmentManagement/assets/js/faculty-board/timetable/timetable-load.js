@@ -23,8 +23,10 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) 
 }
 
 hubNotif.client.refreshedData = function (term, major) {
-    // Refresh timetable after someone import or re-import data
-    getTimetable(term, major);
+    if (term == termId && major == majorId) {
+        // Refresh timetable after someone import or re-import data
+        getTimetable(term, major);
+    }
 }
 
 $(function () {
