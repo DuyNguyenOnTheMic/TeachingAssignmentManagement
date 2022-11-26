@@ -7,11 +7,6 @@ $.connection.hub.start();
 // Notify while anyChanges
 hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) {
     var element = $('#' + id);
-    var assignedCount = $('#assignedCount'),
-        totalCount = $('#totalCount'),
-        allClass = $('table .assign-card'),
-        theoryClass = $('table .btn-success'),
-        practicalClass = $('table .btn-warning');
     if (element.length) {
         if (isUpdate) {
             // Update curriculum class
@@ -21,8 +16,7 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) 
             element.popover('dispose');
             element.remove();
         }
-        assignedCount.text(theoryClass.length + practicalClass.length);
-        totalCount.text(allClass.length);
+        updateCount();
     }
 }
 
@@ -91,4 +85,14 @@ function updateClass(element, lecturerId, lecturerName) {
     }
     element.text(lecturerName);
     $('[data-bs-toggle="popover"]').popover('update');
+}
+
+function updateCount() {
+    var assignedCount = $('#assignedCount'),
+        totalCount = $('#totalCount'),
+        allClass = $('#tblAssign tbody .assign-card'),
+        theoryClass = $('#tblAssign tbody .btn-success'),
+        practicalClass = $('#tblAssign tbody .btn-warning');
+    assignedCount.text(theoryClass.length + practicalClass.length);
+    totalCount.text(allClass.length);
 }

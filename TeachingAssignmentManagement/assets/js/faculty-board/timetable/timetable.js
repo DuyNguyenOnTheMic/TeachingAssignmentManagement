@@ -2,6 +2,11 @@
     majorId = $('#major').val(),
     rootUrl = $('#loader').data('request-url');
 
+$(function () {
+    // Update count on document ready
+    updateCount();
+});
+
 // Display message when table have no data
 var rowCount = $('#tblAssign tbody tr').length;
 if (rowCount == 0) {
