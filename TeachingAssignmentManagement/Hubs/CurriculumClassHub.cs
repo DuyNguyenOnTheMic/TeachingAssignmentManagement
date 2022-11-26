@@ -13,10 +13,10 @@ namespace TeachingAssignmentManagement.Hubs
         }
 
         [HubMethodName("refreshData")]
-        public static void RefreshData()
+        public static void RefreshData(int term, string major)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<CurriculumClassHub>();
-            context.Clients.All.refreshedData();
+            context.Clients.All.refreshedData(term, major);
         }
     }
 }

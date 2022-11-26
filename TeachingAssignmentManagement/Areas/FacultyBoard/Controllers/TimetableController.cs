@@ -258,7 +258,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     ProgressHub.SendProgress("Đang import...", dt.Rows.IndexOf(row), itemsCount);
                 }
                 unitOfWork.Save();
-                CurriculumClassHub.RefreshData();
+                CurriculumClassHub.RefreshData(term, major);
                 return Json(errorLecturerList.Distinct(), JsonRequestBehavior.AllowGet);
             }
             catch
@@ -416,7 +416,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Delete all records in curriculum class table
             unitOfWork.CurriculumClassRepository.DeleteAllClasses(term, major);
             unitOfWork.Save();
-            CurriculumClassHub.RefreshData();
+            CurriculumClassHub.RefreshData(term, major);
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 

@@ -22,9 +22,9 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) 
     }
 }
 
-hubNotif.client.refreshedData = function () {
+hubNotif.client.refreshedData = function (term, major) {
     // Refresh timetable after someone import or re-import data
-    getTimetable();
+    getTimetable(term, major);
 }
 
 $(function () {
@@ -43,7 +43,9 @@ $(function () {
     })
 
     formSelect.change(function () {
-        getTimetable();
+        var termId = $('#term').val(),
+            majorId = $('#major').val();
+        getTimetable(termId, majorId);
     });
 });
 
@@ -88,10 +90,7 @@ function updateCount() {
     totalCount.text(allClass.length);
 }
 
-function getTimetable() {
-    var termId = $('#term').val(),
-        majorId = $('#major').val();
-
+function getTimetable(termId, majorId) {
     // Hide all popovers
     $("[data-bs-toggle='popover']").popover('dispose');
 
