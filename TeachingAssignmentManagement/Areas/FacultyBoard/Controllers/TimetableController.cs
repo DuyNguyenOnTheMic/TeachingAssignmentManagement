@@ -417,6 +417,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Delete all records in curriculum class table
             unitOfWork.CurriculumClassRepository.DeleteAllClasses(term, major);
             unitOfWork.Save();
+            CurriculumClassHub.RefreshData();
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
