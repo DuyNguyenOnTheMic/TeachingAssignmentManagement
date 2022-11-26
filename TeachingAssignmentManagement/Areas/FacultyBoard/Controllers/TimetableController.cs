@@ -1,5 +1,4 @@
 ﻿using ClosedXML.Excel;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections;
@@ -52,7 +51,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             IEnumerable<CurriculumClassDTO> classes = unitOfWork.CurriculumClassRepository.GetTimetable(223, userId);
             List<SelectListItem> weekList = new List<SelectListItem>();
             int startWeek = 1;
-            int endWeek = classes.Max(c => c.EndWeek);   
+            int endWeek = classes.Max(c => c.EndWeek);
             for (int i = startWeek; i <= endWeek; i++)
             {
                 weekList.Add(new SelectListItem()
