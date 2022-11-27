@@ -71,13 +71,13 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         break;
                     }
                 }
-                if (currentWeek > 0)
+                if (currentWeek <= 0)
                 {
-                    break;
+                    startDate = futureDate;
                 }
                 else
                 {
-                    startDate = futureDate;
+                    break;
                 }
             }
             ViewData["startWeek"] = startWeek;
