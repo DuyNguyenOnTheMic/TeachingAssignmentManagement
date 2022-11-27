@@ -83,7 +83,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     string[] userLang = Request.UserLanguages;
                     string language = userLang[0];
                     string formatInfo = new CultureInfo(language).DateTimeFormat.ShortDatePattern;
-                    weekLabel = "Tuần " + i + ": " + startDate.ToString(formatInfo) + "-" + futureDate.ToString(formatInfo);
+                    weekLabel = "Tuần " + i + ": Từ ngày " + startDate.ToString(formatInfo) + " đến ngày " + futureDate.ToString(formatInfo);
                     break;
                 }
             }

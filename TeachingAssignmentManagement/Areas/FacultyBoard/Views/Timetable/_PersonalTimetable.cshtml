@@ -2,7 +2,9 @@
 
 <div id="weekData" data-start-week="@ViewData["startWeek"]" data-end-week="@ViewData["endWeek"]" data-current-week="@ViewData["currentWeek"]"></div>
 
-<p>@ViewData["weekLabel"]</p>
+<div class="alert alert-primary" role="alert">
+    <div class="alert-body"><strong>@ViewData["weekLabel"]</strong></div>
+</div>
 
 <div class="table-responsive personal-timetable-div">
     <table class="table table-bordered personal-timetable" id="tblTimetable">
