@@ -58,16 +58,16 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             term term = unitOfWork.TermRepository.GetTermByID(termId);
             IEnumerable<CurriculumClassDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, userId);
             var startDate = term.start_date;
-            var startWeek = term.start_week;
             var endDate = new DateTime();
+            var startWeek = term.start_week;
+            var endWeek = query_classes.Max(c => c.EndWeek);
+            int currentWeek = 0;
+            string weekLabel = string.Empty;
             if (week > 0)
             {
                 startDate = term.start_date.AddDays((week - 1) * 7).Date;
                 endDate = startDate.AddDays(6).Date;
             }
-            var endWeek = query_classes.Max(c => c.EndWeek);
-            int currentWeek = 0;
-            string weekLabel = string.Empty;
             for (int i = startWeek; i <= endWeek; i++)
             {
                 var futureDate = startDate.AddDays(6);
