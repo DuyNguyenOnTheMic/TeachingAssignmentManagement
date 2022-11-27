@@ -86,7 +86,14 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                             break;
                         }
                     }
-                    startDate = endDate.AddDays(1);
+                    if (currentWeek <= 0)
+                    {
+                        startDate = endDate.AddDays(1);
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
                 if (currentWeek <= 0)
                 {
