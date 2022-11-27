@@ -74,7 +74,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 if (currentWeek > 0)
                 {
                     break;
-                } else
+                }
+                else
                 {
                     startDate = futureDate;
                 }
