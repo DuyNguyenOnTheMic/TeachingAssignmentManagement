@@ -86,14 +86,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                             break;
                         }
                     }
-                    if (currentWeek <= 0)
-                    {
-                        startDate = endDate.AddDays(1);
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    startDate = endDate.AddDays(1);
+                }
+                if (currentWeek <= 0)
+                {
+                    // Set current week in case no current week found
+                    currentWeek = endWeek;
                 }
             }
             // Get current user language date format
