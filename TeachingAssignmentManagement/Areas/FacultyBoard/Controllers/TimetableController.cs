@@ -70,7 +70,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         currentWeek = i;
                         break;
                     }
-                    continue;
                 }
                 if (currentWeek > 0)
                 {
