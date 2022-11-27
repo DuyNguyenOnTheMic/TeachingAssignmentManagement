@@ -29,6 +29,11 @@ namespace TeachingAssignmentManagement.DAL
             });
         }
 
+        public IEnumerable<CurriculumClassDTO> GetClassWeek(IEnumerable<CurriculumClassDTO> query_classes, int week)
+        {
+            return query_classes.Where(c => c.StartWeek <= week && c.EndWeek >= week);
+        }
+
         public IEnumerable<CurriculumClassDTO> GetAssignTimetable(int termId, string majorId)
         {
             return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId).Select(c => new CurriculumClassDTO
