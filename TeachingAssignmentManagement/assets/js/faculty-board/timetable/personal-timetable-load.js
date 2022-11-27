@@ -18,9 +18,10 @@ $(function () {
     })
 
     var termId = $('#term option:last-child').val();
+    var week = 3;
     $('#term').val(termId).trigger('change');
     // Get Partial View personal timetable data
-    $.get(url, { termId }, function (data) {
+    $.get(url, { termId, week }, function (data) {
         personalTimetableDiv.html(data);
     });
 });

@@ -52,13 +52,19 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             return View();
         }
 
-        public ActionResult GetPersonalData(int termId, int? week)
+        public ActionResult GetPersonalData(int termId, int week)
         {
             string userId = "687aef9d-f6b9-4179-a7a8-64d917c3a953";
             term term = unitOfWork.TermRepository.GetTermByID(termId);
             IEnumerable<CurriculumClassDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, userId);
             var startDate = term.start_date;
             var startWeek = term.start_week;
+            var endDate = new DateTime();
+            if (week > 0)
+            {
+                startDate = term.start_date.AddDays((week - 1) * 7).Date;
+                endDate = startDate.AddDays(6).Date;
+            }
             var endWeek = query_classes.Max(c => c.EndWeek);
             int currentWeek = 0;
             string weekLabel = string.Empty;
