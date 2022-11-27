@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -78,7 +79,8 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 }
                 else
                 {
-                    weekLabel = "Tuần " + i + ": " + startDate.ToShortDateString() + "-" + futureDate.ToShortDateString();
+                    string formatInfo = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern;
+                    weekLabel = "Tuần " + i + ": " + startDate.ToString(formatInfo) + "-" + futureDate.ToString(formatInfo);
                     break;
                 }
             }
