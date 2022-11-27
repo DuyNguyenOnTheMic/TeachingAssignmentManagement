@@ -60,6 +60,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             var startWeek = term.start_week;
             var endWeek = query_classes.Max(c => c.EndWeek);
             int currentWeek = 0;
+            string weekLabel = string.Empty;
             for (int i = startWeek; i <= endWeek; i++)
             {
                 var futureDate = startDate.AddDays(6);
@@ -77,12 +78,14 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 }
                 else
                 {
+                    weekLabel = "Tuần " + i + ": " + startDate.ToShortDateString() + "-" + futureDate.ToShortDateString();
                     break;
                 }
             }
             ViewData["startWeek"] = startWeek;
             ViewData["endWeek"] = endWeek;
             ViewData["currentWeek"] = currentWeek;
+            ViewData["weekLabel"] = weekLabel;
             return PartialView("_PersonalTimetable", new TimetableViewModels
             {
                 CurriculumClassDTOs = query_classes.ToList()
