@@ -54,6 +54,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
 
         public ActionResult GetPersonalData(int termId, int week)
         {
+            // Declare variables
             string userId = "687aef9d-f6b9-4179-a7a8-64d917c3a953";
             term term = unitOfWork.TermRepository.GetTermByID(termId);
             IEnumerable<CurriculumClassDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, userId);
@@ -63,36 +64,44 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             var endWeek = query_classes.Max(c => c.EndWeek);
             int currentWeek = 0;
             string weekLabel = string.Empty;
+
             if (week > 0)
             {
+                // Set week based on user's selection
                 startDate = term.start_date.AddDays((week - 1) * 7).Date;
                 endDate = startDate.AddDays(6).Date;
+                currentWeek = week;
             }
-            for (int i = startWeek; i <= endWeek; i++)
+            else
             {
-                var futureDate = startDate.AddDays(6);
-                for (DateTime date = startDate; date <= futureDate; date = date.AddDays(1))
+                // Get current week
+                for (int i = startWeek; i <= endWeek; i++)
                 {
-                    if (date.Date == DateTime.Today)
+                    endDate = startDate.AddDays(6);
+                    for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
                     {
-                        currentWeek = i;
+                        if (date.Date == DateTime.Today)
+                        {
+                            currentWeek = i;
+                            break;
+                        }
+                    }
+                    if (currentWeek <= 0)
+                    {
+                        startDate = endDate.AddDays(1);
+                    }
+                    else
+                    {
                         break;
                     }
                 }
-                if (currentWeek <= 0)
-                {
-                    startDate = futureDate.AddDays(1);
-                }
-                else
-                {
-                    // Get current user language format
-                    string[] userLang = Request.UserLanguages;
-                    string language = userLang[0];
-                    string formatInfo = new CultureInfo(language).DateTimeFormat.ShortDatePattern;
-                    weekLabel = "Tuần " + i + ": Từ ngày " + startDate.ToString(formatInfo) + " đến ngày " + futureDate.ToString(formatInfo);
-                    break;
-                }
             }
+            // Get current user language date format
+            string[] userLang = Request.UserLanguages;
+            string language = userLang[0];
+            string formatInfo = new CultureInfo(language).DateTimeFormat.ShortDatePattern;
+            weekLabel = "Tuần " + currentWeek + ": Từ ngày " + startDate.ToString(formatInfo) + " đến ngày " + endDate.ToString(formatInfo);
+
             ViewData["startWeek"] = startWeek;
             ViewData["endWeek"] = endWeek;
             ViewData["currentWeek"] = currentWeek;
