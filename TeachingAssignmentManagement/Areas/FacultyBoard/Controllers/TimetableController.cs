@@ -79,7 +79,10 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 }
                 else
                 {
-                    string formatInfo = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern;
+                    // Get current user language format
+                    string[] userLang = Request.UserLanguages;
+                    string language = userLang[0];
+                    string formatInfo = new CultureInfo(language).DateTimeFormat.ShortDatePattern;
                     weekLabel = "Tuần " + i + ": " + startDate.ToString(formatInfo) + "-" + futureDate.ToString(formatInfo);
                     break;
                 }
