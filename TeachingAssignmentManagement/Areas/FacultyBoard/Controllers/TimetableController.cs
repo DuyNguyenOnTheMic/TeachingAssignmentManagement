@@ -62,7 +62,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             int currentWeek = 0;
             for (int i = startWeek; i <= endWeek; i++)
             {
-                var futureDate = startDate.AddDays(7);
+                var futureDate = startDate.AddDays(6);
                 for (DateTime date = startDate; date <= futureDate; date = date.AddDays(1))
                 {
                     if (date.Date == DateTime.Today)
@@ -73,7 +73,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 }
                 if (currentWeek <= 0)
                 {
-                    startDate = futureDate;
+                    startDate = futureDate.AddDays(1);
                 }
                 else
                 {
