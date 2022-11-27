@@ -68,7 +68,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             if (week > 0)
             {
                 // Set week based on user's selection
-                startDate = term.start_date.AddDays((week - 1) * 7).Date;
+                startDate = startDate.AddDays((week - 1) * 7).Date;
                 endDate = startDate.AddDays(6).Date;
                 currentWeek = week;
             }
