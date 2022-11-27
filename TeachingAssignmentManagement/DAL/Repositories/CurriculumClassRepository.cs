@@ -29,7 +29,7 @@ namespace TeachingAssignmentManagement.DAL
             });
         }
 
-        public IEnumerable<CurriculumClassDTO> GetClassWeek(IEnumerable<CurriculumClassDTO> query_classes, int week)
+        public IEnumerable<CurriculumClassDTO> GetClassInWeek(IEnumerable<CurriculumClassDTO> query_classes, int week)
         {
             return query_classes.Where(c => c.StartWeek <= week && c.EndWeek >= week);
         }
