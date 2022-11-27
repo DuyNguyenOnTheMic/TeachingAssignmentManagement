@@ -18,9 +18,21 @@ $(function () {
     })
 
     var termId = $('#term option:last-child').val();
-    var week = 3;
+    var week = 0;
     $('#term').val(termId).trigger('change');
     // Get Partial View personal timetable data
+    $.get(url, { termId, week }, function (data) {
+        personalTimetableDiv.html(data);
+    });
+});
+
+$('#week').change(function () {
+    // Display loading message while fetching data
+    personalTimetableDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
+
+    var termId = $('#term').val(),
+        week = $(this).val();
+    // Get Partial View timetable data
     $.get(url, { termId, week }, function (data) {
         personalTimetableDiv.html(data);
     });

@@ -4,8 +4,9 @@
     endWeek = weekData.data('end-week'),
     currentWeek = weekData.data('current-week');
 
-for (var i = startWeek; i <= endWeek; i++) {
-    weekSelect.append('<option value="' + i + '">Tuần ' + i + '</option>');
+if (!weekSelect.val()) {
+    for (var i = startWeek; i <= endWeek; i++) {
+        weekSelect.append('<option value="' + i + '">Tuần ' + i + '</option>');
+    }
+    weekSelect.val(currentWeek);
 }
-
-weekSelect.val(currentWeek);
