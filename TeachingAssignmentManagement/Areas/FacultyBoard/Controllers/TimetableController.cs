@@ -56,8 +56,33 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             string userId = "687aef9d-f6b9-4179-a7a8-64d917c3a953";
             term term = unitOfWork.TermRepository.GetTermByID(termId);
             IEnumerable<CurriculumClassDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, userId);
-            ViewData["startWeek"] = term.start_week;
-            ViewData["endWeek"] = query_classes.Max(c => c.EndWeek);
+            var startDate = term.start_date;
+            var startWeek = term.start_week;
+            var endWeek = query_classes.Max(c => c.EndWeek);
+            int currentWeek = 0;
+            for (int i = startWeek; i <= endWeek; i++)
+            {
+                var futureDate = startDate.AddDays(7);
+                for (DateTime date = startDate; date <= futureDate; date = date.AddDays(1))
+                {
+                    if (date.Date == DateTime.Today)
+                    {
+                        currentWeek = i;
+                        break;
+                    }
+                    continue;
+                }
+                if (currentWeek > 0)
+                {
+                    break;
+                } else
+                {
+                    startDate = futureDate;
+                }
+            }
+            ViewData["startWeek"] = startWeek;
+            ViewData["endWeek"] = endWeek;
+            ViewData["currentWeek"] = currentWeek;
             return PartialView("_PersonalTimetable", new TimetableViewModels
             {
                 CurriculumClassDTOs = query_classes.ToList()

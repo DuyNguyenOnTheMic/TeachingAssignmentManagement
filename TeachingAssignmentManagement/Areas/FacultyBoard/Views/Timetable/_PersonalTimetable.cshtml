@@ -1,7 +1,6 @@
 ﻿@model TeachingAssignmentManagement.Models.TimetableViewModels
 
-<div id="startWeek" data-week="@ViewData["startWeek"]"></div>
-<div id="endWeek" data-week="@ViewData["endWeek"]"></div>
+<div id="weekData" data-start-week="@ViewData["startWeek"]" data-end-week="@ViewData["endWeek"]" data-current-week="@ViewData["currentWeek"]"></div>
 
 <div class="table-responsive personal-timetable-div">
     <table class="table table-bordered personal-timetable" id="tblTimetable">
