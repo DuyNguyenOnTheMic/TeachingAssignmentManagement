@@ -5,7 +5,7 @@
 $(function () {
     var formSelect = $('.form-select');
 
-    // Populate select2 for choosing term and major
+    // Populate select2 for choosing term and week
     formSelect.each(function () {
         var $this = $(this);
         $this.wrap('<div class="position-relative"></div>');
