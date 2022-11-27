@@ -86,7 +86,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                             break;
                         }
                     }
-                    if (currentWeek <= 0)
+                    if (currentWeek == 0)
                     {
                         startDate = endDate.AddDays(1);
                     }
@@ -95,7 +95,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         break;
                     }
                 }
-                if (currentWeek <= 0)
+                if (currentWeek == 0)
                 {
                     // Set current week in case no current week found
                     currentWeek = endWeek;
