@@ -58,7 +58,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             string userId = "7861e7cc-84eb-4790-892a-56bc72edb656";
             term term = unitOfWork.TermRepository.GetTermByID(termId);
             IEnumerable<CurriculumClassDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, userId);
-            if (query_classes == null)
+            if (!query_classes.Any())
             {
                 // Return not found error message
                 Response.Write($"Học kỳ này chưa có dữ liệu phân công của bạn!");
