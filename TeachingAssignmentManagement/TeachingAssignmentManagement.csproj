@@ -243,8 +243,8 @@
       <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
-    <Reference Include="XLParser, Version=1.6.1.0, Culture=neutral, PublicKeyToken=63397e1e46bb91b4, processorArchitecture=MSIL">
-      <HintPath>packages\XLParser.1.6.1\lib\net461\XLParser.dll</HintPath>
+    <Reference Include="XLParser, Version=1.6.2.0, Culture=neutral, PublicKeyToken=63397e1e46bb91b4, processorArchitecture=MSIL">
+      <HintPath>packages\XLParser.1.6.2\lib\net461\XLParser.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
