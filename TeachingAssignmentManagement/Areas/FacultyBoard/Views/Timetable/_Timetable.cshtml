@@ -1,6 +1,6 @@
 ﻿@model TeachingAssignmentManagement.Models.TimetableViewModels
 
-<div class="d-flex justify-content-between align-items-center row mb-1">
+<div class="d-flex justify-content-between align-items-center row">
     <div class="col-sm-12 col-lg-6 d-flex justify-content-center justify-content-lg-start flex-lg-nowrap flex-wrap">
         <p class="my-auto me-1"><i>Chú thích: </i></p>
         <button class="btn btn-success btn-sm me-50 mb-50" type="button">Lý thuyết</button>
@@ -12,11 +12,11 @@
             <button type="button" class="btn btn-outline-secondary waves-effect btn-export"><i class="feather feather-file me-50"></i>Export</button>
         </div>
     </div>
-    <span>
-        Số lớp đã phân công: <strong>
-            <span id="assignedCount"></span>/<span id="totalCount"></span>
-        </strong>
-    </span>
+    <div class="col-sm-12">
+        <div class="alert alert-primary my-25" role="alert">
+            <div class="alert-body">Số lớp đã phân công: <strong><span id="assignedCount"></span>/<span id="totalCount"></span></strong></div>
+        </div>
+    </div>
 </div>
 
 <div class="table-responsive assign-table-div">
