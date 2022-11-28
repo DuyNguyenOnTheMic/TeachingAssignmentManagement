@@ -124,75 +124,48 @@ if (termForm.length) {
         });
     });
 
-    // Populate touchspin for start week
-    var startWeek = $('.touchspin-startweek'),
-        startWeekMin = 1,
-        startWeekMax = 52;
-    startWeek.TouchSpin({
-        min: startWeekMin,
-        max: startWeekMax,
-        buttondown_txt: feather.icons['minus'].toSvg(),
-        buttonup_txt: feather.icons['plus'].toSvg()
-    }).on('touchspin.on.startdownspin', function () {
+    // Populate touchspin
+    $('.touchspin').each(function () {
         var $this = $(this);
-        $('.bootstrap-touchspin-up').removeClass('disabled-max-min');
-        if ($this.val() == startWeekMin) {
-            $(this).siblings().find('.bootstrap-touchspin-down').addClass('disabled-max-min');
-        }
-    }).on('touchspin.on.startupspin', function () {
-        var $this = $(this);
-        $('.bootstrap-touchspin-down').removeClass('disabled-max-min');
-        if ($this.val() == startWeekMax) {
-            $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
-        }
-    });
+        $this.TouchSpin({
+            min: getMin($this),
+            max: getMax($this),
+            buttondown_txt: feather.icons['minus'].toSvg(),
+            buttonup_txt: feather.icons['plus'].toSvg()
+        }).on('touchspin.on.startdownspin', function () {
+            $('.bootstrap-touchspin-up').removeClass('disabled-max-min');
+            if ($this.val() == getMin($this)) {
+                $(this).siblings().find('.bootstrap-touchspin-down').addClass('disabled-max-min');
+            }
+        }).on('touchspin.on.startupspin', function () {
+            $('.bootstrap-touchspin-down').removeClass('disabled-max-min');
+            if ($this.val() == getMax($this)) {
+                $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
+            }
+        });
+    })
 
-    // Populate touchspin for max lesson number
-    var maxLesson = $('.touchspin-maxlesson'),
-        maxLessonMin = 3,
-        maxLessonMax = 15;
-    maxLesson.TouchSpin({
-        step: 3,
-        min: maxLessonMin,
-        max: maxLessonMax,
-        buttondown_txt: feather.icons['minus'].toSvg(),
-        buttonup_txt: feather.icons['plus'].toSvg()
-    }).on('touchspin.on.startdownspin', function () {
-        var $this = $(this);
-        $('.bootstrap-touchspin-up').removeClass('disabled-max-min');
-        if ($this.val() == maxLessonMin) {
-            $(this).siblings().find('.bootstrap-touchspin-down').addClass('disabled-max-min');
+    // Use to get min number of each touchspin
+    function getMin(touchspin) {
+        if (touchspin.hasClass('touchspin-startweek')) {
+            return 1;
+        } else if (touchspin.hasClass('touchspin-maxlesson')) {
+            return 3;
+        } else if (touchspin.hasClass('touchspin-maxclass')) {
+            return 1;
         }
-    }).on('touchspin.on.startupspin', function () {
-        var $this = $(this);
-        $('.bootstrap-touchspin-down').removeClass('disabled-max-min');
-        if ($this.val() == maxLessonMax) {
-            $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
-        }
-    });
+    }
 
-    // Populate touchspin for max class number
-    var maxClass = $('.touchspin-maxclass'),
-        maxClassMin = 1,
-        maxClassMax = 30;
-    maxClass.TouchSpin({
-        min: maxClassMin,
-        max: maxClassMax,
-        buttondown_txt: feather.icons['minus'].toSvg(),
-        buttonup_txt: feather.icons['plus'].toSvg()
-    }).on('touchspin.on.startdownspin', function () {
-        var $this = $(this);
-        $('.bootstrap-touchspin-up').removeClass('disabled-max-min');
-        if ($this.val() == maxClassMin) {
-            $(this).siblings().find('.bootstrap-touchspin-down').addClass('disabled-max-min');
+    // Use to get max number of each touchspin
+    function getMax(touchspin) {
+        if (touchspin.hasClass('touchspin-startweek')) {
+            return 52;
+        } else if (touchspin.hasClass('touchspin-maxlesson')) {
+            return 15;
+        } else if (touchspin.hasClass('touchspin-maxclass')) {
+            return 30;
         }
-    }).on('touchspin.on.startupspin', function () {
-        var $this = $(this);
-        $('.bootstrap-touchspin-down').removeClass('disabled-max-min');
-        if ($this.val() == maxClassMax) {
-            $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
-        }
-    });
+    }
 
     // Custom vietnamese language for flatpickr
     var vn = {
