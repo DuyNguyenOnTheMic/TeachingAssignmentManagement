@@ -458,8 +458,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 IEnumerable<curriculum_class> query_classWeek = unitOfWork.CurriculumClassRepository.GetClassesInTerm(termId, lecturerId);
                 IEnumerable<curriculum_class> query_classDay = unitOfWork.CurriculumClassRepository.GetClassesInDay(query_classWeek, curriculumClass.day_2);
                 IEnumerable<curriculum_class> query_classLesson = unitOfWork.CurriculumClassRepository.GetClassesInLesson(query_classDay, curriculumClass.start_lesson_2);
-                int maxLessons = term.max_lesson / 3;
-                int maxClasses = term.max_class;
 
                 // Check not duplicate class in the same time
                 if (query_classLesson.Count() >= 1)
@@ -476,7 +474,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 }
 
                 // Check maximum lessons in a day
-                if (query_classDay.Count() >= maxLessons)
+                if (query_classDay.Sum(c => c.lesson_number) + curriculumClass.lesson_number > term.max_lesson)
                 {
                     IEnumerable classes = query_classDay.Select(c => new
                     {
@@ -490,7 +488,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                 }
 
                 // Check maximum classes in a week
-                if (query_classWeek.Count() >= maxClasses)
+                if (query_classWeek.Count() >= term.max_class)
                 {
                     IEnumerable classes = query_classWeek.Select(c => new
                     {
