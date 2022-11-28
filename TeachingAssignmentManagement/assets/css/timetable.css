@@ -48,10 +48,19 @@ table.assign-table {
         z-index: 2;
     }
 
-    table.assign-table td, table.assign-table th {
+    table.assign-table th {
         padding: .72rem 1.5rem;
         vertical-align: middle;
     }
+
+    table.assign-table td {
+        padding: .25rem;
+        vertical-align: middle;
+    }
+
+        table.assign-table td:first-child {
+            padding: .72rem 1.5rem;
+        }
 
     table.assign-table td, table.assign-table th {
         -webkit-box-sizing: content-box;
