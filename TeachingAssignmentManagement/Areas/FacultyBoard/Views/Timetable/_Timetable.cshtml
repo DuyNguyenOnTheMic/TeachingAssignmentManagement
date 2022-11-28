@@ -60,7 +60,7 @@
                                         string lecturerName = item.LecturerName ?? "Chưa phân";
                                         string cardClass = "Lý thuyết" == item.Type ? "btn-success" : "btn-warning";
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>Loại HP:</b> @item.Type <br /><b>Phòng:</b> @item.RoomId">
-                                            <button class="btn @cardClass btn-sm assign-card text-nowrap m-25" type="button" id="@item.Id" data-lecturerid="@lecturerId" data-classtype="@item.Type" data-bs-toggle="popover" data-bs-content="@Html.Partial("_Assign", new ViewDataDictionary { { "lecturer", ViewBag.lecturers }, { "classId", item.Id }, { "lecturerId", lecturerId } }).ToString()" title="@item.CurriculumClassId" data-bs-delay="160" data-bs-trigger="click">@lecturerName</button>
+                                            <button class="btn @cardClass btn-sm assign-card text-nowrap my-25" type="button" id="@item.Id" data-lecturerid="@lecturerId" data-classtype="@item.Type" data-bs-toggle="popover" data-bs-content="@Html.Partial("_Assign", new ViewDataDictionary { { "lecturer", ViewBag.lecturers }, { "classId", item.Id }, { "lecturerId", lecturerId } }).ToString()" title="@item.CurriculumClassId" data-bs-delay="160" data-bs-trigger="click">@lecturerName</button>
                                         </div>
                                     }
                                 </td>
