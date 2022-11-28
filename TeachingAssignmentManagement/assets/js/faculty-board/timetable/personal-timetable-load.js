@@ -1,4 +1,5 @@
-﻿var rootUrl = $('#loader').data('request-url'),
+﻿var weekSelect = $('#week'),
+    rootUrl = $('#loader').data('request-url'),
     personalTimetableDiv = $('#personalTimetableDiv'),
     url = rootUrl + 'FacultyBoard/Timetable/GetPersonalData';
 
@@ -22,11 +23,18 @@ $(function () {
     $('#term').val(termId).trigger('change');
     // Get Partial View personal timetable data
     $.get(url, { termId, week }, function (data) {
-        personalTimetableDiv.html(data);
+        if (!data.error) {
+            // Populate personal timetable
+            personalTimetableDiv.html(data);
+        } else {
+            // Return not found error message
+            personalTimetableDiv.html(data.message);
+            weekSelect.parent().find('.select2-selection__placeholder').text('không khả dụng');
+        }
     });
 });
 
-$('#week').change(function () {
+weekSelect.change(function () {
     // Display loading message while fetching data
     personalTimetableDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
 

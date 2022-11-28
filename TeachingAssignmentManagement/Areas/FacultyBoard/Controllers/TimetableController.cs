@@ -61,8 +61,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             if (!query_classes.Any())
             {
                 // Return not found error message
-                Response.Write($"Học kỳ này chưa có dữ liệu phân công của bạn!");
-                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+                return Json(new { error = true, message = "Học kỳ này chưa có dữ liệu phân công của bạn!" }, JsonRequestBehavior.AllowGet);
             }
             else
             {
