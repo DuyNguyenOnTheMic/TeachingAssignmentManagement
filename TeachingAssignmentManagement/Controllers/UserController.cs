@@ -37,7 +37,7 @@ namespace TeachingAssignmentManagement.Controllers
             }
         }
 
-        // GET: FacultyBoard/User
+        [HttpGet]
         [OutputCache(Duration = 600, VaryByCustom = "userName")]
         public ActionResult Index()
         {

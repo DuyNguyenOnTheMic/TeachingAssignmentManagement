@@ -9,13 +9,14 @@ namespace TeachingAssignmentManagement.Controllers
     {
         private readonly UnitOfWork unitOfWork = new UnitOfWork();
 
-        // GET: FacultyBoard/Major
+        [HttpGet]
         [OutputCache(Duration = 600, VaryByCustom = "userName")]
         public ActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
         public JsonResult GetData()
         {
             // Get majors data from database

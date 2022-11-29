@@ -11,13 +11,14 @@ namespace TeachingAssignmentManagement.Controllers
     {
         private readonly UnitOfWork unitOfWork = new UnitOfWork();
 
-        // GET: FacultyBoard/Term
+        [HttpGet]
         [OutputCache(Duration = 600, VaryByCustom = "userName")]
         public ActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
         public JsonResult GetData()
         {
             // Get terms data from database

@@ -45,7 +45,7 @@ namespace TeachingAssignmentManagement.Controllers
             }
         }
 
-        // GET: FacultyBoard/Timetable
+        [HttpGet]
         [Authorize(Roles = "BCN khoa, Bộ môn, Giảng viên")]
         public ActionResult Index()
         {
