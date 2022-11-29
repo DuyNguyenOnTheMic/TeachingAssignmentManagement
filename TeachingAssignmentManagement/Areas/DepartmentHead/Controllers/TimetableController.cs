@@ -15,6 +15,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Areas.DepartmentHead.Controllers
 {
+    [Authorize(Roles = "Bộ môn")]
     public class TimetableController : Controller
     {
         private ApplicationUserManager _userManager;
