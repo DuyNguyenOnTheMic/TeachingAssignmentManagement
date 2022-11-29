@@ -366,6 +366,7 @@ namespace TeachingAssignmentManagement.Controllers
                         {
                             // Update curriculum class's lecturer
                             query_curriculumClass.lecturer_id = curriculumClass.lecturer_id;
+                            query_curriculumClass.last_assigned_by = lastAssignedBy;
                         }
                     }
                     ProgressHub.SendProgress("Đang import...", dt.Rows.IndexOf(row), itemsCount);
