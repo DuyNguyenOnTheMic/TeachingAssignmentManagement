@@ -1,15 +1,6 @@
 ﻿var popup, dataTable;
 var rootUrl = $('#loader').data('request-url');
 
-// Reference the hub
-var hubNotif = $.connection.majorHub;
-// Start the connection
-$.connection.hub.start();
-// Notify while anyChanges
-hubNotif.client.updatedData = function () {
-    refreshTable();
-};
-
 $(function () {
     'use strict';
 
