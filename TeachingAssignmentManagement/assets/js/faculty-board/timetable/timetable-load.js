@@ -1,6 +1,6 @@
 ﻿var rootUrl = $('#loader').data('request-url'),
     assignLecturerDiv = $('#assignLecturerDiv'),
-    url = rootUrl + 'FacultyBoard/Timetable/GetData';
+    url = rootUrl + 'Timetable/GetData';
 
 // Reference the hub
 var hubNotif = $.connection.curriculumClassHub;
