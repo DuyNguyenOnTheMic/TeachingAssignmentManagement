@@ -1,7 +1,7 @@
 ﻿var weekSelect = $('#week'),
     rootUrl = $('#loader').data('request-url'),
     personalTimetableDiv = $('#personalTimetableDiv'),
-    url = rootUrl + 'FacultyBoard/Timetable/GetPersonalData';
+    url = rootUrl + 'Timetable/GetPersonalData';
 
 $(function () {
     var formSelect = $('.form-select');
