@@ -309,7 +309,7 @@ namespace TeachingAssignmentManagement.Controllers
                         unitOfWork.Save();
                     }
 
-                    string curentLecturerId = string.Empty;
+                    string lastAssignedBy = string.Empty;
                     lecturer query_lecturer = unitOfWork.UserRepository.GetLecturerByStaffId(lecturerId);
                     if (query_lecturer == null && ToNullableString(lecturerId) != null && ToNullableString(fullName) != null)
                     {
@@ -318,7 +318,8 @@ namespace TeachingAssignmentManagement.Controllers
                     }
                     else
                     {
-                        curentLecturerId = query_lecturer?.id == null ? null : userId;
+                        // Set last assigned by value
+                        lastAssignedBy = query_lecturer?.id == null ? null : userId;
                     }
 
                     // Declare curriculum class
@@ -345,7 +346,7 @@ namespace TeachingAssignmentManagement.Controllers
                         end_week = ToInt(endWeek),
                         note_1 = ToNullableString(note1),
                         note_2 = ToNullableString(note2),
-                        last_assigned_by = curentLecturerId,
+                        last_assigned_by = lastAssignedBy,
                         lecturer_id = query_lecturer?.id,
                         term_id = term,
                         major_id = major,
