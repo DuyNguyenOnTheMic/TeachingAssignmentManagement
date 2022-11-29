@@ -110,6 +110,20 @@
                                 <li>
                                     <a class="d-flex align-items-center" href="@Url.Action("About", "Home")"><i class="feather feather-mail"></i><span class="menu-title text-truncate">Email</span></a>
                                 </li>
+                                <li class=" nav-item">
+                                    <a class="d-flex align-items-center" href="#"><i class="feather feather-clock"></i><span class="menu-title text-truncate">Thời khoá biểu</span></a>
+                                    <ul class="menu-content">
+                                        <li>
+                                            <a class="d-flex align-items-center" href="@Url.Action("Import", "Timetable")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Import TKB</span></a>
+                                        </li>
+                                        <li>
+                                            <a class="d-flex align-items-center" href="@Url.Action("Assign", "Timetable")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Phân công</span></a>
+                                        </li>
+                                        <li>
+                                            <a class="d-flex align-items-center" href="@Url.Action("Index", "Timetable")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Xem TKB</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 break;
                             case "Giảng viên":
                                 <li>
