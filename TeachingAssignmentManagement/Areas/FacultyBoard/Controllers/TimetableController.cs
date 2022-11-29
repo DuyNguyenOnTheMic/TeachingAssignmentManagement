@@ -55,7 +55,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         public ActionResult GetPersonalData(int termId, int week)
         {
             // Declare variables
-            string userId = "7861e7cc-84eb-4790-892a-56bc72edb656";
+            string userId = "32e17ae6-c72f-4f20-b865-251e9ee8e71d";
             term term = unitOfWork.TermRepository.GetTermByID(termId);
             IEnumerable<CurriculumClassDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, userId);
             if (!query_classes.Any())
