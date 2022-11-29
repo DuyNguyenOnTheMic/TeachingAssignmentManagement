@@ -453,7 +453,7 @@ namespace TeachingAssignmentManagement.Controllers
             lecturerId = ToNullableString(lecturerId);
 
             // Check if user is in role Department head to restrict assignment
-            if (User.IsInRole("Bộ môn") && curriculumClass.last_assigned_by != currentLecturerId)
+            if (User.IsInRole("Bộ môn") && curriculumClass.last_assigned_by != null && curriculumClass.last_assigned_by != currentLecturerId)
             {
                 return Json(new { error = true, message = "Lớp học phần này đã được phân công!" }, JsonRequestBehavior.AllowGet);
             }
