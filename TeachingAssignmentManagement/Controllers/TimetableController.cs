@@ -220,7 +220,7 @@ namespace TeachingAssignmentManagement.Controllers
             }
 
             int itemsCount = dt.Rows.Count;
-
+            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
             List<curriculum_class> curriculumClassList = new List<curriculum_class>();
             IEnumerable<curriculum_class> query_curriculumClassWhere = curriculumClassList;
             if (isUpdate)
@@ -309,11 +309,16 @@ namespace TeachingAssignmentManagement.Controllers
                         unitOfWork.Save();
                     }
 
+                    string curentLecturerId = string.Empty;
                     lecturer query_lecturer = unitOfWork.UserRepository.GetLecturerByStaffId(lecturerId);
                     if (query_lecturer == null && ToNullableString(lecturerId) != null && ToNullableString(fullName) != null)
                     {
                         // Add record to error list
                         errorLecturerList.Add(Tuple.Create(ToNullableString(lecturerId), ToNullableString(fullName)));
+                    }
+                    else
+                    {
+                        curentLecturerId = query_lecturer?.id == null ? null : userId;
                     }
 
                     // Declare curriculum class
@@ -340,9 +345,10 @@ namespace TeachingAssignmentManagement.Controllers
                         end_week = ToInt(endWeek),
                         note_1 = ToNullableString(note1),
                         note_2 = ToNullableString(note2),
+                        last_assigned_by = curentLecturerId,
+                        lecturer_id = query_lecturer?.id,
                         term_id = term,
                         major_id = major,
-                        lecturer_id = query_lecturer?.id,
                         curriculum_id = ToNullableString(curriculumId),
                         room_id = ToNullableString(roomId)
                     };
