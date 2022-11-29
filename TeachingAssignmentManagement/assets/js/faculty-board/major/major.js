@@ -17,7 +17,7 @@ $(function () {
     dataTable = $('#tblMajor').DataTable(
         {
             ajax: {
-                url: rootUrl + 'FacultyBoard/Major/GetData',
+                url: rootUrl + 'Major/GetData',
                 type: 'GET',
                 dataType: 'json',
                 dataSrc: ''
@@ -29,7 +29,7 @@ $(function () {
                 { 'data': 'name' },
                 {
                     'data': 'id', 'render': function (data) {
-                        return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=popupForm('" + rootUrl + "FacultyBoard/Major/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' data-original-title='Delete' title='Delete' onclick=deleteMajor('" + data + "') > <i class='feather feather-trash-2 font-medium-3 me-1'></i></a > ";
+                        return "<a class='editRow text-success p-0' data-original-title='Edit' title='Edit' onclick=popupForm('" + rootUrl + "Major/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a> <a class='deleteRow text-danger p-0' data-original-title='Delete' title='Delete' onclick=deleteMajor('" + data + "') > <i class='feather feather-trash-2 font-medium-3 me-1'></i></a > ";
                     }
                 }
             ],
@@ -53,7 +53,7 @@ $(function () {
                     text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Thêm ngành mới',
                     className: 'createNew btn btn-primary',
                     attr: {
-                        'onclick': "popupForm('" + rootUrl + "FacultyBoard/Major/Create')"
+                        'onclick': "popupForm('" + rootUrl + "Major/Create')"
                     },
                     init: function (api, node, config) {
                         $(node).removeClass('btn-secondary');
@@ -195,7 +195,7 @@ function deleteMajor(id) {
             // Delete item
             $.ajax({
                 type: 'POST',
-                url: rootUrl + 'FacultyBoard/Major/Delete/' + id,
+                url: rootUrl + 'Major/Delete/' + id,
                 success: function (data) {
                     if (data.success) {
                         refreshTable();
