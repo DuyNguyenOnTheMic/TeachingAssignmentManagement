@@ -465,7 +465,8 @@ namespace TeachingAssignmentManagement.Controllers
             // Check if user is in role Department head to restrict assignment
             if (User.IsInRole("Bộ môn") && curriculumClass.last_assigned_by != null && curriculumClass.last_assigned_by != currentLecturerId)
             {
-                return Json(new { error = true, message = "Lớp học phần này đã được phân công!" }, JsonRequestBehavior.AllowGet);
+                string lastAssignedBy = unitOfWork.UserRepository.GetLecturerByID(curriculumClass.last_assigned_by).full_name;
+                return Json(new { error = true, message = "Lớp học phần này đã được phân công bởi " + lastAssignedBy + "!" }, JsonRequestBehavior.AllowGet);
             }
 
             // Update lecturer id of curriculum class
