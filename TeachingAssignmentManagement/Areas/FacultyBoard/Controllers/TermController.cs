@@ -97,6 +97,13 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            unitOfWork.Dispose();
+            base.Dispose(disposing);
+        }
+
+        #region Helpers
         public List<SelectListItem> PopulateYears(int startYear)
         {
             // Create year select list
@@ -108,11 +115,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             }
             return years;
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            unitOfWork.Dispose();
-            base.Dispose(disposing);
-        }
+        #endregion
     }
 }

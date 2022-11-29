@@ -255,12 +255,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
-        public static string SetNullOnEmpty(string value)
-        {
-            // Check if string is empty
-            return value != null && string.IsNullOrEmpty(value.Trim()) ? null : value;
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -275,5 +269,13 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             unitOfWork.Dispose();
             base.Dispose(disposing);
         }
+
+        #region Helpers
+        public static string SetNullOnEmpty(string value)
+        {
+            // Check if string is empty
+            return value != null && string.IsNullOrEmpty(value.Trim()) ? null : value;
+        }
+        #endregion
     }
 }
