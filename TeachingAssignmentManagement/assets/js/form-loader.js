@@ -267,15 +267,21 @@ if (termForm.length) {
             },
             start_week: {
                 required: true,
-                number: false
+                number: false,
+                min: 1,
+                max: 52
             },
             max_lesson: {
                 required: true,
-                number: false
+                number: false,
+                min: 3,
+                max: 15
             },
             max_class: {
                 required: true,
-                number: false
+                number: false,
+                min: 1,
+                max: 30
             }
         },
         messages: {
@@ -292,13 +298,19 @@ if (termForm.length) {
                 moreCheck: "Năm kết thúc không thể nhỏ hơn năm bắt đầu!"
             },
             start_week: {
-                required: "Bạn chưa nhập tuần bắt đầu"
+                required: "Bạn chưa nhập tuần bắt đầu",
+                min: "Vui lòng nhập lớn hoặc bằng 1",
+                max: "Vui lòng nhập nhỏ hơn hoặc bằng 52"
             },
             max_lesson: {
-                required: "Bạn chưa nhập số tiết tối đa"
+                required: "Bạn chưa nhập số tiết tối đa",
+                min: "Vui lòng nhập lớn hoặc bằng 3",
+                max: "Vui lòng nhập nhỏ hơn hoặc bằng 15"
             },
             max_class: {
-                required: "Bạn chưa nhập số lớp tối đa"
+                required: "Bạn chưa nhập số lớp tối đa",
+                min: "Vui lòng nhập lớn hoặc bằng 1",
+                max: "Vui lòng nhập nhỏ hơn hoặc bằng 30"
             }
         },
         errorPlacement: function (error, element) {
