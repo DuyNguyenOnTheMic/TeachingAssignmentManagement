@@ -281,7 +281,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         {
                             id = ToNullableString(curriculumId),
                             name = ToNullableString(name),
-                            credits = (int)ToNullableInt(credits)
+                            credits = ToInt(credits)
                         };
                         unitOfWork.CurriculumRepository.InsertCurriculum(curriculum);
                         unitOfWork.Save();
@@ -320,18 +320,18 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                         minimum_student = ToNullableInt(minimumStudent),
                         total_lesson = ToNullableInt(totalLesson),
                         day = ToNullableString(day),
-                        start_lesson = (int)ToNullableInt(startLesson),
-                        lesson_number = (int)ToNullableInt(lessonNumber),
+                        start_lesson = ToInt(startLesson),
+                        lesson_number = ToInt(lessonNumber),
                         lesson_time = ToNullableString(lessonTime),
                         student_number = ToNullableInt(studentNumber),
                         free_slot = ToNullableInt(freeSlot),
                         state = ToNullableString(state),
                         learn_week = ToNullableString(learnWeek),
-                        day_2 = (int)ToNullableInt(day2),
-                        start_lesson_2 = (int)ToNullableInt(startLesson2),
+                        day_2 = ToInt(day2),
+                        start_lesson_2 = ToInt(startLesson2),
                         student_registered_number = ToNullableInt(studentRegisteredNumber),
-                        start_week = (int)ToNullableInt(startWeek),
-                        end_week = (int)ToNullableInt(endWeek),
+                        start_week = ToInt(startWeek),
+                        end_week = ToInt(endWeek),
                         note_1 = ToNullableString(note1),
                         note_2 = ToNullableString(note2),
                         term_id = term,
@@ -572,6 +572,12 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
         {
             // Convert string to nullable int
             return value != null && string.IsNullOrEmpty(value.Trim()) ? (int?)null : int.Parse(value);
+        }
+
+        public static int ToInt(string value)
+        {
+            // Convert string to int
+            return int.Parse(value);
         }
 
         protected override void Dispose(bool disposing)
