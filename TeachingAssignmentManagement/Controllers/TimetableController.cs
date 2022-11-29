@@ -221,6 +221,7 @@ namespace TeachingAssignmentManagement.Controllers
 
             int itemsCount = dt.Rows.Count;
             string userId = UserManager.FindByEmail(User.Identity.Name).Id;
+            TimetableViewModels timetableViewModels = new TimetableViewModels();
             List<curriculum_class> curriculumClassList = new List<curriculum_class>();
             IEnumerable<curriculum_class> query_curriculumClassWhere = curriculumClassList;
             if (isUpdate)
@@ -276,6 +277,14 @@ namespace TeachingAssignmentManagement.Controllers
                     {
                         int excelRow = dt.Rows.IndexOf(row) + 2;
                         Response.Write($"Oops, có lỗi đã xảy ra ở dòng số <strong>" + excelRow + "</strong>, vui lòng kiểm tra lại tệp tin. 🥹");
+                        return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
+                    }
+
+                    // Check if start lessons is true
+                    if (!timetableViewModels.startLessons.Contains(ToInt(startLesson2)))
+                    {
+                        int excelRow = dt.Rows.IndexOf(row) + 2;
+                        Response.Write($"Oops, có lỗi đã xảy ra ở dòng số <strong>" + excelRow + "</strong>, tiết bắt đầu phải là 1, 4, 7, 10 hoặc 13. 🥹");
                         return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
                     }
 
