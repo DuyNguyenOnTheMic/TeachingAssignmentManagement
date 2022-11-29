@@ -66,10 +66,10 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             else
             {
                 // Populate personal timetable
-                var startDate = term.start_date;
-                var endDate = new DateTime();
-                var startWeek = term.start_week;
-                var endWeek = query_classes.Max(c => c.EndWeek);
+                DateTime startDate = term.start_date;
+                DateTime endDate = new DateTime();
+                int startWeek = term.start_week;
+                int endWeek = query_classes.Max(c => c.EndWeek);
                 int currentWeek = 0;
                 string weekLabel = string.Empty;
 
