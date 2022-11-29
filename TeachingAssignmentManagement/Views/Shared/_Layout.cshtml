@@ -61,7 +61,7 @@
                 <div class="navbar-header">
                     <ul class="nav navbar-nav flex-row">
                         <li class="nav-item me-auto">
-                            <a class="navbar-brand" href="@Url.Action("Index", "Home", new { Area = "" })">
+                            <a class="navbar-brand" href="@Url.Action("Index", "Home")">
                                 <span class="brand-logo">
                                     <img src="~/assets/images/img_vlu_logo.png" alt="VLU Logo" />
                                 </span>
@@ -74,7 +74,7 @@
                 <div class="main-menu-content">
                     <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
                         <li class="nav-item">
-                            <a class="d-flex align-items-center" href="@Url.Action("Index", "Home", new { Area = "" })"><i class="feather feather-home"></i><span class="menu-title text-truncate">Trang chủ</span></a>
+                            <a class="d-flex align-items-center" href="@Url.Action("Index", "Home")"><i class="feather feather-home"></i><span class="menu-title text-truncate">Trang chủ</span></a>
                         </li>
                         @switch (roleName)
                         {
