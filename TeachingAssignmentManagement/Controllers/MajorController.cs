@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
-using TeachingAssignmentManagement.Hubs;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
@@ -43,7 +42,6 @@ namespace TeachingAssignmentManagement.Controllers
             {
                 return Json(new { error = true }, JsonRequestBehavior.AllowGet);
             }
-            MajorHub.BroadcastData();
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
@@ -59,7 +57,6 @@ namespace TeachingAssignmentManagement.Controllers
             // Update major
             unitOfWork.MajorRepository.UpdateMajor(major);
             unitOfWork.Save();
-            MajorHub.BroadcastData();
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
@@ -76,7 +73,6 @@ namespace TeachingAssignmentManagement.Controllers
             {
                 return Json(new { error = true, message = "Không thể xoá do ngành này đã có dữ liệu!" }, JsonRequestBehavior.AllowGet);
             }
-            MajorHub.BroadcastData();
             return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
         }
 

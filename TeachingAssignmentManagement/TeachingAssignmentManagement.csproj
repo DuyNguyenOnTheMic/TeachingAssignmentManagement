@@ -292,7 +292,6 @@
     </Compile>
     <Compile Include="Helpers\HtmlMinifierExtensions.cs" />
     <Compile Include="Helpers\IdentityExtensions.cs" />
-    <Compile Include="Hubs\MajorHub.cs" />
     <Compile Include="Hubs\ProgressHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\curriculum_class.cs">
