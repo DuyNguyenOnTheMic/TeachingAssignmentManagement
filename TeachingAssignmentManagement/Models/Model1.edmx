@@ -87,7 +87,7 @@
           <Property Name="total_lesson" Type="int" />
           <Property Name="day" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="start_lesson" Type="int" Nullable="false" />
-          <Property Name="lesson_number" Type="int" />
+          <Property Name="lesson_number" Type="int" Nullable="false" />
           <Property Name="lesson_time" Type="nvarchar" MaxLength="100" />
           <Property Name="student_number" Type="int" />
           <Property Name="free_slot" Type="int" />
@@ -96,13 +96,14 @@
           <Property Name="day_2" Type="int" Nullable="false" />
           <Property Name="start_lesson_2" Type="int" Nullable="false" />
           <Property Name="student_registered_number" Type="int" />
-          <Property Name="start_week" Type="int" />
-          <Property Name="end_week" Type="int" />
+          <Property Name="start_week" Type="int" Nullable="false" />
+          <Property Name="end_week" Type="int" Nullable="false" />
           <Property Name="note_1" Type="nvarchar(max)" />
           <Property Name="note_2" Type="nvarchar(max)" />
+          <Property Name="last_assigned_by" Type="nvarchar" MaxLength="128" />
+          <Property Name="lecturer_id" Type="nvarchar" MaxLength="128" />
           <Property Name="term_id" Type="int" Nullable="false" />
           <Property Name="major_id" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="lecturer_id" Type="nvarchar" MaxLength="128" />
           <Property Name="curriculum_id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="room_id" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
@@ -173,6 +174,18 @@
             </Principal>
             <Dependent Role="curriculum_class">
               <PropertyRef Name="lecturer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_curriculum_class_lecturer1">
+          <End Role="lecturer" Type="Self.lecturer" Multiplicity="0..1" />
+          <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lecturer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="curriculum_class">
+              <PropertyRef Name="last_assigned_by" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -287,6 +300,10 @@
             <End Role="curriculum_class" EntitySet="curriculum_class" />
           </AssociationSet>
           <AssociationSet Name="FK_curriculum_class_lecturer" Association="Self.FK_curriculum_class_lecturer">
+            <End Role="lecturer" EntitySet="lecturer" />
+            <End Role="curriculum_class" EntitySet="curriculum_class" />
+          </AssociationSet>
+          <AssociationSet Name="FK_curriculum_class_lecturer1" Association="Self.FK_curriculum_class_lecturer1">
             <End Role="lecturer" EntitySet="lecturer" />
             <End Role="curriculum_class" EntitySet="curriculum_class" />
           </AssociationSet>
@@ -405,7 +422,7 @@
           <Property Name="total_lesson" Type="Int32" />
           <Property Name="day" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="start_lesson" Type="Int32" Nullable="false" />
-          <Property Name="lesson_number" Type="Int32" />
+          <Property Name="lesson_number" Type="Int32" Nullable="false" />
           <Property Name="lesson_time" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="student_number" Type="Int32" />
           <Property Name="free_slot" Type="Int32" />
@@ -414,17 +431,19 @@
           <Property Name="day_2" Type="Int32" Nullable="false" />
           <Property Name="start_lesson_2" Type="Int32" Nullable="false" />
           <Property Name="student_registered_number" Type="Int32" />
-          <Property Name="start_week" Type="Int32" />
-          <Property Name="end_week" Type="Int32" />
+          <Property Name="start_week" Type="Int32" Nullable="false" />
+          <Property Name="end_week" Type="Int32" Nullable="false" />
           <Property Name="note_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="note_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="last_assigned_by" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="lecturer_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="term_id" Type="Int32" Nullable="false" />
           <Property Name="major_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="lecturer_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="curriculum_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="room_id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="curriculum" Relationship="Self.FK_curriculum_class_curriculum" FromRole="curriculum_class" ToRole="curriculum" />
           <NavigationProperty Name="lecturer" Relationship="Self.FK_curriculum_class_lecturer" FromRole="curriculum_class" ToRole="lecturer" />
+          <NavigationProperty Name="lecturer1" Relationship="Self.FK_curriculum_class_lecturer1" FromRole="curriculum_class" ToRole="lecturer" />
           <NavigationProperty Name="major" Relationship="Self.FK_curriculum_class_major" FromRole="curriculum_class" ToRole="major" />
           <NavigationProperty Name="room" Relationship="Self.FK_curriculum_class_room" FromRole="curriculum_class" ToRole="room" />
           <NavigationProperty Name="term" Relationship="Self.FK_curriculum_class_term" FromRole="curriculum_class" ToRole="term" />
@@ -437,6 +456,7 @@
           <Property Name="staff_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="curriculum_class" Relationship="Self.FK_curriculum_class_lecturer" FromRole="lecturer" ToRole="curriculum_class" />
+          <NavigationProperty Name="curriculum_class1" Relationship="Self.FK_curriculum_class_lecturer1" FromRole="lecturer" ToRole="curriculum_class" />
         </EntityType>
         <EntityType Name="major">
           <Key>
@@ -531,6 +551,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_curriculum_class_lecturer1">
+          <End Role="lecturer" Type="Self.lecturer" Multiplicity="0..1" />
+          <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lecturer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="curriculum_class">
+              <PropertyRef Name="last_assigned_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_curriculum_class_major">
           <End Role="major" Type="Self.major" Multiplicity="1" />
           <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
@@ -597,6 +629,10 @@
             <End Role="curriculum_class" EntitySet="curriculum_class" />
           </AssociationSet>
           <AssociationSet Name="FK_curriculum_class_lecturer" Association="Self.FK_curriculum_class_lecturer">
+            <End Role="lecturer" EntitySet="lecturers" />
+            <End Role="curriculum_class" EntitySet="curriculum_class" />
+          </AssociationSet>
+          <AssociationSet Name="FK_curriculum_class_lecturer1" Association="Self.FK_curriculum_class_lecturer1">
             <End Role="lecturer" EntitySet="lecturers" />
             <End Role="curriculum_class" EntitySet="curriculum_class" />
           </AssociationSet>
@@ -712,9 +748,10 @@
                 <ScalarProperty Name="end_week" ColumnName="end_week" />
                 <ScalarProperty Name="note_1" ColumnName="note_1" />
                 <ScalarProperty Name="note_2" ColumnName="note_2" />
+                <ScalarProperty Name="last_assigned_by" ColumnName="last_assigned_by" />
+                <ScalarProperty Name="lecturer_id" ColumnName="lecturer_id" />
                 <ScalarProperty Name="term_id" ColumnName="term_id" />
                 <ScalarProperty Name="major_id" ColumnName="major_id" />
-                <ScalarProperty Name="lecturer_id" ColumnName="lecturer_id" />
                 <ScalarProperty Name="curriculum_id" ColumnName="curriculum_id" />
                 <ScalarProperty Name="room_id" ColumnName="room_id" />
               </MappingFragment>

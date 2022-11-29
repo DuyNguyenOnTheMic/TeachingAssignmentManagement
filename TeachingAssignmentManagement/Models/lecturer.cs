@@ -18,6 +18,7 @@ namespace TeachingAssignmentManagement.Models
         public lecturer()
         {
             this.curriculum_class = new HashSet<curriculum_class>();
+            this.curriculum_class1 = new HashSet<curriculum_class>();
         }
     
         public string id { get; set; }
@@ -26,5 +27,7 @@ namespace TeachingAssignmentManagement.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<curriculum_class> curriculum_class { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<curriculum_class> curriculum_class1 { get; set; }
     }
 }

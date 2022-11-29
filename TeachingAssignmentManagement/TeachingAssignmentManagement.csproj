@@ -1186,13 +1186,6 @@
     <Content Include="Areas\FacultyBoard\Views\Timetable\Index.cshtml" />
     <Content Include="Areas\FacultyBoard\Views\Timetable\_Timetable.cshtml" />
     <Content Include="Areas\FacultyBoard\Views\Timetable\_Assign.cshtml" />
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Areas\FacultyBoard\Views\Major\Index.cshtml" />
@@ -1207,6 +1200,13 @@
   <ItemGroup>
     <Content Include="Areas\FacultyBoard\Views\Timetable\Assign.cshtml" />
     <Content Include="Areas\FacultyBoard\Views\Timetable\_PersonalTimetable.cshtml" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>

@@ -23,7 +23,7 @@ namespace TeachingAssignmentManagement.Models
         public Nullable<int> total_lesson { get; set; }
         public string day { get; set; }
         public int start_lesson { get; set; }
-        public Nullable<int> lesson_number { get; set; }
+        public int lesson_number { get; set; }
         public string lesson_time { get; set; }
         public Nullable<int> student_number { get; set; }
         public Nullable<int> free_slot { get; set; }
@@ -32,18 +32,20 @@ namespace TeachingAssignmentManagement.Models
         public int day_2 { get; set; }
         public int start_lesson_2 { get; set; }
         public Nullable<int> student_registered_number { get; set; }
-        public Nullable<int> start_week { get; set; }
-        public Nullable<int> end_week { get; set; }
+        public int start_week { get; set; }
+        public int end_week { get; set; }
         public string note_1 { get; set; }
         public string note_2 { get; set; }
+        public string last_assigned_by { get; set; }
+        public string lecturer_id { get; set; }
         public int term_id { get; set; }
         public string major_id { get; set; }
-        public string lecturer_id { get; set; }
         public string curriculum_id { get; set; }
         public string room_id { get; set; }
     
         public virtual curriculum curriculum { get; set; }
         public virtual lecturer lecturer { get; set; }
+        public virtual lecturer lecturer1 { get; set; }
         public virtual major major { get; set; }
         public virtual room room { get; set; }
         public virtual term term { get; set; }
