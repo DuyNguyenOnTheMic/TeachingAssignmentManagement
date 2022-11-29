@@ -269,7 +269,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
                     if (checkNull != null)
                     {
                         int excelRow = dt.Rows.IndexOf(row) + 2;
-                        Response.Write($"Oops, có lỗi đã xảy ra ở dòng số <strong>" + excelRow + "</strong>, vui lòng kiểm tra lại tệp tin 🥹");
+                        Response.Write($"Oops, có lỗi đã xảy ra ở dòng số <strong>" + excelRow + "</strong>, vui lòng kiểm tra lại tệp tin. 🥹");
                         return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
                     }
 
