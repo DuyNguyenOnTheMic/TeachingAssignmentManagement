@@ -50,7 +50,7 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
     // Send ajax request to check state of lecturer
     $.ajax({
         type: 'GET',
-        url: rootUrl + 'FacultyBoard/Timetable/CheckState',
+        url: rootUrl + 'Timetable/CheckState',
         data: { id, termId, lecturerId },
         success: function (data) {
             if (data.success) {
@@ -108,7 +108,7 @@ $(document).off('click', '.btn-delete').on('click', '.btn-delete', function () {
                 // Send ajax request to delete class
                 $.ajax({
                     type: 'POST',
-                    url: rootUrl + 'FacultyBoard/Timetable/Delete',
+                    url: rootUrl + 'Timetable/Delete',
                     data: { id },
                     success: function (data) {
                         if (data.success) {
@@ -148,7 +148,7 @@ $('.assign-card').on('click', function () {
 });
 
 $('.btn-export').on('click', function () {
-    var url = rootUrl + 'FacultyBoard/TimeTable/Export?termId=' + termId + '&majorId=' + majorId;
+    var url = rootUrl + 'TimeTable/Export?termId=' + termId + '&majorId=' + majorId;
     window.location = url;
 });
 
@@ -164,7 +164,7 @@ function assignLecturer(id, lecturerId) {
     // Send ajax request to assign lecturer
     $.ajax({
         type: 'POST',
-        url: rootUrl + 'FacultyBoard/Timetable/Assign',
+        url: rootUrl + 'Timetable/Assign',
         data: { id, lecturerId },
         success: function (data) {
             if (data.success) {
