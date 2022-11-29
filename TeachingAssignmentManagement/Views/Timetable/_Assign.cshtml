@@ -15,7 +15,10 @@
     <button class="btn btn-primary waves-effect waves-float waves-light btn-icon btn-assign ms-25" data-id="@classId" type="button" aria-label="Assign">
         <i class="feather feather-check"></i>
     </button>
-    <button class="btn btn-danger waves-effect waves-float waves-light btn-icon btn-delete ms-25" data-id="@classId" type="button" aria-label="Delete">
-        <i class="feather feather-x"></i>
-    </button>
+    @if (User.IsInRole("BCN khoa"))
+    {
+        <button class="btn btn-danger waves-effect waves-float waves-light btn-icon btn-delete ms-25" data-id="@classId" type="button" aria-label="Delete">
+            <i class="feather feather-x"></i>
+        </button>
+    }
 </div>
