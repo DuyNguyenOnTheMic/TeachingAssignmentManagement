@@ -171,6 +171,17 @@ function assignLecturer(id, lecturerId) {
                 // Display success message
                 toastr.options.positionClass = 'toast-bottom-right';
                 toastr.success('Thành công!');
+            } else {
+                // Show error message
+                Swal.fire({
+                    title: 'Thông báo',
+                    html: errorMessage,
+                    icon: 'error',
+                    customClass: {
+                        confirmButton: 'btn btn-primary'
+                    },
+                    buttonsStyling: false
+                })
             }
         }
     });
