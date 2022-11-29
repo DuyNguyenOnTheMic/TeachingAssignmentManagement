@@ -18,7 +18,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
 {
-    [Authorize(Roles = "BCN khoa")]
+    [Authorize(Roles = "BCN khoa, Bộ môn")]
     public class TimetableController : Controller
     {
         private ApplicationUserManager _userManager;
@@ -46,6 +46,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         // GET: FacultyBoard/Timetable
+        [Authorize(Roles = "BCN khoa, Bộ môn, Giảng viên")]
         public ActionResult Index()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
@@ -53,6 +54,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "BCN khoa, Bộ môn, Giảng viên")]
         public ActionResult GetPersonalData(int termId, int week)
         {
             // Declare variables
@@ -140,6 +142,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "BCN khoa")]
         public ActionResult Import()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
@@ -148,6 +151,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "BCN khoa")]
         public ActionResult Import(HttpPostedFileBase postedFile, int term, string major, bool isUpdate)
         {
             string path = Server.MapPath("~/Uploads/");
@@ -506,6 +510,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "BCN khoa")]
         public ActionResult Delete(int id)
         {
             // Delete class
@@ -518,6 +523,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "BCN khoa")]
         public ActionResult DeleteAll(int term, string major)
         {
             // Delete all records in curriculum class table
