@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections;
@@ -441,10 +442,18 @@ namespace TeachingAssignmentManagement.Controllers
         {
             // Declare variables
             curriculum_class curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
+            string currentLecturerId = UserManager.FindByEmail(User.Identity.Name).Id;
             lecturerId = ToNullableString(lecturerId);
+
+            // Check if user is in role Department head to restrict assignment
+            if (User.IsInRole("Bộ môn") && curriculumClass.last_assigned_by != currentLecturerId)
+            {
+                return Json(new { error = true, message = "Lớp học phần này đã được phân công!" }, JsonRequestBehavior.AllowGet);
+            }
 
             // Update lecturer id of curriculum class
             curriculumClass.lecturer_id = lecturerId;
+            curriculumClass.last_assigned_by = currentLecturerId;
             unitOfWork.Save();
 
             // Send signal to SignalR Hub
