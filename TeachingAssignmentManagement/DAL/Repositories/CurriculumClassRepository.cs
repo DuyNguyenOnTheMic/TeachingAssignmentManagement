@@ -21,8 +21,8 @@ namespace TeachingAssignmentManagement.DAL
                 Type = c.type,
                 Day2 = c.day_2,
                 StartLesson2 = c.start_lesson_2,
-                StartWeek = (int)c.start_week,
-                EndWeek = (int)c.end_week,
+                StartWeek = c.start_week,
+                EndWeek = c.end_week,
                 CurriculumId = c.curriculum_id,
                 RoomId = c.room_id,
                 Curriculum = c.curriculum
