@@ -175,7 +175,7 @@ function assignLecturer(id, lecturerId) {
                 // Show error message
                 Swal.fire({
                     title: 'Thông báo',
-                    html: errorMessage,
+                    html: data.message,
                     icon: 'error',
                     customClass: {
                         confirmButton: 'btn btn-primary'
