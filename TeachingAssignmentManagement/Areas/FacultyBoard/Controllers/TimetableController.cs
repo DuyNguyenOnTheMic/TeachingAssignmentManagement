@@ -527,6 +527,22 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_userManager != null)
+                {
+                    _userManager.Dispose();
+                    _userManager = null;
+                }
+            }
+
+            unitOfWork.Dispose();
+            base.Dispose(disposing);
+        }
+
+        #region Helpers
         private string ValidateColumns(DataTable dt)
         {
             // Declare the valid column names
@@ -580,20 +596,6 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             // Convert string to int
             return int.Parse(value);
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_userManager != null)
-                {
-                    _userManager.Dispose();
-                    _userManager = null;
-                }
-            }
-
-            unitOfWork.Dispose();
-            base.Dispose(disposing);
-        }
+        #endregion
     }
 }
