@@ -52,6 +52,7 @@ namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult GetPersonalData(int termId, int week)
         {
             // Declare variables
