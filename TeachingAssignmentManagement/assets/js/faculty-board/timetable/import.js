@@ -17,7 +17,7 @@ select.each(function () {
 
 // Populate Dropzone
 myDropzone.dropzone({
-    url: rootUrl + 'FacultyBoard/Timetable/Import',
+    url: rootUrl + 'Timetable/Import',
     autoProcessQueue: false,
     paramName: 'postedFile',
     timeout: null,
@@ -233,7 +233,7 @@ function deleteAndImport(myDropzone) {
     // Send ajax request to delete all curriculum classes
     $.ajax({
         type: 'POST',
-        url: rootUrl + 'FacultyBoard/Timetable/DeleteAll',
+        url: rootUrl + 'Timetable/DeleteAll',
         data: { term, major },
         success: function (data) {
             if (data.success) {
@@ -368,7 +368,7 @@ function importUsers() {
     // Send ajax request to import users
     $.ajax({
         type: 'POST',
-        url: rootUrl + 'FacultyBoard/User/Import',
+        url: rootUrl + 'User/Import',
         data: { lecturerId, lecturerName },
         success: function (data) {
             window.onbeforeunload = null;
