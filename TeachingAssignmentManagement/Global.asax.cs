@@ -7,7 +7,7 @@ using System.Web.Routing;
 
 namespace TeachingAssignmentManagement
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {
