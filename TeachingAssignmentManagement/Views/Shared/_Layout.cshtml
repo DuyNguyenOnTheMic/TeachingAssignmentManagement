@@ -80,45 +80,45 @@
                         {
                             case "BCN khoa":
                                 <li class="nav-item">
-                                    <a class="d-flex align-items-center" href="@Url.Action("About", "Home", new { Area = "" })"><i class="feather feather-mail"></i><span class="menu-title text-truncate">Email</span></a>
+                                    <a class="d-flex align-items-center" href="@Url.Action("About", "Home")"><i class="feather feather-mail"></i><span class="menu-title text-truncate">Email</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="d-flex align-items-center" href="@Url.Action("Contact", "Home", new { Area = "" })"><i class="feather feather-message-square"></i><span class="menu-title text-truncate">Chat</span></a>
+                                    <a class="d-flex align-items-center" href="@Url.Action("Contact", "Home")"><i class="feather feather-message-square"></i><span class="menu-title text-truncate">Chat</span></a>
                                 </li>
                                 <li class=" nav-item">
                                     <a class="d-flex align-items-center" href="#"><i class="feather feather-clock"></i><span class="menu-title text-truncate">Thời khoá biểu</span></a>
                                     <ul class="menu-content">
                                         <li>
-                                            <a class="d-flex align-items-center" href="@Url.Action("Import", "Timetable", new { Area = "FacultyBoard" })"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Import TKB</span></a>
+                                            <a class="d-flex align-items-center" href="@Url.Action("Import", "Timetable")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Import TKB</span></a>
                                         </li>
                                         <li>
-                                            <a class="d-flex align-items-center" href="@Url.Action("Assign", "Timetable", new { Area = "FacultyBoard" })"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Phân công</span></a>
+                                            <a class="d-flex align-items-center" href="@Url.Action("Assign", "Timetable")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Phân công</span></a>
                                         </li>
                                         <li>
-                                            <a class="d-flex align-items-center" href="@Url.Action("Index", "Timetable", new { Area = "FacultyBoard" })"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Xem TKB</span></a>
+                                            <a class="d-flex align-items-center" href="@Url.Action("Index", "Timetable")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Xem TKB</span></a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="nav-item @(ViewBag.Title == "Quản lý ngành" ? "active" : "")">
-                                    <a class="d-flex align-items-center" href="@Url.Action("Index", "Term", new { Area = "FacultyBoard" })"><i class="feather feather-layers"></i><span class="menu-title text-truncate">Học kỳ và ngành</span></a>
+                                    <a class="d-flex align-items-center" href="@Url.Action("Index", "Term")"><i class="feather feather-layers"></i><span class="menu-title text-truncate">Học kỳ và ngành</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="d-flex align-items-center" href="@Url.Action("Index", "User", new { Area = "FacultyBoard" })"><i class="feather feather-user"></i><span class="menu-title text-truncate">Người dùng</span></a>
+                                    <a class="d-flex align-items-center" href="@Url.Action("Index", "User")"><i class="feather feather-user"></i><span class="menu-title text-truncate">Người dùng</span></a>
                                 </li>
                                 break;
                             case "Bộ môn":
                                 <li>
-                                    <a class="d-flex align-items-center" href="@Url.Action("About", "Home", new { Area = "" })"><i class="feather feather-mail"></i><span class="menu-title text-truncate">Email</span></a>
+                                    <a class="d-flex align-items-center" href="@Url.Action("About", "Home")"><i class="feather feather-mail"></i><span class="menu-title text-truncate">Email</span></a>
                                 </li>
                                 break;
                             case "Giảng viên":
                                 <li>
-                                    <a class="d-flex align-items-center" href="@Url.Action("About", "Home", new { Area = "" })"><i class="feather feather-mail"></i><span class="menu-title text-truncate">Email</span></a>
+                                    <a class="d-flex align-items-center" href="@Url.Action("About", "Home")"><i class="feather feather-mail"></i><span class="menu-title text-truncate">Email</span></a>
                                 </li>
                                 break;
                             default:
                                 <li>
-                                    <a class="d-flex align-items-center" href="@Url.Action("About", "Home", new { Area = "" })"><i class="feather feather-mail"></i><span class="menu-title text-truncate">Email</span></a>
+                                    <a class="d-flex align-items-center" href="@Url.Action("About", "Home")"><i class="feather feather-mail"></i><span class="menu-title text-truncate">Email</span></a>
                                 </li>
                                 break;
                         }

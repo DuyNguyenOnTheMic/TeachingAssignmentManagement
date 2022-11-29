@@ -8,7 +8,7 @@ using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Hubs;
 using TeachingAssignmentManagement.Models;
 
-namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
+namespace TeachingAssignmentManagement.Controllers
 {
     [Authorize(Roles = "BCN khoa")]
     public class UserController : Controller

@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
 
-namespace TeachingAssignmentManagement.Areas.FacultyBoard.Controllers
+namespace TeachingAssignmentManagement.Controllers
 {
     [Authorize(Roles = "BCN khoa")]
     public class TermController : Controller

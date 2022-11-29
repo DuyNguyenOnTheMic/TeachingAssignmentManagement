@@ -256,16 +256,13 @@
     <Compile Include="App_Start\MyStyleBundle.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\DepartmentHead\Controllers\TimetableController.cs" />
-    <Compile Include="Areas\DepartmentHead\DepartmentHeadAreaRegistration.cs" />
-    <Compile Include="Areas\FacultyBoard\Controllers\TermController.cs" />
-    <Compile Include="Areas\FacultyBoard\Controllers\TimetableController.cs" />
-    <Compile Include="Areas\FacultyBoard\Controllers\UserController.cs" />
-    <Compile Include="Areas\FacultyBoard\FacultyBoardAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Areas\FacultyBoard\Controllers\MajorController.cs" />
+    <Compile Include="Controllers\MajorController.cs" />
+    <Compile Include="Controllers\TermController.cs" />
+    <Compile Include="Controllers\TimetableController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1151,11 +1148,6 @@
   <ItemGroup>
     <Folder Include="app-assets\vendors\css\tables\datatable\extensions\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\DepartmentHead\Data\" />
-    <Folder Include="Areas\DepartmentHead\Views\Shared\" />
-    <Folder Include="Areas\DepartmentHead\Views\Timetable\" />
-    <Folder Include="Areas\FacultyBoard\Data\" />
-    <Folder Include="Areas\FacultyBoard\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app-assets\fonts\feather\fonts\feather.eot" />
@@ -1177,25 +1169,10 @@
     <Content Include="app-assets\vendors\css\extensions\dd-icon\dd-icon.eot" />
     <Content Include="app-assets\vendors\css\extensions\dd-icon\dd-icon.ttf" />
     <Content Include="app-assets\vendors\css\extensions\dd-icon\dd-icon.woff" />
-    <Content Include="Areas\FacultyBoard\Views\web.config" />
-    <Content Include="Areas\FacultyBoard\Views\User\Index.cshtml" />
-    <Content Include="Areas\FacultyBoard\Views\User\Edit.cshtml" />
-    <Content Include="Areas\FacultyBoard\Views\User\Create.cshtml" />
-    <Content Include="Areas\FacultyBoard\Views\Term\Index.cshtml" />
-    <Content Include="Areas\FacultyBoard\Views\Term\Create.cshtml" />
-    <Content Include="Areas\FacultyBoard\Views\Term\Edit.cshtml" />
-    <Content Include="Areas\FacultyBoard\Views\Timetable\Import.cshtml" />
-    <Content Include="Areas\FacultyBoard\Views\_ViewStart.cshtml" />
     <Content Include="assets\files\CNTT UIS-ThoiKhoaBieu_TieuChuan_Mau.xlsx" />
     <Content Include="assets\js\faculty-board\timetable\import.min.js" />
-    <Content Include="Areas\FacultyBoard\Views\Timetable\Index.cshtml" />
-    <Content Include="Areas\FacultyBoard\Views\Timetable\_Timetable.cshtml" />
-    <Content Include="Areas\FacultyBoard\Views\Timetable\_Assign.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Areas\FacultyBoard\Views\Major\Index.cshtml" />
-    <Content Include="Areas\FacultyBoard\Views\Major\Create.cshtml" />
-    <Content Include="Areas\FacultyBoard\Views\Major\Edit.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Account\Update.cshtml" />
   </ItemGroup>
@@ -1203,8 +1180,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\FacultyBoard\Views\Timetable\Assign.cshtml" />
-    <Content Include="Areas\FacultyBoard\Views\Timetable\_PersonalTimetable.cshtml" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -1212,8 +1187,22 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\DepartmentHead\Views\web.config" />
     <None Include="packages.config" />
+    <Content Include="Views\Major\Create.cshtml" />
+    <Content Include="Views\Major\Edit.cshtml" />
+    <Content Include="Views\Major\Index.cshtml" />
+    <Content Include="Views\Term\Create.cshtml" />
+    <Content Include="Views\Term\Edit.cshtml" />
+    <Content Include="Views\Term\Index.cshtml" />
+    <Content Include="Views\Timetable\Assign.cshtml" />
+    <Content Include="Views\Timetable\Import.cshtml" />
+    <Content Include="Views\Timetable\Index.cshtml" />
+    <Content Include="Views\Timetable\_Assign.cshtml" />
+    <Content Include="Views\Timetable\_PersonalTimetable.cshtml" />
+    <Content Include="Views\Timetable\_Timetable.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
