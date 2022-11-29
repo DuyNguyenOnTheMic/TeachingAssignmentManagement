@@ -256,6 +256,7 @@
     <Compile Include="App_Start\MyStyleBundle.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\DepartmentHead\DepartmentHeadAreaRegistration.cs" />
     <Compile Include="Areas\FacultyBoard\Controllers\TermController.cs" />
     <Compile Include="Areas\FacultyBoard\Controllers\TimetableController.cs" />
     <Compile Include="Areas\FacultyBoard\Controllers\UserController.cs" />
@@ -1149,6 +1150,9 @@
   <ItemGroup>
     <Folder Include="app-assets\vendors\css\tables\datatable\extensions\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\DepartmentHead\Controllers\" />
+    <Folder Include="Areas\DepartmentHead\Data\" />
+    <Folder Include="Areas\DepartmentHead\Views\Shared\" />
     <Folder Include="Areas\FacultyBoard\Data\" />
     <Folder Include="Areas\FacultyBoard\Views\Shared\" />
   </ItemGroup>
@@ -1207,6 +1211,7 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\DepartmentHead\Views\web.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
