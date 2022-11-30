@@ -30,7 +30,9 @@
                             <td>
                                 @foreach (var item in classes)
                                 {
-                                    @item.CurriculumClassId
+                                    <div class="text-center" data-toggle="tooltip" data-placement="top" title="" data-original-title="Thứ 3">
+                                        -Môn: @item.Curriculum.name (@item.CurriculumId)<br>-Mã LHP: @item.CurriculumClassId<br>-Phòng: @item.RoomId<br>-Tiết: @item.LessonTime
+                                    </div>
                                 }
                             </td>
                         }
