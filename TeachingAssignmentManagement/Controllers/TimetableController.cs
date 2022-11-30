@@ -109,7 +109,7 @@ namespace TeachingAssignmentManagement.Controllers
                     }
                     if (currentWeek == 0)
                     {
-                        if (term.start_date <= DateTime.Today)
+                        if (term.start_date < DateTime.Today)
                         {
                             // Set current week in case start date is in the past
                             startDate = startDate.AddDays(-7);
