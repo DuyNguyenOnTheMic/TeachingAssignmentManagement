@@ -3,7 +3,7 @@
     url = rootUrl + 'Timetable/GetData';
 
 // Reference the hub
-var hubNotif = $.connection.curriculumClassHub;
+var hubNotif = $.connection.timetableHub;
 // Start the connection
 $.connection.hub.start();
 // Notify while anyChanges
