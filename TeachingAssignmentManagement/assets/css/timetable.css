@@ -23,6 +23,19 @@
     color: #22292f;
 }
 
+.personal-timetable-div td:first-child {
+    background-color: #f3f2f7;
+    color: #22292f;
+    font-weight: bold;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.dark-layout .personal-timetable-div td:first-child {
+    background-color: #343d55;
+    color: #22292f;
+}
+
 .assign-table-div .table-vertical-divider {
     border-left: 2px solid #4B4B4B !important;
 }
