@@ -50,10 +50,10 @@
                         foreach (int startLesson in Model.startLessons)
                         {
                             var classes = Model.CurriculumClassDTOs.Where(x => x.CurriculumId == curriculum.id && x.Day2 == day && x.StartLesson2 == startLesson);
-                            string dividerClass = startLesson == 1 ? "table-vertical-divider" : string.Empty;
+                            string dividerClass = startLesson == 1 ? "class=table-vertical-divider" : string.Empty;
                             if (classes.Any())
                             {
-                                <td class="@dividerClass">
+                                <td @dividerClass>
                                     @foreach (var item in classes)
                                     {
                                         string lecturerId = item.LecturerId ?? string.Empty;
@@ -67,7 +67,7 @@
                             }
                             else
                             {
-                                <td class="@dividerClass"></td>
+                                <td @dividerClass></td>
                             }
                         }
                     }
