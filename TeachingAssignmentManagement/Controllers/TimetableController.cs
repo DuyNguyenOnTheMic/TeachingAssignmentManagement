@@ -471,7 +471,7 @@ namespace TeachingAssignmentManagement.Controllers
 
             // Update lecturer id of curriculum class
             curriculumClass.lecturer_id = lecturerId;
-            curriculumClass.last_assigned_by = currentLecturerId;
+            curriculumClass.last_assigned_by = lecturerId != null ? currentLecturerId : null;
             unitOfWork.Save();
 
             // Send signal to SignalR Hub
