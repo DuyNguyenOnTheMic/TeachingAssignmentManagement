@@ -23,8 +23,16 @@
     color: #22292f;
 }
 
+.personal-timetable-div th {
+    vertical-align: middle !important;
+}
+
+    .personal-timetable-div th:first-child {
+        padding: 1rem;
+    }
+
 .personal-timetable-div td {
-    padding: .3rem .5rem;
+    padding: .3rem;
     text-align: center;
 }
 
