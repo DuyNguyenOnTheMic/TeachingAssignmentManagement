@@ -381,7 +381,7 @@ namespace TeachingAssignmentManagement.Controllers
                     ProgressHub.SendProgress("Đang import...", dt.Rows.IndexOf(row), itemsCount);
                 }
                 unitOfWork.Save();
-                CurriculumClassHub.RefreshData(term, major);
+                TimetableHub.RefreshData(term, major);
                 return Json(errorLecturerList.Distinct(), JsonRequestBehavior.AllowGet);
             }
             catch
@@ -475,7 +475,7 @@ namespace TeachingAssignmentManagement.Controllers
             unitOfWork.Save();
 
             // Send signal to SignalR Hub
-            CurriculumClassHub.BroadcastData(id, lecturerId, curriculumClass.lecturer?.full_name, true);
+            TimetableHub.BroadcastData(id, lecturerId, curriculumClass.lecturer?.full_name, true);
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
@@ -545,7 +545,7 @@ namespace TeachingAssignmentManagement.Controllers
             unitOfWork.Save();
 
             // Send signal to SignalR Hub
-            CurriculumClassHub.BroadcastData(id, null, null, false);
+            TimetableHub.BroadcastData(id, null, null, false);
             return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
@@ -556,7 +556,7 @@ namespace TeachingAssignmentManagement.Controllers
             // Delete all records in curriculum class table
             unitOfWork.CurriculumClassRepository.DeleteAllClasses(term, major);
             unitOfWork.Save();
-            CurriculumClassHub.RefreshData(term, major);
+            TimetableHub.RefreshData(term, major);
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 

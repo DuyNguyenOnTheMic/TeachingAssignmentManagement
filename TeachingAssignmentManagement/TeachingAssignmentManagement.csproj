@@ -279,7 +279,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CurriculumClassDTO.cs" />
-    <Compile Include="Hubs\CurriculumClassHub.cs" />
+    <Compile Include="Hubs\TimetableHub.cs" />
     <Compile Include="DAL\Repositories\CurriculumClassRepository.cs" />
     <Compile Include="DAL\Repositories\CurriculumRepository.cs" />
     <Compile Include="DAL\Repositories\MajorRepository.cs" />
