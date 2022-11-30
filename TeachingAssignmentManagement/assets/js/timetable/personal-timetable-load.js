@@ -38,6 +38,9 @@ weekSelect.change(function () {
     // Display loading message while fetching data
     personalTimetableDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
 
+    // Dispose all tooltips and popovers
+    $("[data-bs-toggle='tooltip']").tooltip('dispose');
+
     var termId = $('#term').val(),
         week = $(this).val();
     // Get Partial View timetable data
