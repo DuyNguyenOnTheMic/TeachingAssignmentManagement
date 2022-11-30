@@ -4,6 +4,11 @@
     endWeek = weekData.data('end-week'),
     currentWeek = weekData.data('current-week');
 
+// Initialize Tooltip
+$('[data-bs-toggle="tooltip"]').tooltip({
+    trigger: 'hover'
+});
+
 if (!weekSelect.val()) {
     if (startWeek <= endWeek) {
         // Populate week select dropdown
