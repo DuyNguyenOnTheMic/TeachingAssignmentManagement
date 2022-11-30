@@ -80,8 +80,8 @@ namespace TeachingAssignmentManagement.Controllers
                 if (week > 0)
                 {
                     // Set week based on user's selection
-                    startDate = startDate.AddDays((week - 1) * 7).Date;
-                    endDate = startDate.AddDays(6).Date;
+                    startDate = startDate.AddDays((week - 1) * 7);
+                    endDate = startDate.AddDays(6);
                     currentWeek = week;
                 }
                 else
@@ -92,7 +92,7 @@ namespace TeachingAssignmentManagement.Controllers
                         endDate = startDate.AddDays(6);
                         for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
                         {
-                            if (date.Date == DateTime.Today)
+                            if (date == DateTime.Today)
                             {
                                 currentWeek = i;
                                 break;
@@ -109,8 +109,18 @@ namespace TeachingAssignmentManagement.Controllers
                     }
                     if (currentWeek == 0)
                     {
-                        // Set current week in case no current week found
-                        currentWeek = endWeek;
+                        if (startDate <= DateTime.Today)
+                        {
+                            // Set current week in case start date is in the past
+                            currentWeek = endWeek;
+                        }
+                        else
+                        {
+                            // Set current week in case start date is in the future
+                            startDate = term.start_date;
+                            endDate = startDate.AddDays(6);
+                            currentWeek = startWeek;
+                        }
                     }
                 }
                 // Get current user language date format
