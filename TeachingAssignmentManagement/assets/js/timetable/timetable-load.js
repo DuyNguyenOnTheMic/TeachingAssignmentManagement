@@ -15,6 +15,7 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) 
             updateClass(element, lecturerId, lecturerName);
         } else {
             // Delete curriculum class
+            element.parent().tooltip('dispose');
             element.popover('dispose');
             element.remove();
         }
@@ -93,7 +94,8 @@ function updateCount() {
 }
 
 function getTimetable(termId, majorId) {
-    // Hide all popovers
+    // Dispose all tooltips and popovers
+    $("[data-bs-toggle='tooltip']").tooltip('dispose');
     $("[data-bs-toggle='popover']").popover('dispose');
 
     if (termId && majorId) {
