@@ -23,13 +23,17 @@
     color: #22292f;
 }
 
-.personal-timetable-div td:first-child {
-    background-color: #f3f2f7;
-    color: #22292f;
-    font-weight: bold;
-    white-space: nowrap;
+.personal-timetable-div td {
+    padding: .3rem .5rem;
     text-align: center;
 }
+
+    .personal-timetable-div td:first-child {
+        background-color: #f3f2f7;
+        color: #22292f;
+        white-space: nowrap;
+        font-weight: bold;
+    }
 
 .dark-layout .personal-timetable-div td:first-child {
     background-color: #343d55;
