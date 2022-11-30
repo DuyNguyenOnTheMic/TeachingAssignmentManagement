@@ -72,7 +72,7 @@ table.assign-table {
     }
 
         table.assign-table td:first-child {
-            padding: .72rem 1.5rem;
+            padding: .72rem;
         }
 
     table.assign-table td, table.assign-table th {
