@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -26,23 +25,22 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_Major_Json_Data_Not_Null_Test()
+        public void Insert_Major_Repository_Test()
         {
             // Arrange
-            var data = new List<major> { new major() { id = "bla", name = "hehe" } }.AsQueryable();
-
+            var major = new major() { id = "bla", name = "hehe" };
             var mockSet = new Mock<DbSet<major>>();
-            mockSet.As<IQueryable<major>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<major>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<major>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<major>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
             var mockContext = new Mock<CP25Team03Entities>();
             mockContext.Setup(c => c.majors).Returns(mockSet.Object);
 
             // Act
             var service = new UnitOfWork(mockContext.Object);
-            var books = service.MajorRepository.GetMajors();
+            service.MajorRepository.InsertMajor(major);
+            service.Save();
+
+            //Act
+            mockSet.Verify(r => r.Add(major), Times.Once);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
     }
 }
