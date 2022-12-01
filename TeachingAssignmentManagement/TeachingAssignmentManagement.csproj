@@ -1111,7 +1111,9 @@
     <Content Include="assets\js\term\term.js" />
     <Content Include="assets\js\term\term.min.js" />
     <Content Include="assets\js\timetable\personal-timetable-load.js" />
+    <Content Include="assets\js\timetable\personal-timetable-load.min.js" />
     <Content Include="assets\js\timetable\personal-timetable.js" />
+    <Content Include="assets\js\timetable\personal-timetable.min.js" />
     <Content Include="assets\js\timetable\timetable-load.js" />
     <Content Include="assets\js\timetable\import.js" />
     <Content Include="assets\js\timetable\timetable-load.min.js" />
