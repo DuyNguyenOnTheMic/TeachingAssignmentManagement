@@ -18,8 +18,8 @@ $(function () {
         });
     })
 
-    var termId = $('#term option:last-child').val();
-    var week = 0;
+    var termId = $('#term option:last-child').val(),
+        week = 0;
     $('#term').val(termId).trigger('change');
     // Get Partial View personal timetable data
     $.get(url, { termId, week }, function (data) {
