@@ -79,7 +79,6 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             var major = new major() { id = "122", name = "hehe" };
-            mockContext.Setup(c => c.majors).Returns(mockSet.Object);
 
             // Act
             unitOfWork.MajorRepository.InsertMajor(major);
