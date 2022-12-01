@@ -329,7 +329,7 @@ namespace TeachingAssignmentManagement.Controllers
                         unitOfWork.Save();
                     }
 
-                    string lastAssignedBy = string.Empty;
+                    string lastAssignedBy = null;
                     lecturer query_lecturer = unitOfWork.UserRepository.GetLecturerByStaffId(lecturerId);
                     if (query_lecturer == null && ToNullableString(lecturerId) != null && ToNullableString(fullName) != null)
                     {
