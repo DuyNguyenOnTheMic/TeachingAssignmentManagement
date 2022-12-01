@@ -42,7 +42,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             var unitOfWork = new UnitOfWork(mockContext.Object);
             var major = unitOfWork.MajorRepository.GetMajors().Cast<object>().ToList();
 
-            //Act
+            // Assert
             Assert.IsNotNull(major);
             Assert.AreEqual(data.Count(), major.Count);
         }
@@ -61,7 +61,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             service.MajorRepository.InsertMajor(major);
             service.Save();
 
-            //Act
+            // Assert
             mockSet.Verify(r => r.Add(major), Times.Once);
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
