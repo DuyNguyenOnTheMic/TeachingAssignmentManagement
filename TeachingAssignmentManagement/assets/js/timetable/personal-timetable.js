@@ -18,7 +18,7 @@ if (!weekSelect.val()) {
         weekSelect.val(currentWeek);
     } else {
         // Catch error if start week is more than end week
-        $('#personalTimetableDiv').empty().append('<h4 class="text-center mt-2">Oops, có vẻ như ban chủ nhiệm khoa của bạn đã đặt tuần bắt đầu lớn hơn tuần kết thúc, vui lòng liên hệ để sửa lỗi.</h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="Welcome" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
+        $('#personalTimetableDiv').empty().append('<h4 class="text-center mt-2">Oops, có vẻ như ban chủ nhiệm khoa của bạn đã đặt tuần bắt đầu lớn hơn tuần kết thúc, vui lòng liên hệ để sửa lỗi.</h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="Welcome" src="' + rootUrl + 'assets/images/img_sorry.svg"></div>');
         weekSelect.parent().find('.select2-selection__placeholder').text('không khả dụng');
     }
 }
