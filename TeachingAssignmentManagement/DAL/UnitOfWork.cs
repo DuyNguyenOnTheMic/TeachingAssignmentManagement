@@ -5,13 +5,18 @@ namespace TeachingAssignmentManagement.DAL
 {
     public class UnitOfWork : IDisposable
     {
-        private readonly CP25Team03Entities context = new CP25Team03Entities();
+        private readonly CP25Team03Entities context;
         private CurriculumClassRepository curriculumClassRepository;
         private CurriculumRepository curriculumRepository;
         private MajorRepository majorRepository;
         private RoomRepository roomRepository;
         private TermRepository termRepository;
         private UserRepository userRepository;
+
+        public UnitOfWork(CP25Team03Entities context)
+        {
+            this.context = context;
+        }
 
         public CurriculumClassRepository CurriculumClassRepository
         {

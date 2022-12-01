@@ -23,7 +23,7 @@ namespace TeachingAssignmentManagement.Controllers
     public class TimetableController : Controller
     {
         private ApplicationUserManager _userManager;
-        private readonly UnitOfWork unitOfWork = new UnitOfWork();
+        private readonly UnitOfWork unitOfWork = new UnitOfWork(new CP25Team03Entities());
 
         public TimetableController()
         {
