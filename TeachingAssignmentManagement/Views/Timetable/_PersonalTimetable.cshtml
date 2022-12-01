@@ -31,7 +31,7 @@
                                 @foreach (var item in classes)
                                 {
                                     string cardClass = "Lý thuyết" == item.Type ? "theory-class" : "practical-class";
-                                    <div class="@cardClass" data-bs-toggle="tooltip" data-bs-placement="top" title="Thứ @day">
+                                    <div class="@cardClass" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>Thứ @day <br />Lớp:</b> @item.Type">
                                         -Môn: @item.Curriculum.name (@item.CurriculumId)<br>-Mã LHP: @item.CurriculumClassId<br>-Phòng: @item.RoomId<br>-Tiết: @item.LessonTime
                                     </div>
                                 }
