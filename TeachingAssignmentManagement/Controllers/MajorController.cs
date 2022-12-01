@@ -7,7 +7,17 @@ namespace TeachingAssignmentManagement.Controllers
     [Authorize(Roles = "BCN khoa")]
     public class MajorController : Controller
     {
-        public UnitOfWork unitOfWork = new UnitOfWork(new CP25Team03Entities());
+        private readonly UnitOfWork unitOfWork;
+
+        public MajorController()
+        {
+            unitOfWork = new UnitOfWork(new CP25Team03Entities());
+        }
+
+        public MajorController(UnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
 
         [HttpGet]
         [OutputCache(Duration = 600, VaryByCustom = "userName")]

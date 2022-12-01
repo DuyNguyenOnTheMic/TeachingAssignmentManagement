@@ -33,6 +33,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             var data = new List<major> { new major() { id = "bla", name = "hehe" } }.AsQueryable();
             var mockSet = new Mock<DbSet<major>>();
             var mockContext = new Mock<CP25Team03Entities>();
+            var unitOfWork = new UnitOfWork(mockContext.Object);
             mockContext.Setup(c => c.majors).Returns(() => mockSet.Object);
             mockSet.As<IQueryable<major>>().Setup(m => m.Provider).Returns(data.Provider);
             mockSet.As<IQueryable<major>>().Setup(m => m.Expression).Returns(data.Expression);
@@ -40,7 +41,6 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockSet.As<IQueryable<major>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
 
             // Act
-            var unitOfWork = new UnitOfWork(mockContext.Object);
             var major = unitOfWork.MajorRepository.GetMajors().Cast<object>().ToList();
 
             // Assert
@@ -55,10 +55,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             var data = new List<major> { new major() { id = "bla", name = "hehe" } }.AsQueryable();
             var mockSet = new Mock<DbSet<major>>();
             var mockContext = new Mock<CP25Team03Entities>();
-            var controller = new MajorController
-            {
-                unitOfWork = new UnitOfWork(mockContext.Object)
-            };
+            var unitOfWork = new UnitOfWork(mockContext.Object);
+            var controller = new MajorController(unitOfWork);
             mockContext.Setup(c => c.majors).Returns(() => mockSet.Object);
             mockSet.As<IQueryable<major>>().Setup(m => m.Provider).Returns(data.Provider);
             mockSet.As<IQueryable<major>>().Setup(m => m.Expression).Returns(data.Expression);
