@@ -9,7 +9,17 @@ namespace TeachingAssignmentManagement.Controllers
     [Authorize(Roles = "BCN khoa")]
     public class TermController : Controller
     {
-        private readonly UnitOfWork unitOfWork = new UnitOfWork(new CP25Team03Entities());
+        private readonly UnitOfWork unitOfWork;
+
+        public TermController()
+        {
+            unitOfWork = new UnitOfWork(new CP25Team03Entities());
+        }
+
+        public TermController(UnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
 
         [HttpGet]
         [OutputCache(Duration = 600, VaryByCustom = "userName")]
