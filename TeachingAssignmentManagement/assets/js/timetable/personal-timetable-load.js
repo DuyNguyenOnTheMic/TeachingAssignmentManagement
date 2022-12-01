@@ -35,31 +35,27 @@ $(function () {
 });
 
 $('#term').change(function () {
-    personalTimetableDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
-
     weekSelect.empty();
-    // Dispose all tooltips and popovers
-    $("[data-bs-toggle='tooltip']").tooltip('dispose');
-
     var termId = $(this).val();
-    var week = 0;
-    // Get Partial View timetable data
-    $.get(url, { termId, week }, function (data) {
-        personalTimetableDiv.html(data);
-    });
+    week = 0;
+    GetPersonalTimetable(termId, week);
 });
 
 weekSelect.change(function () {
+    var termId = $('#term').val(),
+        week = $(this).val();
+    GetPersonalTimetable(termId, week);
+});
+
+function GetPersonalTimetable(termId, week) {
     // Display loading message while fetching data
     personalTimetableDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
 
     // Dispose all tooltips and popovers
     $("[data-bs-toggle='tooltip']").tooltip('dispose');
 
-    var termId = $('#term').val(),
-        week = $(this).val();
     // Get Partial View timetable data
     $.get(url, { termId, week }, function (data) {
         personalTimetableDiv.html(data);
     });
-});
+}
