@@ -19,15 +19,6 @@ namespace TeachingAssignmentManagement.Controllers
         private ApplicationUserManager _userManager;
         private readonly UnitOfWork unitOfWork = new UnitOfWork(new CP25Team03Entities());
 
-        public AccountController()
-        {
-        }
-
-        public AccountController(ApplicationUserManager userManager)
-        {
-            UserManager = userManager;
-        }
-
         public ApplicationUserManager UserManager
         {
             get
