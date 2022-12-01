@@ -26,7 +26,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_Major_List_Should_Be_Not_Null()
+        public void Get_Major_List_Should_Be_Not_Null_Test()
         {
             // Arrange
             var data = new List<major> { new major() { id = "bla", name = "hehe" } }.AsQueryable();
@@ -48,7 +48,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Insert_Major_Repository_Test222()
+        public void Insert_Major_Repository_Test()
         {
             // Arrange
             var major = new major() { id = "bla", name = "hehe" };
