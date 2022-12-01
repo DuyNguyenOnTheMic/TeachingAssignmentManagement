@@ -14,15 +14,16 @@ namespace TeachingAssignmentManagement.Controllers
     public class UserController : Controller
     {
         private ApplicationUserManager _userManager;
-        private readonly UnitOfWork unitOfWork = new UnitOfWork(new CP25Team03Entities());
+        private readonly UnitOfWork unitOfWork;
 
         public UserController()
         {
+            unitOfWork = new UnitOfWork(new CP25Team03Entities());
         }
 
-        public UserController(ApplicationUserManager userManager)
+        public UserController(UnitOfWork unitOfWork)
         {
-            UserManager = userManager;
+            this.unitOfWork = unitOfWork;
         }
 
         public ApplicationUserManager UserManager
