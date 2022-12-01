@@ -47,7 +47,7 @@ function loading() {
     // Display loading message while fetching data
     personalTimetableDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
 
-    // Dispose all tooltips and popovers
+    // Dispose all tooltips
     $("[data-bs-toggle='tooltip']").tooltip('dispose');
 }
 
