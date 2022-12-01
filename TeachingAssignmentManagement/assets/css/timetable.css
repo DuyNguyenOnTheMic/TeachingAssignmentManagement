@@ -25,6 +25,9 @@
 
 .personal-timetable-div th {
     vertical-align: middle !important;
+    text-align: center;
+    white-space: nowrap;
+    color: #22292f;
 }
 
     .personal-timetable-div th:first-child {
@@ -104,6 +107,11 @@ table.assign-table {
 
 table.table-bordered.assign-table th, table.table-bordered.assign-table td {
     border-bottom-width: 1px;
+}
+
+table.personal-timetable {
+    margin-top: 6px !important;
+    margin-bottom: 6px !important;
 }
 
 .modal-header .btn-close {
