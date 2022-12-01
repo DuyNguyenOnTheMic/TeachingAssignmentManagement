@@ -226,7 +226,7 @@ namespace TeachingAssignmentManagement.Controllers
             string isValid = ValidateColumns(dt);
             if (isValid != null)
             {
-                Response.Write($"Có vẻ như bạn đã sai hoặc thiếu tên cột <strong>" + isValid + "</strong>, vui lòng kiểm tra lại tệp tin! 😟");
+                Response.Write($"Có vẻ như bạn đã sai hoặc thiếu tên cột <strong>" + isValid + "</strong>, vui lòng kiểm tra lại tệp tin!");
                 return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
             }
 
@@ -287,7 +287,7 @@ namespace TeachingAssignmentManagement.Controllers
                     if (checkNull != null)
                     {
                         int excelRow = dt.Rows.IndexOf(row) + 2;
-                        Response.Write($"Oops, có lỗi đã xảy ra ở dòng số <strong>" + excelRow + "</strong>, vui lòng kiểm tra lại tệp tin. 🥹");
+                        Response.Write($"Oops, có lỗi đã xảy ra ở dòng số <strong>" + excelRow + "</strong>, vui lòng kiểm tra lại tệp tin.");
                         return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
                     }
 
@@ -295,7 +295,7 @@ namespace TeachingAssignmentManagement.Controllers
                     if (!timetableViewModels.startLessons.Contains(ToInt(startLesson2)))
                     {
                         int excelRow = dt.Rows.IndexOf(row) + 2;
-                        Response.Write($"Oops, có lỗi đã xảy ra ở dòng số <strong>" + excelRow + "</strong>, tiết bắt đầu phải là 1, 4, 7, 10 hoặc 13. 🥹");
+                        Response.Write($"Oops, có lỗi đã xảy ra ở dòng số <strong>" + excelRow + "</strong>, tiết bắt đầu phải là 1, 4, 7, 10 hoặc 13.");
                         return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
                     }
 
@@ -397,7 +397,7 @@ namespace TeachingAssignmentManagement.Controllers
             }
             catch
             {
-                Response.Write($"Oops, có lỗi đã xảy ra, vui lòng kiểm tra lại tệp tin 🥹");
+                Response.Write($"Oops, có lỗi đã xảy ra, vui lòng kiểm tra lại tệp tin");
                 return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
             }
         }
