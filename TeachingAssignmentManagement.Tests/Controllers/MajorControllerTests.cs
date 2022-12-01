@@ -3,7 +3,6 @@ using Moq;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Net.Sockets;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
