@@ -59,13 +59,13 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult GetPersonalData(int termId, int week)
         {
             // Declare variables
-            string userId = "32e17ae6-c72f-4f20-b865-251e9ee8e71d";
+            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
             term term = unitOfWork.TermRepository.GetTermByID(termId);
             IEnumerable<CurriculumClassDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, userId);
             if (!query_classes.Any())
             {
                 // Return not found error message
-                return Json(new { error = true, message = "Học kỳ này chưa có dữ liệu phân công của bạn!" }, JsonRequestBehavior.AllowGet);
+                return Json(new { error = true, message = "Học kỳ này chưa có dữ liệu phân công của bạn." }, JsonRequestBehavior.AllowGet);
             }
             else
             {
