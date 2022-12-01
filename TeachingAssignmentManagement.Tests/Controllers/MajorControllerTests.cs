@@ -13,6 +13,27 @@ namespace TeachingAssignmentManagement.Controllers.Tests
     [TestClass()]
     public class MajorControllerTests
     {
+        private Mock<DbSet<major>> mockSet;
+        private Mock<CP25Team03Entities> mockContext;
+        private UnitOfWork unitOfWork;
+        private MajorController controller;
+        private IQueryable<major> listMajor;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            listMajor = new List<major> { new major() { id = "bla", name = "hehe" } }.AsQueryable();
+            mockSet = new Mock<DbSet<major>>();
+            mockContext = new Mock<CP25Team03Entities>();
+            unitOfWork = new UnitOfWork(mockContext.Object);
+            controller = new MajorController(unitOfWork);
+            mockContext.Setup(c => c.majors).Returns(() => mockSet.Object);
+            mockSet.As<IQueryable<major>>().Setup(m => m.Provider).Returns(listMajor.Provider);
+            mockSet.As<IQueryable<major>>().Setup(m => m.Expression).Returns(listMajor.Expression);
+            mockSet.As<IQueryable<major>>().Setup(m => m.ElementType).Returns(listMajor.ElementType);
+            mockSet.As<IQueryable<major>>().Setup(m => m.GetEnumerator()).Returns(listMajor.GetEnumerator());
+        }
+
         [TestMethod()]
         public void Index_Test()
         {
@@ -29,45 +50,22 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         [TestMethod()]
         public void Get_Major_List_Should_Be_Not_Null_Test()
         {
-            // Arrange
-            var data = new List<major> { new major() { id = "bla", name = "hehe" } }.AsQueryable();
-            var mockSet = new Mock<DbSet<major>>();
-            var mockContext = new Mock<CP25Team03Entities>();
-            var unitOfWork = new UnitOfWork(mockContext.Object);
-            mockContext.Setup(c => c.majors).Returns(() => mockSet.Object);
-            mockSet.As<IQueryable<major>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<major>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<major>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<major>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
             // Act
             var major = unitOfWork.MajorRepository.GetMajors().Cast<object>().ToList();
 
             // Assert
             Assert.IsNotNull(major);
-            Assert.AreEqual(data.Count(), major.Count);
+            Assert.AreEqual(listMajor.Count(), major.Count);
         }
 
         [TestMethod()]
-        public void Get_Major_Json_Data_Not_NUll_Test()
+        public void Get_Major_Json_Data_Not_Null_Test()
         {
-            // Arrange
-            var data = new List<major> { new major() { id = "bla", name = "hehe" } }.AsQueryable();
-            var mockSet = new Mock<DbSet<major>>();
-            var mockContext = new Mock<CP25Team03Entities>();
-            var unitOfWork = new UnitOfWork(mockContext.Object);
-            var controller = new MajorController(unitOfWork);
-            mockContext.Setup(c => c.majors).Returns(() => mockSet.Object);
-            mockSet.As<IQueryable<major>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<major>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<major>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<major>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
-            // Act.
+            // Act
             var actionResult = controller.GetData();
             dynamic jsonCollection = actionResult.Data;
 
-            // Assert.
+            // Assert
             Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
             foreach (dynamic json in jsonCollection)
             {
@@ -81,15 +79,12 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Insert_Major_Repository_Test()
         {
             // Arrange
-            var major = new major() { id = "bla", name = "hehe" };
-            var mockSet = new Mock<DbSet<major>>();
-            var mockContext = new Mock<CP25Team03Entities>();
+            var major = new major() { id = "122", name = "hehe" };
             mockContext.Setup(c => c.majors).Returns(mockSet.Object);
 
             // Act
-            var service = new UnitOfWork(mockContext.Object);
-            service.MajorRepository.InsertMajor(major);
-            service.Save();
+            unitOfWork.MajorRepository.InsertMajor(major);
+            unitOfWork.Save();
 
             // Assert
             mockSet.Verify(r => r.Add(major), Times.Once);
