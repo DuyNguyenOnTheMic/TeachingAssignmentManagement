@@ -36,8 +36,8 @@ $(function () {
 
 $('#term').change(function () {
     weekSelect.empty();
-    var termId = $(this).val();
-    week = 0;
+    var termId = $(this).val(),
+        week = 0;
     GetPersonalTimetable(termId, week);
 });
 
