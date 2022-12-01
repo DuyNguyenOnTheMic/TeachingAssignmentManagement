@@ -21,7 +21,10 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         [TestInitialize]
         public void Initialize()
         {
-            listMajor = new List<major> { new major() { id = "bla", name = "hehe" } }.AsQueryable();
+            listMajor = new List<major> {
+                new major() { id = "1", name = "Kỹ Thuật Phần Mềm" },
+                new major() { id = "2", name = "Công Nghệ Thông Tin" }
+            }.AsQueryable();
             mockSet = new Mock<DbSet<major>>();
             mockContext = new Mock<CP25Team03Entities>();
             unitOfWork = new UnitOfWork(mockContext.Object);
@@ -47,7 +50,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_Major_List_Should_Be_Not_Null_Test()
+        public void Get_Major_List_Should_Be_Not_Null_And_Equal_Test()
         {
             // Act
             var major = unitOfWork.MajorRepository.GetMajors().Cast<object>().ToList();
