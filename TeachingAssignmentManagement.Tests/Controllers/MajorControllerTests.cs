@@ -40,6 +40,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         [TestCleanup()]
         public void TestCleanup()
         {
+            unitOfWork.Dispose();
             scope.Dispose();
         }
 
