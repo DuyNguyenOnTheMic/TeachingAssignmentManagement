@@ -56,6 +56,20 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(result);
         }
 
+        [TestMethod]
+        public void Index_ViewName_Test()
+        {
+            // Arrange
+            var controller = new MajorController();
+
+            // Act
+            var result = controller.Index() as ViewResult;
+
+            // Assert
+            Assert.AreEqual("", result.ViewName);
+        }
+
+
         [TestMethod()]
         public void Get_Major_Json_Data_Not_Null_Test()
         {
