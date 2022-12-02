@@ -19,7 +19,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         private UnitOfWork unitOfWork;
         private TransactionScope scope;
 
-        [TestInitialize]
+        [TestInitialize()]
         public void Initialize()
         {
             listMajor = new List<major> {
@@ -37,7 +37,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockContext.Setup(c => c.majors).Returns(() => mockSet.Object);
         }
 
-        [TestCleanup]
+        [TestCleanup()]
         public void TestCleanup()
         {
             scope.Dispose();
