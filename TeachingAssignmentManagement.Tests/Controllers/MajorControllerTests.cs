@@ -17,6 +17,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         private Mock<DbSet<major>> mockSet;
         private Mock<CP25Team03Entities> mockContext;
         private UnitOfWork unitOfWork;
+        private TransactionScope scope;
 
         [TestInitialize]
         public void Initialize()
@@ -28,11 +29,18 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockSet = new Mock<DbSet<major>>();
             mockContext = new Mock<CP25Team03Entities>();
             unitOfWork = new UnitOfWork(mockContext.Object);
+            scope = new TransactionScope();
             mockSet.As<IQueryable<major>>().Setup(m => m.Provider).Returns(listMajor.Provider);
             mockSet.As<IQueryable<major>>().Setup(m => m.Expression).Returns(listMajor.Expression);
             mockSet.As<IQueryable<major>>().Setup(m => m.ElementType).Returns(listMajor.ElementType);
             mockSet.As<IQueryable<major>>().Setup(m => m.GetEnumerator()).Returns(listMajor.GetEnumerator());
             mockContext.Setup(c => c.majors).Returns(() => mockSet.Object);
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            scope.Dispose();
         }
 
         [TestMethod()]
@@ -260,7 +268,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Act
             JsonResult result;
             dynamic jsonCollection;
-            using (var scop = new TransactionScope())
+            using (scope)
             {
                 controller.Create(major);
                 result = controller.Create(major) as JsonResult;
@@ -269,6 +277,42 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Assert
             Assert.AreEqual(true, jsonCollection.error);
+        }
+
+        [TestMethod()]
+        public void Edit_View_Test()
+        {
+            // Arrange
+            MajorController controller = new MajorController(unitOfWork);
+
+            // Act
+            ViewResult result = controller.Edit(listMajor.First().id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod()]
+        public void Edit_Major_Data_Should_Load_Correctly_Test()
+        {
+            // Arrange
+            MajorController controller = new MajorController();
+            major major = new major() { id = "test", name = "Hệ thống thông tin" };
+
+            // Act
+            ViewResult result;
+            using (scope)
+            {
+                controller.Create(major);
+                result = controller.Edit(major.id) as ViewResult;
+            }
+            major model = result.Model as major;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(model);
+            Assert.AreEqual(model.id, major.id);
+            Assert.AreEqual(model.name, major.name);
         }
 
 
