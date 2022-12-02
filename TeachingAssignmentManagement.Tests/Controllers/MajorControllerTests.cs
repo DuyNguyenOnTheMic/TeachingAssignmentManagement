@@ -77,7 +77,26 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_Major_Json_Data_Correctly_Test()
+        public void Get_Major_Json_Data_Is_Correct_Test()
+        {
+            // Arrange
+            MajorController controller = new MajorController(unitOfWork);
+
+            // Act
+            JsonResult actionResult = controller.GetData();
+            dynamic jsonCollection = actionResult.Data;
+            List<major> majorList = listMajor.ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            Assert.AreEqual(jsonCollection[0].id, majorList[0].id);
+            Assert.IsNotNull(jsonCollection[0].name, majorList[0].name);
+            Assert.AreEqual(jsonCollection[1].id, majorList[1].id);
+            Assert.IsNotNull(jsonCollection[1].name, majorList[1].name);
+        }
+
+        [TestMethod()]
+        public void Get_Major_Json_Data_Not_False_Test()
         {
             // Arrange.
             MajorController controller = new MajorController(unitOfWork);
@@ -320,11 +339,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Edit_Major_Test()
         {
             // Arrange
-            var controller = new MajorController(unitOfWork);
+            MajorController controller = new MajorController(unitOfWork);
             major major = new major() { id = "test", name = "Hệ thống thông tin" };
 
             // Act
-            var result = controller.Edit(major) as JsonResult;
+            JsonResult result = controller.Edit(major) as JsonResult;
             dynamic jsonCollection = result.Data;
 
             // Assert
@@ -336,10 +355,10 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Delete_Major_Test()
         {
             // Arrange
-            var controller = new MajorController(unitOfWork);
+            MajorController controller = new MajorController(unitOfWork);
 
             // Act
-            var result = controller.Delete(listMajor.First().id) as JsonResult;
+            JsonResult result = controller.Delete(listMajor.First().id) as JsonResult;
             dynamic jsonCollection = result.Data;
 
             // Assert
