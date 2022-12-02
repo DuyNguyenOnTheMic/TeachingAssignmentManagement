@@ -3,6 +3,7 @@ using Moq;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Transactions;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
@@ -253,12 +254,18 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Create_Should_Be_Failed_When_Major_Exists_Test()
         {
             // Arrange
-            MajorController controller = new MajorController(unitOfWork);
-            major major = new major() { id = "7480104", name = "Hệ thống thông tin" };
+            MajorController controller = new MajorController();
+            major major = new major() { id = "test", name = "Hệ thống thông tin" };
 
             // Act
-            JsonResult result = controller.Create(major) as JsonResult;
-            dynamic jsonCollection = result.Data;
+            JsonResult result;
+            dynamic jsonCollection;
+            using (var scop = new TransactionScope())
+            {
+                controller.Create(major);
+                result = controller.Create(major) as JsonResult;
+                jsonCollection = result.Data;
+            }
 
             // Assert
             Assert.AreEqual(true, jsonCollection.error);
