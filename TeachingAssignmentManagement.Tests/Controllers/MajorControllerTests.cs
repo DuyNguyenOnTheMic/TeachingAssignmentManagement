@@ -76,6 +76,20 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             }
         }
 
+        [TestMethod()]
+        public void Insert_Major_Controller_Test()
+        {
+            // Arrange
+            var major = new major() { id = "122", name = "hehe" };
+
+            // Act
+            controller.Create(major);
+
+            // Assert
+            mockSet.Verify(r => r.Add(major), Times.Once);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
 
         [TestMethod()]
         public void Insert_Major_Repository_Test()
