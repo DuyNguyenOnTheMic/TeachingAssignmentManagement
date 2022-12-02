@@ -28,11 +28,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockSet = new Mock<DbSet<major>>();
             mockContext = new Mock<CP25Team03Entities>();
             unitOfWork = new UnitOfWork(mockContext.Object);
-            mockContext.Setup(c => c.majors).Returns(() => mockSet.Object);
             mockSet.As<IQueryable<major>>().Setup(m => m.Provider).Returns(listMajor.Provider);
             mockSet.As<IQueryable<major>>().Setup(m => m.Expression).Returns(listMajor.Expression);
             mockSet.As<IQueryable<major>>().Setup(m => m.ElementType).Returns(listMajor.ElementType);
             mockSet.As<IQueryable<major>>().Setup(m => m.GetEnumerator()).Returns(listMajor.GetEnumerator());
+            mockContext.Setup(c => c.majors).Returns(() => mockSet.Object);
         }
 
         [TestMethod()]
