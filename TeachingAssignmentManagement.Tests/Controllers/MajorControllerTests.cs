@@ -28,7 +28,6 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockSet = new Mock<DbSet<major>>();
             mockContext = new Mock<CP25Team03Entities>();
             unitOfWork = new UnitOfWork(mockContext.Object);
-            controller = new MajorController(unitOfWork);
             mockContext.Setup(c => c.majors).Returns(() => mockSet.Object);
             mockSet.As<IQueryable<major>>().Setup(m => m.Provider).Returns(listMajor.Provider);
             mockSet.As<IQueryable<major>>().Setup(m => m.Expression).Returns(listMajor.Expression);
@@ -63,6 +62,9 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         [TestMethod()]
         public void Get_Major_Json_Data_Not_Null_Test()
         {
+            // Arrange
+            controller = new MajorController(unitOfWork);
+
             // Act
             var actionResult = controller.GetData();
             dynamic jsonCollection = actionResult.Data;
@@ -81,6 +83,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             var major = new major() { id = "122", name = "hehe" };
+            controller = new MajorController(unitOfWork);
 
             // Act
             controller.Create(major);
@@ -90,6 +93,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
 
+        #region RepositoryTests
 
         [TestMethod()]
         public void Insert_Major_Repository_Test()
@@ -105,5 +109,6 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockSet.Verify(r => r.Add(major), Times.Once);
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
+        #endregion
     }
 }
