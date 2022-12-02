@@ -331,6 +331,21 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
 
+        [TestMethod]
+        public void Delete_Major_Test()
+        {
+            // Arrange
+            var controller = new MajorController(unitOfWork);
+
+            // Act
+            var result = controller.Delete(listMajor.First().id) as JsonResult;
+            dynamic jsonCollection = result.Data;
+
+            // Assert
+            Assert.IsNotNull(jsonCollection);
+            mockSet.Verify(r => r.Remove(It.IsAny<major>()));
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
 
         #region RepositoryTests
 
