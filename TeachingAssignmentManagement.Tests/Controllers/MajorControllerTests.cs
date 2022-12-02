@@ -315,6 +315,22 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(model.name, major.name);
         }
 
+        [TestMethod]
+        public void Edit_Major_Test()
+        {
+            // Arrange
+            var controller = new MajorController(unitOfWork);
+            major major = new major() { id = "test", name = "Hệ thống thông tin" };
+
+            // Act
+            var result = controller.Edit(major) as JsonResult;
+            dynamic jsonCollection = result.Data;
+
+            // Assert
+            Assert.AreEqual(true, jsonCollection.success);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
 
         #region RepositoryTests
 
