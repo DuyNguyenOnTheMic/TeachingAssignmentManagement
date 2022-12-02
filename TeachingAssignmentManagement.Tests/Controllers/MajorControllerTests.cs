@@ -38,7 +38,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Index_Test()
         {
             // Arrange
-            var controller = new MajorController();
+            MajorController controller = new MajorController();
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -51,10 +51,10 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Get_Major_Json_Data_Not_Null_Test()
         {
             // Arrange
-            var controller = new MajorController(unitOfWork);
+            MajorController controller = new MajorController(unitOfWork);
 
             // Act
-            var actionResult = controller.GetData();
+            JsonResult actionResult = controller.GetData();
             dynamic jsonCollection = actionResult.Data;
 
             // Assert
@@ -70,10 +70,10 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Get_Major_Json_Data_Correctly_Test()
         {
             // Arrange.
-            var controller = new MajorController(unitOfWork);
+            MajorController controller = new MajorController(unitOfWork);
 
             // Act.
-            var actionResult = controller.GetData();
+            JsonResult actionResult = controller.GetData();
 
             // Assert.
             Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
@@ -91,13 +91,13 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Major_Json_Data_Should_Convert_To_IEnumerable_Test()
         {
             // Arrange
-            var controller = new MajorController(unitOfWork);
+            MajorController controller = new MajorController(unitOfWork);
 
             // Act
-            var actionResult = controller.GetData();
+            JsonResult actionResult = controller.GetData();
             dynamic jsonCollection = actionResult.Data;
             int count = 0;
-            foreach (var value in jsonCollection)
+            foreach (dynamic value in jsonCollection)
             {
                 count++;
             }
@@ -110,10 +110,10 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Major_Json_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Arrange
-            var controller = new MajorController(unitOfWork);
+            MajorController controller = new MajorController(unitOfWork);
 
             // Act
-            var actionResult = controller.GetData();
+            JsonResult actionResult = controller.GetData();
             dynamic jsonCollection = actionResult.Data;
 
             // Assert                
@@ -124,17 +124,17 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Major_JSon_Data_Should_Be_Indexable_Test()
         {
             // Arrange
-            var controller = new MajorController(unitOfWork);
+            MajorController controller = new MajorController(unitOfWork);
 
             // Act
-            var actionResult = controller.GetData();
+            JsonResult actionResult = controller.GetData();
             dynamic jsonCollection = actionResult.Data;
 
             // Assert
-            for (var i = 0; i < jsonCollection.Count; i++)
+            for (int i = 0; i < jsonCollection.Count; i++)
             {
 
-                var json = jsonCollection[i];
+                dynamic json = jsonCollection[i];
 
                 Assert.IsNotNull(json);
                 Assert.IsNotNull(json.id,
@@ -148,10 +148,10 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Get_Major_List_Should_Be_Not_Null_And_Equal_Test()
         {
             // Arrange
-            var controller = new MajorController(unitOfWork);
+            MajorController controller = new MajorController(unitOfWork);
 
             // Act
-            var actionResult = controller.GetData();
+            JsonResult actionResult = controller.GetData();
             dynamic jsonCollection = actionResult.Data;
 
             // Assert
@@ -163,7 +163,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Create_View_Test()
         {
             // Arrange
-            var controller = new MajorController();
+            MajorController controller = new MajorController();
 
             // Act
             ViewResult result = controller.Create() as ViewResult;
@@ -176,8 +176,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Create_Major_Test()
         {
             // Arrange
-            var major = new major() { id = "122", name = "hehe" };
-            var controller = new MajorController(unitOfWork);
+            major major = new major() { id = "122", name = "hehe" };
+            MajorController controller = new MajorController(unitOfWork);
 
             // Act
             controller.Create(major);
@@ -187,13 +187,91 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
 
+        [TestMethod]
+        public void Create_Shoud_Be_Failed_When_Major_Id_Is_Null_Test()
+        {
+            // Arrange
+            MajorController controller = new MajorController();
+            major major = new major() { id = null, name = "Test" };
+
+            // Act
+            JsonResult result = controller.Create(major) as JsonResult;
+            dynamic jsonCollection = result.Data;
+
+            // Assert
+            Assert.AreEqual(true, jsonCollection.error);
+        }
+
+        [TestMethod]
+        public void Create_Shoud_Be_Failed_When_Major_Name_Is_Null_Test()
+        {
+            // Arrange
+            MajorController controller = new MajorController();
+            major major = new major() { id = "blabla", name = null };
+
+            // Act
+            JsonResult result = controller.Create(major) as JsonResult;
+            dynamic jsonCollection = result.Data;
+
+            // Assert
+            Assert.AreEqual(true, jsonCollection.error);
+        }
+
+        [TestMethod]
+        public void Create_Shoud_Be_Failed_When_Major_Id_Over_50_Characters_Test()
+        {
+            // Arrange
+            MajorController controller = new MajorController();
+            major major = new major() { id = "usposueremisedaccumsanliguladiamatdsdasdsaddasasadd", name = "Test" };
+
+            // Act
+            JsonResult result = controller.Create(major) as JsonResult;
+            dynamic jsonCollection = result.Data;
+
+            // Assert
+            Assert.AreEqual(51, major.id.Length);
+            Assert.AreEqual(true, jsonCollection.error);
+        }
+
+        [TestMethod]
+        public void Create_Shoud_Be_Failed_When_Major_Name_Over_255_Characters_Test()
+        {
+            // Arrange
+            MajorController controller = new MajorController();
+            major major = new major() { id = "test", name = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris efficitur, massa non aliquet accumsan, ligula risus posuere mi, sed accumsan ligula diam at ante. Duis fermentum blandit ante, viverra convallis magna varius et. Sed congue ut elit vitae ufsaa" };
+
+            // Act
+            JsonResult result = controller.Create(major) as JsonResult;
+            dynamic jsonCollection = result.Data;
+
+            // Assert
+            Assert.AreEqual(256, major.name.Length);
+            Assert.AreEqual(true, jsonCollection.error);
+        }
+
+        [TestMethod]
+        public void Create_Should_Be_Failed_When_Major_Exists_Test()
+        {
+            // Arrange
+            MajorController controller = new MajorController(unitOfWork);
+            major major = new major() { id = "7480104", name = "Hệ thống thông tin" };
+
+            // Act
+            JsonResult result = controller.Create(major) as JsonResult;
+            dynamic jsonCollection = result.Data;
+
+            // Assert
+            Assert.AreEqual(true, jsonCollection.error);
+        }
+
+
         #region RepositoryTests
 
         [TestMethod()]
         public void Insert_Major_Repository_Test()
         {
             // Arrange
-            var major = new major() { id = "122", name = "hehe" };
+            major major = new major() { id = "122", name = "hehe" };
 
             // Act
             unitOfWork.MajorRepository.InsertMajor(major);
