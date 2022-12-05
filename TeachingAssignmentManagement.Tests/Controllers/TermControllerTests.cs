@@ -335,6 +335,83 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
 
+        [TestMethod]
+        public void Populate_Years_Not_Null_Test()
+        {
+            // Arrange
+            TermController controller = new TermController(unitOfWork);
+            int year = DateTime.Now.Year;
+
+            // Act
+            List<SelectListItem> result = controller.PopulateYears(year);
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void Populate_Years_List_Should_Be_Countable_Test()
+        {
+            // Arrange
+            TermController controller = new TermController(unitOfWork);
+            int year = DateTime.Now.Year;
+
+            // Act
+            List<SelectListItem> result = controller.PopulateYears(year);
+            int count = 0;
+            foreach (SelectListItem item in result)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod]
+        public void Populate_Years_List_Should_Start_Correctly_Test()
+        {
+            // Arrange
+            TermController controller = new TermController(unitOfWork);
+            int year = DateTime.Now.Year;
+            int startYear = year - 10;
+
+            // Act
+            List<SelectListItem> result = controller.PopulateYears(year);
+
+            // Assert
+            Assert.AreEqual(startYear, int.Parse(result[0].Value));
+        }
+
+        [TestMethod]
+        public void Populate_Years_List_Should_End_Correctly_Test()
+        {
+            // Arrange
+            TermController controller = new TermController(unitOfWork);
+            int year = DateTime.Now.Year;
+            int endYear = year + 10;
+
+            // Act
+            List<SelectListItem> result = controller.PopulateYears(year);
+
+            // Assert
+            Assert.AreEqual(endYear, int.Parse(result.Last().Value));
+        }
+
+        [TestMethod]
+        public void Populate_Years_List_Total_Count_Correctly_Test()
+        {
+            // Arrange
+            TermController controller = new TermController(unitOfWork);
+            int year = DateTime.Now.Year;
+
+            // Act
+            List<SelectListItem> result = controller.PopulateYears(year);
+
+            // Assert
+            Assert.AreEqual(21, result.Count);
+        }
+
         #region RepositoryTests
         [TestMethod()]
         public void Insert_Term_Repository_Test()
