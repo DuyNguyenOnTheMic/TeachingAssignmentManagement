@@ -236,13 +236,19 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Edit_View_Test()
+        public void Edit_Term_View_Test()
         {
             // Arrange
             TermController controller = new TermController();
+            term term = new term() { id = 125, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 };
 
             // Act
-            ViewResult result = controller.Edit(listTerm.First().id) as ViewResult;
+            ViewResult result;
+            using (scope)
+            {
+                controller.Create(term);
+                result = controller.Edit(term.id) as ViewResult;
+            }
 
             // Assert
             Assert.IsNotNull(result);

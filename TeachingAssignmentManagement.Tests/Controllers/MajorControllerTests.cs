@@ -300,13 +300,19 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Edit_View_Test()
+        public void Edit_Major_View_Test()
         {
             // Arrange
             MajorController controller = new MajorController(unitOfWork);
+            major major = new major() { id = "test", name = "Hệ thống thông tin" };
 
             // Act
-            ViewResult result = controller.Edit(listMajor.First().id) as ViewResult;
+            ViewResult result;
+            using (scope)
+            {
+                controller.Create(major);
+                result = controller.Edit(major.id) as ViewResult;
+            }
 
             // Assert
             Assert.IsNotNull(result);
