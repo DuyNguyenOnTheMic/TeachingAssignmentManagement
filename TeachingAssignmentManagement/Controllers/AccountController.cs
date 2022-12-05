@@ -93,6 +93,7 @@ namespace TeachingAssignmentManagement.Controllers
             context.Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             context.Authentication.SignIn(identity);
 
+            // Redirect user to specific page based on role
             string role = identity.GetRole();
             switch (role)
             {
