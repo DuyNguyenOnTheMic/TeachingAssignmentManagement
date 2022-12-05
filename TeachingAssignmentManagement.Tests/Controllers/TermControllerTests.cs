@@ -280,7 +280,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod]
-        public void Edit_Term_Test()
+        public void Edit_Term_Mock_Test()
         {
             // Arrange
             TermController controller = new TermController(unitOfWork);
@@ -293,6 +293,27 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.AreEqual(true, jsonCollection.success);
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod()]
+        public void Edit_Term_Data_Test()
+        {
+            // Arrange
+            TermController controller = new TermController();
+            term term = new term() { id = 125, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 };
+
+            // Act
+            using (scope)
+            {
+                controller.Create(term);
+                term.start_year = 2019;
+                term.end_year = 2020;
+                controller.Edit(term);
+            }
+
+            // Assert
+            Assert.AreEqual(term.start_year, 2019);
+            Assert.AreEqual(term.end_year, 2020);
         }
 
         [TestMethod]

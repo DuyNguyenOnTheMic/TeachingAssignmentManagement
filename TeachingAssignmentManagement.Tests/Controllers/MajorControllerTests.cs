@@ -343,7 +343,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod]
-        public void Edit_Major_Test()
+        public void Edit_Major_Mock_Test()
         {
             // Arrange
             MajorController controller = new MajorController(unitOfWork);
@@ -356,6 +356,26 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.AreEqual(true, jsonCollection.success);
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod()]
+        public void Edit_Major_Data_Test()
+        {
+            // Arrange
+            MajorController controller = new MajorController();
+            major major = new major() { id = "test", name = "Hệ thống thông tin" };
+
+            // Act
+            using (scope)
+            {
+                controller.Create(major);
+                major.name= "test";
+                controller.Edit(major);
+            }
+
+            // Assert
+            Assert.AreEqual(major.id, "test");
+            Assert.AreEqual(major.name, "test");
         }
 
         [TestMethod]
