@@ -90,9 +90,9 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
             Assert.AreEqual(jsonCollection[0].id, majorList[0].id);
-            Assert.IsNotNull(jsonCollection[0].name, majorList[0].name);
+            Assert.AreEqual(jsonCollection[0].name, majorList[0].name);
             Assert.AreEqual(jsonCollection[1].id, majorList[1].id);
-            Assert.IsNotNull(jsonCollection[1].name, majorList[1].name);
+            Assert.AreEqual(jsonCollection[1].name, majorList[1].name);
         }
 
         [TestMethod()]
@@ -205,8 +205,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Create_Major_Test()
         {
             // Arrange
-            major major = new major() { id = "122", name = "hehe" };
             MajorController controller = new MajorController(unitOfWork);
+            major major = new major() { id = "122", name = "hehe" };
 
             // Act
             controller.Create(major);
