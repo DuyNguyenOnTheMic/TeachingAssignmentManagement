@@ -371,14 +371,13 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             using (scope)
             {
                 controller.Create(major);
-                major.name = "testId";
                 major.name = "testName";
                 controller.Edit(major);
                 majorEdited = unitOfWork.MajorRepository.GetMajorByID(major.id);
             }
 
             // Assert
-            Assert.AreEqual(majorEdited.id, "testId");
+            Assert.AreEqual(majorEdited.id, "test");
             Assert.AreEqual(majorEdited.name, "testName");
         }
 
