@@ -99,13 +99,13 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         [TestMethod()]
         public void Get_Term_Json_Data_Not_False_Test()
         {
-            // Arrange.
+            // Arrange
             TermController controller = new TermController(unitOfWork);
 
-            // Act.
+            // Act
             JsonResult actionResult = controller.GetData();
 
-            // Assert.
+            // Assert
             Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
             dynamic jsonCollection = actionResult.Data;
             foreach (dynamic json in jsonCollection)
