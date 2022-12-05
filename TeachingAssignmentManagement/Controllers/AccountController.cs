@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
@@ -92,7 +93,15 @@ namespace TeachingAssignmentManagement.Controllers
             context.Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             context.Authentication.SignIn(identity);
 
-            return RedirectToAction("Index", "Home");
+            string role = identity.GetRole();
+            switch (role)
+            {
+                case "Bộ môn":
+                case "Giảng viên":
+                    return RedirectToAction("Index", "Timetable");
+                default:
+                    return RedirectToAction("Index", "Home");
+            }
         }
 
         //

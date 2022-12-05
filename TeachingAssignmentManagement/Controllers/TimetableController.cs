@@ -19,7 +19,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
 {
-    [Authorize(Roles = "BCN khoa, Bộ môn")]
+    [Authorize(Roles = "BCN khoa, Bộ môn, Giảng viên")]
     public class TimetableController : Controller
     {
         private ApplicationUserManager _userManager;
@@ -48,7 +48,6 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "BCN khoa, Bộ môn, Giảng viên")]
         public ActionResult Index()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
@@ -56,7 +55,6 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "BCN khoa, Bộ môn, Giảng viên")]
         public ActionResult GetPersonalData(int termId, int week)
         {
             // Declare variables
@@ -459,6 +457,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "BCN khoa, Bộ môn")]
         public ActionResult Assign()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
@@ -467,6 +466,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "BCN khoa, Bộ môn")]
         public JsonResult Assign(int id, string lecturerId)
         {
             // Declare variables
@@ -492,6 +492,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "BCN khoa, Bộ môn")]
         public JsonResult CheckState(int id, int termId, string lecturerId)
         {
             if (lecturerId != string.Empty)
