@@ -14,7 +14,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
     [TestClass()]
     public class TermControllerTests
     {
-        private IQueryable<term> listterm;
+        private IQueryable<term> listTerm;
         private Mock<DbSet<term>> mockSet;
         private Mock<CP25Team03Entities> mockContext;
         private UnitOfWork unitOfWork;
@@ -23,7 +23,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         [TestInitialize()]
         public void Initialize()
         {
-            listterm = new List<term> {
+            listTerm = new List<term> {
                 new term() { id = 123, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 },
                 new term() { id = 124, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 }
             }.AsQueryable();
@@ -31,10 +31,10 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockContext = new Mock<CP25Team03Entities>();
             unitOfWork = new UnitOfWork(mockContext.Object);
             scope = new TransactionScope();
-            mockSet.As<IQueryable<term>>().Setup(m => m.Provider).Returns(listterm.Provider);
-            mockSet.As<IQueryable<term>>().Setup(m => m.Expression).Returns(listterm.Expression);
-            mockSet.As<IQueryable<term>>().Setup(m => m.ElementType).Returns(listterm.ElementType);
-            mockSet.As<IQueryable<term>>().Setup(m => m.GetEnumerator()).Returns(listterm.GetEnumerator());
+            mockSet.As<IQueryable<term>>().Setup(m => m.Provider).Returns(listTerm.Provider);
+            mockSet.As<IQueryable<term>>().Setup(m => m.Expression).Returns(listTerm.Expression);
+            mockSet.As<IQueryable<term>>().Setup(m => m.ElementType).Returns(listTerm.ElementType);
+            mockSet.As<IQueryable<term>>().Setup(m => m.GetEnumerator()).Returns(listTerm.GetEnumerator());
             mockContext.Setup(c => c.terms).Returns(() => mockSet.Object);
         }
 
@@ -59,7 +59,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_term_Json_Data_Not_Null_Test()
+        public void Get_Term_Json_Data_Not_Null_Test()
         {
             // Arrange
             TermController controller = new TermController(unitOfWork);
@@ -78,7 +78,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_term_Json_Data_Is_Correct_Test()
+        public void Get_Term_Json_Data_Is_Correct_Test()
         {
             // Arrange
             TermController controller = new TermController(unitOfWork);
@@ -86,7 +86,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Act
             JsonResult actionResult = controller.GetData();
             dynamic jsonCollection = actionResult.Data;
-            List<term> termList = listterm.ToList();
+            List<term> termList = listTerm.ToList();
 
             // Assert
             Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
@@ -95,7 +95,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_term_Json_Data_Not_False_Test()
+        public void Get_Term_Json_Data_Not_False_Test()
         {
             // Arrange.
             TermController controller = new TermController(unitOfWork);
@@ -173,7 +173,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_term_List_Should_Be_Not_Null_And_Equal_Test()
+        public void Get_Term_List_Should_Be_Not_Null_And_Equal_Test()
         {
             // Arrange
             TermController controller = new TermController(unitOfWork);
@@ -184,7 +184,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Assert
             Assert.IsNotNull(jsonCollection);
-            Assert.AreEqual(listterm.Count(), jsonCollection.Count);
+            Assert.AreEqual(listTerm.Count(), jsonCollection.Count);
         }
 
         [TestMethod()]
@@ -201,7 +201,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Create_term_Test()
+        public void Create_Term_Test()
         {
             // Arrange
             TermController controller = new TermController(unitOfWork);
@@ -216,7 +216,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod]
-        public void Create_Shoud_Be_Failed_When_term_Id_Is_Null_Test()
+        public void Create_Shoud_Be_Failed_When_Term_Id_Is_Null_Test()
         {
             // Arrange
             TermController controller = new TermController();
@@ -231,7 +231,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod]
-        public void Create_Shoud_Be_Failed_When_term_Name_Is_Null_Test()
+        public void Create_Shoud_Be_Failed_When_Term_Name_Is_Null_Test()
         {
             // Arrange
             TermController controller = new TermController();
@@ -246,7 +246,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod]
-        public void Create_Should_Be_Failed_When_term_Exists_Test()
+        public void Create_Should_Be_Failed_When_Term_Exists_Test()
         {
             // Arrange
             TermController controller = new TermController();
@@ -273,14 +273,14 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             TermController controller = new TermController(unitOfWork);
 
             // Act
-            ViewResult result = controller.Edit(listterm.First().id) as ViewResult;
+            ViewResult result = controller.Edit(listTerm.First().id) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
         }
 
         [TestMethod()]
-        public void Edit_term_Data_Should_Load_Correctly_Test()
+        public void Edit_Term_Data_Should_Load_Correctly_Test()
         {
             // Arrange
             TermController controller = new TermController();
@@ -302,7 +302,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod]
-        public void Edit_term_Test()
+        public void Edit_Term_Test()
         {
             // Arrange
             TermController controller = new TermController(unitOfWork);
@@ -318,13 +318,13 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod]
-        public void Delete_term_Test()
+        public void Delete_Term_Test()
         {
             // Arrange
             TermController controller = new TermController(unitOfWork);
 
             // Act
-            JsonResult result = controller.Delete(listterm.First().id) as JsonResult;
+            JsonResult result = controller.Delete(listTerm.First().id) as JsonResult;
             dynamic jsonCollection = result.Data;
 
             // Assert
@@ -334,9 +334,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         #region RepositoryTests
-
         [TestMethod()]
-        public void Insert_term_Repository_Test()
+        public void Insert_Term_Repository_Test()
         {
             // Arrange
             term term = new term() { id = 125, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 };
