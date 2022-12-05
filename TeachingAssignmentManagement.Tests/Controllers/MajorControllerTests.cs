@@ -363,19 +363,23 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             MajorController controller = new MajorController();
+            unitOfWork = new UnitOfWork(new CP25Team03Entities());
             major major = new major() { id = "test", name = "Hệ thống thông tin" };
 
             // Act
+            major majorEdited;
             using (scope)
             {
                 controller.Create(major);
-                major.name= "test";
+                major.name = "testId";
+                major.name = "testName";
                 controller.Edit(major);
+                majorEdited = unitOfWork.MajorRepository.GetMajorByID(major.id);
             }
 
             // Assert
-            Assert.AreEqual(major.id, "test");
-            Assert.AreEqual(major.name, "test");
+            Assert.AreEqual(majorEdited.id, "testId");
+            Assert.AreEqual(majorEdited.name, "testName");
         }
 
         [TestMethod]

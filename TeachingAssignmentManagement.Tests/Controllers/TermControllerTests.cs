@@ -300,20 +300,23 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             TermController controller = new TermController();
+            unitOfWork = new UnitOfWork(new CP25Team03Entities());
             term term = new term() { id = 125, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 };
 
             // Act
+            term termEdited;
             using (scope)
             {
                 controller.Create(term);
                 term.start_year = 2019;
                 term.end_year = 2020;
                 controller.Edit(term);
+                termEdited = unitOfWork.TermRepository.GetTermByID(term.id);
             }
 
             // Assert
-            Assert.AreEqual(term.start_year, 2019);
-            Assert.AreEqual(term.end_year, 2020);
+            Assert.AreEqual(termEdited.start_year, 2019);
+            Assert.AreEqual(termEdited.end_year, 2020);
         }
 
         [TestMethod]
