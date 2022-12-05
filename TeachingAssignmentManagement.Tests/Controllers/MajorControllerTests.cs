@@ -89,10 +89,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Assert
             Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
-            Assert.AreEqual(jsonCollection[0].id, majorList[0].id);
-            Assert.AreEqual(jsonCollection[0].name, majorList[0].name);
-            Assert.AreEqual(jsonCollection[1].id, majorList[1].id);
-            Assert.AreEqual(jsonCollection[1].name, majorList[1].name);
+            for (int i = 0; i < listMajor.Count(); i++)
+            {
+                Assert.AreEqual(jsonCollection[i].id, majorList[i].id);
+                Assert.AreEqual(jsonCollection[i].name, majorList[i].name);
+            }
         }
 
         [TestMethod()]
