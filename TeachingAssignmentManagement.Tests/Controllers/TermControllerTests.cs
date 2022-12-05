@@ -73,7 +73,6 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             foreach (dynamic json in jsonCollection)
             {
                 Assert.IsNotNull(json.id);
-                Assert.IsNotNull(json.name);
             }
         }
 
@@ -216,36 +215,6 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod]
-        public void Create_Shoud_Be_Failed_When_Term_Id_Is_Null_Test()
-        {
-            // Arrange
-            TermController controller = new TermController();
-            term term = new term() { id = 125, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 };
-
-            // Act
-            JsonResult result = controller.Create(term) as JsonResult;
-            dynamic jsonCollection = result.Data;
-
-            // Assert
-            Assert.AreEqual(true, jsonCollection.error);
-        }
-
-        [TestMethod]
-        public void Create_Shoud_Be_Failed_When_Term_Name_Is_Null_Test()
-        {
-            // Arrange
-            TermController controller = new TermController();
-            term term = new term() { id = 125, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 };
-
-            // Act
-            JsonResult result = controller.Create(term) as JsonResult;
-            dynamic jsonCollection = result.Data;
-
-            // Assert
-            Assert.AreEqual(true, jsonCollection.error);
-        }
-
-        [TestMethod]
         public void Create_Should_Be_Failed_When_Term_Exists_Test()
         {
             // Arrange
@@ -270,7 +239,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Edit_View_Test()
         {
             // Arrange
-            TermController controller = new TermController(unitOfWork);
+            TermController controller = new TermController();
 
             // Act
             ViewResult result = controller.Edit(listTerm.First().id) as ViewResult;
