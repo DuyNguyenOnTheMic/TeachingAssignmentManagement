@@ -16,7 +16,6 @@
     $.app = $.app || {};
 
     var $body = $('body');
-    var $window = $(window);
     var menuWrapper_el = $('div[data-menu="menu-wrapper"]').html();
     var menuWrapperClasses = $('div[data-menu="menu-wrapper"]').attr('class');
 
@@ -176,12 +175,6 @@
                 this.toOverlayMenu(currentBreakpoint.name, menuType);
             }
 
-            if ($body.is('.horizontal-layout') && !$body.hasClass('.horizontal-menu-demo')) {
-                this.changeMenu(currentBreakpoint.name);
-
-                $('.menu-toggle').removeClass('is-active');
-            }
-
             // Dropdown submenu on large screen on hover For Large screen only
             // ---------------------------------------------------------------
             if (currentBreakpoint.name == 'xl') {
@@ -215,15 +208,6 @@
             } else {
                 $('.header-navbar[data-nav=brand-center]').addClass('navbar-brand-center');
             }
-            // On screen width change, current active menu in horizontal
-            if (currentBreakpoint.name == 'xl' && menuType == 'horizontal-menu') {
-                $('.main-menu-content').find('li.active').parents('li').addClass('sidebar-group-active active');
-            }
-
-            if (currentBreakpoint.name !== 'xl' && menuType == 'horizontal-menu') {
-                $('#navbar-type').toggleClass('d-none d-xl-block');
-            }
-
             // Dropdown submenu on small screen on click
             // --------------------------------------------------
             $('ul.dropdown-menu [data-bs-toggle=dropdown]').on('click', function (event) {
@@ -234,56 +218,6 @@
                 $(this).parent().siblings().removeClass('show');
                 $(this).parent().toggleClass('show');
             });
-
-            // Horizontal layout submenu drawer scrollbar
-            if (menuType == 'horizontal-menu') {
-                $('li.dropdown-submenu').on('mouseenter', function () {
-                    if (!$(this).parent('.dropdown').hasClass('show')) {
-                        $(this).removeClass('openLeft');
-                    }
-                    var dd = $(this).find('.dropdown-menu');
-                    if (dd) {
-                        var pageHeight = $(window).height(),
-                            // ddTop = dd.offset().top,
-                            ddTop = $(this).position().top,
-                            ddLeft = dd.offset().left,
-                            ddWidth = dd.width(),
-                            ddHeight = dd.height();
-                        if (pageHeight - ddTop - ddHeight - 28 < 1) {
-                            var maxHeight = pageHeight - ddTop - 170;
-                            $(this)
-                                .find('.dropdown-menu')
-                                .css({
-                                    'max-height': maxHeight + 'px',
-                                    'overflow-y': 'auto',
-                                    'overflow-x': 'hidden'
-                                });
-                            var menu_content = new PerfectScrollbar('li.dropdown-submenu.show .dropdown-menu', {
-                                wheelPropagation: false
-                            });
-                        }
-                        // Add class to horizontal sub menu if screen width is small
-                        if (ddLeft + ddWidth - (window.innerWidth - 16) >= 0) {
-                            $(this).addClass('openLeft');
-                        }
-                    }
-                });
-                $('.theme-layouts').find('.semi-dark').hide();
-            }
-
-            // Horizontal Fixed Nav Sticky hight issue on small screens
-            // if (menuType == 'horizontal-menu') {
-            //   if (currentBreakpoint.name == 'sm' || currentBreakpoint.name == 'xs') {
-            //     if ($(".menu-fixed").length) {
-            //       $(".menu-fixed").unstick();
-            //     }
-            //   }
-            //   else {
-            //     if ($(".navbar-fixed").length) {
-            //       $(".navbar-fixed").sticky();
-            //     }
-            //   }
-            // }
         },
 
         transit: function (callback1, callback2) {
@@ -403,11 +337,7 @@
                         // $('.sidenav-overlay').removeClass('d-block d-none');
                     },
                     function () {
-                        if ($('.main-menu').hasClass('menu-native-scroll') || $body.data('menu') == 'horizontal-menu') {
-                            this.manualScroller.disable();
-                        } else {
-                            if ($('.main-menu').hasClass('menu-fixed')) this.manualScroller.enable();
-                        }
+                        if ($('.main-menu').hasClass('menu-fixed')) this.manualScroller.enable();
 
                         if (
                             ($body.data('menu') == 'vertical-menu' || $body.data('menu') == 'vertical-menu-modern') &&
@@ -455,9 +385,6 @@
                         $('.content-overlay').removeClass('d-block d-none');
                     },
                     function () {
-                        if ($body.data('menu') == 'horizontal-menu' && $body.hasClass('vertical-overlay-menu')) {
-                            if ($('.main-menu').hasClass('menu-fixed')) this.manualScroller.enable();
-                        }
                         if (
                             ($body.data('menu') == 'vertical-menu' || $body.data('menu') == 'vertical-menu-modern') &&
                             $('.main-menu').hasClass('menu-fixed')
@@ -572,7 +499,6 @@
 
         toggle: function () {
             var currentBreakpoint = Unison.fetch.now(); // Current Breakpoint
-            var collapsed = this.collapsed;
             var expanded = this.expanded;
             var hidden = this.hidden;
             var menu = $body.data('menu');
@@ -595,13 +521,13 @@
                     break;
                 case 'lg':
                     if (expanded === true) {
-                        if (menu == 'vertical-overlay-menu' || menu == 'vertical-menu-modern' || menu == 'horizontal-menu') {
+                        if (menu == 'vertical-overlay-menu' || menu == 'vertical-menu-modern') {
                             this.hide();
                         } else {
                             this.collapse();
                         }
                     } else {
-                        if (menu == 'vertical-overlay-menu' || menu == 'vertical-menu-modern' || menu == 'horizontal-menu') {
+                        if (menu == 'vertical-overlay-menu' || menu == 'vertical-menu-modern') {
                             this.open();
                         } else {
                             this.expand();
