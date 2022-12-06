@@ -95,8 +95,8 @@ function updateCount() {
 
 function getTimetable(termId, majorId) {
     // Dispose all tooltips and popovers
-    $("[data-bs-toggle='tooltip']").tooltip('dispose');
-    $("[data-bs-toggle='popover']").popover('dispose');
+    $("#tblAssign [data-bs-toggle='tooltip']").tooltip('dispose');
+    $("#tblAssign [data-bs-toggle='popover']").popover('dispose');
 
     if (termId && majorId) {
         // Display loading message while fetching data
