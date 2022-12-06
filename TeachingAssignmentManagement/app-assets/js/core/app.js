@@ -530,9 +530,11 @@ window.colors = {
 
         if (switchToLayout === 'dark-layout') {
             $html.addClass('dark-layout');
+            document.documentElement.style.setProperty('color-scheme', 'dark');
             navLinkStyle.find('.ficon').replaceWith(feather.icons['sun'].toSvg({ class: 'ficon' }));
         } else {
             $html.addClass('light-layout');
+            document.documentElement.style.setProperty('color-scheme', 'light');
             navLinkStyle.find('.ficon').replaceWith(feather.icons['moon'].toSvg({ class: 'ficon' }));
         }
         // Set radio in customizer if we have
