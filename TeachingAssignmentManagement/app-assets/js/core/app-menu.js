@@ -349,21 +349,13 @@
         collapse: function () {
             if (this.collapsed === false) {
                 if ($body.data('menu') == 'vertical-menu-modern') {
-                    const menuToggle = $('.modern-nav-toggle');
-                    menuToggle
+                    $('.modern-nav-toggle')
                         .find('.collapse-toggle-icon')
                         .replaceWith(
                             feather.icons['circle'].toSvg({
                                 class: 'd-none d-xl-block collapse-toggle-icon primary font-medium-4'
                             })
                         );
-                    menuToggle.click(function () {
-                        $('.navbar-header, .main-menu').off('mouseenter', modernMenuExpand);
-                        $('.main-menu, .navbar-header').removeClass('expanded');
-                        setTimeout(function () {
-                            $('.navbar-header, .main-menu').on('mouseenter', modernMenuExpand);
-                        }, 100);
-                    });
                 }
                 this.transit(
                     function () {
@@ -686,6 +678,13 @@
                 });
 
             $('.navbar-header, .main-menu').on('mouseenter', modernMenuExpand).on('mouseleave', modernMenuCollapse);
+            $('.modern-nav-toggle').on('click', function () {
+                $('.navbar-header, .main-menu').off('mouseenter', modernMenuExpand);
+                $('.main-menu, .navbar-header').removeClass('expanded');
+                setTimeout(function () {
+                    $('.navbar-header, .main-menu').on('mouseenter', modernMenuExpand);
+                }, 50);
+            });
 
             $('.main-menu-content').on('mouseleave', function () {
                 if ($body.hasClass('menu-collapsed')) {
