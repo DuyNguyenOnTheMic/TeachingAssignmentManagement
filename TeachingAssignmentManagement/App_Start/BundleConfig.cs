@@ -13,7 +13,7 @@ namespace TeachingAssignmentManagement
 
             bundles.Add(new MyScriptBundle("~/bundles/app").Include(
                        "~/app-assets/js/core/app-menu.min.js",
-                       "~/app-assets/js/core/app.js"));
+                       "~/app-assets/js/core/app.min.js"));
 
             bundles.Add(new MyScriptBundle("~/bundles/extensions").Include(
                        "~/app-assets/vendors/js/extensions/toastr.min.js",

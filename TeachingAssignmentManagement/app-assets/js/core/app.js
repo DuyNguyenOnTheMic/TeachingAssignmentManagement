@@ -1,4 +1,4 @@
-/*=========================================================================================
+﻿/*=========================================================================================
   File Name: app.js
   Description: Template related app JS.
   ----------------------------------------------------------------------------------------
@@ -532,10 +532,26 @@ window.colors = {
             $html.addClass('dark-layout');
             document.documentElement.style.setProperty('color-scheme', 'dark');
             navLinkStyle.find('.ficon').replaceWith(feather.icons['sun'].toSvg({ class: 'ficon' }));
+            var tooltip = bootstrap.Tooltip.getInstance(navLinkStyle);
+            if (tooltip) {
+                tooltip.dispose();
+            }
+            new bootstrap.Tooltip(navLinkStyle, {
+                title: 'Chế độ sáng',
+                fallbackPlacements: ['bottom']
+            });
         } else {
             $html.addClass('light-layout');
             document.documentElement.style.setProperty('color-scheme', 'light');
             navLinkStyle.find('.ficon').replaceWith(feather.icons['moon'].toSvg({ class: 'ficon' }));
+            var tooltip = bootstrap.Tooltip.getInstance(navLinkStyle);
+            if (tooltip) {
+                tooltip.dispose();
+            }
+            new bootstrap.Tooltip(navLinkStyle, {
+                title: 'Chế độ tối',
+                fallbackPlacements: ['bottom']
+            });
         }
         // Set radio in customizer if we have
         if ($('input:radio[data-layout=' + switchToLayout + ']').length > 0) {
