@@ -21,16 +21,12 @@
                                 @using (Html.BeginForm("Import", "Timetable", FormMethod.Post, new { @enctype = "multipart/form-data" }))
                                 {
                                     <div class="row mb-1">
-                                        <div class="col-md-1">
-                                            <label class="col-form-label font-small-4 text-nowrap" for="term">Học kỳ: </label>
-                                        </div>
-                                        <div class="col-md-5 mb-1">
+                                        <div class="col-md-6 mb-1">
+                                            <label class="form-label font-small-4" for="term">Học kỳ: </label>
                                             @Html.DropDownList("term", null, "---- Chọn học kỳ ----", htmlAttributes: new { @class = "select2 form-select form-data" })
                                         </div>
-                                        <div class="col-md-1">
-                                            <label class="col-form-label font-small-4 text-nowrap" for="major">Ngành: </label>
-                                        </div>
-                                        <div class="col-md-5 mb-1">
+                                        <div class="col-md-6 mb-1">
+                                            <label class="form-label font-small-4" for="major">Ngành: </label>
                                             @Html.DropDownList("major", null, "---- Chọn ngành ----", htmlAttributes: new { @class = "select2 form-select form-data" })
                                         </div>
                                     </div>
