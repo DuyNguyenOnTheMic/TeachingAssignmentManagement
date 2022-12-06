@@ -1,5 +1,5 @@
 .assign-table-div {
-    max-height: 75vh;
+    max-height: 70vh;
     overflow: scroll;
 }
 
@@ -87,7 +87,7 @@ table.assign-table {
     }
 
     table.assign-table th {
-        padding: .72rem 1.5rem;
+        padding: .20rem 1.5rem;
         vertical-align: middle;
     }
 
@@ -97,7 +97,7 @@ table.assign-table {
     }
 
         table.assign-table td:first-child {
-            padding: .72rem;
+            padding: .20rem .72rem;
         }
 
     table.assign-table td, table.assign-table th {
