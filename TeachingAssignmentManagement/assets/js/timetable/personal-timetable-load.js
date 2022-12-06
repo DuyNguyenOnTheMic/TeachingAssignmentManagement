@@ -22,7 +22,6 @@ $(function () {
     var termId = $('#term option:last-child').val(),
         week = 0;
     if (termId) {
-        alert('hehe');
         termSelect.val(termId).trigger('change');
         // Get Partial View personal timetable data
         fetchData(termId, week);
