@@ -1,5 +1,5 @@
 ﻿var select = $('.select2'),
-    myDropzone = $('#dpz-single-file')
+    dropzone = $('#dpz-single-file')
     isUpdate = $('#isUpdate');
 var rootUrl = $('#loader').data('request-url');
 
@@ -16,7 +16,7 @@ select.each(function () {
 })
 
 // Populate Dropzone
-myDropzone.dropzone({
+dropzone.dropzone({
     url: rootUrl + 'Timetable/Import',
     autoProcessQueue: false,
     paramName: 'postedFile',
@@ -34,6 +34,10 @@ myDropzone.dropzone({
 
         // Using a closure
         var myDropzone = this;
+
+        this.on("addedfile", function (file) {
+            dropzone.find('.dz-progress').addClass('d-none');
+        });
 
         this.on('maxfilesexceeded', function (file) {
             // Remove file and add again if user input more than 1
@@ -62,6 +66,7 @@ myDropzone.dropzone({
             } else if (count == 0) {
                 toastr.warning('File chưa được upload hoặc sai định dạng ');
             } else {
+                dropzone.find('.dz-progress').removeClass('d-none');
                 // Begin to import file
                 myDropzone.processQueue();
             }
