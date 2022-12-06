@@ -545,10 +545,12 @@ window.colors = {
             if (tooltip) {
                 tooltip.dispose();
             }
-            new bootstrap.Tooltip(navLinkStyle, {
-                title: 'Chế độ sáng',
-                fallbackPlacements: ['bottom']
-            });
+            setTimeout(function () {
+                new bootstrap.Tooltip(navLinkStyle, {
+                    title: 'Chế độ sáng',
+                    fallbackPlacements: ['bottom']
+                });
+            }, 250);
         } else {
             $html.addClass('light-layout');
             document.documentElement.style.setProperty('color-scheme', 'light');
@@ -557,10 +559,12 @@ window.colors = {
             if (tooltip) {
                 tooltip.dispose();
             }
-            new bootstrap.Tooltip(navLinkStyle, {
-                title: 'Chế độ tối',
-                fallbackPlacements: ['bottom']
-            });
+            setTimeout(function () {
+                new bootstrap.Tooltip(navLinkStyle, {
+                    title: 'Chế độ tối',
+                    fallbackPlacements: ['bottom']
+                });
+            }, 250);
         }
         // Set radio in customizer if we have
         if ($('input:radio[data-layout=' + switchToLayout + ']').length > 0) {
