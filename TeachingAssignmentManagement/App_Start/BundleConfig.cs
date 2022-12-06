@@ -12,7 +12,7 @@ namespace TeachingAssignmentManagement
                         "~/app-assets/vendors/js/screenfull/screenfull.min.js"));
 
             bundles.Add(new MyScriptBundle("~/bundles/app").Include(
-                       "~/app-assets/js/core/app-menu.min.js",
+                       "~/app-assets/js/core/app-menu.js",
                        "~/app-assets/js/core/app.min.js"));
 
             bundles.Add(new MyScriptBundle("~/bundles/extensions").Include(
@@ -59,7 +59,7 @@ namespace TeachingAssignmentManagement
                         "~/app-assets/vendors/css/extensions/sweetalert2.min.css",
                         "~/app-assets/css/plugins/extensions/ext-component-sweet-alerts.min.css"));
 
-            BundleTable.EnableOptimizations = true;
+            //BundleTable.EnableOptimizations = true;
         }
     }
 }
