@@ -520,6 +520,15 @@ window.colors = {
     //? Comment it if you don't want to sync layout with local db
     setLayout(currentLocalStorageLayout);
 
+    $(".apptogglefullscreen").on("click", (function (e) {
+        screenfull.isEnabled && screenfull.toggle()
+    })), screenfull.on("change", (() => {
+        screenfull.isFullscreen ? $(".apptogglefullscreen").find("i").toggleClass("feather-minimize feather-maximize") : $(".apptogglefullscreen").find("i").toggleClass("feather-maximize feather-minimize"), setTimeout((function () {
+            var e = $(".apptogglefullscreen");
+            e.tooltip("dispose"), screenfull.isFullscreen ? e.attr("title", "Thoát toàn màn hình") : e.attr("title", "Toàn màn hình"), bootstrap.Tooltip.getOrCreateInstance(e)
+        }), 200)
+    }))
+
     function setLayout(currentLocalStorageLayout) {
         var navLinkStyle = $('.nav-link-style'),
             currentLayout = getCurrentLayout(),
