@@ -105,10 +105,8 @@ dropzone.dropzone({
 
             if (xhr) {
                 var errorDisplay = document.querySelectorAll('[data-dz-errormessage]');
+                errorDisplay[errorDisplay.length - 1].innerHTML = 'Đã xảy ra lỗi! Vui lòng kiểm tra và chọn lại tệp tin.';
                 if (xhr.status == 417) {
-                    // Show message if the file is not in the right format (like missing columns, etc, ...)
-                    errorDisplay[errorDisplay.length - 1].innerHTML = 'Đã xảy ra lỗi, vui lòng kiểm tra lại tệp tin';
-
                     Swal.fire({
                         title: 'Thông báo',
                         html: errorMessage,
@@ -119,9 +117,6 @@ dropzone.dropzone({
                         buttonsStyling: false
                     });
                 } else if (xhr.status == 409) {
-                    // Handle alternative flows when user chooses term and major which already has data
-                    errorDisplay[errorDisplay.length - 1].innerHTML = 'Đã xảy ra lỗi!';
-
                     Swal.fire({
                         title: 'Thông báo',
                         text: errorMessage,
