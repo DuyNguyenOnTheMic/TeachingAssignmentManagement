@@ -149,7 +149,7 @@ $('.assign-card').on('click', function () {
 
 $('.btn-export').on('click', function () {
     var url = rootUrl + 'TimeTable/Export?termId=' + termId + '&majorId=' + majorId;
-    window.location = url;
+    window.open(url, '_blank').focus();
 });
 
 function splitString(lecturerName) {
