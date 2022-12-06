@@ -64,7 +64,7 @@ namespace TeachingAssignmentManagement.Controllers
             if (!query_classes.Any())
             {
                 // Return not found error message
-                return Json(new { error = true, message = "Học kỳ này chưa có dữ liệu phân công của bạn." }, JsonRequestBehavior.AllowGet);
+                return Json(new { error = true, message = "Học kỳ này chưa có dữ liệu phân công của bạn" }, JsonRequestBehavior.AllowGet);
             }
             else
             {
