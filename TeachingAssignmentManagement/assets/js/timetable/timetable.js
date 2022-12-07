@@ -151,6 +151,11 @@ $('.assign-card').on('click', function () {
     }, 0);
 });
 
+// Hide other popovers when user click on table
+$('#tblAssign').on('click', function () {
+    $('[data-bs-toggle="popover"]').popover('hide');
+});
+
 $('.btn-export').on('click', function () {
     var url = rootUrl + 'TimeTable/Export?termId=' + termId + '&majorId=' + majorId;
     window.open(url, '_blank').focus();
