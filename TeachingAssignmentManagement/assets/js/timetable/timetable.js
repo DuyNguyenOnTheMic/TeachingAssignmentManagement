@@ -153,7 +153,7 @@ $('.assign-card').on('click', function () {
 
 // Hide other popovers when user click on table
 $('#tblAssign').on('click', function () {
-    $('[data-bs-toggle="popover"]').popover('hide');
+    $('#tblAssign [data-bs-toggle="popover"]').popover('hide');
 });
 
 $('.btn-export').on('click', function () {
