@@ -204,6 +204,16 @@ namespace TeachingAssignmentManagement.Controllers
                 }
             }
 
+            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
+
+            // Check if lecturer has filled in personal information
+            lecturer lecturer = unitOfWork.UserRepository.GetLecturerByID(userId);
+            if (lecturer?.staff_id == null || lecturer?.full_name == null)
+            {
+                Response.Write($"Bạn chưa điền đầy đủ thông tin của bạn (<strong>mã giảng viên</strong> và <strong>tên giảng viên</strong>) để hệ thống có thể ghi nhận phân công bởi bạn.");
+                return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
+            }
+
             if (!isUpdate)
             {
                 // Check if this term and major already has data
@@ -230,7 +240,6 @@ namespace TeachingAssignmentManagement.Controllers
             }
 
             int itemsCount = dt.Rows.Count;
-            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
             TimetableViewModels timetableViewModels = new TimetableViewModels();
             List<curriculum_class> curriculumClassList = new List<curriculum_class>();
             IEnumerable<curriculum_class> query_curriculumClassWhere = curriculumClassList;
