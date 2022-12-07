@@ -51,11 +51,11 @@
     color: #22292f;
 }
 
-.assign-table-div .unassign-theory {
+.assign-table-div .unassigned-theory {
     border: 3px solid #28c76f !important;
 }
 
-.assign-table-div .unassign-practical {
+.assign-table-div .unassigned-practical {
     border: 3px solid #ff9f43 !important;
 }
 

@@ -36,9 +36,9 @@ $('.assign-card').each(function () {
         $this.text(splitString(lecturerName));
     } else {
         if ($this.hasClass('btn-success')) {
-            $this.removeClass('btn-success').addClass('btn-secondary theory-class');
+            $this.removeClass('btn-success').addClass('btn-secondary unassigned-theory');
         } else {
-            $this.removeClass('btn-warning').addClass('btn-secondary practical-class');
+            $this.removeClass('btn-warning').addClass('btn-secondary unassigned-practical');
         }
     }
 });
