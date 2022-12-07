@@ -51,6 +51,14 @@
     color: #22292f;
 }
 
+.assign-table-div .theory-class {
+    border: 3px solid #28c76f !important;
+}
+
+.assign-table-div .practical-class {
+    border: 3px solid #ff9f43 !important;
+}
+
 .personal-timetable-div .theory-class {
     border: 2px dashed #28c76f !important;
     border-radius: .358rem;

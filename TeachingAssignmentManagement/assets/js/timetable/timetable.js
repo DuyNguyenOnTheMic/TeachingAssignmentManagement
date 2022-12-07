@@ -35,7 +35,11 @@ $('.assign-card').each(function () {
     if (lecturerId != '') {
         $this.text(splitString(lecturerName));
     } else {
-        $this.removeClass('btn-success btn-warning').addClass('btn-secondary');
+        if ($this.hasClass('btn-success')) {
+            $this.removeClass('btn-success').addClass('btn-secondary theory-class');
+        } else {
+            $this.removeClass('btn-warning').addClass('btn-secondary practical-class');
+        }
     }
 });
 
