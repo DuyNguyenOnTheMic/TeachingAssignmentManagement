@@ -8,6 +8,7 @@
         public string LessonTime { get; set; }
         public int Day2 { get; set; }
         public int StartLesson2 { get; set; }
+        public int? StudentRegisteredNumber { get; set; }
         public int StartWeek { get; set; }
         public int EndWeek { get; set; }
         public string LecturerId { get; set; }
