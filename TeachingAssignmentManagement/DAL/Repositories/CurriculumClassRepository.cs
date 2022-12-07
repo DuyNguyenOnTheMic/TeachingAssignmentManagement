@@ -53,6 +53,24 @@ namespace TeachingAssignmentManagement.DAL
             });
         }
 
+        public IEnumerable<CurriculumClassDTO> GetTermAssignTimetable(int termId)
+        {
+            return context.curriculum_class.Where(c => c.term_id == termId).Select(c => new CurriculumClassDTO
+            {
+                Id = c.id,
+                CurriculumClassId = c.curriculum_class_id,
+                Type = c.type,
+                Day2 = c.day_2,
+                StartLesson2 = c.start_lesson_2,
+                StudentRegisteredNumber = c.student_registered_number,
+                LecturerId = c.lecturer_id,
+                LecturerName = c.lecturer.full_name,
+                CurriculumId = c.curriculum_id,
+                RoomId = c.room_id,
+                Curriculum = c.curriculum
+            });
+        }
+
         public IEnumerable<curriculum_class> GetExportData(int termId, string majorId)
         {
             return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId);

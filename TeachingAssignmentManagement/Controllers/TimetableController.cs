@@ -143,7 +143,9 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public ActionResult GetData(int termId, string majorId)
         {
-            IEnumerable<CurriculumClassDTO> query_classes = unitOfWork.CurriculumClassRepository.GetAssignTimetable(termId, majorId);
+            IEnumerable<CurriculumClassDTO> query_classes = majorId != "-1"
+                ? unitOfWork.CurriculumClassRepository.GetAssignTimetable(termId, majorId)
+                : unitOfWork.CurriculumClassRepository.GetTermAssignTimetable(termId);
             ViewBag.curriculums = unitOfWork.CurriculumRepository.GetCurriculums(query_classes);
             ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
             return PartialView("_Timetable", new TimetableViewModels
