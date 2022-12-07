@@ -64,9 +64,9 @@ function populateSelect($this) {
 
 function updateClass(element, lecturerId, lecturerName) {
     element.data('lecturerid', lecturerId);
+    var classType = element.data('classtype');
+    element.removeClass('btn-success btn-warning btn-secondary theory-class practical-class');
     if (lecturerId) {
-        var classType = element.data('classtype');
-        element.removeClass('btn-success btn-warning btn-secondary');
         if (classType == 'Lý thuyết') {
             // color of theory class
             element.addClass('btn-success');
@@ -77,7 +77,13 @@ function updateClass(element, lecturerId, lecturerName) {
         lecturerName = splitString(lecturerName);
     } else {
         lecturerName = 'Chưa phân';
-        element.removeClass('btn-success btn-warning').addClass('btn-secondary');
+        if (classType == 'Lý thuyết') {
+            // color of theory class
+            element.addClass('btn-secondary theory-class');
+        } else {
+            // color of practical class
+            element.addClass('btn-secondary practical-class');
+        }
     }
     element.text(lecturerName);
     $('[data-bs-toggle="popover"]').popover('update');
