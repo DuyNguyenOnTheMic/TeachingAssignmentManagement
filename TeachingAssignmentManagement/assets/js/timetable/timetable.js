@@ -88,7 +88,7 @@ $(document).off('click', '.btn-delete').on('click', '.btn-delete', function () {
 
     // Get values
     var id = $this.data('id');
-    var curriculumClassId = $this.parents().find('.popover-header').text();
+    var curriculumClassId = $this.parents().find('.popover-header').find('.class-id').text();
 
     // Show confirm message
     Swal.fire({
