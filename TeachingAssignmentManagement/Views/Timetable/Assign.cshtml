@@ -25,7 +25,7 @@
                                     </div>
                                     <div class="col-md-6 mb-1">
                                         <label class="form-label font-small-4" for="major">Ngành: </label>
-                                        @Html.DropDownList("major", null, "---- Chọn ngành ----", htmlAttributes: new { @class = "select2 form-select" })
+                                        @Html.DropDownList("major", null, "---- Chọn ngành ----", htmlAttributes: new { @class = "select2 form-select", @multiple = "multiple" })
                                     </div>
                                 </div>
                                 <div id="assignLecturerDiv">
@@ -54,5 +54,5 @@
     <script src="~/app-assets/vendors/js/signalr/jquery.signalR.min.js"></script>
     <script src="~/signalr/hubs"></script>
     <script src="~/app-assets/language/select2/vi.min.js"></script>
-    <script src="~/assets/js/timetable/timetable-load.min.js"></script>
+    <script src="~/assets/js/timetable/timetable-load.js"></script>
 }

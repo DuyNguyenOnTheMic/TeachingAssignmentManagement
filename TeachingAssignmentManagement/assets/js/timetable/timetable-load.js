@@ -31,19 +31,30 @@ hubNotif.client.refreshedData = function (term, major) {
 }
 
 $(function () {
-    var formSelect = $('.form-select');
+    var formSelect = $('.form-select'),
+        termSelect = $('#term'),
+        majorSelect = $('#major');
 
     // Populate select2 for choosing term and major
-    formSelect.each(function () {
-        var $this = $(this);
-        $this.wrap('<div class="position-relative"></div>');
-        $this.select2({
-            language: 'vi',
-            dropdownAutoWidth: true,
-            dropdownParent: $this.parent(),
-            placeholder: $this[0][0].innerHTML
-        });
-    })
+    termSelect.wrap('<div class="position-relative"></div>');
+    termSelect.select2({
+        language: 'vi',
+        dropdownAutoWidth: true,
+        dropdownParent: termSelect.parent(),
+        placeholder: termSelect[0][0].innerHTML
+    });
+
+    majorSelect.wrap('<div class="position-relative"></div>');
+    majorSelect.select2({
+        language: 'vi',
+        dropdownAutoWidth: true,
+        dropdownParent: majorSelect.parent(),
+        placeholder: majorSelect[0][0].innerHTML,
+        closeOnSelect: false
+    }).on('change.select2', function () {
+        majorSelect.select2("close");
+        majorSelect.select2("open");
+    });
 
     formSelect.change(function () {
         var termId = $('#term').val(),
