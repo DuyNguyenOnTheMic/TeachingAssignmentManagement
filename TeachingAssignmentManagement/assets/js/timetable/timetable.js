@@ -92,10 +92,12 @@ curriculumSelect.select2({
 })
 curriculumSelect.parent().find('.select2-search__field').attr('placeholder', 'Lọc môn học');
 curriculumSelect.on('select2:select', function (e) {
+    // Show table row on select
     var curriculumId = $('#' + e.params.data.id);
     curriculumId.show();
     FilterCount(curriculumSelect);
 }).on('select2:unselect', function (e) {
+    // Hide table row on unselect
     var curriculumId = $('#' + e.params.data.id);
     curriculumId.hide();
     FilterCount(curriculumSelect);
