@@ -252,6 +252,7 @@ namespace TeachingAssignmentManagement.Controllers
             }
 
             // Create a list for storing error Lecturers
+            List<Tuple<string, string, string>> errorAssignList = new List<Tuple<string, string, string>>();
             List<Tuple<string, string>> errorLecturerList = new List<Tuple<string, string>>();
 
             try
@@ -399,16 +400,31 @@ namespace TeachingAssignmentManagement.Controllers
                         }
                         else if (query_curriculumClass?.lecturer_id == null && curriculumClass.lecturer_id != null)
                         {
-                            // Update curriculum class's lecturer
-                            query_curriculumClass.lecturer_id = curriculumClass.lecturer_id;
-                            query_curriculumClass.last_assigned_by = lastAssignedBy;
+                            dynamic checkState = CheckState(query_curriculumClass.id, term, curriculumClass.lecturer_id).Data;
+                            if (checkState.success)
+                            {
+                                query_curriculumClass.lecturer_id = curriculumClass.lecturer_id;
+                                query_curriculumClass.last_assigned_by = lastAssignedBy;
+                                unitOfWork.Save();
+                            }
+                            else
+                            {
+                                errorAssignList.Add(Tuple.Create(ToNullableString(lecturerId), ToNullableString(fullName), checkState.message));
+                            }
                         }
                     }
                     ProgressHub.SendProgress("Đang import...", dt.Rows.IndexOf(row), itemsCount);
                 }
                 unitOfWork.Save();
                 TimetableHub.RefreshData(term, major);
-                return Json(errorLecturerList.Distinct(), JsonRequestBehavior.AllowGet);
+                if (errorLecturerList.Count > 0)
+                {
+                    return Json(errorLecturerList.Distinct(), JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(errorAssignList, JsonRequestBehavior.AllowGet);
+                }
             }
             catch
             {
@@ -531,7 +547,7 @@ namespace TeachingAssignmentManagement.Controllers
                         lessonTime = c.lesson_time,
                         majorName = c.major.name
                     }).ToList();
-                    return Json(new { duplicate = true, message = "Giảng viên này đã có lớp trong tiết học này!", classList = classes }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = false, message = "Giảng viên này đã có lớp trong tiết học này!", classList = classes }, JsonRequestBehavior.AllowGet);
                 }
 
                 // Check maximum lessons in a day
@@ -545,7 +561,7 @@ namespace TeachingAssignmentManagement.Controllers
                         lessonTime = c.lesson_time,
                         majorName = c.major.name
                     }).ToList();
-                    return Json(new { maxLesson = true, message = "Giảng viên này đã đạt số tiết tối đa trong 1 ngày!", classList = classes }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = false, message = "Giảng viên này đã đạt số tiết tối đa trong 1 ngày!", classList = classes }, JsonRequestBehavior.AllowGet);
                 }
 
                 // Check maximum classes in a week
@@ -559,7 +575,7 @@ namespace TeachingAssignmentManagement.Controllers
                         lessonTime = c.lesson_time,
                         majorName = c.major.name
                     }).ToList();
-                    return Json(new { maxCLass = true, message = "Giảng viên này đạt số lớp tối đa trong 1 tuần!", classList = classes }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = false, message = "Giảng viên này đạt số lớp tối đa trong 1 tuần!", classList = classes }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
