@@ -180,14 +180,13 @@ function importSucceeded(data) {
 
         var message;
         if (data[0].Item3) {
+            // Show assign lecturer error list
             message = 'Đã import dữ liệu! \nCó một số giảng viên có lịch giảng dạy bị trùng, vui lòng xem chi tiết ở cuối trang.';
+            SetVisibleColumn(true);
         } else {
+            // Show lecturer that hasn't been in the system yet
             message = 'Đã import dữ liệu! \nCó một số giảng viên chưa có trong hệ thống, vui lòng xem chi tiết ở cuối trang.';
-            var table = $('#tblErrorLecturers').DataTable();
-            for (var i = 3; i <= 5; i++) {
-                table.column(i).visible(false, false);
-            }
-            table.columns.adjust().draw(false); // adjust column sizing and redraw
+            SetVisibleColumn(false);
         }
 
         Swal.fire({
@@ -214,6 +213,14 @@ function importSucceeded(data) {
         $('#errorLecturers-section').hide();
     }
     window.onbeforeunload = null;
+}
+
+function SetVisibleColumn(state) {
+    var table = $('#tblErrorLecturers').DataTable();
+    for (var i = 3; i <= 5; i++) {
+        table.column(i).visible(state, state);
+    }
+    table.columns.adjust().draw(state); // adjust column sizing and redraw
 }
 
 function importAgain(myDropzone, state) {
