@@ -90,9 +90,7 @@ curriculumSelect.select2({
     placeholder: 'Lọc môn học',
     dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
 })
-
 curriculumSelect.parent().find('.select2-search__field').attr('placeholder', 'Lọc môn học');
-
 curriculumSelect.on('select2:select', function (e) {
     var curriculumId = $('#' + e.params.data.id);
     curriculumId.show();
