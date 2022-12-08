@@ -253,7 +253,7 @@ namespace TeachingAssignmentManagement.Controllers
 
             // Create a list for storing error Lecturers
             List<Tuple<string, string>> errorLecturerList = new List<Tuple<string, string>>();
-            List<Tuple<string, string, string, string, string>> errorAssignList = new List<Tuple<string, string, string, string, string>>();
+            List<Tuple<string, string, string, string, string, string>> errorAssignList = new List<Tuple<string, string, string, string, string, string>>();
 
             try
             {
@@ -411,7 +411,7 @@ namespace TeachingAssignmentManagement.Controllers
                             else
                             {
                                 // Add lecturer to error list
-                                errorAssignList.Add(Tuple.Create(ToNullableString(lecturerId), ToNullableString(fullName), day, lessonTime, checkState.message));
+                                errorAssignList.Add(Tuple.Create(lecturerId, fullName, curriculumClassid, day, lessonTime, checkState.message));
                             }
                         }
                     }

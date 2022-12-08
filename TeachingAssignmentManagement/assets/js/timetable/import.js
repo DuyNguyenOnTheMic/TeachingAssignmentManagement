@@ -180,7 +180,7 @@ function importSucceeded(data) {
         populateDatatable(data);
 
         var message;
-        if (data[0].Item3) {
+        if (data[0].Item6) {
             // Show assign lecturer error list
             message = 'Đã import dữ liệu! \nCó một số giảng viên có lịch giảng dạy bị trùng, vui lòng xem chi tiết ở cuối trang.';
             SetVisibleColumn(true);
@@ -222,7 +222,7 @@ function importSucceeded(data) {
 
 function SetVisibleColumn(state) {
     var table = $('#tblErrorLecturers').DataTable();
-    for (var i = 3; i <= 5; i++) {
+    for (var i = 3; i <= 6; i++) {
         table.column(i).visible(state, state);
     }
     table.columns.adjust().draw(state); // adjust column sizing and redraw
@@ -285,7 +285,8 @@ function populateDatatable(data) {
                     { 'data': 'Item2' },
                     { 'data': 'Item3', defaultContent: '' },
                     { 'data': 'Item4', defaultContent: '' },
-                    { 'data': 'Item5', defaultContent: '' }
+                    { 'data': 'Item5', defaultContent: '' },
+                    { 'data': 'Item6', defaultContent: '' }
                 ],
 
                 columnDefs: [
