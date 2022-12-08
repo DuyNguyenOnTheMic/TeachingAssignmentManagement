@@ -15,9 +15,14 @@ curriculumSelect.select2({
     dropdownAutoWidth: true,
     dropdownParent: curriculumSelect.parent(),
     placeholder: curriculumSelect[0][0].innerHTML,
-}).on('change', function () {
-    console.log(curriculumSelect.val());
-    curriculumSelect.parent().find('.select2-search__field').attr('placeholder', 'Here is your placeholder');
+}).on('select2:select', function (e) {
+    var curriculumId = $('#' + e.params.data.id);
+    curriculumId.show(); 
+    curriculumSelect.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + curriculumSelect.val().length);
+}).on('select2:unselect', function (e) {
+    var curriculumId = $('#' + e.params.data.id);
+    curriculumId.hide();
+    curriculumSelect.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + curriculumSelect.val().length);
 });
 
 // Display message when table have no data
