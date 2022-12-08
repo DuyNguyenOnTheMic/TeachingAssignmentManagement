@@ -172,20 +172,29 @@ function importSucceeded(data) {
     isUpdate.val(false);
 
     if (data.length) {
+        // Show section
+        $('#errorLecturers-section').show();
+
+        // Populate datatables
+        populateDatatable(data);
+
+        var message;
+        if (data[0].Item3) {
+            message = 'Đã import dữ liệu! \nCó một số giảng viên có lịch giảng dạy bị trùng, vui lòng xem chi tiết ở cuối trang.';
+        } else {
+            message = 'Đã import dữ liệu! \nCó một số giảng viên chưa có trong hệ thống, vui lòng xem chi tiết ở cuối trang.';
+            $('#tblErrorLecturers').DataTable().column(3).visible(false);
+        }
+
         Swal.fire({
             title: 'Thông báo',
-            text: 'Đã import dữ liệu! \nCó một số giảng viên chưa có trong hệ thống, vui lòng xem chi tiết ở cuối trang.',
+            text: message,
             icon: 'error',
             customClass: {
                 confirmButton: 'btn btn-primary'
             },
             buttonsStyling: false
         });
-        // Show section
-        $('#errorLecturers-section').show();
-
-        // Show lecturers which hasn't been imported into the system
-        populateDatatable(data);
 
     } else {
         Swal.fire({
@@ -257,7 +266,8 @@ function populateDatatable(data) {
                 columns: [
                     { 'data': '', defaultContent: '' },
                     { 'data': 'Item1' },
-                    { 'data': 'Item2' }
+                    { 'data': 'Item2' },
+                    { 'data': 'Item3', defaultContent: '' }
                 ],
 
                 columnDefs: [
