@@ -7,6 +7,16 @@ $(function () {
     updateCount();
 });
 
+// Populate select2 for curriculum filter
+var curriculumSelect = $('#curriculum'); 
+curriculumSelect.wrap('<div class="position-relative my-50"></div>');
+curriculumSelect.select2({
+    language: 'vi',
+    dropdownAutoWidth: true,
+    dropdownParent: curriculumSelect.parent(),
+    placeholder: curriculumSelect[0][0].innerHTML,
+})
+
 // Display message when table have no data
 var rowCount = $('#tblAssign tbody tr').length;
 if (rowCount == 0) {
