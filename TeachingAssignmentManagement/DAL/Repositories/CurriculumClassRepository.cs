@@ -92,6 +92,10 @@ namespace TeachingAssignmentManagement.DAL
             int nextLesson = lesson + 3;
             if (lesson != 1 && lesson != 7)
             {
+                if (lesson == 4)
+                {
+                    nextLesson = 0;
+                }
                 previousLesson = lesson - 3;
             }
             string campus = room.Split('.')[0];
