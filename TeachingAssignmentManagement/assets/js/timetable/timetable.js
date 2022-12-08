@@ -16,6 +16,7 @@ curriculumSelect.select2({
     dropdownParent: curriculumSelect.parent(),
     placeholder: curriculumSelect[0][0].innerHTML,
 }).on('change', function () {
+    console.log(curriculumSelect.val());
     curriculumSelect.parent().find('.select2-search__field').attr('placeholder', 'Here is your placeholder');
 });
 
