@@ -55,12 +55,14 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
         }
         $rendered.find('.select2-dropdown').prepend($btnContainer);
         $selectAll.on('click', function (e) {
+            $('#tblAssign [data-bs-toggle="popover"]').popover('hide');
             $('#curriculum > option').prop('selected', 'selected').trigger('change'); // Select All Options
             self.trigger('close');
             $('#tblAssign').find('tbody tr').show();
             FilterCount(curriculumSelect);
         });
         $unselectAll.on('click', function (e) {
+            $('#tblAssign [data-bs-toggle="popover"]').popover('hide');
             $('#curriculum').val(null).trigger('change'); // Unselect All Options
             self.trigger('close');
             $('#tblAssign').find('tbody tr').hide();
