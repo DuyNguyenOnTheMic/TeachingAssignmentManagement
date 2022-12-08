@@ -15,7 +15,9 @@ curriculumSelect.select2({
     dropdownAutoWidth: true,
     dropdownParent: curriculumSelect.parent(),
     placeholder: curriculumSelect[0][0].innerHTML,
-})
+}).on('change', function () {
+    curriculumSelect.parent().find('.select2-search__field').attr('placeholder', 'Here is your placeholder');
+});
 
 // Display message when table have no data
 var rowCount = $('#tblAssign tbody tr').length;
