@@ -7,7 +7,18 @@
         <button class="btn btn-warning btn-sm me-50 mb-50" type="button">Thực hành</button>
         <button class="btn btn-secondary btn-sm mb-50" type="button">Chưa phân</button>
     </div>
-    <div class="col-sm-12 col-lg-6 my-50">
+    <div class="col-sm-12 col-lg-3 my-50">
+        <div class="d-flex align-items-center justify-content-center justify-content-lg-start flex-lg-nowrap flex-wrap">
+            <select class="select2 form-select" name="curriculum">
+                <option value="">Lọc môn học</option>
+                @foreach (var option in ViewBag.curriculums)
+                {
+                    <option value="@option.id">@option.name</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-12 col-lg-3 my-50">
         <div class="d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap">
             <button type="button" class="btn btn-outline-secondary waves-effect btn-export"><i class="feather feather-file me-50"></i>Export</button>
         </div>
