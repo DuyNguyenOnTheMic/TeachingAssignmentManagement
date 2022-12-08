@@ -32,6 +32,53 @@ if (rowCount == 0) {
     });
 }
 
+$.fn.select2.amd.define('select2/selectAllAdapter', [
+    'select2/utils',
+    'select2/dropdown',
+    'select2/dropdown/attachBody'
+], function (Utils, Dropdown, AttachBody) {
+
+    function SelectAll() { }
+    SelectAll.prototype.render = function (decorated) {
+        var self = this,
+            $rendered = decorated.call(this),
+            $selectAll = $(
+                '<button class="btn btn-sm" type="button"><i class="feather feather-check-square"></i> Chọn tất cả</button>'
+            ),
+            $unselectAll = $(
+                '<button class="btn btn-sm" type="button"><i class="feather feather-square"></i> Bỏ chọn tất cả</button>'
+            ),
+            $btnContainer = $('<div></div>').append($selectAll).append($unselectAll);
+        if (!this.$element.prop("multiple")) {
+            // this isn't a multi-select -> don't add the buttons!
+            return $rendered;
+        }
+        $rendered.find('.select2-dropdown').prepend($btnContainer);
+        $selectAll.on('click', function (e) {
+            $('#curriculum > option').prop('selected', 'selected').trigger('change'); // Select All Options
+            self.trigger('close');
+            $('#tblAssign').find('tbody tr').show();
+            FilterCount(curriculumSelect);
+        });
+        $unselectAll.on('click', function (e) {
+            $('#curriculum').val(null).trigger('change'); // Unselect All Options
+            self.trigger('close');
+            $('#tblAssign').find('tbody tr').hide();
+            $('#curriculum').parent().find('.select2-search__field').attr('placeholder', 'Lọc môn học');
+        });
+        return $rendered;
+    };
+
+    return Utils.Decorate(
+        Utils.Decorate(
+            Dropdown,
+            AttachBody
+        ),
+        SelectAll
+    );
+
+});
+
 // Populate select2 for curriculum filter
 var curriculumSelect = $('#curriculum');
 $("#curriculum > option").prop("selected", "selected");
@@ -40,20 +87,25 @@ curriculumSelect.select2({
     language: 'vi',
     dropdownAutoWidth: true,
     dropdownParent: curriculumSelect.parent(),
-    placeholder: 'Lọc môn học'
+    placeholder: 'Lọc môn học',
+    dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
 })
 
-curriculumSelect.parent().find('.select2-search__field').attr('placeholder', 'hehe');
+curriculumSelect.parent().find('.select2-search__field').attr('placeholder', 'Lọc môn học');
 
 curriculumSelect.on('select2:select', function (e) {
     var curriculumId = $('#' + e.params.data.id);
     curriculumId.show();
-    curriculumSelect.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + curriculumSelect.val().length);
+    FilterCount(curriculumSelect);
 }).on('select2:unselect', function (e) {
     var curriculumId = $('#' + e.params.data.id);
     curriculumId.hide();
-    curriculumSelect.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + curriculumSelect.val().length);
+    FilterCount(curriculumSelect);
 });
+
+function FilterCount(element) {
+    element.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + curriculumSelect.val().length);
+}
 
 // Split lecturerName
 $('.assign-card').each(function () {
