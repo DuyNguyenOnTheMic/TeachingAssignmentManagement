@@ -403,12 +403,14 @@ namespace TeachingAssignmentManagement.Controllers
                             dynamic checkState = CheckState(query_curriculumClass.id, term, curriculumClass.lecturer_id).Data;
                             if (checkState.success)
                             {
+                                // update lecturer if check success
                                 query_curriculumClass.lecturer_id = curriculumClass.lecturer_id;
                                 query_curriculumClass.last_assigned_by = lastAssignedBy;
                                 unitOfWork.Save();
                             }
                             else
                             {
+                                // Add lecturer to error list
                                 errorAssignList.Add(Tuple.Create(ToNullableString(lecturerId), ToNullableString(fullName), checkState.message));
                             }
                         }
