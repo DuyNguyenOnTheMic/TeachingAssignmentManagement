@@ -173,7 +173,8 @@ function importSucceeded(data) {
 
     if (data.length) {
         // Show section
-        $('#errorLecturers-section').show();
+        var errorLecturers = $('#errorLecturers-section');
+        errorLecturers.show();
 
         // Populate datatables
         populateDatatable(data);
@@ -183,6 +184,10 @@ function importSucceeded(data) {
             // Show assign lecturer error list
             message = 'Đã import dữ liệu! \nCó một số giảng viên có lịch giảng dạy bị trùng, vui lòng xem chi tiết ở cuối trang.';
             SetVisibleColumn(true);
+            setTimeout(function () {
+                errorLecturers.find('.alert').hide();
+                errorLecturers.find('.importUser').hide();
+            }, 0);
         } else {
             // Show lecturer that hasn't been in the system yet
             message = 'Đã import dữ liệu! \nCó một số giảng viên chưa có trong hệ thống, vui lòng xem chi tiết ở cuối trang.';
