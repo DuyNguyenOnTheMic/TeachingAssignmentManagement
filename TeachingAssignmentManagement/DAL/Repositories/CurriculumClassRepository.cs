@@ -86,6 +86,20 @@ namespace TeachingAssignmentManagement.DAL
             return curriculumClasses.Where(c => c.start_lesson_2 == lesson);
         }
 
+        public IEnumerable<curriculum_class> GetClassesInCampus(IEnumerable<curriculum_class> curriculumClasses, int lesson, string room)
+        {
+            int previousLesson = 0;
+            int nextLesson = lesson + 3;
+            if (lesson != 1 && lesson != 7)
+            {
+                previousLesson = lesson - 3;
+            }
+            string campus = room.Split('.')[0];
+            return campus.Contains("CS")
+                ? curriculumClasses.Where(c => !c.room_id.Contains(campus) && c.room_id.Contains("CS") && (c.start_lesson == previousLesson || c.start_lesson == nextLesson))
+                : Enumerable.Empty<curriculum_class>();
+        }
+
         public IEnumerable<curriculum_class> GetClassesInDay(IEnumerable<curriculum_class> curriculumClasses, int day)
         {
             return curriculumClasses.Where(c => c.day_2 == day);

@@ -531,6 +531,7 @@ namespace TeachingAssignmentManagement.Controllers
                 term term = unitOfWork.TermRepository.GetTermByID(termId);
                 IEnumerable<curriculum_class> query_classWeek = unitOfWork.CurriculumClassRepository.GetClassesInTerm(termId, lecturerId);
                 IEnumerable<curriculum_class> query_classDay = unitOfWork.CurriculumClassRepository.GetClassesInDay(query_classWeek, curriculumClass.day_2);
+                IEnumerable<curriculum_class> query_classCampus = unitOfWork.CurriculumClassRepository.GetClassesInCampus(query_classDay, curriculumClass.start_lesson_2, curriculumClass.room_id);
                 IEnumerable<curriculum_class> query_classLesson = unitOfWork.CurriculumClassRepository.GetClassesInLesson(query_classDay, curriculumClass.start_lesson_2);
 
                 // Check not duplicate class in the same time
@@ -545,6 +546,20 @@ namespace TeachingAssignmentManagement.Controllers
                         majorName = c.major.name
                     }).ToList();
                     return Json(new { success = false, message = "Giảng viên này đã có lớp trong tiết học này!", classList = classes }, JsonRequestBehavior.AllowGet);
+                }
+
+                // Check previous and next class not in the other campus
+                if (query_classCampus.Any())
+                {
+                    IEnumerable classes = query_classCampus.Select(c => new
+                    {
+                        classId = c.curriculum_class_id,
+                        curriculumName = c.curriculum.name,
+                        classDay = c.day,
+                        lessonTime = c.lesson_time,
+                        majorName = c.major.name
+                    }).ToList();
+                    return Json(new { success = false, message = "Giảng viên này đã có lớp ở cơ sở khác!", classList = classes }, JsonRequestBehavior.AllowGet);
                 }
 
                 // Check maximum lessons in a day
