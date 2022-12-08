@@ -183,7 +183,11 @@ function importSucceeded(data) {
             message = 'Đã import dữ liệu! \nCó một số giảng viên có lịch giảng dạy bị trùng, vui lòng xem chi tiết ở cuối trang.';
         } else {
             message = 'Đã import dữ liệu! \nCó một số giảng viên chưa có trong hệ thống, vui lòng xem chi tiết ở cuối trang.';
-            $('#tblErrorLecturers').DataTable().column(3).visible(false);
+            var table = $('#tblErrorLecturers').DataTable();
+            for (var i = 3; i <= 5; i++) {
+                table.column(i).visible(false, false);
+            }
+            table.columns.adjust().draw(false); // adjust column sizing and redraw
         }
 
         Swal.fire({
@@ -267,7 +271,9 @@ function populateDatatable(data) {
                     { 'data': '', defaultContent: '' },
                     { 'data': 'Item1' },
                     { 'data': 'Item2' },
-                    { 'data': 'Item3', defaultContent: '' }
+                    { 'data': 'Item3', defaultContent: '' },
+                    { 'data': 'Item4', defaultContent: '' },
+                    { 'data': 'Item5', defaultContent: '' }
                 ],
 
                 columnDefs: [
