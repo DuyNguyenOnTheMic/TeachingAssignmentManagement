@@ -8,7 +8,7 @@ $(function () {
 });
 
 // Populate select2 for curriculum filter
-var curriculumSelect = $('#curriculum'); 
+var curriculumSelect = $('#curriculum');
 curriculumSelect.wrap('<div class="position-relative my-50"></div>');
 curriculumSelect.select2({
     language: 'vi',
@@ -17,7 +17,7 @@ curriculumSelect.select2({
     placeholder: curriculumSelect[0][0].innerHTML,
 }).on('select2:select', function (e) {
     var curriculumId = $('#' + e.params.data.id);
-    curriculumId.show(); 
+    curriculumId.show();
     curriculumSelect.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + curriculumSelect.val().length);
 }).on('select2:unselect', function (e) {
     var curriculumId = $('#' + e.params.data.id);
