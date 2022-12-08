@@ -417,14 +417,9 @@ namespace TeachingAssignmentManagement.Controllers
                 }
                 unitOfWork.Save();
                 TimetableHub.RefreshData(term, major);
-                if (errorLecturerList.Count > 0)
-                {
-                    return Json(errorLecturerList.Distinct(), JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    return Json(errorAssignList, JsonRequestBehavior.AllowGet);
-                }
+                return errorLecturerList.Count > 0
+                    ? Json(errorLecturerList.Distinct(), JsonRequestBehavior.AllowGet)
+                    : (ActionResult)Json(errorAssignList, JsonRequestBehavior.AllowGet);
             }
             catch
             {
