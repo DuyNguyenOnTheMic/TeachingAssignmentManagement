@@ -7,24 +7,6 @@ $(function () {
     updateCount();
 });
 
-// Populate select2 for curriculum filter
-var curriculumSelect = $('#curriculum');
-curriculumSelect.wrap('<div class="position-relative my-50"></div>');
-curriculumSelect.select2({
-    language: 'vi',
-    dropdownAutoWidth: true,
-    dropdownParent: curriculumSelect.parent(),
-    placeholder: curriculumSelect[0][0].innerHTML,
-}).on('select2:select', function (e) {
-    var curriculumId = $('#' + e.params.data.id);
-    curriculumId.show();
-    curriculumSelect.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + curriculumSelect.val().length);
-}).on('select2:unselect', function (e) {
-    var curriculumId = $('#' + e.params.data.id);
-    curriculumId.hide();
-    curriculumSelect.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + curriculumSelect.val().length);
-});
-
 // Display message when table have no data
 var rowCount = $('#tblAssign tbody tr').length;
 if (rowCount == 0) {
@@ -44,6 +26,29 @@ if (rowCount == 0) {
         });
     });
 }
+
+// Populate select2 for curriculum filter
+var curriculumSelect = $('#curriculum');
+$("#curriculum > option").prop("selected", "selected");
+curriculumSelect.wrap('<div class="position-relative my-50"></div>');
+curriculumSelect.select2({
+    language: 'vi',
+    dropdownAutoWidth: true,
+    dropdownParent: curriculumSelect.parent(),
+    placeholder: 'Lọc môn học'
+})
+
+curriculumSelect.parent().find('.select2-search__field').attr('placeholder', 'hehe');
+
+curriculumSelect.on('select2:select', function (e) {
+    var curriculumId = $('#' + e.params.data.id);
+    curriculumId.show();
+    curriculumSelect.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + curriculumSelect.val().length);
+}).on('select2:unselect', function (e) {
+    var curriculumId = $('#' + e.params.data.id);
+    curriculumId.hide();
+    curriculumSelect.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + curriculumSelect.val().length);
+});
 
 // Split lecturerName
 $('.assign-card').each(function () {
