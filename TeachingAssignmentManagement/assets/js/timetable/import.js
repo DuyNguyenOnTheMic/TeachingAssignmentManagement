@@ -192,6 +192,10 @@ function importSucceeded(data) {
             // Show lecturer that hasn't been in the system yet
             message = 'Đã import dữ liệu! \nCó một số giảng viên chưa có trong hệ thống, vui lòng xem chi tiết ở cuối trang.';
             SetVisibleColumn(false);
+            setTimeout(function () {
+                errorLecturers.find('.alert').show();
+                errorLecturers.find('.importUser').show();
+            }, 0);
         }
 
         Swal.fire({
