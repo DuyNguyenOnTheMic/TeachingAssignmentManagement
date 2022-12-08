@@ -6,7 +6,7 @@
         <button class="btn btn-success me-50 my-auto p-25 text-nowrap" type="button">Lý thuyết</button>
         <button class="btn btn-warning me-50 my-auto p-25 text-nowrap" type="button">Thực hành</button>
         <button class="btn btn-secondary me-1 my-auto p-25 text-nowrap" type="button">Chưa phân</button>
-        <select class="select2 form-select my-50" name="curriculum">
+        <select class="select2 form-select my-50" name="curriculum" multiple aria-label="Lọc môn học">
             <option value="">Lọc môn học</option>
             @foreach (var option in ViewBag.curriculums)
             {
