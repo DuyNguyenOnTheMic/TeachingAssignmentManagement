@@ -5,6 +5,11 @@
 $(function () {
     // Update count on document ready
     updateCount();
+
+    // Update focus for select2 inside popover
+    $(document).on('select2:open', () => {
+        document.querySelector('.select2-container--open .select2-search__field').focus();
+    });
 });
 
 // Display message when table have no data
