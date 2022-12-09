@@ -121,6 +121,7 @@
           </Key>
           <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="abbreviation" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="room">
           <Key>
@@ -464,6 +465,7 @@
           </Key>
           <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="abbreviation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="curriculum_class" Relationship="Self.FK_curriculum_class_major" FromRole="major" ToRole="curriculum_class" />
         </EntityType>
         <EntityType Name="room">
@@ -771,6 +773,7 @@
               <MappingFragment StoreEntitySet="major">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="abbreviation" ColumnName="abbreviation" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
