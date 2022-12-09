@@ -39,6 +39,7 @@ if (majorId == -1) {
         var curriculumId = $this.attr('id');
         var majorAbb = $('.abb-' + curriculumId).first().data('abb');
         $this.find('td:first').append(' (' + majorAbb + ')');
+        $('#curriculum option[value="' + curriculumId + '"]').append(' (' + majorAbb + ')');
     });
 }
 
