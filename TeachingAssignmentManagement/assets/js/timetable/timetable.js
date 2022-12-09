@@ -37,8 +37,8 @@ if (majorId == -1) {
     $('#tblAssign tbody tr').each(function () {
         var $this = $(this);
         var curriculumId = $this.attr('id');
-        var abbElement = $('.abb-' + curriculumId).first().text();
-        $this.find('td:first').append(' (' + abbElement + ')');
+        var majorAbb = $('.abb-' + curriculumId).first().data('abb');
+        $this.find('td:first').append(' (' + majorAbb + ')');
     });
 }
 
