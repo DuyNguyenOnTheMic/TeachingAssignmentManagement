@@ -95,8 +95,8 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
 });
 
 // Populate select2 for curriculum filter
-curriculumFilter.find('option').prop("selected", "selected");
-curriculumFilter.wrap('<div class="position-relative my-50"></div>');
+curriculumFilter.find('option').prop('selected', 'selected');
+curriculumFilter.wrap('<div class="position-relative my-50 me-1"></div>');
 curriculumFilter.select2({
     language: 'vi',
     dropdownAutoWidth: true,
@@ -115,6 +115,19 @@ curriculumFilter.on('select2:select', function (e) {
     var curriculumId = $('#' + e.params.data.id);
     curriculumId.hide();
     FilterCount(curriculumFilter);
+});
+
+// Populate select2 for lecturer filter
+lecturerFilter.wrap('<div class="position-relative my-50"></div>');
+lecturerFilter.select2({
+    language: 'vi',
+    dropdownAutoWidth: true,
+    dropdownParent: lecturerFilter.parent(),
+    placeholder: 'Lọc giảng viên',
+    allowClear: true
+}).on('select2:select', function (e) {
+}).on('select2:unselect', function (e) {
+    alert('hehe');
 });
 
 function FilterCount(element) {
