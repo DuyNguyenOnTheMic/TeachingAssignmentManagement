@@ -68,14 +68,14 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
         }
         $rendered.find('.select2-dropdown').prepend($btnContainer);
         $selectAll.on('click', function () {
-            $('#tblAssign [data-bs-toggle="popover"]').popover('hide');
+            hidePopover();
             curriculumFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options
             self.trigger('close');
             $('#tblAssign').find('tbody tr').show();
             FilterCount(curriculumFilter);
         });
         $unselectAll.on('click', function () {
-            $('#tblAssign [data-bs-toggle="popover"]').popover('hide');
+            hidePopover();
             curriculumFilter.val(null).trigger('change'); // Unselect All Options
             self.trigger('close');
             $('#tblAssign').find('tbody tr').hide();
@@ -126,6 +126,8 @@ lecturerFilter.select2({
     placeholder: 'Lọc giảng viên',
     allowClear: true
 }).on('select2:select', function () {
+    // Show all class to filter again
+    showAllClass();
     // Filter for curriculum classes which has lecturer
     var $this = $(this),
         tableRow = $('#tblAssign tbody tr'),
@@ -135,10 +137,9 @@ lecturerFilter.select2({
         curriculumRow = lecturerClass.closest('tr');
     curriculumClass.not(lecturerClass).hide();
     tableRow.not(curriculumRow).hide();
-}).on('select2:unselect', function (e) {
+}).on('select2:unselect', function () {
     // Show all class when unselect
-    $('#tblAssign tbody tr').show();
-    $('.assign-card').show();
+    showAllClass();
 });
 
 function FilterCount(element) {
@@ -271,13 +272,23 @@ $('.assign-card').on('click', function () {
 
 // Hide other popovers when user click on table
 $('#tblAssign').on('click', function () {
-    $('#tblAssign [data-bs-toggle="popover"]').popover('hide');
+    hidePopover();
 });
 
 $('.btn-export').on('click', function () {
     var url = rootUrl + 'TimeTable/Export?termId=' + termId + '&majorId=' + majorId;
     window.open(url, '_blank').focus();
 });
+
+function showAllClass() {
+    hidePopover();
+    $('#tblAssign tbody tr').show();
+    $('.assign-card').show();
+}
+
+function hidePopover() {
+    $('#tblAssign [data-bs-toggle="popover"]').popover('hide');
+}
 
 function splitString(lecturerName) {
     // Split lecture name
