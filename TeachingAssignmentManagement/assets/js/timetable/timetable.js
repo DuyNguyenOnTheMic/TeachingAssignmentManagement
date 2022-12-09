@@ -125,7 +125,7 @@ lecturerFilter.select2({
     dropdownParent: lecturerFilter.parent(),
     placeholder: 'Lọc giảng viên',
     allowClear: true
-}).on('select2:select', function (e) {
+}).on('select2:select', function () {
     // Filter for curriculum classes which has lecturer
     var $this = $(this),
         tableRow = $('#tblAssign tbody tr'),
@@ -263,7 +263,7 @@ $('.assign-card').on('click', function () {
             });
         } else {
             // Set selected value for dropdown
-            var lecturerId = $(this).data('lecturerid');
+            var lecturerId = $(this).attr('data-lecturerid');
             formSelect.val(lecturerId).trigger('change');
         }
     }, 0);
