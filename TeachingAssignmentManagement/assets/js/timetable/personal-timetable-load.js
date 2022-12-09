@@ -19,7 +19,7 @@ $(function () {
         });
     })
 
-    var termId = $('#term option:last-child').val(),
+    var termId = $('#term option:eq(1)').val(),
         week = 0;
     if (termId) {
         termSelect.val(termId).trigger('change');
