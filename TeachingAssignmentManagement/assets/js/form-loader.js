@@ -88,6 +88,10 @@ if (majorForm.length) {
             name: {
                 required: true,
                 maxlength: 255
+            },
+            abbreviation: {
+                required: true,
+                maxlength: 50
             }
         },
         messages: {
@@ -99,6 +103,10 @@ if (majorForm.length) {
             name: {
                 required: "Bạn chưa nhập tên ngành",
                 maxlength: "Tối đa 255 kí tự được cho phép"
+            },
+            abbreviation: {
+                required: "Bạn chưa nhập tên viết tắt của ngành",
+                maxlength: "Tối đa 50 kí tự được cho phép"
             }
         }
     });
