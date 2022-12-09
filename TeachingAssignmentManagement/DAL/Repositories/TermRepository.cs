@@ -25,7 +25,7 @@ namespace TeachingAssignmentManagement.DAL
                 t.start_date,
                 t.max_lesson,
                 t.max_class
-            }).ToList();
+            }).OrderByDescending(t => t.id).ToList();
         }
 
         public term GetTermByID(int id)
