@@ -187,7 +187,7 @@ function importSucceeded(data) {
             setTimeout(function () {
                 errorLecturers.find('.alert').hide();
                 errorLecturers.find('.importUser').hide();
-            }, 0);
+            }, 100);
         } else {
             // Show lecturer that hasn't been in the system yet
             message = 'Đã import dữ liệu! \nCó một số giảng viên chưa có trong hệ thống, vui lòng xem chi tiết ở cuối trang.';
@@ -195,7 +195,7 @@ function importSucceeded(data) {
             setTimeout(function () {
                 errorLecturers.find('.alert').show();
                 errorLecturers.find('.importUser').show();
-            }, 0);
+            }, 100);
         }
 
         Swal.fire({
