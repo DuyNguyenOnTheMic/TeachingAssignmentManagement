@@ -21,7 +21,7 @@ namespace TeachingAssignmentManagement.DAL
                 m.id,
                 m.name,
                 m.abbreviation
-            }).ToList();
+            }).OrderByDescending(m => m.name.Contains("công nghệ thông tin")).ToList();
         }
 
         public major GetMajorByID(string id)
