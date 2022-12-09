@@ -68,6 +68,10 @@
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>@item.CurriculumClassId </b>(@item.StudentRegisteredNumber SV)<br /><b>Phòng: </b>@item.RoomId">
                                             <button class="btn @cardClass assign-card text-nowrap my-25 p-25" type="button" id="@item.Id" data-lecturerid="@lecturerId" data-classtype="@item.Type" data-bs-toggle="popover" data-bs-content="@Html.Partial("_Assign", new ViewDataDictionary { { "lecturer", ViewBag.lecturers }, { "classId", item.Id }, { "lecturerId", lecturerId } }).ToString()" title="<span class='class-id'>@item.CurriculumClassId</span> (@item.StudentRegisteredNumber SV)" data-bs-delay="160" data-bs-trigger="click">@lecturerName</button>
                                         </div>
+                                        if (item.MajorAbb != null)
+                                        {
+                                            <div class="d-none abb-@curriculum.id">@item.MajorAbb</div>
+                                        }
                                     }
                                 </td>
                             }
@@ -83,4 +87,4 @@
     </table>
 </div>
 
-<script src="~/assets/js/timetable/timetable.min.js"></script>
+<script src="~/assets/js/timetable/timetable.js"></script>

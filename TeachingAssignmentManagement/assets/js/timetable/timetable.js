@@ -32,6 +32,16 @@ if (rowCount == 0) {
     });
 }
 
+if (majorId == -1) {
+    // Append abbreviation text of major name to curriculum name
+    $('#tblAssign tbody tr').each(function () {
+        var $this = $(this);
+        var curriculumId = $this.attr('id');
+        var abbElement = $('.abb-' + curriculumId).first().text();
+        $this.find('td:first').append(' (' + abbElement + ')');
+    });
+}
+
 $.fn.select2.amd.define('select2/selectAllAdapter', [
     'select2/utils',
     'select2/dropdown',
