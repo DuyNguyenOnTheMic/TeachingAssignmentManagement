@@ -446,7 +446,19 @@ namespace TeachingAssignmentManagement.Controllers
                 new DataColumn("Ghi Chú 1"), new DataColumn("Ghi chú 2")
             });
 
-            IEnumerable<curriculum_class> classes = unitOfWork.CurriculumClassRepository.GetExportData(termId, majorId);
+            IEnumerable<curriculum_class> classes;
+            if (majorId != "-1")
+            {
+                // Export data in term and major
+                classes = unitOfWork.CurriculumClassRepository.GetExportData(termId, majorId);
+            }
+            else
+            {
+                // Export data in whole term and update major name for file
+                classes = unitOfWork.CurriculumClassRepository.GetTermExportData(termId);
+                majorId = "TatCa";
+            }
+
             foreach (curriculum_class item in classes)
             {
                 // Add data to table

@@ -76,6 +76,11 @@ namespace TeachingAssignmentManagement.DAL
             return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId);
         }
 
+        public IEnumerable<curriculum_class> GetTermExportData(int termId)
+        {
+            return context.curriculum_class.Where(c => c.term_id == termId);
+        }
+
         public IEnumerable<curriculum_class> GetClassesInTerm(int termId, string lecturerId)
         {
             return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
