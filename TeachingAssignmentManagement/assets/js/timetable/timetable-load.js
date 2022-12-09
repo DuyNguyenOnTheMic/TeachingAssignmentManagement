@@ -34,7 +34,7 @@ $(function () {
     var formSelect = $('.form-select');
 
     // Append option to select all major
-    $('#major').append('<option value="-1">Tất cả</option>');
+    $("#major option:first").after('<option value="-1">Tất cả</option>');
 
     // Populate select2 for choosing term and major
     formSelect.each(function () {
