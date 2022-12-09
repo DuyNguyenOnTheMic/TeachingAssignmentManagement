@@ -19,7 +19,8 @@ namespace TeachingAssignmentManagement.DAL
             return context.majors.Select(m => new
             {
                 m.id,
-                m.name
+                m.name,
+                m.abbreviation
             }).ToList();
         }
 
