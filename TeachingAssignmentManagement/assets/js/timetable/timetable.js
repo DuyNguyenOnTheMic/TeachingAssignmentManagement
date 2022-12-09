@@ -258,15 +258,9 @@ $('.assign-card').on('click', function () {
         if (!$(formSelect).hasClass("select2-hidden-accessible")) {
             // Apply select2
             populateSelect(formSelect);
-            // Add focus to search field
-            formSelect.on('select2:open', () => {
-                document.querySelector('.select2-search__field').focus();
-            });
-        } else {
-            // Set selected value for dropdown
-            var lecturerId = $(this).attr('data-lecturerid');
-            formSelect.val(lecturerId).trigger('change');
         }
+        var lecturerId = $(this).attr('data-lecturerid');
+        formSelect.val(lecturerId).trigger('change');
     }, 0);
 });
 
