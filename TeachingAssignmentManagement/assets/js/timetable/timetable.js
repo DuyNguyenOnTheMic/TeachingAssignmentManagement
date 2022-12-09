@@ -126,8 +126,19 @@ lecturerFilter.select2({
     placeholder: 'Lọc giảng viên',
     allowClear: true
 }).on('select2:select', function (e) {
+    // Filter for curriculum classes which has lecturer
+    var $this = $(this),
+        tableRow = $('#tblAssign tbody tr'),
+        lecturerId = $this.val(),
+        lecturerClass = tableRow.find('[data-lecturerid=' + lecturerId + ']'),
+        curriculumClass = tableRow.find('.assign-card'),
+        curriculumRow = lecturerClass.closest('tr');
+    curriculumClass.not(lecturerClass).hide();
+    tableRow.not(curriculumRow).hide();
 }).on('select2:unselect', function (e) {
-    alert('hehe');
+    // Show all class when unselect
+    $('#tblAssign tbody tr').show();
+    $('.assign-card').show();
 });
 
 function FilterCount(element) {
