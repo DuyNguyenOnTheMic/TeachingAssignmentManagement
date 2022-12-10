@@ -56,12 +56,12 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
         var self = this,
             $rendered = decorated.call(this),
             $selectAll = $(
-                '<button class="btn btn-sm" type="button"><i class="feather feather-check-square"></i> Chọn tất cả</button>'
+                '<button class="btn btn-sm text-start" type="button"><i class="feather feather-check-square"></i> Chọn tất cả</button>'
             ),
             $unselectAll = $(
-                '<button class="btn btn-sm" type="button"><i class="feather feather-square"></i> Bỏ chọn tất cả</button>'
+                '<button class="btn btn-sm text-start" type="button"><i class="feather feather-square"></i> Bỏ chọn tất cả</button>'
             ),
-            $btnContainer = $('<div></div>').append($selectAll).append($unselectAll);
+            $btnContainer = $('<div class="d-grid"></div>').append($selectAll).append($unselectAll);
         if (!this.$element.prop("multiple")) {
             // this isn't a multi-select -> don't add the buttons!
             return $rendered;
