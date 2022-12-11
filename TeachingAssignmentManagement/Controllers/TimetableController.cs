@@ -402,7 +402,7 @@ namespace TeachingAssignmentManagement.Controllers
                         }
                         else if (query_curriculumClass?.lecturer_id == null && curriculumClass.lecturer_id != null)
                         {
-                            dynamic checkState = CheckState(query_curriculumClass.id, term, curriculumClass.lecturer_id).Data;
+                            dynamic checkState = CheckState(query_curriculumClass.id, term, curriculumClass.lecturer_id, true).Data;
                             if (checkState.success)
                             {
                                 // update lecturer if check success
@@ -536,7 +536,7 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = "BCN khoa, Bộ môn")]
-        public JsonResult CheckState(int id, int termId, string lecturerId)
+        public JsonResult CheckState(int id, int termId, string lecturerId, bool warning)
         {
             if (lecturerId != string.Empty)
             {
@@ -563,7 +563,7 @@ namespace TeachingAssignmentManagement.Controllers
                 }
 
                 // Check previous and next class not in the other campus
-                if (query_classCampus.Any())
+                if (query_classCampus.Any() && warning == true)
                 {
                     IEnumerable classes = query_classCampus.Select(c => new
                     {
@@ -574,7 +574,7 @@ namespace TeachingAssignmentManagement.Controllers
                         roomId = c.room_id,
                         majorName = c.major.name
                     }).ToList();
-                    return Json(new { success = false, warning = true, message = "Giảng viên này đã có lớp ở cơ sở khác!", classList = classes }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = false, warning = true, message = "Giảng viên này đã có lớp ở cơ sở khác, bạn có chắc muốn phân công?", classList = classes }, JsonRequestBehavior.AllowGet);
                 }
 
                 // Check maximum lessons in a day

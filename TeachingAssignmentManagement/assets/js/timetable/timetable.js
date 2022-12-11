@@ -168,17 +168,18 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
     // Get values
     var id = $this.data('id'),
         lecturerSelect = $this.parent().find('.select2 :selected'),
-        lecturerId = lecturerSelect.val();
+        lecturerId = lecturerSelect.val()
+        warning = true;
 
     // Send ajax request to check state of lecturer
     $.ajax({
         type: 'GET',
         url: rootUrl + 'Timetable/CheckState',
-        data: { id, termId, lecturerId },
+        data: { id, termId, lecturerId, warning },
         success: function (data) {
             if (data.success) {
                 // Call function to assign lecturer
-                assignLecturer(id, lecturerId);
+                assignLecturer(id, lecturerId, warning);
             } else if (data.warning) {
                 // Populate error message into table
                 let errorMessage = data.message + '<div class="table-responsive mt-2"><table class="table table-sm"><thead class="text-nowrap"><tr><th></th><th>Mã LHP</th><th>Tên HP</th><th>Thứ</th><th>Tiết</th><th>Phòng</th><th>Ngành</th></tr></thead><tbody>';
@@ -191,13 +192,21 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
                     title: 'Thông báo',
                     width: 800,
                     html: errorMessage,
-                    icon: 'error',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'Huỷ',
+                    confirmButtonText: 'Phân công',
                     customClass: {
-                        confirmButton: 'btn btn-primary'
+                        confirmButton: 'btn btn-primary',
+                        cancelButton: 'btn btn-outline-danger ms-1'
                     },
                     buttonsStyling: false
-                })
-                alert('coi chừng đó ' + data.message);
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        warning = false;
+                        assignLecturer(id, lecturerId, warning);
+                    }
+                });            
             } else {
                 // Populate error message into table
                 let errorMessage = data.message + '<div class="table-responsive mt-2"><table class="table table-sm"><thead class="text-nowrap"><tr><th></th><th>Mã LHP</th><th>Tên HP</th><th>Thứ</th><th>Tiết</th><th>Ngành</th></tr></thead><tbody>';
@@ -311,12 +320,12 @@ function splitString(lecturerName) {
     return result;
 }
 
-function assignLecturer(id, lecturerId) {
+function assignLecturer(id, lecturerId, warning) {
     // Send ajax request to assign lecturer
     $.ajax({
         type: 'POST',
         url: rootUrl + 'Timetable/Assign',
-        data: { id, lecturerId },
+        data: { id, lecturerId, warning },
         success: function (data) {
             if (data.success) {
                 // Display success message
