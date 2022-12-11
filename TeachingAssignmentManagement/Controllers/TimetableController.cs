@@ -247,7 +247,7 @@ namespace TeachingAssignmentManagement.Controllers
             IEnumerable<curriculum_class> query_curriculumClassWhere = curriculumClassList;
             if (isUpdate)
             {
-                // Query Curriculum classes of this term and major
+                // Query Curriculum classes of this term
                 query_curriculumClassWhere = unitOfWork.CurriculumClassRepository.GetClassesByTerm(term);
             }
 
