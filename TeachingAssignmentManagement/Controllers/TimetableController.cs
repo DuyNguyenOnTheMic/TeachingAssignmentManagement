@@ -395,17 +395,10 @@ namespace TeachingAssignmentManagement.Controllers
                         curriculum_class query_curriculumClass = unitOfWork.CurriculumClassRepository.FindCurriculumClass(query_curriculumClassWhere, curriculumClass.curriculum_class_id, curriculumClass.day_2, curriculumClass.room_id);
                         if (query_curriculumClass == null)
                         {
-                            dynamic checkState = CheckState(query_curriculumClass.id, term, curriculumClass.lecturer_id).Data;
-                            if (checkState.success)
-                            {
-                                // Create new curriculum class if no class found
-                                unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
-                            }
-                            else
-                            {
-                                // Add lecturer to error list
-                                errorAssignList.Add(Tuple.Create(lecturerId, fullName, curriculumClassid, day, lessonTime, checkState.message));
-                            }
+                            // Create new curriculum class if no class found
+                            curriculumClass.last_assigned_by = null;
+                            curriculumClass.lecturer_id = null;
+                            unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
                         }
                         else if (query_curriculumClass?.lecturer_id == null && curriculumClass.lecturer_id != null)
                         {
@@ -413,8 +406,8 @@ namespace TeachingAssignmentManagement.Controllers
                             if (checkState.success)
                             {
                                 // update lecturer if check success
-                                query_curriculumClass.lecturer_id = curriculumClass.lecturer_id;
                                 query_curriculumClass.last_assigned_by = lastAssignedBy;
+                                query_curriculumClass.lecturer_id = curriculumClass.lecturer_id;
                                 unitOfWork.Save();
                             }
                             else
