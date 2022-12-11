@@ -557,7 +557,6 @@ namespace TeachingAssignmentManagement.Controllers
                         curriculumName = c.curriculum.name,
                         classDay = c.day,
                         lessonTime = c.lesson_time,
-                        roomId = c.room_id,
                         majorName = c.major.name
                     }).ToList();
                     return Json(new { success = false, message = "Giảng viên này đã có lớp trong tiết học này!", classList = classes }, JsonRequestBehavior.AllowGet);
@@ -575,7 +574,7 @@ namespace TeachingAssignmentManagement.Controllers
                         roomId = c.room_id,
                         majorName = c.major.name
                     }).ToList();
-                    return Json(new { success = false, message = "Giảng viên này đã có lớp ở cơ sở khác!", classList = classes }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = false, warning = true, message = "Giảng viên này đã có lớp ở cơ sở khác!", classList = classes }, JsonRequestBehavior.AllowGet);
                 }
 
                 // Check maximum lessons in a day
@@ -587,7 +586,6 @@ namespace TeachingAssignmentManagement.Controllers
                         curriculumName = c.curriculum.name,
                         classDay = c.day,
                         lessonTime = c.lesson_time,
-                        roomId = c.room_id,
                         majorName = c.major.name
                     }).ToList();
                     return Json(new { success = false, message = "Giảng viên này đã đạt số tiết tối đa trong 1 ngày!", classList = classes }, JsonRequestBehavior.AllowGet);
@@ -602,7 +600,6 @@ namespace TeachingAssignmentManagement.Controllers
                         curriculumName = c.curriculum.name,
                         classDay = c.day,
                         lessonTime = c.lesson_time,
-                        roomId = c.room_id,
                         majorName = c.major.name
                     }).ToList();
                     return Json(new { success = false, message = "Giảng viên này đạt số lớp tối đa trong 1 tuần!", classList = classes }, JsonRequestBehavior.AllowGet);
