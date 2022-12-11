@@ -248,7 +248,7 @@ namespace TeachingAssignmentManagement.Controllers
             if (isUpdate)
             {
                 // Query Curriculum classes of this term and major
-                query_curriculumClassWhere = unitOfWork.CurriculumClassRepository.GetClassesByTermMajor(term, major);
+                query_curriculumClassWhere = unitOfWork.CurriculumClassRepository.GetClassesByTerm(term);
             }
 
             // Create a list for storing error Lecturers
@@ -455,7 +455,7 @@ namespace TeachingAssignmentManagement.Controllers
             else
             {
                 // Export data in whole term and update major name for file
-                classes = unitOfWork.CurriculumClassRepository.GetTermExportData(termId);
+                classes = unitOfWork.CurriculumClassRepository.GetClassesByTerm(termId);
                 majorId = "TatCa";
             }
 
