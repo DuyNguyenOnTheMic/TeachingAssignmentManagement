@@ -71,12 +71,13 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
             hidePopover();
             if (self.$element.attr('id') == 'curriculumFilter') {
                 curriculumFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options
+                FilterCount(curriculumFilter);
             } else if (self.$element.attr('id') == 'lecturerFilter') {
                 lecturerFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options
+                FilterCount(lecturerFilter);
             }
             self.trigger('close');
             $('#tblAssign').find('tbody tr').show();
-            FilterCount(curriculumFilter);
         });
         $unselectAll.on('click', function () {
             hidePopover();
