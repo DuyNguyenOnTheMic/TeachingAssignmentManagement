@@ -86,7 +86,7 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
                 curriculumFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc môn học');
             } else if (self.$element.attr('id') == 'lecturerFilter') {
                 lecturerFilter.val(null).trigger('change'); // Unselect All Options
-                curriculumFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
+                lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
             }
             self.trigger('close');
             $('#tblAssign').find('tbody tr').hide();
@@ -137,10 +137,14 @@ lecturerFilter.select2({
     placeholder: 'Lọc giảng viên',
     dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
 }).on('select2:select', function () {
-    // Show all class to filter again
-    showAllClass();
+    hidePopover();
     // Filter for curriculum classes which has lecturer
+    var tableRow = $('#tblAssign tbody tr'),
+        lecturerId = e.params.data.id,
+        lecturerClass = tableRow.find('[data-lecturerid=' + lecturerId + ']');
+    lecturerClass.show();
 }).on('select2:unselect', function (e) {
+    hidePopover();
     // Show all class when unselect
     var tableRow = $('#tblAssign tbody tr'),
         lecturerId = e.params.data.id,
@@ -307,12 +311,6 @@ $('.btn-export').on('click', function () {
     var url = rootUrl + 'TimeTable/Export?termId=' + termId + '&majorId=' + majorId;
     window.open(url, '_blank').focus();
 });
-
-function showAllClass() {
-    hidePopover();
-    $('#tblAssign tbody tr').show();
-    $('.assign-card').show();
-}
 
 function hidePopover() {
     $('#tblAssign [data-bs-toggle="popover"]').popover('hide');
