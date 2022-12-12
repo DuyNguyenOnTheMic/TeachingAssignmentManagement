@@ -157,8 +157,8 @@ lecturerFilter.on('select2:select', function (e) {
     hidePopover();
     // Show all class when unselect
     var tableRow = $('#tblAssign tbody tr'),
-        lecturerId = e.params.data.id;
-    var lecturerClass = tableRow.find('[data-lecturerid="' + lecturerId + '"]');
+        lecturerId = e.params.data.id,
+        lecturerClass = tableRow.find('[data-lecturerid="' + lecturerId + '"]');
     lecturerClass.hide();
     tableRow.each(function () {
         var $this = $(this);
