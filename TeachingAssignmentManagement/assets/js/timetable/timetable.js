@@ -150,6 +150,15 @@ lecturerFilter.select2({
         lecturerId = e.params.data.id,
         lecturerClass = tableRow.find('[data-lecturerid=' + lecturerId + ']');
     lecturerClass.hide();
+    tableRow.each(function () {
+        var $this = $(this);
+        console.log($this.find('.assign-card:visible'));
+        if ($this.find('.assign-card:visible').length == 0) {
+            $this.closest('tr').hide();
+        } else {
+            $this.closest('tr').show();
+        }
+    });
 });
 
 function FilterCount(element) {
