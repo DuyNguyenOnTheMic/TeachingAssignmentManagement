@@ -13,7 +13,7 @@
             }
         </select>
         <select class="form-select" id="lecturerFilter" name="lecturerFilter" multiple aria-label="Lọc giảng viên">
-            <option value="">Lọc giảng viên</option>
+            <option value="">Chưa phân công</option>
             @foreach (var option in ViewBag.lecturers)
             {
                 <option value="@option.Value">@option.Text</option>

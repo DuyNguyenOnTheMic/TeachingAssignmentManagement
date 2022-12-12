@@ -135,7 +135,9 @@ lecturerFilter.select2({
     dropdownAutoWidth: true,
     dropdownParent: lecturerFilter.parent(),
     dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
-}).on('select2:select', function (e) {
+})
+lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
+lecturerFilter.on('select2:select', function (e) {
     hidePopover();
     $('#tblAssign tbody tr').show();
     // Filter for curriculum classes which has lecturer
