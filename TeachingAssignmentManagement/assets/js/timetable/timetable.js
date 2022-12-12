@@ -140,17 +140,15 @@ lecturerFilter.select2({
     // Show all class to filter again
     showAllClass();
     // Filter for curriculum classes which has lecturer
-    var $this = $(this),
-        tableRow = $('#tblAssign tbody tr'),
-        lecturerId = $this.val(),
+}).on('select2:unselect', function (e) {
+    // Show all class when unselect
+    var tableRow = $('#tblAssign tbody tr'),
+        lecturerId = e.params.data.id,
         lecturerClass = tableRow.find('[data-lecturerid=' + lecturerId + ']'),
         curriculumClass = tableRow.find('.assign-card'),
         curriculumRow = lecturerClass.closest('tr');
     curriculumClass.not(lecturerClass).hide();
     tableRow.not(curriculumRow).hide();
-}).on('select2:unselect', function () {
-    // Show all class when unselect
-    showAllClass();
 });
 
 function FilterCount(element) {
@@ -180,7 +178,7 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
     var id = $this.data('id'),
         lecturerSelect = $this.parent().find('.select2 :selected'),
         lecturerId = lecturerSelect.val()
-        warning = true;
+    warning = true;
 
     // Send ajax request to check state of lecturer
     $.ajax({
@@ -217,7 +215,7 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
                         warning = false;
                         assignLecturer(id, lecturerId, warning);
                     }
-                });            
+                });
             } else {
                 // Populate error message into table
                 let errorMessage = data.message + '<div class="table-responsive mt-2"><table class="table table-sm"><thead class="text-nowrap"><tr><th></th><th>Mã LHP</th><th>Tên HP</th><th>Thứ</th><th>Tiết</th><th>Ngành</th></tr></thead><tbody>';
