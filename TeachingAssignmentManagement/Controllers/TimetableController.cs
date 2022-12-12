@@ -574,7 +574,7 @@ namespace TeachingAssignmentManagement.Controllers
                         roomId = c.room_id,
                         majorName = c.major.name
                     }).ToList();
-                    return Json(new { success = false, warning = true, message = "Giảng viên này đã có lớp ở cơ sở khác, bạn có chắc muốn phân công?", classList = classes }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = false, warning = true, message = "Giảng viên này đã được phân ca liền kề ở cơ sở khác!", classList = classes }, JsonRequestBehavior.AllowGet);
                 }
 
                 // Check maximum lessons in a day

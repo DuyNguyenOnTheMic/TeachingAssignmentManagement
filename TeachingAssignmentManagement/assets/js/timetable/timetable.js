@@ -218,7 +218,7 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
                 assignLecturer(id, lecturerId, warning);
             } else if (data.warning) {
                 // Populate error message into table
-                let errorMessage = data.message + '<div class="table-responsive mt-2"><table class="table table-sm"><thead class="text-nowrap"><tr><th></th><th>Mã LHP</th><th>Tên HP</th><th>Thứ</th><th>Tiết</th><th>Phòng</th><th>Ngành</th></tr></thead><tbody>';
+                let errorMessage = data.message + ' Bạn có chắc muốn phân công?' + '<div class="table-responsive mt-2"><table class="table table-sm"><thead class="text-nowrap"><tr><th></th><th>Mã LHP</th><th>Tên HP</th><th>Thứ</th><th>Tiết</th><th>Phòng</th><th>Ngành</th></tr></thead><tbody>';
                 data.classList.forEach(function (item, index) {
                     errorMessage += '<tr class="font-small-3"><td>' + (index + 1) + '</td><td>' + item.classId + '</td><td>' + item.curriculumName + '</td><td class="text-nowrap">' + item.classDay + '</td><td class="text-nowrap">' + item.lessonTime + '</td><td>' + item.roomId + '</td><td>' + item.majorName + '</td></tr>';
                 });
