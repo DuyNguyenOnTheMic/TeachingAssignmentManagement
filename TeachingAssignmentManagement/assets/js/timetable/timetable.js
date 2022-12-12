@@ -148,6 +148,14 @@ lecturerFilter.on('select2:select', function (e) {
             lecturerClass = tableRow.find('[data-lecturerid="' + lecturerId + '"]');
         lecturerClass.show();
         filterCount(lecturerFilter);
+        tableRow.each(function () {
+            var $this = $(this);
+            if ($this.find('.assign-card:visible').length == 0) {
+                $this.closest('tr').hide();
+            } else {
+                $this.closest('tr').show();
+            }
+        });
     } else {
         $('#tblAssign tbody tr').show();
         var tableRow = $('#tblAssign tbody tr'),
