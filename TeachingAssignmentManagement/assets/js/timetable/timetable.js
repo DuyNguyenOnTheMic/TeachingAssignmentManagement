@@ -71,10 +71,10 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
             hidePopover();
             if (self.$element.attr('id') == 'curriculumFilter') {
                 curriculumFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options
-                FilterCount(curriculumFilter);
+                filterCount(curriculumFilter);
             } else if (self.$element.attr('id') == 'lecturerFilter') {
                 lecturerFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options
-                FilterCount(lecturerFilter);
+                filterCount(lecturerFilter);
             }
             self.trigger('close');
             $('#tblAssign').find('tbody tr').show();
@@ -119,12 +119,12 @@ curriculumFilter.on('select2:select', function (e) {
     // Show table row on select
     var curriculumId = $('#' + e.params.data.id);
     curriculumId.show();
-    FilterCount(curriculumFilter);
+    filterCount(curriculumFilter);
 }).on('select2:unselect', function (e) {
     // Hide table row on unselect
     var curriculumId = $('#' + e.params.data.id);
     curriculumId.hide();
-    FilterCount(curriculumFilter);
+    filterCount(curriculumFilter);
 });
 
 // Populate select2 for lecturer filter
@@ -145,7 +145,7 @@ lecturerFilter.on('select2:select', function (e) {
         lecturerId = e.params.data.id,
         lecturerClass = tableRow.find('[data-lecturerid="' + lecturerId + '"]');
     lecturerClass.show();
-    FilterCount(lecturerFilter);
+    filterCount(lecturerFilter);
     tableRow.each(function () {
         var $this = $(this);
         if ($this.find('.assign-card:visible').length == 0) {
@@ -161,7 +161,7 @@ lecturerFilter.on('select2:select', function (e) {
         lecturerId = e.params.data.id,
         lecturerClass = tableRow.find('[data-lecturerid="' + lecturerId + '"]');
     lecturerClass.hide();
-    FilterCount(lecturerFilter);
+    filterCount(lecturerFilter);
     tableRow.each(function () {
         var $this = $(this);
         if ($this.find('.assign-card:visible').length == 0) {
@@ -172,8 +172,8 @@ lecturerFilter.on('select2:select', function (e) {
     });
 });
 
-function FilterCount(element) {
-    element.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + curriculumFilter.val().length);
+function filterCount(element) {
+    element.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + element.val().length);
 }
 
 // Split lecturerName
