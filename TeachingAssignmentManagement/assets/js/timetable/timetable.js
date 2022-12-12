@@ -141,7 +141,6 @@ lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọ
 lecturerFilter.on('select2:select', function (e) {
     hidePopover();
     // Filter for curriculum classes which has lecturer
-    console.log($('#tblAssign tbody tr:hidden').length);
     if ($('#tblAssign tbody tr:visible').length > 0) {
         $('#tblAssign tbody tr').show();
         var tableRow = $('#tblAssign tbody tr'),
@@ -156,7 +155,16 @@ lecturerFilter.on('select2:select', function (e) {
             lecturerClass = tableRow.find('[data-lecturerid="' + lecturerId + '"]');
         lecturerClass.show();
         filterCount(lecturerFilter);
-        alert('hehe');
+        $('.assign-card').not(lecturerClass).hide();
+        tableRow.not(lecturerClass.closest('tr')).hide();
+        tableRow.each(function () {
+            var $this = $(this);
+            if ($this.find('.assign-card:visible').length == 0) {
+                $this.closest('tr').hide();
+            } else {
+                $this.closest('tr').show();
+            }
+        });
     }
 }).on('select2:unselect', function (e) {
     hidePopover();
