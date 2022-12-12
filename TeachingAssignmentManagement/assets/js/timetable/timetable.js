@@ -145,6 +145,7 @@ lecturerFilter.on('select2:select', function (e) {
         lecturerId = e.params.data.id,
         lecturerClass = tableRow.find('[data-lecturerid="' + lecturerId + '"]');
     lecturerClass.show();
+    FilterCount(lecturerFilter);
     tableRow.each(function () {
         var $this = $(this);
         if ($this.find('.assign-card:visible').length == 0) {
@@ -160,6 +161,7 @@ lecturerFilter.on('select2:select', function (e) {
         lecturerId = e.params.data.id,
         lecturerClass = tableRow.find('[data-lecturerid="' + lecturerId + '"]');
     lecturerClass.hide();
+    FilterCount(lecturerFilter);
     tableRow.each(function () {
         var $this = $(this);
         if ($this.find('.assign-card:visible').length == 0) {
