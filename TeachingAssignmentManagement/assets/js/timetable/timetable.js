@@ -124,7 +124,7 @@ lecturerFilter.select2({
     dropdownAutoWidth: true,
     dropdownParent: lecturerFilter.parent(),
     placeholder: 'Lọc giảng viên',
-    allowClear: true
+    dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
 }).on('select2:select', function () {
     // Show all class to filter again
     showAllClass();
