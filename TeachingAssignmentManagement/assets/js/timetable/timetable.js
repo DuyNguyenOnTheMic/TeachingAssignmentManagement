@@ -75,6 +75,7 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
             } else if (self.$element.attr('id') == 'lecturerFilter') {
                 lecturerFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options
                 filterCount(lecturerFilter);
+                $('.assign-card').show();
             }
             self.trigger('close');
             $('#tblAssign').find('tbody tr').show();
@@ -146,14 +147,6 @@ lecturerFilter.on('select2:select', function (e) {
         lecturerClass = tableRow.find('[data-lecturerid="' + lecturerId + '"]');
     lecturerClass.show();
     filterCount(lecturerFilter);
-    tableRow.each(function () {
-        var $this = $(this);
-        if ($this.find('.assign-card:visible').length == 0) {
-            $this.closest('tr').hide();
-        } else {
-            $this.closest('tr').show();
-        }
-    });
 }).on('select2:unselect', function (e) {
     hidePopover();
     // Show all class when unselect
