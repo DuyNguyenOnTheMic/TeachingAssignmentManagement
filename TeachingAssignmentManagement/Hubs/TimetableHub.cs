@@ -6,6 +6,7 @@ namespace TeachingAssignmentManagement.Hubs
     {
         public static void BroadcastData(int id, string lecturerId, string lecturerName, bool isUpdate)
         {
+            if (lecturerId == null) { lecturerId = string.Empty; }
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<TimetableHub>();
             context.Clients.All.updatedData(id, lecturerId, lecturerName, isUpdate);
         }
