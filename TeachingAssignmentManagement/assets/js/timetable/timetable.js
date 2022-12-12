@@ -139,10 +139,10 @@ lecturerFilter.select2({
 })
 lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
 lecturerFilter.on('select2:select', function (e) {
-    hidePopover();
     var tableRow = $('#tblAssign tbody tr'),
         lecturerId = e.params.data.id,
         lecturerClass = tableRow.find('[data-lecturerid="' + lecturerId + '"]');
+    hidePopover();
     lecturerClass.show();
     filterCount(lecturerFilter);
     // Filter for curriculum classes which has lecturer
@@ -156,11 +156,10 @@ lecturerFilter.on('select2:select', function (e) {
         updateRow(tableRow);
     }
 }).on('select2:unselect', function (e) {
-    hidePopover();
-    // Show all class when unselect
     var tableRow = $('#tblAssign tbody tr'),
         lecturerId = e.params.data.id,
         lecturerClass = tableRow.find('[data-lecturerid="' + lecturerId + '"]');
+    hidePopover();
     lecturerClass.hide();
     filterCount(lecturerFilter);
     updateRow(tableRow);
