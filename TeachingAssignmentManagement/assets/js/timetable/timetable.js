@@ -69,17 +69,26 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
         $rendered.find('.select2-dropdown').prepend($btnContainer);
         $selectAll.on('click', function () {
             hidePopover();
-            curriculumFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options
+            if (self.$element.attr('id') == 'curriculumFilter') {
+                curriculumFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options
+            } else if (self.$element.attr('id') == 'lecturerFilter') {
+                lecturerFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options
+            }
             self.trigger('close');
             $('#tblAssign').find('tbody tr').show();
             FilterCount(curriculumFilter);
         });
         $unselectAll.on('click', function () {
             hidePopover();
-            curriculumFilter.val(null).trigger('change'); // Unselect All Options
+            if (self.$element.attr('id') == 'curriculumFilter') {
+                curriculumFilter.val(null).trigger('change'); // Unselect All Options
+                curriculumFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc môn học');
+            } else if (self.$element.attr('id') == 'lecturerFilter') {
+                lecturerFilter.val(null).trigger('change'); // Unselect All Options
+                curriculumFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
+            }
             self.trigger('close');
             $('#tblAssign').find('tbody tr').hide();
-            curriculumFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc môn học');
         });
         return $rendered;
     };
