@@ -37,6 +37,12 @@ hubNotif.client.refreshedData = function (term, major) {
 $(function () {
     var formSelect = $('.form-select');
 
+    // Set selected option when form load
+    formSelect.each(function () {
+        var $this = $(this);
+        $this.val($this.find('option:first').next().val());
+    });
+
     // Append option to select all major
     $("#major option:first").after('<option value="-1">Tất cả</option>');
 
@@ -56,7 +62,7 @@ $(function () {
         var termId = $('#term').val(),
             majorId = $('#major').val();
         getTimetable(termId, majorId);
-    });
+    }).change();
 });
 
 function populateSelect($this) {
