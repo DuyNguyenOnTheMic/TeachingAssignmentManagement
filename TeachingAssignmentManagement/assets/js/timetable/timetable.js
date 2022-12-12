@@ -144,11 +144,8 @@ lecturerFilter.select2({
     // Show all class when unselect
     var tableRow = $('#tblAssign tbody tr'),
         lecturerId = e.params.data.id,
-        lecturerClass = tableRow.find('[data-lecturerid=' + lecturerId + ']'),
-        curriculumClass = tableRow.find('.assign-card'),
-        curriculumRow = lecturerClass.closest('tr');
-    curriculumClass.not(lecturerClass).hide();
-    tableRow.not(curriculumRow).hide();
+        lecturerClass = tableRow.find('[data-lecturerid=' + lecturerId + ']');
+    lecturerClass.hide();
 });
 
 function FilterCount(element) {
