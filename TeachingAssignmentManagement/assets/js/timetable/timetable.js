@@ -148,14 +148,7 @@ lecturerFilter.on('select2:select', function (e) {
             lecturerClass = tableRow.find('[data-lecturerid="' + lecturerId + '"]');
         lecturerClass.show();
         filterCount(lecturerFilter);
-        tableRow.each(function () {
-            var $this = $(this);
-            if ($this.find('.assign-card:visible').length == 0) {
-                $this.closest('tr').hide();
-            } else {
-                $this.closest('tr').show();
-            }
-        });
+        updateRow(tableRow);
     } else {
         $('#tblAssign tbody tr').show();
         var tableRow = $('#tblAssign tbody tr'),
@@ -165,14 +158,7 @@ lecturerFilter.on('select2:select', function (e) {
         filterCount(lecturerFilter);
         $('.assign-card').not(lecturerClass).hide();
         tableRow.not(lecturerClass.closest('tr')).hide();
-        tableRow.each(function () {
-            var $this = $(this);
-            if ($this.find('.assign-card:visible').length == 0) {
-                $this.closest('tr').hide();
-            } else {
-                $this.closest('tr').show();
-            }
-        });
+        updateRow(tableRow);
     }
 }).on('select2:unselect', function (e) {
     hidePopover();
@@ -182,25 +168,8 @@ lecturerFilter.on('select2:select', function (e) {
         lecturerClass = tableRow.find('[data-lecturerid="' + lecturerId + '"]');
     lecturerClass.hide();
     filterCount(lecturerFilter);
-    tableRow.each(function () {
-        var $this = $(this);
-        if ($this.find('.assign-card:visible').length == 0) {
-            $this.closest('tr').hide();
-        } else {
-            $this.closest('tr').show();
-        }
-    });
+    updateRow(tableRow);
 });
-
-function filterCount(element) {
-    var filterText;
-    if (element.attr('id') == 'curriculumFilter') {
-        filterText = 'môn';
-    } else if (element.attr('id') == 'lecturerFilter') {
-        filterText = 'GV';
-    }
-    element.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + element.val().length + ' ' + filterText);
-}
 
 // Split lecturerName
 $('.assign-card').each(function () {
@@ -357,6 +326,27 @@ $('.btn-export').on('click', function () {
     var url = rootUrl + 'TimeTable/Export?termId=' + termId + '&majorId=' + majorId;
     window.open(url, '_blank').focus();
 });
+
+function updateRow(tableRow) {
+    tableRow.each(function () {
+        var $this = $(this);
+        if ($this.find('.assign-card:visible').length == 0) {
+            $this.closest('tr').hide();
+        } else {
+            $this.closest('tr').show();
+        }
+    });
+}
+
+function filterCount(element) {
+    var filterText;
+    if (element.attr('id') == 'curriculumFilter') {
+        filterText = 'môn';
+    } else if (element.attr('id') == 'lecturerFilter') {
+        filterText = 'GV';
+    }
+    element.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + element.val().length + ' ' + filterText);
+}
 
 function hidePopover() {
     $('#tblAssign [data-bs-toggle="popover"]').popover('hide');
