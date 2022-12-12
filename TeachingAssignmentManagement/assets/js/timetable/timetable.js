@@ -147,11 +147,11 @@ lecturerFilter.on('select2:select', function (e) {
     filterCount(lecturerFilter);
     // Filter for curriculum classes which has lecturer
     if ($('#tblAssign tbody tr:visible').length > 0) {
-        $('#tblAssign tbody tr').show();
+        tableRow.show();
         updateRow(tableRow);
     } else {
-        $('#tblAssign tbody tr').show();
-        $('.assign-card').not(lecturerClass).hide();
+        tableRow.show();
+        $('#tblAssign .assign-card').not(lecturerClass).hide();
         tableRow.not(lecturerClass.closest('tr')).hide();
         updateRow(tableRow);
     }
