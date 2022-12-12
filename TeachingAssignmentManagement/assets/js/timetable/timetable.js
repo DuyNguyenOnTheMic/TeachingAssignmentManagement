@@ -145,7 +145,6 @@ lecturerFilter.select2({
     lecturerClass.show();
     tableRow.each(function () {
         var $this = $(this);
-        console.log($this.find('.assign-card:visible'));
         if ($this.find('.assign-card:visible').length == 0) {
             $this.closest('tr').hide();
         } else {
@@ -161,7 +160,6 @@ lecturerFilter.select2({
     lecturerClass.hide();
     tableRow.each(function () {
         var $this = $(this);
-        console.log($this.find('.assign-card:visible'));
         if ($this.find('.assign-card:visible').length == 0) {
             $this.closest('tr').hide();
         } else {
