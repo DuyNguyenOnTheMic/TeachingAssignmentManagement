@@ -128,6 +128,7 @@ curriculumFilter.on('select2:select', function (e) {
 });
 
 // Populate select2 for lecturer filter
+lecturerFilter.find('option').prop('selected', 'selected');
 lecturerFilter.wrap('<div class="position-relative my-50"></div>');
 lecturerFilter.select2({
     language: 'vi',
