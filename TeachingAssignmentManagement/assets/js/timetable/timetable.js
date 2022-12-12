@@ -138,6 +138,7 @@ lecturerFilter.select2({
     dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
 }).on('select2:select', function (e) {
     hidePopover();
+    $('#tblAssign tbody tr').show();
     // Filter for curriculum classes which has lecturer
     var tableRow = $('#tblAssign tbody tr'),
         lecturerId = e.params.data.id,
