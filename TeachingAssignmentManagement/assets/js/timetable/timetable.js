@@ -173,7 +173,13 @@ lecturerFilter.on('select2:select', function (e) {
 });
 
 function filterCount(element) {
-    element.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + element.val().length);
+    var filterText;
+    if (element.attr('id') == 'curriculumFilter') {
+        filterText = 'môn';
+    } else if (element.attr('id') == 'lecturerFilter') {
+        filterText = 'GV';
+    }
+    element.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + element.val().length + ' ' + filterText);
 }
 
 // Split lecturerName
