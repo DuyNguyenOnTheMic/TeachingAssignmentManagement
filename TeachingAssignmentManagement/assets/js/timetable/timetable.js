@@ -134,7 +134,6 @@ lecturerFilter.select2({
     language: 'vi',
     dropdownAutoWidth: true,
     dropdownParent: lecturerFilter.parent(),
-    placeholder: 'Lọc giảng viên',
     dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
 }).on('select2:select', function (e) {
     hidePopover();
