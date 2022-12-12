@@ -145,11 +145,12 @@ lecturerFilter.on('select2:select', function (e) {
     hidePopover();
     lecturerClass.show();
     filterCount(lecturerFilter);
-    // Filter for curriculum classes which has lecturer
     if ($('#tblAssign tbody tr:visible').length > 0) {
+        // Filter for curriculum classes which has lecturer
         tableRow.show();
         updateRow(tableRow);
     } else {
+        // Filter from beginning when user deselects all options
         tableRow.show();
         $('#tblAssign .assign-card').not(lecturerClass).hide();
         tableRow.not(lecturerClass.closest('tr')).hide();
