@@ -117,6 +117,10 @@ $.ajax({
                         display: function (context) {
                             // Only return positive values
                             return context.dataset.data[context.dataIndex] !== 0;
+                        },
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'start'
                         }
                     }
                 }
