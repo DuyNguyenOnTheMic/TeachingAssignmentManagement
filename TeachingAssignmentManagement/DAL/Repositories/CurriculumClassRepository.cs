@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using TeachingAssignmentManagement.Models;
 
@@ -118,6 +119,15 @@ namespace TeachingAssignmentManagement.DAL
         public curriculum_class GetClassByID(int id)
         {
             return context.curriculum_class.Find(id);
+        }
+
+        public IEnumerable GetStatistics(IEnumerable<curriculum_class> curriculumClass)
+        {
+            return curriculumClass.GroupBy(c => c.lecturer_id).Select(c => new
+            {
+                c.Key,
+                sum = c.Select(item => item.total_lesson).DefaultIfEmpty(0).Sum()
+            }).ToList();
         }
 
         public curriculum_class FindCurriculumClass(IEnumerable<curriculum_class> curriculumClass, string curriculumClassId, int day2, string roomId)

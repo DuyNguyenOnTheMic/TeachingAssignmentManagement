@@ -21,9 +21,19 @@ namespace TeachingAssignmentManagement.Controllers
         // GET: Statistics
         public ActionResult Index()
         {
+            GetData();
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
             ViewData["year"] = new SelectList(unitOfWork.TermRepository.GetYears(), "schoolyear", "schoolyear");
             return View();
+        }
+
+        [HttpGet]
+        public JsonResult GetData()
+        {
+            var haha = unitOfWork.CurriculumClassRepository.GetClassesByTerm(223);
+            var hehe = unitOfWork.CurriculumClassRepository.GetStatistics(haha);
+
+            return null;
         }
     }
 }
