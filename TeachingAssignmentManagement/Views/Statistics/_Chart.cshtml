@@ -12,7 +12,7 @@
     </div>
     <div class="tab-pane" id="profileIcon" aria-labelledby="profileIcon-tab" role="tabpanel">
         <div class="alert alert-primary my-25" role="alert">
-            <div class="alert-body"><b><i class="feather feather-help-circle"></i> Hướng dẫn:  </b>Hệ thống sẽ tự động tạo tất cả giảng viên vào hệ thống nếu bạn chọn <strong>"Import vào hệ thống"</strong>.</div>
+            <div class="alert-body"><b><i class="feather feather-help-circle"></i> Hướng dẫn: </b>Hệ thống sẽ tự động tạo tất cả giảng viên vào hệ thống nếu bạn chọn <strong>"Import vào hệ thống"</strong>.</div>
         </div>
         <div class="card-datatable">
             <table class="datatables-ajax table table-responsive" id="tblErrorLecturers">
@@ -29,4 +29,6 @@
     </div>
 </div>
 
+<script src="~/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
+@Scripts.Render("~/bundles/export-dt")
 <script src="~/assets/js/statistics/statistics.js"></script>
