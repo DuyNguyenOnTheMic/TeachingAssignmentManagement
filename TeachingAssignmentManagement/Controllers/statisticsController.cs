@@ -22,7 +22,7 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult Index()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
-            ViewData["year"] = new SelectList(unitOfWork.TermRepository.GetYear(), "schoolyear", "schoolyear");
+            ViewData["year"] = new SelectList(unitOfWork.TermRepository.GetYears(), "schoolyear", "schoolyear");
             return View();
         }
     }

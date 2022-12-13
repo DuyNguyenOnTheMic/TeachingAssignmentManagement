@@ -28,7 +28,7 @@ namespace TeachingAssignmentManagement.DAL
             }).OrderByDescending(t => t.id).ToList();
         }
 
-        public IEnumerable GetYear()
+        public IEnumerable GetYears()
         {
             return context.terms.Select(t => new
             {
