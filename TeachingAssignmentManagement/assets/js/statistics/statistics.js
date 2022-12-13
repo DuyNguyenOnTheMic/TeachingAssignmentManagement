@@ -79,7 +79,9 @@
             datasets: [{
                 label: '# of Votes',
                 data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1
+                borderWidth: 1,
+                backgroundColor: 'rgba(40, 208, 148, 0.2)',
+                borderColor: 'rgba(40, 208, 148)'
             }]
         },
         options: chartOptions,
