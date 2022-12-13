@@ -108,7 +108,7 @@ $.ajax({
             labels: labels,
             datasets: [
                 {
-                    label: 'Đã đạt',
+                    label: 'Số giờ giảng',
                     data: totalLessons,
                     backgroundColor: 'rgba(40, 208, 148, 0.2)',
                     borderColor: 'rgba(40, 208, 148)',
