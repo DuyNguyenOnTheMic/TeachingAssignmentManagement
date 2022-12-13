@@ -1,0 +1,66 @@
+@{
+    ViewBag.Title = "Thống kê số giờ";
+}
+
+<div class="app-content content ">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper p-0">
+        <div class="content-body">
+            <!-- ChartJS section start -->
+            <section>
+                <!-- Line Chart Starts-->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title-wrap">
+                                    <h4 class="card-title">@ViewBag.Title</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-1">
+                                        <label class="form-label font-small-4" for="unit">Thống kê theo: </label>
+                                        <select class="form-select" id="unit" name="unit">
+                                            <option>Học kỳ</option>
+                                            <option>Ngành</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-1">
+                                        <label class="form-label font-small-4" for="term">Học kỳ: </label>
+                                        @Html.DropDownList("term", null, "---- Chọn học kỳ ----", htmlAttributes: new { @class = "select2 form-select" })
+                                    </div>
+                                    <div class="col-md-6 mb-1 d-none">
+                                        <label class="form-label font-small-4" for="year">Năm học: </label>
+                                        @Html.DropDownList("year", null, "---- Chọn năm học ----", htmlAttributes: new { @class = "select2 form-select" })
+                                    </div>
+                                </div>
+                                <div id="statisticsDiv">
+                                    <div class="d-flex justify-content-center mt-2">
+                                        <div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div>
+                                        <p class="my-auto">Đang tải...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Line Chart Ends-->
+            </section>
+            <!-- ChartJS section end -->
+        </div>
+    </div>
+</div>
+
+<div id="loader" data-request-url="@Url.Content("~/")"></div>
+
+@section styles {
+    <link href="~/app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script src="~/app-assets/vendors/js/charts/chart.min.js"></script>
+    <script src="~/app-assets/vendors/js/charts/chartjs-plugin-datalabels.min.js"></script>
+    <script src="~/assets/js/statistics/statistics-load.js"></script>
+}
