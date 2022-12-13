@@ -26,7 +26,7 @@
         responsiveAnimationDuration: 500,
         borderRadius: 4,
         legend: {
-            position: 'top',
+            position: 'top'
         },
         scales: {
             xAxis: {
@@ -60,6 +60,11 @@
             },
             datalabels: {
                 color: labelColor
+            },
+            legend: {
+                labels: {
+                    color: labelColor
+                }
             }
         }
     };
@@ -107,6 +112,7 @@
         chart.options.scales.xAxis.ticks.color = color;
         chart.options.scales.yAxis.ticks.color = color;
         chart.options.plugins.datalabels.color = color;
+        chart.options.plugins.legend.labels.color = color;
         chart.update();
     });
 });
