@@ -18,7 +18,7 @@ namespace TeachingAssignmentManagement.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        // GET: Statistics
+        [HttpGet]
         public ActionResult Index()
         {
             GetTermData();
