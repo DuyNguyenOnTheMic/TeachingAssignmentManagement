@@ -58,6 +58,9 @@
                     size: 25
                 }
             },
+            datalabels: {
+                color: labelColor
+            }
         }
     };
 
