@@ -260,6 +260,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MajorController.cs" />
+    <Compile Include="Controllers\statisticsController.cs" />
     <Compile Include="Controllers\TermController.cs" />
     <Compile Include="Controllers\TimetableController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -1149,6 +1150,7 @@
   <ItemGroup>
     <Folder Include="app-assets\vendors\css\tables\datatable\extensions\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Views\statistics\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app-assets\fonts\feather\fonts\feather.eot" />
