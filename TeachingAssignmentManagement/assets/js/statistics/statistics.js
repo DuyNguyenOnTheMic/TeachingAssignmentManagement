@@ -1,6 +1,20 @@
 ﻿$(function () {
     //Get the context of the Chart canvas element we want to select
-    var ctx = $("#statistics-chart");
+    var ctx = $("#statistics-chart"),
+        chartWrapper = $('.chartjs');
+
+    // Detect Dark Layout
+    if ($('html').hasClass('dark-layout')) {
+        labelColor = '#b4b7bd';
+    }
+
+    // Wrap charts with div of height according to their data-height
+    if (chartWrapper.length) {
+        alert('hehe');
+        chartWrapper.each(function () {
+            $(this).wrap($('<div style="height:' + this.getAttribute('data-height') + 'px"></div>'));
+        });
+    }
 
     // Chart Options
     var chartOptions = {
@@ -20,7 +34,8 @@
                     drawTicks: false,
                 },
                 ticks: {
-                    padding: 20
+                    padding: 20,
+                    fontColor: labelColor
                 }
             },
             yAxis: {
