@@ -21,10 +21,15 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            GetTermData();
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
             ViewData["year"] = new SelectList(unitOfWork.TermRepository.GetYears(), "schoolyear", "schoolyear");
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult GetChart()
+        {
+            return PartialView("_Chart");
         }
 
         [HttpGet]

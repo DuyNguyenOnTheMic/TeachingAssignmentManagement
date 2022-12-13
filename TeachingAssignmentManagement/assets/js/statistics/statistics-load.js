@@ -1,107 +1,8 @@
-﻿$(window).on('load', function () {
-    //Get the context of the Chart canvas element we want to select
-    var ctx = $("#statistics-chart"),
-        chartWrapper = $('.chartjs');
+﻿var rootUrl = $('#loader').data('request-url'),
+    personalTimetableDiv = $('#statisticsDiv'),
+    url = rootUrl + 'Statistics/GetChart';
 
-    var labelColor = '#6e6b7b',
-        gridLineColor = 'rgba(200, 200, 200, 0.2)'; // RGBA color helps in dark layout
-
-    // Detect Dark Layout
-    if ($('html').hasClass('dark-layout')) {
-        labelColor = '#b4b7bd';
-    }
-
-    // Wrap charts with div of height according to their data-height
-    if (chartWrapper.length) {
-        chartWrapper.each(function () {
-            $(this).wrap($('<div style="height:' + this.getAttribute('data-height') + 'px"></div>'));
-        });
-    }
-
-    // Chart Options
-    var chartOptions = {
-        indexAxis: 'y',
-        responsive: true,
-        maintainAspectRatio: false,
-        scaleShowVerticalLines: false,
-        responsiveAnimationDuration: 500,
-        borderRadius: 4,
-        legend: {
-            position: 'top'
-        },
-        scales: {
-            xAxis: {
-                stacked: true,
-                grid: {
-                    color: gridLineColor,
-                    drawTicks: false,
-                },
-                ticks: {
-                    color: labelColor
-                }
-            },
-            yAxis: {
-                stacked: true,
-                grid: {
-                    color: gridLineColor
-                },
-                ticks: {
-                    color: labelColor
-                }
-            }
-        },
-        plugins: {
-            title: {
-                display: true,
-                font: {
-                    size: 25
-                }
-            },
-            datalabels: {
-                color: labelColor
-            },
-            legend: {
-                labels: {
-                    color: labelColor
-                }
-            }
-        }
-    };
-
-    // Plugin block
-    const legendMargin = {
-        id: 'legendMargin',
-        beforeInit(chart, legend, options) {
-            const fitValue = chart.legend.fit;
-
-            chart.legend.fit = function fit() {
-                fitValue.bind(chart.legend)();
-                return this.height += 30;
-            }
-        }
-    };
-
-    // Create the chart
-    var chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1,
-                backgroundColor: 'rgba(40, 208, 148, 0.2)',
-                borderColor: 'rgba(40, 208, 148)',
-                datalabels: {
-                    anchor: 'end',
-                    align: 'start'
-                }
-            }]
-        },
-        options: chartOptions,
-        plugins: [ChartDataLabels, legendMargin]
-    });
-
+$(window).on('load', function () {
     // Detect Dark Layout and change color
     $('.nav-link-style').on('click', function () {
         var lightColor = '#b4b7bd',
@@ -117,5 +18,19 @@
         chart.options.plugins.datalabels.color = color;
         chart.options.plugins.legend.labels.color = color;
         chart.update();
+    });
+});
+
+$(function () {
+    var termId = 223;
+    $.get(url, function (data) {
+        if (!data.error) {
+            // Populate personal timetable
+            personalTimetableDiv.html(data);
+        } else {
+            // Return not found error message
+            personalTimetableDiv.html('<h4 class="text-center mt-2">' + data.message + '</h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="No data" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
+            weekSelect.parent().find('.select2-selection__placeholder').text('không khả dụng');
+        }
     });
 });
