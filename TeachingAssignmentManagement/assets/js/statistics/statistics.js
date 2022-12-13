@@ -17,6 +17,8 @@ if (chartWrapper.length) {
     });
 }
 
+Chart.defaults.font.family = 'Montserrat,Helvetica,Arial,serif';
+
 // Chart Options
 var chartOptions = {
     indexAxis: 'y',
