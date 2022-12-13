@@ -128,7 +128,7 @@ namespace TeachingAssignmentManagement.DAL
                 c.Key,
                 c.FirstOrDefault().lecturer.full_name,
                 sum = c.Sum(item => item.total_lesson)
-            }).ToList();
+            }).OrderByDescending(c => c.sum).ToList();
         }
 
         public curriculum_class FindCurriculumClass(IEnumerable<curriculum_class> curriculumClass, string curriculumClassId, int day2, string roomId)
