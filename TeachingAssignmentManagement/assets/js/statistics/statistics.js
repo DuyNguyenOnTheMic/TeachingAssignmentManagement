@@ -45,6 +45,7 @@ var chartOptions = {
                 color: gridLineColor
             },
             ticks: {
+                autoSkip: false,
                 color: labelColor
             }
         }
