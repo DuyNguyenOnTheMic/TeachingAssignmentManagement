@@ -20,6 +20,7 @@
 
     // Chart Options
     var chartOptions = {
+        indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
         scaleShowVerticalLines: false,
