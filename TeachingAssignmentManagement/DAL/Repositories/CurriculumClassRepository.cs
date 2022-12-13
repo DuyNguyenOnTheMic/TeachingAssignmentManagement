@@ -121,7 +121,7 @@ namespace TeachingAssignmentManagement.DAL
             return context.curriculum_class.Find(id);
         }
 
-        public IEnumerable GetStatistics(int termId)
+        public IEnumerable GetTermStatistics(int termId)
         {
             return context.curriculum_class.Where(c => c.term_id == termId).GroupBy(c => c.lecturer.id).Select(c => new
             {
