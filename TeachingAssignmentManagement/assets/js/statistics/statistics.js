@@ -93,7 +93,11 @@
                 data: [12, 19, 3, 5, 2, 3],
                 borderWidth: 1,
                 backgroundColor: 'rgba(40, 208, 148, 0.2)',
-                borderColor: 'rgba(40, 208, 148)'
+                borderColor: 'rgba(40, 208, 148)',
+                datalabels: {
+                    anchor: 'end',
+                    align: 'start'
+                }
             }]
         },
         options: chartOptions,
