@@ -3,10 +3,12 @@ var ctx = $("#statistics-chart"),
     chartWrapper = $('.chartjs');
 
 var labelColor = '#6e6b7b',
+    titleColor = '#666666',
     gridLineColor = 'rgba(200, 200, 200, 0.2)'; // RGBA color helps in dark layout
 
 // Detect Dark Layout
 if ($('html').hasClass('dark-layout')) {
+    titleColor = '#d0d2d6',
     labelColor = '#b4b7bd';
 }
 
@@ -56,7 +58,8 @@ var chartOptions = {
             display: true,
             font: {
                 size: 25
-            }
+            },
+            color: titleColor
         },
         datalabels: {
             color: labelColor
@@ -128,6 +131,7 @@ $('.nav-link-style').on('click', function () {
     } else {
         color = darkColor;
     }
+    chart.options.plugins.title.color = color;
     chart.options.scales.xAxis.ticks.color = color;
     chart.options.scales.yAxis.ticks.color = color;
     chart.options.plugins.datalabels.color = color;
