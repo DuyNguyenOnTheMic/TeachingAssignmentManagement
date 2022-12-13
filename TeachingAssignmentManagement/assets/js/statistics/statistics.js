@@ -24,7 +24,6 @@ var chartOptions = {
     maintainAspectRatio: false,
     scaleShowVerticalLines: false,
     responsiveAnimationDuration: 500,
-    borderRadius: 4,
     legend: {
         position: 'top'
     },
