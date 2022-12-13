@@ -121,12 +121,13 @@ namespace TeachingAssignmentManagement.DAL
             return context.curriculum_class.Find(id);
         }
 
-        public IEnumerable GetStatistics(IEnumerable<curriculum_class> curriculumClass)
+        public IEnumerable GetStatistics(int termId)
         {
-            return curriculumClass.GroupBy(c => c.lecturer_id).Select(c => new
+            return context.curriculum_class.Where(c => c.term_id == termId).GroupBy(c => c.lecturer.id).Select(c => new
             {
                 c.Key,
-                sum = c.Select(item => item.total_lesson).DefaultIfEmpty(0).Sum()
+                c.First().lecturer.full_name,
+                sum = c.Sum(item => item.total_lesson)
             }).ToList();
         }
 

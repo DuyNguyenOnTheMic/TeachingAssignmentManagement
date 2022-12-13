@@ -30,8 +30,7 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public JsonResult GetData()
         {
-            var haha = unitOfWork.CurriculumClassRepository.GetClassesByTerm(223);
-            var hehe = unitOfWork.CurriculumClassRepository.GetStatistics(haha);
+            var hehe = unitOfWork.CurriculumClassRepository.GetStatistics(223);
 
             return null;
         }
