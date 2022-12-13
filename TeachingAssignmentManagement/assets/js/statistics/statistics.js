@@ -37,7 +37,6 @@
                     drawTicks: false,
                 },
                 ticks: {
-                    padding: 20,
                     color: labelColor
                 }
             },
@@ -48,6 +47,7 @@
                     drawTicks: false,
                 },
                 ticks: {
+                    padding: 20,
                     color: labelColor
                 }
             }
