@@ -123,18 +123,23 @@ $.ajax({
 
 // Detect Dark Layout and change color
 $('.nav-link-style').on('click', function () {
-    var lightColor = '#b4b7bd',
-        darkColor = '#6e6b7b',
-        color;
+    var titleLight = '#d0d2d6',
+        titleDark = '#666666',
+        textLight = '#b4b7bd',
+        TextDark = '#6e6b7b',
+        titleColor,
+        textColor;
     if ($('html').hasClass('dark-layout')) {
-        color = lightColor;
+        titleColor = titleLight;
+        textColor = textLight;
     } else {
-        color = darkColor;
+        titleColor = titleDark;
+        textColor = TextDark;
     }
-    chart.options.plugins.title.color = color;
-    chart.options.plugins.datalabels.color = color;
-    chart.options.plugins.legend.labels.color = color;
-    chart.options.scales.xAxis.ticks.color = color;
-    chart.options.scales.yAxis.ticks.color = color;
+    chart.options.plugins.title.color = titleColor;
+    chart.options.plugins.datalabels.color = textColor;
+    chart.options.plugins.legend.labels.color = textColor;
+    chart.options.scales.xAxis.ticks.color = textColor;
+    chart.options.scales.yAxis.ticks.color = textColor;
     chart.update();
 });
