@@ -132,9 +132,9 @@ $('.nav-link-style').on('click', function () {
         color = darkColor;
     }
     chart.options.plugins.title.color = color;
-    chart.options.scales.xAxis.ticks.color = color;
-    chart.options.scales.yAxis.ticks.color = color;
     chart.options.plugins.datalabels.color = color;
     chart.options.plugins.legend.labels.color = color;
+    chart.options.scales.xAxis.ticks.color = color;
+    chart.options.scales.yAxis.ticks.color = color;
     chart.update();
 });
