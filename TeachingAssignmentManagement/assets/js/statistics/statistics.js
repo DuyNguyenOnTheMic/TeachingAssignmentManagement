@@ -101,10 +101,6 @@ $.ajax({
                     borderColor: 'rgba(40, 208, 148)',
                     borderWidth: 1,
                     datalabels: {
-                        display: function (context) {
-                            // Only return positive values
-                            return context.dataset.data[context.dataIndex] !== 0;
-                        },
                         anchor: 'end',
                         align: 'start',
                         offset: -30
