@@ -4,6 +4,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
 {
+    [Authorize(Roles = "BCN khoa, Bộ môn, Giảng viên")]
     public class StatisticsController : Controller
     {
         private readonly UnitOfWork unitOfWork;
@@ -35,9 +36,7 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public JsonResult GetTermData()
         {
-            var hehe = unitOfWork.CurriculumClassRepository.GetTermStatistics(223);
-
-            return Json(hehe, JsonRequestBehavior.AllowGet);
+            return Json(unitOfWork.CurriculumClassRepository.GetTermStatistics(223), JsonRequestBehavior.AllowGet);
         }
     }
 }
