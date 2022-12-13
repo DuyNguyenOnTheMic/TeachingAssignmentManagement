@@ -44,7 +44,7 @@
                 stacked: true,
                 grid: {
                     color: gridLineColor,
-                    drawTicks: false,
+                    drawTicks: false
                 },
                 ticks: {
                     padding: 20,
