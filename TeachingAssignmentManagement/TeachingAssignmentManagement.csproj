@@ -1017,6 +1017,7 @@
     <Content Include="app-assets\vendors\js\charts\apexcharts.js" />
     <Content Include="app-assets\vendors\js\charts\apexcharts.min.js" />
     <Content Include="app-assets\vendors\js\charts\chart.min.js" />
+    <Content Include="app-assets\vendors\js\charts\chartjs-plugin-datalabels.min.js" />
     <Content Include="app-assets\vendors\js\extensions\dragula.min.js" />
     <Content Include="app-assets\vendors\js\extensions\i18next.min.js" />
     <Content Include="app-assets\vendors\js\extensions\i18nextBrowserLanguageDetector.min.js" />

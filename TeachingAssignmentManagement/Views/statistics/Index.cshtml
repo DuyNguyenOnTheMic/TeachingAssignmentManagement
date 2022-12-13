@@ -60,7 +60,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <canvas class="line-chart-ex chartjs" data-height="450"></canvas>
+                                <canvas id="statistics-chart" data-height="450"></canvas>
                             </div>
                         </div>
                     </div>
@@ -75,5 +75,6 @@
 
 @section scripts{
     <script src="~/app-assets/vendors/js/charts/chart.min.js"></script>
+    <script src="~/app-assets/vendors/js/charts/chartjs-plugin-datalabels.min.js"></script>
     <script src="~/assets/js/statistics/statistics.js"></script>
 }
