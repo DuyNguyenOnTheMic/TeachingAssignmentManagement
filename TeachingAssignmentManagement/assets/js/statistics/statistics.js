@@ -118,10 +118,9 @@ $.ajax({
                             // Only return positive values
                             return context.dataset.data[context.dataIndex] !== 0;
                         },
-                        datalabels: {
-                            anchor: 'end',
-                            align: 'start'
-                        }
+                        anchor: 'end',
+                        align: 'start',
+                        offset: -30
                     }
                 }
             ]
