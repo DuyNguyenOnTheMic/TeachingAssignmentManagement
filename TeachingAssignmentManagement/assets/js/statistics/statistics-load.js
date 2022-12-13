@@ -1,5 +1,5 @@
 ﻿var rootUrl = $('#loader').data('request-url'),
-    personalTimetableDiv = $('#statisticsDiv'),
+    statisticsDiv = $('#statisticsDiv'),
     url = rootUrl + 'Statistics/GetChart';
 
 $(window).on('load', function () {
@@ -26,7 +26,7 @@ $(function () {
     $.get(url, function (data) {
         if (!data.error) {
             // Populate personal timetable
-            personalTimetableDiv.html(data);
+            statisticsDiv.html(data);
         } else {
             // Return not found error message
             personalTimetableDiv.html('<h4 class="text-center mt-2">' + data.message + '</h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="No data" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
