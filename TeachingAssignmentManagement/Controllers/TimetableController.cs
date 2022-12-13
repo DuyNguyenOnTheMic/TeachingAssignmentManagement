@@ -475,7 +475,8 @@ namespace TeachingAssignmentManagement.Controllers
             using (XLWorkbook workbook = new XLWorkbook())
             {
                 IXLWorksheet worksheet = workbook.Worksheets.Add(dt);
-                for (int row = 1; row <= dt.Rows.Count; row++)
+                int excelRow = dt.Rows.Count + 1;
+                for (int row = 1; row <= excelRow; row++)
                 {
                     // Color lecturer id and Lecturer name if null
                     IXLCell lecturerId = worksheet.Cell(row, 16);
