@@ -28,6 +28,14 @@ namespace TeachingAssignmentManagement.DAL
             }).OrderByDescending(t => t.id).ToList();
         }
 
+        public IEnumerable GetYear()
+        {
+            return context.terms.Select(t => new
+            {
+                schoolyear = t.start_year + " - " + t.end_year
+            }).Distinct().OrderByDescending(t => t.schoolyear).ToList();
+        }
+
         public term GetTermByID(int id)
         {
             return context.terms.Find(id);

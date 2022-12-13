@@ -32,9 +32,9 @@
                                         <label class="form-label font-small-4" for="term">Học kỳ: </label>
                                         @Html.DropDownList("term", null, "---- Chọn học kỳ ----", htmlAttributes: new { @class = "select2 form-select" })
                                     </div>
-                                    <div class="col-md-6 mb-1 d-none">
-                                        <label class="form-label font-small-4" for="term">Năm học: </label>
-                                        @Html.DropDownList("term", null, "---- Chọn năm học ----", htmlAttributes: new { @class = "select2 form-select" })
+                                    <div class="col-md-6 mb-1">
+                                        <label class="form-label font-small-4" for="year">Năm học: </label>
+                                        @Html.DropDownList("year", null, "---- Chọn năm học ----", htmlAttributes: new { @class = "select2 form-select" })
                                     </div>
                                 </div>
                                 <canvas class="chartjs" id="statistics-chart" data-height="450"></canvas>
