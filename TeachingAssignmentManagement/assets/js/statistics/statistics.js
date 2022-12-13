@@ -97,8 +97,8 @@ $.ajax({
                 {
                     label: 'Số giờ giảng',
                     data: totalLessons,
-                    backgroundColor: 'rgba(40, 208, 148, 0.2)',
-                    borderColor: 'rgba(40, 208, 148)',
+                    backgroundColor: 'rgba(115, 103, 240, 0.8)',
+                    borderColor: 'transparent',
                     borderWidth: 1,
                     datalabels: {
                         anchor: 'end',
