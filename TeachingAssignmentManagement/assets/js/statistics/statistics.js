@@ -13,7 +13,6 @@
 
     // Wrap charts with div of height according to their data-height
     if (chartWrapper.length) {
-        alert('hehe');
         chartWrapper.each(function () {
             $(this).wrap($('<div style="height:' + this.getAttribute('data-height') + 'px"></div>'));
         });
