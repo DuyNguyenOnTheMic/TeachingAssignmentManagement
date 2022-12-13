@@ -37,7 +37,7 @@ namespace TeachingAssignmentManagement.Controllers
         {
             var hehe = unitOfWork.CurriculumClassRepository.GetTermStatistics(223);
 
-            return null;
+            return Json(hehe, JsonRequestBehavior.AllowGet);
         }
     }
 }

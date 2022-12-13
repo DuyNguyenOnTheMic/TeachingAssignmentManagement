@@ -83,22 +83,51 @@ const legendMargin = {
 // Create the chart
 var chart = new Chart(ctx, {
     type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1,
-            backgroundColor: 'rgba(40, 208, 148, 0.2)',
-            borderColor: 'rgba(40, 208, 148)',
-            datalabels: {
-                anchor: 'end',
-                align: 'start'
-            }
-        }]
-    },
+    data: {},
     options: chartOptions,
     plugins: [ChartDataLabels, legendMargin]
+});
+
+var termId = 223;
+$.ajax({
+    type: 'GET',
+    url: '/Statistics/GetTermData',
+    data: { termId },
+    success: function (response) {
+
+        // Get chart labels and data
+        var labels = response.map(function (e) {
+            return e.full_name;
+        });
+        var totalLessons = response.map(function (e) {
+            return e.sum;
+        });
+
+        // Chart Data
+        var chartData = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Đã đạt',
+                    data: totalLessons,
+                    backgroundColor: 'rgba(40, 208, 148, 0.2)',
+                    borderColor: 'rgba(40, 208, 148)',
+                    borderWidth: 1,
+                    datalabels: {
+                        display: function (context) {
+                            // Only return positive values
+                            return context.dataset.data[context.dataIndex] !== 0;
+                        }
+                    }
+                }
+            ]
+        };
+
+        // Update chart data
+        chart.options.plugins.title.text = 'Thống kê sinh viên Ngành';
+        chart.data = chartData;
+        chart.update();
+    }
 });
 
 // Detect Dark Layout and change color
