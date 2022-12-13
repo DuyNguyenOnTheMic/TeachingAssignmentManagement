@@ -127,7 +127,7 @@ $.ajax({
         };
 
         // Update chart data
-        chart.options.plugins.title.text = 'Thống kê sinh viên Ngành';
+        chart.options.plugins.title.text = 'Thống kê số giờ học kỳ 223';
         chart.data = chartData;
         chart.update();
     }
