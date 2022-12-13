@@ -123,7 +123,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable GetTermStatistics(int termId)
         {
-            return context.curriculum_class.Where(c => c.term_id == termId).GroupBy(c => c.lecturer.id).Select(c => new
+            return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id != null).GroupBy(c => c.lecturer_id).Select(c => new
             {
                 c.Key,
                 c.FirstOrDefault().lecturer.full_name,
