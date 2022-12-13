@@ -2,25 +2,6 @@
     statisticsDiv = $('#statisticsDiv'),
     url = rootUrl + 'Statistics/GetChart';
 
-$(window).on('load', function () {
-    // Detect Dark Layout and change color
-    $('.nav-link-style').on('click', function () {
-        var lightColor = '#b4b7bd',
-            darkColor = '#6e6b7b',
-            color;
-        if ($('html').hasClass('dark-layout')) {
-            color = lightColor;
-        } else {
-            color = darkColor;
-        }
-        chart.options.scales.xAxis.ticks.color = color;
-        chart.options.scales.yAxis.ticks.color = color;
-        chart.options.plugins.datalabels.color = color;
-        chart.options.plugins.legend.labels.color = color;
-        chart.update();
-    });
-});
-
 $(function () {
     var termId = 223;
     $.get(url, function (data) {
