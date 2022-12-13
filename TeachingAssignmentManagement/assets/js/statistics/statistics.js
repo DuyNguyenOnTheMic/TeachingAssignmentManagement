@@ -37,7 +37,7 @@
                 },
                 ticks: {
                     padding: 20,
-                    fontColor: labelColor
+                    color: labelColor
                 }
             },
             yAxis: {
@@ -45,6 +45,9 @@
                 grid: {
                     color: gridLineColor,
                     drawTicks: false,
+                },
+                ticks: {
+                    color: labelColor
                 }
             }
         },
