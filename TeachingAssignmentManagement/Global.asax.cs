@@ -13,7 +13,7 @@ namespace TeachingAssignmentManagement
         {
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            //GlobalFilters.Filters.Add(new CompressAttribute());
+            GlobalFilters.Filters.Add(new CompressAttribute());
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
