@@ -67,25 +67,12 @@ var chartOptions = {
     }
 };
 
-// Plugin block
-const legendMargin = {
-    id: 'legendMargin',
-    beforeInit(chart, legend, options) {
-        const fitValue = chart.legend.fit;
-
-        chart.legend.fit = function fit() {
-            fitValue.bind(chart.legend)();
-            return this.height += 30;
-        }
-    }
-};
-
 // Create the chart
 var chart = new Chart(ctx, {
     type: 'bar',
     data: {},
     options: chartOptions,
-    plugins: [ChartDataLabels, legendMargin]
+    plugins: [ChartDataLabels]
 });
 
 var termId = 223;
