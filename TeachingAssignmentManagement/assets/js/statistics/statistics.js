@@ -43,11 +43,9 @@
             yAxis: {
                 stacked: true,
                 grid: {
-                    color: gridLineColor,
-                    drawTicks: false
+                    color: gridLineColor
                 },
                 ticks: {
-                    padding: 20,
                     color: labelColor
                 }
             }
