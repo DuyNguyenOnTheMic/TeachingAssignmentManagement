@@ -3,6 +3,9 @@
     var ctx = $("#statistics-chart"),
         chartWrapper = $('.chartjs');
 
+    var labelColor = '#6e6b7b',
+        gridLineColor = 'rgba(200, 200, 200, 0.2)'; // RGBA color helps in dark layout
+
     // Detect Dark Layout
     if ($('html').hasClass('dark-layout')) {
         labelColor = '#b4b7bd';
@@ -30,7 +33,7 @@
             xAxis: {
                 stacked: true,
                 grid: {
-                    color: "#f3f3f3",
+                    color: gridLineColor,
                     drawTicks: false,
                 },
                 ticks: {
@@ -41,7 +44,7 @@
             yAxis: {
                 stacked: true,
                 grid: {
-                    color: "#f3f3f3",
+                    color: gridLineColor,
                     drawTicks: false,
                 }
             }
