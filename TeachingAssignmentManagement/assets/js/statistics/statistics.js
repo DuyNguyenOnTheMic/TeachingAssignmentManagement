@@ -56,8 +56,15 @@
 
     // Create the chart
     var chart = new Chart(ctx, {
-        type: "bar",
-        data: {},
+        type: 'bar',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1
+            }]
+        },
         options: chartOptions,
         plugins: [ChartDataLabels, legendMargin]
     });
