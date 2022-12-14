@@ -80,7 +80,7 @@ var chart = new Chart(ctx, {
     plugins: [ChartDataLabels]
 });
 
-var termId = 223;
+var termId = termSelect.val();
 $.ajax({
     type: 'GET',
     url: rootUrl + 'Statistics/GetTermData',
