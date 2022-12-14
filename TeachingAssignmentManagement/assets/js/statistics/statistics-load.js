@@ -1,8 +1,7 @@
 ﻿var termSelect = $('#term'),
     rootUrl = $('#loader').data('request-url'),
     statisticsDiv = $('#statisticsDiv'),
-    curriculumsDiv = $('#curriculumsDiv'),
-    url = rootUrl + 'Statistics/GetChart';
+    curriculumsDiv = $('#curriculumsDiv');
 
 $(function () {
     var formSelect = $('.form-select');
@@ -42,6 +41,7 @@ termSelect.change(function () {
 
 
 function fetchData() {
+    var url = rootUrl + 'Statistics/GetChart';
     $.get(url, function (data) {
         // Populate statistics data
         statisticsDiv.html(data);
