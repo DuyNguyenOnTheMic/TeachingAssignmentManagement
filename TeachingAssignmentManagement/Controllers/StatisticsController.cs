@@ -34,9 +34,9 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetTermData()
+        public JsonResult GetTermData(int termId)
         {
-            return Json(unitOfWork.CurriculumClassRepository.GetTermStatistics(223), JsonRequestBehavior.AllowGet);
+            return Json(unitOfWork.CurriculumClassRepository.GetTermStatistics(termId), JsonRequestBehavior.AllowGet);
         }
     }
 }
