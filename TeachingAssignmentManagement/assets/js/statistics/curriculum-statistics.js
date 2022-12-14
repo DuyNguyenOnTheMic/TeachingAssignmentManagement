@@ -1,9 +1,10 @@
-﻿var dataTable;
-var fileName = 'ThongKe_SoGio_HK' + termId;
+﻿var dataTable,
+    fileName = 'SoMonGiangDay_HK' + termId,
+    lecturerId = $('#lecturerId').val();
 
 $.ajax({
     type: 'GET',
-    url: rootUrl + 'Statistics/GetLecturerData/' + id,
+    url: rootUrl + 'Statistics/GetLecturerData/' + lecturerId,
     success: function (data) {
         // Populate statistics table
         dataTable = $('#tblCurriculums').DataTable(
