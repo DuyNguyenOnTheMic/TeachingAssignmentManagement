@@ -170,10 +170,10 @@ function populateDatatable(data) {
                 {
                     searchable: false,
                     orderable: false,
-                    className: 'text-center',
                     width: '5%',
-                    targets: 0
-                }
+                    targets: [0, 4]
+                },
+                { className: 'text-center', target: [0, 3, 4]}
             ],
             order: [[3, 'desc']],
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
@@ -229,3 +229,10 @@ function populateDatatable(data) {
         });
     });
 }
+
+$(function () {
+    // Adjust column width on navigating Boostrap tab
+    $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+        $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
+    });
+})
