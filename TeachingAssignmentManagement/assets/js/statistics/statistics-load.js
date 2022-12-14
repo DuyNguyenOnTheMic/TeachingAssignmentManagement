@@ -4,7 +4,6 @@
     url = rootUrl + 'Statistics/GetChart';
 
 $(function () {
-
     var formSelect = $('.form-select');
 
     // Populate select2 for choosing term and week
