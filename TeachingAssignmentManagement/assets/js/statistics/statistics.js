@@ -171,7 +171,7 @@ function populateDatatable(data) {
                     searchable: false,
                     orderable: false,
                     width: '5%',
-                    targets: [0, 1, 4]
+                    targets: [0, 1]
                 },
                 { className: 'text-center', target: [0, 3, 4] }
             ],
