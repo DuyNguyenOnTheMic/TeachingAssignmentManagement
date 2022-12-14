@@ -47,7 +47,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetLecturerData(int termId, string lecturerId)
+        public JsonResult GetTermCurriculums(int termId, string lecturerId)
         {
             return Json(unitOfWork.CurriculumClassRepository.GetTermCurriculums(termId, lecturerId), JsonRequestBehavior.AllowGet);
         }

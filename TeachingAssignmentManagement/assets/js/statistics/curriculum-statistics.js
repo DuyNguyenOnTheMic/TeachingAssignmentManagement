@@ -4,7 +4,7 @@
 
 $.ajax({
     type: 'GET',
-    url: rootUrl + 'Statistics/GetLecturerData/',
+    url: rootUrl + 'Statistics/GetTermCurriculums',
     data: { termId, lecturerId },
     success: function (data) {
         // Populate statistics table
