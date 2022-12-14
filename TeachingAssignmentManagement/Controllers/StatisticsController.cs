@@ -34,6 +34,12 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        public ActionResult GetCurriculums()
+        {
+            return PartialView("_Curriculums");
+        }
+
+        [HttpGet]
         public JsonResult GetTermData(int termId)
         {
             return Json(unitOfWork.CurriculumClassRepository.GetTermStatistics(termId), JsonRequestBehavior.AllowGet);
