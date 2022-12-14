@@ -115,7 +115,7 @@ $.ajax({
         };
 
         // Update chart data
-        chart.options.plugins.title.text = 'Thống kê số giờ học kỳ 223';
+        chart.options.plugins.title.text = 'Thống kê số giờ học kỳ ' + termSelect.val();
         chart.data = chartData;
         chart.update();
 
