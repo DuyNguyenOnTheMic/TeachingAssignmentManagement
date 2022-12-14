@@ -158,7 +158,7 @@ function populateDatatable(data) {
                 { 'data': '', defaultContent: '' },
                 {
                     'data': null, 'render': function () {
-                        return "<a class='viewInfo text-success p-0' data-original-title='Xem môn học' title='Xem môn học'><i class='feather feather-info font-medium-3 me-1'></i></a>";
+                        return "<button type='button' class='btn btn-icon btn-sm btn-icon rounded-circle btn-warning viewInfo' title='Xem môn học'><i class='feather feather-inbox'></i></button>";
                     }
                 },
                 { 'data': 'staff_id' },
