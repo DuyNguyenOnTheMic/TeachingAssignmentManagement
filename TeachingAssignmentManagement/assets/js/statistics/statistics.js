@@ -28,9 +28,6 @@ var chartOptions = {
     maintainAspectRatio: false,
     scaleShowVerticalLines: false,
     responsiveAnimationDuration: 500,
-    legend: {
-        position: 'top'
-    },
     scales: {
         xAxis: {
             stacked: true,
