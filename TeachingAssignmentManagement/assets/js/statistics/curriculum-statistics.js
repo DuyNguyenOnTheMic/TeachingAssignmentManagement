@@ -4,16 +4,18 @@
 
 $.ajax({
     type: 'GET',
-    url: rootUrl + 'Statistics/GetLecturerData/' + lecturerId,
+    url: rootUrl + 'Statistics/GetLecturerData/',
+    data: { termId, lecturerId },
     success: function (data) {
         // Populate statistics table
         dataTable = $('#tblCurriculums').DataTable(
             {
                 columns: [
                     { 'data': '', defaultContent: '' },
-                    { 'data': 'Key' },
-                    { 'data': 'name' },
-                    { 'data': 'credits' }
+                    { 'data': 'id' },
+                    { 'data': 'curriculum_name' },
+                    { 'data': 'curriculum_credits' },
+                    { 'data': 'major_name' }
                 ],
                 data: data,
                 columnDefs: [
