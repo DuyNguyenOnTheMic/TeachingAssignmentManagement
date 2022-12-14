@@ -56,6 +56,7 @@ var chartOptions = {
     plugins: {
         title: {
             display: true,
+            text: 'Thống kê số giờ học kỳ ' + termSelect.val(),
             font: {
                 size: 25
             },
@@ -71,14 +72,6 @@ var chartOptions = {
         }
     }
 };
-
-// Create the chart
-var chart = new Chart(ctx, {
-    type: 'bar',
-    data: {},
-    options: chartOptions,
-    plugins: [ChartDataLabels]
-});
 
 var termId = termSelect.val();
 $.ajax({
@@ -114,37 +107,40 @@ $.ajax({
             ]
         };
 
-        // Update chart data
-        chart.options.plugins.title.text = 'Thống kê số giờ học kỳ ' + termSelect.val();
-        chart.data = chartData;
-        chart.update();
+        // Create the chart
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: chartData,
+            options: chartOptions,
+            plugins: [ChartDataLabels]
+        });
+
+        // Detect Dark Layout and change color
+        $('.nav-link-style').on('click', function () {
+            var titleLight = '#d0d2d6',
+                titleDark = '#666666',
+                textLight = '#b4b7bd',
+                TextDark = '#6e6b7b',
+                titleColor,
+                textColor;
+            if ($('html').hasClass('dark-layout')) {
+                titleColor = titleLight;
+                textColor = textLight;
+            } else {
+                titleColor = titleDark;
+                textColor = TextDark;
+            }
+            chart.options.plugins.title.color = titleColor;
+            chart.options.plugins.datalabels.color = textColor;
+            chart.options.plugins.legend.labels.color = textColor;
+            chart.options.scales.xAxis.ticks.color = textColor;
+            chart.options.scales.yAxis.ticks.color = textColor;
+            chart.update();
+        });
 
         // populate table for viewing statistics
         populateDatatable(response);
     }
-});
-
-// Detect Dark Layout and change color
-$('.nav-link-style').on('click', function () {
-    var titleLight = '#d0d2d6',
-        titleDark = '#666666',
-        textLight = '#b4b7bd',
-        TextDark = '#6e6b7b',
-        titleColor,
-        textColor;
-    if ($('html').hasClass('dark-layout')) {
-        titleColor = titleLight;
-        textColor = textLight;
-    } else {
-        titleColor = titleDark;
-        textColor = TextDark;
-    }
-    chart.options.plugins.title.color = titleColor;
-    chart.options.plugins.datalabels.color = textColor;
-    chart.options.plugins.legend.labels.color = textColor;
-    chart.options.scales.xAxis.ticks.color = textColor;
-    chart.options.scales.yAxis.ticks.color = textColor;
-    chart.update();
 });
 
 function populateDatatable(data) {
