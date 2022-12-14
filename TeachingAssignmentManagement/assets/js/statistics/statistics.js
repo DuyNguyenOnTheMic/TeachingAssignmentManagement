@@ -151,7 +151,7 @@ function populateDatatable(data) {
     var dataTable;
     var fileName = 'ThongKe_SoGio_HK' + termId;
 
-    // Populate Error lecturers datatable
+    // Populate statistics table
     dataTable = $('#tblStatistics').DataTable(
         {
             columns: [
@@ -161,7 +161,7 @@ function populateDatatable(data) {
                 { 'data': 'sum' },
                 {
                     'data': 'Key', 'render': function (data) {
-                        return "<a class='viewInfo text-success p-0' data-original-title='Xem môn học' title='Xem môn học' onclick=popupForm('" + rootUrl + "Major/Edit/" + data + "')><i class='feather feather-info font-medium-3 me-1'></i></a>";
+                        return "<a class='viewInfo text-success p-0' data-original-title='Xem môn học' title='Xem môn học' onclick=getCurriculums('" + data + "')><i class='feather feather-info font-medium-3 me-1'></i></a>";
                     }
                 }
             ],
