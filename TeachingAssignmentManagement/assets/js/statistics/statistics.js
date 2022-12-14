@@ -231,14 +231,21 @@ function populateDatatable(data) {
 
     // Add event listener for opening and closing details
     $('#tblStatistics tbody').on('click', 'td .viewInfo ', function () {
-        var tr = $(this).closest('tr');
+        var $this = $(this);
+        var tr = $this.closest('tr');
         var row = dataTable.row(tr);
 
         if (row.child.isShown()) {
+            // Update icon on click
+            $this.removeClass('btn-danger').addClass('btn-success');
+            $this.find('i').removeClass('feather-minus').addClass('feather-plus');
             // This row is already open - close it
             row.child.hide();
             tr.removeClass('shown');
         } else {
+            // Update icon on click
+            $this.removeClass('btn-success').addClass('btn-danger');
+            $this.find('i').removeClass('feather-plus').addClass('feather-minus');
             // Open this row
             row.child(format(row.data())).show();
             tr.addClass('shown');
