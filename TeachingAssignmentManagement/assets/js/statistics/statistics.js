@@ -158,7 +158,12 @@ function populateDatatable(data) {
                 { 'data': '', defaultContent: '' },
                 { 'data': 'staff_id' },
                 { 'data': 'full_name' },
-                { 'data': 'sum' }
+                { 'data': 'sum' },
+                {
+                    'data': 'Key', 'render': function (data) {
+                        return "<a class='viewInfo text-success p-0' data-original-title='Xem môn học' title='Xem môn học' onclick=popupForm('" + rootUrl + "Major/Edit/" + data + "')><i class='feather feather-info font-medium-3 me-1'></i></a>";
+                    }
+                }
             ],
             data: data,
             columnDefs: [
