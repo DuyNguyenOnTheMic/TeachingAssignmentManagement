@@ -38,5 +38,12 @@ namespace TeachingAssignmentManagement.Controllers
         {
             return Json(unitOfWork.CurriculumClassRepository.GetTermStatistics(termId), JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public JsonResult GetLecturerData(string lecturerId)
+        {
+            return Json(unitOfWork.CurriculumClassRepository.GetCurriculums(lecturerId), JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
