@@ -30,7 +30,7 @@ $(function () {
 });
 
 function fetchData(termId) {
-    $.get(url, function (data) {
+    $.get(url, { termId }, function (data) {
         if (!data.error) {
             // Populate personal timetable
             statisticsDiv.html(data);
