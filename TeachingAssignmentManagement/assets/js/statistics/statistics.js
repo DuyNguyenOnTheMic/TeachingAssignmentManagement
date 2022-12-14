@@ -236,3 +236,6 @@ $(function () {
         $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
     });
 })
+
+function getCurriculums(lecturerId) {
+}
