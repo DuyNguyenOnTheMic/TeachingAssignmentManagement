@@ -6,6 +6,10 @@
 $(function () {
     var formSelect = $('.form-select');
 
+    // Set latest term value
+    var termId = $('#term option:eq(1)').val();
+    termSelect.val(termId);
+
     // Populate select2 for choosing term and week
     formSelect.each(function () {
         var $this = $(this);
@@ -18,9 +22,7 @@ $(function () {
         });
     })
 
-    var termId = $('#term option:eq(1)').val();
     if (termId) {
-        termSelect.val(termId).trigger('change');
         // Get Partial View personal timetable data
         fetchData();
     } else {
