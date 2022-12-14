@@ -238,4 +238,10 @@ $(function () {
 })
 
 function getCurriculums(lecturerId) {
+    var curriculumsDiv = $('#curriculumsDiv');
+        url = rootUrl + 'Statistics/GetCurriculums';
+    $.get(url, function (data) {
+        // Populate curriculums data
+        curriculumsDiv.html(data);
+    });
 }
