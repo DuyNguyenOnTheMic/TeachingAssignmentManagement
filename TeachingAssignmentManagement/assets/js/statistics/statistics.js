@@ -156,14 +156,14 @@ function populateDatatable(data) {
         {
             columns: [
                 { 'data': '', defaultContent: '' },
+                {
+                    'data': null, 'render': function () {
+                        return "<a class='viewInfo text-success p-0' data-original-title='Xem môn học' title='Xem môn học'><i class='feather feather-info font-medium-3 me-1'></i></a>";
+                    }
+                },
                 { 'data': 'staff_id' },
                 { 'data': 'full_name' },
-                { 'data': 'sum' },
-                {
-                    'data': 'Key', 'render': function (data) {
-                        return "<a class='viewInfo text-success p-0' data-original-title='Xem môn học' title='Xem môn học' onclick=getCurriculums('" + data + "')><i class='feather feather-info font-medium-3 me-1'></i></a>";
-                    }
-                }
+                { 'data': 'sum' }
             ],
             data: data,
             columnDefs: [
@@ -171,7 +171,7 @@ function populateDatatable(data) {
                     searchable: false,
                     orderable: false,
                     width: '5%',
-                    targets: [0, 4]
+                    targets: [0, 1, 4]
                 },
                 { className: 'text-center', target: [0, 3, 4] }
             ],
@@ -228,6 +228,22 @@ function populateDatatable(data) {
             dataTable.cell(cell).invalidate('dom');
         });
     });
+
+    // Add event listener for opening and closing details
+    $(document).on('click', '.viewInfo ', function () {
+        var tr = $(this).closest('tr');
+        var row = dataTable.row(tr);
+
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            // Open this row
+            row.child(format(row.data())).show();
+            tr.addClass('shown');
+        }
+    });
 }
 
 // Adjust column width on navigating Boostrap tab
@@ -241,4 +257,29 @@ function getCurriculums(lecturerId) {
         // Populate curriculums data
         curriculumsDiv.html(data);
     });
+}
+
+/* Formatting function for row details - modify as you need */
+function format(d) {
+    // `d` is the original data object for the row
+    return (
+        '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+        '<tr>' +
+        '<td>Full name:</td>' +
+        '<td>' +
+        d.curriculum_id +
+        '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Extension number:</td>' +
+        '<td>' +
+        d.curriculum_name +
+        '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>Extra info:</td>' +
+        '<td>And any further details here (images etc)...</td>' +
+        '</tr>' +
+        '</table>'
+    );
 }
