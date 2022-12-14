@@ -36,7 +36,9 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public ActionResult GetCurriculums(string lecturerId)
         {
+            var lecturer = unitOfWork.UserRepository.GetLecturerByID(lecturerId);
             ViewData["lecturerId"] = lecturerId;
+            ViewData["lecturerName"] = lecturer.full_name;
             return PartialView("_Curriculums");
         }
 
