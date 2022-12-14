@@ -39,7 +39,7 @@ termSelect.change(function () {
 
 function fetchData(termId) {
     $.get(url, { termId }, function (data) {
-        // Populate personal timetable
+        // Populate statistics data
         statisticsDiv.html(data);
     });
 }
