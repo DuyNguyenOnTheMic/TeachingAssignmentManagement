@@ -149,7 +149,7 @@ $('.nav-link-style').on('click', function () {
 
 function populateDatatable(data) {
     var dataTable;
-    var fileName = 'ThongKe_HK' + termId;
+    var fileName = 'ThongKe_SoGio_HK' + termId;
 
     // Populate Error lecturers datatable
     dataTable = $('#tblStatistics').DataTable(
