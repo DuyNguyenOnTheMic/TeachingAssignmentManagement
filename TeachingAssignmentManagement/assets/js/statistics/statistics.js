@@ -230,7 +230,7 @@ function populateDatatable(data) {
     });
 
     // Add event listener for opening and closing details
-    $(document).on('click', '.viewInfo ', function () {
+    $('#tblStatistics tbody').on('click', 'td .viewInfo ', function () {
         var tr = $(this).closest('tr');
         var row = dataTable.row(tr);
 
