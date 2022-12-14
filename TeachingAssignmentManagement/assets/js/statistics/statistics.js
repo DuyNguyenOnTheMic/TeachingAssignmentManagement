@@ -165,7 +165,6 @@ function populateDatatable(data) {
                     }
                 }
             ],
-            destroy: true,
             data: data,
             columnDefs: [
                 {
