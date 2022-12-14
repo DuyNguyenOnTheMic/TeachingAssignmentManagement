@@ -83,7 +83,7 @@ var chart = new Chart(ctx, {
 var termId = 223;
 $.ajax({
     type: 'GET',
-    url: '/Statistics/GetTermData',
+    url: rootUrl + 'Statistics/GetTermData',
     data: { termId },
     success: function (response) {
 
