@@ -1,6 +1,7 @@
 ﻿var termSelect = $('#term'),
     rootUrl = $('#loader').data('request-url'),
     statisticsDiv = $('#statisticsDiv'),
+    curriculumsDiv = $('#curriculumsDiv'),
     url = rootUrl + 'Statistics/GetChart';
 
 $(function () {
@@ -32,6 +33,8 @@ $(function () {
 
 // Fetch data on term change
 termSelect.change(function () {
+    // Empty curriculumsDiv
+    curriculumsDiv.empty();
     // Display loading message while fetching data
     statisticsDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
     fetchData();

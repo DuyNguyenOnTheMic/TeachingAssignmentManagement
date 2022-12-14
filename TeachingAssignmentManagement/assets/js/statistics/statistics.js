@@ -235,9 +235,8 @@ $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
     $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
 });
 
-var curriculumsDiv = $('#curriculumsDiv'),
-    url = rootUrl + 'Statistics/GetCurriculums';
 function getCurriculums(lecturerId) {
+    url = rootUrl + 'Statistics/GetCurriculums';
     $.get(url, { lecturerId }, function (data) {
         // Populate curriculums data
         curriculumsDiv.html(data);
