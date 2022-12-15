@@ -44,7 +44,7 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public JsonResult GetYearData(int startYear, int endYear)
         {
-            return Json(unitOfWork.CurriculumClassRepository.GetTermStatistics(0), JsonRequestBehavior.AllowGet);
+            return Json(unitOfWork.CurriculumClassRepository.GetYearStatistics(startYear, endYear), JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

@@ -136,6 +136,21 @@ namespace TeachingAssignmentManagement.DAL
             }).OrderByDescending(c => c.sum).ToList();
         }
 
+        public IEnumerable GetYearStatistics(int startYear, int endYear)
+        {
+            return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id != null).GroupBy(c => c.lecturer_id).Select(c => new
+            {
+                c.Key,
+                c.FirstOrDefault().lecturer.staff_id,
+                c.FirstOrDefault().lecturer.full_name,
+                sum = c.Sum(item => item.total_lesson),
+                curriculum_id = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum_id),
+                curriculum_name = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum.name),
+                curriculum_credits = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum.credits),
+                curriculum_major = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().major.name)
+            }).OrderByDescending(c => c.sum).ToList();
+        }
+
         public curriculum_class FindCurriculumClass(IEnumerable<curriculum_class> curriculumClass, string curriculumClassId, int day2, string roomId)
         {
             return curriculumClass.FirstOrDefault(c => c.curriculum_class_id == curriculumClassId && c.day_2 == day2 && c.room_id == roomId);
