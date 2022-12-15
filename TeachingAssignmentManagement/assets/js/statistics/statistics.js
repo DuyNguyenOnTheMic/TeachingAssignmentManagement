@@ -12,16 +12,21 @@ var dataLoader = $('#data-loader'),
     value = dataLoader.val(),
     url = rootUrl + 'Statistics/',
     titleText,
+    fileName,
     data;
 
 if (type == yearSelect.attr('id')) {
-    var yearSplit = value.split(" - ");
-    data = { 'startYear': yearSplit[0], 'endYear': yearSplit[1] };
+    var yearSplit = value.split(" - "),
+        startYear = yearSplit[0],
+        endYear = yearSplit[1];
+    data = { startYear, endYear };
     titleText = 'Thống kê số giờ năm học ' + value;
+    fileName = 'ThongKeSoGio_NamHoc' + startYear + '-' + endYear;
     url += 'GetYearData';
 } else {
     data = { 'termId': value };
     titleText = 'Thống kê số giờ học kỳ ' + value;
+    fileName = 'ThongKeSoGio_HK' + value;
     url += 'GetTermData';
 }
 
@@ -160,7 +165,6 @@ $.ajax({
 
 function populateDatatable(data) {
     var dataTable;
-    var fileName = 'ThongKe_SoGio_HK';
 
     // Populate statistics table
     dataTable = $('#tblStatistics').DataTable(
