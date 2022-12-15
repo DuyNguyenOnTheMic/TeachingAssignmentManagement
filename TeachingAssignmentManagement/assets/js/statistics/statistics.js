@@ -251,14 +251,6 @@ $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
     $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
 });
 
-function getCurriculums(lecturerId) {
-    var url = rootUrl + 'Statistics/GetCurriculums';
-    $.get(url, { lecturerId }, function (data) {
-        // Populate curriculums data
-        curriculumsDiv.html(data);
-    });
-}
-
 /* Formatting function for row details - modify as you need */
 function format(d) {
     // `d` is the original data object for the row
