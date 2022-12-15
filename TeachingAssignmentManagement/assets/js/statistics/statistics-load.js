@@ -35,11 +35,13 @@ $(function () {
 unitSelect.change(function () {
     var $this = $(this);
     if ($this.val() == 'term') {
-        termSelect.parent().removeClass('d-none');
-        yearSelect.parent().addClass('d-none');
+        // Show term select2 field
+        $('#termDiv').show();
+        $('#yearDiv').hide();
     } else {
-        yearSelect.parent().removeClass('d-none');
-        termSelect.parent().addClass('d-none');
+        // Show year select2 field
+        $('#yearDiv').show();
+        $('#termDiv').hide();
     }
 });
 

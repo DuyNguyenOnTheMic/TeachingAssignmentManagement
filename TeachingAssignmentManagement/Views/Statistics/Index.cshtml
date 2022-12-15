@@ -27,11 +27,11 @@
                                             <option value="year">Năm học</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-6 mb-1">
+                                    <div class="col-md-6 mb-1" id="termDiv">
                                         <label class="form-label font-small-4" for="term">Học kỳ: </label>
                                         @Html.DropDownList("term", null, "---- Chọn học kỳ ----", htmlAttributes: new { @class = "select2 form-select" })
                                     </div>
-                                    <div class="col-md-6 mb-1 d-none">
+                                    <div class="col-md-6 mb-1" id="yearDiv" style="display: none">
                                         <label class="form-label font-small-4" for="year">Năm học: </label>
                                         @Html.DropDownList("year", null, "---- Chọn năm học ----", htmlAttributes: new { @class = "select2 form-select" })
                                     </div>
