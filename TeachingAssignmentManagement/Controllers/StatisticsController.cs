@@ -28,8 +28,10 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetChart()
+        public ActionResult GetChart(string type, string value)
         {
+            ViewData["type"] = type;
+            ViewData["value"] = value;
             return PartialView("_Chart");
         }
 

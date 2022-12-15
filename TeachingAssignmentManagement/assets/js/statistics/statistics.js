@@ -70,6 +70,10 @@ var chartOptions = {
     }
 };
 
+var dataLoader = $('#data-loader'),
+    type = dataLoader.data('type'),
+    value = dataLoader.val();
+
 var termId = termSelect.val();
 $.ajax({
     type: 'GET',
