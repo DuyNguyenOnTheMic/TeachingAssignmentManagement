@@ -48,15 +48,18 @@ unitSelect.change(function () {
 
 // Fetch data on term change
 formTermYear.change(function () {
+    var $this = $(this),
+        type = $this.attr('id'),
+        value = $this.val();
     // Display loading message while fetching data
     statisticsDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
-    fetchData();
+    fetchData(type, value);
 });
 
 
-function fetchData() {
+function fetchData(type, value) {
     var url = rootUrl + 'Statistics/GetChart';
-    $.get(url, function (data) {
+    $.get(url, { type, value }, function (data) {
         // Populate statistics data
         statisticsDiv.html(data);
     });
