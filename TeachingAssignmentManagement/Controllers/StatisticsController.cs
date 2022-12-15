@@ -34,24 +34,9 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetCurriculums(string lecturerId)
-        {
-            var lecturer = unitOfWork.UserRepository.GetLecturerByID(lecturerId);
-            ViewData["lecturerId"] = lecturerId;
-            ViewData["lecturerName"] = lecturer.full_name;
-            return PartialView("_Curriculums");
-        }
-
-        [HttpGet]
         public JsonResult GetTermData(int termId)
         {
             return Json(unitOfWork.CurriculumClassRepository.GetTermStatistics(termId), JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        public JsonResult GetTermCurriculums(int termId, string lecturerId)
-        {
-            return Json(unitOfWork.CurriculumClassRepository.GetTermCurriculums(termId, lecturerId), JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

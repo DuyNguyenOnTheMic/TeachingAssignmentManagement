@@ -135,17 +135,6 @@ namespace TeachingAssignmentManagement.DAL
             }).OrderByDescending(c => c.sum).ToList();
         }
 
-        public IEnumerable GetTermCurriculums(int termId, string lecturerId)
-        {
-            return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id == lecturerId).GroupBy(c => c.curriculum_id).Select(c => new
-            {
-                id = c.Key,
-                curriculum_name = c.FirstOrDefault().curriculum.name,
-                curriculum_credits = c.FirstOrDefault().curriculum.credits,
-                major_name = c.FirstOrDefault().major.name,
-            }).ToList();
-        }
-
         public curriculum_class FindCurriculumClass(IEnumerable<curriculum_class> curriculumClass, string curriculumClassId, int day2, string roomId)
         {
             return curriculumClass.FirstOrDefault(c => c.curriculum_class_id == curriculumClassId && c.day_2 == day2 && c.room_id == roomId);
