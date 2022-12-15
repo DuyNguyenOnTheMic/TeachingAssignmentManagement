@@ -1,4 +1,5 @@
-﻿var termSelect = $('#term'),
+﻿var unitSelect = $('#unit'),
+    termSelect = $('#term'),
     rootUrl = $('#loader').data('request-url'),
     statisticsDiv = $('#statisticsDiv');
 
