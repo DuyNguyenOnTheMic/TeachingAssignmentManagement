@@ -260,7 +260,7 @@ function format(d) {
         arrayLength = curriculumId.length,
         tableRow = '';
     for (var i = 0; i < arrayLength; i++) {
-        tableRow += '<tr><td>' + curriculumId[i] + '</td><td>' + curriculumName[i] + '</td><td>' + curriculumCredits[i] + '</td></tr>';
+        tableRow += '<tr><td>' + curriculumId[i] + '</td><td>' + curriculumName[i] + '</td><td class="text-center">' + curriculumCredits[i] + '</td></tr>';
     }
     return (
         '<table class="datatables-ajax table">' +
@@ -268,7 +268,7 @@ function format(d) {
         '<tr>' +
         '<th>Mã HP</th>' +
         '<th>Tên HP</th>' +
-        '<th>Số TC</th>' +
+        '<th class="text-center">Số TC</th>' +
         '</tr>' +
         '</thead>' +
         '<tbody>' +
