@@ -204,22 +204,34 @@ function populateDatatable(data) {
                         {
                             extend: 'print',
                             className: 'dropdown-item',
-                            title: fileName
+                            title: fileName,
+                            exportOptions: {
+                                columns: [0, 2, 3, 4]
+                            }
                         },
                         {
                             extend: 'excel',
                             className: 'dropdown-item',
-                            title: fileName
+                            title: fileName,
+                            exportOptions: {
+                                columns: [0, 2, 3, 4]
+                            }
                         },
                         {
                             extend: 'pdf',
                             className: 'dropdown-item',
-                            title: fileName
+                            title: fileName,
+                            exportOptions: {
+                                columns: [0, 2, 3, 4]
+                            }
                         },
                         {
                             extend: 'copy',
                             className: 'dropdown-item',
-                            title: fileName
+                            title: fileName,
+                            exportOptions: {
+                                columns: [0, 2, 3, 4]
+                            }
                         }
                     ],
                     init: function (api, node, config) {
