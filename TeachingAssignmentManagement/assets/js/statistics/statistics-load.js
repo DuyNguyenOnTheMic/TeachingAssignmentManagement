@@ -3,14 +3,15 @@
     yearSelect = $('#year'),
     formTermYear = $('.form-termyear'),
     rootUrl = $('#loader').data('request-url'),
-    statisticsDiv = $('#statisticsDiv');
+    statisticsDiv = $('#statisticsDiv'),
+    latestTermId = $('#term option:eq(1)').val(),
+    latestYearId = $('#year option:eq(1)').val();
 
 $(function () {
     var formSelect = $('.form-select');
 
     // Set latest term value
-    var termId = $('#term option:eq(1)').val();
-    termSelect.val(termId);
+    termSelect.val(latestTermId);
 
     // Populate select2 for choosing term and week
     formSelect.each(function () {
@@ -24,9 +25,9 @@ $(function () {
         });
     })
 
-    if (termId) {
+    if (latestTermId) {
         // Get Partial View personal timetable data
-        fetchData(termSelect.attr('id'), termId);
+        fetchData(termSelect.attr('id'), latestTermId);
     } else {
         statisticsDiv.html('<h4 class="text-center mt-2">Chưa có dữ liệu học kỳ</h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="No data" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
     }
@@ -36,10 +37,16 @@ $(function () {
 unitSelect.change(function () {
     var $this = $(this);
     if ($this.val() == 'term') {
+        // Set latest term
+        termSelect.val(latestTermId).trigger('change');
+
         // Show term select2 field
         $('#termDiv').show();
         $('#yearDiv').hide();
     } else {
+        // Set latest year
+        yearSelect.val(latestYearId).trigger('change');
+
         // Show year select2 field
         $('#yearDiv').show();
         $('#termDiv').hide();
