@@ -15,6 +15,7 @@ var dataLoader = $('#data-loader'),
     fileName,
     data;
 
+// Check if user is selecting term or year
 if (type == yearSelect.attr('id')) {
     var yearSplit = value.split(" - "),
         startYear = yearSplit[0],
