@@ -263,7 +263,7 @@ function format(d) {
         tableRow += '<tr><td>' + curriculumId[i] + '</td><td>' + curriculumName[i] + '</td><td class="text-center">' + curriculumCredits[i] + '</td></tr>';
     }
     return (
-        '<table class="datatables-ajax table">' +
+        '<table class="table table-sm">' +
         '<thead class="table-light">' +
         '<tr>' +
         '<th>Mã HP</th>' +
