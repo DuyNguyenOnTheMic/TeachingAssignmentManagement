@@ -1210,7 +1210,6 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Statistics\Index.cshtml" />
     <Content Include="Views\Statistics\_Chart.cshtml" />
-    <Content Include="Views\Statistics\_Curriculums.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
