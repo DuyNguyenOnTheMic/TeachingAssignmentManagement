@@ -254,20 +254,26 @@ $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
 // HTML format for child rows of viewing statistics
 function format(d) {
     // `d` is the original data object for the row
+    var curriculumId = d.curriculum_id,
+        curriculumName = d.curriculum_name,
+        curriculumCredits = d.curriculum_credits,
+        arrayLength = curriculumId.length,
+        tableRow = '';
+    for (var i = 0; i < arrayLength; i++) {
+        tableRow += '<tr><td>' + curriculumId[i] + '</td><td>' + curriculumName[i] + '</td><td>' + curriculumCredits[i] + '</td></tr>';
+    }
     return (
-        '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+        '<table class="datatables-ajax table">' +
+        '<thead class="table-light">' +
         '<tr>' +
-        '<td>Mã HP:</td>' +
-        '<td>' +
-        d.curriculum_id +
-        '</td>' +
+        '<th>Mã HP</th>' +
+        '<th>Tên HP</th>' +
+        '<th>Số TC</th>' +
         '</tr>' +
-        '<tr>' +
-        '<td>Tên HP:</td>' +
-        '<td>' +
-        d.curriculum_name +
-        '</td>' +
-        '</tr>' +
+        '</thead>' +
+        '<tbody>' +
+        tableRow +
+        '</tbody>' +
         '</table>'
     );
 }
