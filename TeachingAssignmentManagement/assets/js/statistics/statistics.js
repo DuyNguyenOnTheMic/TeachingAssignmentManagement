@@ -99,6 +99,7 @@ $.ajax({
     type: 'GET',
     url: url,
     data: data,
+    async: false,
     success: function (response) {
 
         // Get chart labels and data
