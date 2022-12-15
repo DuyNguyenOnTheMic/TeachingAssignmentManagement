@@ -72,13 +72,23 @@ var chartOptions = {
 
 var dataLoader = $('#data-loader'),
     type = dataLoader.data('type'),
-    value = dataLoader.val();
+    value = dataLoader.val(),
+    url = rootUrl + 'Statistics/',
+    data;
 
-var termId = termSelect.val();
+if (type == yearSelect.attr('id')) {
+    data = value.split(" - ");
+    url += 'GetYearData';
+} else {
+    data = { 'termId': value };
+    url += 'GetTermData';
+}
+console.log(data);
+
 $.ajax({
     type: 'GET',
-    url: rootUrl + 'Statistics/GetTermData',
-    data: { termId },
+    url: url,
+    data: data,
     success: function (response) {
 
         // Get chart labels and data
