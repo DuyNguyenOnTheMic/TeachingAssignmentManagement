@@ -251,7 +251,7 @@ $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
     $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
 });
 
-/* Formatting function for row details - modify as you need */
+// HTML format for child rows of viewing statistics
 function format(d) {
     // `d` is the original data object for the row
     return (
