@@ -265,20 +265,16 @@ function format(d) {
     return (
         '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
-        '<td>Full name:</td>' +
+        '<td>Mã HP:</td>' +
         '<td>' +
         d.curriculum_id +
         '</td>' +
         '</tr>' +
         '<tr>' +
-        '<td>Extension number:</td>' +
+        '<td>Tên HP:</td>' +
         '<td>' +
         d.curriculum_name +
         '</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>Extra info:</td>' +
-        '<td>And any further details here (images etc)...</td>' +
         '</tr>' +
         '</table>'
     );
