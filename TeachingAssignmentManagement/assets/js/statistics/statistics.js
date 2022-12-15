@@ -156,7 +156,7 @@ $.ajax({
 
 function populateDatatable(data) {
     var dataTable;
-    var fileName = 'ThongKe_SoGio_HK' + termId;
+    var fileName = 'ThongKe_SoGio_HK';
 
     // Populate statistics table
     dataTable = $('#tblStatistics').DataTable(
