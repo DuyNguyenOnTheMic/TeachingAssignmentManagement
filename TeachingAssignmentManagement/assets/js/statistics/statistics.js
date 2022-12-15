@@ -6,6 +6,25 @@ var labelColor = '#6e6b7b',
     titleColor = '#666666',
     gridLineColor = 'rgba(200, 200, 200, 0.2)'; // RGBA color helps in dark layout
 
+// Setup data
+var dataLoader = $('#data-loader'),
+    type = dataLoader.data('type'),
+    value = dataLoader.val(),
+    url = rootUrl + 'Statistics/',
+    titleText,
+    data;
+
+if (type == yearSelect.attr('id')) {
+    var yearSplit = value.split(" - ");
+    data = { 'startYear': yearSplit[0], 'endYear': yearSplit[1] };
+    titleText = 'Thống kê số giờ năm học ' + value;
+    url += 'GetYearData';
+} else {
+    data = { 'termId': value };
+    titleText = 'Thống kê số giờ học kỳ ' + value;
+    url += 'GetTermData';
+}
+
 // Detect Dark Layout
 if ($('html').hasClass('dark-layout')) {
     titleColor = '#d0d2d6',
@@ -53,7 +72,7 @@ var chartOptions = {
     plugins: {
         title: {
             display: true,
-            text: 'Thống kê số giờ học kỳ ' + termSelect.val(),
+            text: titleText,
             font: {
                 size: 25
             },
@@ -69,22 +88,6 @@ var chartOptions = {
         }
     }
 };
-
-var dataLoader = $('#data-loader'),
-    type = dataLoader.data('type'),
-    value = dataLoader.val(),
-    url = rootUrl + 'Statistics/',
-    data;
-
-if (type == yearSelect.attr('id')) {
-    var yearSplit = value.split(" - ");
-    data = { 'startYear': yearSplit[0], 'endYear': yearSplit[1] };
-    url += 'GetYearData';
-} else {
-    data = { 'termId': value };
-    url += 'GetTermData';
-}
-console.log(data);
 
 $.ajax({
     type: 'GET',
