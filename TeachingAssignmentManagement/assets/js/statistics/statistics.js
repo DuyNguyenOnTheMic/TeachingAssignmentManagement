@@ -257,10 +257,11 @@ function format(d) {
     var curriculumId = d.curriculum_id,
         curriculumName = d.curriculum_name,
         curriculumCredits = d.curriculum_credits,
+        curriculumMajor = d.curriculum_major,
         arrayLength = curriculumId.length,
         tableRow = '';
     for (var i = 0; i < arrayLength; i++) {
-        tableRow += '<tr><td>' + curriculumId[i] + '</td><td>' + curriculumName[i] + '</td><td class="text-center">' + curriculumCredits[i] + '</td></tr>';
+        tableRow += '<tr><td>' + curriculumId[i] + '</td><td>' + curriculumName[i] + '</td><td>' + curriculumMajor[i] + '</td><td class="text-center">' + curriculumCredits[i] + '</td></tr>';
     }
     return (
         '<table class="table table-sm">' +
@@ -268,6 +269,7 @@ function format(d) {
         '<tr>' +
         '<th>Mã HP</th>' +
         '<th>Tên HP</th>' +
+        '<th>Ngành</th>' +
         '<th class="text-center">Số TC</th>' +
         '</tr>' +
         '</thead>' +
