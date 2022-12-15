@@ -1,6 +1,7 @@
 ﻿var unitSelect = $('#unit'),
     termSelect = $('#term'),
     yearSelect = $('#year'),
+    formTermYear = $('.form-termyear'),
     rootUrl = $('#loader').data('request-url'),
     statisticsDiv = $('#statisticsDiv');
 
@@ -46,7 +47,7 @@ unitSelect.change(function () {
 });
 
 // Fetch data on term change
-termSelect.change(function () {
+formTermYear.change(function () {
     // Display loading message while fetching data
     statisticsDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
     fetchData();
