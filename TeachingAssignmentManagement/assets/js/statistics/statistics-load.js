@@ -11,6 +11,18 @@ $(function () {
     var termId = $('#term option:eq(1)').val();
     termSelect.val(termId);
 
+    // Populate select2 for choosing term and week
+    formSelect.each(function () {
+        var $this = $(this);
+        $this.wrap('<div class="position-relative"></div>');
+        $this.select2({
+            language: 'vi',
+            dropdownAutoWidth: true,
+            dropdownParent: $this.parent(),
+            placeholder: $this[0][0].innerHTML
+        });
+    })
+
     if (termId) {
         // Get Partial View personal timetable data
         fetchData();
