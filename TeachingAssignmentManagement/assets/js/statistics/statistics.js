@@ -77,7 +77,8 @@ var dataLoader = $('#data-loader'),
     data;
 
 if (type == yearSelect.attr('id')) {
-    data = value.split(" - ");
+    var yearSplit = value.split(" - ");
+    data = { 'startYear': yearSplit[0], 'endYear': yearSplit[1] };
     url += 'GetYearData';
 } else {
     data = { 'termId': value };
