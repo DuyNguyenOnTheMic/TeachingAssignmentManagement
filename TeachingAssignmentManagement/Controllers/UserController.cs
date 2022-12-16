@@ -135,6 +135,12 @@ namespace TeachingAssignmentManagement.Controllers
             {
                 return Json(new { error = true, message = "Mã giảng viên này đã có trong hệ thống!" }, JsonRequestBehavior.AllowGet);
             }
+
+            if (email == string.Empty)
+            {
+                user.Email = null;
+                user.UserName = staff_id;
+            }
             // Create new user
             UserManager.Create(user);
             UserManager.AddToRole(user.Id, role.Name);
