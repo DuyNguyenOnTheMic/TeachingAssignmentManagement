@@ -375,6 +375,9 @@ if (userForm.length) {
                 required: true,
                 emailCheck: true
             },
+            type: {
+                required: true
+            },
             role_id: {
                 required: true
             }
@@ -390,6 +393,9 @@ if (userForm.length) {
             email: {
                 required: "Bạn chưa nhập email",
                 emailCheck: "Vui lòng nhập email Văn Lang hợp lệ!"
+            },
+            type: {
+                required: "Bạn chưa chọn loại giảng viên"
             },
             role_id: {
                 required: "Bạn chưa chọn role"
