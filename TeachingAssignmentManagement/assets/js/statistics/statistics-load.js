@@ -54,17 +54,38 @@ unitSelect.change(function () {
     }
 });
 
-// Fetch data on term change
+// Fetch data on term or year change
 formTermYear.change(function () {
     var $this = $(this),
         type = $this.attr('id'),
         value = $this.val(),
         lecturerType = lecturerTypeSelect.val();
     // Display loading message while fetching data
-    statisticsDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
+    loading();
     fetchData(type, value, lecturerType);
 });
 
+// Fetch data on lecturer type change
+lecturerTypeSelect.change(function () {
+    var $this = $(this),
+        type,
+        value;
+    // Check if term or year select is hidden
+    if (termSelect.is(':visible')) {
+        type = termSelect.attr('id');
+        value = termSelect.val();
+    } else {
+        type = yearSelect.attr('id');
+        value = yearSelect.val();
+    }
+    // Display loading message while fetching data
+    loading();
+    fetchData(type, value, $this.val());
+});
+
+function loading() {
+    statisticsDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
+}
 
 function fetchData(type, value, lecturerType) {
     var url = rootUrl + 'Statistics/GetChart';
