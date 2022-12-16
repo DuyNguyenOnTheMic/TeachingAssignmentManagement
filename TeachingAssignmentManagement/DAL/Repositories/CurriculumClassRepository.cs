@@ -134,7 +134,7 @@ namespace TeachingAssignmentManagement.DAL
                 curriculum_name = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum.name),
                 curriculum_credits = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum.credits),
                 curriculum_major = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().major.name),
-                curriculum_hours = c.GroupBy(item => item.curriculum.id).Sum(item => item.FirstOrDefault().total_lesson)
+                curriculum_hours = c.GroupBy(item => item.curriculum.id).Select(item => item.Sum(cu => cu.total_lesson))
             }).OrderByDescending(c => c.sum).ToList();
         }
 
