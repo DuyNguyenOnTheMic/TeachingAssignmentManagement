@@ -57,16 +57,17 @@ unitSelect.change(function () {
 formTermYear.change(function () {
     var $this = $(this),
         type = $this.attr('id'),
-        value = $this.val();
+        value = $this.val(),
+        lecturerType = $('#lecturerType').val();
     // Display loading message while fetching data
     statisticsDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
-    fetchData(type, value);
+    fetchData(type, value, lecturerType);
 });
 
 
-function fetchData(type, value) {
+function fetchData(type, value, lecturerType) {
     var url = rootUrl + 'Statistics/GetChart';
-    $.get(url, { type, value }, function (data) {
+    $.get(url, { type, value, lecturerType }, function (data) {
         // Populate statistics data
         statisticsDiv.html(data);
     });
