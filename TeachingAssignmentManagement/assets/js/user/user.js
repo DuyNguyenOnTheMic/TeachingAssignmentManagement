@@ -29,6 +29,20 @@ $(function () {
             ],
             columnDefs: [
                 {
+                    // User type
+                    targets: 4,
+                    render: function (data, type, full, meta) {
+                        var $status = full['type'];
+                        var typeBadgeObj = {
+                            'Cơ hữu': 'badge-light-warning',
+                            'Thỉnh giảng': 'badge-light-success',
+                            'null': 'hehe'
+                        };
+                        console.log($status);
+                        return '<span class="badge rounded-pill badge-light-warning text-capitalized">' + $status + '</span>';
+                    }
+                },
+                {
                     // User Role
                     targets: 5,
                     render: function (data, type, full, meta) {
@@ -39,7 +53,7 @@ $(function () {
                             'Giảng viên': feather.icons['edit-2'].toSvg({ class: 'font-medium-3 text-success me-50' }),
                             'Chưa phân quyền': feather.icons['help-circle'].toSvg({ class: 'font-medium-3 text-warning me-50' })
                         };
-                        return "<span class='text-truncate align-middle'>" + roleBadgeObj[$role] + $role + '</span>';
+                        return '<span class="text-truncate align-middle">' + roleBadgeObj[$role] + $role + '</span>';
                     }
                 },
                 {
