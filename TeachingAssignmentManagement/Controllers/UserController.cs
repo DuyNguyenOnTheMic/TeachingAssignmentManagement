@@ -96,7 +96,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string staff_id, string full_name, string email, string role_id)
+        public ActionResult Create(string staff_id, string full_name, string email, string type, string role_id)
         {
             // Declare variables
             string txtStaffId = SetNullOnEmpty(staff_id);
@@ -125,7 +125,8 @@ namespace TeachingAssignmentManagement.Controllers
                     {
                         id = user.Id,
                         staff_id = txtStaffId,
-                        full_name = txtFullName
+                        full_name = txtFullName,
+                        type = type
                     };
                     unitOfWork.UserRepository.InsertLecturer(lecturer);
                     unitOfWork.Save();
