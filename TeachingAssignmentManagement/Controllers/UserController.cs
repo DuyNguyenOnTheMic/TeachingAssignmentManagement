@@ -230,25 +230,28 @@ namespace TeachingAssignmentManagement.Controllers
                 }
                 unitOfWork.Save();
 
-                // Update email of user
-                user.Email = email;
-                user.UserName = email;
-                UserManager.Update(user);
+                if (email != string.Empty)
+                {
+                    // Update email of user
+                    user.Email = email;
+                    user.UserName = email;
+                    UserManager.Update(user);
+                }
             }
             catch
             {
                 return Json(new { error = true, message = "Mã giảng viên này đã có trong hệ thống!" }, JsonRequestBehavior.AllowGet);
             }
 
-            if (oldRole == null)
+            if (oldRole != null)
             {
-                // Add user to role
+                // Update user role
+                UserManager.RemoveFromRole(id, oldRole);
                 UserManager.AddToRole(id, role.Name);
             }
             else
             {
-                // Update user role
-                UserManager.RemoveFromRole(id, oldRole);
+                // Add user to role
                 UserManager.AddToRole(id, role.Name);
             }
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
