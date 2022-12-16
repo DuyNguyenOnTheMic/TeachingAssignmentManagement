@@ -121,9 +121,9 @@ namespace TeachingAssignmentManagement.DAL
             return context.curriculum_class.Find(id);
         }
 
-        public IEnumerable GetTermStatistics(int termId)
+        public IEnumerable GetTermStatistics(int termId, string lecturerType)
         {
-            return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id != null).GroupBy(c => c.lecturer_id).Select(c => new
+            return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id != null && c.lecturer.type == lecturerType).GroupBy(c => c.lecturer_id).Select(c => new
             {
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
@@ -137,9 +137,9 @@ namespace TeachingAssignmentManagement.DAL
             }).OrderByDescending(c => c.sum).ToList();
         }
 
-        public IEnumerable GetYearStatistics(int startYear, int endYear)
+        public IEnumerable GetYearStatistics(int startYear, int endYear, string lecturerType)
         {
-            return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id != null).GroupBy(c => c.lecturer_id).Select(c => new
+            return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id != null && c.lecturer.type == lecturerType).GroupBy(c => c.lecturer_id).Select(c => new
             {
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
