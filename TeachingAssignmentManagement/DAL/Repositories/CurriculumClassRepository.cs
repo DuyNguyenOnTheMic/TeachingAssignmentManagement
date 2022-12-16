@@ -148,7 +148,8 @@ namespace TeachingAssignmentManagement.DAL
                 id = c.Key,
                 curriculum_name = c.FirstOrDefault().curriculum.name,
                 curriculum_credits = c.FirstOrDefault().curriculum.credits,
-                major_name = c.FirstOrDefault().major.name,
+                curriculum_major = c.FirstOrDefault().major.name,
+                curriculum_hours = c.Sum(item => item.total_lesson)
             }).ToList();
         }
 
