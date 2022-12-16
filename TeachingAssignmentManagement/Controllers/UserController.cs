@@ -152,19 +152,24 @@ namespace TeachingAssignmentManagement.Controllers
                 new SelectListItem() { Text = "Cơ hữu", Value = "Cơ hữu" },
                 new SelectListItem() { Text = "Thỉnh giảng", Value = "Thỉnh giảng" }
             };
-            lecturerType.Find(s => s.Value == lecturer.type).Selected = true;
-            ViewData["type"] = lecturerType;
+
+            // Set selected value for lecturer type
+            if (lecturer.type != null)
+            {
+                lecturerType.Find(s => s.Value == lecturer.type).Selected = true;
+            }
 
             if (user.Roles.Count > 0)
             {
-                // Set selected values for select lists
+                // Set selected value for user role
                 ViewData["role_id"] = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name", user.Roles.FirstOrDefault().RoleId);
             }
             else
             {
-                // Populate new select lists
+                // Populate new role select list
                 ViewData["role_id"] = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name");
             }
+            ViewData["type"] = lecturerType;
             ViewData["email"] = user.Email;
             return View(lecturer);
         }
