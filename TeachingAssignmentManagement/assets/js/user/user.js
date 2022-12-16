@@ -19,8 +19,8 @@ $(function () {
                 { 'data': 'staff_id' },
                 { 'data': 'full_name' },
                 { 'data': 'email' },
-                { 'data': 'role' },
                 { 'data': 'type' },
+                { 'data': 'role' },
                 {
                     'data': 'id', 'render': function (data, type, row) {
                         return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + rootUrl + "User/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a><a class='deleteRow text-danger p-0' data-original-title='Xoá' title='Xoá' onclick=deleteUser('" + data + "','" + row.email + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
@@ -30,7 +30,7 @@ $(function () {
             columnDefs: [
                 {
                     // User Role
-                    targets: 4,
+                    targets: 5,
                     render: function (data, type, full, meta) {
                         var $role = full['role'];
                         var roleBadgeObj = {
@@ -78,7 +78,7 @@ $(function () {
             initComplete: function () {
                 // Adding role filter once table initialized
                 this.api()
-                    .columns(4)
+                    .columns(5)
                     .every(function () {
                         var column = this;
                         var select = $(
