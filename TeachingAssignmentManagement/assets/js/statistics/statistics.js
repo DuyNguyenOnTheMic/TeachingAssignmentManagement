@@ -101,67 +101,71 @@ $.ajax({
     data: data,
     async: false,
     success: function (response) {
+        if (!response.length) {
+            // Show no data message
+            statisticsDiv.empty().append('<h4 class="text-center mt-2">Học kỳ này chưa có dữ liệu <i class="feather feather-help-circle"></i></h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="Welcome" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
+        } else {
+            // Get chart labels and data
+            var labels = response.map(function (e) {
+                return e.full_name;
+            });
+            var totalLessons = response.map(function (e) {
+                return e.sum;
+            });
 
-        // Get chart labels and data
-        var labels = response.map(function (e) {
-            return e.full_name;
-        });
-        var totalLessons = response.map(function (e) {
-            return e.sum;
-        });
-
-        // Chart Data
-        var chartData = {
-            labels: labels,
-            datasets: [
-                {
-                    label: 'Số giờ giảng',
-                    data: totalLessons,
-                    backgroundColor: 'rgba(115, 103, 240, 0.8)',
-                    borderColor: 'transparent',
-                    borderWidth: 1,
-                    datalabels: {
-                        anchor: 'end',
-                        align: 'start',
-                        offset: -30
+            // Chart Data
+            var chartData = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Số giờ giảng',
+                        data: totalLessons,
+                        backgroundColor: 'rgba(115, 103, 240, 0.8)',
+                        borderColor: 'transparent',
+                        borderWidth: 1,
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'start',
+                            offset: -30
+                        }
                     }
+                ]
+            };
+
+            // Create the chart
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: chartData,
+                options: chartOptions,
+                plugins: [ChartDataLabels]
+            });
+
+            // Detect Dark Layout and change color
+            $('.nav-link-style').on('click', function () {
+                var titleLight = '#d0d2d6',
+                    titleDark = '#666666',
+                    textLight = '#b4b7bd',
+                    TextDark = '#6e6b7b',
+                    titleColor,
+                    textColor;
+                if ($('html').hasClass('dark-layout')) {
+                    titleColor = titleLight;
+                    textColor = textLight;
+                } else {
+                    titleColor = titleDark;
+                    textColor = TextDark;
                 }
-            ]
-        };
+                chart.options.plugins.title.color = titleColor;
+                chart.options.plugins.datalabels.color = textColor;
+                chart.options.plugins.legend.labels.color = textColor;
+                chart.options.scales.xAxis.ticks.color = textColor;
+                chart.options.scales.yAxis.ticks.color = textColor;
+                chart.update();
+            });
 
-        // Create the chart
-        var chart = new Chart(ctx, {
-            type: 'bar',
-            data: chartData,
-            options: chartOptions,
-            plugins: [ChartDataLabels]
-        });
-
-        // Detect Dark Layout and change color
-        $('.nav-link-style').on('click', function () {
-            var titleLight = '#d0d2d6',
-                titleDark = '#666666',
-                textLight = '#b4b7bd',
-                TextDark = '#6e6b7b',
-                titleColor,
-                textColor;
-            if ($('html').hasClass('dark-layout')) {
-                titleColor = titleLight;
-                textColor = textLight;
-            } else {
-                titleColor = titleDark;
-                textColor = TextDark;
-            }
-            chart.options.plugins.title.color = titleColor;
-            chart.options.plugins.datalabels.color = textColor;
-            chart.options.plugins.legend.labels.color = textColor;
-            chart.options.scales.xAxis.ticks.color = textColor;
-            chart.options.scales.yAxis.ticks.color = textColor;
-            chart.update();
-        });
-
-        // populate table for viewing statistics
-        populateDatatable(response);
+            // populate table for viewing statistics
+            populateDatatable(response);
+        }
     }
 });
 
