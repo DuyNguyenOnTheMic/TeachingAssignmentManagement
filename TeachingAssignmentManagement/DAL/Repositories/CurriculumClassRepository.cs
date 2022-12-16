@@ -125,7 +125,6 @@ namespace TeachingAssignmentManagement.DAL
         {
             return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer.type == lecturerType).GroupBy(c => c.lecturer_id).Select(c => new
             {
-                c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
                 c.FirstOrDefault().lecturer.full_name,
                 sum = c.Sum(item => item.total_lesson),
@@ -144,10 +143,11 @@ namespace TeachingAssignmentManagement.DAL
         {
             return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer.type != null).GroupBy(c => c.lecturer_id).Select(c => new
             {
-                c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
                 full_name = c.FirstOrDefault().lecturer.full_name + " (" + c.FirstOrDefault().lecturer.type + ")",
                 sum = c.Sum(item => item.total_lesson),
+                theory_count = c.Count(item => item.type == "Lý thuyết"),
+                practice_count = c.Count(item => item.type == "Thực hành"),
                 curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
                 curriculum_id = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum_id),
                 curriculum_name = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum.name),
@@ -161,10 +161,11 @@ namespace TeachingAssignmentManagement.DAL
         {
             return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type == lecturerType).GroupBy(c => c.lecturer_id).Select(c => new
             {
-                c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
                 c.FirstOrDefault().lecturer.full_name,
                 sum = c.Sum(item => item.total_lesson),
+                theory_count = c.Count(item => item.type == "Lý thuyết"),
+                practice_count = c.Count(item => item.type == "Thực hành"),
                 curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
                 curriculum_id = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum_id),
                 curriculum_name = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum.name),
@@ -178,10 +179,11 @@ namespace TeachingAssignmentManagement.DAL
         {
             return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type != null).GroupBy(c => c.lecturer_id).Select(c => new
             {
-                c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
                 full_name = c.FirstOrDefault().lecturer.full_name + " (" + c.FirstOrDefault().lecturer.type + ")",
                 sum = c.Sum(item => item.total_lesson),
+                theory_count = c.Count(item => item.type == "Lý thuyết"),
+                practice_count = c.Count(item => item.type == "Thực hành"),
                 curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
                 curriculum_id = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum_id),
                 curriculum_name = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum.name),
