@@ -19,12 +19,18 @@
     </div>
 
     <div class="mb-1">
-        <label class="form-label font-small-4" for="email">Email: </label>
+        <label class="form-label font-small-4" for="email"><span class="text-danger">*</span> Email: </label>
         <input type="text" class="form-control" id="email" name="email" placeholder="Nhập email" aria-label="Nhập email" value="@ViewData["email"]" />
     </div>
 
     <div class="mb-1">
-        <label class="form-label font-small-4" for="role_id">Role: </label>
+        <label class="form-label font-small-4" for="role_id"><span class="text-danger">*</span> Loại giảng viên: </label>
+        <small class="text-muted"><i>(Giảng viên cơ hữu hoặc giảng viên thỉnh giảng)</i></small>
+        @Html.DropDownList("type", null, htmlAttributes: new { @class = "select2 form-select", @aria_label = "Chọn loại giảng viên" })
+    </div>
+
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="role_id"><span class="text-danger">*</span> Role: </label>
         @Html.DropDownList("role_id", null, htmlAttributes: new { @class = "select2 form-select", @aria_label = "Chọn role" })
     </div>
 
