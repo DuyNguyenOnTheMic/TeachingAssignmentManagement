@@ -148,7 +148,6 @@ function submitForm(form) {
                     refreshTable();
 
                     // Show message when create or edit succeeded
-                    toastr.options.positionClass = 'toast-bottom-right';
                     toastr["success"](data.message);
                 }
                 else {
@@ -193,7 +192,6 @@ function deleteMajor(id) {
                         refreshTable();
 
                         // Show message when delete succeeded
-                        toastr.options.positionClass = 'toast-bottom-right';
                         toastr["success"](data.message);
                     }
                     else {
