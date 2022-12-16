@@ -175,7 +175,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(string id, string staff_id, string full_name, string email, string role_id)
+        public ActionResult Edit(string id, string staff_id, string full_name, string email, string type, string role_id)
         {
             // Declare variables
             ApplicationUser user = UserManager.FindById(id);
@@ -201,23 +201,10 @@ namespace TeachingAssignmentManagement.Controllers
 
             try
             {
-                if (query_lecturer != null)
-                {
-                    // Edit lecturer info
-                    query_lecturer.staff_id = txtStaffId;
-                    query_lecturer.full_name = txtFullName;
-                }
-                else if (txtStaffId != null || txtFullName != null)
-                {
-                    // Add a new lecturer
-                    lecturer lecturer = new lecturer
-                    {
-                        id = id,
-                        staff_id = txtStaffId,
-                        full_name = txtFullName
-                    };
-                    unitOfWork.UserRepository.InsertLecturer(lecturer);
-                }
+                // Edit lecturer info
+                query_lecturer.staff_id = txtStaffId;
+                query_lecturer.full_name = txtFullName;
+                query_lecturer.type = type;
                 unitOfWork.Save();
 
                 // Update email of user
