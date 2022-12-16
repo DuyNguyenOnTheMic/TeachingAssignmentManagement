@@ -343,7 +343,7 @@ if (userForm.length) {
         $this.wrap('<div class="position-relative"></div>');
         $this
             .select2({
-                placeholder: "---- Chọn role ----",
+                placeholder: $this[0][0].innerHTML,
                 minimumResultsForSearch: Infinity,
                 forceabove: true,
                 dropdownParent: $this.parent()
