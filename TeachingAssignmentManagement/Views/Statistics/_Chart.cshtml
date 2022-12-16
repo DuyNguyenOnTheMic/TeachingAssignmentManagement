@@ -1,4 +1,8 @@
-﻿<ul class="nav nav-tabs" role="tablist">
+﻿@if (ViewData["lecturerType"].ToString() == "-1")
+{
+    <div class="float-end mt-50"><i>Chú thích: CH là giảng viên cơ hữu và TG là giảng viên thỉnh giảng</i></div>
+}
+<ul class="nav nav-tabs" role="tablist">
     <li class="nav-item">
         <a class="nav-link active" id="chart-tab" data-bs-toggle="tab" href="#chartIcon" aria-controls="chart" role="tab" aria-selected="true"><i class="feather feather-bar-chart-2"></i> Biểu đồ</a>
     </li>
