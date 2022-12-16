@@ -137,6 +137,22 @@ namespace TeachingAssignmentManagement.DAL
             }).OrderByDescending(c => c.sum).ToList();
         }
 
+        public IEnumerable GetTermStatisticsAll(int termId)
+        {
+            return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id != null && c.lecturer.type != null).GroupBy(c => c.lecturer_id).Select(c => new
+            {
+                c.Key,
+                c.FirstOrDefault().lecturer.staff_id,
+                full_name = c.FirstOrDefault().lecturer.full_name + c.FirstOrDefault().lecturer.type,
+                sum = c.Sum(item => item.total_lesson),
+                curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                curriculum_id = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum_id),
+                curriculum_name = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum.name),
+                curriculum_credits = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum.credits),
+                curriculum_major = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().major.name)
+            }).OrderByDescending(c => c.sum).ToList();
+        }
+
         public IEnumerable GetYearStatistics(int startYear, int endYear, string lecturerType)
         {
             return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id != null && c.lecturer.type == lecturerType).GroupBy(c => c.lecturer_id).Select(c => new
@@ -144,6 +160,22 @@ namespace TeachingAssignmentManagement.DAL
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
                 c.FirstOrDefault().lecturer.full_name,
+                sum = c.Sum(item => item.total_lesson),
+                curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                curriculum_id = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum_id),
+                curriculum_name = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum.name),
+                curriculum_credits = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum.credits),
+                curriculum_major = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().major.name)
+            }).OrderByDescending(c => c.sum).ToList();
+        }
+
+        public IEnumerable GetYearStatisticsAll(int startYear, int endYear)
+        {
+            return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id != null && c.lecturer.type != null).GroupBy(c => c.lecturer_id).Select(c => new
+            {
+                c.Key,
+                c.FirstOrDefault().lecturer.staff_id,
+                full_name = c.FirstOrDefault().lecturer.full_name + c.FirstOrDefault().lecturer.type,
                 sum = c.Sum(item => item.total_lesson),
                 curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
                 curriculum_id = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum_id),

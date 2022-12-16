@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections;
+using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
 
@@ -39,13 +40,19 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public JsonResult GetTermData(int termId, string lecturerType)
         {
-            return Json(unitOfWork.CurriculumClassRepository.GetTermStatistics(termId, lecturerType), JsonRequestBehavior.AllowGet);
+            IEnumerable query_classes = lecturerType != "-1"
+                ? unitOfWork.CurriculumClassRepository.GetTermStatistics(termId, lecturerType)
+                : unitOfWork.CurriculumClassRepository.GetTermStatisticsAll(termId);
+            return Json(query_classes, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public JsonResult GetYearData(int startYear, int endYear, string lecturerType)
         {
-            return Json(unitOfWork.CurriculumClassRepository.GetYearStatistics(startYear, endYear, lecturerType), JsonRequestBehavior.AllowGet);
+            IEnumerable query_classes = lecturerType != "-1"
+                ? unitOfWork.CurriculumClassRepository.GetYearStatistics(startYear, endYear, lecturerType)
+                : unitOfWork.CurriculumClassRepository.GetYearStatisticsAll(startYear, endYear);
+            return Json(query_classes, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
