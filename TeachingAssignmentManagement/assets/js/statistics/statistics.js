@@ -186,22 +186,7 @@ function populateDatatable(data) {
                 { 'data': 'staff_id' },
                 { 'data': 'full_name' },
                 { 'data': 'curriculum_count' },
-                {
-                    'render': function (data, type, full, meta) {
-                        // Render total class column
-                        var theoryClass = full.theory_count + 'LT',
-                            practiceClass = full.practice_count + 'TH',
-                            totalClass;
-                        if (full.theory_count && full.practice_count) {
-                            totalClass = theoryClass + ' + ' + practiceClass;
-                        } else if (full.theory_count) {
-                            totalClass = theoryClass;
-                        } else if (full.practice_count) {
-                            totalClass = practiceClass;
-                        }
-                        return totalClass;
-                    }
-                },
+                { 'data': 'class_count' },
                 { 'data': 'sum' }
             ],
             data: data,

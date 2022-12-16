@@ -129,6 +129,7 @@ namespace TeachingAssignmentManagement.DAL
                 c.FirstOrDefault().lecturer.staff_id,
                 c.FirstOrDefault().lecturer.full_name,
                 sum = c.Sum(item => item.total_lesson),
+                class_count = c.Count(),
                 theory_count = c.GroupBy(item => item.curriculum.id).Select(item => item.Count(cu => cu.type == "Lý thuyết")),
                 practice_count = c.GroupBy(item => item.curriculum.id).Select(item => item.Count(cu => cu.type == "Thực hành")),
                 curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
