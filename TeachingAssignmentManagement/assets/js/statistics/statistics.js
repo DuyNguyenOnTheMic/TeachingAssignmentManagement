@@ -186,7 +186,9 @@ function populateDatatable(data) {
                 { 'data': 'staff_id' },
                 { 'data': 'full_name' },
                 { 'data': 'curriculum_count' },
-                { 'data': 'sum' }
+                { 'data': 'sum' },
+                { 'data': 'theory_count' },
+                { 'data': 'practice_count' }
             ],
             data: data,
             columnDefs: [
