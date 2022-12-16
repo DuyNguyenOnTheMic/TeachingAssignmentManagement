@@ -147,6 +147,7 @@ namespace TeachingAssignmentManagement.Controllers
         {
             // Get user role
             ApplicationUser user = UserManager.FindById(id);
+            lecturer lecturer = unitOfWork.UserRepository.GetLecturerByID(id);
             if (user.Roles.Count > 0)
             {
                 // Set selected role
@@ -158,7 +159,7 @@ namespace TeachingAssignmentManagement.Controllers
                 ViewData["role_id"] = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name");
             }
             ViewData["email"] = user.Email;
-            return View(unitOfWork.UserRepository.GetLecturerByID(id));
+            return View(lecturer);
         }
 
         [HttpPost]
