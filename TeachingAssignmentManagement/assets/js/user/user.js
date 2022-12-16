@@ -35,10 +35,10 @@ $(function () {
                         var $status = full['type'];
                         if ($status) {
                             var typeBadgeObj = {
-                                'Cơ hữu': 'badge-light-success',
-                                'Thỉnh giảng': 'badge-light-warning'
+                                'CH': { title: 'Cơ hữu', class: 'badge-light-success' },
+                                'TG': { title: 'Thỉnh giảng', class: 'badge-light-warning' }
                             };
-                            return '<span class="badge rounded-pill ' + typeBadgeObj[$status] + ' text-capitalized">' + $status + '</span>';
+                            return '<span class="badge rounded-pill ' + typeBadgeObj[$status].class + ' text-capitalized">' + typeBadgeObj[$status].title + '</span>';
                         } else {
                             return null;
                         }
