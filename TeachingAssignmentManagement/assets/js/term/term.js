@@ -142,7 +142,6 @@ function submitForm(form) {
                     dataTable.ajax.reload(null, false);
 
                     // Show message when create or edit succeeded
-                    toastr.options.positionClass = 'toast-bottom-right';
                     toastr["success"](data.message);
                 }
                 else {
@@ -187,7 +186,6 @@ function deleteTerm(id) {
                         dataTable.ajax.reload(null, false);
 
                         // Show message when delete succeeded
-                        toastr.options.positionClass = 'toast-bottom-right';
                         toastr["success"](data.message);
                     }
                     else {
