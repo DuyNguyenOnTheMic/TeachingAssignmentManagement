@@ -372,7 +372,9 @@ if (userForm.length) {
                 maxlength: 255
             },
             email: {
-                required: true,
+                required: function () {
+                    return ($("#type").val() == 'CH') ? true : false;
+                },
                 emailCheck: true
             },
             type: {
