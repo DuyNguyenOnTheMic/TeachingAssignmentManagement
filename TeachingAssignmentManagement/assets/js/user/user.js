@@ -107,10 +107,10 @@ $(function () {
             cell.innerHTML = i + 1;
         });
         // Get user count
-        var countFBoard = dataTable.column(4).data().filter(function (value, index) { return value === "BCN khoa" ? true : false; }).length;
-        var countDHead = dataTable.column(4).data().filter(function (value, index) { return value === "Bộ môn" ? true : false; }).length;
-        var countLecturer = dataTable.column(4).data().filter(function (value, index) { return value === "Giảng viên" ? true : false; }).length;
-        var countUnassigned = dataTable.column(4).data().filter(function (value, index) { return value === "Chưa phân quyền" ? true : false; }).length;
+        var countFBoard = dataTable.column(5).data().filter(function (value, index) { return value === "BCN khoa" ? true : false; }).length;
+        var countDHead = dataTable.column(5).data().filter(function (value, index) { return value === "Bộ môn" ? true : false; }).length;
+        var countLecturer = dataTable.column(5).data().filter(function (value, index) { return value === "Giảng viên" ? true : false; }).length;
+        var countUnassigned = dataTable.column(5).data().filter(function (value, index) { return value === "Chưa phân quyền" ? true : false; }).length;
         $('#totalFBoard').text(countFBoard);
         $('#totalDHead').text(countDHead);
         $('#totalLecturer').text(countLecturer);
