@@ -365,10 +365,12 @@ if (userForm.length) {
     userForm.validate({
         rules: {
             staff_id: {
+                required: true,
                 idCheck: true,
                 maxlength: 50
             },
             full_name: {
+                required: true,
                 maxlength: 255
             },
             email: {
@@ -386,10 +388,12 @@ if (userForm.length) {
         },
         messages: {
             staff_id: {
+                required: "Bạn chưa nhập mã giảng viên",
                 idCheck: "Chỉ được nhập số-chữ không dấu và không có khoảng trắng!",
                 maxlength: "Tối đa 50 kí tự được cho phép"
             },
             full_name: {
+                required: "Bạn chưa nhập tên giảng viên",
                 maxlength: "Tối đa 255 kí tự được cho phép"
             },
             email: {
