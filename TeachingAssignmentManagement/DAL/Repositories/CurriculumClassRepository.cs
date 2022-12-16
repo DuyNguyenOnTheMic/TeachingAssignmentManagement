@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DocumentFormat.OpenXml.Office.CustomUI;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TeachingAssignmentManagement.Models;
@@ -128,8 +129,8 @@ namespace TeachingAssignmentManagement.DAL
                 c.FirstOrDefault().lecturer.staff_id,
                 c.FirstOrDefault().lecturer.full_name,
                 sum = c.Sum(item => item.total_lesson),
-                theory_count = c.Count(item => item.type == "Lý thuyết"),
-                practice_count = c.Count(item => item.type == "Thực hành"),
+                theory_count = c.GroupBy(item => item.curriculum.id).Select(item => item.Count(cu => cu.type == "Lý thuyết")),
+                practice_count = c.GroupBy(item => item.curriculum.id).Select(item => item.Count(cu => cu.type == "Thực hành")),
                 curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
                 curriculum_id = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum_id),
                 curriculum_name = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum.name),
