@@ -114,7 +114,7 @@
           <Property Name="id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="staff_id" Type="varchar" MaxLength="50" />
           <Property Name="full_name" Type="nvarchar" MaxLength="255" />
-          <Property Name="type" Type="varchar" MaxLength="50" />
+          <Property Name="type" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="major">
           <Key>
@@ -457,7 +457,7 @@
           <Property Name="id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="staff_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="curriculum_class" Relationship="Self.FK_curriculum_class_lecturer" FromRole="lecturer" ToRole="curriculum_class" />
           <NavigationProperty Name="curriculum_class1" Relationship="Self.FK_curriculum_class_lecturer1" FromRole="lecturer" ToRole="curriculum_class" />
         </EntityType>
