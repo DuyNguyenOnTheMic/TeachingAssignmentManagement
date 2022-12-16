@@ -117,25 +117,23 @@ namespace TeachingAssignmentManagement.Controllers
             {
                 return Json(new { error = true, message = "Người dùng đã có trong hệ thống!" }, JsonRequestBehavior.AllowGet);
             }
-            else if (txtStaffId != null || txtFullName != null)
+
+            try
             {
-                try
+                // Add a new lecturer
+                lecturer lecturer = new lecturer
                 {
-                    // Add a new lecturer
-                    lecturer lecturer = new lecturer
-                    {
-                        id = user.Id,
-                        staff_id = txtStaffId,
-                        full_name = txtFullName,
-                        type = type
-                    };
-                    unitOfWork.UserRepository.InsertLecturer(lecturer);
-                    unitOfWork.Save();
-                }
-                catch
-                {
-                    return Json(new { error = true, message = "Mã giảng viên này đã có trong hệ thống!" }, JsonRequestBehavior.AllowGet);
-                }
+                    id = user.Id,
+                    staff_id = txtStaffId,
+                    full_name = txtFullName,
+                    type = type
+                };
+                unitOfWork.UserRepository.InsertLecturer(lecturer);
+                unitOfWork.Save();
+            }
+            catch
+            {
+                return Json(new { error = true, message = "Mã giảng viên này đã có trong hệ thống!" }, JsonRequestBehavior.AllowGet);
             }
             // Create new user
             UserManager.Create(user);
