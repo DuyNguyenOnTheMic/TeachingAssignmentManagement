@@ -314,6 +314,7 @@ function format(d) {
         '<th>Tên HP</th>' +
         '<th>Ngành</th>' +
         '<th class="text-center">Số TC</th>' +
+        '<th class="text-center">Số giờ</th>' +
         '</tr>' +
         '</thead>' +
         '<tbody>' +
