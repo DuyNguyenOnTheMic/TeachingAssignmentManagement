@@ -55,6 +55,12 @@ namespace TeachingAssignmentManagement.Controllers
             return Json(query_classes, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult GetTermCurriculums(int termId, string lecturerId)
+        {
+            return View(unitOfWork.CurriculumClassRepository.GetTermCurriculums(termId, lecturerId));
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();

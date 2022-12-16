@@ -141,6 +141,17 @@ namespace TeachingAssignmentManagement.DAL
             }).OrderByDescending(c => c.sum).ToList();
         }
 
+        public IEnumerable GetTermCurriculums(int termId, string lecturerId)
+        {
+            return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id == lecturerId).GroupBy(c => c.curriculum_id).Select(c => new
+            {
+                id = c.Key,
+                curriculum_name = c.FirstOrDefault().curriculum.name,
+                curriculum_credits = c.FirstOrDefault().curriculum.credits,
+                major_name = c.FirstOrDefault().major.name,
+            }).ToList();
+        }
+
         public IEnumerable GetTermStatisticsAll(int termId)
         {
             return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer.type != null).GroupBy(c => c.lecturer_id).Select(c => new
