@@ -201,10 +201,25 @@ namespace TeachingAssignmentManagement.Controllers
 
             try
             {
-                // Edit lecturer info
-                query_lecturer.staff_id = txtStaffId;
-                query_lecturer.full_name = txtFullName;
-                query_lecturer.type = type;
+                if (query_lecturer != null)
+                {
+                    // Edit lecturer info
+                    query_lecturer.staff_id = txtStaffId;
+                    query_lecturer.full_name = txtFullName;
+                    query_lecturer.type = type;
+                }
+                else
+                {
+                    // Add a new lecturer
+                    lecturer lecturer = new lecturer
+                    {
+                        id = id,
+                        staff_id = txtStaffId,
+                        full_name = txtFullName,
+                        type = type
+                    };
+                    unitOfWork.UserRepository.InsertLecturer(lecturer);
+                }
                 unitOfWork.Save();
 
                 // Update email of user
