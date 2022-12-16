@@ -302,10 +302,12 @@ function format(d) {
         curriculumCredits = d.curriculum_credits,
         curriculumMajor = d.curriculum_major,
         curriculumHours = d.curriculum_hours,
+        theoryCount = d.theory_count,
+        practiceCount = d.practice_count,
         arrayLength = curriculumId.length,
         tableRow = '';
     for (var i = 0; i < arrayLength; i++) {
-        tableRow += '<tr><td>' + curriculumId[i] + '</td><td>' + curriculumName[i] + '</td><td>' + curriculumMajor[i] + '</td><td class="text-center">' + curriculumCredits[i] + '</td><td class="text-center">' + curriculumHours[i] + '</td></tr>';
+        tableRow += '<tr><td>' + curriculumId[i] + '</td><td>' + curriculumName[i] + '</td><td>' + curriculumMajor[i] + '</td><td class="text-center">' + curriculumCredits[i] + '</td><td class="text-center">' + curriculumHours[i] + '</td><td class="text-center">' + theoryCount[i] + '</td><td class="text-center">' + practiceCount[i] + '</td></tr>';
     }
     return (
         '<table class="table table-sm">' +
@@ -316,6 +318,8 @@ function format(d) {
         '<th>Ngành</th>' +
         '<th class="text-center">Số TC</th>' +
         '<th class="text-center">Số giờ</th>' +
+        '<th class="text-center">Lý thuyết</th>' +
+        '<th class="text-center">Thực hành</th>' +
         '</tr>' +
         '</thead>' +
         '<tbody>' +
