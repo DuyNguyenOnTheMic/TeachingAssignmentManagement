@@ -154,7 +154,7 @@ namespace TeachingAssignmentManagement.Controllers
             };
 
             // Set selected value for lecturer type
-            if (lecturer.type != null)
+            if (lecturer?.type != null)
             {
                 lecturerType.Find(s => s.Value == lecturer.type).Selected = true;
             }
