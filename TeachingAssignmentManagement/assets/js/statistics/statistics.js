@@ -300,10 +300,11 @@ function format(d) {
         curriculumName = d.curriculum_name,
         curriculumCredits = d.curriculum_credits,
         curriculumMajor = d.curriculum_major,
+        curriculumHours = d.curriculum_hours,
         arrayLength = curriculumId.length,
         tableRow = '';
     for (var i = 0; i < arrayLength; i++) {
-        tableRow += '<tr><td>' + curriculumId[i] + '</td><td>' + curriculumName[i] + '</td><td>' + curriculumMajor[i] + '</td><td class="text-center">' + curriculumCredits[i] + '</td></tr>';
+        tableRow += '<tr><td>' + curriculumId[i] + '</td><td>' + curriculumName[i] + '</td><td>' + curriculumMajor[i] + '</td><td class="text-center">' + curriculumCredits[i] + '</td><td class="text-center">' + curriculumHours[i] + '</td></tr>';
     }
     return (
         '<table class="table table-sm">' +

@@ -123,7 +123,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable GetTermStatistics(int termId, string lecturerType)
         {
-            return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id != null && c.lecturer.type == lecturerType).GroupBy(c => c.lecturer_id).Select(c => new
+            return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer.type == lecturerType).GroupBy(c => c.lecturer_id).Select(c => new
             {
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
@@ -133,13 +133,14 @@ namespace TeachingAssignmentManagement.DAL
                 curriculum_id = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum_id),
                 curriculum_name = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum.name),
                 curriculum_credits = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().curriculum.credits),
-                curriculum_major = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().major.name)
+                curriculum_major = c.GroupBy(item => item.curriculum.id).Select(item => item.FirstOrDefault().major.name),
+                curriculum_hours = c.GroupBy(item => item.curriculum.id).Sum(item => item.FirstOrDefault().total_lesson)
             }).OrderByDescending(c => c.sum).ToList();
         }
 
         public IEnumerable GetTermStatisticsAll(int termId)
         {
-            return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id != null && c.lecturer.type != null).GroupBy(c => c.lecturer_id).Select(c => new
+            return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer.type != null).GroupBy(c => c.lecturer_id).Select(c => new
             {
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
@@ -155,7 +156,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable GetYearStatistics(int startYear, int endYear, string lecturerType)
         {
-            return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id != null && c.lecturer.type == lecturerType).GroupBy(c => c.lecturer_id).Select(c => new
+            return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type == lecturerType).GroupBy(c => c.lecturer_id).Select(c => new
             {
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
@@ -171,7 +172,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable GetYearStatisticsAll(int startYear, int endYear)
         {
-            return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id != null && c.lecturer.type != null).GroupBy(c => c.lecturer_id).Select(c => new
+            return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type != null).GroupBy(c => c.lecturer_id).Select(c => new
             {
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
