@@ -187,8 +187,11 @@ function populateDatatable(data) {
                 { 'data': 'full_name' },
                 { 'data': 'curriculum_count' },
                 { 'data': 'sum' },
-                { 'data': 'theory_count' },
-                { 'data': 'practice_count' }
+                {
+                    'data': null, 'render': function (data, type, full, meta) {
+                        return full.theory_count + 'LT + ' + full.practice_count + 'TH';
+                    }
+                }
             ],
             data: data,
             columnDefs: [
