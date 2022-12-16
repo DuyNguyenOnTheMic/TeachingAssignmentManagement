@@ -1,6 +1,7 @@
 ﻿var unitSelect = $('#unit'),
     termSelect = $('#term'),
     yearSelect = $('#year'),
+    lecturerTypeSelect = $('#lecturerType'),
     formTermYear = $('.form-termyear'),
     rootUrl = $('#loader').data('request-url'),
     statisticsDiv = $('#statisticsDiv'),
@@ -27,7 +28,7 @@ $(function () {
 
     if (latestTermId) {
         // Get Partial View personal timetable data
-        fetchData(termSelect.attr('id'), latestTermId);
+        fetchData(termSelect.attr('id'), latestTermId, lecturerTypeSelect.val());
     } else {
         statisticsDiv.html('<h4 class="text-center mt-2">Chưa có dữ liệu học kỳ</h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="No data" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
     }
@@ -58,7 +59,7 @@ formTermYear.change(function () {
     var $this = $(this),
         type = $this.attr('id'),
         value = $this.val(),
-        lecturerType = $('#lecturerType').val();
+        lecturerType = lecturerTypeSelect.val();
     // Display loading message while fetching data
     statisticsDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
     fetchData(type, value, lecturerType);
