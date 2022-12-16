@@ -46,10 +46,10 @@ $(function () {
                     searchable: false,
                     orderable: false,
                     className: 'text-center',
-                    targets: [0, 5]
+                    targets: [0, 6]
                 },
                 { width: '5%', targets: 0 },
-                { width: '10%', targets: 5 }
+                { width: '10%', targets: 6 }
             ],
 
             order: [[3, 'asc']],
