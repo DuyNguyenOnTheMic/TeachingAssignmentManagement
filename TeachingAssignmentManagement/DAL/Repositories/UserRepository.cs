@@ -24,7 +24,8 @@ namespace TeachingAssignmentManagement.DAL
                 email = u.Email,
                 role = u.AspNetRoles.FirstOrDefault().Name,
                 query_lecturer.FirstOrDefault(l => l.id == u.Id).staff_id,
-                query_lecturer.FirstOrDefault(l => l.id == u.Id).full_name
+                query_lecturer.FirstOrDefault(l => l.id == u.Id).full_name,
+                query_lecturer.FirstOrDefault(l => l.id == u.Id).type
             }).ToList();
         }
 
