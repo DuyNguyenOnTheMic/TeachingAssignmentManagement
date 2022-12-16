@@ -34,12 +34,11 @@ $(function () {
                     render: function (data, type, full, meta) {
                         var $status = full['type'];
                         var typeBadgeObj = {
-                            'Cơ hữu': 'badge-light-warning',
-                            'Thỉnh giảng': 'badge-light-success',
-                            'null': 'hehe'
+                            'Cơ hữu': 'badge-light-success',
+                            'Thỉnh giảng': 'badge-light-warning'
                         };
                         console.log($status);
-                        return '<span class="badge rounded-pill badge-light-warning text-capitalized">' + $status + '</span>';
+                        return '<span class="badge rounded-pill ' + typeBadgeObj[$status] + ' text-capitalized">' + $status + '</span>';
                     }
                 },
                 {
