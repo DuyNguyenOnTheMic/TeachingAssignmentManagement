@@ -37,13 +37,13 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetTermData(int termId)
+        public JsonResult GetTermData(int termId, string lecturerType)
         {
             return Json(unitOfWork.CurriculumClassRepository.GetTermStatistics(termId), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public JsonResult GetYearData(int startYear, int endYear)
+        public JsonResult GetYearData(int startYear, int endYear, string lecturerType)
         {
             return Json(unitOfWork.CurriculumClassRepository.GetYearStatistics(startYear, endYear), JsonRequestBehavior.AllowGet);
         }
