@@ -403,7 +403,7 @@ if (userForm.length) {
         },
         errorPlacement: function (error, element) {
             if (element.hasClass("select2")) {
-                error.appendTo(element.siblings(".select2"));
+                error.insertAfter(element.siblings(".select2"));
             } else {
                 error.insertAfter(element);
             }
