@@ -38,7 +38,6 @@ $(function () {
                                 'Cơ hữu': 'badge-light-success',
                                 'Thỉnh giảng': 'badge-light-warning'
                             };
-                            console.log($status);
                             return '<span class="badge rounded-pill ' + typeBadgeObj[$status] + ' text-capitalized">' + $status + '</span>';
                         } else {
                             return null;
