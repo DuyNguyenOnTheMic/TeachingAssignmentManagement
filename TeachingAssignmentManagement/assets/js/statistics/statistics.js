@@ -189,7 +189,18 @@ function populateDatatable(data) {
                 { 'data': 'sum' },
                 {
                     'render': function (data, type, full, meta) {
-                        return full.theory_count + 'LT + ' + full.practice_count + 'TH';
+                        // Render total class column
+                        var theoryClass = full.theory_count + 'LT',
+                            practiceClass = full.practice_count + 'TH',
+                            totalClass;
+                        if (full.theory_count && full.practice_count) {
+                            totalClass = theoryClass + ' + ' + practiceClass;
+                        } else if (full.theory_count) {
+                            totalClass = theoryClass;
+                        } else if (full.practice_count) {
+                            totalClass = practiceClass;
+                        }
+                        return totalClass;
                     }
                 }
             ],
