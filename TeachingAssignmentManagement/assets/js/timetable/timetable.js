@@ -284,7 +284,6 @@ $(document).off('click', '.btn-delete').on('click', '.btn-delete', function () {
                     success: function (data) {
                         if (data.success) {
                             // Show success message
-                            toastr.options.positionClass = 'toast-bottom-right';
                             toastr.success('Xoá lớp thành công!');
                         }
                     }
@@ -364,7 +363,6 @@ function assignLecturer(id, lecturerId, warning) {
         success: function (data) {
             if (data.success) {
                 // Display success message
-                toastr.options.positionClass = 'toast-bottom-right';
                 toastr.success('Thành công!');
             } else {
                 // Show error message
