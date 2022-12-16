@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System.Collections.Generic;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
 using System.Web;
@@ -148,14 +149,22 @@ namespace TeachingAssignmentManagement.Controllers
             // Get user role
             ApplicationUser user = UserManager.FindById(id);
             lecturer lecturer = unitOfWork.UserRepository.GetLecturerByID(id);
+            List<SelectListItem> lecturerType = new List<SelectListItem>()
+                {
+                    new SelectListItem() { Text = "Cơ hữu", Value = "Cơ hữu" },
+                    new SelectListItem() { Text = "Thỉnh giảng", Value = "Thỉnh giảng" }
+                };
             if (user.Roles.Count > 0)
             {
-                // Set selected role
+                // Set selected values for select lists
+                lecturerType.Find(s => s.Value == lecturer.type).Selected = true;
+                ViewData["type"] = lecturerType;
                 ViewData["role_id"] = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name", user.Roles.FirstOrDefault().RoleId);
             }
             else
             {
-                // Populate new role select list
+                // Populate new select lists
+                ViewData["type"] = lecturerType;
                 ViewData["role_id"] = new SelectList(unitOfWork.UserRepository.GetRoles(), "id", "name");
             }
             ViewData["email"] = user.Email;
