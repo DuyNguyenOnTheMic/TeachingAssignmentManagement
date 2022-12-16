@@ -56,7 +56,6 @@ dropzone.dropzone({
             var majorId = $("#major").val();
 
             // Validation for form
-            toastr.options.positionClass = 'toast-bottom-right';
             if (termId == '' && majorId == '') {
                 toastr.warning('Bạn chưa chọn học kỳ và ngành');
             } else if (termId == '') {
