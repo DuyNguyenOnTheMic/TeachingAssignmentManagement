@@ -150,10 +150,11 @@ namespace TeachingAssignmentManagement.Controllers
             ApplicationUser user = UserManager.FindById(id);
             lecturer lecturer = unitOfWork.UserRepository.GetLecturerByID(id);
             List<SelectListItem> lecturerType = new List<SelectListItem>()
-                {
-                    new SelectListItem() { Text = "Cơ hữu", Value = "Cơ hữu" },
-                    new SelectListItem() { Text = "Thỉnh giảng", Value = "Thỉnh giảng" }
-                };
+            {
+                new SelectListItem() { Text = "Cơ hữu", Value = "Cơ hữu" },
+                new SelectListItem() { Text = "Thỉnh giảng", Value = "Thỉnh giảng" }
+            };
+
             if (user.Roles.Count > 0)
             {
                 // Set selected values for select lists
