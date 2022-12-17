@@ -179,8 +179,9 @@ function populateDatatable(data) {
             columns: [
                 { 'data': '', defaultContent: '' },
                 {
-                    'render': function () {
-                        return "<button type='button' class='btn btn-icon btn-icon rounded-circle btn-success waves-effect waves-float waves-light p-25 viewInfo' title='Xem môn học'><i class='feather feather-plus'></i></button>";
+                    'data': 'Key',
+                    'render': function (data) {
+                        return "<button type='button' class='btn btn-icon btn-icon rounded-circle btn-success waves-effect waves-float waves-light p-25 viewInfo' title='Xem môn học' data-id='" + data + "'><i class='feather feather-plus'></i></button>";
                     }
                 },
                 { 'data': 'staff_id' },

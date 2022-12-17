@@ -126,6 +126,7 @@ namespace TeachingAssignmentManagement.DAL
         {
             return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer.type == lecturerType).GroupBy(c => c.lecturer_id).Select(c => new
             {
+                c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
                 c.FirstOrDefault().lecturer.full_name,
                 sum = c.Sum(item => item.total_lesson),
