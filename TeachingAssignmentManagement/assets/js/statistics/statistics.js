@@ -272,6 +272,7 @@ function populateDatatable(data) {
             tr = $this.closest('tr'),
             row = dataTable.row(tr),
             lecturerId = $this.data('id'),
+            curriculumUrl = rootUrl + 'Statistics/',
             curriculumData;
 
         if (row.child.isShown()) {
@@ -291,15 +292,17 @@ function populateDatatable(data) {
                 var yearSplit = value.split(" - "),
                     startYear = yearSplit[0],
                     endYear = yearSplit[1];
+                curriculumUrl += 'GetYearCurrriculums';
                 curriculumData = { startYear, endYear, lecturerId };
             } else {
+                curriculumUrl += 'GetTermCurriculums';
                 curriculumData = { 'termId': value, lecturerId };
             }
 
             // Send request to fetch curriculums
             $.ajax({
                 type: 'GET',
-                url: rootUrl + 'Statistics/GetTermCurriculums',
+                url: curriculumUrl,
                 data: curriculumData,
                 success: function (data) {
                     // Open this row
