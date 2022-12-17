@@ -271,7 +271,7 @@ function populateDatatable(data) {
         var $this = $(this),
             tr = $this.closest('tr'),
             row = dataTable.row(tr),
-            lecturerId = $this.data('id')
+            lecturerId = $this.data('id'),
             curriculumData;
 
         if (row.child.isShown()) {
