@@ -273,29 +273,29 @@ function populateDatatable(data) {
         var row = dataTable.row(tr);
         console.log(row.data().staff_id);
 
-        /*$.ajax({
-            type: 'GET',
-            url: rootUrl + 'Statistics/GetTermCurriculums',
-            data: data,
-            async: false,
-            success: function (data) {
-                if (row.child.isShown()) {
-                    // Update icon on click
-                    $this.removeClass('btn-danger').addClass('btn-success');
-                    $this.find('i').removeClass('feather-minus').addClass('feather-plus');
-                    // This row is already open - close it
-                    row.child.hide();
-                    tr.removeClass('shown');
-                } else {
-                    // Update icon on click
-                    $this.removeClass('btn-success').addClass('btn-danger');
-                    $this.find('i').removeClass('feather-plus').addClass('feather-minus');
-                    // Open this row
-                    row.child(format(row.data())).show();
+        if (row.child.isShown()) {
+            // Update icon on click
+            $this.removeClass('btn-danger').addClass('btn-success');
+            $this.find('i').removeClass('feather-minus').addClass('feather-plus');
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            // Update icon on click
+            $this.removeClass('btn-success').addClass('btn-danger');
+            $this.find('i').removeClass('feather-plus').addClass('feather-minus');
+            // Open this row
+            $.ajax({
+                type: 'GET',
+                url: rootUrl + 'Statistics/GetTermCurriculums',
+                data: data,
+                async: false,
+                success: function (data) {
+                    row.child(format(data)).show();
                     tr.addClass('shown');
                 }
-            }
-        });*/
+            });
+        }
     });
 }
 
