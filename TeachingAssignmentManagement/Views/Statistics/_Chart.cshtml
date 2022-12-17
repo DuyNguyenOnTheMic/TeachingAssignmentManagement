@@ -1,15 +1,23 @@
-﻿@if (ViewData["lecturerType"].ToString() == "-1")
-{
-    <div class="float-end mt-50"><i>Chú thích: CH là giảng viên cơ hữu và TG là giảng viên thỉnh giảng</i></div>
-}
-<ul class="nav nav-tabs" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active" id="chart-tab" data-bs-toggle="tab" href="#chartIcon" aria-controls="chart" role="tab" aria-selected="true"><i class="feather feather-bar-chart-2"></i> Biểu đồ</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id="table-tab" data-bs-toggle="tab" href="#tableIcon" aria-controls="table" role="tab" aria-selected="false"><i class="feather feather-grid"></i> Bảng biểu</a>
-    </li>
-</ul>
+﻿<div class="d-flex justify-content-between align-items-center row">
+    <div class="col-sm-12 col-lg-6 d-flex justify-content-center justify-content-lg-start flex-lg-nowrap flex-wrap">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="chart-tab" data-bs-toggle="tab" href="#chartIcon" aria-controls="chart" role="tab" aria-selected="true"><i class="feather feather-bar-chart-2"></i> Biểu đồ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="table-tab" data-bs-toggle="tab" href="#tableIcon" aria-controls="table" role="tab" aria-selected="false"><i class="feather feather-grid"></i> Bảng biểu</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-12 col-lg-6 my-50">
+        <div class="d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap">
+            @if (ViewData["lecturerType"].ToString() == "-1")
+            {
+                <div><i>Chú thích: CH là giảng viên cơ hữu và TG là giảng viên thỉnh giảng</i></div>
+            }
+        </div>
+    </div>
+</div>
 <div class="tab-content">
     <div class="tab-pane active" id="chartIcon" aria-labelledby="chart-tab" role="tabpanel">
         <canvas class="chartjs" id="statistics-chart" data-height="750"></canvas>
