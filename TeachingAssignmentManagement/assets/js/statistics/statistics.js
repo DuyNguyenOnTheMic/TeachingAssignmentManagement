@@ -338,7 +338,7 @@ function format(d) {
     }
 
     // Render rows
-    return (
+    return ( '<div class="slider">' +
         '<table class="table table-sm">' +
         '<thead class="table-light">' +
         '<tr>' +
@@ -354,6 +354,7 @@ function format(d) {
         '<tbody>' +
         tableRow +
         '</tbody>' +
-        '</table>'
+        '</table>' +
+        '</div>'
     );
 }
