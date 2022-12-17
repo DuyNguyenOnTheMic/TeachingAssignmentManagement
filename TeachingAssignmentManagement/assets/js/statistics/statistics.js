@@ -85,6 +85,15 @@ var chartOptions = {
             },
             color: titleColor
         },
+        subtitle: {
+            display: true,
+            align: 'start',
+            font: {
+                size: 15,
+                weight: 'bold italic'
+            },
+            color: titleColor
+        },
         datalabels: {
             color: labelColor
         },
@@ -133,6 +142,8 @@ $.ajax({
                 ]
             };
 
+            chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length;
+
             // Create the chart
             var chart = new Chart(ctx, {
                 type: 'bar',
@@ -156,6 +167,7 @@ $.ajax({
                     titleColor = titleDark;
                     textColor = TextDark;
                 }
+                chart.options.plugins.subtitle.color = titleColor;
                 chart.options.plugins.title.color = titleColor;
                 chart.options.plugins.datalabels.color = textColor;
                 chart.options.plugins.legend.labels.color = textColor;
