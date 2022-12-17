@@ -129,8 +129,9 @@ namespace TeachingAssignmentManagement.DAL
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
                 c.FirstOrDefault().lecturer.full_name,
-                sum = c.Sum(item => item.total_lesson),
-                class_count = c.Count()
+                curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                class_count = c.Count(),
+                sum = c.Sum(item => item.total_lesson)
             }).OrderByDescending(c => c.sum).ToList();
         }
 
@@ -155,8 +156,9 @@ namespace TeachingAssignmentManagement.DAL
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
                 full_name = c.FirstOrDefault().lecturer.full_name + " (" + c.FirstOrDefault().lecturer.type + ")",
-                sum = c.Sum(item => item.total_lesson),
-                class_count = c.Count()
+                curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                class_count = c.Count(),
+                sum = c.Sum(item => item.total_lesson)
             }).OrderByDescending(c => c.sum).ToList();
         }
 
@@ -167,8 +169,9 @@ namespace TeachingAssignmentManagement.DAL
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
                 c.FirstOrDefault().lecturer.full_name,
-                sum = c.Sum(item => item.total_lesson),
-                class_count = c.Count()
+                curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                class_count = c.Count(),
+                sum = c.Sum(item => item.total_lesson)
             }).OrderByDescending(c => c.sum).ToList();
         }
 
@@ -179,8 +182,9 @@ namespace TeachingAssignmentManagement.DAL
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
                 full_name = c.FirstOrDefault().lecturer.full_name + " (" + c.FirstOrDefault().lecturer.type + ")",
-                sum = c.Sum(item => item.total_lesson),
-                class_count = c.Count()
+                curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                class_count = c.Count(),
+                sum = c.Sum(item => item.total_lesson)
             }).OrderByDescending(c => c.sum).ToList();
         }
 
