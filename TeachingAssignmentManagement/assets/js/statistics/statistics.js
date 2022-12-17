@@ -341,16 +341,23 @@ function format(d) {
     var curriculumHours = d.map(function (e) {
         return e.curriculum_hours;
     });
-    var theoryCount = d.map(function (e) {
-        return e.theory_count;
-    });
-    var practiceCount = d.map(function (e) {
-        return e.practice_count;
+    var totalClass = d.map(function (e) {
+        var theoryClass = e.theory_count + 'LT',
+            practiceClass = e.practice_count + 'TH',
+            totalClass;
+        if (e.theory_count && e.practice_count) {
+            totalClass = theoryClass + ' + ' + practiceClass;
+        } else if (e.theory_count) {
+            totalClass = theoryClass;
+        } else if (e.practice_count) {
+            totalClass = practiceClass;
+        }
+        return totalClass;
     });
 
     // Append HTML rows
     for (var i = 0; i < arrayLength; i++) {
-        tableRow += '<tr><td>' + curriculumId[i] + '</td><td>' + curriculumName[i] + '</td><td>' + curriculumMajor[i] + '</td><td class="text-center">' + curriculumCredits[i] + '</td><td class="text-center">' + curriculumHours[i] + '</td><td class="text-center">' + theoryCount[i] + '</td><td class="text-center">' + practiceCount[i] + '</td></tr>';
+        tableRow += '<tr><td>' + curriculumId[i] + '</td><td>' + curriculumName[i] + '</td><td>' + curriculumMajor[i] + '</td><td class="text-center">' + curriculumCredits[i] + '</td><td class="text-center">' + totalClass[i] + '</td><td class="text-center">' + curriculumHours[i] + '</td></tr>';
     }
 
     // Render rows
@@ -362,9 +369,8 @@ function format(d) {
         '<th>Tên HP</th>' +
         '<th>Ngành</th>' +
         '<th class="text-center">Số TC</th>' +
+        '<th class="text-center">Số lớp</th>' +
         '<th class="text-center">Số giờ</th>' +
-        '<th class="text-center">Lý thuyết</th>' +
-        '<th class="text-center">Thực hành</th>' +
         '</tr>' +
         '</thead>' +
         '<tbody>' +
