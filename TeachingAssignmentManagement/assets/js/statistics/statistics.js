@@ -271,7 +271,7 @@ function populateDatatable(data) {
         var $this = $(this);
         var tr = $this.closest('tr');
         var row = dataTable.row(tr);
-        console.log(row.data().staff_id);
+        var lecturerId = $this.data('id');
 
         if (row.child.isShown()) {
             // Update icon on click
@@ -288,8 +288,7 @@ function populateDatatable(data) {
             $.ajax({
                 type: 'GET',
                 url: rootUrl + 'Statistics/GetTermCurriculums',
-                data: data,
-                async: false,
+                data: { 'termId': '223', lecturerId },
                 success: function (data) {
                     row.child(format(data)).show();
                     tr.addClass('shown');
