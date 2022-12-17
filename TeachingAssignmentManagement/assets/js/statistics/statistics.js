@@ -284,12 +284,13 @@ function populateDatatable(data) {
             // Update icon on click
             $this.removeClass('btn-success').addClass('btn-danger');
             $this.find('i').removeClass('feather-plus').addClass('feather-minus');
-            // Open this row
+            // Send request to fetch curriculums
             $.ajax({
                 type: 'GET',
                 url: rootUrl + 'Statistics/GetTermCurriculums',
                 data: { 'termId': '223', lecturerId },
                 success: function (data) {
+                    // Open this row
                     row.child(format(data)).show();
                     tr.addClass('shown');
                 }
