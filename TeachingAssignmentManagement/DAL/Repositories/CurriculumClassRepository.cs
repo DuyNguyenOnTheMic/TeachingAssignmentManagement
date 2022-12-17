@@ -135,6 +135,19 @@ namespace TeachingAssignmentManagement.DAL
             }).OrderByDescending(c => c.sum).ToList();
         }
 
+        public IEnumerable GetTermStatisticsAll(int termId)
+        {
+            return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer.type != null).GroupBy(c => c.lecturer_id).Select(c => new
+            {
+                c.Key,
+                c.FirstOrDefault().lecturer.staff_id,
+                full_name = c.FirstOrDefault().lecturer.full_name + " (" + c.FirstOrDefault().lecturer.type + ")",
+                curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                class_count = c.Count(),
+                sum = c.Sum(item => item.total_lesson)
+            }).OrderByDescending(c => c.sum).ToList();
+        }
+
         public IEnumerable GetTermCurriculums(int termId, string lecturerId)
         {
             return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id == lecturerId).GroupBy(c => c.curriculum_id).Select(c => new
@@ -147,19 +160,6 @@ namespace TeachingAssignmentManagement.DAL
                 theory_count = c.Count(item => item.type == "Lý thuyết"),
                 practice_count = c.Count(item => item.type == "Thực hành")
             }).ToList();
-        }
-
-        public IEnumerable GetTermStatisticsAll(int termId)
-        {
-            return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer.type != null).GroupBy(c => c.lecturer_id).Select(c => new
-            {
-                c.Key,
-                c.FirstOrDefault().lecturer.staff_id,
-                full_name = c.FirstOrDefault().lecturer.full_name + " (" + c.FirstOrDefault().lecturer.type + ")",
-                curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
-                class_count = c.Count(),
-                sum = c.Sum(item => item.total_lesson)
-            }).OrderByDescending(c => c.sum).ToList();
         }
 
         public IEnumerable GetYearStatistics(int startYear, int endYear, string lecturerType)
@@ -186,6 +186,20 @@ namespace TeachingAssignmentManagement.DAL
                 class_count = c.Count(),
                 sum = c.Sum(item => item.total_lesson)
             }).OrderByDescending(c => c.sum).ToList();
+        }
+
+        public IEnumerable GetYearCurriculums(int startYear, int endYear, string lecturerId)
+        {
+            return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id == lecturerId).GroupBy(c => c.curriculum_id).Select(c => new
+            {
+                id = c.Key,
+                curriculum_name = c.FirstOrDefault().curriculum.name,
+                curriculum_credits = c.FirstOrDefault().curriculum.credits,
+                curriculum_major = c.FirstOrDefault().major.name,
+                curriculum_hours = c.Sum(item => item.total_lesson),
+                theory_count = c.Count(item => item.type == "Lý thuyết"),
+                practice_count = c.Count(item => item.type == "Thực hành")
+            }).ToList();
         }
 
         public curriculum_class FindCurriculumClass(IEnumerable<curriculum_class> curriculumClass, string curriculumClassId, int day2, string roomId)

@@ -61,6 +61,12 @@ namespace TeachingAssignmentManagement.Controllers
             return Json(unitOfWork.CurriculumClassRepository.GetTermCurriculums(termId, lecturerId), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult GetYearCurriculums(int startYear, int endYear, string lecturerId)
+        {
+            return Json(unitOfWork.CurriculumClassRepository.GetYearCurriculums(startYear, endYear, lecturerId), JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();

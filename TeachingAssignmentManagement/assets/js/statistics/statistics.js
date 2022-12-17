@@ -292,7 +292,7 @@ function populateDatatable(data) {
                 var yearSplit = value.split(" - "),
                     startYear = yearSplit[0],
                     endYear = yearSplit[1];
-                curriculumUrl += 'GetYearCurrriculums';
+                curriculumUrl += 'GetYearCurriculums';
                 curriculumData = { startYear, endYear, lecturerId };
             } else {
                 curriculumUrl += 'GetTermCurriculums';
