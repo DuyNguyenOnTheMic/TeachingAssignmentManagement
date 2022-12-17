@@ -152,9 +152,11 @@ namespace TeachingAssignmentManagement.DAL
         {
             return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer.type != null).GroupBy(c => c.lecturer_id).Select(c => new
             {
+                c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
                 full_name = c.FirstOrDefault().lecturer.full_name + " (" + c.FirstOrDefault().lecturer.type + ")",
-                sum = c.Sum(item => item.total_lesson)
+                sum = c.Sum(item => item.total_lesson),
+                class_count = c.Count()
             }).OrderByDescending(c => c.sum).ToList();
         }
 
@@ -162,9 +164,11 @@ namespace TeachingAssignmentManagement.DAL
         {
             return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type == lecturerType).GroupBy(c => c.lecturer_id).Select(c => new
             {
+                c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
                 c.FirstOrDefault().lecturer.full_name,
-                sum = c.Sum(item => item.total_lesson)
+                sum = c.Sum(item => item.total_lesson),
+                class_count = c.Count()
             }).OrderByDescending(c => c.sum).ToList();
         }
 
@@ -172,9 +176,11 @@ namespace TeachingAssignmentManagement.DAL
         {
             return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type != null).GroupBy(c => c.lecturer_id).Select(c => new
             {
+                c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
                 full_name = c.FirstOrDefault().lecturer.full_name + " (" + c.FirstOrDefault().lecturer.type + ")",
-                sum = c.Sum(item => item.total_lesson)
+                sum = c.Sum(item => item.total_lesson),
+                class_count = c.Count()
             }).OrderByDescending(c => c.sum).ToList();
         }
 
