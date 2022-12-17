@@ -47,18 +47,18 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        public ActionResult GetTermCurriculums(int termId, string lecturerId)
+        {
+            return Json(unitOfWork.CurriculumClassRepository.GetTermCurriculums(termId, lecturerId), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public JsonResult GetYearData(int startYear, int endYear, string lecturerType)
         {
             IEnumerable query_classes = lecturerType != "-1"
                 ? unitOfWork.CurriculumClassRepository.GetYearStatistics(startYear, endYear, lecturerType)
                 : unitOfWork.CurriculumClassRepository.GetYearStatisticsAll(startYear, endYear);
             return Json(query_classes, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        public ActionResult GetTermCurriculums(int termId, string lecturerId)
-        {
-            return Json(unitOfWork.CurriculumClassRepository.GetTermCurriculums(termId, lecturerId), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
