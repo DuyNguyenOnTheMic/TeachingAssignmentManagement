@@ -325,10 +325,16 @@ function format(d) {
     var curriculumHours = d.map(function (e) {
         return e.curriculum_hours;
     });
+    var theoryCount = d.map(function (e) {
+        return e.theory_count;
+    });
+    var practiceCount = d.map(function (e) {
+        return e.practice_count;
+    });
 
     // Append HTML rows
     for (var i = 0; i < arrayLength; i++) {
-        tableRow += '<tr><td>' + curriculumId[i] + '</td><td>' + curriculumName[i] + '</td><td>' + curriculumMajor[i] + '</td><td class="text-center">' + curriculumCredits[i] + '</td><td class="text-center">' + curriculumHours[i] + '</td></tr>';
+        tableRow += '<tr><td>' + curriculumId[i] + '</td><td>' + curriculumName[i] + '</td><td>' + curriculumMajor[i] + '</td><td class="text-center">' + curriculumCredits[i] + '</td><td class="text-center">' + curriculumHours[i] + '</td><td class="text-center">' + theoryCount[i] + '</td><td class="text-center">' + practiceCount[i] + '</td></tr>';
     }
 
     // Render rows

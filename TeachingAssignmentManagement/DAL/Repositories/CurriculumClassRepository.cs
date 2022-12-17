@@ -150,7 +150,9 @@ namespace TeachingAssignmentManagement.DAL
                 curriculum_name = c.FirstOrDefault().curriculum.name,
                 curriculum_credits = c.FirstOrDefault().curriculum.credits,
                 curriculum_major = c.FirstOrDefault().major.name,
-                curriculum_hours = c.Sum(item => item.total_lesson)
+                curriculum_hours = c.Sum(item => item.total_lesson),
+                theory_count = c.Count(item => item.type == "Lý thuyết"),
+                practice_count = c.Count(item => item.type == "Thực hành")
             }).ToList();
         }
 
