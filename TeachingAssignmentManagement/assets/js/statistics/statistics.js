@@ -268,10 +268,11 @@ function populateDatatable(data) {
 
     // Add event listener for opening and closing details
     $('#tblStatistics tbody').on('click', 'td .viewInfo ', function () {
-        var $this = $(this);
-        var tr = $this.closest('tr');
-        var row = dataTable.row(tr);
-        var lecturerId = $this.data('id');
+        var $this = $(this),
+            tr = $this.closest('tr'),
+            row = dataTable.row(tr),
+            lecturerId = $this.data('id')
+            curriculumData;
 
         if (row.child.isShown()) {
             // Update icon on click
@@ -284,11 +285,22 @@ function populateDatatable(data) {
             // Update icon on click
             $this.removeClass('btn-success').addClass('btn-danger');
             $this.find('i').removeClass('feather-plus').addClass('feather-minus');
+
+            // Get data for ajax request
+            if (type == yearSelect.attr('id')) {
+                var yearSplit = value.split(" - "),
+                    startYear = yearSplit[0],
+                    endYear = yearSplit[1];
+                curriculumData = { startYear, endYear, lecturerId };
+            } else {
+                curriculumData = { 'termId': value, lecturerId };
+            }
+
             // Send request to fetch curriculums
             $.ajax({
                 type: 'GET',
                 url: rootUrl + 'Statistics/GetTermCurriculums',
-                data: { 'termId': '223', lecturerId },
+                data: curriculumData,
                 success: function (data) {
                     // Open this row
                     row.child(format(data)).show();
@@ -339,7 +351,7 @@ function format(d) {
     }
 
     // Render rows
-    return ( '<div class="slider">' +
+    return ('<div class="slider">' +
         '<table class="table table-sm">' +
         '<thead class="table-light">' +
         '<tr>' +
