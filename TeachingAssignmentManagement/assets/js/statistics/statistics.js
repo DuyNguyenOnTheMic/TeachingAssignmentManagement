@@ -306,18 +306,32 @@ $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
 // HTML format for child rows of viewing statistics
 function format(d) {
     // `d` is the original data object for the row
-    var curriculumId = d.curriculum_id,
-        curriculumName = d.curriculum_name,
-        curriculumCredits = d.curriculum_credits,
-        curriculumMajor = d.curriculum_major,
-        curriculumHours = d.curriculum_hours,
-        theoryCount = d.theory_count,
-        practiceCount = d.practice_count,
-        arrayLength = curriculumId.length,
+    var arrayLength = d.length,
         tableRow = '';
+
+    // Map data object
+    var curriculumId = d.map(function (e) {
+        return e.id;
+    });
+    var curriculumName = d.map(function (e) {
+        return e.curriculum_name;
+    });
+    var curriculumCredits = d.map(function (e) {
+        return e.curriculum_credits;
+    });
+    var curriculumMajor = d.map(function (e) {
+        return e.curriculum_major;
+    });
+    var curriculumHours = d.map(function (e) {
+        return e.curriculum_hours;
+    });
+
+    // Append HTML rows
     for (var i = 0; i < arrayLength; i++) {
-        tableRow += '<tr><td>' + curriculumId[i] + '</td><td>' + curriculumName[i] + '</td><td>' + curriculumMajor[i] + '</td><td class="text-center">' + curriculumCredits[i] + '</td><td class="text-center">' + curriculumHours[i] + '</td><td class="text-center">' + theoryCount[i] + '</td><td class="text-center">' + practiceCount[i] + '</td></tr>';
+        tableRow += '<tr><td>' + curriculumId[i] + '</td><td>' + curriculumName[i] + '</td><td>' + curriculumMajor[i] + '</td><td class="text-center">' + curriculumCredits[i] + '</td><td class="text-center">' + curriculumHours[i] + '</td></tr>';
     }
+
+    // Render rows
     return (
         '<table class="table table-sm">' +
         '<thead class="table-light">' +
