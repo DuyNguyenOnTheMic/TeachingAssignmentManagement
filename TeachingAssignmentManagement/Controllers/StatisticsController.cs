@@ -21,6 +21,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "BCN khoa, Bộ môn")]
         public ActionResult Index()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
@@ -29,6 +30,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "BCN khoa, Bộ môn")]
         public ActionResult GetChart(string type, string value, string lecturerType)
         {
             ViewData["type"] = type;
@@ -38,6 +40,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "BCN khoa, Bộ môn")]
         public JsonResult GetTermData(int termId, string lecturerType)
         {
             IEnumerable query_classes = lecturerType != "-1"
@@ -47,12 +50,14 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "BCN khoa, Bộ môn")]
         public ActionResult GetTermCurriculums(int termId, string lecturerId)
         {
             return Json(unitOfWork.CurriculumClassRepository.GetTermCurriculums(termId, lecturerId), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
+        [Authorize(Roles = "BCN khoa, Bộ môn")]
         public JsonResult GetYearData(int startYear, int endYear, string lecturerType)
         {
             IEnumerable query_classes = lecturerType != "-1"
@@ -62,9 +67,18 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "BCN khoa, Bộ môn")]
         public ActionResult GetYearCurriculums(int startYear, int endYear, string lecturerId)
         {
             return Json(unitOfWork.CurriculumClassRepository.GetYearCurriculums(startYear, endYear, lecturerId), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult Lecturer()
+        {
+            ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
+            ViewData["major"] = new SelectList(unitOfWork.MajorRepository.GetMajors(), "id", "name");
+            return View();
         }
 
         protected override void Dispose(bool disposing)
