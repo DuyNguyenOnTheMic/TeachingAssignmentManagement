@@ -143,7 +143,7 @@ namespace TeachingAssignmentManagement.DAL
             {
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
-                full_name = c.FirstOrDefault().lecturer.full_name + " (" + c.FirstOrDefault().lecturer.type + ")",
+                c.FirstOrDefault().lecturer.full_name,
                 curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
                 class_count = c.Count(),
                 sum = c.Sum(item => item.total_lesson),
@@ -185,7 +185,7 @@ namespace TeachingAssignmentManagement.DAL
             {
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
-                full_name = c.FirstOrDefault().lecturer.full_name + " (" + c.FirstOrDefault().lecturer.type + ")",
+                c.FirstOrDefault().lecturer.full_name,
                 curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
                 class_count = c.Count(),
                 sum = c.Sum(item => item.total_lesson),

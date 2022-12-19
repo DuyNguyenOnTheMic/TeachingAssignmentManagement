@@ -117,7 +117,11 @@ $.ajax({
         } else {
             // Get chart labels and data
             var labels = response.map(function (e) {
-                return e.full_name;
+                if (lecturerType == '-1') {
+                    return e.full_name + ' (' + e.lecturer_type + ')';
+                } else {
+                    return e.full_name;
+                }
             });
             var totalLessons = response.map(function (e) {
                 return e.sum;
@@ -216,6 +220,22 @@ function populateDatatable(data) {
                     orderable: false,
                     width: '5%',
                     targets: [0, 1]
+                },
+                {
+                    // User type
+                    targets: 4,
+                    render: function (data, type, full, meta) {
+                        var $status = full['lecturer_type'];
+                        if ($status) {
+                            var typeBadgeObj = {
+                                'CH': { title: 'Cơ hữu', class: 'badge-light-success' },
+                                'TG': { title: 'Thỉnh giảng', class: 'badge-light-warning' }
+                            };
+                            return '<span class="badge rounded-pill ' + typeBadgeObj[$status].class + ' text-capitalized">' + typeBadgeObj[$status].title + '</span>';
+                        } else {
+                            return null;
+                        }
+                    }
                 },
                 { className: 'text-center', target: [0, 1, 5, 6, 7] }
             ],
