@@ -61,6 +61,12 @@
     border: 3px solid #ff9f43 !important;
 }
 
+.assign-table-div .class-card {
+    width: 10rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .personal-timetable-div .theory-class {
     border: 2px dashed #28c76f !important;
     border-radius: .358rem;
