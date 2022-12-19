@@ -1,4 +1,4 @@
-﻿var formSelect = $('.form-select');
+﻿var formSelect = $('.form-select'),
     rootUrl = $('#loader').data('request-url'),
     assignLecturerDiv = $('#assignLecturerDiv'),
     url = rootUrl + 'Timetable/GetData';
