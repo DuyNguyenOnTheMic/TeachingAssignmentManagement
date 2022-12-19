@@ -45,14 +45,12 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
         }
         $rendered.find('.select2-dropdown').prepend($btnContainer);
         $selectAll.on('click', function () {
-            hidePopover();
             lecturerFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options
             filterCount(lecturerFilter);
             self.trigger('close');
             $('#tblStatistics').find('tbody tr').show();
         });
         $unselectAll.on('click', function () {
-            hidePopover();
             lecturerFilter.val('-1').trigger('change'); // Unselect All Options
             lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
             self.trigger('close');
@@ -91,3 +89,7 @@ lecturerFilter.on('select2:select', function (e) {
     lecturerId.hide();
     filterCount(lecturerFilter);
 });
+
+function filterCount(element) {
+    element.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + element.val().length + ' GV');
+}
