@@ -1115,7 +1115,9 @@
     <Content Include="assets\js\statistics\statistics-load.min.js" />
     <Content Include="assets\js\statistics\statistics.js" />
     <Content Include="assets\js\statistics\statistics.min.js" />
+    <Content Include="assets\js\statistics\timetable-statistics-load.min.js" />
     <Content Include="assets\js\statistics\timetable-statistics.js" />
+    <Content Include="assets\js\statistics\timetable-statistics.min.js" />
     <Content Include="assets\js\term\term.js" />
     <Content Include="assets\js\term\term.min.js" />
     <Content Include="assets\js\timetable\personal-timetable-load.js" />
