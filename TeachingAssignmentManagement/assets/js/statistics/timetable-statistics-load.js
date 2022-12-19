@@ -7,7 +7,7 @@ $(function () {
     // Set selected option when form load
     formSelect.each(function () {
         var $this = $(this);
-        $this.val($this.find('option:first').val());
+        $this.val($this.find('option:eq(1)').val());
     });
 
     // Populate select2 for choosing term and major
