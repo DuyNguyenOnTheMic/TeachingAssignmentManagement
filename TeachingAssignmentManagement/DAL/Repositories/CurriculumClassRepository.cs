@@ -69,6 +69,7 @@ namespace TeachingAssignmentManagement.DAL
                 LecturerName = c.lecturer.full_name,
                 CurriculumId = c.curriculum_id,
                 RoomId = c.room_id,
+                MajorName = c.major.name,
                 MajorAbb = c.major.abbreviation,
                 Curriculum = c.curriculum
             });
