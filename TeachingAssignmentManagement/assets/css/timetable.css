@@ -17,6 +17,7 @@
         font-weight: bold;
         z-index: 1;
         min-width: 120px;
+        border-color: #e1e2e2;
     }
 
 .dark-layout .assign-table-div td:first-child {
