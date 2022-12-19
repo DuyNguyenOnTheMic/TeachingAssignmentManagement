@@ -159,7 +159,8 @@ namespace TeachingAssignmentManagement.DAL
                 curriculum_major = c.FirstOrDefault().major.name,
                 curriculum_hours = c.Sum(item => item.total_lesson),
                 theory_count = c.Count(item => item.type == "Lý thuyết"),
-                practice_count = c.Count(item => item.type == "Thực hành")
+                practice_count = c.Count(item => item.type == "Thực hành"),
+                lecturerType = c.FirstOrDefault().lecturer.type
             }).ToList();
         }
 
@@ -199,7 +200,8 @@ namespace TeachingAssignmentManagement.DAL
                 curriculum_major = c.FirstOrDefault().major.name,
                 curriculum_hours = c.Sum(item => item.total_lesson),
                 theory_count = c.Count(item => item.type == "Lý thuyết"),
-                practice_count = c.Count(item => item.type == "Thực hành")
+                practice_count = c.Count(item => item.type == "Thực hành"),
+                lecturerType = c.FirstOrDefault().lecturer.type
             }).ToList();
         }
 
