@@ -81,29 +81,13 @@ lecturerFilter.select2({
 })
 lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
 lecturerFilter.on('select2:select', function (e) {
-    var tableRow = $('#tblStatistics tbody tr'),
-        lecturerId = e.params.data.id,
-        lecturerClass = tableRow.find('[data-lecturerid="' + lecturerId + '"]');
-    hidePopover();
-    lecturerClass.show();
+    // Show table row on select
+    var lecturerId = $('#' + e.params.data.id);
+    lecturerId.show();
     filterCount(lecturerFilter);
-    if ($('#tblStatistics tbody tr:visible').length > 0) {
-        // Filter for curriculum classes which has lecturer
-        tableRow.show();
-        updateRow(tableRow);
-    } else {
-        // Filter from beginning when user deselects all options
-        tableRow.show();
-        $('#tblStatistics .assign-card').not(lecturerClass).hide();
-        tableRow.not(lecturerClass.closest('tr')).hide();
-        updateRow(tableRow);
-    }
 }).on('select2:unselect', function (e) {
-    var tableRow = $('#tblStatistics tbody tr'),
-        lecturerId = e.params.data.id,
-        lecturerClass = tableRow.find('[data-lecturerid="' + lecturerId + '"]');
-    hidePopover();
-    lecturerClass.hide();
+    // Hide table row on unselect
+    var lecturerId = $('#' + e.params.data.id);
+    lecturerId.hide();
     filterCount(lecturerFilter);
-    updateRow(tableRow);
 });

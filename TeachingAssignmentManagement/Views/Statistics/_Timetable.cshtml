@@ -55,7 +55,7 @@
                                         string lecturerId = item.LecturerId ?? string.Empty;
                                         string lecturerName = item.LecturerName ?? "Chưa phân";
                                         string cardClass = "Lý thuyết" == item.Type ? "btn-success" : "btn-warning";
-                                        <button style="width: 10rem" class="btn @cardClass class-card my-25 p-25" type="button" id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>@item.CurriculumClassId </b>(@item.StudentRegisteredNumber SV)<br /><b>Phòng: </b>@item.RoomId">@item.Curriculum.name</button>
+                                        <button style="width: 10rem" class="btn @cardClass class-card my-25 p-25" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>@item.CurriculumClassId </b>(@item.StudentRegisteredNumber SV)<br /><b>Phòng: </b>@item.RoomId">@item.Curriculum.name</button>
                                     }
                                 </td>
                             }
