@@ -1,18 +1,21 @@
 ﻿var unitSelect = $('#unit'),
     termSelect = $('#term'),
     yearSelect = $('#year'),
+    majorSelect = $('#major'),
     lecturerTypeSelect = $('#lecturerType'),
     formTermYear = $('.form-termyear'),
     rootUrl = $('#loader').data('request-url'),
     statisticsDiv = $('#statisticsDiv'),
     latestTermId = $('#term option:eq(1)').val(),
-    latestYearId = $('#year option:eq(1)').val();
+    latestYearId = $('#year option:eq(1)').val(),
+    latestMajorId = $('#major option:eq(1)').val();
 
 $(function () {
     var formSelect = $('.form-select');
 
     // Set latest term value
     termSelect.val(latestTermId);
+    majorSelect.val(latestMajorId);
 
     // Populate select2 for choosing term and week
     formSelect.each(function () {
@@ -26,7 +29,7 @@ $(function () {
         });
     })
 
-    if (latestTermId) {
+    if (latestTermId && latestMajorId) {
         // Get Partial View personal timetable data
         fetchData(termSelect.attr('id'), latestTermId, lecturerTypeSelect.val());
     } else {
