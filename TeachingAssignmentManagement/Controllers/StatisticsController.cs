@@ -77,7 +77,6 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult Lecturer()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
-            ViewData["major"] = new SelectList(unitOfWork.MajorRepository.GetMajors(), "id", "name");
             return View();
         }
 
