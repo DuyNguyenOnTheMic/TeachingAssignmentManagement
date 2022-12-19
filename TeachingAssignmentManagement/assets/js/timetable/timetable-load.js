@@ -89,6 +89,12 @@ function updateClass(element, lecturerId, lecturerName) {
             // color of practical class
             element.addClass('btn-warning');
         }
+        var tooltipElement = element.parent();
+        var tooltipText = tooltipElement.attr('data-bs-original-title');
+        tooltipElement.tooltip('dispose').attr('title', tooltipText + lecturerName);
+        tooltipElement.tooltip({
+            trigger: 'hover'
+        });
         lecturerName = splitString(lecturerName);
     } else {
         lecturerName = 'Chưa phân';
