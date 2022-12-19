@@ -91,10 +91,13 @@ function updateClass(element, lecturerId, lecturerName) {
         }
         var tooltipElement = element.parent();
         var tooltipText = tooltipElement.attr('data-bs-original-title');
-        tooltipElement.tooltip('dispose').attr('title', tooltipText + lecturerName);
-        tooltipElement.tooltip({
-            trigger: 'hover'
-        });
+        tooltipElement.tooltip('dispose');
+        setTimeout(function () {
+            tooltipElement.attr('title', tooltipText + lecturerName);
+            tooltipElement.tooltip({
+                trigger: 'hover'
+            });
+        }, 250);
         lecturerName = splitString(lecturerName);
     } else {
         lecturerName = 'Chưa phân';
