@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
@@ -78,6 +80,18 @@ namespace TeachingAssignmentManagement.Controllers
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult GetTimetable(int termId)
+        {
+            IEnumerable<CurriculumClassDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTermAssignTimetable(termId);
+            ViewBag.curriculums = unitOfWork.CurriculumRepository.GetCurriculums(query_classes);
+            ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
+            return PartialView("_Timetable", new TimetableViewModels
+            {
+                CurriculumClassDTOs = query_classes.ToList()
+            });
         }
 
         protected override void Dispose(bool disposing)

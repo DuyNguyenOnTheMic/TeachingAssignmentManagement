@@ -1,0 +1,91 @@
+﻿@model TeachingAssignmentManagement.Models.TimetableViewModels
+
+<div class="d-flex justify-content-between align-items-center row">
+    <div class="col-sm-12 col-lg-8 d-flex justify-content-center justify-content-lg-start flex-lg-nowrap flex-wrap">
+        <p class="me-1 my-auto text-nowrap"><i>Chú thích: </i></p>
+        <button class="btn btn-success me-50 my-auto p-25 text-nowrap" type="button">Lý thuyết</button>
+        <button class="btn btn-warning me-50 my-auto p-25 text-nowrap" type="button">Thực hành</button>
+        <button class="btn btn-secondary me-1 my-auto p-25 text-nowrap" type="button">Chưa phân</button>
+        <select class="form-select" id="curriculumFilter" name="curriculumFilter" multiple aria-label="Lọc môn học">
+            @foreach (var option in ViewBag.curriculums)
+            {
+                <option value="@option.id">@option.name</option>
+            }
+        </select>
+        <select class="form-select" id="lecturerFilter" name="lecturerFilter" multiple aria-label="Lọc giảng viên">
+            <option value="">Chưa phân công</option>
+            @foreach (var option in ViewBag.lecturers)
+            {
+                <option value="@option.Value">@option.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-sm-12 col-lg-4 my-50">
+        <div class="d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap">
+            <button type="button" class="btn btn-outline-secondary waves-effect btn-export"><i class="feather feather-file me-50"></i>Export</button>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="alert alert-primary my-25" role="alert">
+            <div class="alert-body">Số lớp đã phân công: <strong><span id="assignedCount"></span>/<span id="totalCount"></span></strong></div>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive assign-table-div">
+    <table class="table table-bordered assign-table" id="tblAssign">
+        <thead class="table-light">
+            <tr class="text-center">
+                <th>THỨ</th>
+                @foreach (int day in Model.days)
+                {
+                    <th colspan="5">THỨ @day</th>
+                }
+            </tr>
+            <tr class="text-center text-nowrap">
+                <th>TIẾT</th>
+                @foreach (int day in Model.days)
+                {
+                    foreach (int startLesson in Model.startLessons)
+                    {
+                        <th>@startLesson-@(startLesson + 2)</th>
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lecturer in ViewBag.lecturers)
+            {
+                <tr id="@lecturer.id">
+                    <td>@lecturer.full_name</td>
+                    @foreach (int day in Model.days)
+                    {
+                        foreach (int startLesson in Model.startLessons)
+                        {
+                            var classes = Model.CurriculumClassDTOs.Where(x => x.LecturerId == lecturer.id && x.Day2 == day && x.StartLesson2 == startLesson);
+                            string dividerClass = startLesson == 1 ? "class=table-vertical-divider" : string.Empty;
+                            if (classes.Any())
+                            {
+                                <td @dividerClass>
+                                    @foreach (var item in classes)
+                                    {
+                                        string lecturerId = item.LecturerId ?? string.Empty;
+                                        string lecturerName = item.LecturerName ?? "Chưa phân";
+                                        string cardClass = "Lý thuyết" == item.Type ? "btn-success" : "btn-warning";
+                                        <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>@item.CurriculumClassId </b>(@item.StudentRegisteredNumber SV)<br /><b>Phòng: </b>@item.RoomId">
+                                            <button class="btn @cardClass assign-card text-nowrap my-25 p-25" type="button" id="@item.Id" data-lecturerid="@lecturerId" data-classtype="@item.Type" title="@item.Curriculum.name">@lecturerName</button>
+                                        </div>
+                                    }
+                                </td>
+                            }
+                            else
+                            {
+                                <td @dividerClass></td>
+                            }
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
