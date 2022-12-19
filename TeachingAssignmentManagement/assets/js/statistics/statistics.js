@@ -142,7 +142,7 @@ $.ajax({
                 ]
             };
 
-            chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ: ' + HoursSum(response, 'sum');
+            chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ: ' + hoursSum(response, 'sum');
 
             // Create the chart
             var chart = new Chart(ctx, {
@@ -182,7 +182,7 @@ $.ajax({
     }
 });
 
-function HoursSum(items, prop) {
+function hoursSum(items, prop) {
     return items.reduce(function (a, b) {
         return a + b[prop];
     }, 0);
