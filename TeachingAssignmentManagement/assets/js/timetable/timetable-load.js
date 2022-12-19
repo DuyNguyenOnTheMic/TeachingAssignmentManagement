@@ -78,9 +78,12 @@ function populateSelect($this) {
 }
 
 function updateClass(element, lecturerId, lecturerName, currentLecturerName) {
-    element.attr('data-lecturerid', lecturerId);
     var classType = element.data('classtype');
+    var tooltipElement = element.parent();
+    var tooltipText = tooltipElement.attr('data-bs-original-title').split('<b>Phân công bởi: </b>')[0];
+    element.attr('data-lecturerid', lecturerId);
     element.removeClass('btn-success btn-warning btn-secondary unassigned-theory unassigned-practical');
+    tooltipElement.tooltip('dispose');
     if (lecturerId) {
         if (classType == 'Lý thuyết') {
             // color of theory class
@@ -90,15 +93,7 @@ function updateClass(element, lecturerId, lecturerName, currentLecturerName) {
             element.addClass('btn-warning');
         }
         // Update tooltip text
-        var tooltipElement = element.parent();
-        var tooltipText = tooltipElement.attr('data-bs-original-title').split('<b>Phân công bởi: </b>')[0];
-        tooltipElement.tooltip('dispose');
-        setTimeout(function () {
-            tooltipElement.attr('title', tooltipText + '<b>Phân công bởi: </b>' + currentLecturerName);
-            tooltipElement.tooltip({
-                trigger: 'hover'
-            });
-        }, 250);
+        tooltipElement.attr('title', tooltipText + '<b>Phân công bởi: </b>' + currentLecturerName);
         lecturerName = splitString(lecturerName);
     } else {
         lecturerName = 'Chưa phân';
@@ -109,8 +104,12 @@ function updateClass(element, lecturerId, lecturerName, currentLecturerName) {
             // color of practical class
             element.addClass('btn-secondary unassigned-practical');
         }
+        tooltipElement.attr('title', tooltipText + '<b>Phân công bởi: </b>');
     }
     element.text(lecturerName);
+    tooltipElement.tooltip({
+        trigger: 'hover'
+    });
     $('[data-bs-toggle="popover"]').popover('update');
 }
 
