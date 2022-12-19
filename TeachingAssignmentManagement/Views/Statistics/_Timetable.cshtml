@@ -6,12 +6,6 @@
         <button class="btn btn-success me-50 my-auto p-25 text-nowrap" type="button">Lý thuyết</button>
         <button class="btn btn-warning me-50 my-auto p-25 text-nowrap" type="button">Thực hành</button>
         <button class="btn btn-secondary me-1 my-auto p-25 text-nowrap" type="button">Chưa phân</button>
-        <select class="form-select" id="curriculumFilter" name="curriculumFilter" multiple aria-label="Lọc môn học">
-            @foreach (var option in ViewBag.curriculums)
-            {
-                <option value="@option.id">@option.name</option>
-            }
-        </select>
         <select class="form-select" id="lecturerFilter" name="lecturerFilter" multiple aria-label="Lọc giảng viên">
             <option value="">Chưa phân công</option>
             @foreach (var option in ViewBag.lecturers)
