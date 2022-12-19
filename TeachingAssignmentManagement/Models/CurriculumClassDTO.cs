@@ -11,6 +11,7 @@
         public int? StudentRegisteredNumber { get; set; }
         public int StartWeek { get; set; }
         public int EndWeek { get; set; }
+        public string LastAssigned { get; set; }
         public string LecturerId { get; set; }
         public string LecturerName { get; set; }
         public string CurriculumId { get; set; }
