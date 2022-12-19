@@ -132,7 +132,8 @@ namespace TeachingAssignmentManagement.DAL
                 c.FirstOrDefault().lecturer.full_name,
                 curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
                 class_count = c.Count(),
-                sum = c.Sum(item => item.total_lesson)
+                sum = c.Sum(item => item.total_lesson),
+                lecturer_type = c.FirstOrDefault().lecturer.type
             }).OrderByDescending(c => c.sum).ToList();
         }
 
@@ -145,7 +146,8 @@ namespace TeachingAssignmentManagement.DAL
                 full_name = c.FirstOrDefault().lecturer.full_name + " (" + c.FirstOrDefault().lecturer.type + ")",
                 curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
                 class_count = c.Count(),
-                sum = c.Sum(item => item.total_lesson)
+                sum = c.Sum(item => item.total_lesson),
+                lecturer_type = c.FirstOrDefault().lecturer.type
             }).OrderByDescending(c => c.sum).ToList();
         }
 
@@ -159,8 +161,7 @@ namespace TeachingAssignmentManagement.DAL
                 curriculum_major = c.FirstOrDefault().major.name,
                 curriculum_hours = c.Sum(item => item.total_lesson),
                 theory_count = c.Count(item => item.type == "Lý thuyết"),
-                practice_count = c.Count(item => item.type == "Thực hành"),
-                lecturerType = c.FirstOrDefault().lecturer.type
+                practice_count = c.Count(item => item.type == "Thực hành")
             }).ToList();
         }
 
@@ -173,7 +174,8 @@ namespace TeachingAssignmentManagement.DAL
                 c.FirstOrDefault().lecturer.full_name,
                 curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
                 class_count = c.Count(),
-                sum = c.Sum(item => item.total_lesson)
+                sum = c.Sum(item => item.total_lesson),
+                lecturer_type = c.FirstOrDefault().lecturer.type
             }).OrderByDescending(c => c.sum).ToList();
         }
 
@@ -186,7 +188,8 @@ namespace TeachingAssignmentManagement.DAL
                 full_name = c.FirstOrDefault().lecturer.full_name + " (" + c.FirstOrDefault().lecturer.type + ")",
                 curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
                 class_count = c.Count(),
-                sum = c.Sum(item => item.total_lesson)
+                sum = c.Sum(item => item.total_lesson),
+                lecturer_type = c.FirstOrDefault().lecturer.type
             }).OrderByDescending(c => c.sum).ToList();
         }
 
@@ -200,8 +203,7 @@ namespace TeachingAssignmentManagement.DAL
                 curriculum_major = c.FirstOrDefault().major.name,
                 curriculum_hours = c.Sum(item => item.total_lesson),
                 theory_count = c.Count(item => item.type == "Lý thuyết"),
-                practice_count = c.Count(item => item.type == "Thực hành"),
-                lecturerType = c.FirstOrDefault().lecturer.type
+                practice_count = c.Count(item => item.type == "Thực hành")
             }).ToList();
         }
 
