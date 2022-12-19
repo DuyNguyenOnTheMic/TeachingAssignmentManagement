@@ -516,6 +516,7 @@ namespace TeachingAssignmentManagement.Controllers
             // Declare variables
             curriculum_class curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
             string currentLecturerId = UserManager.FindByEmail(User.Identity.Name).Id;
+            string currentLecturerName = unitOfWork.UserRepository.GetLecturerByID(currentLecturerId).full_name;
             lecturerId = ToNullableString(lecturerId);
 
             // Check if user is in role Department head to restrict assignment
@@ -531,7 +532,7 @@ namespace TeachingAssignmentManagement.Controllers
             unitOfWork.Save();
 
             // Send signal to SignalR Hub
-            TimetableHub.BroadcastData(id, lecturerId, curriculumClass.lecturer?.full_name, true);
+            TimetableHub.BroadcastData(id, lecturerId, curriculumClass.lecturer?.full_name, currentLecturerName, true);
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
@@ -618,7 +619,7 @@ namespace TeachingAssignmentManagement.Controllers
             unitOfWork.Save();
 
             // Send signal to SignalR Hub
-            TimetableHub.BroadcastData(id, null, null, false);
+            TimetableHub.BroadcastData(id, null, null, null, false);
             return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
         }
 

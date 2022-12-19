@@ -8,12 +8,12 @@ var hubNotif = $.connection.timetableHub;
 // Start the connection
 $.connection.hub.start();
 // Notify while anyChanges
-hubNotif.client.updatedData = function (id, lecturerId, lecturerName, isUpdate) {
+hubNotif.client.updatedData = function (id, lecturerId, lecturerName, currentLecturerName, isUpdate) {
     var element = $('#' + id);
     if (element.length) {
         if (isUpdate) {
             // Update curriculum class
-            updateClass(element, lecturerId, lecturerName);
+            updateClass(element, lecturerId, lecturerName, currentLecturerName);
         } else {
             // Delete curriculum class
             element.parent().tooltip('dispose');
@@ -77,7 +77,7 @@ function populateSelect($this) {
     })
 }
 
-function updateClass(element, lecturerId, lecturerName) {
+function updateClass(element, lecturerId, lecturerName, currentLecturerName) {
     element.attr('data-lecturerid', lecturerId);
     var classType = element.data('classtype');
     element.removeClass('btn-success btn-warning btn-secondary unassigned-theory unassigned-practical');
@@ -89,11 +89,12 @@ function updateClass(element, lecturerId, lecturerName) {
             // color of practical class
             element.addClass('btn-warning');
         }
+        // Update tooltip text
         var tooltipElement = element.parent();
-        var tooltipText = tooltipElement.attr('data-bs-original-title');
+        var tooltipText = tooltipElement.attr('data-bs-original-title').split('<b>Phân công bởi: </b>')[0];
         tooltipElement.tooltip('dispose');
         setTimeout(function () {
-            tooltipElement.attr('title', tooltipText + lecturerName);
+            tooltipElement.attr('title', tooltipText + '<b>Phân công bởi: </b>' + currentLecturerName);
             tooltipElement.tooltip({
                 trigger: 'hover'
             });
