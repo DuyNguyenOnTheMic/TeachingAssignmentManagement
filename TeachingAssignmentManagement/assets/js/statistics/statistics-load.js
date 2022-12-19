@@ -13,11 +13,11 @@
 $(function () {
     var formSelect = $('.form-select');
 
-    // Set latest term value
+    // Set latest term and major value
     termSelect.val(latestTermId);
     majorSelect.val(latestMajorId);
 
-    // Populate select2 for choosing term and week
+    // Populate select2
     formSelect.each(function () {
         var $this = $(this);
         $this.wrap('<div class="position-relative"></div>');
