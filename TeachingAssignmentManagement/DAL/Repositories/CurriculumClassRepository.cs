@@ -144,10 +144,10 @@ namespace TeachingAssignmentManagement.DAL
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
                 c.FirstOrDefault().lecturer.full_name,
+                lecturer_type = c.FirstOrDefault().lecturer.type,
                 curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
                 class_count = c.Count(),
-                sum = c.Sum(item => item.total_lesson),
-                lecturer_type = c.FirstOrDefault().lecturer.type
+                sum = c.Sum(item => item.total_lesson)
             }).OrderByDescending(c => c.sum).ToList();
         }
 
@@ -186,10 +186,10 @@ namespace TeachingAssignmentManagement.DAL
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
                 c.FirstOrDefault().lecturer.full_name,
+                lecturer_type = c.FirstOrDefault().lecturer.type,
                 curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
                 class_count = c.Count(),
-                sum = c.Sum(item => item.total_lesson),
-                lecturer_type = c.FirstOrDefault().lecturer.type
+                sum = c.Sum(item => item.total_lesson)
             }).OrderByDescending(c => c.sum).ToList();
         }
 
