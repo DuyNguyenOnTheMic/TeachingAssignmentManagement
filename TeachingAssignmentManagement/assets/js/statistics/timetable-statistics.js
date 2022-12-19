@@ -20,6 +20,15 @@ if (classCount == 0) {
             sanitize: false
         });
     });
+
+    // Hide all table rows on load
+    $('#tblStatistics tbody tr').hide();
+}
+
+// Display message when table have no data
+var rowCount = $('#tblStatistics tbody tr:visible').length;
+if (rowCount == 0) {
+    $('#tblStatistics').empty().append('<h4 class="text-center mt-2">Gì v ba <i class="feather feather-help-circle"></i></h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="Welcome" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
 }
 
 $.fn.select2.amd.define('select2/selectAllAdapter', [
