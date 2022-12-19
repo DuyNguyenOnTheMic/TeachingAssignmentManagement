@@ -20,22 +20,26 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-4 mb-1">
+                                    <div class="col-lg-3 mb-1">
                                         <label class="form-label font-small-4" for="unit">Thống kê theo: </label>
                                         <select class="form-select" id="unit" name="unit">
                                             <option value="term">Học kỳ</option>
                                             <option value="year">Năm học</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-4 mb-1" id="termDiv">
+                                    <div class="col-lg-3 mb-1" id="termDiv">
                                         <label class="form-label font-small-4" for="term">Học kỳ: </label>
                                         @Html.DropDownList("term", null, "---- Chọn học kỳ ----", htmlAttributes: new { @class = "form-termyear form-select" })
                                     </div>
-                                    <div class="col-md-4 mb-1" id="yearDiv" style="display: none">
+                                    <div class="col-lg-3 mb-1" id="yearDiv" style="display: none">
                                         <label class="form-label font-small-4" for="year">Năm học: </label>
                                         @Html.DropDownList("year", null, "---- Chọn năm học ----", htmlAttributes: new { @class = "form-termyear form-select" })
                                     </div>
-                                    <div class="col-md-4 mb-1">
+                                    <div class="col-lg-3 mb-1">
+                                        <label class="form-label font-small-4" for="year">Ngành: </label>
+                                        @Html.DropDownList("major", null, "---- Chọn ngành ----", htmlAttributes: new { @class = "form form-select" })
+                                    </div>
+                                    <div class="col-lg-3 mb-1">
                                         <label class="form-label font-small-4" for="lecturerType">Loại giảng viên: </label>
                                         <select class="form-select" id="lecturerType" name="lecturerType">
                                             <option value="">---- Chọn loại giảng viên ----</option>

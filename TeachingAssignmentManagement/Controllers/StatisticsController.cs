@@ -28,6 +28,7 @@ namespace TeachingAssignmentManagement.Controllers
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
             ViewData["year"] = new SelectList(unitOfWork.TermRepository.GetYears(), "schoolyear", "schoolyear");
+            ViewData["major"] = new SelectList(unitOfWork.MajorRepository.GetMajors(), "id", "name");
             return View();
         }
 
