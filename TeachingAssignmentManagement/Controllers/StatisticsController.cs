@@ -74,7 +74,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult Lecturer()
+        public ActionResult LecturerTimetable()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
             return View();
