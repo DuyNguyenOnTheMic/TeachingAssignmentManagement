@@ -46,28 +46,17 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
         $rendered.find('.select2-dropdown').prepend($btnContainer);
         $selectAll.on('click', function () {
             hidePopover();
-            if (self.$element.attr('id') == 'curriculumFilter') {
-                curriculumFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options
-                filterCount(curriculumFilter);
-            } else if (self.$element.attr('id') == 'lecturerFilter') {
-                lecturerFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options
-                filterCount(lecturerFilter);
-                $('.assign-card').show();
-            }
+            lecturerFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options
+            filterCount(lecturerFilter);
             self.trigger('close');
-            $('#tblAssign').find('tbody tr').show();
+            $('#tblStatistics').find('tbody tr').show();
         });
         $unselectAll.on('click', function () {
             hidePopover();
-            if (self.$element.attr('id') == 'curriculumFilter') {
-                curriculumFilter.val(null).trigger('change'); // Unselect All Options
-                curriculumFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc môn học');
-            } else if (self.$element.attr('id') == 'lecturerFilter') {
-                lecturerFilter.val('-1').trigger('change'); // Unselect All Options
-                lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
-            }
+            lecturerFilter.val('-1').trigger('change'); // Unselect All Options
+            lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
             self.trigger('close');
-            $('#tblAssign').find('tbody tr').hide();
+            $('#tblStatistics').find('tbody tr').hide();
         });
         return $rendered;
     };
