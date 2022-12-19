@@ -31,8 +31,8 @@ $(function () {
                 {
                     // User type
                     targets: 4,
-                    render: function (data, type, full, meta) {
-                        var $status = full['type'];
+                    render: function (data) {
+                        var $status = data;
                         if ($status) {
                             var typeBadgeObj = {
                                 'CH': { title: 'Cơ hữu', class: 'badge-light-success' },
