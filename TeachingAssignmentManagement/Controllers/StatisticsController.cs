@@ -34,20 +34,21 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = "BCN khoa, Bộ môn")]
-        public ActionResult GetChart(string type, string value, string lecturerType)
+        public ActionResult GetChart(string type, string value, string major, string lecturerType)
         {
             ViewData["type"] = type;
             ViewData["value"] = value;
+            ViewData["major"] = major;
             ViewData["lecturerType"] = lecturerType;
             return PartialView("_Chart");
         }
 
         [HttpGet]
         [Authorize(Roles = "BCN khoa, Bộ môn")]
-        public JsonResult GetTermData(int termId, string lecturerType)
+        public JsonResult GetTermData(int termId, string majorId, string lecturerType)
         {
             IEnumerable query_classes = lecturerType != "-1"
-                ? unitOfWork.CurriculumClassRepository.GetTermStatistics(termId, lecturerType)
+                ? unitOfWork.CurriculumClassRepository.GetTermStatistics(termId, majorId, lecturerType)
                 : unitOfWork.CurriculumClassRepository.GetTermStatisticsAll(termId);
             return Json(query_classes, JsonRequestBehavior.AllowGet);
         }

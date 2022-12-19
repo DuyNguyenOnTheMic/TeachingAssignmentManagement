@@ -92,7 +92,8 @@ function loading() {
 
 function fetchData(type, value, lecturerType) {
     var url = rootUrl + 'Statistics/GetChart';
-    $.get(url, { type, value, lecturerType }, function (data) {
+    var major = majorSelect.val();
+    $.get(url, { type, value, major, lecturerType }, function (data) {
         // Populate statistics data
         statisticsDiv.html(data);
     });

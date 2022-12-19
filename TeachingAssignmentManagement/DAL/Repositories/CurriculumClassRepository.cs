@@ -123,9 +123,9 @@ namespace TeachingAssignmentManagement.DAL
             return context.curriculum_class.Find(id);
         }
 
-        public IEnumerable GetTermStatistics(int termId, string lecturerType)
+        public IEnumerable GetTermStatistics(int termId, string majorId, string lecturerType)
         {
-            return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer.type == lecturerType).GroupBy(c => c.lecturer_id).Select(c => new
+            return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == lecturerType).GroupBy(c => c.lecturer_id).Select(c => new
             {
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,

@@ -9,6 +9,7 @@ var labelColor = '#6e6b7b',
 // Setup data
 var dataLoader = $('#data-loader'),
     type = dataLoader.data('type'),
+    majorId = dataLoader.data('major'),
     lecturerType = dataLoader.data('lecturertype'),
     value = dataLoader.val(),
     url = rootUrl + 'Statistics/',
@@ -26,7 +27,7 @@ if (type == yearSelect.attr('id')) {
     fileName = 'ThongKeSoGio_NamHoc_' + startYear + '-' + endYear;
     url += 'GetYearData';
 } else {
-    data = { 'termId': value, lecturerType };
+    data = { 'termId': value, majorId, lecturerType };
     titleText = 'Thống kê số giờ học kỳ ' + value;
     fileName = 'ThongKeSoGio_HK' + value;
     url += 'GetTermData';
