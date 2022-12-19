@@ -235,8 +235,14 @@ namespace TeachingAssignmentManagement.Controllers
                     // Update email of user
                     user.Email = email;
                     user.UserName = email;
-                    UserManager.Update(user);
                 }
+                else
+                {
+                    // Set user name as staff id in aspnet tables
+                    user.Email = null;
+                    user.UserName = staff_id;
+                }
+                UserManager.Update(user);
             }
             catch
             {
