@@ -56,13 +56,13 @@
         <tbody>
             @foreach (var lecturer in ViewBag.lecturers)
             {
-                <tr id="@lecturer.id">
-                    <td>@lecturer.full_name</td>
+                <tr id="@lecturer.Value">
+                    <td>@lecturer.Text</td>
                     @foreach (int day in Model.days)
                     {
                         foreach (int startLesson in Model.startLessons)
                         {
-                            var classes = Model.CurriculumClassDTOs.Where(x => x.LecturerId == lecturer.id && x.Day2 == day && x.StartLesson2 == startLesson);
+                            var classes = Model.CurriculumClassDTOs.Where(x => x.LecturerId == lecturer.Value && x.Day2 == day && x.StartLesson2 == startLesson);
                             string dividerClass = startLesson == 1 ? "class=table-vertical-divider" : string.Empty;
                             if (classes.Any())
                             {
