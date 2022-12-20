@@ -70,6 +70,23 @@ namespace TeachingAssignmentManagement.DAL
                 LecturerName = c.lecturer.full_name,
                 CurriculumId = c.curriculum_id,
                 RoomId = c.room_id,
+                MajorAbb = c.major.abbreviation,
+                Curriculum = c.curriculum
+            });
+        }
+
+        public IEnumerable<CurriculumClassDTO> GetTimetableStatistics(int termId)
+        {
+            return context.curriculum_class.Where(c => c.term_id == termId).Select(c => new CurriculumClassDTO
+            {
+                Id = c.id,
+                CurriculumClassId = c.curriculum_class_id,
+                Type = c.type,
+                Day2 = c.day_2,
+                StartLesson2 = c.start_lesson_2,
+                LecturerId = c.lecturer_id,
+                LecturerName = c.lecturer.full_name,
+                RoomId = c.room_id,
                 MajorName = c.major.name,
                 MajorAbb = c.major.abbreviation,
                 Curriculum = c.curriculum
