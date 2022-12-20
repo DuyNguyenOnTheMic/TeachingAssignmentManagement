@@ -120,7 +120,7 @@ $(function () {
             nextBtnClass = 'btn btn-sm btn-primary btn-next';
         tour.addStep({
             title: 'Chọn tuần',
-            text: 'Bạn có thể chọn tuần để xem thời khoá biểu ờ đây. Mặc định hệ thống sẽ chọn tuần hiện tại.',
+            text: 'Bạn có thể chọn tuần để xem TKB ờ đây. Mặc định hệ thống sẽ chọn tuần hiện tại.',
             attachTo: { element: '#week + .select2-container', on: 'bottom' },
             buttons: [
                 {
@@ -137,7 +137,7 @@ $(function () {
         });
         tour.addStep({
             title: 'Lọc giảng viên',
-            text: 'Chọn giảng viên bạn muốn xem ở đây.',
+            text: 'Chọn giảng viên bạn muốn xem TKB ở đây.',
             attachTo: { element: '#lecturerFilter + .select2-container', on: 'bottom' },
             buttons: [
                 {
