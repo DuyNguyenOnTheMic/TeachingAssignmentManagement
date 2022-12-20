@@ -39,7 +39,7 @@ namespace TeachingAssignmentManagement.Controllers
             ViewData["type"] = type;
             ViewData["value"] = value;
             ViewData["major"] = major;
-            ViewData["majorAbb"] = unitOfWork.MajorRepository.GetMajorByID(major).abbreviation;
+            ViewData["majorAbb"] = major != "-1" ? unitOfWork.MajorRepository.GetMajorByID(major).abbreviation : "tất cả";
             ViewData["lecturerType"] = lecturerType;
             return PartialView("_Chart");
         }
