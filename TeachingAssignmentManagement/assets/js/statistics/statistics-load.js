@@ -3,7 +3,7 @@
     yearSelect = $('#year'),
     majorSelect = $('#major'),
     lecturerTypeSelect = $('#lecturerType'),
-    formTermYear = $('.form-termyear'),
+    formData = $('.form-data'),
     rootUrl = $('#loader').data('request-url'),
     statisticsDiv = $('#statisticsDiv'),
     latestTermId = $('#term option:eq(1)').val(),
@@ -31,7 +31,7 @@ $(function () {
 
     if (latestTermId && latestMajorId) {
         // Get Partial View statistics data
-        fetchData(termSelect.attr('id'), latestTermId, lecturerTypeSelect.val());
+        fetchData(termSelect.attr('id'), latestTermId, latestMajorId, lecturerTypeSelect.val());
     } else {
         statisticsDiv.html('<h4 class="text-center mt-2">Chưa có dữ liệu học kỳ</h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="No data" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
     }
@@ -41,38 +41,28 @@ $(function () {
 unitSelect.change(function () {
     var $this = $(this);
     if ($this.val() == 'term') {
-        // Set latest term
-        termSelect.val(latestTermId).trigger('change');
-
         // Show term select2 field
         $('#termDiv').show();
         $('#yearDiv').hide();
-    } else {
-        // Set latest year
-        yearSelect.val(latestYearId).trigger('change');
 
+        // Set latest term
+        termSelect.val(latestTermId).trigger('change');
+    } else {
         // Show year select2 field
         $('#yearDiv').show();
         $('#termDiv').hide();
+
+        // Set latest year
+        yearSelect.val(latestYearId).trigger('change');
     }
 });
 
-// Fetch data on term or year change
-formTermYear.change(function () {
-    var $this = $(this),
-        type = $this.attr('id'),
-        value = $this.val(),
-        lecturerType = lecturerTypeSelect.val();
-    // Display loading message while fetching data
-    loading();
-    fetchData(type, value, lecturerType);
-});
-
-// Fetch data on lecturer type change
-lecturerTypeSelect.change(function () {
-    var $this = $(this),
-        type,
-        value;
+// Fetch data on form select change
+formData.change(function () {
+    var type,
+        value,
+        major,
+        lecturerType;
     // Check if term or year select is hidden
     if (termSelect.is(':visible')) {
         type = termSelect.attr('id');
@@ -81,18 +71,19 @@ lecturerTypeSelect.change(function () {
         type = yearSelect.attr('id');
         value = yearSelect.val();
     }
+    major = majorSelect.val();
+    lecturerType = lecturerTypeSelect.val();
     // Display loading message while fetching data
     loading();
-    fetchData(type, value, $this.val());
+    fetchData(type, value, major, lecturerType);
 });
 
 function loading() {
     statisticsDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
 }
 
-function fetchData(type, value, lecturerType) {
+function fetchData(type, value, major, lecturerType) {
     var url = rootUrl + 'Statistics/GetChart';
-    var major = majorSelect.val();
     $.get(url, { type, value, major, lecturerType }, function (data) {
         // Populate statistics data
         statisticsDiv.html(data);
