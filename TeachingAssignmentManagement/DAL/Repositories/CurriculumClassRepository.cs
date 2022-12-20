@@ -157,9 +157,12 @@ namespace TeachingAssignmentManagement.DAL
             }).OrderByDescending(c => c.sum).ToList();
         }
 
-        public IEnumerable GetTermCurriculums(int termId, string lecturerId)
+        public IEnumerable GetTermCurriculums(int termId, string majorId, string lecturerId)
         {
-            return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id == lecturerId).GroupBy(c => c.curriculum_id).Select(c => new
+            IQueryable<curriculum_class> query_classes = majorId != "-1"
+                ? context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer_id == lecturerId)
+                : context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
+            return query_classes.GroupBy(c => c.curriculum_id).Select(c => new
             {
                 id = c.Key,
                 curriculum_name = c.FirstOrDefault().curriculum.name,
@@ -205,9 +208,12 @@ namespace TeachingAssignmentManagement.DAL
             }).OrderByDescending(c => c.sum).ToList();
         }
 
-        public IEnumerable GetYearCurriculums(int startYear, int endYear, string lecturerId)
+        public IEnumerable GetYearCurriculums(int startYear, int endYear, string majorId, string lecturerId)
         {
-            return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id == lecturerId).GroupBy(c => c.curriculum_id).Select(c => new
+            IQueryable<curriculum_class> query_classes = majorId != "-1"
+                ? context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer_id == lecturerId)
+                : context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id == lecturerId);
+            return query_classes.GroupBy(c => c.curriculum_id).Select(c => new
             {
                 id = c.Key,
                 curriculum_name = c.FirstOrDefault().curriculum.name,
