@@ -1,4 +1,6 @@
 ﻿var formSelect = $('.form-select'),
+    termSelect = $('#term'),
+    weekSelect = $('#week'),
     rootUrl = $('#loader').data('request-url'),
     timetableStatisticsDiv = $('#timetableStatisticsDiv'),
     url = rootUrl + 'Statistics/GetTimetable';
@@ -31,15 +33,16 @@ formSelect.change(function () {
 });
 
 function fetchData() {
-    var termId = $('#term').val()
+    var termId = termSelect.val(),
+        week = 0;
     if (termId) {
-        getTimetable(termId);
+        getTimetable(termId, week);
     } else {
         timetableStatisticsDiv.html('<h4 class="text-center mt-2">Chưa có dữ liệu học kỳ</h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="No data" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
     }
 }
 
-function getTimetable(termId) {
+function getTimetable(termId, week) {
     // Dispose all tooltips and popovers
     $("#tblAssign [data-bs-toggle='tooltip']").tooltip('dispose');
 
@@ -48,7 +51,7 @@ function getTimetable(termId) {
         timetableStatisticsDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
 
         // Get Partial View timetable data
-        $.get(url, { termId }, function (data) {
+        $.get(url, { termId, week }, function (data) {
             timetableStatisticsDiv.html(data);
         });
     }
