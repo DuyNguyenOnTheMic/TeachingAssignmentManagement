@@ -49,7 +49,7 @@ namespace TeachingAssignmentManagement.Controllers
         {
             IEnumerable query_classes = lecturerType != "-1"
                 ? unitOfWork.CurriculumClassRepository.GetTermStatistics(termId, majorId, lecturerType)
-                : unitOfWork.CurriculumClassRepository.GetTermStatisticsAll(termId);
+                : unitOfWork.CurriculumClassRepository.GetTermStatisticsAll(termId, majorId);
             return Json(query_classes, JsonRequestBehavior.AllowGet);
         }
 
@@ -66,7 +66,7 @@ namespace TeachingAssignmentManagement.Controllers
         {
             IEnumerable query_classes = lecturerType != "-1"
                 ? unitOfWork.CurriculumClassRepository.GetYearStatistics(startYear, endYear, majorId, lecturerType)
-                : unitOfWork.CurriculumClassRepository.GetYearStatisticsAll(startYear, endYear);
+                : unitOfWork.CurriculumClassRepository.GetYearStatisticsAll(startYear, endYear, majorId);
             return Json(query_classes, JsonRequestBehavior.AllowGet);
         }
 
