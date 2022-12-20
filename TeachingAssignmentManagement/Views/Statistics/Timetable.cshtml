@@ -19,9 +19,15 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-12 mb-1">
+                                    <div class="col-md-6 mb-1">
                                         <label class="form-label font-small-4" for="term">Học kỳ: </label>
                                         @Html.DropDownList("term", null, "---- Chọn học kỳ ----", htmlAttributes: new { @class = "select2 form-select" })
+                                    </div>
+                                    <div class="col-md-6 mb-1">
+                                        <label class="form-label font-small-4" for="week">Tuần: </label>
+                                        <select class="select2 form-select" id="week" name="week">
+                                            <option value="">Đang tải...</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div id="timetableStatisticsDiv"></div>
