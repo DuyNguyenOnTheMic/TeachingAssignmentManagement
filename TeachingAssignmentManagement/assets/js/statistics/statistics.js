@@ -256,7 +256,7 @@ function populateDatatable(data) {
                             className: 'dropdown-item',
                             title: fileName,
                             exportOptions: {
-                                columns: [0, 2, 3, 4, 5, 6]
+                                columns: [0, 2, 3, 4, 5, 6, 7]
                             }
                         },
                         {
@@ -264,7 +264,7 @@ function populateDatatable(data) {
                             className: 'dropdown-item',
                             title: fileName,
                             exportOptions: {
-                                columns: [0, 2, 3, 4, 5, 6]
+                                columns: [0, 2, 3, 4, 5, 6, 7]
                             }
                         },
                         {
@@ -272,7 +272,7 @@ function populateDatatable(data) {
                             className: 'dropdown-item',
                             title: fileName,
                             exportOptions: {
-                                columns: [0, 2, 3, 4, 5, 6]
+                                columns: [0, 2, 3, 4, 5, 6, 7]
                             }
                         },
                         {
@@ -280,7 +280,7 @@ function populateDatatable(data) {
                             className: 'dropdown-item',
                             title: fileName,
                             exportOptions: {
-                                columns: [0, 2, 3, 4, 5, 6]
+                                columns: [0, 2, 3, 4, 5, 6, 7]
                             }
                         }
                     ],
