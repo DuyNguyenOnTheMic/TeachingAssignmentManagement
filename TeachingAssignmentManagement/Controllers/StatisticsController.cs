@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using Microsoft.AspNet.Identity;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
@@ -81,7 +83,80 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public ActionResult Timetable()
         {
-            ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
+            // Declare variables
+            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
+            term term = unitOfWork.TermRepository.GetTermByID(termId);
+            IEnumerable<CurriculumClassDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, userId);
+            if (!query_classes.Any())
+            {
+                // Return not found error message
+                return Json(new { error = true, message = "Học kỳ này chưa có dữ liệu phân công của bạn" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                // Populate personal timetable
+                DateTime startDate = term.start_date;
+                DateTime endDate = new DateTime();
+                int startWeek = term.start_week;
+                int endWeek = query_classes.Max(c => c.EndWeek);
+                int currentWeek = 0;
+                string weekLabel = string.Empty;
+
+                if (week > 0)
+                {
+                    // Set week based on user's selection
+                    startDate = startDate.AddDays((week - startWeek) * 7);
+                    endDate = startDate.AddDays(6);
+                    currentWeek = week;
+                }
+                else
+                {
+                    // Get current week
+                    for (int i = startWeek; i <= endWeek; i++)
+                    {
+                        endDate = startDate.AddDays(6);
+                        for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+                        {
+                            if (date == DateTime.Today)
+                            {
+                                currentWeek = i;
+                                break;
+                            }
+                        }
+                        if (currentWeek == 0)
+                        {
+                            startDate = endDate.AddDays(1);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    if (currentWeek == 0)
+                    {
+                        if (term.start_date < DateTime.Today)
+                        {
+                            // Set current week in case start date is in the past
+                            startDate = startDate.AddDays(-7);
+                            currentWeek = endWeek;
+                        }
+                        else
+                        {
+                            // Set current week in case start date is in the future
+                            startDate = term.start_date;
+                            endDate = startDate.AddDays(6);
+                            currentWeek = startWeek;
+                        }
+                    }
+                }
+                // Get current user language date format
+                string[] userLang = Request.UserLanguages;
+                string language = userLang[0];
+                string formatInfo = new CultureInfo(language).DateTimeFormat.ShortDatePattern;
+                weekLabel = "Tuần " + currentWeek + ": Từ ngày " + startDate.ToString(formatInfo) + " đến ngày " + endDate.ToString(formatInfo);
+
+
+                ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
             return View();
         }
 

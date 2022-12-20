@@ -1,4 +1,6 @@
-﻿<div class="d-flex justify-content-between align-items-center row">
+﻿<input type="hidden" id="data-loader" data-type="@ViewData["type"]" data-major="@ViewData["major"]" data-majorabb="@ViewData["majorAbb"]" data-lecturertype="@ViewData["lecturerType"]" value="@ViewData["value"]" />
+
+<div class="d-flex justify-content-between align-items-center row">
     <div class="col-sm-12 col-lg-6 d-flex justify-content-center justify-content-lg-start flex-lg-nowrap flex-wrap">
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
@@ -46,7 +48,5 @@
         </div>
     </div>
 </div>
-
-<input type="hidden" id="data-loader" data-type="@ViewData["type"]" data-major="@ViewData["major"]" data-majorabb="@ViewData["majorAbb"]" data-lecturertype="@ViewData["lecturerType"]" value="@ViewData["value"]" />
 
 <script src="~/assets/js/statistics/statistics.min.js"></script>
