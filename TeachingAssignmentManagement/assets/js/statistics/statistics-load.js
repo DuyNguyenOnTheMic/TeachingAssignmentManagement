@@ -17,6 +17,9 @@ $(function () {
     termSelect.val(latestTermId);
     majorSelect.val(latestMajorId);
 
+    // Append option to select all major
+    $("#major option:first").after('<option value="-1">Tất cả</option>');
+
     // Populate select2
     formSelect.each(function () {
         var $this = $(this);
