@@ -56,7 +56,7 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = "BCN khoa, Bộ môn")]
-        public ActionResult GetTermCurriculums(int termId, string lecturerId)
+        public ActionResult GetTermCurriculums(int termId, string majorId, string lecturerId)
         {
             return Json(unitOfWork.CurriculumClassRepository.GetTermCurriculums(termId, lecturerId), JsonRequestBehavior.AllowGet);
         }
@@ -73,7 +73,7 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = "BCN khoa, Bộ môn")]
-        public ActionResult GetYearCurriculums(int startYear, int endYear, string lecturerId)
+        public ActionResult GetYearCurriculums(int startYear, int endYear, string majorId, string lecturerId)
         {
             return Json(unitOfWork.CurriculumClassRepository.GetYearCurriculums(startYear, endYear, lecturerId), JsonRequestBehavior.AllowGet);
         }

@@ -334,10 +334,10 @@ function populateDatatable(data) {
                     startYear = yearSplit[0],
                     endYear = yearSplit[1];
                 curriculumUrl += 'GetYearCurriculums';
-                curriculumData = { startYear, endYear, lecturerId };
+                curriculumData = { startYear, endYear, majorId, lecturerId };
             } else {
                 curriculumUrl += 'GetTermCurriculums';
-                curriculumData = { 'termId': value, lecturerId };
+                curriculumData = { 'termId': value, majorId, lecturerId };
             }
 
             // Send request to fetch curriculums
