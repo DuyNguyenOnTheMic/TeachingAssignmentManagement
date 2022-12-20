@@ -83,6 +83,7 @@ namespace TeachingAssignmentManagement.DAL
                 Type = c.type,
                 Day2 = c.day_2,
                 StartLesson2 = c.start_lesson_2,
+                StartWeek = c.start_week,
                 EndWeek = c.end_week,
                 LecturerId = c.lecturer_id,
                 LecturerName = c.lecturer.full_name,
