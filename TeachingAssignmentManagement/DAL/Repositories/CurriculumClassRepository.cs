@@ -79,7 +79,6 @@ namespace TeachingAssignmentManagement.DAL
         {
             return context.curriculum_class.Where(c => c.term_id == termId).Select(c => new CurriculumClassDTO
             {
-                Id = c.id,
                 CurriculumClassId = c.curriculum_class_id,
                 Type = c.type,
                 Day2 = c.day_2,
