@@ -111,6 +111,73 @@ lecturerFilter.on('select2:select', function (e) {
     filterCount(lecturerFilter);
 });
 
+$(function () {
+    'use strict';
+
+    var startBtn = $('#tour');
+    function setupTour(tour) {
+        var backBtnClass = 'btn btn-sm btn-outline-primary',
+            nextBtnClass = 'btn btn-sm btn-primary btn-next';
+        tour.addStep({
+            title: 'Chọn tuần',
+            text: 'Bạn có thể chọn tuần để xem thời khoá biểu ờ đây. Mặc định hệ thống sẽ chọn tuần hiện tại.',
+            attachTo: { element: '#week + .select2-container', on: 'bottom' },
+            buttons: [
+                {
+                    action: tour.cancel,
+                    classes: backBtnClass,
+                    text: 'Bỏ qua'
+                },
+                {
+                    text: 'Tiếp',
+                    classes: nextBtnClass,
+                    action: tour.next
+                }
+            ]
+        });
+        tour.addStep({
+            title: 'Lọc giảng viên',
+            text: 'Chọn giảng viên bạn muốn xem ở đây.',
+            attachTo: { element: '#lecturerFilter + .select2-container', on: 'bottom' },
+            buttons: [
+                {
+                    text: 'Bỏ qua',
+                    classes: backBtnClass,
+                    action: tour.cancel
+                },
+                {
+                    text: 'Quay lại',
+                    classes: backBtnClass,
+                    action: tour.back
+                },
+                {
+                    text: 'OK',
+                    classes: nextBtnClass,
+                    action: tour.cancel
+                }
+            ]
+        });
+        return tour;
+    }
+
+    if (startBtn.length) {
+        startBtn.on('click', function () {
+            var tourVar = new Shepherd.Tour({
+                defaultStepOptions: {
+                    classes: 'shadow-md bg-purple-dark',
+                    scrollTo: false,
+                    cancelIcon: {
+                        enabled: true
+                    }
+                },
+                useModalOverlay: true
+            });
+
+            setupTour(tourVar).start();
+        });
+    }
+});
+
 function filterCount(element) {
     element.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + element.val().length + ' GV');
 }
