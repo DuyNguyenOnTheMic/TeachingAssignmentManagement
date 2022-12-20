@@ -165,9 +165,9 @@ namespace TeachingAssignmentManagement.DAL
             }).ToList();
         }
 
-        public IEnumerable GetYearStatistics(int startYear, int endYear, string lecturerType)
+        public IEnumerable GetYearStatistics(int startYear, int endYear, string majorId, string lecturerType)
         {
-            return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type == lecturerType).GroupBy(c => c.lecturer_id).Select(c => new
+            return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer.type == lecturerType).GroupBy(c => c.lecturer_id).Select(c => new
             {
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,

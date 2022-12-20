@@ -62,10 +62,10 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = "BCN khoa, Bộ môn")]
-        public JsonResult GetYearData(int startYear, int endYear, string lecturerType)
+        public JsonResult GetYearData(int startYear, int endYear, string majorId, string lecturerType)
         {
             IEnumerable query_classes = lecturerType != "-1"
-                ? unitOfWork.CurriculumClassRepository.GetYearStatistics(startYear, endYear, lecturerType)
+                ? unitOfWork.CurriculumClassRepository.GetYearStatistics(startYear, endYear, majorId, lecturerType)
                 : unitOfWork.CurriculumClassRepository.GetYearStatisticsAll(startYear, endYear);
             return Json(query_classes, JsonRequestBehavior.AllowGet);
         }

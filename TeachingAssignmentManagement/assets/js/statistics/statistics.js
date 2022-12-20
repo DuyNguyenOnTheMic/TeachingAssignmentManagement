@@ -22,7 +22,7 @@ if (type == yearSelect.attr('id')) {
     var yearSplit = value.split(" - "),
         startYear = yearSplit[0],
         endYear = yearSplit[1];
-    data = { startYear, endYear, lecturerType };
+    data = { startYear, endYear, majorId, lecturerType };
     titleText = 'Thống kê số giờ năm học ' + value;
     fileName = 'ThongKeSoGio_NamHoc_' + startYear + '-' + endYear;
     url += 'GetYearData';
