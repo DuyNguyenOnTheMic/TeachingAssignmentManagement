@@ -125,7 +125,10 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable GetTermStatistics(int termId, string majorId, string lecturerType)
         {
-            return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == lecturerType).GroupBy(c => c.lecturer_id).Select(c => new
+            IQueryable<curriculum_class> query_classes = majorId != "-1"
+                ? context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == lecturerType)
+                : context.curriculum_class.Where(c => c.term_id == termId && c.lecturer.type == lecturerType);
+            return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
             {
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
@@ -139,7 +142,10 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable GetTermStatisticsAll(int termId, string majorId)
         {
-            return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type != null).GroupBy(c => c.lecturer_id).Select(c => new
+            IQueryable<curriculum_class> query_classes = majorId != "-1"
+                ? context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type != null)
+                : context.curriculum_class.Where(c => c.term_id == termId && c.lecturer.type != null);
+            return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
             {
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
