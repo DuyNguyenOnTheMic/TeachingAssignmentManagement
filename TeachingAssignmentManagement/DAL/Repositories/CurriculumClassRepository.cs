@@ -65,6 +65,7 @@ namespace TeachingAssignmentManagement.DAL
                 Day2 = c.day_2,
                 StartLesson2 = c.start_lesson_2,
                 StudentRegisteredNumber = c.student_registered_number,
+                LastAssigned = c.lecturer1.full_name,
                 LecturerId = c.lecturer_id,
                 LecturerName = c.lecturer.full_name,
                 CurriculumId = c.curriculum_id,
