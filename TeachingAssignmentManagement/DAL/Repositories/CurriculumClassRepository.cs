@@ -173,7 +173,10 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable GetYearStatistics(int startYear, int endYear, string majorId, string lecturerType)
         {
-            return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer.type == lecturerType).GroupBy(c => c.lecturer_id).Select(c => new
+            IQueryable<curriculum_class> query_classes = majorId != "-1"
+                ? context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer.type == lecturerType)
+                : context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type == lecturerType);
+            return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
             {
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
@@ -187,7 +190,10 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable GetYearStatisticsAll(int startYear, int endYear, string majorId)
         {
-            return context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer.type != null).GroupBy(c => c.lecturer_id).Select(c => new
+            IQueryable<curriculum_class> query_classes = majorId != "-1"
+                ? context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer.type != null)
+                : context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type != null);
+            return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
             {
                 c.Key,
                 c.FirstOrDefault().lecturer.staff_id,
