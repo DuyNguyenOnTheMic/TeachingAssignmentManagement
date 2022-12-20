@@ -111,6 +111,8 @@ lecturerFilter.on('select2:select', function (e) {
     filterCount(lecturerFilter);
 });
 
+
+// User guide for timetable statistics
 $(function () {
     'use strict';
 
@@ -140,11 +142,6 @@ $(function () {
             text: 'Chọn giảng viên bạn muốn xem TKB ở đây.',
             attachTo: { element: '#lecturerFilter + .select2-container', on: 'bottom' },
             buttons: [
-                {
-                    text: 'Bỏ qua',
-                    classes: backBtnClass,
-                    action: tour.cancel
-                },
                 {
                     text: 'Quay lại',
                     classes: backBtnClass,
