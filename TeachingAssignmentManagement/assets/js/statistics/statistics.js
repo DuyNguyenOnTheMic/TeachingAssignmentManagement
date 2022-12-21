@@ -139,7 +139,7 @@ $.ajax({
                         backgroundColor: 'rgba(115, 103, 240, 0.8)',
                         borderColor: 'transparent',
                         borderWidth: 1,
-                        borderRadius: 4,
+                        borderRadius: 3,
                         datalabels: {
                             anchor: 'end',
                             align: 'start',
