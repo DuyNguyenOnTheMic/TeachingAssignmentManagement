@@ -3,9 +3,15 @@
 <div class="d-flex justify-content-between align-items-center row">
     <div class="col-sm-12 col-lg-8 d-flex justify-content-center justify-content-lg-start flex-lg-nowrap flex-wrap">
         <p class="me-1 my-auto text-nowrap"><i>Chú thích: </i></p>
-        <button class="btn btn-success me-50 my-auto p-25 text-nowrap" type="button">Lý thuyết</button>
-        <button class="btn btn-warning me-50 my-auto p-25 text-nowrap" type="button">Thực hành</button>
-        <button class="btn btn-secondary me-1 my-auto p-25 text-nowrap" type="button">Chưa phân</button>
+        <div class="my-auto">
+            <button class="btn btn-success me-50 my-25 p-25 text-nowrap" type="button">Lý thuyết</button>
+        </div>
+        <div class="my-auto">
+            <button class="btn btn-warning me-50 my-25 p-25 text-nowrap" type="button">Thực hành</button>
+        </div>
+        <div class="my-auto">
+            <button class="btn btn-secondary me-1 my-25 p-25 text-nowrap" type="button">Chưa phân</button>
+        </div>
         <select class="form-select" id="curriculumFilter" name="curriculumFilter" multiple aria-label="Lọc môn học">
             @foreach (var option in ViewBag.curriculums)
             {
