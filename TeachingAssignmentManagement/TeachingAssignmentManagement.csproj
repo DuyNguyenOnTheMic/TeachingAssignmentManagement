@@ -1104,7 +1104,7 @@
     <Content Include="assets\images\img_no_data.svg" />
     <Content Include="assets\images\img_sidebar_background.jpg" />
     <Content Include="assets\images\img_sorry.svg" />
-    <Content Include="assets\images\img_user_avatar.jpg" />
+    <Content Include="assets\images\img_user_avatar.png" />
     <Content Include="assets\images\img_vlu_logo.png" />
     <Content Include="assets\images\img_vlu_name.png" />
     <Content Include="assets\images\img_welcome.svg" />
