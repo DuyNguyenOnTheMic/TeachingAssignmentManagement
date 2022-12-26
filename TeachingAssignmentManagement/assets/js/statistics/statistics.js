@@ -239,6 +239,14 @@ $.ajax({
             chart.options.plugins.legend.onClick = function (event, legendItem, legend) {
                 const index = legendItem.datasetIndex;
                 const ci = legend.chart;
+                if (ci.isDatasetVisible(index)) {
+                    ci.hide(index);
+                    legendItem.hidden = true;
+                } else {
+                    ci.show(index);
+                    legendItem.hidden = false;
+                }
+
                 var sum = 0;
                 // Loop through each legend item
                 for (var i = 0; i < 5; i++) {
@@ -250,15 +258,6 @@ $.ajax({
                 console.log(sum);
                 chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ: ' + sum;
                 chart.update();
-
-                // Show and hide chart legend
-                if (ci.isDatasetVisible(index)) {
-                    ci.hide(index);
-                    legendItem.hidden = true;
-                } else {
-                    ci.show(index);
-                    legendItem.hidden = false;
-                }
             }
 
             // Detect Dark Layout and change color
