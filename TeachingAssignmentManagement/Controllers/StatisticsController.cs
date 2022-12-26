@@ -48,10 +48,10 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = "BCN khoa, Bộ môn")]
-        public JsonResult GetTermData(int termId, string majorId, string lecturerType)
+        public JsonResult GetTermData(int termId, string majorId, string lecturerType, bool isLesson)
         {
             IEnumerable query_classes = lecturerType != "-1"
-                ? unitOfWork.CurriculumClassRepository.GetTermStatistics(termId, majorId, lecturerType)
+                ? unitOfWork.CurriculumClassRepository.GetTermStatistics(termId, majorId, lecturerType, isLesson)
                 : unitOfWork.CurriculumClassRepository.GetTermStatisticsAll(termId, majorId);
             return Json(query_classes, JsonRequestBehavior.AllowGet);
         }

@@ -142,21 +142,42 @@ namespace TeachingAssignmentManagement.DAL
             return context.curriculum_class.Find(id);
         }
 
-        public IEnumerable GetTermStatistics(int termId, string majorId, string lecturerType)
+        public IEnumerable GetTermStatistics(int termId, string majorId, string lecturerType, bool isLesson)
         {
             IQueryable<curriculum_class> query_classes = majorId != "-1"
                 ? context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == lecturerType)
                 : context.curriculum_class.Where(c => c.term_id == termId && c.lecturer.type == lecturerType);
-            return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
+            if (!isLesson)
             {
-                c.Key,
-                c.FirstOrDefault().lecturer.staff_id,
-                c.FirstOrDefault().lecturer.full_name,
-                curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
-                class_count = c.Count(),
-                sum = c.Sum(item => item.total_lesson),
-                lecturer_type = c.FirstOrDefault().lecturer.type
-            }).OrderByDescending(c => c.sum).ToList();
+                query_classes.GroupBy(c => c.lecturer_id).Select(c => new
+                {
+                    c.Key,
+                    c.FirstOrDefault().lecturer.staff_id,
+                    c.FirstOrDefault().lecturer.full_name,
+                    curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                    class_count = c.Count(),
+                    sum = c.Sum(item => item.total_lesson),
+                    lecturer_type = c.FirstOrDefault().lecturer.type
+                }).OrderByDescending(c => c.sum).ToList();
+            }
+            else
+            {
+                query_classes.GroupBy(c => c.lecturer_id).Select(c => new
+                {
+                    c.Key,
+                    c.FirstOrDefault().lecturer.staff_id,
+                    c.FirstOrDefault().lecturer.full_name,
+                    curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                    class_count = c.Count(),
+                    sum = c.GroupBy(item => item.start_lesson_2).Select(item => new
+                    {
+                        item.Key,
+                        sum_lesson = item.Sum(i => i.total_lesson)
+                    }),
+                    lecturer_type = c.FirstOrDefault().lecturer.type
+                }).ToList();
+            }
+            return query_classes;
         }
 
         public IEnumerable GetTermStatisticsAll(int termId, string majorId)
