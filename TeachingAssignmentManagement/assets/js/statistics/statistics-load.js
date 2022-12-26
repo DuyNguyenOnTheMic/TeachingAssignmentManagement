@@ -2,6 +2,7 @@
     termSelect = $('#term'),
     yearSelect = $('#year'),
     majorSelect = $('#major'),
+    isLessonCheck = $('#isLesson'),
     lecturerTypeSelect = $('#lecturerType'),
     formData = $('.form-data'),
     rootUrl = $('#loader').data('request-url'),
@@ -76,7 +77,7 @@ formData.change(function () {
         major,
         lecturerType;
     // Check if user select unit lesson
-    "lesson" == unitSelect.val() ? isLesson = !0 : isLesson = !1;
+    isLessonCheck.is(":checked") ? isLesson = true : isLesson = false;
     // Check if term or year select is hidden
     if (termSelect.is(':visible')) {
         type = termSelect.attr('id');
