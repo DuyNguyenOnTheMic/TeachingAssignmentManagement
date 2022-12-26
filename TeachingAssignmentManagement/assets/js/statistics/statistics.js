@@ -235,6 +235,29 @@ $.ajax({
                 plugins: [ChartDataLabels]
             });
 
+            // Get on legend click event
+            chart.options.plugins.legend.onClick = function (event, legendItem, legend) {
+                const index = legendItem.datasetIndex;
+                const ci = legend.chart;
+                if (ci.isDatasetVisible(index)) {
+                    ci.hide(index);
+                    legendItem.hidden = true;
+                } else {
+                    ci.show(index);
+                    legendItem.hidden = false;
+                }
+
+                var sum = 0;
+                // Loop through each legend item
+                for (var i = 0; i < 5; i++) {
+                    if (ci.isDatasetVisible(i)) {
+                        const dataSet = chart.data.datasets[i].data;
+                        sum += dataSet.reduce((a, b) => a + b, 0);
+                    }
+                }
+                console.log(sum);
+            }
+
             // Detect Dark Layout and change color
             $('.nav-link-style').on('click', function () {
                 var titleLight = '#d0d2d6',
