@@ -36,8 +36,9 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = "BCN khoa, Bộ môn")]
-        public ActionResult GetChart(string type, string value, string major, string lecturerType)
+        public ActionResult GetChart(bool isLesson, string type, string value, string major, string lecturerType)
         {
+            ViewData["isLesson"] = isLesson;
             ViewData["type"] = type;
             ViewData["value"] = value;
             ViewData["major"] = major;
@@ -48,10 +49,10 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = "BCN khoa, Bộ môn")]
-        public JsonResult GetTermData(int termId, string majorId, string lecturerType, bool isLesson)
+        public JsonResult GetTermData(bool isLesson, int termId, string majorId, string lecturerType)
         {
             IEnumerable query_classes = lecturerType != "-1"
-                ? unitOfWork.CurriculumClassRepository.GetTermStatistics(termId, majorId, lecturerType, isLesson)
+                ? unitOfWork.CurriculumClassRepository.GetTermStatistics(isLesson, termId, majorId, lecturerType)
                 : unitOfWork.CurriculumClassRepository.GetTermStatisticsAll(termId, majorId);
             return Json(query_classes, JsonRequestBehavior.AllowGet);
         }

@@ -142,7 +142,7 @@ namespace TeachingAssignmentManagement.DAL
             return context.curriculum_class.Find(id);
         }
 
-        public IEnumerable GetTermStatistics(int termId, string majorId, string lecturerType, bool isLesson)
+        public IEnumerable GetTermStatistics(bool isLesson, int termId, string majorId, string lecturerType)
         {
             IQueryable<curriculum_class> query_classes = majorId != "-1"
                 ? context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == lecturerType)

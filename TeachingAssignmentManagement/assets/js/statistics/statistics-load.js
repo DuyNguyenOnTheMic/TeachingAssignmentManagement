@@ -34,7 +34,7 @@ $(function () {
 
     if (latestTermId && latestMajorId) {
         // Get Partial View statistics data
-        fetchData(termSelect.attr('id'), latestTermId, latestMajorId, lecturerTypeSelect.val());
+        fetchData(false, termSelect.attr('id'), latestTermId, latestMajorId, lecturerTypeSelect.val());
     } else {
         statisticsDiv.html('<h4 class="text-center mt-2">Chưa có dữ liệu học kỳ</h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="No data" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
     }
@@ -70,10 +70,13 @@ unitSelect.change(function () {
 
 // Fetch data on form select change
 formData.change(function () {
-    var type,
+    var isLesson,
+        type,
         value,
         major,
         lecturerType;
+    // Check if user select unit lesson
+    "lesson" == unitSelect.attr("id") ? isLesson = !0 : isLesson = !1;
     // Check if term or year select is hidden
     if (termSelect.is(':visible')) {
         type = termSelect.attr('id');
@@ -86,16 +89,16 @@ formData.change(function () {
     lecturerType = lecturerTypeSelect.val();
     // Display loading message while fetching data
     loading();
-    fetchData(type, value, major, lecturerType);
+    fetchData(isLesson, type, value, major, lecturerType);
 });
 
 function loading() {
     statisticsDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
 }
 
-function fetchData(type, value, major, lecturerType) {
+function fetchData(isLesson, type, value, major, lecturerType) {
     var url = rootUrl + 'Statistics/GetChart';
-    $.get(url, { type, value, major, lecturerType }, function (data) {
+    $.get(url, { isLesson, type, value, major, lecturerType }, function (data) {
         // Populate statistics data
         statisticsDiv.html(data);
     });
