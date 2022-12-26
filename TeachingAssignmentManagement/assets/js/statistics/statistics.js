@@ -256,6 +256,8 @@ $.ajax({
                     }
                 }
                 console.log(sum);
+                chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ: ' + sum;
+                chart.update();
             }
 
             // Detect Dark Layout and change color
