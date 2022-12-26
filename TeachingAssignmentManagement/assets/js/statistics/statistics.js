@@ -128,12 +128,12 @@ $.ajax({
             });
 
             var chartData;
+            var totalLessons = response.map(function (e) {
+                return e.sum;
+            });
 
             if (isLesson == 'False') {
                 // Fetch chart data
-                var totalLessons = response.map(function (e) {
-                    return e.sum;
-                });
                 chartData = {
                     labels: labels,
                     datasets: [
@@ -213,6 +213,13 @@ $.ajax({
                             borderRadius: 3
                         }
                     ]
+                };
+
+                chartOptions.plugins.datalabels = {
+                    color: 'white',
+                    font: {
+                        size: '10'
+                    }
                 };
             }
 
