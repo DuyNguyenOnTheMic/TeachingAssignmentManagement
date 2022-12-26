@@ -126,29 +126,58 @@ $.ajax({
                     return e.full_name;
                 }
             });
-            var totalLessons = response.map(function (e) {
-                return e.sum;
-            });
 
-            // Chart Data
-            var chartData = {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Số giờ giảng',
-                        data: totalLessons,
-                        backgroundColor: 'rgba(115, 103, 240, 0.8)',
-                        borderColor: 'transparent',
-                        borderWidth: 1,
-                        borderRadius: 3,
-                        datalabels: {
-                            anchor: 'end',
-                            align: 'start',
-                            offset: -30
+            var chartData;
+
+            if (isLesson == 'False') {
+                // Fetch chart data
+                var totalLessons = response.map(function (e) {
+                    return e.sum;
+                });
+                chartData = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Số giờ giảng',
+                            data: totalLessons,
+                            backgroundColor: 'rgba(115, 103, 240, 0.8)',
+                            borderColor: 'transparent',
+                            borderWidth: 1,
+                            borderRadius: 3,
+                            datalabels: {
+                                anchor: 'end',
+                                align: 'start',
+                                offset: -30
+                            }
                         }
-                    }
-                ]
-            };
+                    ]
+                };
+            } else {
+                var sumLessons1 = response.map(function (e) {
+                    return e.sum.Key == 1;
+                });
+                console.log(sumLessons1);
+                // Fetch lessons chart data
+                chartData = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Tiết 1',
+                            data: totalLessons,
+                            backgroundColor: 'rgba(115, 103, 240, 0.8)',
+                            borderColor: 'transparent',
+                            borderWidth: 1,
+                            borderRadius: 3,
+                            datalabels: {
+                                anchor: 'end',
+                                align: 'start',
+                                offset: -30
+                            }
+                        }
+                    ]
+                };
+            }
+
 
             chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ: ' + hoursSum(response, 'sum');
 
