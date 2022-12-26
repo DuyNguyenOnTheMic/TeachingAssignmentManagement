@@ -218,7 +218,7 @@ $.ajax({
                 };
 
                 chartOptions.plugins.datalabels = {
-                    color: 'white',
+                    color: '#fff',
                     font: {
                         size: '9'
                     }
@@ -252,7 +252,7 @@ $.ajax({
                 }        
                 chart.options.plugins.subtitle.color = titleColor;
                 chart.options.plugins.title.color = titleColor;
-                chart.options.plugins.datalabels.color = isLessonCheck.is(":checked") ? 'white' : textColor;
+                chart.options.plugins.datalabels.color = isLessonCheck.is(":checked") ? '#fff' : textColor;
                 chart.options.plugins.legend.labels.color = textColor;
                 chart.options.scales.xAxis.ticks.color = textColor;
                 chart.options.scales.yAxis.ticks.color = textColor;
