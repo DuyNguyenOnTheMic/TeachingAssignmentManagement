@@ -187,7 +187,6 @@ $.ajax({
                 };
             }
 
-
             chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ: ' + hoursSum(response, 'sum');
 
             // Create the chart
