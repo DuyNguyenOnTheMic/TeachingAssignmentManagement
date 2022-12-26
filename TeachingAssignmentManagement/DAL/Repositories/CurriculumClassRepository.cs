@@ -149,7 +149,7 @@ namespace TeachingAssignmentManagement.DAL
                 : context.curriculum_class.Where(c => c.term_id == termId && c.lecturer.type == lecturerType);
             if (!isLesson)
             {
-                query_classes.GroupBy(c => c.lecturer_id).Select(c => new
+                return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
                 {
                     c.Key,
                     c.FirstOrDefault().lecturer.staff_id,
@@ -162,7 +162,7 @@ namespace TeachingAssignmentManagement.DAL
             }
             else
             {
-                query_classes.GroupBy(c => c.lecturer_id).Select(c => new
+                return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
                 {
                     c.Key,
                     c.FirstOrDefault().lecturer.staff_id,
@@ -177,7 +177,6 @@ namespace TeachingAssignmentManagement.DAL
                     lecturer_type = c.FirstOrDefault().lecturer.type
                 }).ToList();
             }
-            return query_classes;
         }
 
         public IEnumerable GetTermStatisticsAll(int termId, string majorId)

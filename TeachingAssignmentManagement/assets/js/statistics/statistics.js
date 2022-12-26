@@ -8,6 +8,7 @@ var labelColor = '#6e6b7b',
 
 // Setup data
 var dataLoader = $('#data-loader'),
+    isLesson = dataLoader.data('islesson'),
     type = dataLoader.data('type'),
     majorId = dataLoader.data('major'),
     majorAbb = dataLoader.data('majorabb'),
@@ -23,12 +24,12 @@ if (type == yearSelect.attr('id')) {
     var yearSplit = value.split(" - "),
         startYear = yearSplit[0],
         endYear = yearSplit[1];
-    data = { startYear, endYear, majorId, lecturerType };
+    data = { isLesson, startYear, endYear, majorId, lecturerType };
     titleText = 'Thống kê số giờ năm học ' + value + ' ngành ' + majorAbb;
     fileName = 'ThongKeSoGio_NamHoc_' + startYear + '-' + endYear + '_Nganh_' + majorAbb;
     url += 'GetYearData';
 } else {
-    data = { 'termId': value, majorId, lecturerType };
+    data = { isLesson, 'termId': value, majorId, lecturerType };
     titleText = 'Thống kê số giờ học kỳ ' + value + ' ngành ' + majorAbb;
     fileName = 'ThongKeSoGio_HK' + value + '_Nganh_' + majorAbb;
     url += 'GetTermData';
