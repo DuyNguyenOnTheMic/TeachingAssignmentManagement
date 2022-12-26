@@ -170,6 +170,10 @@ namespace TeachingAssignmentManagement.DAL
                     curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
                     class_count = c.Count(),
                     sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
+                    sumLesson4 = c.Where(item => item.start_lesson_2 == 4).Sum(item => item.total_lesson),
+                    sumLesson7 = c.Where(item => item.start_lesson_2 == 7).Sum(item => item.total_lesson),
+                    sumLesson10 = c.Where(item => item.start_lesson_2 == 10).Sum(item => item.total_lesson),
+                    sumLesson13 = c.Where(item => item.start_lesson_2 == 13).Sum(item => item.total_lesson),
                     lecturer_type = c.FirstOrDefault().lecturer.type
                 }).ToList();
             }

@@ -156,6 +156,18 @@ $.ajax({
                 var sumLessons1 = response.map(function (e) {
                     return e.sumLesson1;
                 });
+                var sumLessons4 = response.map(function (e) {
+                    return e.sumLesson4;
+                });
+                var sumLessons7 = response.map(function (e) {
+                    return e.sumLesson7;
+                });
+                var sumLessons10 = response.map(function (e) {
+                    return e.sumLesson10;
+                });
+                var sumLessons13 = response.map(function (e) {
+                    return e.sumLesson13;
+                });
                 // Fetch lessons chart data
                 chartData = {
                     labels: labels,
@@ -166,12 +178,39 @@ $.ajax({
                             backgroundColor: 'rgba(115, 103, 240, 0.8)',
                             borderColor: 'transparent',
                             borderWidth: 1,
-                            borderRadius: 3,
-                            datalabels: {
-                                anchor: 'end',
-                                align: 'start',
-                                offset: -30
-                            }
+                            borderRadius: 3
+                        },
+                        {
+                            label: 'Tiết 4',
+                            data: sumLessons4,
+                            backgroundColor: 'red',
+                            borderColor: 'transparent',
+                            borderWidth: 1,
+                            borderRadius: 3
+                        },
+                        {
+                            label: 'Tiết 7',
+                            data: sumLessons7,
+                            backgroundColor: 'blue',
+                            borderColor: 'transparent',
+                            borderWidth: 1,
+                            borderRadius: 3
+                        },
+                        {
+                            label: 'Tiết 10',
+                            data: sumLessons10,
+                            backgroundColor: 'violet',
+                            borderColor: 'transparent',
+                            borderWidth: 1,
+                            borderRadius: 3
+                        },
+                        {
+                            label: 'Tiết 13',
+                            data: sumLessons13,
+                            backgroundColor: 'black',
+                            borderColor: 'transparent',
+                            borderWidth: 1,
+                            borderRadius: 3
                         }
                     ]
                 };
