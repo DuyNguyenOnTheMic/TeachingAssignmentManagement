@@ -263,6 +263,7 @@ $.ajax({
                     lecturerCount = array.reduce((r, a) => r.map((b, i) => a[i] + b)).filter(x => x > 0).length;
                 }
 
+                // Update chart title
                 chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + lecturerCount + ' / Tổng số giờ: ' + sum;
                 chart.update();
             }
