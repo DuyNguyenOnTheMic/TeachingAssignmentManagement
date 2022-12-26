@@ -248,15 +248,22 @@ $.ajax({
                 }
 
                 var sum = 0;
-                // Loop through each legend item
+                var array = [];
+                // Loop through each legend item to sum total hours
                 for (var i = 0; i < 5; i++) {
                     if (ci.isDatasetVisible(i)) {
                         const dataSet = chart.data.datasets[i].data;
                         sum += dataSet.reduce((a, b) => a + b, 0);
+                        array.push(dataSet);
                     }
                 }
-                console.log(sum);
-                chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ: ' + sum;
+                // Update lecturer count
+                var lecturerCount = 0;
+                if (array.length) {
+                    lecturerCount = array.reduce((r, a) => r.map((b, i) => a[i] + b)).filter(x => x > 0).length;
+                }
+
+                chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + lecturerCount + ' / Tổng số giờ: ' + sum;
                 chart.update();
             }
 
