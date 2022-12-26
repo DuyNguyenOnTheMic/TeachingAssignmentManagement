@@ -153,6 +153,7 @@ $.ajax({
                     ]
                 };
             } else {
+                // Get lesson data mapping
                 var sumLessons1 = response.map(function (e) {
                     return e.sumLesson1;
                 });
@@ -168,6 +169,7 @@ $.ajax({
                 var sumLessons13 = response.map(function (e) {
                     return e.sumLesson13;
                 });
+
                 // Fetch lessons chart data
                 chartData = {
                     labels: labels,
