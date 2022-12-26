@@ -154,7 +154,16 @@ $.ajax({
                 };
             } else {
                 var sumLessons1 = response.map(function (e) {
-                    return e.sum.Key == 1;
+                    var sumArray = e.sum;
+                    var sumLength = sumArray.length;
+                    for (var i = 0; i < sumLength; i++) {
+                        if (sumArray[i].Key == 1) {
+                            return sumArray[i].sum_lesson;
+                        } else {
+                            return null;
+                        }
+                    }
+                    console.log(sumArray);
                 });
                 console.log(sumLessons1);
                 // Fetch lessons chart data
@@ -163,7 +172,7 @@ $.ajax({
                     datasets: [
                         {
                             label: 'Tiết 1',
-                            data: totalLessons,
+                            data: sumLessons1,
                             backgroundColor: 'rgba(115, 103, 240, 0.8)',
                             borderColor: 'transparent',
                             borderWidth: 1,
