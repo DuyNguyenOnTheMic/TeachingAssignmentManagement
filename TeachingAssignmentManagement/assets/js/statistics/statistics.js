@@ -177,7 +177,7 @@ $.ajax({
                         {
                             label: 'Tiết 1',
                             data: sumLessons1,
-                            backgroundColor: 'rgba(115, 103, 240, 0.8)',
+                            backgroundColor: 'rgba(115, 103, 240, 1)',
                             borderColor: 'transparent',
                             borderWidth: 1,
                             borderRadius: 3
@@ -185,7 +185,7 @@ $.ajax({
                         {
                             label: 'Tiết 4',
                             data: sumLessons4,
-                            backgroundColor: 'rgba(40, 199, 111, 0.8)',
+                            backgroundColor: 'rgba(40, 199, 111, 1)',
                             borderColor: 'transparent',
                             borderWidth: 1,
                             borderRadius: 3
@@ -193,7 +193,7 @@ $.ajax({
                         {
                             label: 'Tiết 7',
                             data: sumLessons7,
-                            backgroundColor: 'rgba(0, 207, 232, 0.8)',
+                            backgroundColor: 'rgba(0, 207, 232, 1)',
                             borderColor: 'transparent',
                             borderWidth: 1,
                             borderRadius: 3
@@ -201,7 +201,7 @@ $.ajax({
                         {
                             label: 'Tiết 10',
                             data: sumLessons10,
-                            backgroundColor: 'rgba(255, 159, 67, 0.8)',
+                            backgroundColor: 'rgba(255, 159, 67, 1)',
                             borderColor: 'transparent',
                             borderWidth: 1,
                             borderRadius: 3
@@ -209,7 +209,7 @@ $.ajax({
                         {
                             label: 'Tiết 13',
                             data: sumLessons13,
-                            backgroundColor: 'rgba(234, 84, 85, 0.8)',
+                            backgroundColor: 'rgba(234, 84, 85, 1)',
                             borderColor: 'transparent',
                             borderWidth: 1,
                             borderRadius: 3
