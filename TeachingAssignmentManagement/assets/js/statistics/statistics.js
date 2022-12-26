@@ -58,7 +58,7 @@ var chartOptions = {
     scaleShowVerticalLines: false,
     responsiveAnimationDuration: 500,
     scales: {
-        xAxis: {
+        x: {
             stacked: true,
             grid: {
                 color: gridLineColor,
@@ -68,7 +68,7 @@ var chartOptions = {
                 color: labelColor
             }
         },
-        yAxis: {
+        y: {
             stacked: true,
             grid: {
                 color: gridLineColor
@@ -254,8 +254,8 @@ $.ajax({
                 chart.options.plugins.title.color = titleColor;
                 chart.options.plugins.datalabels.color = isLessonCheck.is(":checked") ? '#fff' : textColor;
                 chart.options.plugins.legend.labels.color = textColor;
-                chart.options.scales.xAxis.ticks.color = textColor;
-                chart.options.scales.yAxis.ticks.color = textColor;
+                chart.options.scales.x.ticks.color = textColor;
+                chart.options.scales.y.ticks.color = textColor;
                 chart.update();
             });
 
