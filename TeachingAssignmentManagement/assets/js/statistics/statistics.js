@@ -249,7 +249,7 @@ $.ajax({
                 } else {
                     titleColor = titleDark;
                     textColor = TextDark;
-                }        
+                }
                 chart.options.plugins.subtitle.color = titleColor;
                 chart.options.plugins.title.color = titleColor;
                 chart.options.plugins.datalabels.color = isLessonCheck.is(":checked") ? '#fff' : textColor;
@@ -273,6 +273,7 @@ function hoursSum(items, prop) {
 
 function populateDatatable(data) {
     var dataTable;
+    var exportColumns = isLessonCheck.is(":checked") ? [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] : [0, 2, 3, 4, 5, 6, 7];
 
     // Populate statistics table
     dataTable = $('#tblStatistics').DataTable(
@@ -290,7 +291,12 @@ function populateDatatable(data) {
                 { 'data': 'lecturer_type' },
                 { 'data': 'curriculum_count' },
                 { 'data': 'class_count' },
-                { 'data': 'sum' }
+                { 'data': 'sum' },
+                { 'data': 'sumLesson1', defaultContent: '' },
+                { 'data': 'sumLesson4', defaultContent: '' },
+                { 'data': 'sumLesson7', defaultContent: '' },
+                { 'data': 'sumLesson10', defaultContent: '' },
+                { 'data': 'sumLesson13', defaultContent: '' }
             ],
             data: data,
             columnDefs: [
@@ -316,6 +322,11 @@ function populateDatatable(data) {
                         }
                     }
                 },
+                {
+                    visible: false,
+                    searchable: false,
+                    target: [8, 9, 10, 11, 12]
+                },
                 { className: 'text-center', target: [0, 1, 4, 5, 6, 7] }
             ],
             order: [[7, 'desc']],
@@ -333,7 +344,7 @@ function populateDatatable(data) {
                             className: 'dropdown-item',
                             title: fileName,
                             exportOptions: {
-                                columns: [0, 2, 3, 4, 5, 6, 7]
+                                columns: exportColumns
                             }
                         },
                         {
@@ -341,7 +352,7 @@ function populateDatatable(data) {
                             className: 'dropdown-item',
                             title: fileName,
                             exportOptions: {
-                                columns: [0, 2, 3, 4, 5, 6, 7]
+                                columns: exportColumns
                             }
                         },
                         {
@@ -349,7 +360,7 @@ function populateDatatable(data) {
                             className: 'dropdown-item',
                             title: fileName,
                             exportOptions: {
-                                columns: [0, 2, 3, 4, 5, 6, 7]
+                                columns: exportColumns
                             }
                         },
                         {
@@ -357,7 +368,7 @@ function populateDatatable(data) {
                             className: 'dropdown-item',
                             title: fileName,
                             exportOptions: {
-                                columns: [0, 2, 3, 4, 5, 6, 7]
+                                columns: exportColumns
                             }
                         }
                     ],
