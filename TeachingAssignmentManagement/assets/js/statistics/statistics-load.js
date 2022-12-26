@@ -76,7 +76,7 @@ formData.change(function () {
         major,
         lecturerType;
     // Check if user select unit lesson
-    "lesson" == unitSelect.attr("id") ? isLesson = !0 : isLesson = !1;
+    "lesson" == unitSelect.val() ? isLesson = !0 : isLesson = !1;
     // Check if term or year select is hidden
     if (termSelect.is(':visible')) {
         type = termSelect.attr('id');
