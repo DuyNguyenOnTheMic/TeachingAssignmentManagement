@@ -163,9 +163,7 @@ $.ajax({
                             return null;
                         }
                     }
-                    console.log(sumArray);
                 });
-                console.log(sumLessons1);
                 // Fetch lessons chart data
                 chartData = {
                     labels: labels,
