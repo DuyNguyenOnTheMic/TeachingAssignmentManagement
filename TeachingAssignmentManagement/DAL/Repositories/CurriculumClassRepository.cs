@@ -244,6 +244,27 @@ namespace TeachingAssignmentManagement.DAL
             }).ToList();
         }
 
+        public IEnumerable GetLessonStatistics(int termId, string majorId, string lecturerType)
+        {
+            IQueryable<curriculum_class> query_classes = majorId != "-1"
+                ? context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == lecturerType)
+                : context.curriculum_class.Where(c => c.term_id == termId && c.lecturer.type == lecturerType);
+            return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
+            {
+                c.Key,
+                c.FirstOrDefault().lecturer.staff_id,
+                c.FirstOrDefault().lecturer.full_name,
+                curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                class_count = c.Count(),
+                sum = c.GroupBy(item => item.start_lesson_2).Select(item => new
+                {
+                    item.Key,
+                    sum_lesson = item.Sum(i => i.total_lesson)
+                }),
+                lecturer_type = c.FirstOrDefault().lecturer.type
+            }).ToList();
+        }
+
         public curriculum_class FindCurriculumClass(IEnumerable<curriculum_class> curriculumClass, string curriculumClassId, int day2, string roomId)
         {
             return curriculumClass.FirstOrDefault(c => c.curriculum_class_id == curriculumClassId && c.day_2 == day2 && c.room_id == roomId);
