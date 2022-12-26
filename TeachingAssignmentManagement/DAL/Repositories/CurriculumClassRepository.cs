@@ -169,11 +169,7 @@ namespace TeachingAssignmentManagement.DAL
                     c.FirstOrDefault().lecturer.full_name,
                     curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
                     class_count = c.Count(),
-                    sum = c.GroupBy(item => item.start_lesson_2).Select(item => new
-                    {
-                        item.Key,
-                        sum_lesson = item.Sum(i => i.total_lesson)
-                    }),
+                    sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
                     lecturer_type = c.FirstOrDefault().lecturer.type
                 }).ToList();
             }

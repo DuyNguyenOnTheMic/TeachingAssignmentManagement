@@ -154,15 +154,7 @@ $.ajax({
                 };
             } else {
                 var sumLessons1 = response.map(function (e) {
-                    var sumArray = e.sum;
-                    var sumLength = sumArray.length;
-                    for (var i = 0; i < sumLength; i++) {
-                        if (sumArray[i].Key == 1) {
-                            return sumArray[i].sum_lesson;
-                        } else {
-                            return null;
-                        }
-                    }
+                    return e.sumLesson1;
                 });
                 // Fetch lessons chart data
                 chartData = {
