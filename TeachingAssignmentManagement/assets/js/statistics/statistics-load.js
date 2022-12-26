@@ -50,13 +50,21 @@ unitSelect.change(function () {
 
         // Set latest term
         termSelect.val(latestTermId).trigger('change');
-    } else {
+    } else if ($this.val() == 'year') {
         // Show year select2 field
         $('#yearDiv').show();
         $('#termDiv').hide();
 
         // Set latest year
         yearSelect.val(latestYearId).trigger('change');
+    } else {
+        if (termSelect.is(':visible')) {
+            // Set latest term
+            termSelect.val(latestTermId).trigger('change');
+        } else {
+            // Set latest year
+            yearSelect.val(latestYearId).trigger('change');
+        }
     }
 });
 
