@@ -53,7 +53,7 @@ namespace TeachingAssignmentManagement.Controllers
         {
             IEnumerable query_classes = lecturerType != "-1"
                 ? unitOfWork.CurriculumClassRepository.GetTermStatistics(isLesson, termId, majorId, lecturerType)
-                : unitOfWork.CurriculumClassRepository.GetTermStatisticsAll(termId, majorId);
+                : unitOfWork.CurriculumClassRepository.GetTermStatisticsAll(isLesson, termId, majorId);
             return Json(query_classes, JsonRequestBehavior.AllowGet);
         }
 
@@ -79,16 +79,6 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult GetYearCurriculums(int startYear, int endYear, string majorId, string lecturerId)
         {
             return Json(unitOfWork.CurriculumClassRepository.GetYearCurriculums(startYear, endYear, majorId, lecturerId), JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        [Authorize(Roles = "BCN khoa, Bộ môn")]
-        public JsonResult GetLessonData(int termId, string majorId, string lecturerType)
-        {
-            IEnumerable query_classes = lecturerType != "-1"
-                ? unitOfWork.CurriculumClassRepository.GetLessonStatistics(termId, majorId, lecturerType)
-                : unitOfWork.CurriculumClassRepository.GetTermStatisticsAll(termId, majorId);
-            return Json(query_classes, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
