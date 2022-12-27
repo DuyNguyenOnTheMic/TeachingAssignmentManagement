@@ -330,7 +330,7 @@ function populateDatatable(data) {
                 {
                     searchable: false,
                     orderable: false,
-                    width: '5%',
+                    width: '1%',
                     targets: [0, 1]
                 },
                 {
@@ -349,7 +349,7 @@ function populateDatatable(data) {
                         }
                     }
                 },
-                { className: 'text-center', target: [0, 1, 4, 5, 6, 7] }
+                { className: 'text-center', target: [0, 1, 4, 5, 6, 7, 8, 9, 10, 11, 12] }
             ],
             order: [[7, 'desc']],
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
