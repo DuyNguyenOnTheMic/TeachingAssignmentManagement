@@ -80,6 +80,9 @@ var chartOptions = {
         }
     },
     plugins: {
+        colors: {
+            forceOverride: false
+        },
         title: {
             display: true,
             text: titleText,
@@ -177,46 +180,37 @@ $.ajax({
                         {
                             label: 'Tiết 1',
                             data: sumLessons1,
-                            backgroundColor: 'rgba(115, 103, 240, 0.8)',
-                            borderColor: 'transparent',
                             borderWidth: 1,
                             borderRadius: 3
                         },
                         {
                             label: 'Tiết 4',
                             data: sumLessons4,
-                            backgroundColor: 'rgba(40, 199, 111, 0.8)',
-                            borderColor: 'transparent',
                             borderWidth: 1,
                             borderRadius: 3
                         },
                         {
                             label: 'Tiết 7',
                             data: sumLessons7,
-                            backgroundColor: 'rgba(0, 207, 232, 0.8)',
-                            borderColor: 'transparent',
                             borderWidth: 1,
                             borderRadius: 3
                         },
                         {
                             label: 'Tiết 10',
                             data: sumLessons10,
-                            backgroundColor: 'rgba(255, 159, 67, 0.8)',
-                            borderColor: 'transparent',
                             borderWidth: 1,
                             borderRadius: 3
                         },
                         {
                             label: 'Tiết 13',
                             data: sumLessons13,
-                            backgroundColor: 'rgba(234, 84, 85, 0.8)',
-                            borderColor: 'transparent',
                             borderWidth: 1,
                             borderRadius: 3
                         }
                     ]
                 };
 
+                chartOptions.plugins.colors.forceOverride = true;
                 chartOptions.plugins.datalabels = {
                     color: labelColor,
                     font: {
