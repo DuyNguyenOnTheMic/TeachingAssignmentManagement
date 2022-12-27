@@ -364,7 +364,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Arrange
             MajorController controller = new MajorController();
             unitOfWork = new UnitOfWork(new CP25Team03Entities());
-            major major = new major() { id = "test", name = "Hệ thống thông tin" };
+            major major = new major() { id = "test", name = "Hệ thống thông tin", abbreviation = "HTTT" };
 
             // Act
             major majorEdited;

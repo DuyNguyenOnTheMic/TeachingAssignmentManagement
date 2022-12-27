@@ -85,7 +85,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Act
             JsonResult actionResult = controller.GetData();
             dynamic jsonCollection = actionResult.Data;
-            List<term> termList = listTerm.ToList();
+            List<term> termList = listTerm.OrderByDescending(t => t.id).ToList();
 
             // Assert
             Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
