@@ -293,7 +293,7 @@ namespace TeachingAssignmentManagement.Controllers
                     string note2 = row["Ghi chú 2"].ToString();
 
                     // Check if values is null
-                    string[] validRows = { originalId, curriculumId, curriculumClassid, name, credits, type, totalLesson, day, startLesson, lessonNumber, roomId, day2, startLesson2, startWeek, endWeek };
+                    string[] validRows = { originalId, curriculumId, curriculumClassid, name, credits, type, totalLesson, day, startLesson, lessonNumber, roomId, learnWeek, day2, startLesson2, startWeek, endWeek };
                     string checkNull = ValidateNotNull(validRows);
                     if (checkNull != null)
                     {
