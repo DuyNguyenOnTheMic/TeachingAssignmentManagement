@@ -190,6 +190,25 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
+        public void Get_Term_List_Should_Order_By_Latest_Terms_Test()
+        {
+            // Arrange
+            TermController controller = new TermController(unitOfWork);
+            List<term> termList = listTerm.ToList();
+
+            // Act
+            JsonResult actionResult = controller.GetData();
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            Assert.IsNotNull(jsonCollection);
+            Assert.AreEqual(jsonCollection[0].id, termList[1].id);
+            Assert.AreEqual(jsonCollection[0].start_year, termList[1].start_year);
+            Assert.AreEqual(jsonCollection[0].id, 124);
+            Assert.AreEqual(jsonCollection[0].start_year, 2022);
+        }
+
+        [TestMethod()]
         public void Create_View_Test()
         {
             // Arrange
