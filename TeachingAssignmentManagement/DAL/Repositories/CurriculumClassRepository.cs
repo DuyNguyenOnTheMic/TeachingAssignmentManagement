@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TeachingAssignmentManagement.Models;
@@ -23,6 +24,7 @@ namespace TeachingAssignmentManagement.DAL
                 LessonTime = c.lesson_time,
                 Day2 = c.day_2,
                 StartLesson2 = c.start_lesson_2,
+                LearnWeek = c.learn_week,
                 StartWeek = c.start_week,
                 EndWeek = c.end_week,
                 CurriculumId = c.curriculum_id,
@@ -33,7 +35,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable<CurriculumClassDTO> GetClassInWeek(IEnumerable<CurriculumClassDTO> query_classes, int week)
         {
-            return query_classes.Where(c => c.StartWeek <= week && c.EndWeek >= week);
+            return query_classes.Where(c => c.LearnWeek.Split(',').Contains(week.ToString()));
         }
 
         public IEnumerable<CurriculumClassDTO> GetAssignTimetable(int termId, string majorId)
@@ -83,6 +85,7 @@ namespace TeachingAssignmentManagement.DAL
                 Type = c.type,
                 Day2 = c.day_2,
                 StartLesson2 = c.start_lesson_2,
+                LearnWeek = c.learn_week,
                 StartWeek = c.start_week,
                 EndWeek = c.end_week,
                 LecturerId = c.lecturer_id,
