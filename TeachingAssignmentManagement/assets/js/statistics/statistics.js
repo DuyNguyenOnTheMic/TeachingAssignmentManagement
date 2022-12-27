@@ -37,8 +37,8 @@ if (type == yearSelect.attr('id')) {
 
 // Detect Dark Layout
 if ($('html').hasClass('dark-layout')) {
-    titleColor = '#d0d2d6',
-        labelColor = '#b4b7bd';
+    titleColor = '#d0d2d6';
+    labelColor = '#b4b7bd';
 }
 
 // Wrap charts with div of height according to their data-height
@@ -177,7 +177,7 @@ $.ajax({
                         {
                             label: 'Tiết 1',
                             data: sumLessons1,
-                            backgroundColor: 'rgba(115, 103, 240, 1)',
+                            backgroundColor: 'rgba(115, 103, 240, 0.8)',
                             borderColor: 'transparent',
                             borderWidth: 1,
                             borderRadius: 3
@@ -185,7 +185,7 @@ $.ajax({
                         {
                             label: 'Tiết 4',
                             data: sumLessons4,
-                            backgroundColor: 'rgba(40, 199, 111, 1)',
+                            backgroundColor: 'rgba(40, 199, 111, 0.8)',
                             borderColor: 'transparent',
                             borderWidth: 1,
                             borderRadius: 3
@@ -193,7 +193,7 @@ $.ajax({
                         {
                             label: 'Tiết 7',
                             data: sumLessons7,
-                            backgroundColor: 'rgba(0, 207, 232, 1)',
+                            backgroundColor: 'rgba(0, 207, 232, 0.8)',
                             borderColor: 'transparent',
                             borderWidth: 1,
                             borderRadius: 3
@@ -201,7 +201,7 @@ $.ajax({
                         {
                             label: 'Tiết 10',
                             data: sumLessons10,
-                            backgroundColor: 'rgba(255, 159, 67, 1)',
+                            backgroundColor: 'rgba(255, 159, 67, 0.8)',
                             borderColor: 'transparent',
                             borderWidth: 1,
                             borderRadius: 3
@@ -209,7 +209,7 @@ $.ajax({
                         {
                             label: 'Tiết 13',
                             data: sumLessons13,
-                            backgroundColor: 'rgba(234, 84, 85, 1)',
+                            backgroundColor: 'rgba(234, 84, 85, 0.8)',
                             borderColor: 'transparent',
                             borderWidth: 1,
                             borderRadius: 3
@@ -218,7 +218,7 @@ $.ajax({
                 };
 
                 chartOptions.plugins.datalabels = {
-                    color: '#fff',
+                    color: labelColor,
                     font: {
                         size: '9'
                     }
@@ -285,7 +285,7 @@ $.ajax({
                 }
                 chart.options.plugins.subtitle.color = titleColor;
                 chart.options.plugins.title.color = titleColor;
-                chart.options.plugins.datalabels.color = isLessonCheck.is(":checked") ? '#fff' : textColor;
+                chart.options.plugins.datalabels.color = titleColor;
                 chart.options.plugins.legend.labels.color = textColor;
                 chart.options.scales.x.ticks.color = textColor;
                 chart.options.scales.y.ticks.color = textColor;
