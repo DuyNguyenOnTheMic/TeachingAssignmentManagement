@@ -182,7 +182,7 @@ function importSucceeded(data) {
         if (data[0].Item6) {
             // Show assign lecturer error list
             message = 'Đã import dữ liệu! \nCó một số giảng viên có lịch giảng dạy bị trùng, vui lòng xem chi tiết ở cuối trang.';
-            SetVisibleColumn(true);
+            setVisibleColumn(true);
             setTimeout(function () {
                 errorLecturers.find('.alert').hide();
                 errorLecturers.find('.importUser').hide();
@@ -190,7 +190,7 @@ function importSucceeded(data) {
         } else {
             // Show lecturer that hasn't been in the system yet
             message = 'Đã import dữ liệu! \nCó một số giảng viên chưa có trong hệ thống, vui lòng xem chi tiết ở cuối trang.';
-            SetVisibleColumn(false);
+            setVisibleColumn(false);
             setTimeout(function () {
                 errorLecturers.find('.alert').show();
                 errorLecturers.find('.importUser').show();
@@ -223,7 +223,7 @@ function importSucceeded(data) {
     window.onbeforeunload = null;
 }
 
-function SetVisibleColumn(state) {
+function setVisibleColumn(state) {
     var table = $('#tblErrorLecturers').DataTable();
     for (var i = 3; i <= 6; i++) {
         table.column(i).visible(state, state);
