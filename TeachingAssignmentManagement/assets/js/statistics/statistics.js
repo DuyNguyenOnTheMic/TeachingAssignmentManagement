@@ -349,11 +349,6 @@ function populateDatatable(data) {
                         }
                     }
                 },
-                {
-                    visible: false,
-                    searchable: false,
-                    target: [8, 9, 10, 11, 12]
-                },
                 { className: 'text-center', target: [0, 1, 4, 5, 6, 7] }
             ],
             order: [[7, 'desc']],
@@ -408,7 +403,9 @@ function populateDatatable(data) {
                     }
                 }
             ],
-
+            initComplete: function () {
+                isLessonCheck.is(":checked") ? setVisibleColumn(true) : setVisibleColumn(false);
+            },
             language: {
                 'url': rootUrl + 'app-assets/language/datatables/vi.json'
             }
@@ -474,6 +471,14 @@ function populateDatatable(data) {
 $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
     $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
 });
+
+function setVisibleColumn(state) {
+    var table = $('#tblStatistics').DataTable();
+    for (var i = 8; i <= 12; i++) {
+        table.column(i).visible(state, state);
+    }
+    table.columns.adjust().draw(state); // adjust column sizing and redraw
+}
 
 // HTML format for child rows of viewing statistics
 function format(d) {
