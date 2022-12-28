@@ -47,7 +47,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         public void Get_Term_Data_Not_Null_Test()
         {
             // Act
-            IEnumerable<object> actionResult = unitOfWork.TermRepository.GetTerms().Cast<object>();
+            dynamic actionResult = unitOfWork.TermRepository.GetTerms();
 
             // Assert
             Assert.IsNotNull(actionResult);
@@ -57,7 +57,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         public void Get_Term_Data_Is_Correct_Test()
         {
             // Act
-            var actionResult = unitOfWork.TermRepository.GetTerms().Cast<object>() as dynamic;
+            dynamic actionResult = unitOfWork.TermRepository.GetTerms();
             List<term> termList = listTerm.OrderByDescending(t => t.id).ToList();
 
             // Assert
@@ -67,6 +67,21 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.AreEqual(actionResult[i].id, termList[i].id);
                 Assert.AreEqual(actionResult[i].start_year, termList[i].start_year);
             }
+        }
+
+        [TestMethod()]
+        public void Term_Data_Should_Be_IEnumerable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.TermRepository.GetTerms();
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
         }
 
 
