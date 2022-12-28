@@ -151,6 +151,18 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
+        public void Get_Year_Data_Is_Correct_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.TermRepository.GetYears();
+            string schoolyear = listTerm.First().start_year + " - " + listTerm.First().end_year;
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(actionResult[0].schoolyear, schoolyear);
+        }
+
+        [TestMethod()]
         public void Insert_Term_Test()
         {
             // Arrange
