@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -45,7 +44,34 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Get_Term_Json_Data_Not_Null_Test()
+        public void Get_Term_Data_Not_Null_Test()
+        {
+            // Act
+            IEnumerable<object> actionResult = unitOfWork.TermRepository.GetTerms().Cast<object>();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Get_Term_Data_Is_Correct_Test()
+        {
+            // Act
+            var actionResult = unitOfWork.TermRepository.GetTerms().Cast<object>() as dynamic;
+            List<term> termList = listTerm.OrderByDescending(t => t.id).ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            for (int i = 0; i < listTerm.Count(); i++)
+            {
+                Assert.AreEqual(actionResult[i].id, termList[i].id);
+                Assert.AreEqual(actionResult[i].start_year, termList[i].start_year);
+            }
+        }
+
+
+        [TestMethod()]
+        public void Get_Term_Data_Is_Equal_Test()
         {
             // Act
             IEnumerable<object> actionResult = unitOfWork.TermRepository.GetTerms().Cast<object>();
