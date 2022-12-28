@@ -155,7 +155,8 @@ namespace TeachingAssignmentManagement.DAL.Tests
         {
             // Act
             dynamic actionResult = unitOfWork.TermRepository.GetYears();
-            string schoolyear = listTerm.First().start_year + " - " + listTerm.First().end_year;
+            term term = listTerm.First();
+            string schoolyear = term.start_year + " - " + term.end_year;
 
             // Assert
             Assert.IsNotNull(actionResult);
