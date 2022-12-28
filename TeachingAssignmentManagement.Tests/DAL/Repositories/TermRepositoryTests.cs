@@ -165,7 +165,6 @@ namespace TeachingAssignmentManagement.DAL.Tests
             };
 
             // Act
-            mockSet.Setup(m => m.Remove(It.IsAny<term>())).Callback<term>((entity) => listTerm.Remove(entity));
             unitOfWork.TermRepository.DeleteTerm(listTerm[0].id);
             unitOfWork.Save();
 
