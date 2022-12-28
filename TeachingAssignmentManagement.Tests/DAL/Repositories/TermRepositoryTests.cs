@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -42,6 +43,17 @@ namespace TeachingAssignmentManagement.DAL.Tests
             unitOfWork.Dispose();
             scope.Dispose();
         }
+
+        [TestMethod()]
+        public void Get_Term_Json_Data_Not_Null_Test()
+        {
+            // Act
+            IEnumerable<object> actionResult = unitOfWork.TermRepository.GetTerms().Cast<object>();
+
+            // Assert
+            Assert.AreEqual(actionResult.Count(), 2);
+        }
+
 
         [TestMethod()]
         public void Insert_Term_Repository_Test()
