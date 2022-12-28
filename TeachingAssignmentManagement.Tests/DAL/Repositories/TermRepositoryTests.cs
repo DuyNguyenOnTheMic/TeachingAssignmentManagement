@@ -158,14 +158,8 @@ namespace TeachingAssignmentManagement.DAL.Tests
         [TestMethod()]
         public void Delete_Term_Repository_Test()
         {
-            // Arrange
-            List<term> listTerm = new List<term> {
-                new term() { id = 123, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 },
-                new term() { id = 124, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 }
-            };
-
             // Act
-            unitOfWork.TermRepository.DeleteTerm(listTerm[0].id);
+            unitOfWork.TermRepository.DeleteTerm(listTerm.FirstOrDefault().id);
             unitOfWork.Save();
 
             // Assert
