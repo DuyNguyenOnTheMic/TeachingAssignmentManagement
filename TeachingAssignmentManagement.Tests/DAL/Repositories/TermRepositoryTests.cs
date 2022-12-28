@@ -141,7 +141,17 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Insert_Term_Repository_Test()
+        public void Get_Year_Data_Not_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.TermRepository.GetYears();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Insert_Term_Test()
         {
             // Arrange
             term term = new term() { id = 125, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 };
