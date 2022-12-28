@@ -84,17 +84,61 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsTrue(count > 0);
         }
 
+        [TestMethod]
+        public void Term_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.TermRepository.GetTerms();
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod]
+        public void Term_Data_Should_Be_Indexable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.TermRepository.GetTerms();
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.id);
+                Assert.IsNotNull(json.start_year);
+            }
+        }
 
         [TestMethod()]
-        public void Get_Term_Data_Is_Equal_Test()
+        public void Get_Term_List_Should_Be_Not_Null_And_Equal_Test()
         {
             // Act
             IEnumerable<object> actionResult = unitOfWork.TermRepository.GetTerms().Cast<object>();
 
             // Assert
-            Assert.AreEqual(actionResult.Count(), 2);
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(listTerm.Count(), actionResult.Count());
         }
 
+        [TestMethod()]
+        public void Get_Term_Should_Order_By_Latest_Terms_Test()
+        {
+            // Arrange
+            List<term> termList = listTerm.ToList();
+
+            // Act
+            dynamic actionResult = unitOfWork.TermRepository.GetTerms();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(actionResult[0].id, termList[1].id);
+            Assert.AreEqual(actionResult[0].start_year, termList[1].start_year);
+            Assert.AreEqual(actionResult[0].id, 124);
+            Assert.AreEqual(actionResult[0].start_year, 2022);
+        }
 
         [TestMethod()]
         public void Insert_Term_Repository_Test()
