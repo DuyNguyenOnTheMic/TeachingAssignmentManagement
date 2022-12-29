@@ -23,7 +23,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         {
             listTerm = new List<term> {
                 new term() { id = 123, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 },
-                new term() { id = 124, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 }
+                new term() { id = 124, start_year = 2023, end_year = 2024, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 }
             }.AsQueryable();
             mockSet = new Mock<DbSet<term>>();
             mockContext = new Mock<CP25Team03Entities>();
@@ -135,9 +135,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert
             Assert.IsNotNull(actionResult);
             Assert.AreEqual(actionResult[0].id, termList[1].id);
-            Assert.AreEqual(actionResult[0].start_year, termList[1].start_year);
             Assert.AreEqual(actionResult[0].id, 124);
-            Assert.AreEqual(actionResult[0].start_year, 2022);
         }
 
         [TestMethod()]
@@ -160,7 +158,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
 
             // Assert
             Assert.IsNotNull(actionResult);
-            Assert.AreEqual(actionResult[0].schoolyear, schoolyear);
+            Assert.AreEqual(actionResult[1].schoolyear, schoolyear);
         }
 
         [TestMethod()]
@@ -217,17 +215,20 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Get_Year_Should_Order_By_Latest_Terms_Test()
+        public void Get_Year_Should_Order_By_Latest_Years_Test()
         {
             // Arrange
             List<term> termList = listTerm.ToList();
+            string yearBefore = termList[1].start_year + " - " + termList[1].end_year;
+            string yearAfter = termList[0].start_year + " - " + termList[0].end_year;
 
             // Act
             dynamic actionResult = unitOfWork.TermRepository.GetYears();
 
             // Assert
             Assert.IsNotNull(actionResult);
-            Assert.AreEqual(actionResult[0].id, termList[1].id);
+            Assert.AreEqual(actionResult[0].schoolyear, yearBefore);
+            Assert.AreEqual(actionResult[1].schoolyear, yearAfter);
         }
 
         [TestMethod()]
