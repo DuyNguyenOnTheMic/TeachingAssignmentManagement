@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Transactions;
+using System.Web.UI.WebControls;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.DAL.Tests
@@ -42,5 +43,31 @@ namespace TeachingAssignmentManagement.DAL.Tests
             scope.Dispose();
         }
 
+        [TestMethod()]
+        public void Get_Major_Data_Not_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.MajorRepository.GetMajors();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Get_Major_Data_Is_Correct_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.MajorRepository.GetMajors();
+            List<major> majorList = listMajor.OrderByDescending(m => m.name.Contains("công nghệ thông tin")).ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            for (int i = 0; i < listMajor.Count(); i++)
+            {
+                Assert.AreEqual(actionResult[i].id, majorList[i].id);
+                Assert.AreEqual(actionResult[i].name, majorList[i].name);
+                Assert.AreEqual(actionResult[i].abbreviation, majorList[i].abbreviation);
+            }
+        }
     }
 }
