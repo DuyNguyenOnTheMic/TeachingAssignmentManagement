@@ -131,6 +131,23 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.AreEqual(actionResult[0].name, "Công Nghệ Thông Tin");
         }
 
+        [TestMethod]
+        public void Find_Major_Correctly_Test()
+        {
+            // Arrange
+            major major = listMajor.First();
+            mockSet.Setup(m => m.Find(It.IsAny<string>())).Returns(major);
+
+            // Act
+            major actionResult = unitOfWork.MajorRepository.GetMajorByID(major.id);
+
+            // Assert
+            mockSet.Verify(x => x.Find(It.IsAny<string>()), Times.Once());
+            Assert.AreEqual(major.id, actionResult.id);
+            Assert.AreEqual(major.name, actionResult.name);
+            Assert.AreEqual(major.abbreviation, actionResult.abbreviation);
+        }
+
         [TestMethod()]
         public void Insert_Major_Repository_Test()
         {
