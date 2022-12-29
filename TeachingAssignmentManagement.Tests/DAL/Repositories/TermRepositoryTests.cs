@@ -164,6 +164,73 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
+        public void Year_Data_Should_Be_IEnumerable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.TermRepository.GetYears();
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod]
+        public void Year_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.TermRepository.GetYears();
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod]
+        public void Year_Data_Should_Be_Indexable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.TermRepository.GetYears();
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.schoolyear);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Year_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Act
+            IEnumerable<object> actionResult = unitOfWork.TermRepository.GetYears().Cast<object>();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(listTerm.Count(), actionResult.Count());
+        }
+
+        [TestMethod()]
+        public void Get_Year_Should_Order_By_Latest_Terms_Test()
+        {
+            // Arrange
+            List<term> termList = listTerm.ToList();
+
+            // Act
+            dynamic actionResult = unitOfWork.TermRepository.GetYears();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(actionResult[0].id, termList[1].id);
+        }
+
+        [TestMethod()]
         public void Insert_Term_Test()
         {
             // Arrange
