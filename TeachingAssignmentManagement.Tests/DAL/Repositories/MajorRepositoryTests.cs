@@ -30,7 +30,6 @@ namespace TeachingAssignmentManagement.DAL.Tests
             mockSet = new Mock<DbSet<major>>();
             mockContext = new Mock<CP25Team03Entities>();
             unitOfWork = new UnitOfWork(mockContext.Object);
-            scope = new TransactionScope();
             mockSet.As<IQueryable<major>>().Setup(m => m.Provider).Returns(listMajor.Provider);
             mockSet.As<IQueryable<major>>().Setup(m => m.Expression).Returns(listMajor.Expression);
             mockSet.As<IQueryable<major>>().Setup(m => m.ElementType).Returns(listMajor.ElementType);
@@ -42,7 +41,6 @@ namespace TeachingAssignmentManagement.DAL.Tests
         public void TestCleanup()
         {
             unitOfWork.Dispose();
-            scope.Dispose();
         }
 
         [TestMethod()]
@@ -135,6 +133,33 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert
             Assert.AreEqual(actionResult[0].id, "1");
             Assert.AreEqual(actionResult[0].name, "Công Nghệ Thông Tin");
+        }
+
+        [TestMethod()]
+        public void Insert_Major_Repository_Test()
+        {
+            // Arrange
+            major major = new major() { id = "122", name = "hehe" };
+
+            // Act
+            unitOfWork.MajorRepository.InsertMajor(major);
+            unitOfWork.Save();
+
+            // Assert
+            mockSet.Verify(r => r.Add(major), Times.Once);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod()]
+        public void Delete_Major_Repository_Test()
+        {
+            // Act
+            unitOfWork.MajorRepository.DeleteMajor(listMajor.FirstOrDefault().id);
+            unitOfWork.Save();
+
+            // Assert
+            mockSet.Verify(x => x.Remove(It.IsAny<major>()), Times.Once());
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
     }
 }

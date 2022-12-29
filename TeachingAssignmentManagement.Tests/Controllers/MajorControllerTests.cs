@@ -411,23 +411,5 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockSet.Verify(r => r.Remove(It.IsAny<major>()));
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
-
-        #region RepositoryTests
-
-        [TestMethod()]
-        public void Insert_Major_Repository_Test()
-        {
-            // Arrange
-            major major = new major() { id = "122", name = "hehe" };
-
-            // Act
-            unitOfWork.MajorRepository.InsertMajor(major);
-            unitOfWork.Save();
-
-            // Assert
-            mockSet.Verify(r => r.Add(major), Times.Once);
-            mockContext.Verify(r => r.SaveChanges(), Times.Once);
-        }
-        #endregion
     }
 }
