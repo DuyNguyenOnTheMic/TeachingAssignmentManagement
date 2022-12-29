@@ -205,5 +205,41 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.AreEqual(listUser.Count(), jsonCollection.Count);
         }
+
+        [TestMethod()]
+        public void Create_View_Test()
+        {
+            // Arrange
+            UserController controller = new UserController();
+
+            // Act
+            ViewResult result = controller.Create() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod()]
+        public void Create_View_Should_Load_Role_SelectList_Test()
+        {
+            // Arrange
+            UserController controller = new UserController(unitOfWork);
+            Mock<DbSet<AspNetRole>> mockSetRole = new Mock<DbSet<AspNetRole>>();
+            mockContext.Setup(c => c.AspNetRoles).Returns(() => mockSetRole.Object);
+
+            // Act
+            IQueryable<AspNetRole> listRoles = new List<AspNetRole>(listRole).AsQueryable();
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.Provider).Returns(listRoles.Provider);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.Expression).Returns(listRoles.Expression);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.ElementType).Returns(listRoles.ElementType);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.GetEnumerator()).Returns(listRoles.GetEnumerator());
+
+            ViewResult result = controller.Create() as ViewResult;
+            SelectList userRoles = new SelectList(listRole);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(userRoles.Count(), ((IEnumerable<dynamic>)result.ViewBag.role_id).Count());
+        }
     }
 }
