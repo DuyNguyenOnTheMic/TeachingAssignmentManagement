@@ -193,8 +193,8 @@ $.ajax({
                         {
                             label: 'Ca 3',
                             data: sumLessons7,
-                            backgroundColor: 'rgba(255, 159, 64, 0.5)',
-                            borderColor: 'rgba(255, 159, 64, 1)',
+                            backgroundColor: 'rgba(255, 205, 86, 0.5)',
+                            borderColor: 'rgba(255, 205, 86, 1)',
                             borderWidth: 1,
                             borderRadius: 3
                         },
@@ -209,8 +209,8 @@ $.ajax({
                         {
                             label: 'Ca 5',
                             data: sumLessons13,
-                            backgroundColor: 'rgba(255, 205, 86, 0.5)',
-                            borderColor: 'rgba(255, 205, 86, 1)',
+                            backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                            borderColor: 'rgba(153, 102, 255, 1)',
                             borderWidth: 1,
                             borderRadius: 3
                         }
