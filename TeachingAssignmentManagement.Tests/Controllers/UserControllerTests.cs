@@ -98,5 +98,53 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.IsNotNull(json.type);
             }
         }
+
+        [TestMethod()]
+        public void Get_User_Json_Data_Correctly_Test()
+        {
+            // Arrange.
+            UserController controller = new UserController(unitOfWork);
+
+            // Act.
+            JsonResult actionResult = controller.GetData();
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert.
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            foreach (dynamic json in jsonCollection)
+            {
+                Assert.IsNotNull(json.id,
+                    "JSON record does not contain \"id\" required property.");
+                Assert.IsNotNull(json.email,
+                    "JSON record does not contain \"email\" required property.");
+                Assert.IsNotNull(json.role,
+                    "JSON record does not contain \"role\" required property.");
+                Assert.IsNotNull(json.staff_id,
+                    "JSON record does not contain \"staff_id\" required property.");
+                Assert.IsNotNull(json.full_name,
+                    "JSON record does not contain \"full_name\" required property.");
+                Assert.IsNotNull(json.type,
+                    "JSON record does not contain \"type\" required property.");
+            }
+        }
+
+        [TestMethod()]
+        public void User_Json_Data_Should_Convert_To_IEnumerable_Test()
+        {
+            // Arrange
+            UserController controller = new UserController();
+
+            // Act
+            JsonResult actionResult = controller.GetData();
+            dynamic jsonCollection = actionResult.Data;
+            int count = 0;
+            foreach (var value in jsonCollection)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
     }
 }
