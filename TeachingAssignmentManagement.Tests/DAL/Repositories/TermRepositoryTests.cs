@@ -16,7 +16,6 @@ namespace TeachingAssignmentManagement.DAL.Tests
         private Mock<DbSet<term>> mockSet;
         private Mock<CP25Team03Entities> mockContext;
         private UnitOfWork unitOfWork;
-        private TransactionScope scope;
 
         [TestInitialize()]
         public void Initialize()
@@ -28,7 +27,6 @@ namespace TeachingAssignmentManagement.DAL.Tests
             mockSet = new Mock<DbSet<term>>();
             mockContext = new Mock<CP25Team03Entities>();
             unitOfWork = new UnitOfWork(mockContext.Object);
-            scope = new TransactionScope();
             mockSet.As<IQueryable<term>>().Setup(m => m.Provider).Returns(listTerm.Provider);
             mockSet.As<IQueryable<term>>().Setup(m => m.Expression).Returns(listTerm.Expression);
             mockSet.As<IQueryable<term>>().Setup(m => m.ElementType).Returns(listTerm.ElementType);
@@ -40,7 +38,6 @@ namespace TeachingAssignmentManagement.DAL.Tests
         public void TestCleanup()
         {
             unitOfWork.Dispose();
-            scope.Dispose();
         }
 
         [TestMethod()]
