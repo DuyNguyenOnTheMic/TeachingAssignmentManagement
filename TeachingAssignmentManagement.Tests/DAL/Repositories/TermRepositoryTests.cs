@@ -227,6 +227,27 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.AreEqual(actionResult[1].schoolyear, yearAfter);
         }
 
+        [TestMethod]
+        public void Find_Term_Correctly_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            mockSet.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
+
+            // Act
+            term actionResult = unitOfWork.TermRepository.GetTermByID(term.id);
+
+            // Assert
+            mockSet.Verify(x => x.Find(It.IsAny<int>()), Times.Once());
+            Assert.AreEqual(term.id, actionResult.id);
+            Assert.AreEqual(term.start_year, actionResult.start_year);
+            Assert.AreEqual(term.end_year, actionResult.end_year);
+            Assert.AreEqual(term.start_week, actionResult.start_week);
+            Assert.AreEqual(term.start_date, actionResult.start_date);
+            Assert.AreEqual(term.max_lesson, actionResult.max_lesson);
+            Assert.AreEqual(term.max_class, actionResult.max_class);
+        }
+
         [TestMethod()]
         public void Insert_Term_Test()
         {
