@@ -3,10 +3,7 @@ using Moq;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Transactions;
-using System.Web.Mvc;
 using System.Web.UI.WebControls;
-using TeachingAssignmentManagement.Controllers;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.DAL.Tests
@@ -18,7 +15,6 @@ namespace TeachingAssignmentManagement.DAL.Tests
         private Mock<DbSet<major>> mockSet;
         private Mock<CP25Team03Entities> mockContext;
         private UnitOfWork unitOfWork;
-        private TransactionScope scope;
 
         [TestInitialize()]
         public void Initialize()

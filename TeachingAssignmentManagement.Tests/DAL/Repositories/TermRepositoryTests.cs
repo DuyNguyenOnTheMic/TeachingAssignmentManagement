@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Transactions;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.DAL.Tests
