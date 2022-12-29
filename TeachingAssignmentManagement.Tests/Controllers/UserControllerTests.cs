@@ -165,7 +165,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void User_JSon_Data_Should_Be_Indexable_Test()
         {
             // Arrange
-            UserController controller = new UserController();
+            UserController controller = new UserController(unitOfWork);
 
             // Act
             JsonResult actionResult = controller.GetData();
@@ -190,6 +190,20 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.IsNotNull(json.type,
                     "JSON record does not contain \"type\" required property.");
             }
+        }
+
+        [TestMethod]
+        public void User_JSon_Data_Count_Should_Be_Equal_Test()
+        {
+            // Arrange
+            UserController controller = new UserController(unitOfWork);
+
+            // Act
+            JsonResult actionResult = controller.GetData();
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            Assert.AreEqual(listUser.Count(), jsonCollection.Count);
         }
     }
 }
