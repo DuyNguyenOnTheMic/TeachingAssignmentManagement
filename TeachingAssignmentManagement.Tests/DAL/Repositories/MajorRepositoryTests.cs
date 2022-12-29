@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Transactions;
+using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using TeachingAssignmentManagement.Controllers;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.DAL.Tests
@@ -68,6 +70,71 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.AreEqual(actionResult[i].name, majorList[i].name);
                 Assert.AreEqual(actionResult[i].abbreviation, majorList[i].abbreviation);
             }
+        }
+
+        [TestMethod()]
+        public void Major_Data_Should_Be_IEnumerable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.MajorRepository.GetMajors();
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod]
+        public void Major_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.MajorRepository.GetMajors();
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod]
+        public void Major_Data_Should_Be_Indexable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.MajorRepository.GetMajors();
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.name);
+                Assert.IsNotNull(json.abbreviation);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Major_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Act
+            IEnumerable<object> actionResult = unitOfWork.MajorRepository.GetMajors().Cast<object>();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(listMajor.Count(), actionResult.Count());
+        }
+
+        [TestMethod()]
+        public void Get_IT_Major_Should_Be_On_Top_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.MajorRepository.GetMajors();
+
+            // Assert
+            Assert.AreEqual(actionResult[0].id, "1");
+            Assert.AreEqual(actionResult[0].name, "Công Nghệ Thông Tin");
         }
     }
 }
