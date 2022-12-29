@@ -17,17 +17,17 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         private ICollection<AspNetRole> listRole;
         private IQueryable<AspNetUser> listUser;
         private IQueryable<lecturer> listLecturer;
-        private Mock<DbSet<lecturer>> mockSet;
+        private Mock<DbSet<lecturer>> mockSetLecturer;
         private Mock<DbSet<AspNetUser>> mockSetUser;
         private Mock<CP25Team03Entities> mockContext;
         private UnitOfWork unitOfWork;
         private TransactionScope scope;
+        readonly string userId1 = Guid.NewGuid().ToString();
+        readonly string userId2 = Guid.NewGuid().ToString();
 
         [TestInitialize()]
         public void Initialize()
         {
-            string userId1 = Guid.NewGuid().ToString();
-            string userId2 = Guid.NewGuid().ToString();
             listRole = new List<AspNetRole> {
                 new AspNetRole() { Id = "1", Name = "Giảng viên" }
             };
@@ -39,20 +39,20 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = "TG" },
                 new lecturer() { id = userId2, staff_id = "1002", full_name = "Nguyễn Văn B", type = "CH" }
             }.AsQueryable();
-            mockSet = new Mock<DbSet<lecturer>>();
+            mockSetLecturer = new Mock<DbSet<lecturer>>();
             mockSetUser = new Mock<DbSet<AspNetUser>>();
             mockContext = new Mock<CP25Team03Entities>();
             unitOfWork = new UnitOfWork(mockContext.Object);
             scope = new TransactionScope();
-            mockSet.As<IQueryable<lecturer>>().Setup(m => m.Provider).Returns(listLecturer.Provider);
-            mockSet.As<IQueryable<lecturer>>().Setup(m => m.Expression).Returns(listLecturer.Expression);
-            mockSet.As<IQueryable<lecturer>>().Setup(m => m.ElementType).Returns(listLecturer.ElementType);
-            mockSet.As<IQueryable<lecturer>>().Setup(m => m.GetEnumerator()).Returns(listLecturer.GetEnumerator());
             mockSetUser.As<IQueryable<AspNetUser>>().Setup(m => m.Provider).Returns(listUser.Provider);
             mockSetUser.As<IQueryable<AspNetUser>>().Setup(m => m.Expression).Returns(listUser.Expression);
             mockSetUser.As<IQueryable<AspNetUser>>().Setup(m => m.ElementType).Returns(listUser.ElementType);
             mockSetUser.As<IQueryable<AspNetUser>>().Setup(m => m.GetEnumerator()).Returns(listUser.GetEnumerator());
-            mockContext.Setup(c => c.lecturers).Returns(() => mockSet.Object);
+            mockSetLecturer.As<IQueryable<lecturer>>().Setup(m => m.Provider).Returns(listLecturer.Provider);
+            mockSetLecturer.As<IQueryable<lecturer>>().Setup(m => m.Expression).Returns(listLecturer.Expression);
+            mockSetLecturer.As<IQueryable<lecturer>>().Setup(m => m.ElementType).Returns(listLecturer.ElementType);
+            mockSetLecturer.As<IQueryable<lecturer>>().Setup(m => m.GetEnumerator()).Returns(listLecturer.GetEnumerator());
+            mockContext.Setup(c => c.lecturers).Returns(() => mockSetLecturer.Object);
             mockContext.Setup(c => c.AspNetUsers).Returns(() => mockSetUser.Object);
         }
 
@@ -138,13 +138,58 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             JsonResult actionResult = controller.GetData();
             dynamic jsonCollection = actionResult.Data;
             int count = 0;
-            foreach (var value in jsonCollection)
+            foreach (dynamic value in jsonCollection)
             {
                 count++;
             }
 
             // Assert
             Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod]
+        public void User_Json_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            UserController controller = new UserController(unitOfWork);
+
+            // Act
+            JsonResult actionResult = controller.GetData();
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert                
+            Assert.IsNotNull(jsonCollection[0]);
+        }
+
+        [TestMethod]
+        public void User_JSon_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            UserController controller = new UserController();
+
+            // Act
+            JsonResult actionResult = controller.GetData();
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            for (int i = 0; i < jsonCollection.Count; i++)
+            {
+                dynamic json = jsonCollection[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.id,
+                    "JSON record does not contain \"id\" required property.");
+                Assert.IsNotNull(json.email,
+                    "JSON record does not contain \"email\" required property.");
+                Assert.IsNotNull(json.role,
+                    "JSON record does not contain \"role\" required property.");
+                Assert.IsNotNull(json.staff_id,
+                    "JSON record does not contain \"staff_id\" required property.");
+                Assert.IsNotNull(json.full_name,
+                    "JSON record does not contain \"full_name\" required property.");
+                Assert.IsNotNull(json.type,
+                    "JSON record does not contain \"type\" required property.");
+            }
         }
     }
 }
