@@ -175,7 +175,7 @@ $.ajax({
                     labels: labels,
                     datasets: [
                         {
-                            label: 'Tiết 1',
+                            label: 'Ca 1',
                             data: sumLessons1,
                             backgroundColor: 'rgba(54, 162, 235, 0.5)',
                             borderColor: 'rgba(54, 162, 235, 1)',
@@ -183,7 +183,7 @@ $.ajax({
                             borderRadius: 3
                         },
                         {
-                            label: 'Tiết 4',
+                            label: 'Ca 2',
                             data: sumLessons4,
                             backgroundColor: 'rgba(255, 99, 132, 0.5)',
                             borderColor: 'rgba(255, 99, 132, 1)',
@@ -191,7 +191,7 @@ $.ajax({
                             borderRadius: 3
                         },
                         {
-                            label: 'Tiết 7',
+                            label: 'Ca 3',
                             data: sumLessons7,
                             backgroundColor: 'rgba(255, 159, 64, 0.5)',
                             borderColor: 'rgba(255, 159, 64, 1)',
@@ -199,7 +199,7 @@ $.ajax({
                             borderRadius: 3
                         },
                         {
-                            label: 'Tiết 10',
+                            label: 'Ca 4',
                             data: sumLessons10,
                             backgroundColor: 'rgba(75, 192, 192, 0.5)',
                             borderColor: 'rgba(75, 192, 192, 1)',
@@ -207,7 +207,7 @@ $.ajax({
                             borderRadius: 3
                         },
                         {
-                            label: 'Tiết 13',
+                            label: 'Ca 5',
                             data: sumLessons13,
                             backgroundColor: 'rgba(255, 205, 86, 0.5)',
                             borderColor: 'rgba(255, 205, 86, 1)',
