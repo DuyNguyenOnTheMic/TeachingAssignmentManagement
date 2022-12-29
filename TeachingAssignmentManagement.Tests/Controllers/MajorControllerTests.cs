@@ -23,8 +23,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Initialize()
         {
             listMajor = new List<major> {
-                new major() { id = "1", name = "Kỹ Thuật Phần Mềm" },
-                new major() { id = "2", name = "Công Nghệ Thông Tin" }
+                new major() { id = "1", name = "Công Nghệ Thông Tin", abbreviation = "CNTT" },
+                new major() { id = "2", name = "Kỹ Thuật Phần Mềm", abbreviation = "KTPM" }
             }.AsQueryable();
             mockSet = new Mock<DbSet<major>>();
             mockContext = new Mock<CP25Team03Entities>();
@@ -187,6 +187,21 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.IsNotNull(jsonCollection);
             Assert.AreEqual(listMajor.Count(), jsonCollection.Count);
+        }
+
+        [TestMethod()]
+        public void Get_IT_Major_Should_Be_On_Top_Test()
+        {
+            // Arrange
+            MajorController controller = new MajorController(unitOfWork);
+
+            // Act
+            JsonResult actionResult = controller.GetData();
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            Assert.AreEqual(jsonCollection[0].id, "1");
+            Assert.AreEqual(jsonCollection[0].name, "Công Nghệ Thông Tin");
         }
 
         [TestMethod()]
