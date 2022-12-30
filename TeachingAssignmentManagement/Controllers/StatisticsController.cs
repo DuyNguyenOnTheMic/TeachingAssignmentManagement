@@ -99,7 +99,7 @@ namespace TeachingAssignmentManagement.Controllers
             DateTime startDate = term.start_date;
             DateTime endDate = new DateTime();
             int startWeek = term.start_week;
-            int endWeek = query_classes.Max(c => c.EndWeek);
+            int endWeek = query_classes.Any() ? query_classes.Max(c => c.EndWeek) : 1;
             int currentWeek = 0;
             string weekLabel = string.Empty;
 
