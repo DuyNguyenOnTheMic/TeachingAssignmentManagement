@@ -35,8 +35,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable<CurriculumClassDTO> GetClassInWeek(IEnumerable<CurriculumClassDTO> query_classes, int week)
         {
-            string sWeek = week.ToString("00");
-            return query_classes.Where(c => Array.Exists(c.LearnWeek.Split(','), element => int.Parse(element).ToString("00") == sWeek));
+            return query_classes.Where(c => Array.Exists(c.LearnWeek.Split(','), element => int.Parse(element) == week));
         }
 
         public IEnumerable<CurriculumClassDTO> GetAssignTimetable(int termId, string majorId)
