@@ -21,7 +21,6 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         private Mock<DbSet<AspNetUser>> mockSetUser;
         private Mock<CP25Team03Entities> mockContext;
         private UnitOfWork unitOfWork;
-        private TransactionScope scope;
         readonly string userId1 = Guid.NewGuid().ToString();
         readonly string userId2 = Guid.NewGuid().ToString();
 
@@ -43,7 +42,6 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockSetUser = new Mock<DbSet<AspNetUser>>();
             mockContext = new Mock<CP25Team03Entities>();
             unitOfWork = new UnitOfWork(mockContext.Object);
-            scope = new TransactionScope();
             mockSetUser.As<IQueryable<AspNetUser>>().Setup(m => m.Provider).Returns(listUser.Provider);
             mockSetUser.As<IQueryable<AspNetUser>>().Setup(m => m.Expression).Returns(listUser.Expression);
             mockSetUser.As<IQueryable<AspNetUser>>().Setup(m => m.ElementType).Returns(listUser.ElementType);
@@ -60,7 +58,6 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void TestCleanup()
         {
             unitOfWork.Dispose();
-            scope.Dispose();
         }
 
         [TestMethod()]
