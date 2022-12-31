@@ -241,5 +241,57 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(result);
             Assert.AreEqual(userRoles.Count(), ((IEnumerable<dynamic>)result.ViewBag.role_id).Count());
         }
+
+        [TestMethod()]
+        public void Return_Original_String_When_Not_Empty_Test()
+        {
+            // Arrange
+            string test = "Nguyễn Văn A";
+
+            // Act
+            var result = UserController.SetNullOnEmpty(test);
+
+            // Assert
+            Assert.AreEqual(test, result);
+        }
+
+        [TestMethod()]
+        public void Set_Null_On_Empty_String_Test()
+        {
+            // Arrange
+            string test = "";
+
+            // Act
+            var result = UserController.SetNullOnEmpty(test);
+
+            // Assert
+            Assert.AreEqual(null, result);
+        }
+
+        [TestMethod()]
+        public void Set_Null_On_Empty_String_Type_Test()
+        {
+            // Arrange
+            string test = string.Empty;
+
+            // Act
+            var result = UserController.SetNullOnEmpty(test);
+
+            // Assert
+            Assert.AreEqual(null, result);
+        }
+
+        [TestMethod()]
+        public void String_Should_Convert_To_Null_If_Have_Space_Test()
+        {
+            // Arrange
+            string test = "      ";
+
+            // Act
+            var result = UserController.SetNullOnEmpty(test);
+
+            // Assert
+            Assert.AreEqual(null, result);
+        }
     }
 }
