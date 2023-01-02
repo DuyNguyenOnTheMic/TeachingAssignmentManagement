@@ -56,5 +56,36 @@ namespace TeachingAssignmentManagement.DAL.Tests
         {
             unitOfWork.Dispose();
         }
+
+        [TestMethod()]
+        public void Get_User_Data_Not_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.UserRepository.GetUsers();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Get_User_Data_Is_Correct_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.UserRepository.GetUsers();
+            List<AspNetUser> userList = listUser.ToList();
+            List<lecturer> lecturerList = listLecturer.ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            for (int i = 0; i < listUser.Count(); i++)
+            {
+                Assert.AreEqual(actionResult[i].id, userList[i].Id);
+                Assert.AreEqual(actionResult[i].email, userList[i].Email);
+                Assert.AreEqual(actionResult[i].role, userList[i].AspNetRoles.FirstOrDefault().Name);
+                Assert.AreEqual(actionResult[i].staff_id, lecturerList[i].staff_id);
+                Assert.AreEqual(actionResult[i].full_name, lecturerList[i].full_name);
+                Assert.AreEqual(actionResult[i].type, lecturerList[i].type);
+            }
+        }
     }
 }
