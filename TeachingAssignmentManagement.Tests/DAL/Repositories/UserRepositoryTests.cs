@@ -285,5 +285,30 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult);
             Assert.AreEqual(listRole.Count(), actionResult.Count());
         }
+
+        [TestMethod]
+        public void User_Role_Should_Order_By_Id_Test()
+        {
+            // Arrange
+            Mock<DbSet<AspNetRole>> mockSetRole = new Mock<DbSet<AspNetRole>>();
+            mockContext.Setup(c => c.AspNetRoles).Returns(() => mockSetRole.Object);
+
+            // Act
+            IQueryable<AspNetRole> listRoles = new List<AspNetRole>(listRole).AsQueryable();
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.Provider).Returns(listRoles.Provider);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.Expression).Returns(listRoles.Expression);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.ElementType).Returns(listRoles.ElementType);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.GetEnumerator()).Returns(listRoles.GetEnumerator());
+
+            dynamic actionResult = unitOfWork.UserRepository.GetRoles().OrderBy(r => r.Id).ToList();
+            List<AspNetRole> roleList = listRole.ToList();
+
+            // Assert
+            for (int i = 0; i < roleList.Count(); i++)
+            {
+                Assert.AreEqual(actionResult[i].Id, roleList[i].Id);
+                Assert.AreEqual(actionResult[i].Name, roleList[i].Name);
+            }
+        }
     }
 }
