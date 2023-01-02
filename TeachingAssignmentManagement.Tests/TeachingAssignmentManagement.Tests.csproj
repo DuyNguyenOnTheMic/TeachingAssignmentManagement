@@ -107,6 +107,7 @@
     <Compile Include="Controllers\UserControllerTests.cs" />
     <Compile Include="DAL\Repositories\MajorRepositoryTests.cs" />
     <Compile Include="DAL\Repositories\TermRepositoryTests.cs" />
+    <Compile Include="DAL\Repositories\UserRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
