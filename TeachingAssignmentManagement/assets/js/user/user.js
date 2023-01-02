@@ -1,5 +1,9 @@
 ﻿var popup, dataTable;
 var rootUrl = $('#loader').data('request-url');
+var typeBadgeObj = {
+    'CH': { title: 'Cơ hữu', class: 'badge-light-success' },
+    'TG': { title: 'Thỉnh giảng', class: 'badge-light-warning' }
+};
 
 $(function () {
     'use strict';
@@ -34,10 +38,6 @@ $(function () {
                     render: function (data) {
                         var $status = data;
                         if ($status) {
-                            var typeBadgeObj = {
-                                'CH': { title: 'Cơ hữu', class: 'badge-light-success' },
-                                'TG': { title: 'Thỉnh giảng', class: 'badge-light-warning' }
-                            };
                             return '<span class="badge rounded-pill ' + typeBadgeObj[$status].class + ' text-capitalized">' + typeBadgeObj[$status].title + '</span>';
                         } else {
                             return null;
@@ -92,6 +92,37 @@ $(function () {
                 'url': rootUrl + 'app-assets/language/datatables/vi.json'
             },
             initComplete: function () {
+                // Adding user type filter once table initialized
+                this.api()
+                    .columns(4)
+                    .every(function () {
+                        var column = this;
+                        var select = $(
+                            '<select id="UserType" class="form-select text-capitalize mb-md-0 mb-2xx"><option value=""> Chọn loại GV để lọc </option></select>'
+                        )
+                            .appendTo('.user_type')
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                                column.search(val ? '^' + val + '$' : '', true, false).draw();
+                            });
+
+                        column
+                            .data()
+                            .unique()
+                            .sort()
+                            .each(function (d, j) {
+                                if (d) {
+                                    select.append(
+                                        '<option value="' +
+                                        typeBadgeObj[d].title +
+                                        '" class="text-capitalize">' +
+                                        typeBadgeObj[d].title +
+                                        '</option>'
+                                    );
+                                }
+                            });
+                    });
+
                 // Adding role filter once table initialized
                 this.api()
                     .columns(5)
