@@ -165,5 +165,31 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert
             Assert.IsNotNull(actionResult);
         }
+
+        [TestMethod()]
+        public void Get_User_Role_Data_Is_Correct_Test()
+        {
+            // Arrange
+            Mock<DbSet<AspNetRole>> mockSetRole = new Mock<DbSet<AspNetRole>>();
+            mockContext.Setup(c => c.AspNetRoles).Returns(() => mockSetRole.Object);
+
+            // Act
+            IQueryable<AspNetRole> listRoles = new List<AspNetRole>(listRole).AsQueryable();
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.Provider).Returns(listRoles.Provider);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.Expression).Returns(listRoles.Expression);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.ElementType).Returns(listRoles.ElementType);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.GetEnumerator()).Returns(listRoles.GetEnumerator());
+
+            dynamic actionResult = unitOfWork.UserRepository.GetRoles().ToList();
+            List<AspNetRole> roleList = listRole.ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            for (int i = 0; i < roleList.Count(); i++)
+            {
+                Assert.AreEqual(actionResult[i].Id, roleList[i].Id);
+                Assert.AreEqual(actionResult[i].Name, roleList[i].Name);
+            }
+        }
     }
 }
