@@ -231,7 +231,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.ElementType).Returns(listRoles.ElementType);
             mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.GetEnumerator()).Returns(listRoles.GetEnumerator());
 
-            dynamic actionResult = unitOfWork.UserRepository.GetRoles();
+            dynamic actionResult = unitOfWork.UserRepository.GetRoles().ToList();
 
             // Assert                
             Assert.IsNotNull(actionResult[0]);
@@ -251,7 +251,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.ElementType).Returns(listRoles.ElementType);
             mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.GetEnumerator()).Returns(listRoles.GetEnumerator());
 
-            dynamic actionResult = unitOfWork.UserRepository.GetUsers();
+            dynamic actionResult = unitOfWork.UserRepository.GetRoles().ToList();
 
             // Assert
             for (int i = 0; i < actionResult.Count; i++)
@@ -263,6 +263,27 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.IsNotNull(json.Id);
                 Assert.IsNotNull(json.Name);
             }
+        }
+
+        [TestMethod()]
+        public void Get_User_Role_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Arrange
+            Mock<DbSet<AspNetRole>> mockSetRole = new Mock<DbSet<AspNetRole>>();
+            mockContext.Setup(c => c.AspNetRoles).Returns(() => mockSetRole.Object);
+
+            // Act
+            IQueryable<AspNetRole> listRoles = new List<AspNetRole>(listRole).AsQueryable();
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.Provider).Returns(listRoles.Provider);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.Expression).Returns(listRoles.Expression);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.ElementType).Returns(listRoles.ElementType);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.GetEnumerator()).Returns(listRoles.GetEnumerator());
+            
+            IEnumerable<object> actionResult = unitOfWork.UserRepository.GetRoles().Cast<object>();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(listRole.Count(), actionResult.Count());
         }
     }
 }
