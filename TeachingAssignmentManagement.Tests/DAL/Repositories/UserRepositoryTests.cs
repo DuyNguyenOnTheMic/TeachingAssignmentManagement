@@ -216,5 +216,53 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert
             Assert.IsTrue(count > 0);
         }
+
+        [TestMethod]
+        public void User_Role_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            Mock<DbSet<AspNetRole>> mockSetRole = new Mock<DbSet<AspNetRole>>();
+            mockContext.Setup(c => c.AspNetRoles).Returns(() => mockSetRole.Object);
+
+            // Act
+            IQueryable<AspNetRole> listRoles = new List<AspNetRole>(listRole).AsQueryable();
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.Provider).Returns(listRoles.Provider);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.Expression).Returns(listRoles.Expression);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.ElementType).Returns(listRoles.ElementType);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.GetEnumerator()).Returns(listRoles.GetEnumerator());
+
+            dynamic actionResult = unitOfWork.UserRepository.GetRoles();
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod]
+        public void User_Role_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            Mock<DbSet<AspNetRole>> mockSetRole = new Mock<DbSet<AspNetRole>>();
+            mockContext.Setup(c => c.AspNetRoles).Returns(() => mockSetRole.Object);
+
+            // Act
+            IQueryable<AspNetRole> listRoles = new List<AspNetRole>(listRole).AsQueryable();
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.Provider).Returns(listRoles.Provider);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.Expression).Returns(listRoles.Expression);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.ElementType).Returns(listRoles.ElementType);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.GetEnumerator()).Returns(listRoles.GetEnumerator());
+
+            dynamic actionResult = unitOfWork.UserRepository.GetUsers();
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.Id);
+                Assert.IsNotNull(json.Name);
+            }
+        }
     }
 }
