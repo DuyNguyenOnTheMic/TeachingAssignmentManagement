@@ -278,7 +278,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.Expression).Returns(listRoles.Expression);
             mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.ElementType).Returns(listRoles.ElementType);
             mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.GetEnumerator()).Returns(listRoles.GetEnumerator());
-            
+
             IEnumerable<object> actionResult = unitOfWork.UserRepository.GetRoles().Cast<object>();
 
             // Assert
@@ -309,6 +309,30 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.AreEqual(actionResult[i].Id, roleList[i].Id);
                 Assert.AreEqual(actionResult[i].Name, roleList[i].Name);
             }
+        }
+
+        [TestMethod]
+        public void Find_User_Role_Correctly_Test()
+        {
+            // Arrange
+            AspNetRole role = listRole.First();
+            Mock<DbSet<AspNetRole>> mockSetRole = new Mock<DbSet<AspNetRole>>();
+            mockContext.Setup(c => c.AspNetRoles).Returns(() => mockSetRole.Object);
+            mockSetRole.Setup(m => m.Find(It.IsAny<string>())).Returns(role);
+
+            // Act
+            IQueryable<AspNetRole> listRoles = new List<AspNetRole>(listRole).AsQueryable();
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.Provider).Returns(listRoles.Provider);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.Expression).Returns(listRoles.Expression);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.ElementType).Returns(listRoles.ElementType);
+            mockSetRole.As<IQueryable<AspNetRole>>().Setup(m => m.GetEnumerator()).Returns(listRoles.GetEnumerator());
+
+            AspNetRole actionResult = unitOfWork.UserRepository.GetRoleByID(role.Id);
+
+            // Assert
+            mockSetRole.Verify(x => x.Find(It.IsAny<string>()), Times.Once());
+            Assert.AreEqual(role.Id, actionResult.Id);
+            Assert.AreEqual(role.Name, actionResult.Name);
         }
     }
 }
