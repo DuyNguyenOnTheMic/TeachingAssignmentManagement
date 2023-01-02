@@ -334,5 +334,88 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.AreEqual(role.Id, actionResult.Id);
             Assert.AreEqual(role.Name, actionResult.Name);
         }
+
+        [TestMethod()]
+        public void Get_Lecturer_Data_Not_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.UserRepository.GetLecturers();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Get_Lecturer_Data_Is_Correct_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.UserRepository.GetLecturers();
+            List<lecturer> lecturerList = listLecturer.ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            for (int i = 0; i < listLecturer.Count(); i++)
+            {
+                Assert.AreEqual(actionResult[i].id, lecturerList[i].id);
+                Assert.AreEqual(actionResult[i].staff_id, lecturerList[i].staff_id);
+                Assert.AreEqual(actionResult[i].full_name, lecturerList[i].full_name);
+                Assert.AreEqual(actionResult[i].type, lecturerList[i].type);
+            }
+        }
+
+        [TestMethod()]
+        public void Lecturer_Data_Should_Be_IEnumerable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.UserRepository.GetLecturers();
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod]
+        public void Lecturer_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.UserRepository.GetLecturers();
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod]
+        public void Lecturer_Data_Should_Be_Indexable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.UserRepository.GetLecturers();
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.staff_id);
+                Assert.IsNotNull(json.full_name);
+                Assert.IsNotNull(json.type);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Lecturer_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Act
+            IEnumerable<object> actionResult = unitOfWork.UserRepository.GetLecturers().Cast<object>();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(listLecturer.Count(), actionResult.Count());
+        }
     }
 }
