@@ -417,5 +417,27 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult);
             Assert.AreEqual(listLecturer.Count(), actionResult.Count());
         }
+
+        [TestMethod()]
+        public void Get_Lecturer_Data_Should_Not_Include_Null_Values_Test()
+        {
+            // Act
+            string userId3 = Guid.NewGuid().ToString();
+            IQueryable<lecturer> newListLecturer = new List<lecturer> {
+                new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = "TG" },
+                new lecturer() { id = userId2, staff_id = "1002", full_name = "Nguyễn Văn B", type = "CH" },
+                new lecturer() { id = userId3, staff_id = null, full_name = "Nguyễn Văn C", type = "CH" }
+            }.AsQueryable();
+            mockSetLecturer.As<IQueryable<lecturer>>().Setup(m => m.Provider).Returns(newListLecturer.Provider);
+            mockSetLecturer.As<IQueryable<lecturer>>().Setup(m => m.Expression).Returns(newListLecturer.Expression);
+            mockSetLecturer.As<IQueryable<lecturer>>().Setup(m => m.ElementType).Returns(newListLecturer.ElementType);
+            mockSetLecturer.As<IQueryable<lecturer>>().Setup(m => m.GetEnumerator()).Returns(newListLecturer.GetEnumerator());
+
+            IEnumerable<object> actionResult = unitOfWork.UserRepository.GetLecturers().Cast<object>();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(2, actionResult.Count());
+        }
     }
 }
