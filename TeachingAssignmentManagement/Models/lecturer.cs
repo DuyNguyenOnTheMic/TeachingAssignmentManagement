@@ -17,8 +17,8 @@ namespace TeachingAssignmentManagement.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public lecturer()
         {
-            this.curriculum_class = new HashSet<curriculum_class>();
-            this.curriculum_class1 = new HashSet<curriculum_class>();
+            this.class_section = new HashSet<class_section>();
+            this.class_section1 = new HashSet<class_section>();
         }
     
         public string id { get; set; }
@@ -27,8 +27,8 @@ namespace TeachingAssignmentManagement.Models
         public string type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<curriculum_class> curriculum_class { get; set; }
+        public virtual ICollection<class_section> class_section { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<curriculum_class> curriculum_class1 { get; set; }
+        public virtual ICollection<class_section> class_section1 { get; set; }
     }
 }

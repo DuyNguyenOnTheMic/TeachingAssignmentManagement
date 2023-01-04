@@ -12,12 +12,12 @@ namespace TeachingAssignmentManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class curriculum
+    public partial class subject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public curriculum()
+        public subject()
         {
-            this.curriculum_class = new HashSet<curriculum_class>();
+            this.class_section = new HashSet<class_section>();
         }
     
         public string id { get; set; }
@@ -25,6 +25,6 @@ namespace TeachingAssignmentManagement.Models
         public int credits { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<curriculum_class> curriculum_class { get; set; }
+        public virtual ICollection<class_section> class_section { get; set; }
     }
 }

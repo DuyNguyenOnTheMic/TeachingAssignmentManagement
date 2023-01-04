@@ -30,11 +30,11 @@ namespace TeachingAssignmentManagement.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<curriculum> curricula { get; set; }
-        public virtual DbSet<curriculum_class> curriculum_class { get; set; }
+        public virtual DbSet<class_section> class_section { get; set; }
         public virtual DbSet<lecturer> lecturers { get; set; }
         public virtual DbSet<major> majors { get; set; }
         public virtual DbSet<room> rooms { get; set; }
+        public virtual DbSet<subject> subjects { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<term> terms { get; set; }
     }

@@ -66,20 +66,12 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
-        <EntityType Name="curriculum">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="credits" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="curriculum_class">
+        <EntityType Name="class_section">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="curriculum_class_id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="class_section_id" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="original_id" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="type" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="student_class_id" Type="varchar(max)" />
@@ -104,7 +96,7 @@
           <Property Name="lecturer_id" Type="nvarchar" MaxLength="128" />
           <Property Name="term_id" Type="int" Nullable="false" />
           <Property Name="major_id" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="curriculum_id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="subject_id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="room_id" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="lecturer">
@@ -133,6 +125,14 @@
           <Property Name="type" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="capacity" Type="int" />
         </EntityType>
+        <EntityType Name="subject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="credits" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -156,73 +156,73 @@
           <Property Name="max_class" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_curriculum_class_curriculum">
-          <End Role="curriculum" Type="Self.curriculum" Multiplicity="1" />
-          <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
+          <End Role="subject" Type="Self.subject" Multiplicity="1" />
+          <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="curriculum">
+            <Principal Role="subject">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="curriculum_class">
-              <PropertyRef Name="curriculum_id" />
+            <Dependent Role="class_section">
+              <PropertyRef Name="subject_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_curriculum_class_lecturer">
           <End Role="lecturer" Type="Self.lecturer" Multiplicity="0..1" />
-          <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
+          <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lecturer">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="curriculum_class">
+            <Dependent Role="class_section">
               <PropertyRef Name="lecturer_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_curriculum_class_lecturer1">
           <End Role="lecturer" Type="Self.lecturer" Multiplicity="0..1" />
-          <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
+          <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lecturer">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="curriculum_class">
+            <Dependent Role="class_section">
               <PropertyRef Name="last_assigned_by" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_curriculum_class_major">
           <End Role="major" Type="Self.major" Multiplicity="1" />
-          <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
+          <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="major">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="curriculum_class">
+            <Dependent Role="class_section">
               <PropertyRef Name="major_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_curriculum_class_room">
           <End Role="room" Type="Self.room" Multiplicity="1" />
-          <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
+          <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="room">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="curriculum_class">
+            <Dependent Role="class_section">
               <PropertyRef Name="room_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_curriculum_class_term">
           <End Role="term" Type="Self.term" Multiplicity="1" />
-          <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
+          <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="term">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="curriculum_class">
+            <Dependent Role="class_section">
               <PropertyRef Name="term_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -290,36 +290,36 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="curriculum" EntityType="Self.curriculum" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="curriculum_class" EntityType="Self.curriculum_class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="class_section" EntityType="Self.class_section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lecturer" EntityType="Self.lecturer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="major" EntityType="Self.major" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="room" EntityType="Self.room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subject" EntityType="Self.subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="term" EntityType="Self.term" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_curriculum_class_curriculum" Association="Self.FK_curriculum_class_curriculum">
-            <End Role="curriculum" EntitySet="curriculum" />
-            <End Role="curriculum_class" EntitySet="curriculum_class" />
+            <End Role="subject" EntitySet="subject" />
+            <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
           <AssociationSet Name="FK_curriculum_class_lecturer" Association="Self.FK_curriculum_class_lecturer">
             <End Role="lecturer" EntitySet="lecturer" />
-            <End Role="curriculum_class" EntitySet="curriculum_class" />
+            <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
           <AssociationSet Name="FK_curriculum_class_lecturer1" Association="Self.FK_curriculum_class_lecturer1">
             <End Role="lecturer" EntitySet="lecturer" />
-            <End Role="curriculum_class" EntitySet="curriculum_class" />
+            <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
           <AssociationSet Name="FK_curriculum_class_major" Association="Self.FK_curriculum_class_major">
             <End Role="major" EntitySet="major" />
-            <End Role="curriculum_class" EntitySet="curriculum_class" />
+            <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
           <AssociationSet Name="FK_curriculum_class_room" Association="Self.FK_curriculum_class_room">
             <End Role="room" EntitySet="room" />
-            <End Role="curriculum_class" EntitySet="curriculum_class" />
+            <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
           <AssociationSet Name="FK_curriculum_class_term" Association="Self.FK_curriculum_class_term">
             <End Role="term" EntitySet="term" />
-            <End Role="curriculum_class" EntitySet="curriculum_class" />
+            <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -402,21 +402,12 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
-        <EntityType Name="curriculum">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="credits" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="curriculum_class" Relationship="Self.FK_curriculum_class_curriculum" FromRole="curriculum" ToRole="curriculum_class" />
-        </EntityType>
-        <EntityType Name="curriculum_class">
+        <EntityType Name="class_section">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="curriculum_class_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="class_section_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="original_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="student_class_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -441,14 +432,14 @@
           <Property Name="lecturer_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="term_id" Type="Int32" Nullable="false" />
           <Property Name="major_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="curriculum_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="subject_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="room_id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="curriculum" Relationship="Self.FK_curriculum_class_curriculum" FromRole="curriculum_class" ToRole="curriculum" />
-          <NavigationProperty Name="lecturer" Relationship="Self.FK_curriculum_class_lecturer" FromRole="curriculum_class" ToRole="lecturer" />
-          <NavigationProperty Name="lecturer1" Relationship="Self.FK_curriculum_class_lecturer1" FromRole="curriculum_class" ToRole="lecturer" />
-          <NavigationProperty Name="major" Relationship="Self.FK_curriculum_class_major" FromRole="curriculum_class" ToRole="major" />
-          <NavigationProperty Name="room" Relationship="Self.FK_curriculum_class_room" FromRole="curriculum_class" ToRole="room" />
-          <NavigationProperty Name="term" Relationship="Self.FK_curriculum_class_term" FromRole="curriculum_class" ToRole="term" />
+          <NavigationProperty Name="subject" Relationship="Self.FK_curriculum_class_curriculum" FromRole="class_section" ToRole="subject" />
+          <NavigationProperty Name="lecturer" Relationship="Self.FK_curriculum_class_lecturer" FromRole="class_section" ToRole="lecturer" />
+          <NavigationProperty Name="lecturer1" Relationship="Self.FK_curriculum_class_lecturer1" FromRole="class_section" ToRole="lecturer" />
+          <NavigationProperty Name="major" Relationship="Self.FK_curriculum_class_major" FromRole="class_section" ToRole="major" />
+          <NavigationProperty Name="room" Relationship="Self.FK_curriculum_class_room" FromRole="class_section" ToRole="room" />
+          <NavigationProperty Name="term" Relationship="Self.FK_curriculum_class_term" FromRole="class_section" ToRole="term" />
         </EntityType>
         <EntityType Name="lecturer">
           <Key>
@@ -458,8 +449,8 @@
           <Property Name="staff_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="curriculum_class" Relationship="Self.FK_curriculum_class_lecturer" FromRole="lecturer" ToRole="curriculum_class" />
-          <NavigationProperty Name="curriculum_class1" Relationship="Self.FK_curriculum_class_lecturer1" FromRole="lecturer" ToRole="curriculum_class" />
+          <NavigationProperty Name="class_section" Relationship="Self.FK_curriculum_class_lecturer" FromRole="lecturer" ToRole="class_section" />
+          <NavigationProperty Name="class_section1" Relationship="Self.FK_curriculum_class_lecturer1" FromRole="lecturer" ToRole="class_section" />
         </EntityType>
         <EntityType Name="major">
           <Key>
@@ -468,7 +459,7 @@
           <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="abbreviation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="curriculum_class" Relationship="Self.FK_curriculum_class_major" FromRole="major" ToRole="curriculum_class" />
+          <NavigationProperty Name="class_section" Relationship="Self.FK_curriculum_class_major" FromRole="major" ToRole="class_section" />
         </EntityType>
         <EntityType Name="room">
           <Key>
@@ -478,7 +469,16 @@
           <Property Name="room_2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="capacity" Type="Int32" />
-          <NavigationProperty Name="curriculum_class" Relationship="Self.FK_curriculum_class_room" FromRole="room" ToRole="curriculum_class" />
+          <NavigationProperty Name="class_section" Relationship="Self.FK_curriculum_class_room" FromRole="room" ToRole="class_section" />
+        </EntityType>
+        <EntityType Name="subject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="credits" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="class_section" Relationship="Self.FK_curriculum_class_curriculum" FromRole="subject" ToRole="class_section" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -501,7 +501,7 @@
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="max_lesson" Type="Int32" Nullable="false" />
           <Property Name="max_class" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="curriculum_class" Relationship="Self.FK_curriculum_class_term" FromRole="term" ToRole="curriculum_class" />
+          <NavigationProperty Name="class_section" Relationship="Self.FK_curriculum_class_term" FromRole="term" ToRole="class_section" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -532,73 +532,73 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_curriculum_class_curriculum">
-          <End Role="curriculum" Type="Self.curriculum" Multiplicity="1" />
-          <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
+          <End Role="subject" Type="Self.subject" Multiplicity="1" />
+          <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="curriculum">
+            <Principal Role="subject">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="curriculum_class">
-              <PropertyRef Name="curriculum_id" />
+            <Dependent Role="class_section">
+              <PropertyRef Name="subject_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_curriculum_class_lecturer">
           <End Role="lecturer" Type="Self.lecturer" Multiplicity="0..1" />
-          <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
+          <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lecturer">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="curriculum_class">
+            <Dependent Role="class_section">
               <PropertyRef Name="lecturer_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_curriculum_class_lecturer1">
           <End Role="lecturer" Type="Self.lecturer" Multiplicity="0..1" />
-          <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
+          <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lecturer">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="curriculum_class">
+            <Dependent Role="class_section">
               <PropertyRef Name="last_assigned_by" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_curriculum_class_major">
           <End Role="major" Type="Self.major" Multiplicity="1" />
-          <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
+          <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="major">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="curriculum_class">
+            <Dependent Role="class_section">
               <PropertyRef Name="major_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_curriculum_class_room">
           <End Role="room" Type="Self.room" Multiplicity="1" />
-          <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
+          <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="room">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="curriculum_class">
+            <Dependent Role="class_section">
               <PropertyRef Name="room_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_curriculum_class_term">
           <End Role="term" Type="Self.term" Multiplicity="1" />
-          <End Role="curriculum_class" Type="Self.curriculum_class" Multiplicity="*" />
+          <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="term">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="curriculum_class">
+            <Dependent Role="class_section">
               <PropertyRef Name="term_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -613,11 +613,11 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="curricula" EntityType="Self.curriculum" />
-          <EntitySet Name="curriculum_class" EntityType="Self.curriculum_class" />
+          <EntitySet Name="class_section" EntityType="Self.class_section" />
           <EntitySet Name="lecturers" EntityType="Self.lecturer" />
           <EntitySet Name="majors" EntityType="Self.major" />
           <EntitySet Name="rooms" EntityType="Self.room" />
+          <EntitySet Name="subjects" EntityType="Self.subject" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="terms" EntityType="Self.term" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -629,28 +629,28 @@
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
           <AssociationSet Name="FK_curriculum_class_curriculum" Association="Self.FK_curriculum_class_curriculum">
-            <End Role="curriculum" EntitySet="curricula" />
-            <End Role="curriculum_class" EntitySet="curriculum_class" />
+            <End Role="subject" EntitySet="subjects" />
+            <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
           <AssociationSet Name="FK_curriculum_class_lecturer" Association="Self.FK_curriculum_class_lecturer">
             <End Role="lecturer" EntitySet="lecturers" />
-            <End Role="curriculum_class" EntitySet="curriculum_class" />
+            <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
           <AssociationSet Name="FK_curriculum_class_lecturer1" Association="Self.FK_curriculum_class_lecturer1">
             <End Role="lecturer" EntitySet="lecturers" />
-            <End Role="curriculum_class" EntitySet="curriculum_class" />
+            <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
           <AssociationSet Name="FK_curriculum_class_major" Association="Self.FK_curriculum_class_major">
             <End Role="major" EntitySet="majors" />
-            <End Role="curriculum_class" EntitySet="curriculum_class" />
+            <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
           <AssociationSet Name="FK_curriculum_class_room" Association="Self.FK_curriculum_class_room">
             <End Role="room" EntitySet="rooms" />
-            <End Role="curriculum_class" EntitySet="curriculum_class" />
+            <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
           <AssociationSet Name="FK_curriculum_class_term" Association="Self.FK_curriculum_class_term">
             <End Role="term" EntitySet="terms" />
-            <End Role="curriculum_class" EntitySet="curriculum_class" />
+            <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -718,20 +718,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="curricula">
-            <EntityTypeMapping TypeName="CP25Team03Model.curriculum">
-              <MappingFragment StoreEntitySet="curriculum">
+          <EntitySetMapping Name="class_section">
+            <EntityTypeMapping TypeName="CP25Team03Model.class_section">
+              <MappingFragment StoreEntitySet="class_section">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="credits" ColumnName="credits" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="curriculum_class">
-            <EntityTypeMapping TypeName="CP25Team03Model.curriculum_class">
-              <MappingFragment StoreEntitySet="curriculum_class">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="curriculum_class_id" ColumnName="curriculum_class_id" />
+                <ScalarProperty Name="class_section_id" ColumnName="class_section_id" />
                 <ScalarProperty Name="original_id" ColumnName="original_id" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="student_class_id" ColumnName="student_class_id" />
@@ -756,7 +747,7 @@
                 <ScalarProperty Name="lecturer_id" ColumnName="lecturer_id" />
                 <ScalarProperty Name="term_id" ColumnName="term_id" />
                 <ScalarProperty Name="major_id" ColumnName="major_id" />
-                <ScalarProperty Name="curriculum_id" ColumnName="curriculum_id" />
+                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
                 <ScalarProperty Name="room_id" ColumnName="room_id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -787,6 +778,15 @@
                 <ScalarProperty Name="room_2" ColumnName="room_2" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="capacity" ColumnName="capacity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subjects">
+            <EntityTypeMapping TypeName="CP25Team03Model.subject">
+              <MappingFragment StoreEntitySet="subject">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="credits" ColumnName="credits" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

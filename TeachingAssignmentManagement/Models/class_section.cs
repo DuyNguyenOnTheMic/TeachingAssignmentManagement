@@ -12,10 +12,10 @@ namespace TeachingAssignmentManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class curriculum_class
+    public partial class class_section
     {
         public int id { get; set; }
-        public string curriculum_class_id { get; set; }
+        public string class_section_id { get; set; }
         public string original_id { get; set; }
         public string type { get; set; }
         public string student_class_id { get; set; }
@@ -40,10 +40,10 @@ namespace TeachingAssignmentManagement.Models
         public string lecturer_id { get; set; }
         public int term_id { get; set; }
         public string major_id { get; set; }
-        public string curriculum_id { get; set; }
+        public string subject_id { get; set; }
         public string room_id { get; set; }
     
-        public virtual curriculum curriculum { get; set; }
+        public virtual subject subject { get; set; }
         public virtual lecturer lecturer { get; set; }
         public virtual lecturer lecturer1 { get; set; }
         public virtual major major { get; set; }
