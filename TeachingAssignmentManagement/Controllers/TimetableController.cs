@@ -353,7 +353,7 @@ namespace TeachingAssignmentManagement.Controllers
                         lastAssignedBy = query_lecturer?.id == null ? null : userId;
                     }
 
-                    // Declare curriculum class
+                    // Declare class
                     class_section classSection = new class_section()
                     {
                         class_section_id = ToNullableString(classSectionid),
@@ -387,7 +387,7 @@ namespace TeachingAssignmentManagement.Controllers
 
                     if (!isUpdate)
                     {
-                        // Create new curriculum class
+                        // Create new class
                         unitOfWork.ClassSectionRepository.InsertClassSection(classSection);
                     }
                     else
@@ -395,7 +395,7 @@ namespace TeachingAssignmentManagement.Controllers
                         class_section query_classSection = unitOfWork.ClassSectionRepository.FindClassSection(query_classSectionWhere, classSection.class_section_id, classSection.day_2, classSection.room_id);
                         if (query_classSection == null)
                         {
-                            // Create new curriculum class if no class found
+                            // Create new class if no class found
                             classSection.last_assigned_by = null;
                             classSection.lecturer_id = null;
                             unitOfWork.ClassSectionRepository.InsertClassSection(classSection);
@@ -526,7 +526,7 @@ namespace TeachingAssignmentManagement.Controllers
                 return Json(new { error = true, message = "Lớp học phần này đã được phân công bởi " + lastAssignedBy + "!" }, JsonRequestBehavior.AllowGet);
             }
 
-            // Update lecturer id of curriculum class
+            // Update lecturer id of class
             classSection.lecturer_id = lecturerId;
             classSection.last_assigned_by = lecturerId != null ? currentLecturerId : null;
             unitOfWork.Save();
