@@ -15,10 +15,10 @@
         public string LastAssigned { get; set; }
         public string LecturerId { get; set; }
         public string LecturerName { get; set; }
-        public string CurriculumId { get; set; }
+        public string SubjectId { get; set; }
         public string RoomId { get; set; }
         public string MajorName { get; set; }
         public string MajorAbb { get; set; }
-        public curriculum Curriculum { get; set; }
+        public subject Subject { get; set; }
     }
 }

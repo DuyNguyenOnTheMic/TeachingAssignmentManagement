@@ -17,9 +17,9 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable<CurriculumClassDTO> GetTimetable(int termId, string lecturerId)
         {
-            return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id == lecturerId).Select(c => new CurriculumClassDTO
+            return context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId).Select(c => new CurriculumClassDTO
             {
-                CurriculumClassId = c.curriculum_class_id,
+                CurriculumClassId = c.class_section_id,
                 Type = c.type,
                 LessonTime = c.lesson_time,
                 Day2 = c.day_2,
@@ -27,9 +27,9 @@ namespace TeachingAssignmentManagement.DAL
                 LearnWeek = c.learn_week,
                 StartWeek = c.start_week,
                 EndWeek = c.end_week,
-                CurriculumId = c.curriculum_id,
+                SubjectId = c.subject_id,
                 RoomId = c.room_id,
-                Curriculum = c.curriculum
+                Subject = c.subject
             });
         }
 
@@ -40,10 +40,10 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable<CurriculumClassDTO> GetAssignTimetable(int termId, string majorId)
         {
-            return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId).Select(c => new CurriculumClassDTO
+            return context.class_section.Where(c => c.term_id == termId && c.major_id == majorId).Select(c => new CurriculumClassDTO
             {
                 Id = c.id,
-                CurriculumClassId = c.curriculum_class_id,
+                CurriculumClassId = c.class_section_id,
                 Type = c.type,
                 Day2 = c.day_2,
                 StartLesson2 = c.start_lesson_2,
@@ -51,18 +51,18 @@ namespace TeachingAssignmentManagement.DAL
                 LastAssigned = c.lecturer1.full_name,
                 LecturerId = c.lecturer_id,
                 LecturerName = c.lecturer.full_name,
-                CurriculumId = c.curriculum_id,
+                SubjectId = c.subject_id,
                 RoomId = c.room_id,
-                Curriculum = c.curriculum
+                Subject = c.subject
             });
         }
 
         public IEnumerable<CurriculumClassDTO> GetTermAssignTimetable(int termId)
         {
-            return context.curriculum_class.Where(c => c.term_id == termId).Select(c => new CurriculumClassDTO
+            return context.class_section.Where(c => c.term_id == termId).Select(c => new CurriculumClassDTO
             {
                 Id = c.id,
-                CurriculumClassId = c.curriculum_class_id,
+                CurriculumClassId = c.class_section_id,
                 Type = c.type,
                 Day2 = c.day_2,
                 StartLesson2 = c.start_lesson_2,
@@ -70,18 +70,18 @@ namespace TeachingAssignmentManagement.DAL
                 LastAssigned = c.lecturer1.full_name,
                 LecturerId = c.lecturer_id,
                 LecturerName = c.lecturer.full_name,
-                CurriculumId = c.curriculum_id,
+                SubjectId = c.subject_id,
                 RoomId = c.room_id,
                 MajorAbb = c.major.abbreviation,
-                Curriculum = c.curriculum
+                Subject = c.subject
             });
         }
 
         public IEnumerable<CurriculumClassDTO> GetTimetableStatistics(int termId)
         {
-            return context.curriculum_class.Where(c => c.term_id == termId).Select(c => new CurriculumClassDTO
+            return context.class_section.Where(c => c.term_id == termId).Select(c => new CurriculumClassDTO
             {
-                CurriculumClassId = c.curriculum_class_id,
+                CurriculumClassId = c.class_section_id,
                 Type = c.type,
                 Day2 = c.day_2,
                 StartLesson2 = c.start_lesson_2,
@@ -93,26 +93,26 @@ namespace TeachingAssignmentManagement.DAL
                 RoomId = c.room_id,
                 MajorName = c.major.name,
                 MajorAbb = c.major.abbreviation,
-                Curriculum = c.curriculum
+                Subject = c.subject
             });
         }
 
-        public IEnumerable<curriculum_class> GetExportData(int termId, string majorId)
+        public IEnumerable<class_section> GetExportData(int termId, string majorId)
         {
-            return context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId);
+            return context.class_section.Where(c => c.term_id == termId && c.major_id == majorId);
         }
 
-        public IEnumerable<curriculum_class> GetClassesInTerm(int termId, string lecturerId)
+        public IEnumerable<class_section> GetClassesInTerm(int termId, string lecturerId)
         {
-            return context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
+            return context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
         }
 
-        public IEnumerable<curriculum_class> GetClassesInLesson(IEnumerable<curriculum_class> curriculumClasses, int lesson)
+        public IEnumerable<class_section> GetClassesInLesson(IEnumerable<class_section> curriculumClasses, int lesson)
         {
             return curriculumClasses.Where(c => c.start_lesson_2 == lesson);
         }
 
-        public IEnumerable<curriculum_class> GetClassesInCampus(IEnumerable<curriculum_class> curriculumClasses, int lesson, string room)
+        public IEnumerable<class_section> GetClassesInCampus(IEnumerable<class_section> curriculumClasses, int lesson, string room)
         {
             int previousLesson = 0;
             int nextLesson = lesson + 3;
@@ -127,29 +127,29 @@ namespace TeachingAssignmentManagement.DAL
             string campus = room.Split('.')[0];
             return campus.Contains("CS")
                 ? curriculumClasses.Where(c => !c.room_id.Contains(campus) && c.room_id.Contains("CS") && (c.start_lesson == previousLesson || c.start_lesson == nextLesson))
-                : Enumerable.Empty<curriculum_class>();
+                : Enumerable.Empty<class_section>();
         }
 
-        public IEnumerable<curriculum_class> GetClassesInDay(IEnumerable<curriculum_class> curriculumClasses, int day)
+        public IEnumerable<class_section> GetClassesInDay(IEnumerable<class_section> curriculumClasses, int day)
         {
             return curriculumClasses.Where(c => c.day_2 == day);
         }
 
-        public IEnumerable<curriculum_class> GetClassesByTerm(int termId)
+        public IEnumerable<class_section> GetClassesByTerm(int termId)
         {
-            return context.curriculum_class.Where(c => c.term_id == termId);
+            return context.class_section.Where(c => c.term_id == termId);
         }
 
-        public curriculum_class GetClassByID(int id)
+        public class_section GetClassByID(int id)
         {
-            return context.curriculum_class.Find(id);
+            return context.class_section.Find(id);
         }
 
         public IEnumerable GetTermStatistics(bool isLesson, int termId, string majorId, string lecturerType)
         {
-            IQueryable<curriculum_class> query_classes = majorId != "-1"
-                ? context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == lecturerType)
-                : context.curriculum_class.Where(c => c.term_id == termId && c.lecturer.type == lecturerType);
+            IQueryable<class_section> query_classes = majorId != "-1"
+                ? context.class_section.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == lecturerType)
+                : context.class_section.Where(c => c.term_id == termId && c.lecturer.type == lecturerType);
             if (!isLesson)
             {
                 return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
@@ -157,7 +157,7 @@ namespace TeachingAssignmentManagement.DAL
                     c.Key,
                     c.FirstOrDefault().lecturer.staff_id,
                     c.FirstOrDefault().lecturer.full_name,
-                    curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                    curriculum_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
                     lecturer_type = c.FirstOrDefault().lecturer.type
@@ -170,7 +170,7 @@ namespace TeachingAssignmentManagement.DAL
                     c.Key,
                     c.FirstOrDefault().lecturer.staff_id,
                     c.FirstOrDefault().lecturer.full_name,
-                    curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                    curriculum_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
                     sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
@@ -185,9 +185,9 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable GetTermStatisticsAll(bool isLesson, int termId, string majorId)
         {
-            IQueryable<curriculum_class> query_classes = majorId != "-1"
-                ? context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type != null)
-                : context.curriculum_class.Where(c => c.term_id == termId && c.lecturer.type != null);
+            IQueryable<class_section> query_classes = majorId != "-1"
+                ? context.class_section.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type != null)
+                : context.class_section.Where(c => c.term_id == termId && c.lecturer.type != null);
             if (!isLesson)
             {
                 return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
@@ -196,7 +196,7 @@ namespace TeachingAssignmentManagement.DAL
                     c.FirstOrDefault().lecturer.staff_id,
                     c.FirstOrDefault().lecturer.full_name,
                     lecturer_type = c.FirstOrDefault().lecturer.type,
-                    curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                    curriculum_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson)
                 }).OrderByDescending(c => c.sum).ToList();
@@ -208,7 +208,7 @@ namespace TeachingAssignmentManagement.DAL
                     c.Key,
                     c.FirstOrDefault().lecturer.staff_id,
                     c.FirstOrDefault().lecturer.full_name,
-                    curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                    curriculum_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
                     sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
@@ -223,14 +223,14 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable GetTermCurriculums(int termId, string majorId, string lecturerId)
         {
-            IQueryable<curriculum_class> query_classes = majorId != "-1"
-                ? context.curriculum_class.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer_id == lecturerId)
-                : context.curriculum_class.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
-            return query_classes.GroupBy(c => c.curriculum_id).Select(c => new
+            IQueryable<class_section> query_classes = majorId != "-1"
+                ? context.class_section.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer_id == lecturerId)
+                : context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
+            return query_classes.GroupBy(c => c.subject_id).Select(c => new
             {
                 id = c.Key,
-                curriculum_name = c.FirstOrDefault().curriculum.name,
-                curriculum_credits = c.FirstOrDefault().curriculum.credits,
+                curriculum_name = c.FirstOrDefault().subject.name,
+                curriculum_credits = c.FirstOrDefault().subject.credits,
                 curriculum_major = c.FirstOrDefault().major.name,
                 curriculum_hours = c.Sum(item => item.total_lesson),
                 theory_count = c.Count(item => item.type == "Lý thuyết"),
@@ -240,9 +240,9 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable GetYearStatistics(bool isLesson, int startYear, int endYear, string majorId, string lecturerType)
         {
-            IQueryable<curriculum_class> query_classes = majorId != "-1"
-                ? context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer.type == lecturerType)
-                : context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type == lecturerType);
+            IQueryable<class_section> query_classes = majorId != "-1"
+                ? context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer.type == lecturerType)
+                : context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type == lecturerType);
             if (!isLesson)
             {
                 return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
@@ -250,7 +250,7 @@ namespace TeachingAssignmentManagement.DAL
                     c.Key,
                     c.FirstOrDefault().lecturer.staff_id,
                     c.FirstOrDefault().lecturer.full_name,
-                    curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                    curriculum_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
                     lecturer_type = c.FirstOrDefault().lecturer.type
@@ -263,7 +263,7 @@ namespace TeachingAssignmentManagement.DAL
                     c.Key,
                     c.FirstOrDefault().lecturer.staff_id,
                     c.FirstOrDefault().lecturer.full_name,
-                    curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                    curriculum_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
                     sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
@@ -278,9 +278,9 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable GetYearStatisticsAll(bool isLesson, int startYear, int endYear, string majorId)
         {
-            IQueryable<curriculum_class> query_classes = majorId != "-1"
-                ? context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer.type != null)
-                : context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type != null);
+            IQueryable<class_section> query_classes = majorId != "-1"
+                ? context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer.type != null)
+                : context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type != null);
             if (!isLesson)
             {
                 return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
@@ -289,7 +289,7 @@ namespace TeachingAssignmentManagement.DAL
                     c.FirstOrDefault().lecturer.staff_id,
                     c.FirstOrDefault().lecturer.full_name,
                     lecturer_type = c.FirstOrDefault().lecturer.type,
-                    curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                    curriculum_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson)
                 }).OrderByDescending(c => c.sum).ToList();
@@ -301,7 +301,7 @@ namespace TeachingAssignmentManagement.DAL
                     c.Key,
                     c.FirstOrDefault().lecturer.staff_id,
                     c.FirstOrDefault().lecturer.full_name,
-                    curriculum_count = c.GroupBy(item => item.curriculum.id).Count(),
+                    curriculum_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
                     sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
@@ -316,14 +316,14 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable GetYearCurriculums(int startYear, int endYear, string majorId, string lecturerId)
         {
-            IQueryable<curriculum_class> query_classes = majorId != "-1"
-                ? context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer_id == lecturerId)
-                : context.curriculum_class.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id == lecturerId);
-            return query_classes.GroupBy(c => c.curriculum_id).Select(c => new
+            IQueryable<class_section> query_classes = majorId != "-1"
+                ? context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer_id == lecturerId)
+                : context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id == lecturerId);
+            return query_classes.GroupBy(c => c.subject_id).Select(c => new
             {
                 id = c.Key,
-                curriculum_name = c.FirstOrDefault().curriculum.name,
-                curriculum_credits = c.FirstOrDefault().curriculum.credits,
+                curriculum_name = c.FirstOrDefault().subject.name,
+                curriculum_credits = c.FirstOrDefault().subject.credits,
                 curriculum_major = c.FirstOrDefault().major.name,
                 curriculum_hours = c.Sum(item => item.total_lesson),
                 theory_count = c.Count(item => item.type == "Lý thuyết"),
@@ -331,30 +331,30 @@ namespace TeachingAssignmentManagement.DAL
             }).ToList();
         }
 
-        public curriculum_class FindCurriculumClass(IEnumerable<curriculum_class> curriculumClass, string curriculumClassId, int day2, string roomId)
+        public class_section FindCurriculumClass(IEnumerable<class_section> curriculumClass, string curriculumClassId, int day2, string roomId)
         {
-            return curriculumClass.FirstOrDefault(c => c.curriculum_class_id == curriculumClassId && c.day_2 == day2 && c.room_id == roomId);
+            return curriculumClass.FirstOrDefault(c => c.class_section_id == curriculumClassId && c.day_2 == day2 && c.room_id == roomId);
         }
 
-        public curriculum_class CheckTermMajor(int termId, string majorId)
+        public class_section CheckTermMajor(int termId, string majorId)
         {
-            return context.curriculum_class.FirstOrDefault(c => c.term_id == termId && c.major_id == majorId);
+            return context.class_section.FirstOrDefault(c => c.term_id == termId && c.major_id == majorId);
         }
 
-        public void InsertCurriculumClass(curriculum_class curriculum_Class)
+        public void InsertCurriculumClass(class_section class_section)
         {
-            context.curriculum_class.Add(curriculum_Class);
+            context.class_section.Add(class_section);
         }
 
         public void DeleteClass(int id)
         {
-            curriculum_class curriculumClass = context.curriculum_class.Find(id);
-            context.curriculum_class.Remove(curriculumClass);
+            class_section curriculumClass = context.class_section.Find(id);
+            context.class_section.Remove(curriculumClass);
         }
 
         public void DeleteAllClasses(int term, string major)
         {
-            context.curriculum_class.RemoveRange(context.curriculum_class.Where(c => c.term_id == term && c.major_id == major));
+            context.class_section.RemoveRange(context.class_section.Where(c => c.term_id == term && c.major_id == major));
         }
     }
 }

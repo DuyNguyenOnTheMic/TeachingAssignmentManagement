@@ -219,7 +219,7 @@ namespace TeachingAssignmentManagement.Controllers
             if (!isUpdate)
             {
                 // Check if this term and major already has data
-                curriculum_class query_term_major = unitOfWork.CurriculumClassRepository.CheckTermMajor(term, major);
+                class_section query_term_major = unitOfWork.CurriculumClassRepository.CheckTermMajor(term, major);
                 if (query_term_major != null)
                 {
                     Response.Write($"Học kỳ và ngành này đã có dữ liệu trong hệ thống, bạn muốn cập nhật hay thay thế thời khoá biểu?");
@@ -243,8 +243,8 @@ namespace TeachingAssignmentManagement.Controllers
 
             int itemsCount = dt.Rows.Count;
             TimetableViewModels timetableViewModels = new TimetableViewModels();
-            List<curriculum_class> curriculumClassList = new List<curriculum_class>();
-            IEnumerable<curriculum_class> query_curriculumClassWhere = curriculumClassList;
+            List<class_section> curriculumClassList = new List<class_section>();
+            IEnumerable<class_section> query_curriculumClassWhere = curriculumClassList;
             if (isUpdate)
             {
                 // Query Curriculum classes of this term
@@ -262,8 +262,8 @@ namespace TeachingAssignmentManagement.Controllers
                 {
                     // Declare all columns
                     string originalId = row["MaGocLHP"].ToString();
-                    string curriculumId = row["Mã MH"].ToString();
-                    string curriculumClassid = row["Mã LHP"].ToString();
+                    string subjectId = row["Mã MH"].ToString();
+                    string classSectionid = row["Mã LHP"].ToString();
                     string name = row["Tên HP"].ToString();
                     string credits = row["Số TC"].ToString();
                     string type = row["Loại HP"].ToString();
@@ -293,7 +293,7 @@ namespace TeachingAssignmentManagement.Controllers
                     string note2 = row["Ghi chú 2"].ToString();
 
                     // Check if values is null
-                    string[] validRows = { originalId, curriculumId, curriculumClassid, name, credits, type, totalLesson, day, startLesson, lessonNumber, roomId, learnWeek, day2, startLesson2, startWeek, endWeek };
+                    string[] validRows = { originalId, subjectId, classSectionid, name, credits, type, totalLesson, day, startLesson, lessonNumber, roomId, learnWeek, day2, startLesson2, startWeek, endWeek };
                     string checkNull = ValidateNotNull(validRows);
                     if (checkNull != null)
                     {
@@ -310,17 +310,17 @@ namespace TeachingAssignmentManagement.Controllers
                         return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
                     }
 
-                    curriculum query_curriculum = unitOfWork.CurriculumRepository.GetCurriculumByID(curriculumId);
-                    if (query_curriculum == null)
+                    subject query_subject = unitOfWork.CurriculumRepository.GetCurriculumByID(subjectId);
+                    if (query_subject == null)
                     {
-                        // Create new curriculum
-                        curriculum curriculum = new curriculum()
+                        // Create new subject
+                        subject subject = new subject()
                         {
-                            id = ToNullableString(curriculumId),
+                            id = ToNullableString(subjectId),
                             name = ToNullableString(name),
                             credits = ToInt(credits)
                         };
-                        unitOfWork.CurriculumRepository.InsertCurriculum(curriculum);
+                        unitOfWork.CurriculumRepository.InsertCurriculum(subject);
                         unitOfWork.Save();
                     }
 
@@ -354,9 +354,9 @@ namespace TeachingAssignmentManagement.Controllers
                     }
 
                     // Declare curriculum class
-                    curriculum_class curriculumClass = new curriculum_class()
+                    class_section curriculumClass = new class_section()
                     {
-                        curriculum_class_id = ToNullableString(curriculumClassid),
+                        class_section_id = ToNullableString(classSectionid),
                         original_id = ToNullableString(originalId),
                         type = ToNullableString(type),
                         student_class_id = ToNullableString(studentClassId),
@@ -381,7 +381,7 @@ namespace TeachingAssignmentManagement.Controllers
                         lecturer_id = query_lecturer?.id,
                         term_id = term,
                         major_id = major,
-                        curriculum_id = ToNullableString(curriculumId),
+                        subject_id = ToNullableString(subjectId),
                         room_id = ToNullableString(roomId)
                     };
 
@@ -392,7 +392,7 @@ namespace TeachingAssignmentManagement.Controllers
                     }
                     else
                     {
-                        curriculum_class query_curriculumClass = unitOfWork.CurriculumClassRepository.FindCurriculumClass(query_curriculumClassWhere, curriculumClass.curriculum_class_id, curriculumClass.day_2, curriculumClass.room_id);
+                        class_section query_curriculumClass = unitOfWork.CurriculumClassRepository.FindCurriculumClass(query_curriculumClassWhere, curriculumClass.class_section_id, curriculumClass.day_2, curriculumClass.room_id);
                         if (query_curriculumClass == null)
                         {
                             // Create new curriculum class if no class found
@@ -413,7 +413,7 @@ namespace TeachingAssignmentManagement.Controllers
                             else
                             {
                                 // Add lecturer to error list
-                                errorAssignList.Add(Tuple.Create(lecturerId, fullName, curriculumClassid, day, lessonTime, checkState.message));
+                                errorAssignList.Add(Tuple.Create(lecturerId, fullName, classSectionid, day, lessonTime, checkState.message));
                             }
                         }
                     }
@@ -448,7 +448,7 @@ namespace TeachingAssignmentManagement.Controllers
                 new DataColumn("Ghi Chú 1"), new DataColumn("Ghi chú 2")
             });
 
-            IEnumerable<curriculum_class> classes;
+            IEnumerable<class_section> classes;
             if (majorId != "-1")
             {
                 // Export data in term and major
@@ -461,11 +461,11 @@ namespace TeachingAssignmentManagement.Controllers
                 majorId = "TatCa";
             }
 
-            foreach (curriculum_class item in classes)
+            foreach (class_section item in classes)
             {
                 // Add data to table
-                dt.Rows.Add(item.original_id, item.curriculum_id, item.curriculum_class_id, item.curriculum.name,
-                    item.curriculum.credits, item.type, item.student_class_id, item.minimum_student, item.total_lesson,
+                dt.Rows.Add(item.original_id, item.subject_id, item.class_section_id, item.subject.name,
+                    item.subject.credits, item.type, item.student_class_id, item.minimum_student, item.total_lesson,
                     item.room.room_2, item.day, item.start_lesson, item.lesson_number, item.lesson_time, item.room_id,
                     item.lecturer?.staff_id, item.lecturer?.full_name, item.room.type, item.room.capacity, item.student_number,
                     item.free_slot, item.state, item.learn_week, item.day_2, item.start_lesson_2,
@@ -514,7 +514,7 @@ namespace TeachingAssignmentManagement.Controllers
         public JsonResult Assign(int id, string lecturerId)
         {
             // Declare variables
-            curriculum_class curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
+            class_section curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
             string currentLecturerId = UserManager.FindByEmail(User.Identity.Name).Id;
             string currentLecturerName = unitOfWork.UserRepository.GetLecturerByID(currentLecturerId).full_name;
             lecturerId = ToNullableString(lecturerId);
@@ -543,20 +543,20 @@ namespace TeachingAssignmentManagement.Controllers
             if (lecturerId != string.Empty)
             {
                 // Declare variables
-                curriculum_class curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
+                class_section curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
                 term term = unitOfWork.TermRepository.GetTermByID(termId);
-                IEnumerable<curriculum_class> query_classWeek = unitOfWork.CurriculumClassRepository.GetClassesInTerm(termId, lecturerId);
-                IEnumerable<curriculum_class> query_classDay = unitOfWork.CurriculumClassRepository.GetClassesInDay(query_classWeek, curriculumClass.day_2);
-                IEnumerable<curriculum_class> query_classCampus = unitOfWork.CurriculumClassRepository.GetClassesInCampus(query_classDay, curriculumClass.start_lesson_2, curriculumClass.room_id);
-                IEnumerable<curriculum_class> query_classLesson = unitOfWork.CurriculumClassRepository.GetClassesInLesson(query_classDay, curriculumClass.start_lesson_2);
+                IEnumerable<class_section> query_classWeek = unitOfWork.CurriculumClassRepository.GetClassesInTerm(termId, lecturerId);
+                IEnumerable<class_section> query_classDay = unitOfWork.CurriculumClassRepository.GetClassesInDay(query_classWeek, curriculumClass.day_2);
+                IEnumerable<class_section> query_classCampus = unitOfWork.CurriculumClassRepository.GetClassesInCampus(query_classDay, curriculumClass.start_lesson_2, curriculumClass.room_id);
+                IEnumerable<class_section> query_classLesson = unitOfWork.CurriculumClassRepository.GetClassesInLesson(query_classDay, curriculumClass.start_lesson_2);
 
                 // Check not duplicate class in the same time
                 if (query_classLesson.Count() >= 1)
                 {
                     IEnumerable classes = query_classLesson.Select(c => new
                     {
-                        classId = c.curriculum_class_id,
-                        curriculumName = c.curriculum.name,
+                        classId = c.class_section_id,
+                        curriculumName = c.subject.name,
                         classDay = c.day,
                         lessonTime = c.lesson_time,
                         majorName = c.major.name
@@ -569,8 +569,8 @@ namespace TeachingAssignmentManagement.Controllers
                 {
                     IEnumerable classes = query_classCampus.Select(c => new
                     {
-                        classId = c.curriculum_class_id,
-                        curriculumName = c.curriculum.name,
+                        classId = c.class_section_id,
+                        curriculumName = c.subject.name,
                         classDay = c.day,
                         lessonTime = c.lesson_time,
                         roomId = c.room_id,
@@ -584,8 +584,8 @@ namespace TeachingAssignmentManagement.Controllers
                 {
                     IEnumerable classes = query_classDay.Select(c => new
                     {
-                        classId = c.curriculum_class_id,
-                        curriculumName = c.curriculum.name,
+                        classId = c.class_section_id,
+                        curriculumName = c.subject.name,
                         classDay = c.day,
                         lessonTime = c.lesson_time,
                         majorName = c.major.name
@@ -598,8 +598,8 @@ namespace TeachingAssignmentManagement.Controllers
                 {
                     IEnumerable classes = query_classWeek.Select(c => new
                     {
-                        classId = c.curriculum_class_id,
-                        curriculumName = c.curriculum.name,
+                        classId = c.class_section_id,
+                        curriculumName = c.subject.name,
                         classDay = c.day,
                         lessonTime = c.lesson_time,
                         majorName = c.major.name
