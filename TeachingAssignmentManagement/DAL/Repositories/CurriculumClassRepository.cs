@@ -19,7 +19,7 @@ namespace TeachingAssignmentManagement.DAL
         {
             return context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId).Select(c => new ClassSectionDTO
             {
-                CurriculumClassId = c.class_section_id,
+                ClassSectionId = c.class_section_id,
                 Type = c.type,
                 LessonTime = c.lesson_time,
                 Day2 = c.day_2,
@@ -43,7 +43,7 @@ namespace TeachingAssignmentManagement.DAL
             return context.class_section.Where(c => c.term_id == termId && c.major_id == majorId).Select(c => new ClassSectionDTO
             {
                 Id = c.id,
-                CurriculumClassId = c.class_section_id,
+                ClassSectionId = c.class_section_id,
                 Type = c.type,
                 Day2 = c.day_2,
                 StartLesson2 = c.start_lesson_2,
@@ -62,7 +62,7 @@ namespace TeachingAssignmentManagement.DAL
             return context.class_section.Where(c => c.term_id == termId).Select(c => new ClassSectionDTO
             {
                 Id = c.id,
-                CurriculumClassId = c.class_section_id,
+                ClassSectionId = c.class_section_id,
                 Type = c.type,
                 Day2 = c.day_2,
                 StartLesson2 = c.start_lesson_2,
@@ -81,7 +81,7 @@ namespace TeachingAssignmentManagement.DAL
         {
             return context.class_section.Where(c => c.term_id == termId).Select(c => new ClassSectionDTO
             {
-                CurriculumClassId = c.class_section_id,
+                ClassSectionId = c.class_section_id,
                 Type = c.type,
                 Day2 = c.day_2,
                 StartLesson2 = c.start_lesson_2,

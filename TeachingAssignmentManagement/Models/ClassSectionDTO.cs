@@ -3,7 +3,7 @@
     public class ClassSectionDTO
     {
         public int Id { get; set; }
-        public string CurriculumClassId { get; set; }
+        public string ClassSectionId { get; set; }
         public string Type { get; set; }
         public string LessonTime { get; set; }
         public int Day2 { get; set; }
