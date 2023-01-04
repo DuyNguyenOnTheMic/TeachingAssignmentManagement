@@ -13,7 +13,7 @@
             <button class="btn btn-secondary me-1 my-25 p-25 text-nowrap" type="button">Chưa phân</button>
         </div>
         <select class="form-select" id="curriculumFilter" name="curriculumFilter" multiple aria-label="Lọc môn học">
-            @foreach (var option in ViewBag.curriculums)
+            @foreach (var option in ViewBag.subjects)
             {
                 <option value="@option.id">@option.name</option>
             }
@@ -60,7 +60,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var curriculum in ViewBag.curriculums)
+            @foreach (var curriculum in ViewBag.subjects)
             {
                 <tr id="@curriculum.id">
                     <td>@curriculum.name</td>

@@ -160,7 +160,7 @@ namespace TeachingAssignmentManagement.Controllers
             ViewData["endWeek"] = endWeek;
             ViewData["currentWeek"] = currentWeek;
             ViewData["weekLabel"] = weekLabel;
-            ViewBag.curriculums = unitOfWork.SubjectRepository.GetCurriculums(query_classes);
+            ViewBag.curriculums = unitOfWork.SubjectRepository.GetSubjects(query_classes);
             ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
             return PartialView("_Timetable", new TimetableViewModels
             {

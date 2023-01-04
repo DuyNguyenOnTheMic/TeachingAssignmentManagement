@@ -13,17 +13,17 @@ namespace TeachingAssignmentManagement.DAL
             this.context = context;
         }
 
-        public IEnumerable<subject> GetCurriculums(IEnumerable<ClassSectionDTO> curriculumClass)
+        public IEnumerable<subject> GetSubjects(IEnumerable<ClassSectionDTO> classSections)
         {
-            return curriculumClass.Select(c => c.Subject).Distinct().ToList();
+            return classSections.Select(c => c.Subject).Distinct().ToList();
         }
 
-        public subject GetCurriculumByID(string id)
+        public subject GetSubjectByID(string id)
         {
             return context.subjects.Find(id);
         }
 
-        public void InsertCurriculum(subject subject)
+        public void InsertSubject(subject subject)
         {
             context.subjects.Add(subject);
         }
