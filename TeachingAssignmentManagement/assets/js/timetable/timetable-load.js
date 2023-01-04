@@ -12,10 +12,10 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, currentLec
     var element = $('#' + id);
     if (element.length) {
         if (isUpdate) {
-            // Update curriculum class
+            // Update class
             updateClass(element, lecturerId, lecturerName, currentLecturerName);
         } else {
-            // Delete curriculum class
+            // Delete class
             element.parent().tooltip('dispose');
             element.popover('dispose');
             element.remove();
