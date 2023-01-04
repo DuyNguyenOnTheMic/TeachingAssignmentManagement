@@ -155,19 +155,7 @@
           <Property Name="max_lesson" Type="int" Nullable="false" />
           <Property Name="max_class" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_curriculum_class_curriculum">
-          <End Role="subject" Type="Self.subject" Multiplicity="1" />
-          <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="subject">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="class_section">
-              <PropertyRef Name="subject_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_curriculum_class_lecturer">
+        <Association Name="FK_class_section_lecturer">
           <End Role="lecturer" Type="Self.lecturer" Multiplicity="0..1" />
           <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
@@ -179,7 +167,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_curriculum_class_lecturer1">
+        <Association Name="FK_class_section_lecturer1">
           <End Role="lecturer" Type="Self.lecturer" Multiplicity="0..1" />
           <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
@@ -191,7 +179,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_curriculum_class_major">
+        <Association Name="FK_class_section_major">
           <End Role="major" Type="Self.major" Multiplicity="1" />
           <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
@@ -203,7 +191,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_curriculum_class_room">
+        <Association Name="FK_class_section_room">
           <End Role="room" Type="Self.room" Multiplicity="1" />
           <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
@@ -215,7 +203,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_curriculum_class_term">
+        <Association Name="FK_class_section_subject">
+          <End Role="subject" Type="Self.subject" Multiplicity="1" />
+          <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subject">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="class_section">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_class_section_term">
           <End Role="term" Type="Self.term" Multiplicity="1" />
           <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
@@ -297,27 +297,27 @@
           <EntitySet Name="subject" EntityType="Self.subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="term" EntityType="Self.term" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_curriculum_class_curriculum" Association="Self.FK_curriculum_class_curriculum">
-            <End Role="subject" EntitySet="subject" />
-            <End Role="class_section" EntitySet="class_section" />
-          </AssociationSet>
-          <AssociationSet Name="FK_curriculum_class_lecturer" Association="Self.FK_curriculum_class_lecturer">
+          <AssociationSet Name="FK_class_section_lecturer" Association="Self.FK_class_section_lecturer">
             <End Role="lecturer" EntitySet="lecturer" />
             <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
-          <AssociationSet Name="FK_curriculum_class_lecturer1" Association="Self.FK_curriculum_class_lecturer1">
+          <AssociationSet Name="FK_class_section_lecturer1" Association="Self.FK_class_section_lecturer1">
             <End Role="lecturer" EntitySet="lecturer" />
             <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
-          <AssociationSet Name="FK_curriculum_class_major" Association="Self.FK_curriculum_class_major">
+          <AssociationSet Name="FK_class_section_major" Association="Self.FK_class_section_major">
             <End Role="major" EntitySet="major" />
             <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
-          <AssociationSet Name="FK_curriculum_class_room" Association="Self.FK_curriculum_class_room">
+          <AssociationSet Name="FK_class_section_room" Association="Self.FK_class_section_room">
             <End Role="room" EntitySet="room" />
             <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
-          <AssociationSet Name="FK_curriculum_class_term" Association="Self.FK_curriculum_class_term">
+          <AssociationSet Name="FK_class_section_subject" Association="Self.FK_class_section_subject">
+            <End Role="subject" EntitySet="subject" />
+            <End Role="class_section" EntitySet="class_section" />
+          </AssociationSet>
+          <AssociationSet Name="FK_class_section_term" Association="Self.FK_class_section_term">
             <End Role="term" EntitySet="term" />
             <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
@@ -434,12 +434,12 @@
           <Property Name="major_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="subject_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="room_id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="subject" Relationship="Self.FK_curriculum_class_curriculum" FromRole="class_section" ToRole="subject" />
-          <NavigationProperty Name="lecturer" Relationship="Self.FK_curriculum_class_lecturer" FromRole="class_section" ToRole="lecturer" />
-          <NavigationProperty Name="lecturer1" Relationship="Self.FK_curriculum_class_lecturer1" FromRole="class_section" ToRole="lecturer" />
-          <NavigationProperty Name="major" Relationship="Self.FK_curriculum_class_major" FromRole="class_section" ToRole="major" />
-          <NavigationProperty Name="room" Relationship="Self.FK_curriculum_class_room" FromRole="class_section" ToRole="room" />
-          <NavigationProperty Name="term" Relationship="Self.FK_curriculum_class_term" FromRole="class_section" ToRole="term" />
+          <NavigationProperty Name="lecturer" Relationship="Self.FK_class_section_lecturer" FromRole="class_section" ToRole="lecturer" />
+          <NavigationProperty Name="lecturer1" Relationship="Self.FK_class_section_lecturer1" FromRole="class_section" ToRole="lecturer" />
+          <NavigationProperty Name="major" Relationship="Self.FK_class_section_major" FromRole="class_section" ToRole="major" />
+          <NavigationProperty Name="room" Relationship="Self.FK_class_section_room" FromRole="class_section" ToRole="room" />
+          <NavigationProperty Name="subject" Relationship="Self.FK_class_section_subject" FromRole="class_section" ToRole="subject" />
+          <NavigationProperty Name="term" Relationship="Self.FK_class_section_term" FromRole="class_section" ToRole="term" />
         </EntityType>
         <EntityType Name="lecturer">
           <Key>
@@ -449,8 +449,8 @@
           <Property Name="staff_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="class_section" Relationship="Self.FK_curriculum_class_lecturer" FromRole="lecturer" ToRole="class_section" />
-          <NavigationProperty Name="class_section1" Relationship="Self.FK_curriculum_class_lecturer1" FromRole="lecturer" ToRole="class_section" />
+          <NavigationProperty Name="class_section" Relationship="Self.FK_class_section_lecturer" FromRole="lecturer" ToRole="class_section" />
+          <NavigationProperty Name="class_section1" Relationship="Self.FK_class_section_lecturer1" FromRole="lecturer" ToRole="class_section" />
         </EntityType>
         <EntityType Name="major">
           <Key>
@@ -459,7 +459,7 @@
           <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="abbreviation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="class_section" Relationship="Self.FK_curriculum_class_major" FromRole="major" ToRole="class_section" />
+          <NavigationProperty Name="class_section" Relationship="Self.FK_class_section_major" FromRole="major" ToRole="class_section" />
         </EntityType>
         <EntityType Name="room">
           <Key>
@@ -469,7 +469,7 @@
           <Property Name="room_2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="capacity" Type="Int32" />
-          <NavigationProperty Name="class_section" Relationship="Self.FK_curriculum_class_room" FromRole="room" ToRole="class_section" />
+          <NavigationProperty Name="class_section" Relationship="Self.FK_class_section_room" FromRole="room" ToRole="class_section" />
         </EntityType>
         <EntityType Name="subject">
           <Key>
@@ -478,7 +478,7 @@
           <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="credits" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="class_section" Relationship="Self.FK_curriculum_class_curriculum" FromRole="subject" ToRole="class_section" />
+          <NavigationProperty Name="class_section" Relationship="Self.FK_class_section_subject" FromRole="subject" ToRole="class_section" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -501,7 +501,7 @@
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="max_lesson" Type="Int32" Nullable="false" />
           <Property Name="max_class" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="class_section" Relationship="Self.FK_curriculum_class_term" FromRole="term" ToRole="class_section" />
+          <NavigationProperty Name="class_section" Relationship="Self.FK_class_section_term" FromRole="term" ToRole="class_section" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -531,19 +531,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_curriculum_class_curriculum">
-          <End Role="subject" Type="Self.subject" Multiplicity="1" />
-          <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="subject">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="class_section">
-              <PropertyRef Name="subject_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_curriculum_class_lecturer">
+        <Association Name="FK_class_section_lecturer">
           <End Role="lecturer" Type="Self.lecturer" Multiplicity="0..1" />
           <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
@@ -555,7 +543,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_curriculum_class_lecturer1">
+        <Association Name="FK_class_section_lecturer1">
           <End Role="lecturer" Type="Self.lecturer" Multiplicity="0..1" />
           <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
@@ -567,7 +555,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_curriculum_class_major">
+        <Association Name="FK_class_section_major">
           <End Role="major" Type="Self.major" Multiplicity="1" />
           <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
@@ -579,7 +567,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_curriculum_class_room">
+        <Association Name="FK_class_section_room">
           <End Role="room" Type="Self.room" Multiplicity="1" />
           <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
@@ -591,7 +579,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_curriculum_class_term">
+        <Association Name="FK_class_section_subject">
+          <End Role="subject" Type="Self.subject" Multiplicity="1" />
+          <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subject">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="class_section">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_class_section_term">
           <End Role="term" Type="Self.term" Multiplicity="1" />
           <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
           <ReferentialConstraint>
@@ -628,27 +628,27 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
-          <AssociationSet Name="FK_curriculum_class_curriculum" Association="Self.FK_curriculum_class_curriculum">
-            <End Role="subject" EntitySet="subjects" />
-            <End Role="class_section" EntitySet="class_section" />
-          </AssociationSet>
-          <AssociationSet Name="FK_curriculum_class_lecturer" Association="Self.FK_curriculum_class_lecturer">
+          <AssociationSet Name="FK_class_section_lecturer" Association="Self.FK_class_section_lecturer">
             <End Role="lecturer" EntitySet="lecturers" />
             <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
-          <AssociationSet Name="FK_curriculum_class_lecturer1" Association="Self.FK_curriculum_class_lecturer1">
+          <AssociationSet Name="FK_class_section_lecturer1" Association="Self.FK_class_section_lecturer1">
             <End Role="lecturer" EntitySet="lecturers" />
             <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
-          <AssociationSet Name="FK_curriculum_class_major" Association="Self.FK_curriculum_class_major">
+          <AssociationSet Name="FK_class_section_major" Association="Self.FK_class_section_major">
             <End Role="major" EntitySet="majors" />
             <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
-          <AssociationSet Name="FK_curriculum_class_room" Association="Self.FK_curriculum_class_room">
+          <AssociationSet Name="FK_class_section_room" Association="Self.FK_class_section_room">
             <End Role="room" EntitySet="rooms" />
             <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
-          <AssociationSet Name="FK_curriculum_class_term" Association="Self.FK_curriculum_class_term">
+          <AssociationSet Name="FK_class_section_subject" Association="Self.FK_class_section_subject">
+            <End Role="subject" EntitySet="subjects" />
+            <End Role="class_section" EntitySet="class_section" />
+          </AssociationSet>
+          <AssociationSet Name="FK_class_section_term" Association="Self.FK_class_section_term">
             <End Role="term" EntitySet="terms" />
             <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>

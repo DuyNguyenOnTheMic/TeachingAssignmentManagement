@@ -43,11 +43,11 @@ namespace TeachingAssignmentManagement.Models
         public string subject_id { get; set; }
         public string room_id { get; set; }
     
-        public virtual subject subject { get; set; }
         public virtual lecturer lecturer { get; set; }
         public virtual lecturer lecturer1 { get; set; }
         public virtual major major { get; set; }
         public virtual room room { get; set; }
+        public virtual subject subject { get; set; }
         public virtual term term { get; set; }
     }
 }

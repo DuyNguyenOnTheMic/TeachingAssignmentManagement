@@ -276,9 +276,6 @@
     <Compile Include="Models\AspNetUserLogin.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\class_section.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ClassSectionDTO.cs" />
     <Compile Include="Hubs\TimetableHub.cs" />
     <Compile Include="DAL\Repositories\ClassSectionRepository.cs" />
@@ -295,6 +292,9 @@
     <Compile Include="Helpers\IdentityExtensions.cs" />
     <Compile Include="Hubs\ProgressHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\class_section.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
