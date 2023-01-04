@@ -627,7 +627,7 @@ namespace TeachingAssignmentManagement.Controllers
         [Authorize(Roles = "BCN khoa")]
         public ActionResult DeleteAll(int term, string major)
         {
-            // Delete all records in curriculum class table
+            // Delete all records in class section table
             unitOfWork.ClassSectionRepository.DeleteAllClasses(term, major);
             unitOfWork.Save();
             TimetableHub.RefreshData(term, major);
