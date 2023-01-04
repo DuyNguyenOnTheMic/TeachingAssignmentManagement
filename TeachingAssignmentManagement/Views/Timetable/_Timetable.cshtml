@@ -33,7 +33,7 @@
     </div>
     <div class="col-sm-12">
         <div class="alert alert-primary my-25" role="alert">
-            <div class="alert-body">Số lớp đã phân công: <strong><span id="assignedCount"></span>/<span id="totalCount"></span></strong> trên tổng số học phần: <strong><span id="curriculumCount"></span></strong></div>
+            <div class="alert-body">Số lớp đã phân công: <strong><span id="assignedCount"></span>/<span id="totalCount"></span></strong> trên tổng số học phần: <strong><span id="subjectCount"></span></strong></div>
         </div>
     </div>
 </div>
@@ -60,15 +60,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var curriculum in ViewBag.subjects)
+            @foreach (var subject in ViewBag.subjects)
             {
-                <tr id="@curriculum.id">
-                    <td>@curriculum.name</td>
+                <tr id="@subject.id">
+                    <td>@subject.name</td>
                     @foreach (int day in Model.days)
                     {
                         foreach (int startLesson in Model.startLessons)
                         {
-                            var classes = Model.ClassSectionDTOs.Where(x => x.SubjectId == curriculum.id && x.Day2 == day && x.StartLesson2 == startLesson);
+                            var classes = Model.ClassSectionDTOs.Where(x => x.SubjectId == subject.id && x.Day2 == day && x.StartLesson2 == startLesson);
                             string dividerClass = startLesson == 1 ? "class=table-vertical-divider" : string.Empty;
                             if (classes.Any())
                             {
@@ -83,7 +83,7 @@
                                         </div>
                                         if (item.MajorAbb != null)
                                         {
-                                            <div class="d-none abb-@curriculum.id" data-abb="@item.MajorAbb"></div>
+                                            <div class="d-none abb-@subject.id" data-abb="@item.MajorAbb"></div>
                                         }
                                     }
                                 </td>
