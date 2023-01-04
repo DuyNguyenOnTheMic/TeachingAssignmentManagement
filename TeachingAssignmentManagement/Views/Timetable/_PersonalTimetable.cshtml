@@ -32,7 +32,7 @@
                                 {
                                     string cardClass = "Lý thuyết" == item.Type ? "theory-class" : "practical-class";
                                     <div class="@cardClass" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>Thứ @day <br />Lớp:</b> @item.Type">
-                                        <b>@item.Curriculum.name</b><br><b><u>Mã LHP:</u></b> @item.CurriculumClassId<br><b><u>Phòng:</u></b> @item.RoomId<br><b><u>Tiết:</u></b> @item.LessonTime
+                                        <b>@item.Subject.name</b><br><b><u>Mã LHP:</u></b> @item.CurriculumClassId<br><b><u>Phòng:</u></b> @item.RoomId<br><b><u>Tiết:</u></b> @item.LessonTime
                                     </div>
                                 }
                             </td>
