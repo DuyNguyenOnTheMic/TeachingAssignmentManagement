@@ -93,7 +93,7 @@ namespace TeachingAssignmentManagement.Controllers
         {
             // Declare variables
             term term = unitOfWork.TermRepository.GetTermByID(termId);
-            IEnumerable<CurriculumClassDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTimetableStatistics(termId);
+            IEnumerable<ClassSectionDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTimetableStatistics(termId);
 
             // Populate timetable
             DateTime startDate = term.start_date;

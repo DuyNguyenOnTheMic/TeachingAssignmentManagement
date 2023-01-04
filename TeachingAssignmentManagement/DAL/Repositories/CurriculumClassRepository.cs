@@ -15,9 +15,9 @@ namespace TeachingAssignmentManagement.DAL
             this.context = context;
         }
 
-        public IEnumerable<CurriculumClassDTO> GetTimetable(int termId, string lecturerId)
+        public IEnumerable<ClassSectionDTO> GetTimetable(int termId, string lecturerId)
         {
-            return context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId).Select(c => new CurriculumClassDTO
+            return context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId).Select(c => new ClassSectionDTO
             {
                 CurriculumClassId = c.class_section_id,
                 Type = c.type,
@@ -33,14 +33,14 @@ namespace TeachingAssignmentManagement.DAL
             });
         }
 
-        public IEnumerable<CurriculumClassDTO> GetClassInWeek(IEnumerable<CurriculumClassDTO> query_classes, int week)
+        public IEnumerable<ClassSectionDTO> GetClassInWeek(IEnumerable<ClassSectionDTO> query_classes, int week)
         {
             return query_classes.Where(c => Array.Exists(c.LearnWeek.Split(','), element => int.Parse(element) == week));
         }
 
-        public IEnumerable<CurriculumClassDTO> GetAssignTimetable(int termId, string majorId)
+        public IEnumerable<ClassSectionDTO> GetAssignTimetable(int termId, string majorId)
         {
-            return context.class_section.Where(c => c.term_id == termId && c.major_id == majorId).Select(c => new CurriculumClassDTO
+            return context.class_section.Where(c => c.term_id == termId && c.major_id == majorId).Select(c => new ClassSectionDTO
             {
                 Id = c.id,
                 CurriculumClassId = c.class_section_id,
@@ -57,9 +57,9 @@ namespace TeachingAssignmentManagement.DAL
             });
         }
 
-        public IEnumerable<CurriculumClassDTO> GetTermAssignTimetable(int termId)
+        public IEnumerable<ClassSectionDTO> GetTermAssignTimetable(int termId)
         {
-            return context.class_section.Where(c => c.term_id == termId).Select(c => new CurriculumClassDTO
+            return context.class_section.Where(c => c.term_id == termId).Select(c => new ClassSectionDTO
             {
                 Id = c.id,
                 CurriculumClassId = c.class_section_id,
@@ -77,9 +77,9 @@ namespace TeachingAssignmentManagement.DAL
             });
         }
 
-        public IEnumerable<CurriculumClassDTO> GetTimetableStatistics(int termId)
+        public IEnumerable<ClassSectionDTO> GetTimetableStatistics(int termId)
         {
-            return context.class_section.Where(c => c.term_id == termId).Select(c => new CurriculumClassDTO
+            return context.class_section.Where(c => c.term_id == termId).Select(c => new ClassSectionDTO
             {
                 CurriculumClassId = c.class_section_id,
                 Type = c.type,

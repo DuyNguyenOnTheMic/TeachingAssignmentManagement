@@ -1,6 +1,6 @@
 ﻿namespace TeachingAssignmentManagement.Models
 {
-    public class CurriculumClassDTO
+    public class ClassSectionDTO
     {
         public int Id { get; set; }
         public string CurriculumClassId { get; set; }

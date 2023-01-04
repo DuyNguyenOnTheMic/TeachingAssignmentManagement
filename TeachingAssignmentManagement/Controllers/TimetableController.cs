@@ -60,7 +60,7 @@ namespace TeachingAssignmentManagement.Controllers
             // Declare variables
             string userId = UserManager.FindByEmail(User.Identity.Name).Id;
             term term = unitOfWork.TermRepository.GetTermByID(termId);
-            IEnumerable<CurriculumClassDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, userId);
+            IEnumerable<ClassSectionDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, userId);
             if (!query_classes.Any())
             {
                 // Return not found error message
@@ -143,7 +143,7 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public ActionResult GetData(int termId, string majorId)
         {
-            IEnumerable<CurriculumClassDTO> query_classes = majorId != "-1"
+            IEnumerable<ClassSectionDTO> query_classes = majorId != "-1"
                 ? unitOfWork.CurriculumClassRepository.GetAssignTimetable(termId, majorId)
                 : unitOfWork.CurriculumClassRepository.GetTermAssignTimetable(termId);
             ViewBag.curriculums = unitOfWork.CurriculumRepository.GetCurriculums(query_classes);
