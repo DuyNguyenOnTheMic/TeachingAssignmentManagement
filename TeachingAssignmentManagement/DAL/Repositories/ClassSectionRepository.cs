@@ -107,12 +107,12 @@ namespace TeachingAssignmentManagement.DAL
             return context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
         }
 
-        public IEnumerable<class_section> GetClassesInLesson(IEnumerable<class_section> curriculumClasses, int lesson)
+        public IEnumerable<class_section> GetClassesInLesson(IEnumerable<class_section> classSections, int lesson)
         {
-            return curriculumClasses.Where(c => c.start_lesson_2 == lesson);
+            return classSections.Where(c => c.start_lesson_2 == lesson);
         }
 
-        public IEnumerable<class_section> GetClassesInCampus(IEnumerable<class_section> curriculumClasses, int lesson, string room)
+        public IEnumerable<class_section> GetClassesInCampus(IEnumerable<class_section> classSections, int lesson, string room)
         {
             int previousLesson = 0;
             int nextLesson = lesson + 3;
@@ -126,13 +126,13 @@ namespace TeachingAssignmentManagement.DAL
             }
             string campus = room.Split('.')[0];
             return campus.Contains("CS")
-                ? curriculumClasses.Where(c => !c.room_id.Contains(campus) && c.room_id.Contains("CS") && (c.start_lesson == previousLesson || c.start_lesson == nextLesson))
+                ? classSections.Where(c => !c.room_id.Contains(campus) && c.room_id.Contains("CS") && (c.start_lesson == previousLesson || c.start_lesson == nextLesson))
                 : Enumerable.Empty<class_section>();
         }
 
-        public IEnumerable<class_section> GetClassesInDay(IEnumerable<class_section> curriculumClasses, int day)
+        public IEnumerable<class_section> GetClassesInDay(IEnumerable<class_section> classSections, int day)
         {
-            return curriculumClasses.Where(c => c.day_2 == day);
+            return classSections.Where(c => c.day_2 == day);
         }
 
         public IEnumerable<class_section> GetClassesByTerm(int termId)
@@ -331,9 +331,9 @@ namespace TeachingAssignmentManagement.DAL
             }).ToList();
         }
 
-        public class_section FindCurriculumClass(IEnumerable<class_section> curriculumClass, string curriculumClassId, int day2, string roomId)
+        public class_section FindClassSection(IEnumerable<class_section> classSection, string classSectionId, int day2, string roomId)
         {
-            return curriculumClass.FirstOrDefault(c => c.class_section_id == curriculumClassId && c.day_2 == day2 && c.room_id == roomId);
+            return classSection.FirstOrDefault(c => c.class_section_id == classSectionId && c.day_2 == day2 && c.room_id == roomId);
         }
 
         public class_section CheckTermMajor(int termId, string majorId)
@@ -341,15 +341,15 @@ namespace TeachingAssignmentManagement.DAL
             return context.class_section.FirstOrDefault(c => c.term_id == termId && c.major_id == majorId);
         }
 
-        public void InsertCurriculumClass(class_section class_section)
+        public void InsertClassSection(class_section classSection)
         {
-            context.class_section.Add(class_section);
+            context.class_section.Add(classSection);
         }
 
         public void DeleteClass(int id)
         {
-            class_section curriculumClass = context.class_section.Find(id);
-            context.class_section.Remove(curriculumClass);
+            class_section classSection = context.class_section.Find(id);
+            context.class_section.Remove(classSection);
         }
 
         public void DeleteAllClasses(int term, string major)

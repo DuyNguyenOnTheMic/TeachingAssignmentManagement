@@ -243,8 +243,8 @@ namespace TeachingAssignmentManagement.Controllers
 
             int itemsCount = dt.Rows.Count;
             TimetableViewModels timetableViewModels = new TimetableViewModels();
-            List<class_section> curriculumClassList = new List<class_section>();
-            IEnumerable<class_section> query_classSectionWhere = curriculumClassList;
+            List<class_section> classSectionList = new List<class_section>();
+            IEnumerable<class_section> query_classSectionWhere = classSectionList;
             if (isUpdate)
             {
                 // Query Curriculum classes of this term
@@ -354,7 +354,7 @@ namespace TeachingAssignmentManagement.Controllers
                     }
 
                     // Declare curriculum class
-                    class_section curriculumClass = new class_section()
+                    class_section classSection = new class_section()
                     {
                         class_section_id = ToNullableString(classSectionid),
                         original_id = ToNullableString(originalId),
@@ -388,26 +388,26 @@ namespace TeachingAssignmentManagement.Controllers
                     if (!isUpdate)
                     {
                         // Create new curriculum class
-                        unitOfWork.ClassSectionRepository.InsertCurriculumClass(curriculumClass);
+                        unitOfWork.ClassSectionRepository.InsertClassSection(classSection);
                     }
                     else
                     {
-                        class_section query_curriculumClass = unitOfWork.ClassSectionRepository.FindCurriculumClass(query_classSectionWhere, curriculumClass.class_section_id, curriculumClass.day_2, curriculumClass.room_id);
-                        if (query_curriculumClass == null)
+                        class_section query_classSection = unitOfWork.ClassSectionRepository.FindClassSection(query_classSectionWhere, classSection.class_section_id, classSection.day_2, classSection.room_id);
+                        if (query_classSection == null)
                         {
                             // Create new curriculum class if no class found
-                            curriculumClass.last_assigned_by = null;
-                            curriculumClass.lecturer_id = null;
-                            unitOfWork.ClassSectionRepository.InsertCurriculumClass(curriculumClass);
+                            classSection.last_assigned_by = null;
+                            classSection.lecturer_id = null;
+                            unitOfWork.ClassSectionRepository.InsertClassSection(classSection);
                         }
-                        else if (query_curriculumClass?.lecturer_id == null && curriculumClass.lecturer_id != null)
+                        else if (query_classSection?.lecturer_id == null && classSection.lecturer_id != null)
                         {
-                            dynamic checkState = CheckState(query_curriculumClass.id, term, curriculumClass.lecturer_id, true).Data;
+                            dynamic checkState = CheckState(query_classSection.id, term, classSection.lecturer_id, true).Data;
                             if (checkState.success)
                             {
                                 // update lecturer if check success
-                                query_curriculumClass.last_assigned_by = lastAssignedBy;
-                                query_curriculumClass.lecturer_id = curriculumClass.lecturer_id;
+                                query_classSection.last_assigned_by = lastAssignedBy;
+                                query_classSection.lecturer_id = classSection.lecturer_id;
                                 unitOfWork.Save();
                             }
                             else
@@ -514,25 +514,25 @@ namespace TeachingAssignmentManagement.Controllers
         public JsonResult Assign(int id, string lecturerId)
         {
             // Declare variables
-            class_section curriculumClass = unitOfWork.ClassSectionRepository.GetClassByID(id);
+            class_section classSection = unitOfWork.ClassSectionRepository.GetClassByID(id);
             string currentLecturerId = UserManager.FindByEmail(User.Identity.Name).Id;
             string currentLecturerName = unitOfWork.UserRepository.GetLecturerByID(currentLecturerId).full_name;
             lecturerId = ToNullableString(lecturerId);
 
             // Check if user is in role Department head to restrict assignment
-            if (User.IsInRole("Bộ môn") && curriculumClass.last_assigned_by != null && curriculumClass.last_assigned_by != currentLecturerId)
+            if (User.IsInRole("Bộ môn") && classSection.last_assigned_by != null && classSection.last_assigned_by != currentLecturerId)
             {
-                string lastAssignedBy = unitOfWork.UserRepository.GetLecturerByID(curriculumClass.last_assigned_by).full_name;
+                string lastAssignedBy = unitOfWork.UserRepository.GetLecturerByID(classSection.last_assigned_by).full_name;
                 return Json(new { error = true, message = "Lớp học phần này đã được phân công bởi " + lastAssignedBy + "!" }, JsonRequestBehavior.AllowGet);
             }
 
             // Update lecturer id of curriculum class
-            curriculumClass.lecturer_id = lecturerId;
-            curriculumClass.last_assigned_by = lecturerId != null ? currentLecturerId : null;
+            classSection.lecturer_id = lecturerId;
+            classSection.last_assigned_by = lecturerId != null ? currentLecturerId : null;
             unitOfWork.Save();
 
             // Send signal to SignalR Hub
-            TimetableHub.BroadcastData(id, lecturerId, curriculumClass.lecturer?.full_name, currentLecturerName, true);
+            TimetableHub.BroadcastData(id, lecturerId, classSection.lecturer?.full_name, currentLecturerName, true);
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
@@ -543,12 +543,12 @@ namespace TeachingAssignmentManagement.Controllers
             if (lecturerId != string.Empty)
             {
                 // Declare variables
-                class_section curriculumClass = unitOfWork.ClassSectionRepository.GetClassByID(id);
+                class_section classSection = unitOfWork.ClassSectionRepository.GetClassByID(id);
                 term term = unitOfWork.TermRepository.GetTermByID(termId);
                 IEnumerable<class_section> query_classWeek = unitOfWork.ClassSectionRepository.GetClassesInTerm(termId, lecturerId);
-                IEnumerable<class_section> query_classDay = unitOfWork.ClassSectionRepository.GetClassesInDay(query_classWeek, curriculumClass.day_2);
-                IEnumerable<class_section> query_classCampus = unitOfWork.ClassSectionRepository.GetClassesInCampus(query_classDay, curriculumClass.start_lesson_2, curriculumClass.room_id);
-                IEnumerable<class_section> query_classLesson = unitOfWork.ClassSectionRepository.GetClassesInLesson(query_classDay, curriculumClass.start_lesson_2);
+                IEnumerable<class_section> query_classDay = unitOfWork.ClassSectionRepository.GetClassesInDay(query_classWeek, classSection.day_2);
+                IEnumerable<class_section> query_classCampus = unitOfWork.ClassSectionRepository.GetClassesInCampus(query_classDay, classSection.start_lesson_2, classSection.room_id);
+                IEnumerable<class_section> query_classLesson = unitOfWork.ClassSectionRepository.GetClassesInLesson(query_classDay, classSection.start_lesson_2);
 
                 // Check not duplicate class in the same time
                 if (query_classLesson.Count() >= 1)
@@ -580,7 +580,7 @@ namespace TeachingAssignmentManagement.Controllers
                 }
 
                 // Check maximum lessons in a day
-                if (query_classDay.Sum(c => c.lesson_number) + curriculumClass.lesson_number > term.max_lesson)
+                if (query_classDay.Sum(c => c.lesson_number) + classSection.lesson_number > term.max_lesson)
                 {
                     IEnumerable classes = query_classDay.Select(c => new
                     {
