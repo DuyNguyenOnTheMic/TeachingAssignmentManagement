@@ -6,7 +6,7 @@ namespace TeachingAssignmentManagement.DAL
     public class UnitOfWork : IDisposable
     {
         private readonly CP25Team03Entities context;
-        private CurriculumClassRepository curriculumClassRepository;
+        private ClassSectionRepository classSectionRepository;
         private CurriculumRepository curriculumRepository;
         private MajorRepository majorRepository;
         private RoomRepository roomRepository;
@@ -18,15 +18,15 @@ namespace TeachingAssignmentManagement.DAL
             this.context = context;
         }
 
-        public CurriculumClassRepository CurriculumClassRepository
+        public ClassSectionRepository ClassSectionRepository
         {
             get
             {
-                if (curriculumClassRepository == null)
+                if (classSectionRepository == null)
                 {
-                    curriculumClassRepository = new CurriculumClassRepository(context);
+                    classSectionRepository = new ClassSectionRepository(context);
                 }
-                return curriculumClassRepository;
+                return classSectionRepository;
             }
         }
 

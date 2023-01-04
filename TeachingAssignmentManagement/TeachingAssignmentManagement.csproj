@@ -281,7 +281,7 @@
     </Compile>
     <Compile Include="Models\ClassSectionDTO.cs" />
     <Compile Include="Hubs\TimetableHub.cs" />
-    <Compile Include="DAL\Repositories\CurriculumClassRepository.cs" />
+    <Compile Include="DAL\Repositories\ClassSectionRepository.cs" />
     <Compile Include="DAL\Repositories\CurriculumRepository.cs" />
     <Compile Include="DAL\Repositories\MajorRepository.cs" />
     <Compile Include="DAL\Repositories\RoomRepository.cs" />

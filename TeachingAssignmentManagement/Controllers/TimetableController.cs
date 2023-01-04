@@ -60,7 +60,7 @@ namespace TeachingAssignmentManagement.Controllers
             // Declare variables
             string userId = UserManager.FindByEmail(User.Identity.Name).Id;
             term term = unitOfWork.TermRepository.GetTermByID(termId);
-            IEnumerable<ClassSectionDTO> query_classes = unitOfWork.CurriculumClassRepository.GetTimetable(termId, userId);
+            IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId);
             if (!query_classes.Any())
             {
                 // Return not found error message
@@ -135,7 +135,7 @@ namespace TeachingAssignmentManagement.Controllers
                 ViewData["weekLabel"] = weekLabel;
                 return PartialView("_PersonalTimetable", new TimetableViewModels
                 {
-                    ClassSectionDTOs = unitOfWork.CurriculumClassRepository.GetClassInWeek(query_classes, currentWeek).ToList()
+                    ClassSectionDTOs = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, currentWeek).ToList()
                 });
             }
         }
@@ -144,8 +144,8 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult GetData(int termId, string majorId)
         {
             IEnumerable<ClassSectionDTO> query_classes = majorId != "-1"
-                ? unitOfWork.CurriculumClassRepository.GetAssignTimetable(termId, majorId)
-                : unitOfWork.CurriculumClassRepository.GetTermAssignTimetable(termId);
+                ? unitOfWork.ClassSectionRepository.GetAssignTimetable(termId, majorId)
+                : unitOfWork.ClassSectionRepository.GetTermAssignTimetable(termId);
             ViewBag.curriculums = unitOfWork.CurriculumRepository.GetCurriculums(query_classes);
             ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
             return PartialView("_Timetable", new TimetableViewModels
@@ -219,7 +219,7 @@ namespace TeachingAssignmentManagement.Controllers
             if (!isUpdate)
             {
                 // Check if this term and major already has data
-                class_section query_term_major = unitOfWork.CurriculumClassRepository.CheckTermMajor(term, major);
+                class_section query_term_major = unitOfWork.ClassSectionRepository.CheckTermMajor(term, major);
                 if (query_term_major != null)
                 {
                     Response.Write($"Học kỳ và ngành này đã có dữ liệu trong hệ thống, bạn muốn cập nhật hay thay thế thời khoá biểu?");
@@ -248,7 +248,7 @@ namespace TeachingAssignmentManagement.Controllers
             if (isUpdate)
             {
                 // Query Curriculum classes of this term
-                query_curriculumClassWhere = unitOfWork.CurriculumClassRepository.GetClassesByTerm(term);
+                query_curriculumClassWhere = unitOfWork.ClassSectionRepository.GetClassesByTerm(term);
             }
 
             // Create a list for storing error Lecturers
@@ -388,17 +388,17 @@ namespace TeachingAssignmentManagement.Controllers
                     if (!isUpdate)
                     {
                         // Create new curriculum class
-                        unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
+                        unitOfWork.ClassSectionRepository.InsertCurriculumClass(curriculumClass);
                     }
                     else
                     {
-                        class_section query_curriculumClass = unitOfWork.CurriculumClassRepository.FindCurriculumClass(query_curriculumClassWhere, curriculumClass.class_section_id, curriculumClass.day_2, curriculumClass.room_id);
+                        class_section query_curriculumClass = unitOfWork.ClassSectionRepository.FindCurriculumClass(query_curriculumClassWhere, curriculumClass.class_section_id, curriculumClass.day_2, curriculumClass.room_id);
                         if (query_curriculumClass == null)
                         {
                             // Create new curriculum class if no class found
                             curriculumClass.last_assigned_by = null;
                             curriculumClass.lecturer_id = null;
-                            unitOfWork.CurriculumClassRepository.InsertCurriculumClass(curriculumClass);
+                            unitOfWork.ClassSectionRepository.InsertCurriculumClass(curriculumClass);
                         }
                         else if (query_curriculumClass?.lecturer_id == null && curriculumClass.lecturer_id != null)
                         {
@@ -452,12 +452,12 @@ namespace TeachingAssignmentManagement.Controllers
             if (majorId != "-1")
             {
                 // Export data in term and major
-                classes = unitOfWork.CurriculumClassRepository.GetExportData(termId, majorId);
+                classes = unitOfWork.ClassSectionRepository.GetExportData(termId, majorId);
             }
             else
             {
                 // Export data in whole term and update major name for file
-                classes = unitOfWork.CurriculumClassRepository.GetClassesByTerm(termId);
+                classes = unitOfWork.ClassSectionRepository.GetClassesByTerm(termId);
                 majorId = "TatCa";
             }
 
@@ -514,7 +514,7 @@ namespace TeachingAssignmentManagement.Controllers
         public JsonResult Assign(int id, string lecturerId)
         {
             // Declare variables
-            class_section curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
+            class_section curriculumClass = unitOfWork.ClassSectionRepository.GetClassByID(id);
             string currentLecturerId = UserManager.FindByEmail(User.Identity.Name).Id;
             string currentLecturerName = unitOfWork.UserRepository.GetLecturerByID(currentLecturerId).full_name;
             lecturerId = ToNullableString(lecturerId);
@@ -543,12 +543,12 @@ namespace TeachingAssignmentManagement.Controllers
             if (lecturerId != string.Empty)
             {
                 // Declare variables
-                class_section curriculumClass = unitOfWork.CurriculumClassRepository.GetClassByID(id);
+                class_section curriculumClass = unitOfWork.ClassSectionRepository.GetClassByID(id);
                 term term = unitOfWork.TermRepository.GetTermByID(termId);
-                IEnumerable<class_section> query_classWeek = unitOfWork.CurriculumClassRepository.GetClassesInTerm(termId, lecturerId);
-                IEnumerable<class_section> query_classDay = unitOfWork.CurriculumClassRepository.GetClassesInDay(query_classWeek, curriculumClass.day_2);
-                IEnumerable<class_section> query_classCampus = unitOfWork.CurriculumClassRepository.GetClassesInCampus(query_classDay, curriculumClass.start_lesson_2, curriculumClass.room_id);
-                IEnumerable<class_section> query_classLesson = unitOfWork.CurriculumClassRepository.GetClassesInLesson(query_classDay, curriculumClass.start_lesson_2);
+                IEnumerable<class_section> query_classWeek = unitOfWork.ClassSectionRepository.GetClassesInTerm(termId, lecturerId);
+                IEnumerable<class_section> query_classDay = unitOfWork.ClassSectionRepository.GetClassesInDay(query_classWeek, curriculumClass.day_2);
+                IEnumerable<class_section> query_classCampus = unitOfWork.ClassSectionRepository.GetClassesInCampus(query_classDay, curriculumClass.start_lesson_2, curriculumClass.room_id);
+                IEnumerable<class_section> query_classLesson = unitOfWork.ClassSectionRepository.GetClassesInLesson(query_classDay, curriculumClass.start_lesson_2);
 
                 // Check not duplicate class in the same time
                 if (query_classLesson.Count() >= 1)
@@ -615,7 +615,7 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult Delete(int id)
         {
             // Delete class
-            unitOfWork.CurriculumClassRepository.DeleteClass(id);
+            unitOfWork.ClassSectionRepository.DeleteClass(id);
             unitOfWork.Save();
 
             // Send signal to SignalR Hub
@@ -628,7 +628,7 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult DeleteAll(int term, string major)
         {
             // Delete all records in curriculum class table
-            unitOfWork.CurriculumClassRepository.DeleteAllClasses(term, major);
+            unitOfWork.ClassSectionRepository.DeleteAllClasses(term, major);
             unitOfWork.Save();
             TimetableHub.RefreshData(term, major);
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
