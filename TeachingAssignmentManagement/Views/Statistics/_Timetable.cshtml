@@ -60,7 +60,7 @@
                     {
                         foreach (int startLesson in Model.startLessons)
                         {
-                            var classes = Model.CurriculumClassDTOs.Where(x => x.LecturerId == lecturer.Value && x.Day2 == day && x.StartLesson2 == startLesson);
+                            var classes = Model.ClassSectionDTOs.Where(x => x.LecturerId == lecturer.Value && x.Day2 == day && x.StartLesson2 == startLesson);
                             string dividerClass = startLesson == 1 ? "class=table-vertical-divider" : string.Empty;
                             if (classes.Any())
                             {

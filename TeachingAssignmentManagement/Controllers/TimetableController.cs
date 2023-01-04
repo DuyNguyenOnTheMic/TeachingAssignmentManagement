@@ -135,7 +135,7 @@ namespace TeachingAssignmentManagement.Controllers
                 ViewData["weekLabel"] = weekLabel;
                 return PartialView("_PersonalTimetable", new TimetableViewModels
                 {
-                    CurriculumClassDTOs = unitOfWork.CurriculumClassRepository.GetClassInWeek(query_classes, currentWeek).ToList()
+                    ClassSectionDTOs = unitOfWork.CurriculumClassRepository.GetClassInWeek(query_classes, currentWeek).ToList()
                 });
             }
         }
@@ -150,7 +150,7 @@ namespace TeachingAssignmentManagement.Controllers
             ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
             return PartialView("_Timetable", new TimetableViewModels
             {
-                CurriculumClassDTOs = query_classes.ToList()
+                ClassSectionDTOs = query_classes.ToList()
             });
         }
 

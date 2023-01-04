@@ -164,7 +164,7 @@ namespace TeachingAssignmentManagement.Controllers
             ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
             return PartialView("_Timetable", new TimetableViewModels
             {
-                CurriculumClassDTOs = unitOfWork.CurriculumClassRepository.GetClassInWeek(query_classes, currentWeek).ToList()
+                ClassSectionDTOs = unitOfWork.CurriculumClassRepository.GetClassInWeek(query_classes, currentWeek).ToList()
             });
         }
 
