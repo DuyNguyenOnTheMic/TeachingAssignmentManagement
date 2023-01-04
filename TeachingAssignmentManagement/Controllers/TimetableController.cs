@@ -244,11 +244,11 @@ namespace TeachingAssignmentManagement.Controllers
             int itemsCount = dt.Rows.Count;
             TimetableViewModels timetableViewModels = new TimetableViewModels();
             List<class_section> curriculumClassList = new List<class_section>();
-            IEnumerable<class_section> query_curriculumClassWhere = curriculumClassList;
+            IEnumerable<class_section> query_classSectionWhere = curriculumClassList;
             if (isUpdate)
             {
                 // Query Curriculum classes of this term
-                query_curriculumClassWhere = unitOfWork.ClassSectionRepository.GetClassesByTerm(term);
+                query_classSectionWhere = unitOfWork.ClassSectionRepository.GetClassesByTerm(term);
             }
 
             // Create a list for storing error Lecturers
@@ -392,7 +392,7 @@ namespace TeachingAssignmentManagement.Controllers
                     }
                     else
                     {
-                        class_section query_curriculumClass = unitOfWork.ClassSectionRepository.FindCurriculumClass(query_curriculumClassWhere, curriculumClass.class_section_id, curriculumClass.day_2, curriculumClass.room_id);
+                        class_section query_curriculumClass = unitOfWork.ClassSectionRepository.FindCurriculumClass(query_classSectionWhere, curriculumClass.class_section_id, curriculumClass.day_2, curriculumClass.room_id);
                         if (query_curriculumClass == null)
                         {
                             // Create new curriculum class if no class found
