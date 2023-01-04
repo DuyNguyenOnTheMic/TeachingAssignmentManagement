@@ -322,7 +322,7 @@ function populateDatatable(data) {
                 { 'data': 'staff_id' },
                 { 'data': 'full_name' },
                 { 'data': 'lecturer_type' },
-                { 'data': 'curriculum_count' },
+                { 'data': 'subject_count' },
                 { 'data': 'class_count' },
                 { 'data': 'sum' },
                 { 'data': 'sumLesson1', defaultContent: '' },
@@ -431,8 +431,8 @@ function populateDatatable(data) {
             tr = $this.closest('tr'),
             row = dataTable.row(tr),
             lecturerId = $this.data('id'),
-            curriculumUrl = rootUrl + 'Statistics/',
-            curriculumData;
+            subjectUrl = rootUrl + 'Statistics/',
+            subjectData;
 
         if (row.child.isShown()) {
             // Update icon on click
@@ -451,18 +451,18 @@ function populateDatatable(data) {
                 var yearSplit = value.split(" - "),
                     startYear = yearSplit[0],
                     endYear = yearSplit[1];
-                curriculumUrl += 'GetYearCurriculums';
-                curriculumData = { startYear, endYear, majorId, lecturerId };
+                subjectUrl += 'GetYearsubjects';
+                subjectData = { startYear, endYear, majorId, lecturerId };
             } else {
-                curriculumUrl += 'GetTermCurriculums';
-                curriculumData = { 'termId': value, majorId, lecturerId };
+                subjectUrl += 'GetTermsubjects';
+                subjectData = { 'termId': value, majorId, lecturerId };
             }
 
-            // Send request to fetch curriculums
+            // Send request to fetch subjects
             $.ajax({
                 type: 'GET',
-                url: curriculumUrl,
-                data: curriculumData,
+                url: subjectUrl,
+                data: subjectData,
                 success: function (data) {
                     // Open this row
                     row.child(format(data)).show();
@@ -493,20 +493,20 @@ function format(d) {
         tableRow = '';
 
     // Map data object
-    var curriculumId = d.map(function (e) {
+    var subjectId = d.map(function (e) {
         return e.id;
     });
-    var curriculumName = d.map(function (e) {
-        return e.curriculum_name;
+    var subjectName = d.map(function (e) {
+        return e.subject_name;
     });
-    var curriculumCredits = d.map(function (e) {
-        return e.curriculum_credits;
+    var subjectCredits = d.map(function (e) {
+        return e.subject_credits;
     });
-    var curriculumMajor = d.map(function (e) {
-        return e.curriculum_major;
+    var subjectMajor = d.map(function (e) {
+        return e.subject_major;
     });
-    var curriculumHours = d.map(function (e) {
-        return e.curriculum_hours;
+    var subjectHours = d.map(function (e) {
+        return e.subject_hours;
     });
     var totalClass = d.map(function (e) {
         var theoryClass = e.theory_count + 'LT',
@@ -524,7 +524,7 @@ function format(d) {
 
     // Append HTML rows
     for (var i = 0; i < arrayLength; i++) {
-        tableRow += '<tr><td>' + curriculumId[i] + '</td><td>' + curriculumName[i] + '</td><td>' + curriculumMajor[i] + '</td><td class="text-center">' + curriculumCredits[i] + '</td><td class="text-center">' + totalClass[i] + '</td><td class="text-center">' + curriculumHours[i] + '</td></tr>';
+        tableRow += '<tr><td>' + subjectId[i] + '</td><td>' + subjectName[i] + '</td><td>' + subjectMajor[i] + '</td><td class="text-center">' + subjectCredits[i] + '</td><td class="text-center">' + totalClass[i] + '</td><td class="text-center">' + subjectHours[i] + '</td></tr>';
     }
 
     // Render rows

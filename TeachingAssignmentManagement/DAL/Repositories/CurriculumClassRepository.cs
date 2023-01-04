@@ -157,7 +157,7 @@ namespace TeachingAssignmentManagement.DAL
                     c.Key,
                     c.FirstOrDefault().lecturer.staff_id,
                     c.FirstOrDefault().lecturer.full_name,
-                    curriculum_count = c.GroupBy(item => item.subject.id).Count(),
+                    subject_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
                     lecturer_type = c.FirstOrDefault().lecturer.type
@@ -170,7 +170,7 @@ namespace TeachingAssignmentManagement.DAL
                     c.Key,
                     c.FirstOrDefault().lecturer.staff_id,
                     c.FirstOrDefault().lecturer.full_name,
-                    curriculum_count = c.GroupBy(item => item.subject.id).Count(),
+                    subject_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
                     sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
@@ -196,7 +196,7 @@ namespace TeachingAssignmentManagement.DAL
                     c.FirstOrDefault().lecturer.staff_id,
                     c.FirstOrDefault().lecturer.full_name,
                     lecturer_type = c.FirstOrDefault().lecturer.type,
-                    curriculum_count = c.GroupBy(item => item.subject.id).Count(),
+                    subject_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson)
                 }).OrderByDescending(c => c.sum).ToList();
@@ -208,7 +208,7 @@ namespace TeachingAssignmentManagement.DAL
                     c.Key,
                     c.FirstOrDefault().lecturer.staff_id,
                     c.FirstOrDefault().lecturer.full_name,
-                    curriculum_count = c.GroupBy(item => item.subject.id).Count(),
+                    subject_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
                     sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
@@ -221,7 +221,7 @@ namespace TeachingAssignmentManagement.DAL
             }
         }
 
-        public IEnumerable GetTermCurriculums(int termId, string majorId, string lecturerId)
+        public IEnumerable GetTermSubjects(int termId, string majorId, string lecturerId)
         {
             IQueryable<class_section> query_classes = majorId != "-1"
                 ? context.class_section.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer_id == lecturerId)
@@ -229,10 +229,10 @@ namespace TeachingAssignmentManagement.DAL
             return query_classes.GroupBy(c => c.subject_id).Select(c => new
             {
                 id = c.Key,
-                curriculum_name = c.FirstOrDefault().subject.name,
-                curriculum_credits = c.FirstOrDefault().subject.credits,
-                curriculum_major = c.FirstOrDefault().major.name,
-                curriculum_hours = c.Sum(item => item.total_lesson),
+                subject_name = c.FirstOrDefault().subject.name,
+                subject_credits = c.FirstOrDefault().subject.credits,
+                subject_major = c.FirstOrDefault().major.name,
+                subject_hours = c.Sum(item => item.total_lesson),
                 theory_count = c.Count(item => item.type == "Lý thuyết"),
                 practice_count = c.Count(item => item.type == "Thực hành")
             }).ToList();
@@ -250,7 +250,7 @@ namespace TeachingAssignmentManagement.DAL
                     c.Key,
                     c.FirstOrDefault().lecturer.staff_id,
                     c.FirstOrDefault().lecturer.full_name,
-                    curriculum_count = c.GroupBy(item => item.subject.id).Count(),
+                    subject_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
                     lecturer_type = c.FirstOrDefault().lecturer.type
@@ -263,7 +263,7 @@ namespace TeachingAssignmentManagement.DAL
                     c.Key,
                     c.FirstOrDefault().lecturer.staff_id,
                     c.FirstOrDefault().lecturer.full_name,
-                    curriculum_count = c.GroupBy(item => item.subject.id).Count(),
+                    subject_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
                     sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
@@ -289,7 +289,7 @@ namespace TeachingAssignmentManagement.DAL
                     c.FirstOrDefault().lecturer.staff_id,
                     c.FirstOrDefault().lecturer.full_name,
                     lecturer_type = c.FirstOrDefault().lecturer.type,
-                    curriculum_count = c.GroupBy(item => item.subject.id).Count(),
+                    subject_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson)
                 }).OrderByDescending(c => c.sum).ToList();
@@ -301,7 +301,7 @@ namespace TeachingAssignmentManagement.DAL
                     c.Key,
                     c.FirstOrDefault().lecturer.staff_id,
                     c.FirstOrDefault().lecturer.full_name,
-                    curriculum_count = c.GroupBy(item => item.subject.id).Count(),
+                    subject_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
                     sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
@@ -314,7 +314,7 @@ namespace TeachingAssignmentManagement.DAL
             }
         }
 
-        public IEnumerable GetYearCurriculums(int startYear, int endYear, string majorId, string lecturerId)
+        public IEnumerable GetYearsubjects(int startYear, int endYear, string majorId, string lecturerId)
         {
             IQueryable<class_section> query_classes = majorId != "-1"
                 ? context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer_id == lecturerId)
@@ -322,10 +322,10 @@ namespace TeachingAssignmentManagement.DAL
             return query_classes.GroupBy(c => c.subject_id).Select(c => new
             {
                 id = c.Key,
-                curriculum_name = c.FirstOrDefault().subject.name,
-                curriculum_credits = c.FirstOrDefault().subject.credits,
-                curriculum_major = c.FirstOrDefault().major.name,
-                curriculum_hours = c.Sum(item => item.total_lesson),
+                subject_name = c.FirstOrDefault().subject.name,
+                subject_credits = c.FirstOrDefault().subject.credits,
+                subject_major = c.FirstOrDefault().major.name,
+                subject_hours = c.Sum(item => item.total_lesson),
                 theory_count = c.Count(item => item.type == "Lý thuyết"),
                 practice_count = c.Count(item => item.type == "Thực hành")
             }).ToList();
