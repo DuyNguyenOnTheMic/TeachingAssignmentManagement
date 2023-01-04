@@ -258,7 +258,7 @@ function deleteAndImport(myDropzone) {
     var term = $('#term').val();
     var major = $('#major').val();
 
-    // Send ajax request to delete all curriculum classes
+    // Send ajax request to delete all classes
     $.ajax({
         type: 'POST',
         url: rootUrl + 'Timetable/DeleteAll',
