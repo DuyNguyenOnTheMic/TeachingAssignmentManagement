@@ -1,14 +1,14 @@
 ﻿var termId = $('#term').val(),
     majorId = $('#major').val(),
     rootUrl = $('#loader').data('request-url'),
-    curriculumFilter = $('#curriculumFilter'),
+    subjectFilter = $('#subjectFilter'),
     lecturerFilter = $('#lecturerFilter'),
     rowCount = $('#tblAssign tbody tr').length;
 
 $(function () {
     // Update count on document ready
     updateCount();
-    $('#curriculumCount').text(rowCount);
+    $('#subjectCount').text(rowCount);
 
     // Update focus for select2 inside popover
     $(document).on('select2:open', () => {
@@ -36,13 +36,13 @@ if (rowCount == 0) {
 }
 
 if (majorId == -1) {
-    // Append abbreviation text of major name to curriculum name
+    // Append abbreviation text of major name to subject name
     $('#tblAssign tbody tr').each(function () {
         var $this = $(this);
-        var curriculumId = $this.attr('id');
-        var majorAbb = $('.abb-' + curriculumId).first().data('abb');
+        var subjectId = $this.attr('id');
+        var majorAbb = $('.abb-' + subjectId).first().data('abb');
         $this.find('td:first').append(' (' + majorAbb + ')');
-        curriculumFilter.find('option[value="' + curriculumId + '"]').append(' (' + majorAbb + ')');
+        subjectFilter.find('option[value="' + subjectId + '"]').append(' (' + majorAbb + ')');
     });
 }
 
@@ -70,9 +70,9 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
         $rendered.find('.select2-dropdown').prepend($btnContainer);
         $selectAll.on('click', function () {
             hidePopover();
-            if (self.$element.attr('id') == 'curriculumFilter') {
-                curriculumFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options
-                filterCount(curriculumFilter);
+            if (self.$element.attr('id') == 'subjectFilter') {
+                subjectFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options
+                filterCount(subjectFilter);
             } else if (self.$element.attr('id') == 'lecturerFilter') {
                 lecturerFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options
                 filterCount(lecturerFilter);
@@ -83,9 +83,9 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
         });
         $unselectAll.on('click', function () {
             hidePopover();
-            if (self.$element.attr('id') == 'curriculumFilter') {
-                curriculumFilter.val(null).trigger('change'); // Unselect All Options
-                curriculumFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc môn học');
+            if (self.$element.attr('id') == 'subjectFilter') {
+                subjectFilter.val(null).trigger('change'); // Unselect All Options
+                subjectFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc môn học');
             } else if (self.$element.attr('id') == 'lecturerFilter') {
                 lecturerFilter.val('-1').trigger('change'); // Unselect All Options
                 lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
@@ -106,27 +106,27 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
 
 });
 
-// Populate select2 for curriculum filter
-curriculumFilter.find('option').prop('selected', 'selected');
-curriculumFilter.wrap('<div class="position-relative my-50 me-1"></div>');
-curriculumFilter.select2({
+// Populate select2 for subject filter
+subjectFilter.find('option').prop('selected', 'selected');
+subjectFilter.wrap('<div class="position-relative my-50 me-1"></div>');
+subjectFilter.select2({
     language: 'vi',
     dropdownAutoWidth: true,
-    dropdownParent: curriculumFilter.parent(),
+    dropdownParent: subjectFilter.parent(),
     placeholder: 'Lọc môn học',
     dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
 })
-curriculumFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc môn học');
-curriculumFilter.on('select2:select', function (e) {
+subjectFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc môn học');
+subjectFilter.on('select2:select', function (e) {
     // Show table row on select
-    var curriculumId = $('#' + e.params.data.id);
-    curriculumId.show();
-    filterCount(curriculumFilter);
+    var subjectId = $('#' + e.params.data.id);
+    subjectId.show();
+    filterCount(subjectFilter);
 }).on('select2:unselect', function (e) {
     // Hide table row on unselect
-    var curriculumId = $('#' + e.params.data.id);
-    curriculumId.hide();
-    filterCount(curriculumFilter);
+    var subjectId = $('#' + e.params.data.id);
+    subjectId.hide();
+    filterCount(subjectFilter);
 });
 
 // Populate select2 for lecturer filter
@@ -147,7 +147,7 @@ lecturerFilter.on('select2:select', function (e) {
     lecturerClass.show();
     filterCount(lecturerFilter);
     if ($('#tblAssign tbody tr:visible').length > 0) {
-        // Filter for curriculum classes which has lecturer
+        // Filter for subject classes which has lecturer
         tableRow.show();
         updateRow(tableRow);
     } else {
@@ -205,7 +205,7 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
                 // Populate error message into table
                 let errorMessage = data.message + ' Bạn có chắc muốn phân công?' + '<div class="table-responsive mt-2"><table class="table table-sm"><thead class="text-nowrap"><tr><th></th><th>Mã LHP</th><th>Tên HP</th><th>Thứ</th><th>Tiết</th><th>Phòng</th><th>Ngành</th></tr></thead><tbody>';
                 data.classList.forEach(function (item, index) {
-                    errorMessage += '<tr class="font-small-3"><td>' + (index + 1) + '</td><td>' + item.classId + '</td><td>' + item.curriculumName + '</td><td class="text-nowrap">' + item.classDay + '</td><td class="text-nowrap">' + item.lessonTime + '</td><td>' + item.roomId + '</td><td>' + item.majorName + '</td></tr>';
+                    errorMessage += '<tr class="font-small-3"><td>' + (index + 1) + '</td><td>' + item.classId + '</td><td>' + item.subjectName + '</td><td class="text-nowrap">' + item.classDay + '</td><td class="text-nowrap">' + item.lessonTime + '</td><td>' + item.roomId + '</td><td>' + item.majorName + '</td></tr>';
                 });
                 errorMessage += '</tbody></table></div>';
                 // Show message when assign failed
@@ -232,7 +232,7 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
                 // Populate error message into table
                 let errorMessage = data.message + '<div class="table-responsive mt-2"><table class="table table-sm"><thead class="text-nowrap"><tr><th></th><th>Mã LHP</th><th>Tên HP</th><th>Thứ</th><th>Tiết</th><th>Ngành</th></tr></thead><tbody>';
                 data.classList.forEach(function (item, index) {
-                    errorMessage += '<tr class="font-small-3"><td>' + (index + 1) + '</td><td>' + item.classId + '</td><td>' + item.curriculumName + '</td><td class="text-nowrap">' + item.classDay + '</td><td class="text-nowrap">' + item.lessonTime + '</td><td>' + item.majorName + '</td></tr>';
+                    errorMessage += '<tr class="font-small-3"><td>' + (index + 1) + '</td><td>' + item.classId + '</td><td>' + item.subjectName + '</td><td class="text-nowrap">' + item.classDay + '</td><td class="text-nowrap">' + item.lessonTime + '</td><td>' + item.majorName + '</td></tr>';
                 });
                 errorMessage += '</tbody></table></div>';
                 // Show message when assign failed
@@ -256,12 +256,12 @@ $(document).off('click', '.btn-delete').on('click', '.btn-delete', function () {
 
     // Get values
     var id = $this.data('id');
-    var curriculumClassId = $this.parents().find('.popover-header').find('.class-id').text();
+    var subjectClassId = $this.parents().find('.popover-header').find('.class-id').text();
 
     // Show confirm message
     Swal.fire({
         title: 'Thông báo',
-        html: '<p class="text-danger mb-0">Hãy nhập lại mã lớp học phần, ' + curriculumClassId + ' để xác nhận xoá.</p>',
+        html: '<p class="text-danger mb-0">Hãy nhập lại mã lớp học phần, ' + subjectClassId + ' để xác nhận xoá.</p>',
         icon: 'warning',
         input: 'text',
         inputAttributes: {
@@ -276,7 +276,7 @@ $(document).off('click', '.btn-delete').on('click', '.btn-delete', function () {
         },
         buttonsStyling: false,
         preConfirm: (classId) => {
-            if (classId === curriculumClassId) {
+            if (classId === subjectClassId) {
                 // Send ajax request to delete class
                 $.ajax({
                     type: 'POST',
@@ -335,7 +335,7 @@ function updateRow(tableRow) {
 
 function filterCount(element) {
     var filterText;
-    if (element.attr('id') == 'curriculumFilter') {
+    if (element.attr('id') == 'subjectFilter') {
         filterText = 'môn';
     } else if (element.attr('id') == 'lecturerFilter') {
         filterText = 'GV';

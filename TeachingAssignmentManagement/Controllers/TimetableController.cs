@@ -556,7 +556,7 @@ namespace TeachingAssignmentManagement.Controllers
                     IEnumerable classes = query_classLesson.Select(c => new
                     {
                         classId = c.class_section_id,
-                        curriculumName = c.subject.name,
+                        subjectName = c.subject.name,
                         classDay = c.day,
                         lessonTime = c.lesson_time,
                         majorName = c.major.name
@@ -570,7 +570,7 @@ namespace TeachingAssignmentManagement.Controllers
                     IEnumerable classes = query_classCampus.Select(c => new
                     {
                         classId = c.class_section_id,
-                        curriculumName = c.subject.name,
+                        subjectName = c.subject.name,
                         classDay = c.day,
                         lessonTime = c.lesson_time,
                         roomId = c.room_id,
@@ -585,7 +585,7 @@ namespace TeachingAssignmentManagement.Controllers
                     IEnumerable classes = query_classDay.Select(c => new
                     {
                         classId = c.class_section_id,
-                        curriculumName = c.subject.name,
+                        subjectName = c.subject.name,
                         classDay = c.day,
                         lessonTime = c.lesson_time,
                         majorName = c.major.name
@@ -599,7 +599,7 @@ namespace TeachingAssignmentManagement.Controllers
                     IEnumerable classes = query_classWeek.Select(c => new
                     {
                         classId = c.class_section_id,
-                        curriculumName = c.subject.name,
+                        subjectName = c.subject.name,
                         classDay = c.day,
                         lessonTime = c.lesson_time,
                         majorName = c.major.name
