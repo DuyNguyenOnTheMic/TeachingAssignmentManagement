@@ -4,11 +4,11 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.DAL
 {
-    public class CurriculumRepository
+    public class SubjectRepository
     {
         private readonly CP25Team03Entities context;
 
-        public CurriculumRepository(CP25Team03Entities context)
+        public SubjectRepository(CP25Team03Entities context)
         {
             this.context = context;
         }

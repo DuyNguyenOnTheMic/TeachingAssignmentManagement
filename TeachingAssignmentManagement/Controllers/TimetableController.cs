@@ -146,7 +146,7 @@ namespace TeachingAssignmentManagement.Controllers
             IEnumerable<ClassSectionDTO> query_classes = majorId != "-1"
                 ? unitOfWork.ClassSectionRepository.GetAssignTimetable(termId, majorId)
                 : unitOfWork.ClassSectionRepository.GetTermAssignTimetable(termId);
-            ViewBag.curriculums = unitOfWork.CurriculumRepository.GetCurriculums(query_classes);
+            ViewBag.curriculums = unitOfWork.SubjectRepository.GetCurriculums(query_classes);
             ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
             return PartialView("_Timetable", new TimetableViewModels
             {
@@ -310,7 +310,7 @@ namespace TeachingAssignmentManagement.Controllers
                         return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
                     }
 
-                    subject query_subject = unitOfWork.CurriculumRepository.GetCurriculumByID(subjectId);
+                    subject query_subject = unitOfWork.SubjectRepository.GetCurriculumByID(subjectId);
                     if (query_subject == null)
                     {
                         // Create new subject
@@ -320,7 +320,7 @@ namespace TeachingAssignmentManagement.Controllers
                             name = ToNullableString(name),
                             credits = ToInt(credits)
                         };
-                        unitOfWork.CurriculumRepository.InsertCurriculum(subject);
+                        unitOfWork.SubjectRepository.InsertCurriculum(subject);
                         unitOfWork.Save();
                     }
 

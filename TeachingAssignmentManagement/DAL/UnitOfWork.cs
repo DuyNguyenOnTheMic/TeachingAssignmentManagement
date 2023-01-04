@@ -7,7 +7,7 @@ namespace TeachingAssignmentManagement.DAL
     {
         private readonly CP25Team03Entities context;
         private ClassSectionRepository classSectionRepository;
-        private CurriculumRepository curriculumRepository;
+        private SubjectRepository subjectRepository;
         private MajorRepository majorRepository;
         private RoomRepository roomRepository;
         private TermRepository termRepository;
@@ -27,18 +27,6 @@ namespace TeachingAssignmentManagement.DAL
                     classSectionRepository = new ClassSectionRepository(context);
                 }
                 return classSectionRepository;
-            }
-        }
-
-        public CurriculumRepository CurriculumRepository
-        {
-            get
-            {
-                if (curriculumRepository == null)
-                {
-                    curriculumRepository = new CurriculumRepository(context);
-                }
-                return curriculumRepository;
             }
         }
 
@@ -63,6 +51,18 @@ namespace TeachingAssignmentManagement.DAL
                     roomRepository = new RoomRepository(context);
                 }
                 return roomRepository;
+            }
+        }
+
+        public SubjectRepository SubjectRepository
+        {
+            get
+            {
+                if (subjectRepository == null)
+                {
+                    subjectRepository = new SubjectRepository(context);
+                }
+                return subjectRepository;
             }
         }
 
