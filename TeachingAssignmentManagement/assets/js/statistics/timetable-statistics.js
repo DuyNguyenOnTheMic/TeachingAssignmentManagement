@@ -68,14 +68,10 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
         $rendered.find('.select2-dropdown').prepend($btnContainer);
         $selectAll.on('click', function () {
             // Select All Options
-            var visibleLecturers = lecturerFilter.find('option:visible');
-            var visibleLength = visibleLecturers.length;
-            visibleLecturers.prop('selected', 'selected').trigger('change');
+            lecturerFilter.find('option').prop('selected', 'selected').trigger('change');
             filterCount(lecturerFilter);
             self.trigger('close');
-            for (var i = 0; i < visibleLength; i++) {
-                $('#' + visibleLecturers[i].value).show();
-            }
+            $('#tblStatistics').find('tbody tr').show();
         });
         $unselectAll.on('click', function () {
             // Unselect All Options
