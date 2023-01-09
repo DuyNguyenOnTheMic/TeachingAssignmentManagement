@@ -122,7 +122,8 @@ lecturerType.select2({
     dropdownParent: lecturerFilter.parent(),
     placeholder: lecturerType[0][0].innerHTML
 }).on('select2:select', function (e) {
-    // Hide options on select
+    // Select lecturers based on lecturer type
+    lecturerFilter.find('option[data-type="' + e.params.data.id + '"]').prop('selected', 'selected').trigger('change');
 })
 
 // User guide for timetable statistics
