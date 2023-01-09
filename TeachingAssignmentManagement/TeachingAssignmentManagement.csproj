@@ -1110,6 +1110,7 @@
     <Content Include="assets\images\img_welcome.svg" />
     <Content Include="assets\js\major\major.js" />
     <Content Include="assets\js\major\major.min.js" />
+    <Content Include="assets\js\statistics\personal-statistics-load.js" />
     <Content Include="assets\js\statistics\timetable-statistics-load.js" />
     <Content Include="assets\js\statistics\statistics-load.js" />
     <Content Include="assets\js\statistics\statistics-load.min.js" />
@@ -1219,6 +1220,7 @@
     <Content Include="Views\Statistics\Timetable.cshtml" />
     <Content Include="Views\Statistics\_Timetable.cshtml" />
     <Content Include="Views\Statistics\Personal.cshtml" />
+    <Content Include="Views\Statistics\_PersonalChart.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

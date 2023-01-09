@@ -175,6 +175,16 @@ namespace TeachingAssignmentManagement.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Authorize(Roles = "BCN khoa, Bộ môn")]
+        public ActionResult GetPersonalChart(bool isLesson, string type, string value)
+        {
+            ViewData["isLesson"] = isLesson;
+            ViewData["type"] = type;
+            ViewData["value"] = value;
+            return PartialView("_PersonalChart");
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
