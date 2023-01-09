@@ -4,7 +4,8 @@
     endWeek = weekData.data('end-week'),
     currentWeek = weekData.data('current-week'),
     rootUrl = $('#loader').data('request-url'),
-    lecturerFilter = $('#lecturerFilter');
+    lecturerFilter = $('#lecturerFilter'),
+    lecturerType = $('#lecturerType');
 
 // Display message when table have no data
 var classCount = $('#tblStatistics .class-card').length;
@@ -97,7 +98,7 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
 });
 
 // Populate select2 for lecturer filter
-lecturerFilter.wrap('<div class="position-relative my-50"></div>');
+lecturerFilter.wrap('<div class="position-relative my-50 me-50"></div>');
 lecturerFilter.select2({
     language: 'vi',
     dropdownAutoWidth: true,
@@ -125,6 +126,14 @@ lecturerFilter.on('select2:select', function (e) {
     filterCount(lecturerFilter);
 });
 
+// Populate select2 for lecturer type
+lecturerType.wrap('<div class="position-relative my-50"></div>');
+lecturerType.select2({
+    language: 'vi',
+    dropdownAutoWidth: true,
+    dropdownParent: lecturerFilter.parent(),
+    placeholder: lecturerType[0][0].innerHTML
+})
 
 // User guide for timetable statistics
 $(function () {
