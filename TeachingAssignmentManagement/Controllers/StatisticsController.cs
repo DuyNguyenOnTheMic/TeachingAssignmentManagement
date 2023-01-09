@@ -167,6 +167,13 @@ namespace TeachingAssignmentManagement.Controllers
             });
         }
 
+        [HttpGet]
+        public ActionResult Personal()
+        {
+            ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
