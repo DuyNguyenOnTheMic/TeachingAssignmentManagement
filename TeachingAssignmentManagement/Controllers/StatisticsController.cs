@@ -205,7 +205,7 @@ namespace TeachingAssignmentManagement.Controllers
         [Authorize(Roles = "BCN khoa, Bộ môn")]
         public JsonResult GetPersonalTermData(bool isLesson, int termId)
         {
-            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
+            string userId = User.Identity.GetUserId();
             return Json(unitOfWork.ClassSectionRepository.GetPersonalTermStatistics(isLesson, termId, userId), JsonRequestBehavior.AllowGet);
         }
 

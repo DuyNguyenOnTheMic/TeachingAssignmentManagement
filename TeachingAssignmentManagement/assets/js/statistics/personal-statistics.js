@@ -21,15 +21,15 @@ if (type == yearSelect.attr('id')) {
     var yearSplit = value.split(" - "),
         startYear = yearSplit[0],
         endYear = yearSplit[1];
-    data = { isLesson, startYear, endYear, majorId, lecturerType };
-    titleText = 'Thống kê số giờ năm học ' + value + ' ngành ' + majorAbb;
-    fileName = 'ThongKeSoGio_NamHoc_' + startYear + '-' + endYear + '_Nganh_' + majorAbb;
+    data = { isLesson, startYear, endYear };
+    titleText = 'Thống kê số giờ năm học ' + value;
+    fileName = 'ThongKeSoGio_NamHoc_' + startYear + '-' + endYear;
     url += 'GetYearData';
 } else {
-    data = { isLesson, 'termId': value, majorId, lecturerType };
-    titleText = 'Thống kê số giờ học kỳ ' + value + ' ngành ' + majorAbb;
-    fileName = 'ThongKeSoGio_HK' + value + '_Nganh_' + majorAbb;
-    url += 'GetTermData';
+    data = { isLesson, 'termId': value };
+    titleText = 'Thống kê số giờ học kỳ ' + value;
+    fileName = 'ThongKeSoGio_HK' + value;
+    url += 'GetPersonalTermData';
 }
 
 // Detect Dark Layout
