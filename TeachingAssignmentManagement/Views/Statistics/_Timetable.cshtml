@@ -14,7 +14,7 @@
         <select class="form-select" id="lecturerFilter" name="lecturerFilter" multiple aria-label="Lọc giảng viên">
             @foreach (var option in ViewBag.lecturers)
             {
-                <option value="@option.Value">@option.Text</option>
+                <option value="@option.id" data-type="@option.type">@option.full_name</option>
             }
         </select>
     </div>
@@ -54,21 +54,19 @@
         <tbody>
             @foreach (var lecturer in ViewBag.lecturers)
             {
-                <tr id="@lecturer.Value">
-                    <td>@lecturer.Text</td>
+                <tr id="@lecturer.id">
+                    <td>@lecturer.full_name</td>
                     @foreach (int day in Model.days)
                     {
                         foreach (int startLesson in Model.startLessons)
                         {
-                            var classes = Model.ClassSectionDTOs.Where(x => x.LecturerId == lecturer.Value && x.Day2 == day && x.StartLesson2 == startLesson);
+                            var classes = Model.ClassSectionDTOs.Where(x => x.LecturerId == lecturer.id && x.Day2 == day && x.StartLesson2 == startLesson);
                             string dividerClass = startLesson == 1 ? "class=table-vertical-divider" : string.Empty;
                             if (classes.Any())
                             {
                                 <td @dividerClass>
                                     @foreach (var item in classes)
                                     {
-                                        string lecturerId = item.LecturerId ?? string.Empty;
-                                        string lecturerName = item.LecturerName ?? "Chưa phân";
                                         string cardClass = "Lý thuyết" == item.Type ? "btn-success" : "btn-warning";
                                         <button class="btn @cardClass text-nowrap class-card my-25 p-25" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>@item.ClassSectionId</b><br /><b>Tên HP: </b>@item.Subject.name<br /><b>Ngành: </b>@item.MajorName<br /><b>Phòng: </b>@item.RoomId">@item.Subject.name</button>
                                     }
@@ -86,4 +84,4 @@
     </table>
 </div>
 
-<script src="~/assets/js/statistics/timetable-statistics.min.js"></script>
+<script src="~/assets/js/statistics/timetable-statistics.js"></script>

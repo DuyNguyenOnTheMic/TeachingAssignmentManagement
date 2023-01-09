@@ -96,7 +96,14 @@ lecturerFilter.select2({
     language: 'vi',
     dropdownAutoWidth: true,
     dropdownParent: lecturerFilter.parent(),
-    dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
+    dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter'),
+    templateResult: function (option, container) {
+        if ($(option.element).attr("data-type") == "CH") {
+            $(container).css("display", "none");
+        }
+
+        return option.text;
+    }
 })
 lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
 lecturerFilter.on('select2:select', function (e) {
