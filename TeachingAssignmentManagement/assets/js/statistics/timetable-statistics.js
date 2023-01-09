@@ -66,13 +66,19 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
         }
         $rendered.find('.select2-dropdown').prepend($btnContainer);
         $selectAll.on('click', function () {
-            lecturerFilter.find('option:visible').prop('selected', 'selected').trigger('change'); // Select All Options
+            // Select All Options
+            var visibleLecturers = lecturerFilter.find('option:visible');
+            var visibleLength = visibleLecturers.length;
+            visibleLecturers.prop('selected', 'selected').trigger('change');
             filterCount(lecturerFilter);
             self.trigger('close');
-            $('#tblStatistics').find('tbody tr').show();
+            for (var i = 0; i < visibleLength; i++) {
+                $('#' + visibleLecturers[i].value).show();
+            }
         });
         $unselectAll.on('click', function () {
-            lecturerFilter.val('-1').trigger('change'); // Unselect All Options
+            // Unselect All Options
+            lecturerFilter.val('-1').trigger('change');
             lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
             self.trigger('close');
             $('#tblStatistics').find('tbody tr').hide();
