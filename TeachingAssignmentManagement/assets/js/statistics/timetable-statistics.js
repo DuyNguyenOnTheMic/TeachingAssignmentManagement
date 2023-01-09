@@ -105,11 +105,14 @@ lecturerFilter.select2({
     dropdownParent: lecturerFilter.parent(),
     dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter'),
     templateResult: function (option, container) {
-        if ($(option.element).data('type') == 'CH') {
+        // Hide visiting lecturers by default
+        var lecturerType = $(option.element).data('type');
+        if (lecturerType == 'TG') {
             $(option.element).hide();
             $(container).hide();
         }
-
+        // Add data attibute for query data
+        $(container).attr('type', lecturerType);
         return option.text;
     }
 })
