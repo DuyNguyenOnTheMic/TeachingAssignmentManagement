@@ -117,16 +117,12 @@ $.ajax({
         } else {
             // Get chart labels and data
             var labels = response.map(function (e) {
-                if (lecturerType == '-1') {
-                    return e.full_name + ' (' + e.lecturer_type + ')';
-                } else {
-                    return e.full_name;
-                }
+                return e.subject_name;
             });
 
             var chartData;
             var totalLessons = response.map(function (e) {
-                return e.sum;
+                return e.subject_hours;
             });
 
             if (isLesson == 'False') {
@@ -222,7 +218,7 @@ $.ajax({
                 };
             }
 
-            chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ: ' + hoursSum(response, 'sum');
+            chartOptions.plugins.subtitle.text = 'Số môn học: ' + response.length + ' / Tổng số giờ: ' + hoursSum(response, 'subject_hours');
 
             // Create the chart
             var chart = new Chart(ctx, {

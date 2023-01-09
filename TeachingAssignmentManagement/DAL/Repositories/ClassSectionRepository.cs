@@ -336,11 +336,16 @@ namespace TeachingAssignmentManagement.DAL
             IQueryable<class_section> query_classes = context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
             if (!isLesson)
             {
-                return query_classes.Select(c => new
+                return query_classes.GroupBy(c => c.subject_id).Select(c => new
                 {
-                    theory_count = query_classes.Count(item => item.type == "Lý thuyết"),
-                    practice_count = query_classes.Count(item => item.type == "Thực hành"),
-                }).ToList();
+                    id = c.Key,
+                    subject_name = c.FirstOrDefault().subject.name,
+                    subject_credits = c.FirstOrDefault().subject.credits,
+                    subject_major = c.FirstOrDefault().major.name,
+                    subject_hours = c.Sum(item => item.total_lesson),
+                    theory_count = c.Count(item => item.type == "Lý thuyết"),
+                    practice_count = c.Count(item => item.type == "Thực hành")
+                }).OrderByDescending(c => c.subject_hours).ToList();
             }
             else
             {
