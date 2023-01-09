@@ -171,6 +171,7 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult Personal()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
+            ViewData["year"] = new SelectList(unitOfWork.TermRepository.GetYears(), "schoolyear", "schoolyear");
             return View();
         }
 
