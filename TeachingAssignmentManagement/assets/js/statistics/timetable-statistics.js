@@ -98,24 +98,7 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
 });
 
 // Populate select2 for lecturer filter
-lecturerFilter.wrap('<div class="position-relative my-50 me-50"></div>');
-lecturerFilter.select2({
-    language: 'vi',
-    dropdownAutoWidth: true,
-    dropdownParent: lecturerFilter.parent(),
-    dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter'),
-    templateResult: function (option, container) {
-        // Hide visiting lecturers by default
-        var lecturerType = $(option.element).data('type');
-        if (lecturerType == 'TG') {
-            $(option.element).hide();
-            $(container).hide();
-        }
-        // Add data attibute for query data
-        $(container).attr('data-type', lecturerType);
-        return option.text;
-    }
-})
+populateLecturerFilter('TG');
 lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
 lecturerFilter.on('select2:select', function (e) {
     // Show table row on select
@@ -136,6 +119,10 @@ lecturerType.select2({
     dropdownAutoWidth: true,
     dropdownParent: lecturerFilter.parent(),
     placeholder: lecturerType[0][0].innerHTML
+}).on('select2:select', function (e) {
+    // Hide options on select
+    lecturerFilter.unwrap().select2('destroy');
+    populateLecturerFilter(e.params.data.id);
 })
 
 // User guide for timetable statistics
@@ -203,4 +190,26 @@ $(function () {
 
 function filterCount(element) {
     element.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + element.val().length + ' GV');
+}
+
+function populateLecturerFilter(value) {
+    lecturerFilter.wrap('<div class="position-relative my-50 me-50"></div>');
+    lecturerFilter.select2({
+        language: 'vi',
+        dropdownAutoWidth: true,
+        dropdownParent: lecturerFilter.parent(),
+        dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter'),
+        templateResult: function (option, container) {
+            // Hide visiting lecturers by default
+            var lecturerType = $(option.element).data('type');
+            if (lecturerType != value) {
+                $(option.element).hide();
+                $(container).hide();
+            }
+            // Add data attibute for query data
+            $(container).attr('data-type', lecturerType);
+            return option.text;
+        }
+    })
+
 }
