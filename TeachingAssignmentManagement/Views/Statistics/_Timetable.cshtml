@@ -11,16 +11,10 @@
         <div class="my-auto">
             <button class="btn btn-warning me-1 my-25 p-25 text-nowrap" type="button">Thực hành</button>
         </div>
-        <select class="form-select d-none" id="lecturerList" name="lecturerList">
-            @foreach (var option in ViewBag.lecturers)
-            {
-                <option value="@option.id" data-type="@option.type">@option.full_name</option>
-            }
-        </select>
         <select class="form-select" id="lecturerFilter" name="lecturerFilter" multiple aria-label="Lọc giảng viên">
             @foreach (var option in ViewBag.lecturers)
             {
-                <option value="@option.id">@option.full_name</option>
+                <option value="@option.id" data-type="@option.type">@option.full_name</option>
             }
         </select>
         <select class="form-select" id="lecturerType" name="lecturerType">

@@ -98,7 +98,13 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
 });
 
 // Populate select2 for lecturer filter
-populateLecturerFilter('TG');
+lecturerFilter.wrap('<div class="position-relative my-50 me-50"></div>');
+lecturerFilter.select2({
+    language: 'vi',
+    dropdownAutoWidth: true,
+    dropdownParent: lecturerFilter.parent(),
+    dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
+})
 lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
 lecturerFilter.on('select2:select', function (e) {
     // Show table row on select
@@ -121,8 +127,6 @@ lecturerType.select2({
     placeholder: lecturerType[0][0].innerHTML
 }).on('select2:select', function (e) {
     // Hide options on select
-    lecturerFilter.unwrap().select2('destroy');
-    populateLecturerFilter(e.params.data.id);
 })
 
 // User guide for timetable statistics
@@ -190,15 +194,4 @@ $(function () {
 
 function filterCount(element) {
     element.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + element.val().length + ' GV');
-}
-
-function populateLecturerFilter() {
-    lecturerFilter.wrap('<div class="position-relative my-50 me-50"></div>');
-    lecturerFilter.select2({
-        language: 'vi',
-        dropdownAutoWidth: true,
-        dropdownParent: lecturerFilter.parent(),
-        dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
-    })
-
 }
