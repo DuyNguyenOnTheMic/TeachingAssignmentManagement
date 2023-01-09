@@ -331,6 +331,42 @@ namespace TeachingAssignmentManagement.DAL
             }).ToList();
         }
 
+        public IEnumerable GetPersonalTermStatistics(bool isLesson, int termId, string userId)
+        {
+            IQueryable<class_section> query_classes = context.class_section.Where(c => c.term_id == termId);
+            if (!isLesson)
+            {
+                return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
+                {
+                    c.Key,
+                    c.FirstOrDefault().lecturer.staff_id,
+                    c.FirstOrDefault().lecturer.full_name,
+                    subject_count = c.GroupBy(item => item.subject.id).Count(),
+                    class_count = c.Count(),
+                    sum = c.Sum(item => item.total_lesson),
+                    lecturer_type = c.FirstOrDefault().lecturer.type
+                }).OrderByDescending(c => c.sum).ToList();
+            }
+            else
+            {
+                return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
+                {
+                    c.Key,
+                    c.FirstOrDefault().lecturer.staff_id,
+                    c.FirstOrDefault().lecturer.full_name,
+                    subject_count = c.GroupBy(item => item.subject.id).Count(),
+                    class_count = c.Count(),
+                    sum = c.Sum(item => item.total_lesson),
+                    sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
+                    sumLesson4 = c.Where(item => item.start_lesson_2 == 4).Sum(item => item.total_lesson),
+                    sumLesson7 = c.Where(item => item.start_lesson_2 == 7).Sum(item => item.total_lesson),
+                    sumLesson10 = c.Where(item => item.start_lesson_2 == 10).Sum(item => item.total_lesson),
+                    sumLesson13 = c.Where(item => item.start_lesson_2 == 13).Sum(item => item.total_lesson),
+                    lecturer_type = c.FirstOrDefault().lecturer.type
+                }).OrderByDescending(c => c.sum).ToList();
+            }
+        }
+
         public class_section FindClassSection(IEnumerable<class_section> classSection, string classSectionId, int day2, string roomId)
         {
             return classSection.FirstOrDefault(c => c.class_section_id == classSectionId && c.day_2 == day2 && c.room_id == roomId);

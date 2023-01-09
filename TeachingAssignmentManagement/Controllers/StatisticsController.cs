@@ -185,6 +185,13 @@ namespace TeachingAssignmentManagement.Controllers
             return PartialView("_PersonalChart");
         }
 
+        [HttpGet]
+        [Authorize(Roles = "BCN khoa, Bộ môn")]
+        public JsonResult GetPersonalTermData(bool isLesson, int termId)
+        {
+            return Json(unitOfWork.ClassSectionRepository.GetPersonalTermStatistics(isLesson, termId), JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
