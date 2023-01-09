@@ -1111,6 +1111,7 @@
     <Content Include="assets\js\major\major.js" />
     <Content Include="assets\js\major\major.min.js" />
     <Content Include="assets\js\statistics\personal-statistics-load.js" />
+    <Content Include="assets\js\statistics\personal-statistics.js" />
     <Content Include="assets\js\statistics\timetable-statistics-load.js" />
     <Content Include="assets\js\statistics\statistics-load.js" />
     <Content Include="assets\js\statistics\statistics-load.min.js" />
