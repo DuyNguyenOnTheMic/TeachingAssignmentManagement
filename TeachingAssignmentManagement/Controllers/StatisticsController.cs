@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
@@ -12,6 +15,7 @@ namespace TeachingAssignmentManagement.Controllers
     [Authorize(Roles = "BCN khoa, Bộ môn, Giảng viên")]
     public class StatisticsController : Controller
     {
+        private ApplicationUserManager _userManager;
         private readonly UnitOfWork unitOfWork;
 
         public StatisticsController()
@@ -22,6 +26,18 @@ namespace TeachingAssignmentManagement.Controllers
         public StatisticsController(UnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
         }
 
         [HttpGet]
@@ -189,7 +205,8 @@ namespace TeachingAssignmentManagement.Controllers
         [Authorize(Roles = "BCN khoa, Bộ môn")]
         public JsonResult GetPersonalTermData(bool isLesson, int termId)
         {
-            return Json(unitOfWork.ClassSectionRepository.GetPersonalTermStatistics(isLesson, termId), JsonRequestBehavior.AllowGet);
+            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
+            return Json(unitOfWork.ClassSectionRepository.GetPersonalTermStatistics(isLesson, termId, userId), JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
