@@ -66,7 +66,7 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
         }
         $rendered.find('.select2-dropdown').prepend($btnContainer);
         $selectAll.on('click', function () {
-            lecturerFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options
+            lecturerFilter.find('option:visible').prop('selected', 'selected').trigger('change'); // Select All Options
             filterCount(lecturerFilter);
             self.trigger('close');
             $('#tblStatistics').find('tbody tr').show();
@@ -98,8 +98,9 @@ lecturerFilter.select2({
     dropdownParent: lecturerFilter.parent(),
     dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter'),
     templateResult: function (option, container) {
-        if ($(option.element).attr("data-type") == "CH") {
-            $(container).css("display", "none");
+        if ($(option.element).data('type') == 'CH') {
+            $(option.element).hide();
+            $(container).hide();
         }
 
         return option.text;
