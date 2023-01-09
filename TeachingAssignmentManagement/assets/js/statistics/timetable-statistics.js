@@ -192,24 +192,13 @@ function filterCount(element) {
     element.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + element.val().length + ' GV');
 }
 
-function populateLecturerFilter(value) {
+function populateLecturerFilter() {
     lecturerFilter.wrap('<div class="position-relative my-50 me-50"></div>');
     lecturerFilter.select2({
         language: 'vi',
         dropdownAutoWidth: true,
         dropdownParent: lecturerFilter.parent(),
-        dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter'),
-        templateResult: function (option, container) {
-            // Hide visiting lecturers by default
-            var lecturerType = $(option.element).data('type');
-            if (lecturerType != value) {
-                $(option.element).hide();
-                $(container).hide();
-            }
-            // Add data attibute for query data
-            $(container).attr('data-type', lecturerType);
-            return option.text;
-        }
+        dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
     })
 
 }
