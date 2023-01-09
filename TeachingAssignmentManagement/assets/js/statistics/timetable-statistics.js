@@ -112,7 +112,7 @@ lecturerFilter.select2({
             $(container).hide();
         }
         // Add data attibute for query data
-        $(container).attr('type', lecturerType);
+        $(container).attr('data-type', lecturerType);
         return option.text;
     }
 })
