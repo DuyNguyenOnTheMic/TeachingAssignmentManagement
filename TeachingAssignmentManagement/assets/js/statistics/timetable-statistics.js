@@ -124,6 +124,7 @@ lecturerType.select2({
 }).on('select2:select', function (e) {
     // Select lecturers based on lecturer type
     lecturerFilter.find('option[data-type="' + e.params.data.id + '"]').prop('selected', 'selected').trigger('change');
+    filterCount(lecturerFilter);
 })
 
 // User guide for timetable statistics
