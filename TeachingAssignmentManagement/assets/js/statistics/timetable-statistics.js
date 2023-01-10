@@ -163,6 +163,7 @@ lessonFilter.on('select2:select', function (e) {
     var colspan = lessonFilter.val().length;
     tableStatistics.find('td[data-startlesson="' + lesson + '"], th[data-startlesson="' + lesson + '"]').show();
     tableStatistics.find('thead .day-header').attr('colspan', colspan);
+    tableStatistics.find('td[data-startlesson!="1"]').removeClass('table-vertical-divider');
 }).on('select2:unselect', function (e) {
     // Hide lesson column on unselect
     var lesson = e.params.data.id;
