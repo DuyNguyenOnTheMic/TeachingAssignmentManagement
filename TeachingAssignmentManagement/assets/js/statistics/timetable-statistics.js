@@ -5,7 +5,8 @@
     currentWeek = weekData.data('current-week'),
     rootUrl = $('#loader').data('request-url'),
     lecturerFilter = $('#lecturerFilter'),
-    lecturerType = $('#lecturerType');
+    lecturerType = $('#lecturerType'),
+    lessonFilter = $('#lessonFilter');
 
 // Display message when table have no data
 var classCount = $('#tblStatistics .class-card').length;
@@ -124,11 +125,11 @@ lecturerFilter.on('select2:select', function (e) {
 });
 
 // Populate select2 for lecturer type
-lecturerType.wrap('<div class="position-relative my-50"></div>');
+lecturerType.wrap('<div class="position-relative my-50 me-1"></div>');
 lecturerType.select2({
     language: 'vi',
     dropdownAutoWidth: true,
-    dropdownParent: lecturerFilter.parent(),
+    dropdownParent: lecturerType.parent(),
     placeholder: lecturerType[0][0].innerHTML,
     minimumResultsForSearch: Infinity
 })
@@ -144,6 +145,19 @@ lecturerType.on('select2:select', function (e) {
 }).on('select2:unselect', function () {
     // Reset placeholder for lecturer type
     resetLecturerType();
+});
+
+// Populate select2 for lesson filter
+lessonFilter.wrap('<div class="position-relative my-50 me-1"></div>');
+lessonFilter.select2({
+    language: 'vi',
+    dropdownAutoWidth: true,
+    dropdownParent: lessonFilter.parent(),
+    dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
+})
+lessonFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc ca giảng');
+lessonFilter.on('select2:select', function (e) {
+}).on('select2:unselect', function (e) {
 });
 
 // User guide for timetable statistics
