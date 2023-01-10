@@ -3,7 +3,8 @@
     startWeek = weekData.data('start-week'),
     endWeek = weekData.data('end-week'),
     currentWeek = weekData.data('current-week'),
-    rootUrl = $('#loader').data('request-url'),
+    rootUrl = $('#loader').data('request-url')
+tableStatistics = $('#tblStatistics'),
     lecturerFilter = $('#lecturerFilter'),
     lecturerType = $('#lecturerType'),
     lessonFilter = $('#lessonFilter');
@@ -156,14 +157,18 @@ lessonFilter.select2({
     closeOnSelect: false
 })
 lessonFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc ca giảng');
-var tableStatistics = $('#tblStatistics');
 lessonFilter.on('select2:select', function (e) {
     // Show lesson column on select
     var lesson = e.params.data.id;
     var colspan = lessonFilter.val().length;
     tableStatistics.find('td[data-startlesson="' + lesson + '"], th[data-startlesson="' + lesson + '"]').show();
     tableStatistics.find('thead .day-header').attr('colspan', colspan);
+
+    // Remove divider class
     tableStatistics.find('td[data-startlesson!="1"]').removeClass('table-vertical-divider');
+
+    // Add divider class for viewing between days in week
+    updateDivider();
 }).on('select2:unselect', function (e) {
     // Hide lesson column on unselect
     var lesson = e.params.data.id;
@@ -172,10 +177,7 @@ lessonFilter.on('select2:select', function (e) {
     tableStatistics.find('thead .day-header').attr('colspan', colspan);
 
     // Add divider class for viewing between days in week
-    if (tableStatistics.find('thead th[data-startlesson="1"]').is(':hidden')) {
-        var firstVisible = tableStatistics.find('thead th.lesson-header:visible').first().data('startlesson');
-        tableStatistics.find('td[data-startlesson="' + firstVisible + '"]').addClass('table-vertical-divider');
-    }
+    updateDivider();
 });
 
 // User guide for timetable statistics
@@ -273,4 +275,11 @@ function resetLecturerFilter() {
 
 function resetLecturerType() {
     lecturerType.parent().find('.select2-search__field').attr('placeholder', 'Lọc loại giảng viên');
+}
+
+function updateDivider() {
+    if (tableStatistics.find('thead th[data-startlesson="1"]').is(':hidden')) {
+        var firstVisible = tableStatistics.find('thead th.lesson-header:visible').first().data('startlesson');
+        tableStatistics.find('td[data-startlesson="' + firstVisible + '"]').addClass('table-vertical-divider');
+    }
 }
