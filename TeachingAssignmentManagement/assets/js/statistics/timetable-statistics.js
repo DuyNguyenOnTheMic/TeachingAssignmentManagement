@@ -170,8 +170,11 @@ lessonFilter.on('select2:select', function (e) {
     var colspan = lessonFilter.val().length;
     tableStatistics.find('td[data-startlesson="' + lesson + '"], th[data-startlesson="' + lesson + '"]').hide();
     tableStatistics.find('thead .day-header').attr('colspan', colspan);
+
+    // Add divider class for viewing between days in week
     if (tableStatistics.find('thead th[data-startlesson="1"]').is(':hidden')) {
-        tableStatistics.find('td[data-startlesson="4"]').addClass('table-vertical-divider');
+        var firstVisible = tableStatistics.find('thead th.lesson-header:visible').first().data('startlesson');
+        tableStatistics.find('td[data-startlesson="' + firstVisible + '"]').addClass('table-vertical-divider');
     }
 });
 
