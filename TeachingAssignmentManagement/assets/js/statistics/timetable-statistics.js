@@ -103,7 +103,7 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
 });
 
 // Populate select2 for lecturer filter
-lecturerFilter.wrap('<div class="position-relative my-50 me-50"></div>');
+lecturerFilter.wrap('<div class="position-relative my-50 me-1"></div>');
 lecturerFilter.select2({
     language: 'vi',
     dropdownAutoWidth: true,
