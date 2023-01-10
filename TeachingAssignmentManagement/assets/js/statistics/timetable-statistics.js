@@ -74,6 +74,8 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
         $selectAll.on('click', function () {
             // Select All Options
             lecturerFilter.find('option').prop('selected', 'selected').trigger('change');
+            lecturerType.val('-1').trigger('change');
+            updateTypePlaceholder();
             filterCount(lecturerFilter);
             self.trigger('close');
             $('#tblStatistics').find('tbody tr').show();
@@ -81,7 +83,9 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
         $unselectAll.on('click', function () {
             // Unselect All Options
             lecturerFilter.val('-1').trigger('change');
+            lecturerType.val('-1').trigger('change');
             lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
+            updateTypePlaceholder();
             self.trigger('close');
             $('#tblStatistics').find('tbody tr').hide();
         });
@@ -128,7 +132,7 @@ lecturerType.select2({
     placeholder: lecturerType[0][0].innerHTML,
     minimumResultsForSearch: Infinity
 })
-lecturerType.parent().find('.select2-search__field').attr('placeholder', 'Lọc loại giảng viên');
+resetLecturerType();
 lecturerType.on('select2:select', function (e) {
     // Select lecturers based on lecturer type
     $(this).val('-1').val(e.params.data.id).trigger('change');
@@ -138,8 +142,8 @@ lecturerType.on('select2:select', function (e) {
     $('#tblStatistics tbody tr').hide();
     $('#tblStatistics tbody tr[data-type="' + e.params.data.id + '"]').show();
 }).on('select2:unselect', function () {
-    // Set filter text for filter lecturer type
-    lecturerType.parent().find('.select2-search__field').attr('placeholder', 'Lọc loại giảng viên');
+    // Reset placeholder for lecturer type
+    resetLecturerType();
 });
 
 // User guide for timetable statistics
@@ -207,4 +211,8 @@ $(function () {
 
 function filterCount(element) {
     element.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + element.val().length + ' GV');
+}
+
+function resetLecturerType() {
+    lecturerType.parent().find('.select2-search__field').attr('placeholder', 'Lọc loại giảng viên');
 }
