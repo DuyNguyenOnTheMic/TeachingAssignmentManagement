@@ -3,8 +3,8 @@
     startWeek = weekData.data('start-week'),
     endWeek = weekData.data('end-week'),
     currentWeek = weekData.data('current-week'),
-    rootUrl = $('#loader').data('request-url')
-tableStatistics = $('#tblStatistics'),
+    rootUrl = $('#loader').data('request-url'),
+    tableStatistics = $('#tblStatistics'),
     lecturerFilter = $('#lecturerFilter'),
     lecturerType = $('#lecturerType'),
     lessonFilter = $('#lessonFilter');
