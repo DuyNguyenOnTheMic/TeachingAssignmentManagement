@@ -156,19 +156,20 @@ lessonFilter.select2({
     closeOnSelect: false
 })
 lessonFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc ca giảng');
+var tableStatistics = $('#tblStatistics');
 lessonFilter.on('select2:select', function (e) {
     // Show lesson column on select
     var lesson = e.params.data.id;
     var colspan = lessonFilter.val().length;
-    $('#tblStatistics td[data-startlesson="' + lesson + '"], th[data-startlesson="' + lesson + '"]').show();
-    $('#tblStatistics thead .day-header').attr('colspan', colspan);
+    tableStatistics.find('td[data-startlesson="' + lesson + '"], th[data-startlesson="' + lesson + '"]').show();
+    tableStatistics.find('thead .day-header').attr('colspan', colspan);
 }).on('select2:unselect', function (e) {
     // Hide lesson column on unselect
     var lesson = e.params.data.id;
     var colspan = lessonFilter.val().length;
-    $('#tblStatistics td[data-startlesson="' + lesson + '"], th[data-startlesson="' + lesson + '"]').hide();
-    $('#tblStatistics thead .day-header').attr('colspan', colspan);
-    if ($('#tblStatistics thead th[data-startlesson="1"]').is(':visible')) {
+    tableStatistics.find('td[data-startlesson="' + lesson + '"], th[data-startlesson="' + lesson + '"]').hide();
+    tableStatistics.find('thead .day-header').attr('colspan', colspan);
+    if (tableStatistics.find('thead th[data-startlesson="1"]').is(':visible')) {
 
     }
 });
