@@ -75,7 +75,7 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
             // Select All Options
             lecturerFilter.find('option').prop('selected', 'selected').trigger('change');
             lecturerType.val('-1').trigger('change');
-            updateTypePlaceholder();
+            resetLecturerType();
             filterCount(lecturerFilter);
             self.trigger('close');
             $('#tblStatistics').find('tbody tr').show();
@@ -85,7 +85,7 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
             lecturerFilter.val('-1').trigger('change');
             lecturerType.val('-1').trigger('change');
             lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
-            updateTypePlaceholder();
+            resetLecturerType();
             self.trigger('close');
             $('#tblStatistics').find('tbody tr').hide();
         });
