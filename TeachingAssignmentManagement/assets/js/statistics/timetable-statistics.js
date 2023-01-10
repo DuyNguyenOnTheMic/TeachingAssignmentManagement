@@ -152,8 +152,7 @@ lessonFilter.wrap('<div class="position-relative my-50 me-1"></div>');
 lessonFilter.select2({
     language: 'vi',
     dropdownAutoWidth: true,
-    dropdownParent: lessonFilter.parent(),
-    dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
+    dropdownParent: lessonFilter.parent()
 })
 lessonFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc ca giảng');
 lessonFilter.on('select2:select', function (e) {
