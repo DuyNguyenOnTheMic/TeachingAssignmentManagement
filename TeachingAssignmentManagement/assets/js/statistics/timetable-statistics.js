@@ -169,8 +169,8 @@ lessonFilter.on('select2:select', function (e) {
     var colspan = lessonFilter.val().length;
     tableStatistics.find('td[data-startlesson="' + lesson + '"], th[data-startlesson="' + lesson + '"]').hide();
     tableStatistics.find('thead .day-header').attr('colspan', colspan);
-    if (tableStatistics.find('thead th[data-startlesson="1"]').is(':visible')) {
-
+    if (tableStatistics.find('thead th[data-startlesson="1"]').is(':hidden')) {
+        tableStatistics.find('td[data-startlesson="4"]').addClass('table-vertical-divider');
     }
 });
 
