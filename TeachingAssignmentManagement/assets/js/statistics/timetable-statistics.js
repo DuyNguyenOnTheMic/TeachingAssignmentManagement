@@ -160,9 +160,9 @@ $(function () {
             attachTo: { element: '#week + .select2-container', on: 'bottom' },
             buttons: [
                 {
-                    action: tour.cancel,
+                    text: 'Bỏ qua',
                     classes: backBtnClass,
-                    text: 'Bỏ qua'
+                    action: tour.cancel
                 },
                 {
                     text: 'Tiếp',
@@ -175,6 +175,28 @@ $(function () {
             title: 'Lọc giảng viên',
             text: 'Chọn giảng viên bạn muốn xem TKB ở đây.',
             attachTo: { element: '#lecturerFilter + .select2-container', on: 'bottom' },
+            buttons: [
+                {
+                    text: 'Bỏ qua',
+                    classes: backBtnClass,
+                    action: tour.cancel
+                },
+                {
+                    text: 'Quay lại',
+                    classes: backBtnClass,
+                    action: tour.back
+                },
+                {
+                    text: 'Tiếp',
+                    classes: nextBtnClass,
+                    action: tour.next
+                }
+            ]
+        });
+        tour.addStep({
+            title: 'Lọc loại giảng viên',
+            text: 'Chọn và xem thời khoá biểu theo loại giảng viên ở đây.',
+            attachTo: { element: '#lecturerType + .select2-container', on: 'bottom' },
             buttons: [
                 {
                     text: 'Quay lại',
