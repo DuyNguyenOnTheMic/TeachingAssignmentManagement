@@ -152,10 +152,15 @@ lessonFilter.wrap('<div class="position-relative my-50 me-1"></div>');
 lessonFilter.select2({
     language: 'vi',
     dropdownAutoWidth: true,
-    dropdownParent: lessonFilter.parent()
+    dropdownParent: lessonFilter.parent(),
+    closeOnSelect: false
 })
 lessonFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc ca giảng');
 lessonFilter.on('select2:select', function (e) {
+    var lesson = e.params.data.id;
+    var colspan = lessonFilter.find('option').length - lessonFilter.val().length;
+    $('#tblStatistics tbody td[data-startlesson="' + lesson + '"], th[data-startlesson="' + lesson + '"]').hide();
+    $('#tblStatistics thead .day-header').attr('colspan', colspan);
 }).on('select2:unselect', function (e) {
 });
 
