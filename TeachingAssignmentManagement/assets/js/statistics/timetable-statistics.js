@@ -78,16 +78,16 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
             resetLecturerType();
             filterCount(lecturerFilter);
             self.trigger('close');
-            $('#tblStatistics').find('tbody tr').show();
+            $('#tblStatistics tbody tr').show();
         });
         $unselectAll.on('click', function () {
             // Unselect All Options
             lecturerFilter.val('-1').trigger('change');
             lecturerType.val('-1').trigger('change');
-            lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
+            resetLecturerFilter();
             resetLecturerType();
             self.trigger('close');
-            $('#tblStatistics').find('tbody tr').hide();
+            $('#tblStatistics tbody tr').hide();
         });
         return $rendered;
     };
@@ -110,7 +110,7 @@ lecturerFilter.select2({
     dropdownParent: lecturerFilter.parent(),
     dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
 })
-lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
+resetLecturerFilter();
 lecturerFilter.on('select2:select', function (e) {
     // Show table row on select
     var lecturerId = $('#' + e.params.data.id);
@@ -211,6 +211,10 @@ $(function () {
 
 function filterCount(element) {
     element.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + element.val().length + ' GV');
+}
+
+function resetLecturerFilter() {
+    lecturerFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc giảng viên');
 }
 
 function resetLecturerType() {
