@@ -78,7 +78,7 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
             lecturerFilter.find('option').prop('selected', 'selected').trigger('change');
             lecturerType.val('-1').trigger('change');
             resetLecturerType();
-            filterCount(lecturerFilter);
+            filterCount(lecturerFilter, 'GV');
             self.trigger('close');
             $('#tblStatistics tbody tr').show();
         });
@@ -117,12 +117,12 @@ lecturerFilter.on('select2:select', function (e) {
     // Show table row on select
     var lecturerId = $('#' + e.params.data.id);
     lecturerId.show();
-    filterCount(lecturerFilter);
+    filterCount(lecturerFilter, 'GV');
 }).on('select2:unselect', function (e) {
     // Hide table row on unselect
     var lecturerId = $('#' + e.params.data.id);
     lecturerId.hide();
-    filterCount(lecturerFilter);
+    filterCount(lecturerFilter, 'GV');
 });
 
 // Populate select2 for lecturer type
@@ -139,7 +139,7 @@ lecturerType.on('select2:select', function (e) {
     // Select lecturers based on lecturer type
     $(this).val('-1').val(e.params.data.id).trigger('change');
     lecturerFilter.val('-1').find('option[data-type="' + e.params.data.id + '"]').prop('selected', 'selected').trigger('change');
-    filterCount(lecturerFilter);
+    filterCount(lecturerFilter, 'GV');
     lecturerType.parent().find('.select2-search__field').attr('placeholder', e.params.data.text);
     $('#tblStatistics tbody tr').hide();
     $('#tblStatistics tbody tr[data-type="' + e.params.data.id + '"]').show();
@@ -163,6 +163,7 @@ lessonFilter.on('select2:select', function (e) {
     var colspan = lessonFilter.val().length;
     tableStatistics.find('td[data-startlesson="' + lesson + '"], th[data-startlesson="' + lesson + '"]').show();
     tableStatistics.find('thead .day-header').attr('colspan', colspan);
+    filterCount(lessonFilter, 'ca giảng');
 
     // Remove divider class
     tableStatistics.find('td[data-startlesson!="1"]').removeClass('table-vertical-divider');
@@ -175,6 +176,7 @@ lessonFilter.on('select2:select', function (e) {
     var colspan = lessonFilter.val().length;
     tableStatistics.find('td[data-startlesson="' + lesson + '"], th[data-startlesson="' + lesson + '"]').hide();
     tableStatistics.find('thead .day-header').attr('colspan', colspan);
+    filterCount(lessonFilter, 'ca giảng');
 
     // Add divider class for viewing between days in week
     updateDivider();
@@ -265,8 +267,8 @@ $(function () {
     }
 });
 
-function filterCount(element) {
-    element.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + element.val().length + ' GV');
+function filterCount(element, text) {
+    element.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + element.val().length + ' ' + text);
 }
 
 function resetLecturerFilter() {
