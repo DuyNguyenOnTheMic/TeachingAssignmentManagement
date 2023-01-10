@@ -28,6 +28,11 @@ if (classCount == 0) {
 
     // Hide all table rows on load
     $('#tblStatistics tbody tr').hide();
+
+    // Update focus for multiple select2
+    $(document).on('select2:open', () => {
+        document.querySelector('.select2-container--open .select2-search__field').focus();
+    });
 }
 
 if (!weekSelect.val()) {
@@ -122,12 +127,13 @@ lecturerType.select2({
     dropdownParent: lecturerFilter.parent(),
     placeholder: lecturerType[0][0].innerHTML,
     minimumResultsForSearch: Infinity
-}).on('select2:select', function (e) {
+})
+lecturerType.parent().find('.select2-search__field').attr('placeholder', 'Lọc loại giảng viên');
+lecturerType.on('select2:select', function (e) {
     // Select lecturers based on lecturer type
     lecturerFilter.find('option[data-type="' + e.params.data.id + '"]').prop('selected', 'selected').trigger('change');
     filterCount(lecturerFilter);
 })
-lecturerType.parent().find('.select2-search__field').attr('placeholder', 'Lọc loại giảng viên');
 
 // User guide for timetable statistics
 $(function () {
