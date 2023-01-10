@@ -131,9 +131,16 @@ lecturerType.select2({
 lecturerType.parent().find('.select2-search__field').attr('placeholder', 'Lọc loại giảng viên');
 lecturerType.on('select2:select', function (e) {
     // Select lecturers based on lecturer type
-    lecturerFilter.find('option[data-type="' + e.params.data.id + '"]').prop('selected', 'selected').trigger('change');
+    $(this).val('-1').val(e.params.data.id).trigger('change');
+    lecturerFilter.val('-1').find('option[data-type="' + e.params.data.id + '"]').prop('selected', 'selected').trigger('change');
     filterCount(lecturerFilter);
-})
+    lecturerType.parent().find('.select2-search__field').attr('placeholder', e.params.data.text);
+    $('#tblStatistics tbody tr').hide();
+    $('#tblStatistics tbody tr[data-type="' + e.params.data.id + '"]').show();
+}).on('select2:unselect', function () {
+    // Set filter text for filter lecturer type
+    lecturerType.parent().find('.select2-search__field').attr('placeholder', 'Lọc loại giảng viên');
+});
 
 // User guide for timetable statistics
 $(function () {
