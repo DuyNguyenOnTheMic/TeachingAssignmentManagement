@@ -120,12 +120,14 @@ lecturerType.select2({
     language: 'vi',
     dropdownAutoWidth: true,
     dropdownParent: lecturerFilter.parent(),
-    placeholder: lecturerType[0][0].innerHTML
+    placeholder: lecturerType[0][0].innerHTML,
+    minimumResultsForSearch: Infinity
 }).on('select2:select', function (e) {
     // Select lecturers based on lecturer type
     lecturerFilter.find('option[data-type="' + e.params.data.id + '"]').prop('selected', 'selected').trigger('change');
     filterCount(lecturerFilter);
 })
+lecturerType.parent().find('.select2-search__field').attr('placeholder', 'Lọc loại giảng viên');
 
 // User guide for timetable statistics
 $(function () {

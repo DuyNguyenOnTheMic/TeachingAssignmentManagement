@@ -17,9 +17,7 @@
                 <option value="@option.id" data-type="@option.type">@option.full_name</option>
             }
         </select>
-        <select class="form-select" id="lecturerType" name="lecturerType">
-            <option value="">Loại giảng viên</option>
-            <option value="-1">Tất cả</option>
+        <select class="form-select" id="lecturerType" name="lecturerType" multiple aria-label="Lọc loại giảng viên">
             <option value="CH" selected>Cơ hữu</option>
             <option value="TG">Thỉnh giảng</option>
         </select>
