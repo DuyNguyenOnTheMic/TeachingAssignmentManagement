@@ -58,7 +58,7 @@
         <tbody>
             @foreach (var lecturer in ViewBag.lecturers)
             {
-                <tr id="@lecturer.id">
+                <tr id="@lecturer.id" data-type="@lecturer.type">
                     <td>@lecturer.full_name</td>
                     @foreach (int day in Model.days)
                     {
