@@ -50,7 +50,7 @@
                 {
                     foreach (int startLesson in Model.startLessons)
                     {
-                        <th>@startLesson-@(startLesson + 2)</th>
+                        <th data-startlesson="@startLesson">@startLesson-@(startLesson + 2)</th>
                     }
                 }
             </tr>
@@ -68,7 +68,7 @@
                             string dividerClass = startLesson == 1 ? "class=table-vertical-divider" : string.Empty;
                             if (classes.Any())
                             {
-                                <td @dividerClass>
+                                <td @dividerClass data-startlesson="@startLesson">
                                     @foreach (var item in classes)
                                     {
                                         string cardClass = "Lý thuyết" == item.Type ? "btn-success" : "btn-warning";
@@ -78,7 +78,7 @@
                             }
                             else
                             {
-                                <td @dividerClass></td>
+                                <td @dividerClass data-startlesson="@startLesson"></td>
                             }
                         }
                     }
