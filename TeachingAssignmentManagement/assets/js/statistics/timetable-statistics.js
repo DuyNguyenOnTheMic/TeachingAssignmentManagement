@@ -160,14 +160,17 @@ lessonFilter.on('select2:select', function (e) {
     // Show lesson column on select
     var lesson = e.params.data.id;
     var colspan = lessonFilter.val().length;
-    $('#tblStatistics tbody td[data-startlesson="' + lesson + '"], th[data-startlesson="' + lesson + '"]').show();
+    $('#tblStatistics td[data-startlesson="' + lesson + '"], th[data-startlesson="' + lesson + '"]').show();
     $('#tblStatistics thead .day-header').attr('colspan', colspan);
 }).on('select2:unselect', function (e) {
     // Hide lesson column on unselect
     var lesson = e.params.data.id;
     var colspan = lessonFilter.val().length;
-    $('#tblStatistics tbody td[data-startlesson="' + lesson + '"], th[data-startlesson="' + lesson + '"]').hide();
+    $('#tblStatistics td[data-startlesson="' + lesson + '"], th[data-startlesson="' + lesson + '"]').hide();
     $('#tblStatistics thead .day-header').attr('colspan', colspan);
+    if ($('#tblStatistics thead th[data-startlesson="1"]').is(':visible')) {
+
+    }
 });
 
 // User guide for timetable statistics
