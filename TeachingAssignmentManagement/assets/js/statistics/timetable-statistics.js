@@ -157,6 +157,11 @@ lessonFilter.select2({
 })
 lessonFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc ca giảng');
 lessonFilter.on('select2:select', function (e) {
+    // Show lesson column on select
+    var lesson = e.params.data.id;
+    var colspan = lessonFilter.val().length;
+    $('#tblStatistics tbody td[data-startlesson="' + lesson + '"], th[data-startlesson="' + lesson + '"]').show();
+    $('#tblStatistics thead .day-header').attr('colspan', colspan);
 }).on('select2:unselect', function (e) {
     // Hide lesson column on unselect
     var lesson = e.params.data.id;
