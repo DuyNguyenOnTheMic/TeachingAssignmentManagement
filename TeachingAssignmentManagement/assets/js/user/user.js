@@ -37,9 +37,9 @@ $(function () {
                     // User type
                     targets: 4,
                     render: function (data) {
-                        var $status = data;
-                        if ($status) {
-                            return '<span class="badge rounded-pill ' + typeBadgeObj[$status].class + ' text-capitalized">' + typeBadgeObj[$status].title + '</span>';
+                        var $type = data;
+                        if ($type) {
+                            return '<span class="badge rounded-pill ' + typeBadgeObj[$type].class + ' text-capitalized">' + typeBadgeObj[$type].title + '</span>';
                         } else {
                             return null;
                         }
@@ -60,11 +60,27 @@ $(function () {
                     }
                 },
                 {
+                    // User status
+                    targets: 6,
+                    render: function (data) {
+                        var $status = data;
+                        var isChecked;
+                        if ($status == true) {
+                            isChecked = 'checked';
+                        } else if ($status == false) {
+                            isChecked = '';
+                        } else {
+                            return null;
+                        }
+                        return '<div class="form-check form-check-primary form-switch"><input type="checkbox" class="form-check-input" id="userStatus" name="userStatus"' + isChecked + '></div>'
+                    }
+                },
+                {
                     searchable: false,
                     orderable: false,
-                    className: 'text-center',
                     targets: [0, 7]
                 },
+                { className: 'text-center', targets: [0, 6, 7] },
                 { width: '5%', targets: 0 },
                 { width: '10%', targets: 7 }
             ],
