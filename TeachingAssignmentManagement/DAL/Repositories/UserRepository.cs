@@ -18,15 +18,18 @@ namespace TeachingAssignmentManagement.DAL
         public IEnumerable GetUsers()
         {
             DbSet<lecturer> query_lecturer = context.lecturers;
-            return context.AspNetUsers.Select(u => new
-            {
-                id = u.Id,
-                email = u.Email,
-                role = u.AspNetRoles.FirstOrDefault().Name,
-                query_lecturer.FirstOrDefault(l => l.id == u.Id).staff_id,
-                query_lecturer.FirstOrDefault(l => l.id == u.Id).full_name,
-                query_lecturer.FirstOrDefault(l => l.id == u.Id).type
-            }).ToList();
+            return (from u in context.AspNetUsers
+                    join l in context.lecturers on u.Id equals l.id into lecturers
+                    from lecturer in lecturers.DefaultIfEmpty()
+                    select new
+                    {
+                        id = u.Id,
+                        email = u.Email,
+                        role = u.AspNetRoles.FirstOrDefault().Name,
+                        lecturer.staff_id,
+                        lecturer.full_name,
+                        lecturer.type
+                    }).ToList();
         }
 
         public IEnumerable<AspNetRole> GetRoles()
