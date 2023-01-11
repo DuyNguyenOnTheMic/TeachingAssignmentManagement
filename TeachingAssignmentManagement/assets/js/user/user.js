@@ -65,7 +65,7 @@ $(function () {
                     render: function (data, type, row) {
                         var $status = data;
                         var isChecked = $status ? 'checked' : '';
-                        return "<div class='form-check form-check-primary form-switch'><input type='checkbox' class='form-check-input user-status' aria-label='Trạng thái người dùng' onchange=editStatus('" + row.id + "','" + !$status + "') " + isChecked + "></div>";
+                        return "<div class='form-check form-check-primary form-switch d-flex justify-content-center'><input type='checkbox' class='form-check-input user-status' aria-label='Trạng thái người dùng' onchange=editStatus('" + row.id + "','" + !$status + "') " + isChecked + "></div>";
                     }
                 },
                 {
