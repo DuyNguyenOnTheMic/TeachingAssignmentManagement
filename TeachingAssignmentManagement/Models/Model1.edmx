@@ -107,7 +107,7 @@
           <Property Name="staff_id" Type="varchar" MaxLength="50" />
           <Property Name="full_name" Type="nvarchar" MaxLength="255" />
           <Property Name="type" Type="nvarchar" MaxLength="100" />
-          <Property Name="status" Type="bit" />
+          <Property Name="status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="major">
           <Key>
@@ -449,7 +449,7 @@
           <Property Name="staff_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="status" Type="Boolean" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="class_section" Relationship="Self.FK_class_section_lecturer" FromRole="lecturer" ToRole="class_section" />
           <NavigationProperty Name="class_section1" Relationship="Self.FK_class_section_lecturer1" FromRole="lecturer" ToRole="class_section" />
         </EntityType>
