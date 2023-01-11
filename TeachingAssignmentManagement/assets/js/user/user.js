@@ -25,6 +25,7 @@ $(function () {
                 { 'data': 'email' },
                 { 'data': 'type' },
                 { 'data': 'role' },
+                { 'data': 'status' },
                 {
                     'data': 'id', 'render': function (data, type, row) {
                         return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + rootUrl + "User/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a><a class='deleteRow text-danger p-0' data-original-title='Xoá' title='Xoá' onclick=deleteUser('" + data + "','" + row.email + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
@@ -62,10 +63,10 @@ $(function () {
                     searchable: false,
                     orderable: false,
                     className: 'text-center',
-                    targets: [0, 6]
+                    targets: [0, 7]
                 },
                 { width: '5%', targets: 0 },
-                { width: '10%', targets: 6 }
+                { width: '10%', targets: 7 }
             ],
 
             order: [[3, 'asc']],
