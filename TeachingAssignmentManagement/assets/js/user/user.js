@@ -78,9 +78,9 @@ $(function () {
                 {
                     searchable: false,
                     orderable: false,
+                    className: 'text-center',
                     targets: [0, 7]
                 },
-                { className: 'text-center', targets: [0, 6, 7] },
                 { width: '5%', targets: 0 },
                 { width: '10%', targets: 7 }
             ],
