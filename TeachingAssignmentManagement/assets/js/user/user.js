@@ -72,7 +72,7 @@ $(function () {
                         } else {
                             return null;
                         }
-                        return '<div class="form-check form-check-primary form-switch"><input type="checkbox" class="form-check-input" id="userStatus" name="userStatus"' + isChecked + '></div>'
+                        return '<div class="form-check form-check-primary form-switch"><input type="checkbox" class="form-check-input user-status" aria-label="Trạng thái người dùng"' + isChecked + '></div>'
                     }
                 },
                 {
