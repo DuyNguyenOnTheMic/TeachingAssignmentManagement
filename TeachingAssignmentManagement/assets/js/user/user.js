@@ -46,7 +46,7 @@ $(function () {
                     }
                 },
                 {
-                    // User Role
+                    // User role
                     targets: 5,
                     render: function (data, type, full, meta) {
                         var $role = full['role'];
