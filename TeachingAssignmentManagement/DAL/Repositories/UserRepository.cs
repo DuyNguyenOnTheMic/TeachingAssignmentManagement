@@ -28,7 +28,8 @@ namespace TeachingAssignmentManagement.DAL
                         role = u.AspNetRoles.FirstOrDefault().Name,
                         lecturer.staff_id,
                         lecturer.full_name,
-                        lecturer.type
+                        lecturer.type,
+                        lecturer.status
                     }).ToList();
         }
 
