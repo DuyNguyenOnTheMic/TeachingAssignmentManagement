@@ -64,15 +64,8 @@ $(function () {
                     targets: 6,
                     render: function (data, type, row) {
                         var $status = data;
-                        var isChecked;
-                        if ($status == true) {
-                            isChecked = 'checked';
-                        } else if ($status == false) {
-                            isChecked = '';
-                        } else {
-                            return null;
-                        }
-                        return "<div class='form-check form-check-primary form-switch'><input type='checkbox' class='form-check-input user-status' aria-label='Trạng thái người dùng' onchange=editStatus('" + row.id + "','" + $status + "') " + isChecked + "></div>";
+                        var isChecked = $status ? 'checked' : '';
+                        return "<div class='form-check form-check-primary form-switch'><input type='checkbox' class='form-check-input user-status' aria-label='Trạng thái người dùng' onchange=editStatus('" + row.id + "','" + !$status + "') " + isChecked + "></div>";
                     }
                 },
                 {
