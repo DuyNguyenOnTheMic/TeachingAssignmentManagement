@@ -74,7 +74,8 @@ namespace TeachingAssignmentManagement.Controllers
                     {
                         id = user.Id,
                         staff_id = id,
-                        full_name = fullName
+                        full_name = fullName,
+                        status = true
                     };
                     unitOfWork.UserRepository.InsertLecturer(lecturer);
                     unitOfWork.Save();
@@ -126,7 +127,8 @@ namespace TeachingAssignmentManagement.Controllers
                     id = user.Id,
                     staff_id = txtStaffId,
                     full_name = txtFullName,
-                    type = type
+                    type = type,
+                    status = true
                 };
                 unitOfWork.UserRepository.InsertLecturer(lecturer);
                 unitOfWork.Save();
@@ -224,7 +226,8 @@ namespace TeachingAssignmentManagement.Controllers
                         id = id,
                         staff_id = txtStaffId,
                         full_name = txtFullName,
-                        type = type
+                        type = type,
+                        status = true
                     };
                     unitOfWork.UserRepository.InsertLecturer(lecturer);
                 }
