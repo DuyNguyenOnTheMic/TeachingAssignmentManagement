@@ -62,7 +62,7 @@ $(function () {
                 {
                     // User status
                     targets: 6,
-                    render: function (data) {
+                    render: function (data, type, row) {
                         var $status = data;
                         var isChecked;
                         if ($status == true) {
@@ -72,7 +72,7 @@ $(function () {
                         } else {
                             return null;
                         }
-                        return '<div class="form-check form-check-primary form-switch"><input type="checkbox" class="form-check-input user-status" aria-label="Trạng thái người dùng"' + isChecked + '></div>'
+                        return '<div class="form-check form-check-primary form-switch"><input type="checkbox" class="form-check-input user-status" aria-label="Trạng thái người dùng" onChange="editStatus("' + row.id + '")"' + isChecked + '></div>'
                     }
                 },
                 {
@@ -209,6 +209,22 @@ function disableButtons(state) {
             this.style.pointerEvents = 'auto';
         });
     }
+}
+
+// Edit user status
+function editStatus(id) {
+    $.ajax({
+        type: 'POST',
+        url: rootUrl + 'User/EditStatus/' + id,
+        success: function (data) {
+            if (data.success) {
+                dataTable.ajax.reload(null, false);
+
+                // Show message when delete succeeded
+                toastr["success"](data.message);
+            }
+        }
+    });
 }
 
 // Show Edit form
