@@ -267,6 +267,15 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
+        public ActionResult EditStatus(string id, bool status)
+        {
+            lecturer lecturer = unitOfWork.UserRepository.GetLecturerByID(id);
+            lecturer.status = status;
+            unitOfWork.Save();
+            return Json(new { success = true, message = "Cập nhật trạng thái thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
         public ActionResult Delete(string id)
         {
             // Declare variables

@@ -72,7 +72,7 @@ $(function () {
                         } else {
                             return null;
                         }
-                        return '<div class="form-check form-check-primary form-switch"><input type="checkbox" class="form-check-input user-status" aria-label="Trạng thái người dùng" onChange="editStatus("' + row.id + '")"' + isChecked + '></div>'
+                        return "<div class='form-check form-check-primary form-switch'><input type='checkbox' class='form-check-input user-status' aria-label='Trạng thái người dùng' onchange=editStatus('" + row.id + "','" + $status + "') " + isChecked + "></div>";
                     }
                 },
                 {
@@ -212,10 +212,11 @@ function disableButtons(state) {
 }
 
 // Edit user status
-function editStatus(id) {
+function editStatus(id, status) {
     $.ajax({
         type: 'POST',
-        url: rootUrl + 'User/EditStatus/' + id,
+        url: rootUrl + 'User/EditStatus/',
+        data: { id, status },
         success: function (data) {
             if (data.success) {
                 dataTable.ajax.reload(null, false);
