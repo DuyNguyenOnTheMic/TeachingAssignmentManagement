@@ -156,7 +156,8 @@ $(function () {
                             });
                     });
 
-                $('div.column-filter').html('<div class="dataTables_length"><label><select class="select2 form-select" id="columnFilter" name="columnFilter"><option value="">Chọn cột để ẩn/ hiện</option></select></label></div>');
+                // Add a filter select for show and hide columns
+                $('div.column-filter').html('<div class="dataTables_showhide"><label><select class="select2 form-select" id="columnFilter" name="columnFilter"><option value="">Ẩn/ hiện cột</option></select></label></div>');
             }
         });
 
