@@ -269,8 +269,22 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpPost]
         public ActionResult EditStatus(string id, bool status)
         {
-            lecturer lecturer = unitOfWork.UserRepository.GetLecturerByID(id);
-            lecturer.status = status;
+            lecturer query_lecturer = unitOfWork.UserRepository.GetLecturerByID(id);
+            if (query_lecturer != null)
+            {
+                // Edit lecturer info
+                query_lecturer.status = status;
+            }
+            else
+            {
+                // Add a new lecturer
+                lecturer lecturer = new lecturer
+                {
+                    id = id,
+                    status = true
+                };
+                unitOfWork.UserRepository.InsertLecturer(lecturer);
+            }
             unitOfWork.Save();
             return Json(new { success = true, message = "Cập nhật trạng thái thành công!" }, JsonRequestBehavior.AllowGet);
         }
