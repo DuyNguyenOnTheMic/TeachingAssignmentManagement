@@ -65,15 +65,15 @@ $(function () {
                     render: function (data, type, row) {
                         var $status = data;
                         var isChecked = $status ? 'checked' : '';
-                        return "<div class='form-check form-check-primary form-switch d-flex justify-content-center'><input type='checkbox' class='form-check-input user-status' aria-label='Trạng thái người dùng' onchange=editStatus('" + row.id + "','" + !$status + "') " + isChecked + "></div>";
+                        return type === 'display' ? "<div class='form-check form-check-primary form-switch d-flex justify-content-center'><input type='checkbox' class='form-check-input user-status' aria-label='Trạng thái người dùng' onchange=editStatus('" + row.id + "','" + !$status + "') " + isChecked + "></div>" : data;
                     }
                 },
                 {
                     searchable: false,
                     orderable: false,
-                    className: 'text-center',
                     targets: [0, 7]
                 },
+                { className: 'text-center', targets: [0, 6, 7] },
                 { width: '5%', targets: 0 },
                 { width: '10%', targets: 7 }
             ],
