@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using DocumentFormat.OpenXml.InkML;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
@@ -129,7 +130,7 @@ namespace TeachingAssignmentManagement.Controllers
         //
         // POST: /Account/Update
         [HttpPost]
-        public ActionResult Update(lecturer lecturer)
+        public ActionResult Update([Bind(Include = "staff_id, full_name")] lecturer lecturer)
         {
             string userId = UserManager.FindByEmail(User.Identity.Name).Id;
             try
@@ -145,6 +146,7 @@ namespace TeachingAssignmentManagement.Controllers
                 {
                     // Create a new lecturer
                     lecturer.id = userId;
+                    lecturer.status = true;
                     unitOfWork.UserRepository.InsertLecturer(lecturer);
                 }
                 unitOfWork.Save();
