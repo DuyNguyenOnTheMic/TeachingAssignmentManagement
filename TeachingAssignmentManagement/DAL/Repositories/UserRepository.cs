@@ -44,7 +44,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable<lecturer> GetLecturers()
         {
-            return context.lecturers.Where(l => l.staff_id != null && l.full_name != null).ToList();
+            return context.lecturers.Where(l => l.staff_id != null && l.full_name != null && l.status == true).ToList();
         }
 
         public lecturer GetLecturerByID(string id)
