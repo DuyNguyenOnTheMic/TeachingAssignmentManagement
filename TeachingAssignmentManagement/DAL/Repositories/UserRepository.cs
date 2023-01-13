@@ -17,7 +17,6 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable GetUsers()
         {
-            DbSet<lecturer> query_lecturer = context.lecturers;
             return (from u in context.AspNetUsers
                     join l in context.lecturers on u.Id equals l.id into lecturers
                     from lecturer in lecturers.DefaultIfEmpty()
