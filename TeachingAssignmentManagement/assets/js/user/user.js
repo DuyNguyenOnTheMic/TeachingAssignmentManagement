@@ -157,7 +157,16 @@ $(function () {
                     });
 
                 // Add a filter select for show and hide columns
-                $('div.column-filter').html('<div class="dataTables_showhide"><label><select class="select2 form-select" id="columnFilter" name="columnFilter"><option value="">Ẩn/ hiện cột</option><option value="status">Trạng thái</option></select></label></div>');
+                $('div.column-filter').html('<div class="dataTables_showhide"><label><select class="select2 form-select" id="columnFilter" name="columnFilter" multiple><option value="">Ẩn/ hiện cột</option><option value="status">Trạng thái</option></select></label></div>');
+
+                // Populate select2 for column filter
+                var columnFilter = $('#columnFilter');
+                columnFilter.wrap('<div class="position-relative"></div>').select2({
+                    language: 'vi',
+                    dropdownAutoWidth: true,
+                    dropdownParent: columnFilter.parent(),
+                    placeholder: columnFilter[0][0].innerHTML
+                })
             }
         });
 
