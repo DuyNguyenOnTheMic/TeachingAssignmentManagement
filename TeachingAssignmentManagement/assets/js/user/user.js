@@ -157,7 +157,7 @@ $(function () {
                     });
 
                 // Add a filter select for show and hide columns
-                $('div.column-filter').html('<div class="dataTables_showhide"><label><select class="select2 form-select" id="columnFilter" name="columnFilter"><option value="">Ẩn/ hiện cột</option></select></label></div>');
+                $('div.column-filter').html('<div class="dataTables_showhide"><label><select class="select2 form-select" id="columnFilter" name="columnFilter"><option value="">Ẩn/ hiện cột</option><option value="status">Trạng thái</option></select></label></div>');
             }
         });
 
