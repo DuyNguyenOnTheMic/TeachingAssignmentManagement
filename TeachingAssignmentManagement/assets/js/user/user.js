@@ -172,6 +172,7 @@ $(function () {
                     // Show/hide table column on select
                     var column = dataTable.column(e.params.data.id);
                     column.visible(!column.visible());
+                    filterCount($(this));
                 })
             }
         });
@@ -220,6 +221,10 @@ function disableButtons(state) {
             this.style.pointerEvents = 'auto';
         });
     }
+}
+
+function filterCount(element) {
+    element.parent().find('.select2-search__field').attr('placeholder', 'Đã chọn ' + element.val().length + ' cột');
 }
 
 // Edit user status
