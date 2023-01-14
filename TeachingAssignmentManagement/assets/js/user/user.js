@@ -62,6 +62,7 @@ $(function () {
                 {
                     // User status
                     targets: 6,
+                    visible: false,
                     render: function (data, type, row) {
                         var $status = data;
                         var isChecked = $status ? 'checked' : '';
@@ -157,7 +158,7 @@ $(function () {
                     });
 
                 // Add a filter select for show and hide columns
-                $('div.column-filter').html('<div class="dataTables_showhide"><label><select class="select2 form-select" id="columnFilter" name="columnFilter" multiple><option value="">Ẩn/ hiện cột</option><option value="status">Trạng thái</option></select></label></div>');
+                $('div.column-filter').html('<div class="dataTables_showhide"><label><select class="select2 form-select" id="columnFilter" name="columnFilter" multiple><option value="">Ẩn/ hiện cột</option><option value="6">Trạng thái</option></select></label></div>');
 
                 // Populate select2 for column filter
                 var columnFilter = $('#columnFilter');
@@ -166,6 +167,10 @@ $(function () {
                     dropdownAutoWidth: true,
                     dropdownParent: columnFilter.parent(),
                     placeholder: columnFilter[0][0].innerHTML
+                }).on('select2:select select2:unselect', function (e) {
+                    // Show table column on select
+                    var column = dataTable.column(e.params.data.id);
+                    column.visible(!column.visible());
                 })
             }
         });
