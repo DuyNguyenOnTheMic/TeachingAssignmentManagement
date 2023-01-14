@@ -158,7 +158,7 @@ $(function () {
                     });
 
                 // Add a filter select for show and hide columns
-                $('div.column-filter').html('<div class="dataTables_showhide"><label><select class="form-select" id="columnFilter" name="columnFilter" multiple="multiple"><option value="">Ẩn/ hiện cột</option><option value="1" selected="selected">Mã giảng viên</option><option value="2" selected="selected">Tên giảng viên</option><option value="3" selected="selected">Email</option><option value="4" selected="selected">Loại</option><option value="5" selected="selected">Role</option><option value="6">Trạng thái</option></select></label></div>');
+                $('div.column-filter').html('<div class="dataTables_showhide"><label><select class="form-select" id="columnFilter" name="columnFilter" multiple="multiple"><option value="1" selected="selected">Mã giảng viên</option><option value="2" selected="selected">Tên giảng viên</option><option value="3" selected="selected">Email</option><option value="4" selected="selected">Loại</option><option value="5" selected="selected">Role</option><option value="6">Trạng thái</option></select></label></div>');
 
                 // Populate select2 for column filter
                 var columnFilter = $('#columnFilter');
@@ -166,9 +166,10 @@ $(function () {
                     language: 'vi',
                     dropdownAutoWidth: true,
                     dropdownParent: columnFilter.parent(),
-                    placeholder: columnFilter[0][0].innerHTML,
                     closeOnSelect: false,
-                }).on('select2:select select2:unselect', function (e) {
+                })
+                columnFilter.parent().find('.select2-search__field').attr('placeholder', 'Ẩn/ hiện cột');
+                columnFilter.on('select2:select select2:unselect', function (e) {
                     // Show/hide table column on select
                     var column = dataTable.column(e.params.data.id);
                     column.visible(!column.visible());
