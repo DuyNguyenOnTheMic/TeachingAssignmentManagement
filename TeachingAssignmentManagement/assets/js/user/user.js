@@ -166,7 +166,8 @@ $(function () {
                     language: 'vi',
                     dropdownAutoWidth: true,
                     dropdownParent: columnFilter.parent(),
-                    placeholder: columnFilter[0][0].innerHTML
+                    placeholder: columnFilter[0][0].innerHTML,
+                    closeOnSelect: false,
                 }).on('select2:select select2:unselect', function (e) {
                     // Show/hide table column on select
                     var column = dataTable.column(e.params.data.id);
