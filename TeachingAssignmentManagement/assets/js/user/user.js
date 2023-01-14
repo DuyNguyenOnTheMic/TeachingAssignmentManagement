@@ -168,7 +168,7 @@ $(function () {
                     dropdownParent: columnFilter.parent(),
                     placeholder: columnFilter[0][0].innerHTML
                 }).on('select2:select select2:unselect', function (e) {
-                    // Show table column on select
+                    // Show/hide table column on select
                     var column = dataTable.column(e.params.data.id);
                     column.visible(!column.visible());
                 })
