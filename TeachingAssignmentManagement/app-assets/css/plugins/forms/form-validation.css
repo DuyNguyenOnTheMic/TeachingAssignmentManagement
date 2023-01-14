@@ -18,6 +18,12 @@ form .select2.error + .select2-container--classic .select2-selection--multiple,
 form .select2.error + .select2-container--default .select2-selection--multiple {
   border-color: #ea5455 !important; }
 
+form .form-data.error + .select2-container--classic .select2-selection--single,
+form .form-data.error + .select2-container--default .select2-selection--single,
+form .form-data.error + .select2-container--classic .select2-selection--multiple,
+form .form-data.error + .select2-container--default .select2-selection--multiple {
+    border-color: #ea5455 !important; }
+
 form .error + input.flatpickr-input {
     border-color: #ea5455 !important;
 }
