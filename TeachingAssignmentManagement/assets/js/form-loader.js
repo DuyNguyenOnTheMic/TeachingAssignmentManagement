@@ -336,7 +336,7 @@ if (termForm.length) {
 }
 
 if (userForm.length) {
-    var select = $('.select2');
+    var select = $('.form-data');
     // select2
     select.each(function () {
         var $this = $(this);
@@ -408,7 +408,7 @@ if (userForm.length) {
             }
         },
         errorPlacement: function (error, element) {
-            if (element.hasClass("select2")) {
+            if (element.hasClass("form-data")) {
                 error.insertAfter(element.siblings(".select2"));
             } else {
                 error.insertAfter(element);

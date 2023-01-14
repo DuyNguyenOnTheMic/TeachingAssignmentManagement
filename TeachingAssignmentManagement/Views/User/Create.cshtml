@@ -24,7 +24,7 @@
     <div class="mb-1">
         <label class="form-label font-small-4" for="type">Loại giảng viên: </label>
         <small class="text-muted"><i>(Giảng viên cơ hữu hoặc giảng viên thỉnh giảng)</i></small>
-        <select class="select2 form-select" id="type" name="type">
+        <select class="form-data form-select" id="type" name="type">
             <option value="">---- Chọn loại giảng viên ----</option>
             <option value="CH">Cơ hữu</option>
             <option value="TG">Thỉnh giảng</option>
@@ -33,7 +33,7 @@
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="role_id">Role: </label>
-        @Html.DropDownList("role_id", null, "---- Chọn role ----", htmlAttributes: new { @class = "select2 form-select", @aria_label = "Chọn role" })
+        @Html.DropDownList("role_id", null, "---- Chọn role ----", htmlAttributes: new { @class = "form-data form-select", @aria_label = "Chọn role" })
     </div>
 
     <div class="float-end m-1">
