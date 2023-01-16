@@ -527,16 +527,11 @@ window.colors = {
         }, 0);
     })), screenfull.on("change", (() => {
         var e = $(".apptogglefullscreen");
+        e.find("i").toggleClass("feather-minimize feather-maximize");
         setTimeout(function () {
-            if (screenfull.isFullscreen) {
-                e.find("i").toggleClass("feather-minimize feather-maximize");
-                e.attr("title", "Thoát toàn màn hình");
-            } else {
-                e.find("i").toggleClass("feather-minimize feather-maximize");
-                e.attr("title", "Toàn màn hình");
-            }
+            screenfull.isFullscreen ? e.attr("title", "Thoát toàn màn hình") : e.attr("title", "Toàn màn hình");
             e.tooltip();
-        }, 200)
+        }, 250)
     }))
 
     function setLayout(currentLocalStorageLayout) {
