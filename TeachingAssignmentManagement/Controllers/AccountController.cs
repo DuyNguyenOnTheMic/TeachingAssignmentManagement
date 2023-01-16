@@ -62,6 +62,12 @@ namespace TeachingAssignmentManagement.Controllers
         // GET: /Account/SignInCallBack
         public async Task<ActionResult> SignInCallBack()
         {
+            // Check if user status is available
+            if (GetStatus() == false)
+            {
+                return RedirectToAction("Index", "Timetable");
+            }
+
             // Get user information
             ApplicationUser user = new ApplicationUser
             {
@@ -103,6 +109,13 @@ namespace TeachingAssignmentManagement.Controllers
                 default:
                     return RedirectToAction("Index", "Home");
             }
+        }
+
+        public bool GetStatus()
+        {
+            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
+            lecturer lecturer = unitOfWork.UserRepository.GetLecturerByID(userId);
+            return lecturer == null || (bool)lecturer.status;
         }
 
         //
