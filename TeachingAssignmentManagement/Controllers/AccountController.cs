@@ -62,24 +62,27 @@ namespace TeachingAssignmentManagement.Controllers
         // GET: /Account/SignInCallBack
         public async Task<ActionResult> SignInCallBack()
         {
-            // Check if user status is available
-            if (GetStatus() == false)
-            {
-                return View("Lockout");
-            }
-
-            // Get user information
+            // Declare variables
+            string userEmail = User.Identity.Name;
+            IOwinContext context = HttpContext.GetOwinContext();
             ApplicationUser user = new ApplicationUser
             {
-                Email = User.Identity.Name,
-                UserName = User.Identity.Name
+                Email = userEmail,
+                UserName = userEmail
             };
 
             // Check if user exists
-            ApplicationUser currentUser = await UserManager.FindByEmailAsync(user.Email);
+            ApplicationUser currentUser = await UserManager.FindByEmailAsync(userEmail);
             ClaimsIdentity identity = (ClaimsIdentity)User.Identity;
             if (currentUser != null)
             {
+                // Check if user status is available
+                if (GetStatus(currentUser.Id) == false)
+                {
+                    context.Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
+                    return View("Lockout");
+                }
+
                 if (currentUser.Roles.Count != 0)
                 {
                     // Add role claim to user
@@ -95,7 +98,6 @@ namespace TeachingAssignmentManagement.Controllers
                 await UserManager.AddToRoleAsync(user.Id, newUserRole);
                 identity.AddClaim(new Claim(ClaimTypes.Role, newUserRole));
             }
-            IOwinContext context = HttpContext.GetOwinContext();
             context.Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             context.Authentication.SignIn(identity);
 
@@ -111,9 +113,8 @@ namespace TeachingAssignmentManagement.Controllers
             }
         }
 
-        public bool GetStatus()
+        public bool GetStatus(string userId)
         {
-            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
             lecturer lecturer = unitOfWork.UserRepository.GetLecturerByID(userId);
             return lecturer == null || (bool)lecturer.status;
         }
