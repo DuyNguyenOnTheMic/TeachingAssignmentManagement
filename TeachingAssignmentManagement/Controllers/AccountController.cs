@@ -115,6 +115,7 @@ namespace TeachingAssignmentManagement.Controllers
 
         public bool GetStatus(string userId)
         {
+            // Get lecturer status
             lecturer lecturer = unitOfWork.UserRepository.GetLecturerByID(userId);
             return lecturer == null || (bool)lecturer.status;
         }
