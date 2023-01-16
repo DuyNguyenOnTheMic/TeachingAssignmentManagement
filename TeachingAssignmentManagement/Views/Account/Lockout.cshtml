@@ -1,6 +1,4 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
-
-@{
+﻿@{
     Layout = null;
 }
 
@@ -13,7 +11,7 @@
     <meta name="description" content="Website quản lý phân công giảng dạy giúp giảng viên của trường đại học Văn Lang quản lý và phân công thao tác giảng dạy dễ dàng hơn.">
     <meta name="keywords" content="phân công giảng dạy, quản lý phân công, quản lý thời khoá biểu, đại học Văn Lang">
     <meta name="author" content="RETROTEAM">
-    <title>Có lỗi đã xảy ra!</title>
+    <title>Tài khoản của bạn đã bị khoá!</title>
     <link rel="shortcut icon" type="image/x-icon" href="~/app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
     @Styles.Render("~/Content/theme")
@@ -34,8 +32,8 @@
                     <div class="misc-wrapper">
                         <div class="misc-inner p-2 p-sm-3">
                             <div class="w-100 text-center">
-                                <h2 class="mb-1">Không thể tìm thấy trang 🕵🏻‍♀️</h2>
-                                <p class="mb-2">Oops! 😖 Yêu cầu của bạn không được tìm thấy.</p><a class="btn btn-primary mb-2 btn-sm-block" href="@Url.Action("Index", "Home")">Quay về trang chủ</a><img class="w-100" src="~/assets/images/img_error.svg" alt="Error page" />
+                                <h2 class="mb-1">Oops! 😖 Có vẻ như tài khoản của bạn đã bị khoá!</h2>
+                                <img class="w-100" src="~/assets/images/img_error.svg" alt="Lockout page" />
                             </div>
                         </div>
                     </div>

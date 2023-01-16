@@ -65,7 +65,7 @@ namespace TeachingAssignmentManagement.Controllers
             // Check if user status is available
             if (GetStatus() == false)
             {
-                return RedirectToAction("Index", "Timetable");
+                return View("Lockout");
             }
 
             // Get user information

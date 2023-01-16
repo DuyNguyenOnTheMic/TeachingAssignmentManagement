@@ -1222,6 +1222,7 @@
     <Content Include="Views\Statistics\_Timetable.cshtml" />
     <Content Include="Views\Statistics\Personal.cshtml" />
     <Content Include="Views\Statistics\_PersonalChart.cshtml" />
+    <Content Include="Views\Account\Lockout.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
