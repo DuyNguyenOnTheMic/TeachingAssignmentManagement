@@ -63,8 +63,8 @@ namespace TeachingAssignmentManagement.Controllers
         public async Task<ActionResult> SignInCallBack()
         {
             // Declare variables
-            string userEmail = User.Identity.Name;
             IOwinContext context = HttpContext.GetOwinContext();
+            string userEmail = User.Identity.Name;
             ApplicationUser user = new ApplicationUser
             {
                 Email = userEmail,
