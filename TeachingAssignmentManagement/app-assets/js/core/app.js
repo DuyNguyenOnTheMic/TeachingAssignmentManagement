@@ -521,12 +521,22 @@ window.colors = {
     setLayout(currentLocalStorageLayout);
 
     $(".apptogglefullscreen").on("click", (function (e) {
-        screenfull.isEnabled && screenfull.toggle()
+        screenfull.isEnabled && screenfull.toggle();
+        setTimeout(function () {
+            $(".apptogglefullscreen").tooltip('dispose');
+        }, 0);
     })), screenfull.on("change", (() => {
-        screenfull.isFullscreen ? $(".apptogglefullscreen").find("i").toggleClass("feather-minimize feather-maximize") : $(".apptogglefullscreen").find("i").toggleClass("feather-maximize feather-minimize"), setTimeout((function () {
-            var e = $(".apptogglefullscreen");
-            e.tooltip("dispose"), screenfull.isFullscreen ? e.attr("title", "Thoát toàn màn hình") : e.attr("title", "Toàn màn hình"), bootstrap.Tooltip.getOrCreateInstance(e)
-        }), 200)
+        var e = $(".apptogglefullscreen");
+        setTimeout(function () {
+            if (screenfull.isFullscreen) {
+                e.find("i").toggleClass("feather-minimize feather-maximize");
+                e.attr("title", "Thoát toàn màn hình");
+            } else {
+                e.find("i").toggleClass("feather-minimize feather-maximize");
+                e.attr("title", "Toàn màn hình");
+            }
+            e.tooltip();
+        }, 200)
     }))
 
     function setLayout(currentLocalStorageLayout) {
