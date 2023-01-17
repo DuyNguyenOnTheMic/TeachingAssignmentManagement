@@ -24,7 +24,8 @@ namespace TeachingAssignmentManagement.DAL
                 t.start_week,
                 t.start_date,
                 t.max_lesson,
-                t.max_class
+                t.max_class,
+                t.status
             }).OrderByDescending(t => t.id).ToList();
         }
 
