@@ -32,6 +32,15 @@ $(function () {
 
             columnDefs: [
                 {
+                    // Term status
+                    targets: 7,
+                    render: function (data, type, row) {
+                        var $status = data;
+                        var isChecked = $status ? 'checked' : '';
+                        return type === 'display' ? "<div class='form-check form-check-primary form-switch d-flex justify-content-center'><input type='checkbox' class='form-check-input user-status' aria-label='Trạng thái người dùng' onchange=editStatus('" + row.id + "','" + !$status + "') " + isChecked + "></div>" : data;
+                    }
+                },
+                {
                     searchable: false,
                     orderable: false,
                     width: '10%',
