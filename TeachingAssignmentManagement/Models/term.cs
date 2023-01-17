@@ -29,6 +29,7 @@ namespace TeachingAssignmentManagement.Models
         public System.DateTime start_date { get; set; }
         public int max_lesson { get; set; }
         public int max_class { get; set; }
+        public bool status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<class_section> class_section { get; set; }
