@@ -93,6 +93,15 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
+        public ActionResult EditStatus(int id, bool status)
+        {
+            term term = unitOfWork.TermRepository.GetTermByID(id);
+            term.status = status;
+            unitOfWork.Save();
+            return Json(new { success = true, message = "Cập nhật trạng thái thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
         public ActionResult Delete(int id)
         {
             try

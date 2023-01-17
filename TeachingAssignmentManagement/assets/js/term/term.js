@@ -107,6 +107,23 @@ function disableButtons(state) {
     }
 }
 
+// Edit term status
+function editStatus(id, status) {
+    $.ajax({
+        type: 'POST',
+        url: rootUrl + 'Term/EditStatus/',
+        data: { id, status },
+        success: function (data) {
+            if (data.success) {
+                dataTable.ajax.reload(null, false);
+
+                // Show message when delete succeeded
+                toastr["success"](data.message);
+            }
+        }
+    });
+}
+
 // Show Create and Edit form
 function popupForm(url) {
     var formDiv = $('<div />')
