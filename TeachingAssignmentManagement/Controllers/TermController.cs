@@ -54,6 +54,8 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpPost]
         public ActionResult Create(term term)
         {
+            // Set status for term
+            term.status = true;
             try
             {
                 // Create new term
