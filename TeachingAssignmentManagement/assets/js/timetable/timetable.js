@@ -327,7 +327,6 @@ $('.assign-card').on('click', function () {
 
             // Add on click event in case user remove disabled attribute
             formButton.click(function () {
-                toastr.warning('Học kỳ này đã được khoá phân công!');
                 return false;
             });
         }
