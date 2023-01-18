@@ -146,6 +146,7 @@ namespace TeachingAssignmentManagement.Controllers
             IEnumerable<ClassSectionDTO> query_classes = majorId != "-1"
                 ? unitOfWork.ClassSectionRepository.GetAssignTimetable(termId, majorId)
                 : unitOfWork.ClassSectionRepository.GetTermAssignTimetable(termId);
+            ViewData["termStatus"] = unitOfWork.TermRepository.GetTermByID(termId).status;
             ViewBag.subjects = unitOfWork.SubjectRepository.GetSubjects(query_classes);
             ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "id", "full_name");
             return PartialView("_Timetable", new TimetableViewModels
