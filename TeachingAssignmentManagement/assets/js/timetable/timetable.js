@@ -317,16 +317,10 @@ $('.assign-card').on('click', function () {
 
             // Disable form select and buttons
             formSelect.prop('disabled', true);
-            formButton.prop('disabled', true);
-            formButton.wrap("<div class='disabled-button'></div>");
-
-            // Show alert message that term is already locked
-            $('.popover-body .disabled-button').click(function () {
-                toastr.warning('Học kỳ này đã được khoá phân công!');
-            });
 
             // Add on click event in case user remove disabled attribute
-            formButton.click(function () {
+            formButton.off('click').on('click', function () {
+                toastr.warning('Học kỳ này đã được khoá phân công!');
                 return false;
             });
         }
