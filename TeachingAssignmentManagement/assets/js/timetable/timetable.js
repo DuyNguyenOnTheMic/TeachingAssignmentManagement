@@ -314,8 +314,22 @@ $('.assign-card').on('click', function () {
         // Check if term status is false
         if (termStatus == 'False') {
             var formButton = $('.popover-body button');
+
+            // Disable form select and buttons
             formSelect.prop('disabled', true);
-            formButton.prop('disabled', true);
+            formButton.addClass('disabled');
+            formButton.wrap("<div class='disabled-button'></div>");
+
+            // Show alert message that term is already locked
+            $('.disabled-button').click(function () {
+                toastr.warning('Học kỳ này đã được khoá phân công!');
+            });
+
+            // Add on click event in case user remove disabled attribute
+            formButton.click(function () {
+                toastr.warning('Học kỳ này đã được khoá phân công!');
+                return false;
+            });
         }
     }, 0);
 });
