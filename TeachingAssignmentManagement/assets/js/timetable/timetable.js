@@ -1,6 +1,7 @@
 ﻿var termId = $('#term').val(),
     majorId = $('#major').val(),
     rootUrl = $('#loader').data('request-url'),
+    termStatus = $('#termData').data('status'),
     subjectFilter = $('#subjectFilter'),
     lecturerFilter = $('#lecturerFilter'),
     rowCount = $('#tblAssign tbody tr').length;
@@ -309,6 +310,13 @@ $('.assign-card').on('click', function () {
         }
         var lecturerId = $(this).attr('data-lecturerid');
         formSelect.val(lecturerId).trigger('change');
+
+        // Check if term status is false
+        if (termStatus == 'False') {
+            var formButton = $('.popover-body button');
+            formSelect.prop('disabled', true);
+            formButton.prop('disabled', true);
+        }
     }, 0);
 });
 
