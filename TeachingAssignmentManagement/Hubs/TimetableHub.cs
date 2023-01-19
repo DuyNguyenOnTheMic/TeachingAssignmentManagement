@@ -11,10 +11,10 @@ namespace TeachingAssignmentManagement.Hubs
             context.Clients.All.updatedData(id, lecturerId, lecturerName, currentLecturerName, isUpdate);
         }
 
-        public static void RefreshData(int term, string major)
+        public static void RefreshData()
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<TimetableHub>();
-            context.Clients.All.refreshedData(term, major);
+            context.Clients.All.refreshedData();
         }
     }
 }

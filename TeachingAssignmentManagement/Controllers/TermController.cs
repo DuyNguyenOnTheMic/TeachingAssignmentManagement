@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Hubs;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
@@ -98,6 +99,7 @@ namespace TeachingAssignmentManagement.Controllers
             term term = unitOfWork.TermRepository.GetTermByID(id);
             term.status = status;
             unitOfWork.Save();
+            TimetableHub.RefreshData();
             return Json(new { success = true, message = "Cập nhật trạng thái thành công!" }, JsonRequestBehavior.AllowGet);
         }
 

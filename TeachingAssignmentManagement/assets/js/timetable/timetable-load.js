@@ -24,15 +24,8 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, currentLec
     }
 }
 
-hubNotif.client.refreshedData = function (term, major) {
-    if (term == termId && major == majorId) {
-        // Refresh timetable after someone import or re-import data
-        getTimetable(term, major);
-    } else if (term == termId && majorId == -1) {
-        // Refresh timetable when user is viewing all majors
-        major = -1;
-        getTimetable(term, major);
-    }
+hubNotif.client.refreshedData = function () {
+    fetchData();
 }
 
 $(function () {
