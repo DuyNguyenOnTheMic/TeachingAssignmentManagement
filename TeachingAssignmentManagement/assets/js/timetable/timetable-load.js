@@ -25,6 +25,7 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, currentLec
 }
 
 hubNotif.client.refreshedData = function () {
+    // Refresh data when hub is called
     fetchData();
 }
 
