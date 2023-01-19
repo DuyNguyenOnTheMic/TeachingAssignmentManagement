@@ -99,7 +99,7 @@ namespace TeachingAssignmentManagement.Controllers
             term term = unitOfWork.TermRepository.GetTermByID(id);
             term.status = status;
             unitOfWork.Save();
-            TimetableHub.RefreshData();
+            TimetableHub.RefreshData(id, null);
             return Json(new { success = true, message = "Cập nhật trạng thái thành công!" }, JsonRequestBehavior.AllowGet);
         }
 

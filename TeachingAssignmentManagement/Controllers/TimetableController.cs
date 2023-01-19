@@ -421,7 +421,7 @@ namespace TeachingAssignmentManagement.Controllers
                     ProgressHub.SendProgress("Đang import...", dt.Rows.IndexOf(row), itemsCount);
                 }
                 unitOfWork.Save();
-                TimetableHub.RefreshData();
+                TimetableHub.RefreshData(term, major);
                 return errorLecturerList.Count > 0
                     ? Json(errorLecturerList.Distinct(), JsonRequestBehavior.AllowGet)
                     : (ActionResult)Json(errorAssignList, JsonRequestBehavior.AllowGet);
@@ -631,7 +631,7 @@ namespace TeachingAssignmentManagement.Controllers
             // Delete all records in class section table
             unitOfWork.ClassSectionRepository.DeleteAllClasses(term, major);
             unitOfWork.Save();
-            TimetableHub.RefreshData();
+            TimetableHub.RefreshData(term, major);
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
