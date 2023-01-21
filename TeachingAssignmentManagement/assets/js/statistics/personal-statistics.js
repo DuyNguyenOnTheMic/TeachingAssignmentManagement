@@ -266,30 +266,19 @@ function hoursSum(items, prop) {
 
 function populateDatatable(data) {
     var dataTable;
-    var exportColumns = isLessonCheck.is(":checked") ? [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] : [0, 2, 3, 4, 5, 6, 7];
 
     // Populate statistics table
     dataTable = $('#tblStatistics').DataTable(
         {
             columns: [
                 { 'data': '', defaultContent: '' },
-                {
-                    'data': 'Key',
-                    'render': function (data) {
-                        return "<button type='button' class='btn btn-icon btn-icon rounded-circle btn-success waves-effect waves-float waves-light p-25 viewInfo' title='Xem môn học' data-id='" + data + "'><i class='feather feather-plus'></i></button>";
-                    }
-                },
-                { 'data': 'staff_id' },
-                { 'data': 'full_name' },
-                { 'data': 'lecturer_type' },
-                { 'data': 'subject_count' },
-                { 'data': 'class_count' },
-                { 'data': 'sum' },
-                { 'data': 'sumLesson1', defaultContent: '' },
-                { 'data': 'sumLesson4', defaultContent: '' },
-                { 'data': 'sumLesson7', defaultContent: '' },
-                { 'data': 'sumLesson10', defaultContent: '' },
-                { 'data': 'sumLesson13', defaultContent: '' }
+                { 'data': 'id' },
+                { 'data': 'subject_name' },
+                { 'data': 'subject_major' },
+                { 'data': 'subject_credits' },
+                { 'data': 'theory_count' },
+                { 'data': 'practice_count' },
+                { 'data': 'subject_hours' }
             ],
             data: data,
             columnDefs: [
@@ -297,25 +286,9 @@ function populateDatatable(data) {
                     searchable: false,
                     orderable: false,
                     width: '1%',
-                    targets: [0, 1]
+                    targets: 0
                 },
-                {
-                    // User type
-                    targets: 4,
-                    render: function (data) {
-                        var $status = data;
-                        if ($status) {
-                            var typeBadgeObj = {
-                                'CH': { title: 'Cơ hữu', class: 'badge-light-success' },
-                                'TG': { title: 'Thỉnh giảng', class: 'badge-light-warning' }
-                            };
-                            return '<span class="badge rounded-pill ' + typeBadgeObj[$status].class + ' text-capitalized">' + typeBadgeObj[$status].title + '</span>';
-                        } else {
-                            return null;
-                        }
-                    }
-                },
-                { className: 'text-center', target: [0, 1, 4, 5, 6, 7, 8, 9, 10, 11, 12] }
+                { className: 'text-center', target: [0, 4, 5, 6, 7] }
             ],
             order: [[7, 'desc']],
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
@@ -330,34 +303,22 @@ function populateDatatable(data) {
                         {
                             extend: 'print',
                             className: 'dropdown-item',
-                            title: fileName,
-                            exportOptions: {
-                                columns: exportColumns
-                            }
+                            title: fileName
                         },
                         {
                             extend: 'excel',
                             className: 'dropdown-item',
-                            title: fileName,
-                            exportOptions: {
-                                columns: exportColumns
-                            }
+                            title: fileName
                         },
                         {
                             extend: 'pdf',
                             className: 'dropdown-item',
-                            title: fileName,
-                            exportOptions: {
-                                columns: exportColumns
-                            }
+                            title: fileName
                         },
                         {
                             extend: 'copy',
                             className: 'dropdown-item',
-                            title: fileName,
-                            exportOptions: {
-                                columns: exportColumns
-                            }
+                            title: fileName
                         }
                     ],
                     init: function (api, node, config) {
