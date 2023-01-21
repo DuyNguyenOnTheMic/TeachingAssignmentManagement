@@ -95,7 +95,7 @@ var chartOptions = {
             color: titleColor
         },
         datalabels: {
-            color: labelColor
+            color: '#d0d2d6'
         },
         legend: {
             labels: {
@@ -136,12 +136,7 @@ $.ajax({
                             backgroundColor: 'rgba(115, 103, 240, 0.8)',
                             borderColor: 'transparent',
                             borderWidth: 1,
-                            borderRadius: 3,
-                            datalabels: {
-                                anchor: 'end',
-                                align: 'start',
-                                offset: -30
-                            }
+                            borderRadius: 3
                         }
                     ]
                 };
@@ -245,7 +240,6 @@ $.ajax({
                 }
                 chart.options.plugins.subtitle.color = titleColor;
                 chart.options.plugins.title.color = titleColor;
-                chart.options.plugins.datalabels.color = titleColor;
                 chart.options.plugins.legend.labels.color = textColor;
                 chart.options.scales.x.ticks.color = textColor;
                 chart.options.scales.y.ticks.color = textColor;
