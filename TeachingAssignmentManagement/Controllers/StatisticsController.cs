@@ -192,7 +192,6 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "BCN khoa, Bộ môn")]
         public ActionResult GetPersonalChart(bool isLesson, string type, string value)
         {
             ViewData["isLesson"] = isLesson;
@@ -202,11 +201,17 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "BCN khoa, Bộ môn")]
         public JsonResult GetPersonalTermData(bool isLesson, int termId)
         {
             string userId = UserManager.FindByEmail(User.Identity.Name).Id;
             return Json(unitOfWork.ClassSectionRepository.GetPersonalTermStatistics(isLesson, termId, userId), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetPersonalYearData(bool isLesson, int startYear, int endYear)
+        {
+            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
+            return Json(unitOfWork.ClassSectionRepository.GetPersonalYearStatistics(isLesson, startYear, endYear, userId), JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
