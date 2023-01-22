@@ -356,6 +356,31 @@ namespace TeachingAssignmentManagement.DAL
             }
         }
 
+        public IEnumerable GetPersonalYearStatistics(bool isLesson, int startYear, int endYear, string lecturerId)
+        {
+            IQueryable<class_section> query_classes = context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id == lecturerId);
+            if (!isLesson)
+            {
+                return query_classes.GroupBy(c => c.subject_id).Select(c => new
+                {
+                    id = c.Key,
+                    subject_name = c.FirstOrDefault().subject.name,
+                    subject_credits = c.FirstOrDefault().subject.credits,
+                    subject_major = c.FirstOrDefault().major.name,
+                    subject_hours = c.Sum(item => item.total_lesson),
+                    theory_count = c.Count(item => item.type == "Lý thuyết"),
+                    practice_count = c.Count(item => item.type == "Thực hành")
+                }).OrderByDescending(c => c.subject_hours).ToList();
+            }
+            else
+            {
+                return query_classes.Select(c => new
+                {
+
+                }).ToList();
+            }
+        }
+
         public class_section FindClassSection(IEnumerable<class_section> classSection, string classSectionId, int day2, string roomId)
         {
             return classSection.FirstOrDefault(c => c.class_section_id == classSectionId && c.day_2 == day2 && c.room_id == roomId);
