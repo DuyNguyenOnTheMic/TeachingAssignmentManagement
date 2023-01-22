@@ -127,6 +127,8 @@ $.ajax({
                 return e.subject_name;
             });
             var labels_adjusted = labels.map(label => splitLabel(label, 3));
+
+            // Function for split label name to break line
             function splitLabel(str, splitLength) {
                 var a = str.split(/[\s,]+/), b = [];
                 while (a.length) b.push(a.splice(0, splitLength).join(' '));
