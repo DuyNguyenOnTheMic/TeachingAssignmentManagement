@@ -287,7 +287,18 @@ function populateDatatable(data) {
                 { 'data': 'subject_credits' },
                 {
                     'data': function (data) {
-                        return data.theory_count + 'LT + ' + data.practice_count + 'TH';
+                        // Render total class column
+                        var theoryClass = data.theory_count + 'LT',
+                            practiceClass = data.practice_count + 'TH',
+                            totalClass;
+                        if (data.theory_count && data.practice_count) {
+                            totalClass = theoryClass + ' + ' + practiceClass;
+                        } else if (data.theory_count) {
+                            totalClass = theoryClass;
+                        } else if (data.practice_count) {
+                            totalClass = practiceClass;
+                        }
+                        return totalClass;
                     }
                 },
                 { 'data': 'subject_hours' }
