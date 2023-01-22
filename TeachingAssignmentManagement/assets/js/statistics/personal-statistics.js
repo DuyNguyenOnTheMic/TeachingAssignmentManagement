@@ -126,9 +126,9 @@ $.ajax({
             var labels = response.map(function (e) {
                 return e.subject_name;
             });
-            var labels_adjusted = labels.map(label => (splitLabel(label, 3)));
-            function splitLabel(str,splitLength) {
-                var a = str.split(/[\s,(]+/), b = [];
+            var labels_adjusted = labels.map(label => splitLabel(label, 3));
+            function splitLabel(str, splitLength) {
+                var a = str.split(/[\s,]+/), b = [];
                 while (a.length) b.push(a.splice(0, splitLength).join(' '));
                 return b;
             }
