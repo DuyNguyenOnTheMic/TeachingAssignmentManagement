@@ -285,8 +285,11 @@ function populateDatatable(data) {
                 { 'data': 'subject_name' },
                 { 'data': 'subject_major' },
                 { 'data': 'subject_credits' },
-                { 'data': 'theory_count' },
-                { 'data': 'practice_count' },
+                {
+                    'data': function (data) {
+                        return data.theory_count + 'LT + ' + data.practice_count + 'TH';
+                    }
+                },
                 { 'data': 'subject_hours' }
             ],
             data: data,
@@ -297,9 +300,9 @@ function populateDatatable(data) {
                     width: '1%',
                     targets: 0
                 },
-                { className: 'text-center', target: [0, 4, 5, 6, 7] }
+                { className: 'text-center', target: [0, 4, 5, 6] }
             ],
-            order: [[7, 'desc']],
+            order: [[6, 'desc']],
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
             displayLength: 10,
             lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "tất cả"]],
@@ -340,7 +343,7 @@ function populateDatatable(data) {
                 }
             ],
             initComplete: function () {
-                isLessonCheck.is(":checked") ? setVisibleColumn(true) : setVisibleColumn(false);
+                //isLessonCheck.is(":checked") ? setVisibleColumn(true) : setVisibleColumn(false);
             },
             language: {
                 'url': rootUrl + 'app-assets/language/datatables/vi.json'
