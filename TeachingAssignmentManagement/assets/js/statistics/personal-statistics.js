@@ -24,7 +24,7 @@ if (type == yearSelect.attr('id')) {
     data = { isLesson, startYear, endYear };
     titleText = 'Thống kê số giờ năm học ' + value;
     fileName = 'ThongKeSoGio_NamHoc_' + startYear + '-' + endYear;
-    url += 'GetYearData';
+    url += 'GetPersonalYearData';
 } else {
     data = { isLesson, 'termId': value };
     titleText = 'Thống kê số giờ học kỳ ' + value;
