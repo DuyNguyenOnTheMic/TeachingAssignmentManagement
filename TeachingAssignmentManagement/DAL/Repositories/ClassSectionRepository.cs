@@ -351,18 +351,19 @@ namespace TeachingAssignmentManagement.DAL
             {
                 return query_classes.GroupBy(c => c.subject_id).Select(c => new
                 {
-                    c.Key,
+                    id = c.Key,
                     subject_name = c.FirstOrDefault().subject.name,
-                    subject_count = c.GroupBy(item => item.subject.id).Count(),
-                    class_count = c.Count(),
-                    sum = c.Sum(item => item.total_lesson),
+                    subject_credits = c.FirstOrDefault().subject.credits,
+                    subject_major = c.FirstOrDefault().major.name,
+                    subject_hours = c.Sum(item => item.total_lesson),
+                    theory_count = c.Count(item => item.type == "Lý thuyết"),
+                    practice_count = c.Count(item => item.type == "Thực hành"),
                     sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
                     sumLesson4 = c.Where(item => item.start_lesson_2 == 4).Sum(item => item.total_lesson),
                     sumLesson7 = c.Where(item => item.start_lesson_2 == 7).Sum(item => item.total_lesson),
                     sumLesson10 = c.Where(item => item.start_lesson_2 == 10).Sum(item => item.total_lesson),
-                    sumLesson13 = c.Where(item => item.start_lesson_2 == 13).Sum(item => item.total_lesson),
-                    lecturer_type = c.FirstOrDefault().lecturer.type
-                }).OrderByDescending(c => c.sum).ToList();
+                    sumLesson13 = c.Where(item => item.start_lesson_2 == 13).Sum(item => item.total_lesson)
+                }).OrderByDescending(c => c.subject_hours).ToList();
             }
         }
 
