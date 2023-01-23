@@ -95,7 +95,7 @@ var chartOptions = {
             color: titleColor
         },
         datalabels: {
-            color: '#d0d2d6'
+            color: '#fff'
         },
         legend: {
             labels: {
