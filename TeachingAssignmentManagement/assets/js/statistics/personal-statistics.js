@@ -245,6 +245,7 @@ $.ajax({
                 }
                 chart.options.plugins.subtitle.color = titleColor;
                 chart.options.plugins.title.color = titleColor;
+                chart.options.plugins.datalabels.color = isLessonCheck.is(":checked") ? titleColor : '#fff';
                 chart.options.plugins.legend.labels.color = textColor;
                 chart.options.scales.x.ticks.color = textColor;
                 chart.options.scales.y.ticks.color = textColor;
