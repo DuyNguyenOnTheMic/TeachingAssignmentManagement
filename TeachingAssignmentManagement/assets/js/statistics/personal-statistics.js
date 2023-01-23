@@ -128,13 +128,6 @@ $.ajax({
             });
             var labels_adjusted = labels.map(label => splitLabel(label, 3));
 
-            // Function for split label name to break line
-            function splitLabel(str, splitLength) {
-                var a = str.split(/[\s,()]+/), b = [];
-                while (a.length) b.push(a.splice(0, splitLength).join(' '));
-                return b;
-            }
-
             var chartData;
             var totalLessons = response.map(function (e) {
                 return e.subject_hours;
@@ -175,7 +168,7 @@ $.ajax({
 
                 // Fetch lessons chart data
                 chartData = {
-                    labels: labels,
+                    labels: labels_adjusted,
                     datasets: [
                         {
                             label: 'Ca 1',
@@ -266,6 +259,12 @@ $.ajax({
         }
     }
 });
+
+function splitLabel(str, splitLength) {
+    var a = str.split(/[\s,()]+/), b = [];
+    while (a.length) b.push(a.splice(0, splitLength).join(' '));
+    return b;
+}
 
 function hoursSum(items, prop) {
     return items.reduce(function (a, b) {
