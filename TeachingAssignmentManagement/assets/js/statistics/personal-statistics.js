@@ -300,7 +300,12 @@ function populateDatatable(data) {
                         return totalClass;
                     }
                 },
-                { 'data': 'subject_hours' }
+                { 'data': 'subject_hours' },
+                { 'data': 'sumLesson1', defaultContent: '' },
+                { 'data': 'sumLesson4', defaultContent: '' },
+                { 'data': 'sumLesson7', defaultContent: '' },
+                { 'data': 'sumLesson10', defaultContent: '' },
+                { 'data': 'sumLesson13', defaultContent: '' }
             ],
             data: data,
             columnDefs: [
@@ -353,7 +358,7 @@ function populateDatatable(data) {
                 }
             ],
             initComplete: function () {
-                //isLessonCheck.is(":checked") ? setVisibleColumn(true) : setVisibleColumn(false);
+                isLessonCheck.is(":checked") ? setVisibleColumn(true) : setVisibleColumn(false);
             },
             language: {
                 'url': rootUrl + 'app-assets/language/datatables/vi.json'
@@ -376,7 +381,7 @@ $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
 
 function setVisibleColumn(state) {
     var table = $('#tblStatistics').DataTable();
-    for (var i = 8; i <= 12; i++) {
+    for (var i = 7; i <= 11; i++) {
         table.column(i).visible(state, state);
     }
     table.columns.adjust().draw(state); // adjust column sizing and redraw
