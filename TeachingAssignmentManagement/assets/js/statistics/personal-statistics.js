@@ -214,10 +214,7 @@ $.ajax({
                 };
 
                 chartOptions.plugins.datalabels = {
-                    color: labelColor,
-                    font: {
-                        size: '9'
-                    }
+                    color: labelColor
                 };
             }
 
