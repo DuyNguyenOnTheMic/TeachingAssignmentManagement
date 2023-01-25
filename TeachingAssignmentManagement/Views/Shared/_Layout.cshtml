@@ -1,7 +1,7 @@
 ﻿@using TeachingAssignmentManagement.Helpers;
 
 @{
-    var roleName = User.Identity.GetRole();
+    string roleName = User.Identity.GetRole();
 }
 
 <!DOCTYPE html>
@@ -85,7 +85,7 @@
                                 <li class="nav-item">
                                     <a class="d-flex align-items-center" href="@Url.Action("Index", "User")"><i class="feather feather-user"></i><span class="menu-title text-truncate">Người dùng</span></a>
                                 </li>
-                                <li class=" nav-item">
+                                <li class="nav-item">
                                     <a class="d-flex align-items-center" href="#"><i class="feather feather-clock"></i><span class="menu-title text-truncate">Thời khoá biểu</span></a>
                                     <ul class="menu-content">
                                         <li>
@@ -99,11 +99,14 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class=" nav-item">
+                                <li class="nav-item">
                                     <a class="d-flex align-items-center" href="#"><i class="feather feather-bar-chart"></i><span class="menu-title text-truncate">Thống kê</span></a>
                                     <ul class="menu-content">
                                         <li>
-                                            <a class="d-flex align-items-center" href="@Url.Action("Index", "Statistics")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Số giờ giảng dạy</span></a>
+                                            <a class="d-flex align-items-center" href="@Url.Action("Index", "Statistics")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Số giờ giảng viên</span></a>
+                                        </li>
+                                        <li>
+                                            <a class="d-flex align-items-center" href="@Url.Action("Personal", "Statistics")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Số giờ cá nhân</span></a>
                                         </li>
                                         <li>
                                             <a class="d-flex align-items-center" href="@Url.Action("Timetable", "Statistics")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Lịch giảng dạy</span></a>
@@ -112,7 +115,7 @@
                                 </li>
                                 break;
                             case "Bộ môn":
-                                <li class=" nav-item">
+                                <li class="nav-item">
                                     <a class="d-flex align-items-center" href="#"><i class="feather feather-clock"></i><span class="menu-title text-truncate">Thời khoá biểu</span></a>
                                     <ul class="menu-content">
                                         <li>
@@ -123,11 +126,14 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class=" nav-item">
+                                <li class="nav-item">
                                     <a class="d-flex align-items-center" href="#"><i class="feather feather-bar-chart"></i><span class="menu-title text-truncate">Thống kê</span></a>
                                     <ul class="menu-content">
                                         <li>
-                                            <a class="d-flex align-items-center" href="@Url.Action("Index", "Statistics")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Số giờ giảng dạy</span></a>
+                                            <a class="d-flex align-items-center" href="@Url.Action("Index", "Statistics")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Số giờ giảng viên</span></a>
+                                        </li>
+                                        <li>
+                                            <a class="d-flex align-items-center" href="@Url.Action("Personal", "Statistics")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Số giờ cá nhân</span></a>
                                         </li>
                                         <li>
                                             <a class="d-flex align-items-center" href="@Url.Action("Timetable", "Statistics")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Lịch giảng dạy</span></a>
@@ -140,7 +146,15 @@
                                     <a class="d-flex align-items-center" href="@Url.Action("Index", "Timetable")"><i class="feather feather-clock"></i><span class="menu-title text-truncate">Thời khoá biểu</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="d-flex align-items-center" href="@Url.Action("Timetable", "Statistics")"><i class="feather feather-bar-chart"></i><span class="menu-title text-truncate">Thống kê</span></a>
+                                    <a class="d-flex align-items-center" href="#"><i class="feather feather-bar-chart"></i><span class="menu-title text-truncate">Thống kê</span></a>
+                                    <ul class="menu-content">
+                                        <li>
+                                            <a class="d-flex align-items-center" href="@Url.Action("Personal", "Statistics")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Số giờ cá nhân</span></a>
+                                        </li>
+                                        <li>
+                                            <a class="d-flex align-items-center" href="@Url.Action("Timetable", "Statistics")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Lịch giảng dạy</span></a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 break;
                             default:
