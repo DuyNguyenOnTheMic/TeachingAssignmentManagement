@@ -385,10 +385,21 @@ namespace TeachingAssignmentManagement.DAL
             }
             else
             {
-                return query_classes.Select(c => new
+                return query_classes.GroupBy(c => c.subject_id).Select(c => new
                 {
-
-                }).ToList();
+                    id = c.Key,
+                    subject_name = c.FirstOrDefault().subject.name,
+                    subject_credits = c.FirstOrDefault().subject.credits,
+                    subject_major = c.FirstOrDefault().major.name,
+                    subject_hours = c.Sum(item => item.total_lesson),
+                    theory_count = c.Count(item => item.type == "Lý thuyết"),
+                    practice_count = c.Count(item => item.type == "Thực hành"),
+                    sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
+                    sumLesson4 = c.Where(item => item.start_lesson_2 == 4).Sum(item => item.total_lesson),
+                    sumLesson7 = c.Where(item => item.start_lesson_2 == 7).Sum(item => item.total_lesson),
+                    sumLesson10 = c.Where(item => item.start_lesson_2 == 10).Sum(item => item.total_lesson),
+                    sumLesson13 = c.Where(item => item.start_lesson_2 == 13).Sum(item => item.total_lesson)
+                }).OrderByDescending(c => c.subject_hours).ToList();
             }
         }
 
