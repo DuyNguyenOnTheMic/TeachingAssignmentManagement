@@ -424,9 +424,9 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Act
             string userId3 = Guid.NewGuid().ToString();
             IQueryable<lecturer> newListLecturer = new List<lecturer> {
-                new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = "TG" },
-                new lecturer() { id = userId2, staff_id = "1002", full_name = "Nguyễn Văn B", type = "CH" },
-                new lecturer() { id = userId3, staff_id = null, full_name = "Nguyễn Văn C", type = "CH" }
+                new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = "TG", status = true },
+                new lecturer() { id = userId2, staff_id = "1002", full_name = "Nguyễn Văn B", type = "CH", status = true},
+                new lecturer() { id = userId3, staff_id = null, full_name = "Nguyễn Văn C", type = "CH", status = true}
             }.AsQueryable();
             mockSetLecturer.As<IQueryable<lecturer>>().Setup(m => m.Provider).Returns(newListLecturer.Provider);
             mockSetLecturer.As<IQueryable<lecturer>>().Setup(m => m.Expression).Returns(newListLecturer.Expression);
