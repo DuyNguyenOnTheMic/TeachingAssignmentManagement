@@ -339,6 +339,62 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod]
+        public void Edit_Term_Status_Mock_Should_Return_Success_When_Status_Is_True()
+        {
+            // Arrange
+            TermController controller = new TermController(unitOfWork);
+            term term = new term() { id = 125, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 };
+            mockSet.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
+
+            // Act
+            JsonResult result = controller.EditStatus(term.id, true) as JsonResult;
+            dynamic jsonCollection = result.Data;
+
+            // Assert
+            Assert.AreEqual(true, jsonCollection.success);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod]
+        public void Edit_Term_Status_Mock_Should_Return_Success_When_Status_Is_False()
+        {
+            // Arrange
+            TermController controller = new TermController(unitOfWork);
+            term term = new term() { id = 125, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 };
+            mockSet.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
+
+            // Act
+            JsonResult result = controller.EditStatus(term.id, false) as JsonResult;
+            dynamic jsonCollection = result.Data;
+
+            // Assert
+            Assert.AreEqual(true, jsonCollection.success);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod()]
+        public void Edit_Term_Status_Test()
+        {
+            // Arrange
+            TermController controller = new TermController();
+            unitOfWork = new UnitOfWork(new CP25Team03Entities());
+            term term = new term() { id = 125, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 };
+
+            // Act
+            term termEdited;
+            using (scope)
+            {
+                controller.Create(term);
+                term.status = true;
+                controller.Edit(term);
+                termEdited = unitOfWork.TermRepository.GetTermByID(term.id);
+            }
+
+            // Assert
+            Assert.AreEqual(termEdited.status, true);
+        }
+
+        [TestMethod]
         public void Delete_Term_Test()
         {
             // Arrange
