@@ -32,8 +32,8 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 new AspNetUser() { Id = userId2, Email = "b.nv@vlu.edu.vn", UserName = "b.nv@vlu.edu.vn", AspNetRoles = listRole }
             }.AsQueryable();
             listLecturer = new List<lecturer> {
-                new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = "TG" },
-                new lecturer() { id = userId2, staff_id = "1002", full_name = "Nguyễn Văn B", type = "CH" }
+                new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = "TG", status = true },
+                new lecturer() { id = userId2, staff_id = "1002", full_name = "Nguyễn Văn B", type = "CH", status = true }
             }.AsQueryable();
             mockSetLecturer = new Mock<DbSet<lecturer>>();
             mockSetUser = new Mock<DbSet<AspNetUser>>();
