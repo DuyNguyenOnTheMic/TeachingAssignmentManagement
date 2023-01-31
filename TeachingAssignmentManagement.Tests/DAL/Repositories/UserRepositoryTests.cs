@@ -540,5 +540,20 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult);
             Assert.AreEqual(listUser.Count(), actionResult.Count());
         }
+
+        [TestMethod()]
+        public void Insert_Lecturer_Test()
+        {
+            // Arrange
+            lecturer lecturer = new lecturer() { id = Guid.NewGuid().ToString(), staff_id = "123", full_name = "Nguyễn Văn C", type = "CH", status = true };
+
+            // Act
+            unitOfWork.UserRepository.InsertLecturer(lecturer);
+            unitOfWork.Save();
+
+            // Assert
+            mockSetLecturer.Verify(r => r.Add(lecturer), Times.Once);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
     }
 }
