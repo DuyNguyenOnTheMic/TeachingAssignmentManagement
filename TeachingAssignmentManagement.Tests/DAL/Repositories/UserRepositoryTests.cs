@@ -25,7 +25,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         public void Initialize()
         {
             listRole = new List<AspNetRole> {
-                new AspNetRole() { Id = "1", Name = "Giảng viên" }
+                new AspNetRole() { Id = "1", Name = "BCN khoa" }
             };
             listUser = new List<AspNetUser> {
                 new AspNetUser() { Id = userId1, Email = "a.nv@vanlanguni.vn", UserName = "a.nv@vanlanguni.vn", AspNetRoles = listRole },
@@ -473,17 +473,16 @@ namespace TeachingAssignmentManagement.DAL.Tests
         public void Get_Faculty_Boards_Data_Is_Correct_Test()
         {
             // Act
-            dynamic actionResult = unitOfWork.UserRepository.GetFacultyBoards();
-            List<lecturer> lecturerList = listLecturer.ToList();
+            dynamic actionResult = unitOfWork.UserRepository.GetFacultyBoards().ToList();
+            List<AspNetUser> userList = listUser.ToList();
 
             // Assert
             Assert.IsNotNull(actionResult);
             for (int i = 0; i < listLecturer.Count(); i++)
             {
-                Assert.AreEqual(actionResult[i].id, lecturerList[i].id);
-                Assert.AreEqual(actionResult[i].staff_id, lecturerList[i].staff_id);
-                Assert.AreEqual(actionResult[i].full_name, lecturerList[i].full_name);
-                Assert.AreEqual(actionResult[i].type, lecturerList[i].type);
+                Assert.AreEqual(actionResult[i].Id, userList[i].Id);
+                Assert.AreEqual(actionResult[i].Email, userList[i].Email);
+                Assert.AreEqual(actionResult[i].AspNetRoles[0].Name, userList[i].AspNetRoles.FirstOrDefault().Name);
             }
         }
 
@@ -506,7 +505,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         public void Faculty_Boards_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Act
-            dynamic actionResult = unitOfWork.UserRepository.GetFacultyBoards();
+            dynamic actionResult = unitOfWork.UserRepository.GetFacultyBoards().ToList();
 
             // Assert                
             Assert.IsNotNull(actionResult[0]);
@@ -516,7 +515,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         public void Faculty_Boards_Data_Should_Be_Indexable_Test()
         {
             // Act
-            dynamic actionResult = unitOfWork.UserRepository.GetFacultyBoards();
+            dynamic actionResult = unitOfWork.UserRepository.GetFacultyBoards().ToList();
 
             // Assert
             for (int i = 0; i < actionResult.Count; i++)
@@ -525,9 +524,9 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 dynamic json = actionResult[i];
 
                 Assert.IsNotNull(json);
-                Assert.IsNotNull(json.staff_id);
-                Assert.IsNotNull(json.full_name);
-                Assert.IsNotNull(json.type);
+                Assert.IsNotNull(json.Id);
+                Assert.IsNotNull(json.Email);
+                Assert.IsNotNull(json.AspNetRoles[0].Name);
             }
         }
 
@@ -539,7 +538,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
 
             // Assert
             Assert.IsNotNull(actionResult);
-            Assert.AreEqual(listLecturer.Count(), actionResult.Count());
+            Assert.AreEqual(listUser.Count(), actionResult.Count());
         }
     }
 }
