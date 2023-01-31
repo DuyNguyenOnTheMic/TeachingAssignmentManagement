@@ -91,6 +91,13 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "BCN khoa, Bộ môn")]
+        public ActionResult GetYearsubjects(int startYear, int endYear, string majorId, string lecturerId)
+        {
+            return Json(unitOfWork.ClassSectionRepository.GetYearsubjects(startYear, endYear, majorId, lecturerId), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public ActionResult Timetable()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
