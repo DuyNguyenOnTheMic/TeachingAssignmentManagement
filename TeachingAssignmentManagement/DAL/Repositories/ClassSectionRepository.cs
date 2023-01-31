@@ -238,6 +238,99 @@ namespace TeachingAssignmentManagement.DAL
             }).ToList();
         }
 
+        public IEnumerable GetYearStatistics(bool isLesson, int startYear, int endYear, string majorId, string lecturerType)
+        {
+            IQueryable<class_section> query_classes = majorId != "-1"
+                ? context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer.type == lecturerType)
+                : context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type == lecturerType);
+            if (!isLesson)
+            {
+                return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
+                {
+                    c.Key,
+                    c.FirstOrDefault().lecturer.staff_id,
+                    c.FirstOrDefault().lecturer.full_name,
+                    subject_count = c.GroupBy(item => item.subject.id).Count(),
+                    class_count = c.Count(),
+                    sum = c.Sum(item => item.total_lesson),
+                    lecturer_type = c.FirstOrDefault().lecturer.type
+                }).OrderByDescending(c => c.sum).ToList();
+            }
+            else
+            {
+                return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
+                {
+                    c.Key,
+                    c.FirstOrDefault().lecturer.staff_id,
+                    c.FirstOrDefault().lecturer.full_name,
+                    subject_count = c.GroupBy(item => item.subject.id).Count(),
+                    class_count = c.Count(),
+                    sum = c.Sum(item => item.total_lesson),
+                    sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
+                    sumLesson4 = c.Where(item => item.start_lesson_2 == 4).Sum(item => item.total_lesson),
+                    sumLesson7 = c.Where(item => item.start_lesson_2 == 7).Sum(item => item.total_lesson),
+                    sumLesson10 = c.Where(item => item.start_lesson_2 == 10).Sum(item => item.total_lesson),
+                    sumLesson13 = c.Where(item => item.start_lesson_2 == 13).Sum(item => item.total_lesson),
+                    lecturer_type = c.FirstOrDefault().lecturer.type
+                }).OrderByDescending(c => c.sum).ToList();
+            }
+        }
+
+        public IEnumerable GetYearStatisticsAll(bool isLesson, int startYear, int endYear, string majorId)
+        {
+            IQueryable<class_section> query_classes = majorId != "-1"
+                ? context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer.type != null)
+                : context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type != null);
+            if (!isLesson)
+            {
+                return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
+                {
+                    c.Key,
+                    c.FirstOrDefault().lecturer.staff_id,
+                    c.FirstOrDefault().lecturer.full_name,
+                    lecturer_type = c.FirstOrDefault().lecturer.type,
+                    subject_count = c.GroupBy(item => item.subject.id).Count(),
+                    class_count = c.Count(),
+                    sum = c.Sum(item => item.total_lesson)
+                }).OrderByDescending(c => c.sum).ToList();
+            }
+            else
+            {
+                return query_classes.GroupBy(c => c.lecturer_id).Select(c => new
+                {
+                    c.Key,
+                    c.FirstOrDefault().lecturer.staff_id,
+                    c.FirstOrDefault().lecturer.full_name,
+                    subject_count = c.GroupBy(item => item.subject.id).Count(),
+                    class_count = c.Count(),
+                    sum = c.Sum(item => item.total_lesson),
+                    sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
+                    sumLesson4 = c.Where(item => item.start_lesson_2 == 4).Sum(item => item.total_lesson),
+                    sumLesson7 = c.Where(item => item.start_lesson_2 == 7).Sum(item => item.total_lesson),
+                    sumLesson10 = c.Where(item => item.start_lesson_2 == 10).Sum(item => item.total_lesson),
+                    sumLesson13 = c.Where(item => item.start_lesson_2 == 13).Sum(item => item.total_lesson),
+                    lecturer_type = c.FirstOrDefault().lecturer.type
+                }).OrderByDescending(c => c.sum).ToList();
+            }
+        }
+
+        public IEnumerable GetYearsubjects(int startYear, int endYear, string majorId, string lecturerId)
+        {
+            IQueryable<class_section> query_classes = majorId != "-1"
+                ? context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer_id == lecturerId)
+                : context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id == lecturerId);
+            return query_classes.GroupBy(c => c.subject_id).Select(c => new
+            {
+                id = c.Key,
+                subject_name = c.FirstOrDefault().subject.name,
+                subject_credits = c.FirstOrDefault().subject.credits,
+                subject_major = c.FirstOrDefault().major.name,
+                subject_hours = c.Sum(item => item.total_lesson),
+                theory_count = c.Count(item => item.type == "Lý thuyết"),
+                practice_count = c.Count(item => item.type == "Thực hành")
+            }).ToList();
+        }
+
         public IEnumerable GetPersonalTermStatistics(bool isLesson, int termId, string lecturerId)
         {
             IQueryable<class_section> query_classes = context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
