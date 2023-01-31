@@ -53,5 +53,20 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.IsNotNull(result);
         }
+
+        [TestMethod()]
+        public void Index_View_Should_Load_Term_SelectList_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+
+            // Act
+            ViewResult result = controller.Index() as ViewResult;
+            SelectList termList = new SelectList(listTerm);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(termList.Count(), ((IEnumerable<dynamic>)result.ViewBag.term).Count());
+        }
     }
 }
