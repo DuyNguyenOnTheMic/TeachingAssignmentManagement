@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Web.Mvc;
 
 namespace TeachingAssignmentManagement.Controllers.Tests
 {
@@ -6,9 +7,16 @@ namespace TeachingAssignmentManagement.Controllers.Tests
     public class TimetableControllerTests
     {
         [TestMethod()]
-        public void TimetableControllerTest()
+        public void Create_View_Test()
         {
+            // Arrange
+            TimetableController controller = new TimetableController();
 
+            // Act
+            ViewResult result = controller.Index() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
         }
     }
 }
