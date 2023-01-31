@@ -439,5 +439,24 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult);
             Assert.AreEqual(2, actionResult.Count());
         }
+
+        [TestMethod]
+        public void Find_Lecturer_Correctly_Test()
+        {
+            // Arrange
+            lecturer lecturer = listLecturer.First();
+            mockSetLecturer.Setup(m => m.Find(It.IsAny<string>())).Returns(lecturer);
+
+            // Act
+            lecturer actionResult = unitOfWork.UserRepository.GetLecturerByID(lecturer.id);
+
+            // Assert
+            mockSetLecturer.Verify(x => x.Find(It.IsAny<string>()), Times.Once());
+            Assert.AreEqual(lecturer.id, actionResult.id);
+            Assert.AreEqual(lecturer.staff_id, actionResult.staff_id);
+            Assert.AreEqual(lecturer.full_name, actionResult.full_name);
+            Assert.AreEqual(lecturer.type, actionResult.type);
+            Assert.AreEqual(lecturer.status, actionResult.status);
+        }
     }
 }
