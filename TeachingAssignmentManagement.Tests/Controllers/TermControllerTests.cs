@@ -386,12 +386,12 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             {
                 controller.Create(term);
                 term.status = true;
-                controller.Edit(term);
+                controller.EditStatus(term.id, false);
                 termEdited = unitOfWork.TermRepository.GetTermByID(term.id);
             }
 
             // Assert
-            Assert.AreEqual(termEdited.status, true);
+            Assert.AreEqual(termEdited.status, false);
         }
 
         [TestMethod]
