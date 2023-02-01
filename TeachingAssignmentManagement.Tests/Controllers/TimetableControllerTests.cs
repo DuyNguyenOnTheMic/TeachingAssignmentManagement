@@ -17,6 +17,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         private IQueryable<subject> listSubject;
         private IQueryable<class_section> listClassSection;
         private IQueryable<term> listTerm;
+        private Mock<DbSet<lecturer>> mockSetLecturer;
         private Mock<DbSet<class_section>> mockSetClassSection;
         private Mock<DbSet<term>> mockSetTerm;
         private Mock<CP25Team03Entities> mockContext;
@@ -43,10 +44,15 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 new term() { id = 123, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 },
                 new term() { id = 124, start_year = 2023, end_year = 2024, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 }
             }.AsQueryable();
+            mockSetLecturer = new Mock<DbSet<lecturer>>();
             mockSetClassSection = new Mock<DbSet<class_section>>();
             mockSetTerm = new Mock<DbSet<term>>();
             mockContext = new Mock<CP25Team03Entities>();
             unitOfWork = new UnitOfWork(mockContext.Object);
+            mockSetLecturer.As<IQueryable<lecturer>>().Setup(m => m.Provider).Returns(listLecturer.Provider);
+            mockSetLecturer.As<IQueryable<lecturer>>().Setup(m => m.Expression).Returns(listLecturer.Expression);
+            mockSetLecturer.As<IQueryable<lecturer>>().Setup(m => m.ElementType).Returns(listLecturer.ElementType);
+            mockSetLecturer.As<IQueryable<lecturer>>().Setup(m => m.GetEnumerator()).Returns(listLecturer.GetEnumerator());
             mockSetClassSection.As<IQueryable<class_section>>().Setup(m => m.Provider).Returns(listClassSection.Provider);
             mockSetClassSection.As<IQueryable<class_section>>().Setup(m => m.Expression).Returns(listClassSection.Expression);
             mockSetClassSection.As<IQueryable<class_section>>().Setup(m => m.ElementType).Returns(listClassSection.ElementType);
@@ -55,6 +61,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockSetTerm.As<IQueryable<term>>().Setup(m => m.Expression).Returns(listTerm.Expression);
             mockSetTerm.As<IQueryable<term>>().Setup(m => m.ElementType).Returns(listTerm.ElementType);
             mockSetTerm.As<IQueryable<term>>().Setup(m => m.GetEnumerator()).Returns(listTerm.GetEnumerator());
+            mockContext.Setup(c => c.lecturers).Returns(() => mockSetLecturer.Object);
             mockContext.Setup(c => c.class_section).Returns(() => mockSetClassSection.Object);
             mockContext.Setup(c => c.terms).Returns(() => mockSetTerm.Object);
         }
