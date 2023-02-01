@@ -42,7 +42,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Create_View_Test()
+        public void Index_View_Test()
         {
             // Arrange
             TimetableController controller = new TimetableController();
