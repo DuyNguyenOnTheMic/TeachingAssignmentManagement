@@ -168,5 +168,28 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(result);
             Assert.AreEqual(listSubject.Count(), ((IEnumerable<dynamic>)result.ViewBag.subjects).Count());
         }
+
+        [TestMethod()]
+        public void Get_Data_Partial_View_Should_Load_Subject_Data_Correctly_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+            term term = listTerm.First();
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
+
+            // Act
+            PartialViewResult result = controller.GetData(termId, majorId) as PartialViewResult;
+            dynamic viewBagResult = result.ViewBag.subjects;
+            List<subject> subjectList = listSubject.ToList();
+
+            // Assert
+            Assert.IsNotNull(result);
+            for (int i = 0; i < listSubject.Count(); i++)
+            {
+                Assert.AreEqual(viewBagResult[i].id, subjectList[i].id);
+                Assert.AreEqual(viewBagResult[i].name, subjectList[i].name);
+                Assert.AreEqual(viewBagResult[i].credits, subjectList[i].credits);
+            }
+        }
     }
 }
