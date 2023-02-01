@@ -68,5 +68,25 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(result);
             Assert.AreEqual(termList.Count(), ((IEnumerable<dynamic>)result.ViewBag.term).Count());
         }
+
+        [TestMethod()]
+        public void Index_View_Should_Load_Term_SelectList_Data_Correctly_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+
+            // Act
+            ViewResult result = controller.Index() as ViewResult;
+            dynamic viewBagResult = result.ViewBag.term.Items;
+            List<term> termList = listTerm.OrderByDescending(t => t.id).ToList();
+
+            // Assert
+            Assert.IsNotNull(result);
+            for (int i = 0; i < termList.Count(); i++)
+            {
+                Assert.AreEqual(viewBagResult[i].id, termList[i].id);
+                Assert.AreEqual(viewBagResult[i].start_year, termList[i].start_year);
+            }
+        }
     }
 }
