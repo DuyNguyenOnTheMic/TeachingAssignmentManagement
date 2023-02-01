@@ -232,5 +232,22 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.AreEqual(viewBagResult[i].status, lecturerList[i].status);
             }
         }
+
+        [TestMethod()]
+        public void Get_Data_Partial_View_Should_Load_Class_Not_Null_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+            term term = listTerm.First();
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
+
+            // Act
+            PartialViewResult result = controller.GetData(termId, majorId) as PartialViewResult;
+            object modelResult = result.Model;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(modelResult);
+        }
     }
 }
