@@ -118,6 +118,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             TimetableController controller = new TimetableController(unitOfWork);
+            term term = listTerm.First();
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
 
             // Act
             ViewResult result = controller.GetData(123, "7480103") as ViewResult;
