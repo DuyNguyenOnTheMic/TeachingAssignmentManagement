@@ -13,6 +13,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
     [TestClass()]
     public class TimetableControllerTests
     {
+        private IQueryable<subject> listSubject;
         private IQueryable<class_section> listClassSection;
         private IQueryable<term> listTerm;
         private Mock<DbSet<term>> mockSetTerm;
@@ -92,6 +93,19 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.AreEqual(viewBagResult[i].id, termList[i].id);
                 Assert.AreEqual(viewBagResult[i].start_year, termList[i].start_year);
             }
+        }
+
+        [TestMethod()]
+        public void Get_Data_Partial_View_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+
+            // Act
+            ViewResult result = controller.GetData(123, "7480103") as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
         }
     }
 }
