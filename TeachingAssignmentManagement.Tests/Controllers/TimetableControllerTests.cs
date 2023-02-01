@@ -184,11 +184,52 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Assert
             Assert.IsNotNull(result);
-            for (int i = 0; i < listSubject.Count(); i++)
+            for (int i = 0; i < subjectList.Count(); i++)
             {
                 Assert.AreEqual(viewBagResult[i].id, subjectList[i].id);
                 Assert.AreEqual(viewBagResult[i].name, subjectList[i].name);
                 Assert.AreEqual(viewBagResult[i].credits, subjectList[i].credits);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Data_Partial_View_Should_Load_Lecturer_SelectList_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+            term term = listTerm.First();
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
+
+            // Act
+            PartialViewResult result = controller.GetData(termId, majorId) as PartialViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(listLecturer.Count(), ((IEnumerable<dynamic>)result.ViewBag.lecturers).Count());
+        }
+
+        [TestMethod()]
+        public void Get_Data_Partial_View_Should_Load_Lecturer_Data_Correctly_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+            term term = listTerm.First();
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
+
+            // Act
+            PartialViewResult result = controller.GetData(termId, majorId) as PartialViewResult;
+            dynamic viewBagResult = result.ViewBag.lecturers.Items;
+            List<lecturer> lecturerList = listLecturer.ToList();
+
+            // Assert
+            Assert.IsNotNull(result);
+            for (int i = 0; i < lecturerList.Count(); i++)
+            {
+                Assert.AreEqual(viewBagResult[i].id, lecturerList[i].id);
+                Assert.AreEqual(viewBagResult[i].staff_id, lecturerList[i].staff_id);
+                Assert.AreEqual(viewBagResult[i].full_name, lecturerList[i].full_name);
+                Assert.AreEqual(viewBagResult[i].type, lecturerList[i].type);
+                Assert.AreEqual(viewBagResult[i].status, lecturerList[i].status);
             }
         }
     }
