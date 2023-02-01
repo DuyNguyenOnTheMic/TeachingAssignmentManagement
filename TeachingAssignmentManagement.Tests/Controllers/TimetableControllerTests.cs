@@ -28,8 +28,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Initialize()
         {
             listLecturer = new List<lecturer> {
-                new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = "TG" },
-                new lecturer() { id = userId2, staff_id = "1002", full_name = "Nguyễn Văn B", type = "CH" }
+                new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = "TG", status = true },
+                new lecturer() { id = userId2, staff_id = "1002", full_name = "Nguyễn Văn B", type = "CH", status = true }
             }.AsQueryable();
             listSubject = new List<subject>
             {
