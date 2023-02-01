@@ -129,7 +129,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
 
             // Act
-            ViewResult result = controller.GetData(123, "7480103") as ViewResult;
+            PartialViewResult result = controller.GetData(123, "7480103") as PartialViewResult;
 
             // Assert
             Assert.IsNotNull(result);
