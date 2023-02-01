@@ -24,7 +24,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             listClassSection = new List<class_section>
             {
-                new class_section { id= 1, class_section_id = "bla" },
+                new class_section { id = 1, original_id = "221_71ITBS10103_01", class_section_id = "221_71ITBS10103_01" },
             }.AsQueryable();
             listTerm = new List<term> {
                 new term() { id = 123, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6 },
