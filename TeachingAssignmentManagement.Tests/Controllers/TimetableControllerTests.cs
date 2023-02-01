@@ -40,7 +40,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             }.AsQueryable();
             listClassSection = new List<class_section>
             {
-                new class_section() { id = 1, class_section_id = "221_71ITBS10103_01", original_id = "221_71ITBS10103_01", type = "Lý thuyết", student_class_id = "71K28CNTT02 71K28CNTT03 71K28CNTT01", minimum_student = 60, total_lesson = 30, day = "Thứ Bảy", start_lesson = 1, lesson_number = 3, lesson_time = "1 - 3", student_number = 90, free_slot = 20, state = "Đang lập kế hoạch", learn_week = "07,08,09,10,11,12,13,14,15,16", day_2 = 7, start_lesson_2 = 1, student_registered_number = 0, start_week = 7, end_week = 16, note_1 = "Mi input 27/9", note_2 = null, lecturer1 = listLecturer.First(), lecturer = listLecturer.Last(), term_id = termId, major_id = majorId, subject = listSubject.First(), room_id = "CS3.F.04.01" }
+                new class_section() { id = 1, class_section_id = "221_71ITBS10103_01", original_id = "221_71ITBS10103_01", type = "Lý thuyết", student_class_id = "71K28CNTT02 71K28CNTT03 71K28CNTT01", minimum_student = 60, total_lesson = 30, day = "Thứ Bảy", start_lesson = 1, lesson_number = 3, lesson_time = "1 - 3", student_number = 90, free_slot = 20, state = "Đang lập kế hoạch", learn_week = "07,08,09,10,11,12,13,14,15,16", day_2 = 7, start_lesson_2 = 1, student_registered_number = 0, start_week = 7, end_week = 16, note_1 = "Mi input 27/9", note_2 = null, lecturer1 = listLecturer.First(), lecturer = listLecturer.Last(), term_id = termId, major_id = majorId, subject = listSubject.First(), room_id = "CS3.F.04.01" },
+                new class_section() { id = 2, class_section_id = "221_71ITBS10103_02", original_id = "221_71ITBS10103_02", type = "Thực hành", student_class_id = "71K28CNTT02 71K28CNTT03 71K28CNTT01", minimum_student = 60, total_lesson = 30, day = "Thứ Bảy", start_lesson = 1, lesson_number = 3, lesson_time = "1 - 3", student_number = 90, free_slot = 20, state = "Đang lập kế hoạch", learn_week = "07,08,09,10,11,12,13,14,15,16", day_2 = 7, start_lesson_2 = 1, student_registered_number = 0, start_week = 7, end_week = 16, note_1 = "Mi input 27/9", note_2 = null, lecturer1 = listLecturer.First(), lecturer = listLecturer.Last(), term_id = termId, major_id = majorId, subject = listSubject.First(), room_id = "CS3.F.04.01" }
             }.AsQueryable();
             listTerm = new List<term> {
                 new term() { id = 123, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6, status = true },
@@ -248,6 +249,24 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.IsNotNull(result);
             Assert.IsNotNull(modelResult);
+        }
+
+        [TestMethod()]
+        public void Get_Data_Partial_View_Should_Load_Class_Section_View_Models_Not_Null_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+            term term = listTerm.First();
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
+
+            // Act
+            PartialViewResult result = controller.GetData(termId, majorId) as PartialViewResult;
+            TimetableViewModels modelResult = result.Model as TimetableViewModels;
+            IEnumerable<ClassSectionDTO> classSectionDTOs = modelResult.ClassSectionDTOs;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(classSectionDTOs);
         }
     }
 }
