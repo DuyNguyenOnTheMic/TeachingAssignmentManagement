@@ -152,5 +152,21 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(result);
             Assert.AreEqual(term.status, result.ViewBag.termStatus);
         }
+
+        [TestMethod()]
+        public void Get_Data_Partial_View_Should_Load_Subject_Data_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+            term term = listTerm.First();
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
+
+            // Act
+            PartialViewResult result = controller.GetData(termId, majorId) as PartialViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(listSubject.Count(), ((IEnumerable<dynamic>)result.ViewBag.subjects).Count());
+        }
     }
 }
