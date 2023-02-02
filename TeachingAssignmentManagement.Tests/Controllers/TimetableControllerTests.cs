@@ -37,7 +37,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 new term() { id = 124, start_year = 2023, end_year = 2024, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6, status = true }
             }.AsQueryable();
             listMajor = new List<major> {
-                new major { id = "7480103", name = "Công Nghệ Thông Tin", abbreviation = "CNTT" }
+                new major { id = "7480103", name = "Kỹ Thuật Phần Mềm", abbreviation = "KTPM" },
+                new major { id = "7480201", name = "Công Nghệ Thông Tin", abbreviation = "CNTT" }
             }.AsQueryable();
             listLecturer = new List<lecturer> {
                 new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = "TG", status = true },
@@ -613,6 +614,27 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(majorList.Count(), ((IEnumerable<dynamic>)result.ViewBag.major).Count());
+        }
+
+        [TestMethod()]
+        public void Import_View_Should_Load_Major_SelectList_Data_Correctly_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+
+            // Act
+            ViewResult result = controller.Import() as ViewResult;
+            dynamic viewBagResult = result.ViewBag.major.Items;
+            List<major> majorList = listMajor.ToList();
+
+            // Assert
+            Assert.IsNotNull(result);
+            for (int i = 0; i < majorList.Count(); i++)
+            {
+                Assert.AreEqual(viewBagResult[i].id, majorList[i].id);
+                Assert.AreEqual(viewBagResult[i].name, majorList[i].name);
+                Assert.AreEqual(viewBagResult[i].abbreviation, majorList[i].abbreviation);
+            }
         }
     }
 }
