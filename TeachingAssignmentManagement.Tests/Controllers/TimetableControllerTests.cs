@@ -813,10 +813,19 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             classSection.lecturer_id = userId1;
             JsonResult actionResult = controller.CheckState(classSection.id, termId, userId1, false);
             dynamic jsonCollection = actionResult.Data;
+            dynamic classList = jsonCollection.classList;
 
             // Assert
             Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
-            Assert.IsNotNull(jsonCollection.classList);
+            Assert.IsNotNull(classList);
+            foreach (dynamic json in classList)
+            {
+                Assert.IsNotNull(json.classId);
+                Assert.IsNotNull(json.subjectName);
+                Assert.IsNotNull(json.classDay);
+                Assert.IsNotNull(json.lessonTime);
+                Assert.IsNotNull(json.majorName);
+            }
         }
     }
 }
