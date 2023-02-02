@@ -407,6 +407,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.IsNotNull(result);
             Assert.IsNotNull(modelResult);
+            Assert.IsNotNull(timetableDays);
         }
 
         [TestMethod()]
@@ -448,6 +449,25 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             {
                 Assert.AreEqual(timetableDays[i], daysList[i]);
             }
+        }
+
+        [TestMethod()]
+        public void Get_Data_Partial_View_Should_Load_Class_Section_View_Models_Start_Lessons_Not_Null_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+            term term = listTerm.First();
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
+
+            // Act
+            PartialViewResult result = controller.GetData(termId, "-1") as PartialViewResult;
+            TimetableViewModels modelResult = result.Model as TimetableViewModels;
+            List<int> timetableStartLessons = modelResult.startLessons;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(modelResult);
+            Assert.IsNotNull(timetableStartLessons);
         }
     }
 }
