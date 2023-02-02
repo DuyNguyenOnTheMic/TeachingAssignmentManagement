@@ -599,5 +599,20 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.AreEqual(viewBagResult[i].start_year, termList[i].start_year);
             }
         }
+
+        [TestMethod()]
+        public void Import_View_Should_Load_Major_SelectList_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+
+            // Act
+            ViewResult result = controller.Import() as ViewResult;
+            SelectList majorList = new SelectList(listMajor);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(majorList.Count(), ((IEnumerable<dynamic>)result.ViewBag.major).Count());
+        }
     }
 }
