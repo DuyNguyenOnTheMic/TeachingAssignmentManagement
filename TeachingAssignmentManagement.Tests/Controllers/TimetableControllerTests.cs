@@ -510,5 +510,18 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.AreEqual(timetableStartLessons[i], startLessonsList[i]);
             }
         }
+
+        [TestMethod()]
+        public void Import_View_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController();
+
+            // Act
+            ViewResult result = controller.Import() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
     }
 }
