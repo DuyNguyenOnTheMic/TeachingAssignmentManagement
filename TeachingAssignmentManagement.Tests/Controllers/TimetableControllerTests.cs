@@ -235,7 +235,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_Data_Partial_View_Should_Load_Class_Not_Null_Test()
+        public void Get_Data_Partial_View_Should_Load_Class_In_Term_Major_Not_Null_Test()
         {
             // Arrange
             TimetableController controller = new TimetableController(unitOfWork);
@@ -252,7 +252,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_Data_Partial_View_Should_Load_Class_Section_View_Models_Not_Null_Test()
+        public void Get_Data_Partial_View_Should_Load_Class_Section_View_Models_In_Term_Major_Not_Null_Test()
         {
             // Arrange
             TimetableController controller = new TimetableController(unitOfWork);
@@ -270,7 +270,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_Data_Partial_View_Should_Load_Class_Section_View_Models_Equal_Test()
+        public void Get_Data_Partial_View_Should_Load_Class_Section_View_Models_In_Term_Major_Equal_Test()
         {
             // Arrange
             TimetableController controller = new TimetableController(unitOfWork);
@@ -288,7 +288,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_Data_Partial_View_Should_Load_Class_Section_View_Models_Data_Correctly_Test()
+        public void Get_Data_Partial_View_Should_Load_Class_Section_View_Models_In_Term_Major_Data_Correctly_Test()
         {
             // Arrange
             TimetableController controller = new TimetableController(unitOfWork);
