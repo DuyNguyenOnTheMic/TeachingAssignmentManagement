@@ -237,6 +237,22 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
+        public void Get_Data_In_Term_Major_Return_Correct_Partial_View_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+            term term = listTerm.First();
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
+
+            // Act
+            PartialViewResult result = controller.GetData(termId, majorId) as PartialViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("_Timetable", result.ViewName);
+        }
+
+        [TestMethod()]
         public void Get_Data_Partial_View_Should_Load_Class_In_Term_Major_Not_Null_Test()
         {
             // Arrange
@@ -320,6 +336,22 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.AreEqual(classSectionDTOs[i].RoomId, classSectionList[i].room_id);
                 Assert.AreEqual(classSectionDTOs[i].Subject, classSectionList[i].subject);
             }
+        }
+
+        [TestMethod()]
+        public void Get_Data_In_Term_Return_Correct_Partial_View_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+            term term = listTerm.First();
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
+
+            // Act
+            PartialViewResult result = controller.GetData(termId, "-1") as PartialViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("_Timetable", result.ViewName);
         }
 
         [TestMethod()]
