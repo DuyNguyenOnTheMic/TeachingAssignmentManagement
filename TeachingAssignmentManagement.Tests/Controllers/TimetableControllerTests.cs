@@ -488,5 +488,27 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(result);
             Assert.AreEqual(startLessonsList.Count(), timetableStartLessons.Count());
         }
+
+        [TestMethod()]
+        public void Get_Data_Partial_View_Should_Load_Class_Section_View_Models_Start_Lessons_Correctly_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+            term term = listTerm.First();
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
+            List<int> startLessonsList = new TimetableViewModels().startLessons;
+
+            // Act
+            PartialViewResult result = controller.GetData(termId, "-1") as PartialViewResult;
+            TimetableViewModels modelResult = result.Model as TimetableViewModels;
+            List<int> timetableStartLessons = modelResult.startLessons;
+
+            // Assert
+            Assert.IsNotNull(result);
+            for (int i = 0; i < startLessonsList.Count(); i++)
+            {
+                Assert.AreEqual(timetableStartLessons[i], startLessonsList[i]);
+            }
+        }
     }
 }
