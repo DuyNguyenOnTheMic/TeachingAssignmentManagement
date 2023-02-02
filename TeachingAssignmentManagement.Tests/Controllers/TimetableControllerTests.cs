@@ -31,12 +31,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         [TestInitialize()]
         public void Initialize()
         {
-            major = new major
-            {
-                id = "7480103",
-                name = "Công Nghệ Thông Tin",
-                abbreviation = "CNTT"
-            };
+            major = new major { id = "7480103", name = "Công Nghệ Thông Tin", abbreviation = "CNTT" };
             listTerm = new List<term> {
                 new term() { id = 123, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6, status = true },
                 new term() { id = 124, start_year = 2023, end_year = 2024, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6, status = true }
