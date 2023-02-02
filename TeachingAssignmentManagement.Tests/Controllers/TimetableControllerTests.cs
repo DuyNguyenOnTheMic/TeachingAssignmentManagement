@@ -780,7 +780,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_Check_State_Json_Data_Error_Test()
+        public void Get_Check_State_Json_Data_Duplicate_Class_Error_Test()
         {
             // Arrange
             TimetableController controller = new TimetableController(unitOfWork);
