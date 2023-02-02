@@ -74,9 +74,10 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockSetClassSection.As<IQueryable<class_section>>().Setup(m => m.Expression).Returns(listClassSection.Expression);
             mockSetClassSection.As<IQueryable<class_section>>().Setup(m => m.ElementType).Returns(listClassSection.ElementType);
             mockSetClassSection.As<IQueryable<class_section>>().Setup(m => m.GetEnumerator()).Returns(listClassSection.GetEnumerator());
+            mockContext.Setup(c => c.terms).Returns(() => mockSetTerm.Object);
+            mockContext.Setup(c => c.majors).Returns(() => mockSetMajor.Object);
             mockContext.Setup(c => c.lecturers).Returns(() => mockSetLecturer.Object);
             mockContext.Setup(c => c.class_section).Returns(() => mockSetClassSection.Object);
-            mockContext.Setup(c => c.terms).Returns(() => mockSetTerm.Object);
         }
 
         [TestCleanup()]
