@@ -1234,5 +1234,39 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.IsNotNull(json.majorName);
             }
         }
+
+        [TestMethod()]
+        public void Get_Check_State_Json_Data_Maximum_Class_Error_List_Not_False_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+            term term = listTerm.First();
+            class_section classSection = listClassSection.First();
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
+            mockSetClassSection.Setup(m => m.Find(It.IsAny<int>())).Returns(classSection);
+
+            // Act
+            term.max_class = 1;
+            classSection.lecturer_id = null;
+            JsonResult actionResult = controller.CheckState(classSection.id, termId, userId1, false);
+            dynamic jsonCollection = actionResult.Data;
+            dynamic classList = jsonCollection.classList;
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            foreach (dynamic json in classList)
+            {
+                Assert.IsNotNull(json.classId,
+                    "JSON record does not contain \"classId\" required property.");
+                Assert.IsNotNull(json.subjectName,
+                    "JSON record does not contain \"subjectName\" required property.");
+                Assert.IsNotNull(json.classDay,
+                    "JSON record does not contain \"classDay\" required property.");
+                Assert.IsNotNull(json.lessonTime,
+                    "JSON record does not contain \"lessonTime\" required property.");
+                Assert.IsNotNull(json.majorName,
+                    "JSON record does not contain \"majorName\" required property.");
+            }
+        }
     }
 }
