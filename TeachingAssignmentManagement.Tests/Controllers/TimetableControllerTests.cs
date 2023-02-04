@@ -732,7 +732,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockSetClassSection.Setup(m => m.Find(It.IsAny<int>())).Returns(classSection);
 
             // Act
-            JsonResult actionResult = controller.CheckState(classSection.id, termId, userId1, false);
+            JsonResult actionResult = controller.CheckState(classSection.id, termId, userId2, false);
             dynamic jsonCollection = actionResult.Data;
 
             // Assert
@@ -751,7 +751,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockSetClassSection.Setup(m => m.Find(It.IsAny<int>())).Returns(classSection);
 
             // Act
-            JsonResult actionResult = controller.CheckState(classSection.id, termId, userId1, false);
+            JsonResult actionResult = controller.CheckState(classSection.id, termId, userId2, false);
             dynamic jsonCollection = actionResult.Data;
 
             // Assert
