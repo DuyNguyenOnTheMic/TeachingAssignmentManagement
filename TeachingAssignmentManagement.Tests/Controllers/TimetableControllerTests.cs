@@ -1092,6 +1092,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Act
             term.max_lesson = 3;
             classSection.start_lesson_2 = 4;
+            classSection.lecturer_id = null;
             JsonResult actionResult = controller.CheckState(classSection.id, termId, userId1, false);
             dynamic jsonCollection = actionResult.Data;
             dynamic classList = jsonCollection.classList;
