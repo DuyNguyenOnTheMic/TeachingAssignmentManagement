@@ -1073,5 +1073,26 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.IsTrue(count > 0);
         }
+
+        [TestMethod]
+        public void Get_Check_State_Json_Data_Maximum_Lesson_Error_List_Index_At_0_Shoud_Not_Be_Null_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+            term term = listTerm.First();
+            class_section classSection = listClassSection.First();
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
+            mockSetClassSection.Setup(m => m.Find(It.IsAny<int>())).Returns(classSection);
+
+            // Act
+            term.max_lesson = 1;
+            classSection.lecturer_id = userId1;
+            JsonResult actionResult = controller.CheckState(classSection.id, termId, userId1, false);
+            dynamic jsonCollection = actionResult.Data;
+            dynamic classList = jsonCollection.classList;
+
+            // Assert
+            Assert.IsNotNull(classList[0]);
+        }
     }
 }
