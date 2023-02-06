@@ -1461,5 +1461,31 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                     "JSON record does not contain \"majorName\" required property.");
             }
         }
+
+        [TestMethod()]
+        public void Get_Check_State_Json_Data_Different_Campus_Error_List_Should_Convert_To_IEnumerable_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+            term term = listTerm.First();
+            class_section classSection = listClassSection.First();
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
+            mockSetClassSection.Setup(m => m.Find(It.IsAny<int>())).Returns(classSection);
+
+            // Act
+            classSection.room_id = "CS4.F.04.01";
+            classSection.lecturer_id = null;
+            JsonResult actionResult = controller.CheckState(classSection.id, termId, userId1, true);
+            dynamic jsonCollection = actionResult.Data;
+            dynamic classList = jsonCollection.classList;
+            int count = 0;
+            foreach (dynamic value in classList)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
     }
 }
