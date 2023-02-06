@@ -1394,5 +1394,36 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
             Assert.IsFalse(jsonCollection.success);
         }
+
+        [TestMethod()]
+        public void Get_Check_State_Json_Data_Different_Campus_Error_List_Not_Null_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+            term term = listTerm.First();
+            class_section classSection = listClassSection.First();
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
+            mockSetClassSection.Setup(m => m.Find(It.IsAny<int>())).Returns(classSection);
+
+            // Act
+            classSection.room_id = "CS4.F.04.01";
+            classSection.lecturer_id = null;
+            JsonResult actionResult = controller.CheckState(classSection.id, termId, userId1, true);
+            dynamic jsonCollection = actionResult.Data;
+            dynamic classList = jsonCollection.classList;
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            Assert.IsNotNull(classList);
+            foreach (dynamic json in classList)
+            {
+                Assert.IsNotNull(json.classId);
+                Assert.IsNotNull(json.subjectName);
+                Assert.IsNotNull(json.classDay);
+                Assert.IsNotNull(json.lessonTime);
+                Assert.IsNotNull(json.roomId);
+                Assert.IsNotNull(json.majorName);
+            }
+        }
     }
 }
