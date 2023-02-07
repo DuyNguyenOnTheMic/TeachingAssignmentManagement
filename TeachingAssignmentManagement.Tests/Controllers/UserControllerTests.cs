@@ -245,7 +245,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             string test = "Nguyễn Văn A";
 
             // Act
-            var result = UserController.SetNullOnEmpty(test);
+            string result = UserController.SetNullOnEmpty(test);
 
             // Assert
             Assert.AreEqual(test, result);
@@ -258,7 +258,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             string test = "";
 
             // Act
-            var result = UserController.SetNullOnEmpty(test);
+            string result = UserController.SetNullOnEmpty(test);
 
             // Assert
             Assert.AreEqual(null, result);
@@ -271,7 +271,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             string test = string.Empty;
 
             // Act
-            var result = UserController.SetNullOnEmpty(test);
+            string result = UserController.SetNullOnEmpty(test);
 
             // Assert
             Assert.AreEqual(null, result);
@@ -284,7 +284,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             string test = "      ";
 
             // Act
-            var result = UserController.SetNullOnEmpty(test);
+            string result = UserController.SetNullOnEmpty(test);
 
             // Assert
             Assert.AreEqual(null, result);

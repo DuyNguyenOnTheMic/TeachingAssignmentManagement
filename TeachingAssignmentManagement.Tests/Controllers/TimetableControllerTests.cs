@@ -1607,7 +1607,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             TimetableController controller = new TimetableController(unitOfWork);
-            var table = new DataTable();
+            DataTable table = new DataTable();
 
             // Act
             table.Columns.AddRange(new DataColumn[30]
