@@ -1610,37 +1610,23 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             var table = new DataTable();
 
             // Act
-            table.Columns.AddRange(
-                new DataColumn[23]{
-                        new DataColumn("StudentID"),
-                        new DataColumn("StudentName"),
-                        new DataColumn("BirthDay"),
-                        new DataColumn("BirthPlace"),
-                        new DataColumn("ClassStudentID"),
-                        new DataColumn("ClassStudentName"),
-                        new DataColumn("YearStudy"),
-                        new DataColumn("TermID"),
-                        new DataColumn("TermName"),
-                        new DataColumn("CurriculumID"),
-                        new DataColumn("StudyUnitID"),
-                        new DataColumn("StudyUnitAlias"),
-                        new DataColumn("CurriculumName"),
-                        new DataColumn("Credits"),
-                        new DataColumn("Mark10"),
-                        new DataColumn("Mark10_2"),
-                        new DataColumn("Mark10_3"),
-                        new DataColumn("Mark10_4"),
-                        new DataColumn("Mark10_5"),
-                        new DataColumn("MaxMark10"),
-                        new DataColumn("maxMark4"),
-                        new DataColumn("MaxMarkLetter"),
-                        new DataColumn("IsPass")
-                });
+            table.Columns.AddRange(new DataColumn[30]
+            {
+                new DataColumn("MaGocLHP"), new DataColumn("Mã MH"), new DataColumn("Mã LHP"), new DataColumn("Tên HP"),
+                new DataColumn("Số TC"), new DataColumn("Loại HP"), new DataColumn("Mã Lớp"), new DataColumn("TSMH"),
+                new DataColumn("Số Tiết Đã xếp"), new DataColumn("PH"), new DataColumn("Thứ"), new DataColumn("Tiết BĐ"),
+                new DataColumn("Số Tiết"), new DataColumn("Tiết Học"), new DataColumn("Phòng"),
+                new DataColumn("Mã CBGD"), new DataColumn("Tên CBGD"), new DataColumn("PH_X"),
+                new DataColumn("Sức Chứa"), new DataColumn("SiSoTKB"), new DataColumn("Trống"),
+                new DataColumn("Tình Trạng LHP"), new DataColumn("TuanHoc2"), new DataColumn("ThuS"),
+                new DataColumn("TietS"), new DataColumn("Số SVĐK"), new DataColumn("Tuần BD"), new DataColumn("Tuần KT"),
+                new DataColumn("Ghi Chú 1"), new DataColumn("Ghi Chú 2")
+            });
 
             string result = controller.ValidateColumns(table);
 
             // Assert
-            Assert.AreEqual(23, table.Columns.Count);
+            Assert.AreEqual(30, table.Columns.Count);
             Assert.AreEqual(null, result);
         }
     }
