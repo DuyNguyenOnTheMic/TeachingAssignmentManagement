@@ -22,6 +22,7 @@ $(function () {
                 { 'data': 'start_date' },
                 { 'data': 'max_lesson' },
                 { 'data': 'max_class' },
+                { 'data': 'status' },
                 {
                     'data': 'id', 'render': function (data) {
                         return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + rootUrl + "Term/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a><a class='deleteRow text-danger p-0' data-original-title='Xoá' title='Xoá' onclick=deleteTerm('" + data + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
@@ -30,6 +31,15 @@ $(function () {
             ],
 
             columnDefs: [
+                {
+                    // Term status
+                    targets: 7,
+                    render: function (data, type, row) {
+                        var $status = data;
+                        var isChecked = $status ? 'checked' : '';
+                        return type === 'display' ? "<div class='form-check form-check-primary form-switch d-flex justify-content-center'><input type='checkbox' class='form-check-input user-status' aria-label='Trạng thái người dùng' onchange=editStatus('" + row.id + "','" + !$status + "') " + isChecked + "></div>" : data;
+                    }
+                },
                 {
                     searchable: false,
                     orderable: false,
