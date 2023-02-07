@@ -651,7 +651,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         #region Helpers
-        private string ValidateColumns(DataTable dt)
+        public string ValidateColumns(DataTable dt)
         {
             // Declare the valid column names
             string[] validColumns = {
@@ -674,7 +674,7 @@ namespace TeachingAssignmentManagement.Controllers
             return null;
         }
 
-        private string ValidateNotNull(string[] validRows)
+        public string ValidateNotNull(string[] validRows)
         {
             foreach (string validRow in validRows)
             {

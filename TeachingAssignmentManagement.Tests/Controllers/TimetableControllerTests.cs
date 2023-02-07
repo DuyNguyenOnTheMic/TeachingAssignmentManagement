@@ -2,6 +2,7 @@
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -1599,6 +1600,48 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(jsonCollection);
             mockSetClassSection.Verify(r => r.RemoveRange(It.IsAny<IEnumerable<class_section>>()));
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod()]
+        public void Validate_Columns_Is_True_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+            var table = new DataTable();
+
+            // Act
+            table.Columns.AddRange(
+                new DataColumn[23]{
+                        new DataColumn("StudentID"),
+                        new DataColumn("StudentName"),
+                        new DataColumn("BirthDay"),
+                        new DataColumn("BirthPlace"),
+                        new DataColumn("ClassStudentID"),
+                        new DataColumn("ClassStudentName"),
+                        new DataColumn("YearStudy"),
+                        new DataColumn("TermID"),
+                        new DataColumn("TermName"),
+                        new DataColumn("CurriculumID"),
+                        new DataColumn("StudyUnitID"),
+                        new DataColumn("StudyUnitAlias"),
+                        new DataColumn("CurriculumName"),
+                        new DataColumn("Credits"),
+                        new DataColumn("Mark10"),
+                        new DataColumn("Mark10_2"),
+                        new DataColumn("Mark10_3"),
+                        new DataColumn("Mark10_4"),
+                        new DataColumn("Mark10_5"),
+                        new DataColumn("MaxMark10"),
+                        new DataColumn("maxMark4"),
+                        new DataColumn("MaxMarkLetter"),
+                        new DataColumn("IsPass")
+                });
+
+            string result = controller.ValidateColumns(table);
+
+            // Assert
+            Assert.AreEqual(23, table.Columns.Count);
+            Assert.AreEqual(null, result);
         }
     }
 }
