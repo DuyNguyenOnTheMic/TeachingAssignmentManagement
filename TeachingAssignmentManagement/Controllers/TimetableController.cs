@@ -207,6 +207,15 @@ namespace TeachingAssignmentManagement.Controllers
                 }
             }
 
+            // Check if term status is false to prevent assignments
+            bool termStatus = unitOfWork.TermRepository.GetTermByID(term).status;
+            if (!termStatus)
+            {
+                Response.Write($"Học kỳ này đã được khoá phân công trên hệ thống!");
+                return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
+            }
+
+            // Get current User Id
             string userId = UserManager.FindByEmail(User.Identity.Name).Id;
 
             // Check if lecturer has filled in personal information
