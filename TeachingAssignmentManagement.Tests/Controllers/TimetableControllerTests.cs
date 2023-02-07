@@ -1730,7 +1730,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Validate_Not_Null_Should_Return_Not_Null_If_Valid_Test()
+        public void Validate_Not_Null_Should_Return_Not_Null_If_Not_Valid_Test()
         {
             // Arrange
             TimetableController controller = new TimetableController(unitOfWork);
@@ -1741,6 +1741,20 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Assert
             Assert.IsNotNull(result);
+        }
+
+        [TestMethod()]
+        public void Validate_Not_Null_Should_Return_Empty_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+
+            // Act
+            string[] validRows = { "Hả hẻ", "Haha", string.Empty };
+            string result = controller.ValidateNotNull(validRows);
+
+            // Assert
+            Assert.AreEqual(result, string.Empty);
         }
     }
 }
