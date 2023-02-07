@@ -1714,5 +1714,19 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(28, table.Columns.Count);
             Assert.AreEqual(result, missingColumn);
         }
+
+        [TestMethod()]
+        public void Validate_Not_Null_Should_Return_Null_If_Valid_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+
+            // Act
+            string[] validRows = { "Hả hẻ", "Haha", "Hố hố" };
+            string result = controller.ValidateNotNull(validRows);
+
+            // Assert
+            Assert.IsNull(result);
+        }
     }
 }
