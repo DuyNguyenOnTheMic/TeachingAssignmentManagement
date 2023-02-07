@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Net.Sockets;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
@@ -1583,6 +1582,22 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.IsNotNull(jsonCollection);
             mockSetClassSection.Verify(r => r.Remove(It.IsAny<class_section>()));
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod]
+        public void Delete_All_Class_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+
+            // Act
+            JsonResult result = controller.DeleteAll(termId, majorId) as JsonResult;
+            dynamic jsonCollection = result.Data;
+
+            // Assert
+            Assert.IsNotNull(jsonCollection);
+            mockSetClassSection.Verify(r => r.RemoveRange(It.IsAny<IEnumerable<class_section>>()));
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
     }
