@@ -1603,7 +1603,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Validate_Columns_Is_True_Test()
+        public void Validate_Columns_Should_Return_Null_If_Valid_Test()
         {
             // Arrange
             TimetableController controller = new TimetableController(unitOfWork);
