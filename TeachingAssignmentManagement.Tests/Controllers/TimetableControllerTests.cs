@@ -1822,5 +1822,18 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.AreEqual(null, result);
         }
+
+        [TestMethod()]
+        public void Set_Null_On_Empty_Int_Test()
+        {
+            // Arrange
+            string test = "";
+
+            // Act
+            int? result = TimetableController.ToNullableInt(test);
+
+            // Assert
+            Assert.AreEqual(null, result);
+        }
     }
 }
