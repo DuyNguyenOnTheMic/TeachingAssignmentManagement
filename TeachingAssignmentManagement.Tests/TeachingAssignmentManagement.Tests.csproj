@@ -106,6 +106,7 @@
     <Compile Include="Controllers\TermControllerTests.cs" />
     <Compile Include="Controllers\TimetableControllerTests.cs" />
     <Compile Include="Controllers\UserControllerTests.cs" />
+    <Compile Include="DAL\Repositories\ClassSectionRepositoryTests.cs" />
     <Compile Include="DAL\Repositories\MajorRepositoryTests.cs" />
     <Compile Include="DAL\Repositories\TermRepositoryTests.cs" />
     <Compile Include="DAL\Repositories\UserRepositoryTests.cs" />
