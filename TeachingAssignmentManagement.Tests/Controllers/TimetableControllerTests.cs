@@ -1730,6 +1730,20 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
+        public void Validate_Not_Null_Should_Return_Null_If_Array_Is_Null_Test()
+        {
+            // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
+
+            // Act
+            string[] validRows = { };
+            string result = controller.ValidateNotNull(validRows);
+
+            // Assert
+            Assert.IsNull(result);
+        }
+
+        [TestMethod()]
         public void Validate_Not_Null_Should_Return_Not_Null_If_Not_Valid_Test()
         {
             // Arrange
