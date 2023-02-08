@@ -1824,6 +1824,20 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
+        public void Return_Int_When_Not_Empty_Test()
+        {
+            // Arrange
+            string stringTest = "123";
+            int intTest = int.Parse(stringTest);
+
+            // Act
+            int? result = TimetableController.ToNullableInt(stringTest);
+
+            // Assert
+            Assert.AreEqual(intTest, result);
+        }
+
+        [TestMethod()]
         public void Set_Null_On_Empty_Int_Test()
         {
             // Arrange
