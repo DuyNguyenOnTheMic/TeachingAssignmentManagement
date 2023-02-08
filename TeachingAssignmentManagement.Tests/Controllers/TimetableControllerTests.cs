@@ -1875,5 +1875,19 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.AreEqual(null, result);
         }
+
+        [TestMethod()]
+        public void String_Should_Convert_To_Int_Test()
+        {
+            // Arrange
+            string stringTest = "123";
+            int intTest = int.Parse(stringTest);
+
+            // Act
+            int result = TimetableController.ToInt(stringTest);
+
+            // Assert
+            Assert.AreEqual(intTest, result);
+        }
     }
 }
