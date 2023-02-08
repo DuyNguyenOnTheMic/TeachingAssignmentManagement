@@ -1788,7 +1788,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Set_Null_On_Empty_String_Test()
         {
             // Arrange
-            string test = string.Empty;
+            string test = "";
 
             // Act
             string result = TimetableController.ToNullableString(test);
@@ -1797,5 +1797,17 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(null, result);
         }
 
+        [TestMethod()]
+        public void Set_Null_On_Empty_String_Type_Test()
+        {
+            // Arrange
+            string test = string.Empty;
+
+            // Act
+            string result = TimetableController.ToNullableString(test);
+
+            // Assert
+            Assert.AreEqual(null, result);
+        }
     }
 }
