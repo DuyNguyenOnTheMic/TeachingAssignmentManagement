@@ -1862,5 +1862,18 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.AreEqual(null, result);
         }
+
+        [TestMethod()]
+        public void String_Should_Convert_To_Null_Int_If_Have_Space_Test()
+        {
+            // Arrange
+            string test = "      ";
+
+            // Act
+            int? result = TimetableController.ToNullableInt(test);
+
+            // Assert
+            Assert.AreEqual(null, result);
+        }
     }
 }
