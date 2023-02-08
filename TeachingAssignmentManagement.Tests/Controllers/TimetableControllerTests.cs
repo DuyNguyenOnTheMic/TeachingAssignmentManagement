@@ -1770,5 +1770,18 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.AreEqual(result, string.Empty);
         }
+
+        [TestMethod()]
+        public void Return_Original_String_When_Not_Empty_Test()
+        {
+            // Arrange
+            string test = "Nguyễn Văn A";
+
+            // Act
+            string result = TimetableController.ToNullableString(test);
+
+            // Assert
+            Assert.AreEqual(test, result);
+        }
     }
 }
