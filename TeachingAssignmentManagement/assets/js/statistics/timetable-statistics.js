@@ -195,17 +195,13 @@ dayFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc th�
 dayFilter.on('select2:select', function (e) {
     // Show day column on select
     var day = e.params.data.id;
-    var colspan = dayFilter.val().length;
-    tableStatistics.find('td[data-startday="' + day + '"], th[data-startday="' + day + '"]').show();
-    tableStatistics.find('thead .day-header').attr('colspan', colspan);
-    filterCount(dayFilter, 'ca giảng');
+    tableStatistics.find('td[data-day="' + day + '"], th[data-day="' + day + '"]').show();
+    filterCount(dayFilter, 'thứ');
 }).on('select2:unselect', function (e) {
     // Hide day column on unselect
     var day = e.params.data.id;
-    var colspan = dayFilter.val().length;
-    tableStatistics.find('td[data-startday="' + day + '"], th[data-startday="' + day + '"]').hide();
-    tableStatistics.find('thead .day-header').attr('colspan', colspan);
-    filterCount(dayFilter, 'ca giảng');
+    tableStatistics.find('td[data-day="' + day + '"], th[data-day="' + day + '"]').hide();
+    filterCount(dayFilter, 'thứ');
 });
 
 // User guide for timetable statistics

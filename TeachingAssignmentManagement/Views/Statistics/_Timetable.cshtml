@@ -54,7 +54,7 @@
                 <th>THỨ</th>
                 @foreach (int day in Model.days)
                 {
-                    <th class="day-header" colspan="5">THỨ @day</th>
+                    <th class="day-header" colspan="5" data-day="@day">THỨ @day</th>
                 }
             </tr>
             <tr class="text-center text-nowrap">
@@ -63,7 +63,7 @@
                 {
                     foreach (int startLesson in Model.startLessons)
                     {
-                        <th class="lesson-header" data-startlesson="@startLesson">@startLesson-@(startLesson + 2)</th>
+                        <th class="lesson-header" data-day="@day" data-startlesson="@startLesson">@startLesson-@(startLesson + 2)</th>
                     }
                 }
             </tr>
@@ -81,7 +81,7 @@
                             string dividerClass = startLesson == 1 ? "class=table-vertical-divider" : string.Empty;
                             if (classes.Any())
                             {
-                                <td @dividerClass data-startlesson="@startLesson">
+                                <td @dividerClass data-day="@day" data-startlesson="@startLesson">
                                     @foreach (var item in classes)
                                     {
                                         string cardClass = "Lý thuyết" == item.Type ? "btn-success" : "btn-warning";
@@ -91,7 +91,7 @@
                             }
                             else
                             {
-                                <td @dividerClass data-startlesson="@startLesson"></td>
+                                <td @dividerClass data-day="@day" data-startlesson="@startLesson"></td>
                             }
                         }
                     }
