@@ -290,6 +290,28 @@ $(function () {
             attachTo: { element: '#lessonFilter + .select2-container', on: 'bottom' },
             buttons: [
                 {
+                    text: 'Bỏ qua',
+                    classes: backBtnClass,
+                    action: tour.cancel
+                },
+                {
+                    text: 'Quay lại',
+                    classes: backBtnClass,
+                    action: tour.back
+                },
+                {
+                    text: 'Tiếp',
+                    classes: nextBtnClass,
+                    action: tour.next
+                }
+            ]
+        });
+        tour.addStep({
+            title: 'Lọc thứ',
+            text: 'Xem và lọc theo thứ ở đây.',
+            attachTo: { element: '#dayFilter + .select2-container', on: 'bottom' },
+            buttons: [
+                {
                     text: 'Quay lại',
                     classes: backBtnClass,
                     action: tour.back
