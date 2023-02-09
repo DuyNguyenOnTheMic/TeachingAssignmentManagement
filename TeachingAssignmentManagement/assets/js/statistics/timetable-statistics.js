@@ -7,7 +7,8 @@
     tableStatistics = $('#tblStatistics'),
     lecturerFilter = $('#lecturerFilter'),
     lecturerType = $('#lecturerType'),
-    lessonFilter = $('#lessonFilter');
+    lessonFilter = $('#lessonFilter'),
+    dayFilter = $('#dayFilter');
 
 // Display message when table have no data
 var classCount = $('#tblStatistics .class-card').length;
@@ -180,6 +181,31 @@ lessonFilter.on('select2:select', function (e) {
 
     // Add divider class for viewing between days in week
     updateDivider();
+});
+
+// Populate select2 for day filter
+dayFilter.wrap('<div class="position-relative my-50"></div>');
+dayFilter.select2({
+    language: 'vi',
+    dropdownAutoWidth: true,
+    dropdownParent: dayFilter.parent(),
+    closeOnSelect: false
+})
+dayFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc thứ');
+dayFilter.on('select2:select', function (e) {
+    // Show day column on select
+    var day = e.params.data.id;
+    var colspan = dayFilter.val().length;
+    tableStatistics.find('td[data-startday="' + day + '"], th[data-startday="' + day + '"]').show();
+    tableStatistics.find('thead .day-header').attr('colspan', colspan);
+    filterCount(dayFilter, 'ca giảng');
+}).on('select2:unselect', function (e) {
+    // Hide day column on unselect
+    var day = e.params.data.id;
+    var colspan = dayFilter.val().length;
+    tableStatistics.find('td[data-startday="' + day + '"], th[data-startday="' + day + '"]').hide();
+    tableStatistics.find('thead .day-header').attr('colspan', colspan);
+    filterCount(dayFilter, 'ca giảng');
 });
 
 // User guide for timetable statistics
