@@ -28,6 +28,12 @@
             <option value="10" selected>Ca 4</option>
             <option value="13" selected>Ca 5</option>
         </select>
+        <select class="form-select" id="dayFilter" name="dayFilter" multiple aria-label="Lọc thứ">
+            @foreach (int day in Model.days)
+            {
+                <option value="@day" selected>Thứ @day</option>
+            }
+        </select>
     </div>
     <div class="col-sm-12 col-lg-4 my-50">
         <div class="d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap">
