@@ -200,7 +200,13 @@ dayFilter.parent().find('.select2-search__field').attr('placeholder', 'Lọc th�
 dayFilter.on('select2:select', function (e) {
     // Show day column on select
     var day = e.params.data.id;
-    tableStatistics.find('td[data-day="' + day + '"], th[data-day="' + day + '"]').show();
+    var visibleLessons = lessonFilter.val();
+    // Only filter current visible lessons
+    for (var i = 0; i < visibleLessons.length; i++) {
+        var visibleLesson = visibleLessons[i];
+        tableStatistics.find('thead .day-header[data-day="' + day + '"]').show();
+        tableStatistics.find('td[data-day="' + day + '"][data-startlesson="' + visibleLesson + '"], th[data-day="' + day + '"][data-startlesson="' + visibleLesson + '"]').show();
+    }
     filterCount(dayFilter, 'thứ');
 }).on('select2:unselect', function (e) {
     // Hide day column on unselect
