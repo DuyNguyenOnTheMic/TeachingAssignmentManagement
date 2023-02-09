@@ -162,7 +162,12 @@ lessonFilter.on('select2:select', function (e) {
     // Show lesson column on select
     var lesson = e.params.data.id;
     var colspan = lessonFilter.val().length;
-    tableStatistics.find('td[data-startlesson="' + lesson + '"], th[data-startlesson="' + lesson + '"]').show();
+    var visibleDays = dayFilter.val();
+    // Only filter current visible days
+    for (var i = 0; i < visibleDays.length; i++) {
+        var visibleDay = visibleDays[i];
+        tableStatistics.find('td[data-day="' + visibleDay + '"][data-startlesson="' + lesson + '"], th[data-day="' + visibleDay + '"][data-startlesson="' + lesson + '"]').show();
+    }
     tableStatistics.find('thead .day-header').attr('colspan', colspan);
     filterCount(lessonFilter, 'ca giảng');
 
