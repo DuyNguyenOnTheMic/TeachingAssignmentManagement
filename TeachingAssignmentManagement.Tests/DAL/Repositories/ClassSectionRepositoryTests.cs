@@ -86,9 +86,13 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void ClassSectionRepositoryTest()
+        public void Get_Timetable_Data_Not_Null_Test()
         {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
 
+            // Assert
+            Assert.IsNotNull(actionResult);
         }
     }
 }
