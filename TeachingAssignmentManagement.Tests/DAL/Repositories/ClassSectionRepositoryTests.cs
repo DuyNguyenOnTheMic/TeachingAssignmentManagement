@@ -183,5 +183,19 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult);
             Assert.AreEqual(query_classSection.Count(), actionResult.Count);
         }
+
+        [TestMethod()]
+        public void Get_Class_In_Week_Data_Not_Null_Test()
+        {
+            // Arrange
+            int week = 7;
+
+            // Act
+            IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, week);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
     }
 }
