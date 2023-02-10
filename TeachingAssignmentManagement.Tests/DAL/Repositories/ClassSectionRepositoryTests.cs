@@ -177,7 +177,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         {
             // Act
             dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1).ToList();
-            var query_classSection = listClassSection.Where(c => c.term_id == termId && c.lecturer_id == userId1).ToList();
+            List<class_section> query_classSection = listClassSection.Where(c => c.term_id == termId && c.lecturer_id == userId1).ToList();
 
             // Assert
             Assert.IsNotNull(actionResult);
@@ -196,6 +196,35 @@ namespace TeachingAssignmentManagement.DAL.Tests
 
             // Assert
             Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Get_Class_In_Week_Data_Is_Correct_Test()
+        {
+            // Arrange
+            int week = 7;
+
+            // Act
+            IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, week).ToList();
+            List<class_section> classSectionList = listClassSection.Where(c => c.term_id == termId && c.lecturer_id == userId1).ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            for (int i = 0; i < classSectionList.Count; i++)
+            {
+                Assert.AreEqual(actionResult[i].ClassSectionId, classSectionList[i].class_section_id);
+                Assert.AreEqual(actionResult[i].Type, classSectionList[i].type);
+                Assert.AreEqual(actionResult[i].LessonTime, classSectionList[i].lesson_time);
+                Assert.AreEqual(actionResult[i].Day2, classSectionList[i].day_2);
+                Assert.AreEqual(actionResult[i].StartLesson2, classSectionList[i].start_lesson_2);
+                Assert.AreEqual(actionResult[i].LearnWeek, classSectionList[i].learn_week);
+                Assert.AreEqual(actionResult[i].StartWeek, classSectionList[i].start_week);
+                Assert.AreEqual(actionResult[i].EndWeek, classSectionList[i].end_week);
+                Assert.AreEqual(actionResult[i].SubjectId, classSectionList[i].subject_id);
+                Assert.AreEqual(actionResult[i].RoomId, classSectionList[i].room_id);
+                Assert.AreEqual(actionResult[i].Subject, classSectionList[i].subject);
+            }
         }
     }
 }
