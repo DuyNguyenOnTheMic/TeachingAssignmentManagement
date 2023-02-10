@@ -259,5 +259,36 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert                
             Assert.IsNotNull(actionResult[0]);
         }
+
+        [TestMethod]
+        public void Class_In_Week_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            int week = 7;
+
+            // Act
+            IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, week).ToList();
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.ClassSectionId);
+                Assert.IsNotNull(json.Type);
+                Assert.IsNotNull(json.LessonTime);
+                Assert.IsNotNull(json.Day2);
+                Assert.IsNotNull(json.StartLesson2);
+                Assert.IsNotNull(json.LearnWeek);
+                Assert.IsNotNull(json.StartWeek);
+                Assert.IsNotNull(json.EndWeek);
+                Assert.IsNotNull(json.SubjectId);
+                Assert.IsNotNull(json.RoomId);
+                Assert.IsNotNull(json.Subject);
+            }
+        }
     }
 }
