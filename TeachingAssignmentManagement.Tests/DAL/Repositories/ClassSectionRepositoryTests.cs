@@ -171,5 +171,17 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.IsNotNull(json.Subject);
             }
         }
+
+        [TestMethod()]
+        public void Get_Timetable_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1).ToList();
+            var query_classSection = listClassSection.Where(c => c.term_id == termId && c.lecturer_id == userId1).ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
     }
 }
