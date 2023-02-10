@@ -124,7 +124,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         public void Timetable_Data_Should_Be_IEnumerable_Test()
         {
             // Act
-            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1).ToList();
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
             int count = 0;
             foreach (dynamic value in actionResult)
             {
@@ -133,6 +133,16 @@ namespace TeachingAssignmentManagement.DAL.Tests
 
             // Assert
             Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod]
+        public void Timetable_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1).ToList();
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
         }
     }
 }
