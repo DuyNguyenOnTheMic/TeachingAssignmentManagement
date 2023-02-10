@@ -290,5 +290,21 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.IsNotNull(json.Subject);
             }
         }
+
+        [TestMethod()]
+        public void Get_Class_In_Week_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Arrange
+            int week = 7;
+
+            // Act
+            IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, week).ToList();
+            List<class_section> query_classSection = listClassSection.Where(c => c.term_id == termId && c.lecturer_id == userId1).ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
     }
 }
