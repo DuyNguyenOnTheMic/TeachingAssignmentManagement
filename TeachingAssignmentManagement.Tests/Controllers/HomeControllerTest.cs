@@ -4,7 +4,7 @@ using TeachingAssignmentManagement.Controllers;
 
 namespace TeachingAssignmentManagement.Tests.Controllers
 {
-    [TestClass]
+    [TestClass()]
     public class HomeControllerTest
     {
         [TestMethod()]
