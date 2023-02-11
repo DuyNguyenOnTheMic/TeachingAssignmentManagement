@@ -489,5 +489,32 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert                
             Assert.IsNotNull(actionResult[0]);
         }
+
+        [TestMethod()]
+        public void Assign_Timetable_Data_Should_Be_Indexable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetAssignTimetable(termId, majorId).ToList();
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.Id);
+                Assert.IsNotNull(json.ClassSectionId);
+                Assert.IsNotNull(json.Type);
+                Assert.IsNotNull(json.Day2);
+                Assert.IsNotNull(json.StartLesson2);
+                Assert.IsNotNull(json.StudentRegisteredNumber);
+                Assert.IsNotNull(json.LecturerId);
+                Assert.IsNotNull(json.LecturerName);
+                Assert.IsNotNull(json.SubjectId);
+                Assert.IsNotNull(json.RoomId);
+                Assert.IsNotNull(json.Subject);
+            }
+        }
     }
 }
