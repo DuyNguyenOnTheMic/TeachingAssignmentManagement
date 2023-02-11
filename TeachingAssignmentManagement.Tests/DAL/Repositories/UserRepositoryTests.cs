@@ -103,7 +103,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void User_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Act
@@ -113,7 +113,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult[0]);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void User_Data_Should_Be_Indexable_Test()
         {
             // Act
@@ -217,7 +217,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void User_Role_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Arrange
@@ -237,7 +237,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult[0]);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void User_Role_Data_Should_Be_Indexable_Test()
         {
             // Arrange
@@ -286,7 +286,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.AreEqual(listRole.Count(), actionResult.Count());
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void User_Role_Should_Order_By_Id_Test()
         {
             // Arrange
@@ -311,7 +311,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             }
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Find_User_Role_Correctly_Test()
         {
             // Arrange
@@ -378,7 +378,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Lecturer_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Act
@@ -388,7 +388,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult[0]);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Lecturer_Data_Should_Be_Indexable_Test()
         {
             // Act
@@ -440,7 +440,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.AreEqual(2, actionResult.Count());
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Find_Lecturer_Correctly_Test()
         {
             // Arrange
@@ -501,7 +501,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Faculty_Boards_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Act
@@ -511,7 +511,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult[0]);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Faculty_Boards_Data_Should_Be_Indexable_Test()
         {
             // Act

@@ -80,7 +80,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Term_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Act
@@ -90,7 +90,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult[0]);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Term_Data_Should_Be_Indexable_Test()
         {
             // Act
@@ -172,7 +172,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Year_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Act
@@ -182,7 +182,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult[0]);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Year_Data_Should_Be_Indexable_Test()
         {
             // Act
@@ -227,7 +227,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.AreEqual(actionResult[1].schoolyear, yearAfter);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Find_Term_Correctly_Test()
         {
             // Arrange

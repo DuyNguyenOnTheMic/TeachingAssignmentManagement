@@ -920,7 +920,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Get_Check_State_Json_Data_Duplicate_Class_Error_List_Index_At_0_Shoud_Not_Be_Null_Test()
         {
             // Arrange
@@ -939,7 +939,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(classList[0]);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Get_Check_State_Json_Data_Duplicate_Class_Error_List_Should_Be_Indexable_Test()
         {
             // Arrange
@@ -1106,7 +1106,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Get_Check_State_Json_Data_Maximum_Lesson_Error_List_Index_At_0_Shoud_Not_Be_Null_Test()
         {
             // Arrange
@@ -1127,7 +1127,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(classList[0]);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Get_Check_State_Json_Data_Maximum_Lesson_Error_List_Should_Be_Indexable_Test()
         {
             // Arrange
@@ -1296,7 +1296,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Get_Check_State_Json_Data_Maximum_Class_Error_List_Index_At_0_Shoud_Not_Be_Null_Test()
         {
             // Arrange
@@ -1317,7 +1317,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(classList[0]);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Get_Check_State_Json_Data_Maximum_Class_Error_List_Should_Be_Indexable_Test()
         {
             // Arrange
@@ -1489,7 +1489,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Get_Check_State_Json_Data_Different_Campus_Error_List_Index_At_0_Shoud_Not_Be_Null_Test()
         {
             // Arrange
@@ -1510,7 +1510,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(classList[0]);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Get_Check_State_Json_Data_Different_Campus_Error_List_Should_Be_Indexable_Test()
         {
             // Arrange
@@ -1549,7 +1549,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             }
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Get_Check_State_Json_Data_Different_Campus_Should_Return_Success_If_Warning_If_False_Test()
         {
             // Arrange
@@ -1570,7 +1570,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsTrue(jsonCollection.success);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Delete_Class_Test()
         {
             // Arrange
@@ -1586,7 +1586,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Delete_All_Class_Test()
         {
             // Arrange

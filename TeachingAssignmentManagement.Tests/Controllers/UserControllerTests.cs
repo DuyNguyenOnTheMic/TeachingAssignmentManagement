@@ -143,7 +143,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void User_Json_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Arrange
@@ -157,7 +157,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(jsonCollection[0]);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void User_JSon_Data_Should_Be_Indexable_Test()
         {
             // Arrange
@@ -188,7 +188,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             }
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void User_JSon_Data_Count_Should_Be_Equal_Test()
         {
             // Arrange

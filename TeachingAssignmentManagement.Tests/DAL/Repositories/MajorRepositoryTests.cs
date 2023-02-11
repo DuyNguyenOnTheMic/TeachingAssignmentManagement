@@ -81,7 +81,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Major_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Act
@@ -91,7 +91,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult[0]);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Major_Data_Should_Be_Indexable_Test()
         {
             // Act
@@ -131,7 +131,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.AreEqual(actionResult[0].name, "Công Nghệ Thông Tin");
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Find_Major_Correctly_Test()
         {
             // Arrange

@@ -135,7 +135,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Timetable_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Act
@@ -145,7 +145,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult[0]);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Timetable_Data_Should_Be_Indexable_Test()
         {
             // Act
@@ -246,7 +246,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Class_In_Week_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Arrange
@@ -260,7 +260,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult[0]);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Class_In_Week_Data_Should_Be_Indexable_Test()
         {
             // Arrange
@@ -369,7 +369,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Class_In_Week_Data_Index_at_0_Should_Not_Be_Null_When_Week_Have_Zero_Test()
         {
             // Arrange
@@ -383,7 +383,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult[0]);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Class_In_Week_Data_Should_Be_Indexable_When_Week_Have_Zero_Test()
         {
             // Arrange
@@ -480,7 +480,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Assign_Timetable_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Act

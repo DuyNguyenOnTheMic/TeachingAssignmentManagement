@@ -136,7 +136,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Term_Json_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Arrange
@@ -150,7 +150,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(jsonCollection[0]);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Term_JSon_Data_Should_Be_Indexable_Test()
         {
             // Arrange
@@ -236,7 +236,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Create_Should_Be_Failed_When_Term_Exists_Test()
         {
             // Arrange
@@ -298,7 +298,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(model.id, term.id);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Edit_Term_Mock_Test()
         {
             // Arrange
@@ -338,7 +338,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(termEdited.end_year, 2020);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Edit_Term_Status_Mock_Should_Return_Success_When_Status_Is_True()
         {
             // Arrange
@@ -355,7 +355,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Edit_Term_Status_Mock_Should_Return_Success_When_Status_Is_False()
         {
             // Arrange
@@ -394,7 +394,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(termEdited.status, false);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Delete_Term_Test()
         {
             // Arrange
@@ -410,7 +410,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Populate_Years_Not_Null_Test()
         {
             // Arrange
@@ -424,7 +424,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(result);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Populate_Years_List_Should_Be_Countable_Test()
         {
             // Arrange
@@ -443,7 +443,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Populate_Years_List_Should_Start_Correctly_Test()
         {
             // Arrange
@@ -458,7 +458,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(startYear, int.Parse(result[0].Value));
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Populate_Years_List_Should_End_Correctly_Test()
         {
             // Arrange
@@ -473,7 +473,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(endYear, int.Parse(result.Last().Value));
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Populate_Years_List_Total_Count_Correctly_Test()
         {
             // Arrange

@@ -136,7 +136,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsTrue(count > 0);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Major_Json_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Arrange
@@ -150,7 +150,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(jsonCollection[0]);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Major_JSon_Data_Should_Be_Indexable_Test()
         {
             // Arrange
@@ -232,7 +232,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Create_Shoud_Be_Failed_When_Major_Id_Is_Null_Test()
         {
             // Arrange
@@ -247,7 +247,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(true, jsonCollection.error);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Create_Shoud_Be_Failed_When_Major_Name_Is_Null_Test()
         {
             // Arrange
@@ -262,7 +262,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(true, jsonCollection.error);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Create_Shoud_Be_Failed_When_Major_Id_Over_50_Characters_Test()
         {
             // Arrange
@@ -278,7 +278,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(true, jsonCollection.error);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Create_Shoud_Be_Failed_When_Major_Name_Over_255_Characters_Test()
         {
             // Arrange
@@ -294,7 +294,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(true, jsonCollection.error);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Create_Should_Be_Failed_When_Major_Exists_Test()
         {
             // Arrange
@@ -357,7 +357,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(model.name, major.name);
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Edit_Major_Mock_Test()
         {
             // Arrange
@@ -396,7 +396,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(majorEdited.name, "testName");
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void Delete_Major_Test()
         {
             // Arrange
