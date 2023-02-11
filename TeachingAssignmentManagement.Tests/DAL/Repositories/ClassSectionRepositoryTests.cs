@@ -429,5 +429,15 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult);
             Assert.AreEqual(query_classSection.Count(), actionResult.Count);
         }
+
+        [TestMethod()]
+        public void Get_Assign_Timetable_Data_Not_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetAssignTimetable(termId, majorId);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
     }
 }
