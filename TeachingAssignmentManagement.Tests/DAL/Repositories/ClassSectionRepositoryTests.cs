@@ -479,5 +479,15 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert
             Assert.IsTrue(count > 0);
         }
+
+        [TestMethod]
+        public void Assign_Timetable_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetAssignTimetable(termId, majorId).ToList();
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
     }
 }
