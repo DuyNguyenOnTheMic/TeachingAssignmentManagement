@@ -134,7 +134,7 @@
           <Property Name="subject_id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="credits" Type="int" Nullable="false" />
-          <Property Name="language" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="is_foreign" Type="bit" Nullable="false" />
           <Property Name="theoretical_coefficient" Type="float" />
           <Property Name="practice_coefficient" Type="float" />
           <Property Name="term_id" Type="int" Nullable="false" />
@@ -521,7 +521,7 @@
           <Property Name="subject_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="credits" Type="Int32" Nullable="false" />
-          <Property Name="language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="is_foreign" Type="Boolean" Nullable="false" />
           <Property Name="theoretical_coefficient" Type="Double" />
           <Property Name="practice_coefficient" Type="Double" />
           <Property Name="term_id" Type="Int32" Nullable="false" />
@@ -873,7 +873,7 @@
                 <ScalarProperty Name="subject_id" ColumnName="subject_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="credits" ColumnName="credits" />
-                <ScalarProperty Name="language" ColumnName="language" />
+                <ScalarProperty Name="is_foreign" ColumnName="is_foreign" />
                 <ScalarProperty Name="theoretical_coefficient" ColumnName="theoretical_coefficient" />
                 <ScalarProperty Name="practice_coefficient" ColumnName="practice_coefficient" />
                 <ScalarProperty Name="term_id" ColumnName="term_id" />

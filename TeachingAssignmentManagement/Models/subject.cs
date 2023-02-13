@@ -24,7 +24,7 @@ namespace TeachingAssignmentManagement.Models
         public string subject_id { get; set; }
         public string name { get; set; }
         public int credits { get; set; }
-        public string language { get; set; }
+        public bool is_foreign { get; set; }
         public Nullable<double> theoretical_coefficient { get; set; }
         public Nullable<double> practice_coefficient { get; set; }
         public int term_id { get; set; }
