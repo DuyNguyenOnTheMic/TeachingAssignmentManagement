@@ -53,7 +53,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(term term)
+        public ActionResult Create([Bind(Include = "id,start_year,end_year,start_week,start_date,max_lesson,max_class,status")] term term)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(term term)
+        public ActionResult Edit([Bind(Include = "id,start_year,end_year,start_week,start_date,max_lesson,max_class,status")] term term)
         {
             // Update term
             unitOfWork.TermRepository.UpdateTerm(term);
