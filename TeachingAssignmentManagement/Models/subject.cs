@@ -21,6 +21,7 @@ namespace TeachingAssignmentManagement.Models
         }
     
         public string id { get; set; }
+        public string subject_id { get; set; }
         public string name { get; set; }
         public int credits { get; set; }
         public string language { get; set; }

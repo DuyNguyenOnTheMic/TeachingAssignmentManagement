@@ -96,7 +96,7 @@
           <Property Name="lecturer_id" Type="nvarchar" MaxLength="128" />
           <Property Name="term_id" Type="int" Nullable="false" />
           <Property Name="major_id" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="subject_id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="subject_id" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="room_id" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="lecturer">
@@ -130,7 +130,8 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="subject_id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="credits" Type="int" Nullable="false" />
           <Property Name="language" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -471,7 +472,7 @@
           <Property Name="lecturer_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="term_id" Type="Int32" Nullable="false" />
           <Property Name="major_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="subject_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="subject_id" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="room_id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="lecturer" Relationship="Self.FK_class_section_lecturer" FromRole="class_section" ToRole="lecturer" />
           <NavigationProperty Name="lecturer1" Relationship="Self.FK_class_section_lecturer1" FromRole="class_section" ToRole="lecturer" />
@@ -516,7 +517,8 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="subject_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="credits" Type="Int32" Nullable="false" />
           <Property Name="language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -868,6 +870,7 @@
             <EntityTypeMapping TypeName="CP25Team03Model.subject">
               <MappingFragment StoreEntitySet="subject">
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="credits" ColumnName="credits" />
                 <ScalarProperty Name="language" ColumnName="language" />
