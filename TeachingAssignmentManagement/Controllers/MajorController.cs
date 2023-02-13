@@ -41,7 +41,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(major major)
+        public ActionResult Create([Bind(Include = "id,name,abbreviation")] major major)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace TeachingAssignmentManagement.Controllers
             }
             catch
             {
-                return Json(new { error = true }, JsonRequestBehavior.AllowGet);
+                return Json(new { error = true, message = "Mã ngành này đã tồn tại!" }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
@@ -63,7 +63,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(major major)
+        public ActionResult Edit([Bind(Include = "id,name,abbreviation")] major major)
         {
             // Update major
             unitOfWork.MajorRepository.UpdateMajor(major);

@@ -144,7 +144,7 @@ namespace TeachingAssignmentManagement.Controllers
         //
         // POST: /Account/Update
         [HttpPost]
-        public ActionResult Update([Bind(Include = "staff_id, full_name")] lecturer lecturer)
+        public ActionResult Update([Bind(Include = "staff_id,full_name")] lecturer lecturer)
         {
             string userId = UserManager.FindByEmail(User.Identity.Name).Id;
             try
