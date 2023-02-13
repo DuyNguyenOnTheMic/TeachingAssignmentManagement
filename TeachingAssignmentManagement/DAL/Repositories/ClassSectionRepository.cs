@@ -72,7 +72,6 @@ namespace TeachingAssignmentManagement.DAL
                 LecturerName = c.lecturer.full_name,
                 SubjectId = c.subject_id,
                 RoomId = c.room_id,
-                MajorAbb = c.major.abbreviation,
                 Subject = c.subject
             });
         }
@@ -92,7 +91,6 @@ namespace TeachingAssignmentManagement.DAL
                 LecturerName = c.lecturer.full_name,
                 RoomId = c.room_id,
                 MajorName = c.major.name,
-                MajorAbb = c.major.abbreviation,
                 Subject = c.subject
             });
         }

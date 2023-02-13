@@ -18,7 +18,6 @@
         public string SubjectId { get; set; }
         public string RoomId { get; set; }
         public string MajorName { get; set; }
-        public string MajorAbb { get; set; }
         public subject Subject { get; set; }
     }
 }
