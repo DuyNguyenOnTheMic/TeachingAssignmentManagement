@@ -629,5 +629,108 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult);
             Assert.AreEqual(query_classSection.Count(), actionResult.Count);
         }
+
+        [TestMethod()]
+        public void Get_Timetable_Statistics_Data_Not_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableStatistics(termId);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Get_Timetable_Statistics_Data_Is_Correct_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableStatistics(termId).ToList();
+            List<class_section> classSectionList = listClassSection.ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            for (int i = 0; i < classSectionList.Count; i++)
+            {
+                Assert.AreEqual(actionResult[i].ClassSectionId, classSectionList[i].class_section_id);
+                Assert.AreEqual(actionResult[i].Type, classSectionList[i].type);
+                Assert.AreEqual(actionResult[i].Day2, classSectionList[i].day_2);
+                Assert.AreEqual(actionResult[i].StartLesson2, classSectionList[i].start_lesson_2);
+                Assert.AreEqual(actionResult[i].LearnWeek, classSectionList[i].learn_week);
+                Assert.AreEqual(actionResult[i].StartWeek, classSectionList[i].start_week);
+                Assert.AreEqual(actionResult[i].EndWeek, classSectionList[i].end_week);
+                Assert.AreEqual(actionResult[i].LecturerId, classSectionList[i].lecturer_id);
+                Assert.AreEqual(actionResult[i].LecturerName, classSectionList[i].lecturer.full_name);
+                Assert.AreEqual(actionResult[i].RoomId, classSectionList[i].room_id);
+                Assert.AreEqual(actionResult[i].MajorName, classSectionList[i].major.name);
+                Assert.AreEqual(actionResult[i].MajorAbb, classSectionList[i].major.abbreviation);
+                Assert.AreEqual(actionResult[i].Subject, classSectionList[i].subject);
+            }
+        }
+
+        [TestMethod()]
+        public void Timetable_Statistics_Data_Should_Be_IEnumerable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableStatistics(termId).ToList();
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod()]
+        public void Timetable_Statistics_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableStatistics(termId).ToList();
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod()]
+        public void Timetable_Statistics_Data_Should_Be_Indexable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableStatistics(termId).ToList();
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.ClassSectionId);
+                Assert.IsNotNull(json.Type);
+                Assert.IsNotNull(json.Day2);
+                Assert.IsNotNull(json.StartLesson2);
+                Assert.IsNotNull(json.LearnWeek);
+                Assert.IsNotNull(json.StartWeek);
+                Assert.IsNotNull(json.EndWeek);
+                Assert.IsNotNull(json.LecturerId);
+                Assert.IsNotNull(json.LecturerName);
+                Assert.IsNotNull(json.RoomId);
+                Assert.IsNotNull(json.MajorName);
+                Assert.IsNotNull(json.MajorAbb);
+                Assert.IsNotNull(json.Subject);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Timetable_Statistics_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableStatistics(termId).ToList();
+            List<class_section> query_classSection = listClassSection.Where(c => c.term_id == termId).ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
     }
 }
