@@ -64,7 +64,7 @@
         <tbody>
             @foreach (var subject in ViewBag.subjects)
             {
-                <tr id="@subject.id">
+                <tr id="@subject.id" data-abb="@subject.major.abbreviation">
                     <td>@subject.name</td>
                     @foreach (int day in Model.days)
                     {
@@ -83,10 +83,6 @@
                                         <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>@item.ClassSectionId </b>(@item.StudentRegisteredNumber SV)<br /><b>Phòng: </b>@item.RoomId@(item.LastAssigned != null ? "<br /><b>Phân công bởi: </b>" + item.LastAssigned : "")">
                                             <button class="btn @cardClass assign-card text-nowrap my-25 p-25" type="button" id="@item.Id" data-lecturerid="@lecturerId" data-classtype="@item.Type" data-bs-toggle="popover" data-bs-content="@Html.Partial("_Assign", new ViewDataDictionary { { "lecturer", ViewBag.lecturers }, { "classId", item.Id }, { "lecturerId", lecturerId } }).ToString()" title="<span class='class-id'>@item.ClassSectionId</span> (@item.StudentRegisteredNumber SV)" data-bs-delay="160" data-bs-trigger="click">@lecturerName</button>
                                         </div>
-                                        if (item.MajorAbb != null)
-                                        {
-                                            <div class="d-none abb-@subject.id" data-abb="@item.MajorAbb"></div>
-                                        }
                                     }
                                 </td>
                             }

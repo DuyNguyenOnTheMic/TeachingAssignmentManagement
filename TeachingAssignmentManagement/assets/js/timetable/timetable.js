@@ -41,7 +41,7 @@ if (majorId == -1) {
     $('#tblAssign tbody tr').each(function () {
         var $this = $(this);
         var subjectId = $this.attr('id');
-        var majorAbb = $('.abb-' + subjectId).first().data('abb');
+        var majorAbb = $this.data('abb');
         $this.find('td:first').append(' (' + majorAbb + ')');
         subjectFilter.find('option[value="' + subjectId + '"]').append(' (' + majorAbb + ')');
     });
