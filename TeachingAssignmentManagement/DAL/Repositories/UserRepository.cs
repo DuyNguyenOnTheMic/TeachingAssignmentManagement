@@ -42,9 +42,18 @@ namespace TeachingAssignmentManagement.DAL
             return context.AspNetRoles.Find(id);
         }
 
-        public IEnumerable<lecturer> GetLecturers()
+        public IEnumerable<LecturerDTO> GetLecturers()
         {
-            return context.lecturers.Where(l => l.staff_id != null && l.full_name != null && l.status == true).ToList();
+            return (from u in context.AspNetUsers
+                    join l in context.lecturers on u.Id equals l.id into lecturers
+                    from lecturer in lecturers.DefaultIfEmpty()
+                    where u.AspNetRoles.FirstOrDefault().Name != "Chưa phân quyền" && lecturer.staff_id != null && lecturer.full_name != null && lecturer.status == true
+                    select new LecturerDTO
+                    {
+                        Id = lecturer.id,
+                        FullName = lecturer.full_name,
+                        Type = lecturer.type
+                    }).ToList();
         }
 
         public lecturer GetLecturerByID(string id)

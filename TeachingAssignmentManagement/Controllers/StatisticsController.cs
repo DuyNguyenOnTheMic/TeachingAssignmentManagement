@@ -176,10 +176,10 @@ namespace TeachingAssignmentManagement.Controllers
             ViewData["endWeek"] = endWeek;
             ViewData["currentWeek"] = currentWeek;
             ViewData["weekLabel"] = weekLabel;
-            ViewBag.lecturers = unitOfWork.UserRepository.GetLecturers();
             return PartialView("_Timetable", new TimetableViewModels
             {
-                ClassSectionDTOs = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, currentWeek).ToList()
+                ClassSectionDTOs = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, currentWeek).ToList(),
+                LecturerDTOs = unitOfWork.UserRepository.GetLecturers()
             });
         }
 

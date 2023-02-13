@@ -302,6 +302,7 @@
     <Compile Include="Models\lecturer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LecturerDTO.cs" />
     <Compile Include="Models\major.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

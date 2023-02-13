@@ -12,9 +12,9 @@
             <button class="btn btn-warning me-1 my-25 p-25 text-nowrap" type="button">Thực hành</button>
         </div>
         <select class="form-select" id="lecturerFilter" name="lecturerFilter" multiple aria-label="Lọc giảng viên">
-            @foreach (var option in ViewBag.lecturers)
+            @foreach (var option in Model.LecturerDTOs)
             {
-                <option value="@option.id" data-type="@option.type">@option.full_name</option>
+                <option value="@option.Id" data-type="@option.Type">@option.FullName</option>
             }
         </select>
         <select class="form-select" id="lecturerType" name="lecturerType" multiple aria-label="Lọc loại giảng viên">
@@ -64,15 +64,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var lecturer in ViewBag.lecturers)
+            @foreach (var lecturer in Model.LecturerDTOs)
             {
-                <tr id="@lecturer.id" data-type="@lecturer.type">
-                    <td>@lecturer.full_name</td>
+                <tr id="@lecturer.Id" data-type="@lecturer.Type">
+                    <td>@lecturer.FullName</td>
                     @foreach (int day in Model.days)
                     {
                         foreach (int startLesson in Model.startLessons)
                         {
-                            var classes = Model.ClassSectionDTOs.Where(x => x.LecturerId == lecturer.id && x.Day2 == day && x.StartLesson2 == startLesson);
+                            var classes = Model.ClassSectionDTOs.Where(x => x.LecturerId == lecturer.Id && x.Day2 == day && x.StartLesson2 == startLesson);
                             string dividerClass = startLesson == 1 ? "class=table-vertical-divider" : string.Empty;
                             if (classes.Any())
                             {
