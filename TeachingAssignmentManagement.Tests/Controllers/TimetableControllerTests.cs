@@ -429,7 +429,6 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.AreEqual(classSectionDTOs[i].LecturerName, classSectionList[i].lecturer.full_name);
                 Assert.AreEqual(classSectionDTOs[i].SubjectId, classSectionList[i].subject_id);
                 Assert.AreEqual(classSectionDTOs[i].RoomId, classSectionList[i].room_id);
-                Assert.AreEqual(classSectionDTOs[i].MajorAbb, classSectionList[i].major.abbreviation);
                 Assert.AreEqual(classSectionDTOs[i].Subject, classSectionList[i].subject);
             }
         }

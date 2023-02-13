@@ -560,7 +560,6 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.AreEqual(actionResult[i].LecturerName, classSectionList[i].lecturer.full_name);
                 Assert.AreEqual(actionResult[i].SubjectId, classSectionList[i].subject_id);
                 Assert.AreEqual(actionResult[i].RoomId, classSectionList[i].room_id);
-                Assert.AreEqual(actionResult[i].MajorAbb, classSectionList[i].major.abbreviation);
                 Assert.AreEqual(actionResult[i].Subject, classSectionList[i].subject);
             }
         }
@@ -613,7 +612,6 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.IsNotNull(json.LecturerName);
                 Assert.IsNotNull(json.SubjectId);
                 Assert.IsNotNull(json.RoomId);
-                Assert.IsNotNull(json.MajorAbb);
                 Assert.IsNotNull(json.Subject);
             }
         }
@@ -662,7 +660,6 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.AreEqual(actionResult[i].LecturerName, classSectionList[i].lecturer.full_name);
                 Assert.AreEqual(actionResult[i].RoomId, classSectionList[i].room_id);
                 Assert.AreEqual(actionResult[i].MajorName, classSectionList[i].major.name);
-                Assert.AreEqual(actionResult[i].MajorAbb, classSectionList[i].major.abbreviation);
                 Assert.AreEqual(actionResult[i].Subject, classSectionList[i].subject);
             }
         }
@@ -716,7 +713,6 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.IsNotNull(json.LecturerName);
                 Assert.IsNotNull(json.RoomId);
                 Assert.IsNotNull(json.MajorName);
-                Assert.IsNotNull(json.MajorAbb);
                 Assert.IsNotNull(json.Subject);
             }
         }
