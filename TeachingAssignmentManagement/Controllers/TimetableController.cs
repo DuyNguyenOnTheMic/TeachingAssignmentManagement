@@ -331,7 +331,7 @@ namespace TeachingAssignmentManagement.Controllers
                             subject_id = ToNullableString(subjectId),
                             name = ToNullableString(name),
                             credits = ToInt(credits),
-                            is_foreign = false,
+                            is_vietnamese = true,
                             term_id = term,
                             major_id = major
                         };
