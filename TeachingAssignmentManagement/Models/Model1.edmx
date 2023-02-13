@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CP25Team03Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CP25Team03Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -133,6 +133,11 @@
           <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="credits" Type="int" Nullable="false" />
+          <Property Name="language" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="theoretical_coefficient" Type="float" />
+          <Property Name="practice_coefficient" Type="float" />
+          <Property Name="term_id" Type="int" Nullable="false" />
+          <Property Name="major_id" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -285,6 +290,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_subject_major">
+          <End Role="major" Type="Self.major" Multiplicity="1" />
+          <End Role="subject" Type="Self.subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="major">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subject">
+              <PropertyRef Name="major_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_subject_term">
+          <End Role="term" Type="Self.term" Multiplicity="1" />
+          <End Role="subject" Type="Self.subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="term">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subject">
+              <PropertyRef Name="term_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="CP25Team03ModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -339,8 +368,17 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_subject_major" Association="Self.FK_subject_major">
+            <End Role="major" EntitySet="major" />
+            <End Role="subject" EntitySet="subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_subject_term" Association="Self.FK_subject_term">
+            <End Role="term" EntitySet="term" />
+            <End Role="subject" EntitySet="subject" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CP25Team03Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -462,6 +500,7 @@
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="abbreviation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="class_section" Relationship="Self.FK_class_section_major" FromRole="major" ToRole="class_section" />
+          <NavigationProperty Name="subjects" Relationship="Self.FK_subject_major" FromRole="major" ToRole="subject" />
         </EntityType>
         <EntityType Name="room">
           <Key>
@@ -480,7 +519,14 @@
           <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="credits" Type="Int32" Nullable="false" />
+          <Property Name="language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="theoretical_coefficient" Type="Double" />
+          <Property Name="practice_coefficient" Type="Double" />
+          <Property Name="term_id" Type="Int32" Nullable="false" />
+          <Property Name="major_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="class_section" Relationship="Self.FK_class_section_subject" FromRole="subject" ToRole="class_section" />
+          <NavigationProperty Name="major" Relationship="Self.FK_subject_major" FromRole="subject" ToRole="major" />
+          <NavigationProperty Name="term" Relationship="Self.FK_subject_term" FromRole="subject" ToRole="term" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -503,8 +549,9 @@
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="max_lesson" Type="Int32" Nullable="false" />
           <Property Name="max_class" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="class_section" Relationship="Self.FK_class_section_term" FromRole="term" ToRole="class_section" />
           <Property Name="status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="class_section" Relationship="Self.FK_class_section_term" FromRole="term" ToRole="class_section" />
+          <NavigationProperty Name="subjects" Relationship="Self.FK_subject_term" FromRole="term" ToRole="subject" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -606,6 +653,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_subject_major">
+          <End Role="major" Type="Self.major" Multiplicity="1" />
+          <End Role="subject" Type="Self.subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="major">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subject">
+              <PropertyRef Name="major_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_subject_term">
+          <End Role="term" Type="Self.term" Multiplicity="1" />
+          <End Role="subject" Type="Self.subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="term">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="subject">
+              <PropertyRef Name="term_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
@@ -654,6 +725,14 @@
           <AssociationSet Name="FK_class_section_term" Association="Self.FK_class_section_term">
             <End Role="term" EntitySet="terms" />
             <End Role="class_section" EntitySet="class_section" />
+          </AssociationSet>
+          <AssociationSet Name="FK_subject_major" Association="Self.FK_subject_major">
+            <End Role="major" EntitySet="majors" />
+            <End Role="subject" EntitySet="subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_subject_term" Association="Self.FK_subject_term">
+            <End Role="term" EntitySet="terms" />
+            <End Role="subject" EntitySet="subjects" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -791,6 +870,11 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="credits" ColumnName="credits" />
+                <ScalarProperty Name="language" ColumnName="language" />
+                <ScalarProperty Name="theoretical_coefficient" ColumnName="theoretical_coefficient" />
+                <ScalarProperty Name="practice_coefficient" ColumnName="practice_coefficient" />
+                <ScalarProperty Name="term_id" ColumnName="term_id" />
+                <ScalarProperty Name="major_id" ColumnName="major_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -808,7 +892,6 @@
           <EntitySetMapping Name="terms">
             <EntityTypeMapping TypeName="CP25Team03Model.term">
               <MappingFragment StoreEntitySet="term">
-                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="start_year" ColumnName="start_year" />
                 <ScalarProperty Name="end_year" ColumnName="end_year" />
@@ -816,6 +899,7 @@
                 <ScalarProperty Name="start_date" ColumnName="start_date" />
                 <ScalarProperty Name="max_lesson" ColumnName="max_lesson" />
                 <ScalarProperty Name="max_class" ColumnName="max_class" />
+                <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

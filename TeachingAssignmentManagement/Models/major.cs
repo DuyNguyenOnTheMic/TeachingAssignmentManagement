@@ -18,6 +18,7 @@ namespace TeachingAssignmentManagement.Models
         public major()
         {
             this.class_section = new HashSet<class_section>();
+            this.subjects = new HashSet<subject>();
         }
     
         public string id { get; set; }
@@ -26,5 +27,7 @@ namespace TeachingAssignmentManagement.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<class_section> class_section { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<subject> subjects { get; set; }
     }
 }

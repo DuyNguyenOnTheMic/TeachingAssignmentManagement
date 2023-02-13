@@ -23,8 +23,15 @@ namespace TeachingAssignmentManagement.Models
         public string id { get; set; }
         public string name { get; set; }
         public int credits { get; set; }
+        public string language { get; set; }
+        public Nullable<double> theoretical_coefficient { get; set; }
+        public Nullable<double> practice_coefficient { get; set; }
+        public int term_id { get; set; }
+        public string major_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<class_section> class_section { get; set; }
+        public virtual major major { get; set; }
+        public virtual term term { get; set; }
     }
 }
