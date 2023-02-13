@@ -320,15 +320,20 @@ namespace TeachingAssignmentManagement.Controllers
                         return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
                     }
 
-                    subject query_subject = unitOfWork.SubjectRepository.GetSubjectByID(subjectId);
+                    string subjectKey = $"{subjectId}-{term}-{major}";
+                    subject query_subject = unitOfWork.SubjectRepository.GetSubjectByID(subjectKey);
                     if (query_subject == null)
                     {
                         // Create new subject
                         subject subject = new subject()
                         {
-                            id = ToNullableString(subjectId),
+                            id = subjectKey,
+                            subject_id = ToNullableString(subjectId),
                             name = ToNullableString(name),
-                            credits = ToInt(credits)
+                            credits = ToInt(credits),
+                            language = "Tiếng Việt",
+                            term_id = term,
+                            major_id = major
                         };
                         unitOfWork.SubjectRepository.InsertSubject(subject);
                         unitOfWork.Save();
@@ -391,7 +396,7 @@ namespace TeachingAssignmentManagement.Controllers
                         lecturer_id = query_lecturer?.id,
                         term_id = term,
                         major_id = major,
-                        subject_id = ToNullableString(subjectId),
+                        subject_id = subjectKey,
                         room_id = ToNullableString(roomId)
                     };
 
