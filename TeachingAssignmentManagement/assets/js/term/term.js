@@ -85,6 +85,10 @@ $(function () {
     });
 });
 
+function refreshTable() {
+    dataTable.ajax.reload(null, false);
+}
+
 function disableButtons(state) {
     if (state === true) {
         // disable buttons
@@ -115,7 +119,7 @@ function editStatus(id, status) {
         data: { id, status },
         success: function (data) {
             if (data.success) {
-                dataTable.ajax.reload(null, false);
+                refreshTable();
 
                 // Show message when delete succeeded
                 toastr["success"](data.message);
@@ -166,7 +170,7 @@ function submitForm(form) {
             success: function (data) {
                 if (data.success) {
                     popup.dialog('close');
-                    dataTable.ajax.reload(null, false);
+                    refreshTable();
 
                     // Show message when create or edit succeeded
                     toastr["success"](data.message);
@@ -210,7 +214,7 @@ function deleteTerm(id) {
                 url: rootUrl + 'Term/Delete/' + id,
                 success: function (data) {
                     if (data.success) {
-                        dataTable.ajax.reload(null, false);
+                        refreshTable();
 
                         // Show message when delete succeeded
                         toastr["success"](data.message);
