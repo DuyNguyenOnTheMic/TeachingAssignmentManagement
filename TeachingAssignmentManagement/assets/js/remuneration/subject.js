@@ -18,9 +18,12 @@ $(function () {
             deferRender: true,
             columns: [
                 { 'data': '', defaultContent: '' },
-                { 'data': 'id' },
+                { 'data': 'subject_id' },
                 { 'data': 'name' },
-                { 'data': 'abbreviation' },
+                { 'data': 'credits' },
+                { 'data': 'is_vietnamese' },
+                { 'data': 'theoretical_coefficient' },
+                { 'data': 'practice_coefficient' },
                 {
                     'data': 'id', 'render': function (data) {
                         return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + rootUrl + "Remuneration/EditSubject/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a>";

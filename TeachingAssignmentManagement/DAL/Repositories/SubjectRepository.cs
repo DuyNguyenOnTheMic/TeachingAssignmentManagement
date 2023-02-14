@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using TeachingAssignmentManagement.Models;
@@ -16,17 +17,33 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable<subject> GetSubjects(IEnumerable<ClassSectionDTO> classSections)
         {
-            return classSections.Select(c => c.Subject).Distinct().ToList();
+            return classSections.Select(s => s.Subject).Distinct().ToList();
         }
 
-        public IEnumerable<subject> GetSubjects(int termId, string majorId)
+        public IEnumerable GetSubjects(int termId, string majorId)
         {
-            return context.subjects.Where(c => c.term_id == termId && c.major_id == majorId).ToList();
+            return context.subjects.Where(s => s.term_id == termId && s.major_id == majorId).Select(s => new
+            {
+                s.subject_id,
+                s.name,
+                s.credits,
+                s.is_vietnamese,
+                s.theoretical_coefficient,
+                s.practice_coefficient
+            }).ToList();
         }
 
-        public IEnumerable<subject> GetTermSubjects(int termId)
+        public IEnumerable GetTermSubjects(int termId)
         {
-            return context.subjects.Where(c => c.term_id == termId).ToList();
+            return context.subjects.Where(s => s.term_id == termId).Select(s => new
+            {
+                s.subject_id,
+                s.name,
+                s.credits,
+                s.is_vietnamese,
+                s.theoretical_coefficient,
+                s.practice_coefficient
+            }).ToList();
         }
 
         public subject GetSubjectByID(string id)
@@ -41,7 +58,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public void DeleteAllSubjects(int term, string major)
         {
-            context.subjects.RemoveRange(context.subjects.Where(c => c.term_id == term && c.major_id == major));
+            context.subjects.RemoveRange(context.subjects.Where(s => s.term_id == term && s.major_id == major));
         }
 
         public void UpdateSubject(subject subject)

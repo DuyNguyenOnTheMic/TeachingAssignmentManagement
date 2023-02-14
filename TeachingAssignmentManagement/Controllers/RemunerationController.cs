@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
@@ -44,7 +44,7 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public JsonResult GetSubjectData(int termId, string majorId)
         {
-            IEnumerable<subject> query_subjects = majorId != "-1"
+            IEnumerable query_subjects = majorId != "-1"
                 ? unitOfWork.SubjectRepository.GetSubjects(termId, majorId)
                 : unitOfWork.SubjectRepository.GetTermSubjects(termId);
             return Json(query_subjects, JsonRequestBehavior.AllowGet);
