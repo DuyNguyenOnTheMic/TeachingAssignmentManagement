@@ -8,14 +8,24 @@
 {
     @Html.HiddenFor(model => model.id)
 
-    <div class="mb-1">
-        <label class="form-label font-small-4" for="subject_id">Mã môn học: </label>
-        <p class="form-control-static" id="subject_id">@Model.subject_id</p>
+    <div class="row mb-1">
+        <div class="col-6">
+            <label class="form-label font-small-4" for="subject_id">Mã môn học: </label>
+            @Html.EditorFor(model => model.subject_id, new { htmlAttributes = new { @class = "form-control", @aria_label = "Mã môn học", @disabled = "@disabled" } })
+        </div>
+        <div class="col-6">
+            <label class="form-label font-small-4" for="name">Tên môn học: </label>
+            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @aria_label = "Tên môn học", @disabled = "@disabled" } })
+        </div>
     </div>
 
     <div class="mb-1">
-        <label class="form-label font-small-4" for="name">Tên môn học: </label>
-        <p class="form-control-static" id="name">@Model.name</p>
+        <label class="form-label font-small-4" for="name">Ngôn ngữ: </label>
+        <small class="text-muted"><i>(Bỏ chọn nếu ngôn ngữ không phải tiếng Việt)</i></small>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input form-data" type="checkbox" id="is_vietnamese" name="is_vietnamese" checked />
+            <label class="form-check-label" for="is_vietnamese">Tiêng Việt</label>
+        </div>
     </div>
 
     <div class="float-end m-1">

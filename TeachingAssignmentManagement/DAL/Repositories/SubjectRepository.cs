@@ -24,6 +24,7 @@ namespace TeachingAssignmentManagement.DAL
         {
             return context.subjects.Where(s => s.term_id == termId && s.major_id == majorId).Select(s => new
             {
+                s.id,
                 s.subject_id,
                 s.name,
                 s.credits,
@@ -37,6 +38,7 @@ namespace TeachingAssignmentManagement.DAL
         {
             return context.subjects.Where(s => s.term_id == termId).Select(s => new
             {
+                s.id,
                 s.subject_id,
                 s.name,
                 s.credits,
