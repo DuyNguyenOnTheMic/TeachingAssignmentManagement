@@ -37,5 +37,10 @@ namespace TeachingAssignmentManagement.DAL
         {
             context.subjects.Add(subject);
         }
+
+        public void DeleteAllSubjects(int term, string major)
+        {
+            context.subjects.RemoveRange(context.subjects.Where(c => c.term_id == term && c.major_id == major));
+        }
     }
 }

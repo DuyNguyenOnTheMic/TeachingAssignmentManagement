@@ -644,6 +644,7 @@ namespace TeachingAssignmentManagement.Controllers
         {
             // Delete all records in class section table
             unitOfWork.ClassSectionRepository.DeleteAllClasses(term, major);
+            unitOfWork.SubjectRepository.DeleteAllSubjects(term, major);
             unitOfWork.Save();
             TimetableHub.RefreshData(term, major);
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
