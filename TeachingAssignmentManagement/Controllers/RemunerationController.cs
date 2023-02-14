@@ -34,12 +34,20 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetSubjectData(int termId, string majorId)
+        public ActionResult GetSubjectPartial(int termId, string majorId)
+        {
+            ViewData["termId"] = termId;
+            ViewData["majorId"] = majorId;
+            return PartialView("_Subject");
+        }
+
+        [HttpGet]
+        public JsonResult GetSubjectData(int termId, string majorId)
         {
             IEnumerable<subject> query_subjects = majorId != "-1"
                 ? unitOfWork.SubjectRepository.GetSubjects(termId, majorId)
                 : unitOfWork.SubjectRepository.GetTermSubjects(termId);
-            return PartialView("_Subject", query_subjects);
+            return Json(query_subjects, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

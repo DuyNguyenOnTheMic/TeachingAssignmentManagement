@@ -1,7 +1,7 @@
 ﻿var formSelect = $('.form-select'),
     rootUrl = $('#loader').data('request-url'),
     subjectDiv = $('#subjectDiv'),
-    url = rootUrl + 'Remuneration/GetSubjectData';
+    url = rootUrl + 'Remuneration/GetSubjectPartial';
 
 $(function () {
     // Set selected option when form load
