@@ -41,5 +41,20 @@ namespace TeachingAssignmentManagement.Controllers
                 : unitOfWork.SubjectRepository.GetTermSubjects(termId);
             return PartialView("_Subject", query_subjects);
         }
+
+        [HttpGet]
+        public ActionResult EditSubject(string id)
+        {
+            return View(unitOfWork.SubjectRepository.GetSubjectByID(id));
+        }
+
+        [HttpPost]
+        public ActionResult EditSubject([Bind(Include = "id,is_vietnamese,theoretical_coefficient,practice_coefficient")] subject subject)
+        {
+            // Update subject
+            unitOfWork.SubjectRepository.UpdateSubject(subject);
+            unitOfWork.Save();
+            return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

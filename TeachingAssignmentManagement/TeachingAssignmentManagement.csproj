@@ -1231,6 +1231,7 @@
     <Content Include="Views\Account\Lockout.cshtml" />
     <Content Include="Views\Remuneration\Subject.cshtml" />
     <Content Include="Views\Remuneration\_Subject.cshtml" />
+    <Content Include="Views\Remuneration\EditSubject.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
