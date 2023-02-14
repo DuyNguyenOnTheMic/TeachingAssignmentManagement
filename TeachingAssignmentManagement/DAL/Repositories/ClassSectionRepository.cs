@@ -224,9 +224,9 @@ namespace TeachingAssignmentManagement.DAL
             IQueryable<class_section> query_classes = majorId != "-1"
                 ? context.class_section.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer_id == lecturerId)
                 : context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
-            return query_classes.GroupBy(c => c.subject.subject_id).Select(c => new
+            return query_classes.GroupBy(c => c.subject_id).Select(c => new
             {
-                id = c.Key,
+                id = c.FirstOrDefault().subject.subject_id,
                 subject_name = c.FirstOrDefault().subject.name,
                 subject_credits = c.FirstOrDefault().subject.credits,
                 subject_major = c.FirstOrDefault().major.name,
@@ -317,9 +317,9 @@ namespace TeachingAssignmentManagement.DAL
             IQueryable<class_section> query_classes = majorId != "-1"
                 ? context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer_id == lecturerId)
                 : context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id == lecturerId);
-            return query_classes.GroupBy(c => c.subject.subject_id).Select(c => new
+            return query_classes.GroupBy(c => c.subject_id).Select(c => new
             {
-                id = c.Key,
+                id = c.FirstOrDefault().subject.subject_id,
                 subject_name = c.FirstOrDefault().subject.name,
                 subject_credits = c.FirstOrDefault().subject.credits,
                 subject_major = c.FirstOrDefault().major.name,
@@ -334,9 +334,9 @@ namespace TeachingAssignmentManagement.DAL
             IQueryable<class_section> query_classes = context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
             if (!isLesson)
             {
-                return query_classes.GroupBy(c => c.subject.subject_id).Select(c => new
+                return query_classes.GroupBy(c => c.subject_id).Select(c => new
                 {
-                    id = c.Key,
+                    id = c.FirstOrDefault().subject.subject_id,
                     subject_name = c.FirstOrDefault().subject.name,
                     subject_credits = c.FirstOrDefault().subject.credits,
                     subject_major = c.FirstOrDefault().major.name,
@@ -347,9 +347,9 @@ namespace TeachingAssignmentManagement.DAL
             }
             else
             {
-                return query_classes.GroupBy(c => c.subject.subject_id).Select(c => new
+                return query_classes.GroupBy(c => c.subject_id).Select(c => new
                 {
-                    id = c.Key,
+                    id = c.FirstOrDefault().subject.subject_id,
                     subject_name = c.FirstOrDefault().subject.name,
                     subject_credits = c.FirstOrDefault().subject.credits,
                     subject_major = c.FirstOrDefault().major.name,
@@ -370,9 +370,9 @@ namespace TeachingAssignmentManagement.DAL
             IQueryable<class_section> query_classes = context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id == lecturerId);
             if (!isLesson)
             {
-                return query_classes.GroupBy(c => c.subject.subject_id).Select(c => new
+                return query_classes.GroupBy(c => c.subject_id).Select(c => new
                 {
-                    id = c.Key,
+                    id = c.FirstOrDefault().subject.subject_id,
                     subject_name = c.FirstOrDefault().subject.name,
                     subject_credits = c.FirstOrDefault().subject.credits,
                     subject_major = c.FirstOrDefault().major.name,
@@ -383,9 +383,9 @@ namespace TeachingAssignmentManagement.DAL
             }
             else
             {
-                return query_classes.GroupBy(c => c.subject.subject_id).Select(c => new
+                return query_classes.GroupBy(c => c.subject_id).Select(c => new
                 {
-                    id = c.Key,
+                    id = c.FirstOrDefault().subject.subject_id,
                     subject_name = c.FirstOrDefault().subject.name,
                     subject_credits = c.FirstOrDefault().subject.credits,
                     subject_major = c.FirstOrDefault().major.name,
