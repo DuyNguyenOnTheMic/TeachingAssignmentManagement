@@ -20,11 +20,11 @@
     </div>
 
     <div class="mb-1">
-        <label class="form-label font-small-4" for="name">Ngôn ngữ: </label>
+        <label class="form-label font-small-4 mb-50" for="name">Ngôn ngữ: </label>
         <small class="text-muted"><i>(Bỏ chọn nếu ngôn ngữ không phải tiếng Việt)</i></small>
         <div class="form-check form-check-inline">
-            <input class="form-check-input form-data" type="checkbox" id="is_vietnamese" name="is_vietnamese" checked />
-            <label class="form-check-label" for="is_vietnamese">Tiêng Việt</label>
+            @Html.CheckBoxFor(model => model.is_vietnamese, new { @class = "form-check-input form-data" })
+            <label class="form-check-label" for="is_vietnamese">Tiếng Việt</label>
         </div>
     </div>
 
