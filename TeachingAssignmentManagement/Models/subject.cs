@@ -25,8 +25,8 @@ namespace TeachingAssignmentManagement.Models
         public string name { get; set; }
         public int credits { get; set; }
         public bool is_vietnamese { get; set; }
-        public Nullable<double> theoretical_coefficient { get; set; }
-        public Nullable<double> practice_coefficient { get; set; }
+        public Nullable<decimal> theoretical_coefficient { get; set; }
+        public Nullable<decimal> practice_coefficient { get; set; }
         public int term_id { get; set; }
         public string major_id { get; set; }
     

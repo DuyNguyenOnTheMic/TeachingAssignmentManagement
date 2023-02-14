@@ -135,8 +135,8 @@
           <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="credits" Type="int" Nullable="false" />
           <Property Name="is_vietnamese" Type="bit" Nullable="false" />
-          <Property Name="theoretical_coefficient" Type="float" />
-          <Property Name="practice_coefficient" Type="float" />
+          <Property Name="theoretical_coefficient" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="practice_coefficient" Type="decimal" Precision="5" Scale="2" />
           <Property Name="term_id" Type="int" Nullable="false" />
           <Property Name="major_id" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -522,8 +522,8 @@
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="credits" Type="Int32" Nullable="false" />
           <Property Name="is_vietnamese" Type="Boolean" Nullable="false" />
-          <Property Name="theoretical_coefficient" Type="Double" />
-          <Property Name="practice_coefficient" Type="Double" />
+          <Property Name="theoretical_coefficient" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="practice_coefficient" Type="Decimal" Precision="5" Scale="2" />
           <Property Name="term_id" Type="Int32" Nullable="false" />
           <Property Name="major_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="class_section" Relationship="Self.FK_class_section_subject" FromRole="subject" ToRole="class_section" />
