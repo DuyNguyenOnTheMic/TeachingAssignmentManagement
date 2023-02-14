@@ -18,6 +18,16 @@ namespace TeachingAssignmentManagement.DAL
             return classSections.Select(c => c.Subject).Distinct().ToList();
         }
 
+        public IEnumerable<subject> GetSubjects(int termId, string majorId)
+        {
+            return context.subjects.Where(c => c.term_id == termId && c.major_id == majorId).ToList();
+        }
+
+        public IEnumerable<subject> GetTermSubjects(int termId)
+        {
+            return context.subjects.Where(c => c.term_id == termId).ToList();
+        }
+
         public subject GetSubjectByID(string id)
         {
             return context.subjects.Find(id);
