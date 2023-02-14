@@ -1,7 +1,8 @@
 ﻿var profileForm = $('#profile-form'),
     majorForm = $('#major-form'),
     termForm = $('#term-form'),
-    userForm = $('#user-form');
+    userForm = $('#user-form'),
+    subjectForm = $('#subject-form');
 
 // Close dialog on button click
 $('#btnClose').click(function () {
@@ -415,4 +416,29 @@ if (userForm.length) {
             }
         }
     });
+}
+
+if (subjectForm.length) {
+    var counterMin = 1,
+        counterMax = 9.99;
+    // Populate touchspin
+    $('.touchspin').each(function () {
+        var $this = $(this);
+        $this.TouchSpin({
+            min: counterMin,
+            max: counterMax,
+            buttondown_txt: feather.icons['minus'].toSvg(),
+            buttonup_txt: feather.icons['plus'].toSvg()
+        }).on('touchspin.on.startdownspin', function () {
+            $('.bootstrap-touchspin-up').removeClass('disabled-max-min');
+            if ($this.val() == counterMin) {
+                $(this).siblings().find('.bootstrap-touchspin-down').addClass('disabled-max-min');
+            }
+        }).on('touchspin.on.startupspin', function () {
+            $('.bootstrap-touchspin-down').removeClass('disabled-max-min');
+            if ($this.val() == counterMax) {
+                $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
+            }
+        });
+    })
 }
