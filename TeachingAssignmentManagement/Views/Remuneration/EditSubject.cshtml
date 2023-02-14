@@ -32,13 +32,13 @@
         <div class="col-6">
             <label class="form-label font-small-4" for="theoretical_coefficient">Hệ số LT: </label>
             <div class="input-group">
-                <input type="text" class="touchspin" id="theoretical_coefficient" name="theoretical_coefficient" value="1" data-bts-step="0.01" data-bts-decimals="2" aria-label="Nhập hệ số LT" />
+                @Html.EditorFor(model => model.theoretical_coefficient, new { htmlAttributes = new { @class = "touchspin", @aria_label = "Nhập hệ số LT", @data_bts_step = "0.01", @data_bts_decimals = "2" } })
             </div>
         </div>
         <div class="col-6">
             <label class="form-label font-small-4" for="practice_coefficient">Hệ số TH: </label>
             <div class="input-group">
-                <input type="text" class="touchspin" id="practice_coefficient" name="practice_coefficient" value="1" data-bts-step="0.01" data-bts-decimals="2" aria-label="Nhập hệ số TH" />
+                @Html.EditorFor(model => model.practice_coefficient, new { htmlAttributes = new { @class = "touchspin", @aria_label = "Nhập hệ số TH", @data_bts_step = "0.01", @data_bts_decimals = "2" } })
             </div>
         </div>
     </div>

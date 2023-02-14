@@ -424,6 +424,7 @@ if (subjectForm.length) {
     // Populate touchspin
     $('.touchspin').each(function () {
         var $this = $(this);
+        $this.val() || $this.val(counterMin);
         $this.TouchSpin({
             min: counterMin,
             max: counterMax,
