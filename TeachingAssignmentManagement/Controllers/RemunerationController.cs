@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Globalization;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
@@ -57,10 +58,13 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditSubject([Bind(Include = "id,is_vietnamese,theoretical_coefficient,practice_coefficient")] subject subject)
+        public ActionResult EditSubject(string id, bool is_vietnamese, string theoretical_coefficient, string practice_coefficient)
         {
             // Update subject
-            unitOfWork.SubjectRepository.UpdateSubject(subject);
+            subject query_subject = unitOfWork.SubjectRepository.GetSubjectByID(id);
+            query_subject.is_vietnamese = is_vietnamese;
+            query_subject.theoretical_coefficient = decimal.Parse(theoretical_coefficient, CultureInfo.InvariantCulture);
+            query_subject.practice_coefficient = decimal.Parse(practice_coefficient, CultureInfo.InvariantCulture);
             unitOfWork.Save();
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
