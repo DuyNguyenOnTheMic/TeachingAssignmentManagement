@@ -62,5 +62,10 @@ namespace TeachingAssignmentManagement.DAL
         {
             context.subjects.RemoveRange(context.subjects.Where(s => s.term_id == term && s.major_id == major));
         }
+
+        public void EditAllSubjects(int term, string major, string theoretical_coefficient, string practice_coefficient)
+        {
+            context.Database.ExecuteSqlCommand("UPDATE subject SET theoretical_coefficient = {0} WHERE term_id = {1} AND major_id = {2}", theoretical_coefficient, term, major);
+        }
     }
 }

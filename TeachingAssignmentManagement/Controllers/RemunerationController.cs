@@ -81,6 +81,7 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult EditAllSubjects(int termId, string majorId, string theoretical_coefficient, string practice_coefficient)
         {
             // Update all subjects
+            unitOfWork.SubjectRepository.EditAllSubjects(termId, majorId, theoretical_coefficient, practice_coefficient);
             unitOfWork.Save();
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
