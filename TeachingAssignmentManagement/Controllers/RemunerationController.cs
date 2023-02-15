@@ -6,6 +6,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
 {
+    [Authorize(Roles = "BCN khoa, Bộ môn")]
     public class RemunerationController : Controller
     {
         private readonly UnitOfWork unitOfWork;
@@ -84,6 +85,12 @@ namespace TeachingAssignmentManagement.Controllers
             unitOfWork.SubjectRepository.EditAllSubjects(termId, majorId, theoretical_coefficient, practice_coefficient);
             unitOfWork.Save();
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            unitOfWork.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
