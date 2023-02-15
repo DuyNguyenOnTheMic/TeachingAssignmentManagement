@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using TeachingAssignmentManagement.Models;
 
@@ -62,11 +61,6 @@ namespace TeachingAssignmentManagement.DAL
         public void DeleteAllSubjects(int term, string major)
         {
             context.subjects.RemoveRange(context.subjects.Where(s => s.term_id == term && s.major_id == major));
-        }
-
-        public void UpdateSubject(subject subject)
-        {
-            context.Entry(subject).State = EntityState.Modified;
         }
     }
 }
