@@ -14,15 +14,17 @@ namespace TeachingAssignmentManagement.Models
     
     public partial class academic_degree_rank
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public decimal unit_price { get; set; }
-        public decimal vietnamese_coefficient { get; set; }
-        public decimal foreign_coefficient { get; set; }
-        public int start_year { get; set; }
-        public int end_year { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public academic_degree_rank()
+        {
+            this.rank_coefficient = new HashSet<rank_coefficient>();
+        }
+    
+        public string id { get; set; }
         public string academic_degree_id { get; set; }
     
         public virtual academic_degree academic_degree { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<rank_coefficient> rank_coefficient { get; set; }
     }
 }

@@ -26,13 +26,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="unit_price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="vietnamese_coefficient" Type="decimal" Precision="5" Scale="2" Nullable="false" />
-          <Property Name="foreign_coefficient" Type="decimal" Precision="5" Scale="2" Nullable="false" />
-          <Property Name="start_year" Type="int" Nullable="false" />
-          <Property Name="end_year" Type="int" Nullable="false" />
+          <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="academic_degree_id" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetRoles">
@@ -136,6 +130,19 @@
           <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="abbreviation" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rank_coefficient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="int" Nullable="false" />
+          <Property Name="unit_price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="vietnamese_coefficient" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="foreign_coefficient" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="start_year" Type="int" Nullable="false" />
+          <Property Name="end_year" Type="int" Nullable="false" />
+          <Property Name="academic_degree_rank_id" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="room">
           <Key>
@@ -323,6 +330,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_rank_coefficient_academic_degree_rank">
+          <End Role="academic_degree_rank" Type="Self.academic_degree_rank" Multiplicity="1" />
+          <End Role="rank_coefficient" Type="Self.rank_coefficient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="academic_degree_rank">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rank_coefficient">
+              <PropertyRef Name="academic_degree_rank_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_subject_major">
           <End Role="major" Type="Self.major" Multiplicity="1" />
           <End Role="subject" Type="Self.subject" Multiplicity="*" />
@@ -359,6 +378,7 @@
           <EntitySet Name="class_section" EntityType="Self.class_section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lecturer" EntityType="Self.lecturer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="major" EntityType="Self.major" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rank_coefficient" EntityType="Self.rank_coefficient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="room" EntityType="Self.room" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="subject" EntityType="Self.subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -407,6 +427,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_rank_coefficient_academic_degree_rank" Association="Self.FK_rank_coefficient_academic_degree_rank">
+            <End Role="academic_degree_rank" EntitySet="academic_degree_rank" />
+            <End Role="rank_coefficient" EntitySet="rank_coefficient" />
+          </AssociationSet>
           <AssociationSet Name="FK_subject_major" Association="Self.FK_subject_major">
             <End Role="major" EntitySet="major" />
             <End Role="subject" EntitySet="subject" />
@@ -443,15 +467,10 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="unit_price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="vietnamese_coefficient" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
-          <Property Name="foreign_coefficient" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
-          <Property Name="start_year" Type="Int32" Nullable="false" />
-          <Property Name="end_year" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="academic_degree_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="academic_degree" Relationship="Self.FK_academic_degree_rank_academic_degree" FromRole="academic_degree_rank" ToRole="academic_degree" />
+          <NavigationProperty Name="rank_coefficient" Relationship="Self.FK_rank_coefficient_academic_degree_rank" FromRole="academic_degree_rank" ToRole="rank_coefficient" />
         </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
@@ -563,6 +582,20 @@
           <NavigationProperty Name="class_section" Relationship="Self.FK_class_section_major" FromRole="major" ToRole="class_section" />
           <NavigationProperty Name="subjects" Relationship="Self.FK_subject_major" FromRole="major" ToRole="subject" />
         </EntityType>
+        <EntityType Name="rank_coefficient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="Int32" Nullable="false" />
+          <Property Name="unit_price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="vietnamese_coefficient" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="foreign_coefficient" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="start_year" Type="Int32" Nullable="false" />
+          <Property Name="end_year" Type="Int32" Nullable="false" />
+          <Property Name="academic_degree_rank_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="academic_degree_rank" Relationship="Self.FK_rank_coefficient_academic_degree_rank" FromRole="rank_coefficient" ToRole="academic_degree_rank" />
+        </EntityType>
         <EntityType Name="room">
           <Key>
             <PropertyRef Name="id" />
@@ -624,6 +657,18 @@
             </Principal>
             <Dependent Role="academic_degree_rank">
               <PropertyRef Name="academic_degree_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rank_coefficient_academic_degree_rank">
+          <End Role="academic_degree_rank" Type="Self.academic_degree_rank" Multiplicity="1" />
+          <End Role="rank_coefficient" Type="Self.rank_coefficient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="academic_degree_rank">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rank_coefficient">
+              <PropertyRef Name="academic_degree_rank_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -766,6 +811,7 @@
           <EntitySet Name="class_section" EntityType="Self.class_section" />
           <EntitySet Name="lecturers" EntityType="Self.lecturer" />
           <EntitySet Name="majors" EntityType="Self.major" />
+          <EntitySet Name="rank_coefficient" EntityType="Self.rank_coefficient" />
           <EntitySet Name="rooms" EntityType="Self.room" />
           <EntitySet Name="subjects" EntityType="Self.subject" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
@@ -773,6 +819,10 @@
           <AssociationSet Name="FK_academic_degree_rank_academic_degree" Association="Self.FK_academic_degree_rank_academic_degree">
             <End Role="academic_degree" EntitySet="academic_degree" />
             <End Role="academic_degree_rank" EntitySet="academic_degree_rank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rank_coefficient_academic_degree_rank" Association="Self.FK_rank_coefficient_academic_degree_rank">
+            <End Role="academic_degree_rank" EntitySet="academic_degree_rank" />
+            <End Role="rank_coefficient" EntitySet="rank_coefficient" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -847,12 +897,6 @@
             <EntityTypeMapping TypeName="CP25Team03Model.academic_degree_rank">
               <MappingFragment StoreEntitySet="academic_degree_rank">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="unit_price" ColumnName="unit_price" />
-                <ScalarProperty Name="vietnamese_coefficient" ColumnName="vietnamese_coefficient" />
-                <ScalarProperty Name="foreign_coefficient" ColumnName="foreign_coefficient" />
-                <ScalarProperty Name="start_year" ColumnName="start_year" />
-                <ScalarProperty Name="end_year" ColumnName="end_year" />
                 <ScalarProperty Name="academic_degree_id" ColumnName="academic_degree_id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -953,6 +997,20 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="abbreviation" ColumnName="abbreviation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rank_coefficient">
+            <EntityTypeMapping TypeName="CP25Team03Model.rank_coefficient">
+              <MappingFragment StoreEntitySet="rank_coefficient">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="unit_price" ColumnName="unit_price" />
+                <ScalarProperty Name="vietnamese_coefficient" ColumnName="vietnamese_coefficient" />
+                <ScalarProperty Name="foreign_coefficient" ColumnName="foreign_coefficient" />
+                <ScalarProperty Name="start_year" ColumnName="start_year" />
+                <ScalarProperty Name="end_year" ColumnName="end_year" />
+                <ScalarProperty Name="academic_degree_rank_id" ColumnName="academic_degree_rank_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

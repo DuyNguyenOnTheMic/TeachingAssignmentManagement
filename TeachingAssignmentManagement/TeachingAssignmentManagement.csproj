@@ -329,6 +329,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\rank_coefficient.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\room.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

@@ -35,6 +35,7 @@ namespace TeachingAssignmentManagement.Models
         public virtual DbSet<class_section> class_section { get; set; }
         public virtual DbSet<lecturer> lecturers { get; set; }
         public virtual DbSet<major> majors { get; set; }
+        public virtual DbSet<rank_coefficient> rank_coefficient { get; set; }
         public virtual DbSet<room> rooms { get; set; }
         public virtual DbSet<subject> subjects { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
