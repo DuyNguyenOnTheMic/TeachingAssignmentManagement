@@ -33,6 +33,13 @@ $(function () {
 
             columnDefs: [
                 {
+                    // Subject language
+                    targets: 4,
+                    render: function (data) {
+                        return data ? 'Việt' : 'Anh';
+                    }
+                },
+                {
                     searchable: false,
                     orderable: false,
                     targets: [0, 7]
