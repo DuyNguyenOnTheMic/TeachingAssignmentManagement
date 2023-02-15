@@ -1120,6 +1120,7 @@
     <Content Include="assets\images\img_welcome.svg" />
     <Content Include="assets\js\major\major.js" />
     <Content Include="assets\js\major\major.min.js" />
+    <Content Include="assets\js\remuneration\academic-degree.js" />
     <Content Include="assets\js\remuneration\subject-load.js" />
     <Content Include="assets\js\remuneration\subject.js" />
     <Content Include="assets\js\statistics\personal-statistics-load.js" />
