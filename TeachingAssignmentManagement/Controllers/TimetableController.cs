@@ -332,6 +332,8 @@ namespace TeachingAssignmentManagement.Controllers
                             name = ToNullableString(name),
                             credits = ToInt(credits),
                             is_vietnamese = true,
+                            theoretical_coefficient = 1,
+                            practice_coefficient = 1,
                             term_id = term,
                             major_id = major
                         };
