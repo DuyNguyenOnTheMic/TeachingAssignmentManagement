@@ -46,6 +46,7 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public JsonResult GetSubjectData(int termId, string majorId)
         {
+            // Get subjects data from database
             IEnumerable query_subjects = majorId != "-1"
                 ? unitOfWork.SubjectRepository.GetSubjects(termId, majorId)
                 : unitOfWork.SubjectRepository.GetTermSubjects(termId);
@@ -91,6 +92,13 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult AcademicDegree()
         {
             return View();
+        }
+
+        [HttpGet]
+        public JsonResult GetAcademicDegreeData()
+        {
+            // Get Academics, Degrees data from database
+            return Json(unitOfWork.MajorRepository.GetMajors(), JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
