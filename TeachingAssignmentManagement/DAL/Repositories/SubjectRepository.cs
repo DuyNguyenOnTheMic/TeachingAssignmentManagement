@@ -65,7 +65,10 @@ namespace TeachingAssignmentManagement.DAL
 
         public void EditAllSubjects(int term, string major, string theoretical_coefficient, string practice_coefficient)
         {
-            context.Database.ExecuteSqlCommand("UPDATE subject SET theoretical_coefficient = {0} WHERE term_id = {1} AND major_id = {2}", theoretical_coefficient, term, major);
+            string sql = major != "-1"
+                ? "UPDATE subject SET theoretical_coefficient = {0}, practice_coefficient = {1} WHERE term_id = {2} AND major_id = {3}"
+                : "UPDATE subject SET theoretical_coefficient = {0}, practice_coefficient = {1} WHERE term_id = {2}";
+            context.Database.ExecuteSqlCommand(sql, theoretical_coefficient, practice_coefficient, term, major);
         }
     }
 }
