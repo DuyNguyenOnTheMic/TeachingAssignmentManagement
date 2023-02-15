@@ -102,11 +102,13 @@ function setVisibleColumn(state) {
 function disableButtons(state) {
     if (state === true) {
         // disable buttons
+        $('.editAll').prop('disabled', true);
         $('.editRow').each(function () {
             this.style.pointerEvents = 'none';
         });
     } else {
         // enable buttons
+        $('.editAll').prop('disabled', false);
         $('.editRow').each(function () {
             this.style.pointerEvents = 'auto';
         });
