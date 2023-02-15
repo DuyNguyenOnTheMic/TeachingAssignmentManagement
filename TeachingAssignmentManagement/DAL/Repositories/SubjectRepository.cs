@@ -42,6 +42,7 @@ namespace TeachingAssignmentManagement.DAL
                 s.subject_id,
                 s.name,
                 s.credits,
+                major = s.major.name,
                 s.is_vietnamese,
                 s.theoretical_coefficient,
                 s.practice_coefficient

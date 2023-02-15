@@ -21,6 +21,7 @@ $(function () {
                 { 'data': 'subject_id' },
                 { 'data': 'name' },
                 { 'data': 'credits' },
+                { 'data': 'major', defaultContent: '' },
                 { 'data': 'is_vietnamese' },
                 { 'data': 'theoretical_coefficient' },
                 { 'data': 'practice_coefficient' },
@@ -34,7 +35,7 @@ $(function () {
             columnDefs: [
                 {
                     // Subject language
-                    targets: 4,
+                    targets: 5,
                     render: function (data) {
                         return data ? 'Việt' : 'Anh';
                     }
@@ -42,17 +43,20 @@ $(function () {
                 {
                     searchable: false,
                     orderable: false,
-                    targets: [0, 7]
+                    targets: [0, 8]
                 },
-                { className: 'text-center', targets: [0, 3, 4, 5, 6, 7] },
+                { className: 'text-center', targets: [0, 3, 5, 6, 7, 8] },
                 { width: '5%', targets: 0 },
-                { width: '10%', targets: 7 }
+                { width: '10%', targets: 8 }
             ],
             order: [[1, 'asc']],
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
             displayLength: 10,
             lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "tất cả"]],
 
+            initComplete: function () {
+                majorId == '-1' ? setVisibleColumn(true) : setVisibleColumn(false);
+            },
             language: {
                 'url': rootUrl + 'app-assets/language/datatables/vi.json'
             }
@@ -72,6 +76,12 @@ $(function () {
         }
     });
 });
+
+function setVisibleColumn(state) {
+    var table = $('#tblSubject').DataTable();
+    table.column(4).visible(state, state);
+    table.columns.adjust().draw(state); // adjust column sizing and redraw
+}
 
 function disableButtons(state) {
     if (state === true) {
