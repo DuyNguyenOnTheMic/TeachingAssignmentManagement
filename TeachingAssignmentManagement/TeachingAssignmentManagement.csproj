@@ -449,6 +449,8 @@
     <Content Include="app-assets\css\themes\dark-layout.min.css" />
     <Content Include="app-assets\fonts\feather\fonts\feather.svg" />
     <Content Include="app-assets\fonts\feather\iconfont.css" />
+    <Content Include="assets\flags\4x3\us.svg" />
+    <Content Include="assets\flags\4x3\vn.svg" />
     <Content Include="app-assets\fonts\font-awesome\css\font-awesome.css" />
     <Content Include="app-assets\fonts\font-awesome\css\font-awesome.min.css" />
     <Content Include="app-assets\fonts\font-awesome\webfonts\fa-brands-400.svg" />
