@@ -66,6 +66,20 @@ $(function () {
     });
 });
 
+function disableButtons(state) {
+    if (state === true) {
+        // disable buttons
+        $('.editRow').each(function () {
+            this.style.pointerEvents = 'none';
+        });
+    } else {
+        // enable buttons
+        $('.editRow').each(function () {
+            this.style.pointerEvents = 'auto';
+        });
+    }
+}
+
 // Show Edit form
 function popupForm(url) {
     var formDiv = $('<div/>')
@@ -97,16 +111,36 @@ function popupForm(url) {
         });
 }
 
-function disableButtons(state) {
-    if (state === true) {
-        // disable buttons
-        $('.editRow').each(function () {
-            this.style.pointerEvents = 'none';
-        });
-    } else {
-        // enable buttons
-        $('.editRow').each(function () {
-            this.style.pointerEvents = 'auto';
+function submitForm(form) {
+    $.validator.unobtrusive.parse(form);
+
+    if ($(form).valid()) {
+        $.ajax({
+            type: 'POST',
+            url: form.action,
+            data: $(form).serialize(),
+            success: function (data) {
+                if (data.success) {
+                    popup.dialog('close');
+                    dataTable.ajax.reload(null, false);
+
+                    // Show message when create or edit succeeded
+                    toastr["success"](data.message);
+                }
+                else {
+                    // Show message when create failed
+                    Swal.fire({
+                        title: 'Thông báo',
+                        text: data.message,
+                        icon: 'error',
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
+                }
+            }
         });
     }
+    return false;
 }

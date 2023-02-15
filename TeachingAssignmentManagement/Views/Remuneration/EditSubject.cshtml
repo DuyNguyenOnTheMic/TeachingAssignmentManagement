@@ -1,4 +1,5 @@
 ﻿@model TeachingAssignmentManagement.Models.subject
+@using System.Globalization
 
 @{
     Layout = null;
@@ -42,6 +43,8 @@
             </div>
         </div>
     </div>
+
+    @Model.practice_coefficient.ToString(CultureInfo.InvariantCulture)
 
     <div class="float-end m-1">
         <button type="button" class="btn btn-outline-secondary waves-effect me-1" id="btnClose">Huỷ</button>
