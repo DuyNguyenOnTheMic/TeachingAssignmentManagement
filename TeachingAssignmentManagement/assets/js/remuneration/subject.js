@@ -123,7 +123,7 @@ function popupForm(url) {
             popup = formDiv.dialog({
                 autoOpen: true,
                 resizable: false,
-                title: 'Quản lý môn học',
+                title: 'Quản lý thù lao môn học',
                 width: 550,
                 open: function () {
                     // Add close icon class

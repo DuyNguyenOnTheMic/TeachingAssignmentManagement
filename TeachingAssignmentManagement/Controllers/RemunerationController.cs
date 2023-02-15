@@ -87,6 +87,12 @@ namespace TeachingAssignmentManagement.Controllers
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult AcademicDegree()
+        {
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();

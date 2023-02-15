@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Quản lý học hàm, học vị";
+}
+
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper p-0">
+        <div class="content-body">
+            <!-- users list start -->
+            <section class="app-user-list">
+                <!-- list and filter start -->
+                <div class="card">
+                    <div class="card-body border-bottom">
+                        <div class="card-title-wrap">
+                            <h4 class="card-title">@ViewBag.Title</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 user_type"></div>
+                            <div class="col-md-4 user_role"></div>
+                        </div>
+                    </div>
+                    <div class="card-datatable">
+                        <table class="datatables-ajax table table-responsive" id="tblUser">
+                            <thead class="table-light">
+                                <tr>
+                                    <th></th>
+                                    <th>Mã học hàm, học vị</th>
+                                    <th>Tên học hàm, học vị</th>
+                                    <th>Số cấp bậc</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <!-- list and filter end -->
+            </section>
+            <!-- users list ends -->
+        </div>
+    </div>
+</div>
+
+<div id="loader" data-request-url="@Url.Content("~/")"></div>
+
+@section styles {
+    <link href="~/app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/app-assets/vendors/css/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+}
+
+@section scripts {
+    <script src="~/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
+    <script src="~/app-assets/vendors/js/jquery-ui/jquery-ui.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1241,6 +1241,7 @@
     <Content Include="Views\Remuneration\_Subject.cshtml" />
     <Content Include="Views\Remuneration\EditSubject.cshtml" />
     <Content Include="Views\Remuneration\EditAllSubjects.cshtml" />
+    <Content Include="Views\Remuneration\AcademicDegree.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
