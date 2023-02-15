@@ -1232,6 +1232,7 @@
     <Content Include="Views\Remuneration\Subject.cshtml" />
     <Content Include="Views\Remuneration\_Subject.cshtml" />
     <Content Include="Views\Remuneration\EditSubject.cshtml" />
+    <Content Include="Views\Remuneration\EditAllSubject.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

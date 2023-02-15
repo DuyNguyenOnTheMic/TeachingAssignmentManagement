@@ -68,5 +68,11 @@ namespace TeachingAssignmentManagement.Controllers
             unitOfWork.Save();
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public ActionResult EditAllSubject()
+        {
+            return View();
+        }
     }
 }
