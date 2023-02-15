@@ -443,4 +443,42 @@ if (subjectForm.length) {
             }
         });
     })
+
+    // Form validation for subject
+    subjectForm.validate({
+        ignore: [],
+        rules: {
+            theoretical_coefficient: {
+                required: true,
+                number: false,
+                min: counterMin,
+                max: counterMax
+            },
+            practice_coefficient: {
+                required: true,
+                number: false,
+                min: counterMin,
+                max: counterMax
+            }
+        },
+        messages: {
+            theoretical_coefficient: {
+                required: "Bạn chưa nhập số tiết tối đa",
+                min: "Vui lòng nhập lớn hoặc bằng 1",
+                max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
+            },
+            practice_coefficient: {
+                required: "Bạn chưa nhập số lớp tối đa",
+                min: "Vui lòng nhập lớn hoặc bằng 1",
+                max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
+            }
+        },
+        errorPlacement: function (error, element) {
+            if (element.hasClass("touchspin")) {
+                error.insertAfter(element.closest(".bootstrap-touchspin"));
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
 }
