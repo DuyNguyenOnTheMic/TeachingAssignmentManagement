@@ -37,7 +37,7 @@ $(function () {
                     // Subject language
                     targets: 5,
                     render: function (data) {
-                        return data ? 'Việt' : 'Anh';
+                        return data ? '<i class="flag-icon flag-icon-vn me-50"></i>Việt' : '<i class="flag-icon flag-icon-us me-50"></i>Anh';
                     }
                 },
                 {
