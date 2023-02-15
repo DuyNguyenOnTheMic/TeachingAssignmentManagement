@@ -265,6 +265,12 @@
     <Compile Include="Controllers\TermController.cs" />
     <Compile Include="Controllers\TimetableController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Models\academic_degree.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\academic_degree_rank.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

@@ -15,6 +15,26 @@
           <Property Name="Model" Type="varbinary(max)" Nullable="false" />
           <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
+        <EntityType Name="academic_degree">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="academic_degree_rank">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="unit_price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="vietnamese_coefficient" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="foreign_coefficient" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="start_year" Type="int" Nullable="false" />
+          <Property Name="end_year" Type="int" Nullable="false" />
+          <Property Name="academic_degree_id" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -163,6 +183,18 @@
           <Property Name="max_class" Type="int" Nullable="false" />
           <Property Name="status" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_academic_degree_rank_academic_degree">
+          <End Role="academic_degree" Type="Self.academic_degree" Multiplicity="1" />
+          <End Role="academic_degree_rank" Type="Self.academic_degree_rank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="academic_degree">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="academic_degree_rank">
+              <PropertyRef Name="academic_degree_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_class_section_lecturer">
           <End Role="lecturer" Type="Self.lecturer" Multiplicity="0..1" />
           <End Role="class_section" Type="Self.class_section" Multiplicity="*" />
@@ -317,6 +349,8 @@
         </Association>
         <EntityContainer Name="CP25Team03ModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="academic_degree" EntityType="Self.academic_degree" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="academic_degree_rank" EntityType="Self.academic_degree_rank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -329,6 +363,10 @@
           <EntitySet Name="subject" EntityType="Self.subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="term" EntityType="Self.term" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_academic_degree_rank_academic_degree" Association="Self.FK_academic_degree_rank_academic_degree">
+            <End Role="academic_degree" EntitySet="academic_degree" />
+            <End Role="academic_degree_rank" EntitySet="academic_degree_rank" />
+          </AssociationSet>
           <AssociationSet Name="FK_class_section_lecturer" Association="Self.FK_class_section_lecturer">
             <End Role="lecturer" EntitySet="lecturer" />
             <End Role="class_section" EntitySet="class_section" />
@@ -392,6 +430,28 @@
           <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="academic_degree">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="academic_degree_rank" Relationship="Self.FK_academic_degree_rank_academic_degree" FromRole="academic_degree" ToRole="academic_degree_rank" />
+        </EntityType>
+        <EntityType Name="academic_degree_rank">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="unit_price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="vietnamese_coefficient" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="foreign_coefficient" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="start_year" Type="Int32" Nullable="false" />
+          <Property Name="end_year" Type="Int32" Nullable="false" />
+          <Property Name="academic_degree_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="academic_degree" Relationship="Self.FK_academic_degree_rank_academic_degree" FromRole="academic_degree_rank" ToRole="academic_degree" />
         </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
@@ -555,6 +615,18 @@
           <NavigationProperty Name="class_section" Relationship="Self.FK_class_section_term" FromRole="term" ToRole="class_section" />
           <NavigationProperty Name="subjects" Relationship="Self.FK_subject_term" FromRole="term" ToRole="subject" />
         </EntityType>
+        <Association Name="FK_academic_degree_rank_academic_degree">
+          <End Role="academic_degree" Type="Self.academic_degree" Multiplicity="1" />
+          <End Role="academic_degree_rank" Type="Self.academic_degree_rank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="academic_degree">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="academic_degree_rank">
+              <PropertyRef Name="academic_degree_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -685,6 +757,8 @@
         </Association>
         <EntityContainer Name="CP25Team03Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="academic_degree" EntityType="Self.academic_degree" />
+          <EntitySet Name="academic_degree_rank" EntityType="Self.academic_degree_rank" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
@@ -696,6 +770,10 @@
           <EntitySet Name="subjects" EntityType="Self.subject" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="terms" EntityType="Self.term" />
+          <AssociationSet Name="FK_academic_degree_rank_academic_degree" Association="Self.FK_academic_degree_rank_academic_degree">
+            <End Role="academic_degree" EntitySet="academic_degree" />
+            <End Role="academic_degree_rank" EntitySet="academic_degree_rank" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -754,6 +832,28 @@
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
                 <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="academic_degree">
+            <EntityTypeMapping TypeName="CP25Team03Model.academic_degree">
+              <MappingFragment StoreEntitySet="academic_degree">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="academic_degree_rank">
+            <EntityTypeMapping TypeName="CP25Team03Model.academic_degree_rank">
+              <MappingFragment StoreEntitySet="academic_degree_rank">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="unit_price" ColumnName="unit_price" />
+                <ScalarProperty Name="vietnamese_coefficient" ColumnName="vietnamese_coefficient" />
+                <ScalarProperty Name="foreign_coefficient" ColumnName="foreign_coefficient" />
+                <ScalarProperty Name="start_year" ColumnName="start_year" />
+                <ScalarProperty Name="end_year" ColumnName="end_year" />
+                <ScalarProperty Name="academic_degree_id" ColumnName="academic_degree_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

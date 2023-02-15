@@ -26,6 +26,8 @@ namespace TeachingAssignmentManagement.Models
         }
     
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<academic_degree> academic_degree { get; set; }
+        public virtual DbSet<academic_degree_rank> academic_degree_rank { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
