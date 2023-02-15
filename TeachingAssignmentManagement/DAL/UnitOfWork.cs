@@ -6,6 +6,7 @@ namespace TeachingAssignmentManagement.DAL
     public class UnitOfWork : IDisposable
     {
         private readonly CP25Team03Entities context;
+        private AcademicDegreeRepository academicDegreeRepository;
         private ClassSectionRepository classSectionRepository;
         private SubjectRepository subjectRepository;
         private MajorRepository majorRepository;
@@ -16,6 +17,18 @@ namespace TeachingAssignmentManagement.DAL
         public UnitOfWork(CP25Team03Entities context)
         {
             this.context = context;
+        }
+
+        public AcademicDegreeRepository AcademicDegreeRepository
+        {
+            get
+            {
+                if (academicDegreeRepository == null)
+                {
+                    academicDegreeRepository = new AcademicDegreeRepository(context);
+                }
+                return academicDegreeRepository;
+            }
         }
 
         public ClassSectionRepository ClassSectionRepository
