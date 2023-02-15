@@ -70,9 +70,19 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditAllSubject()
+        public ActionResult EditAllSubjects(int termId, string majorId)
         {
+            ViewData["termId"] = termId;
+            ViewData["majorId"] = majorId;
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditAllSubjects(int termId, string majorId, string theoretical_coefficient, string practice_coefficient)
+        {
+            // Update all subjects
+            unitOfWork.Save();
+            return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
     }
 }

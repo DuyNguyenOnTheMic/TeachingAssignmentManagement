@@ -2,8 +2,10 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("EditAllSubject", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "subject-form" }))
+@using (Html.BeginForm("EditAllSubjects", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "subject-form" }))
 {
+    @Html.Hidden("termId")
+    @Html.Hidden("majorId")
     <div class="row mb-1">
         <div class="col-6">
             <label class="form-label font-small-4" for="theoretical_coefficient">Hệ số LT: </label>
