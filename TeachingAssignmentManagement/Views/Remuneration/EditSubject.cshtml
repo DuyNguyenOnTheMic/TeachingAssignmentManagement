@@ -33,18 +33,16 @@
         <div class="col-6">
             <label class="form-label font-small-4" for="theoretical_coefficient">Hệ số LT: </label>
             <div class="input-group">
-                @Html.EditorFor(model => model.theoretical_coefficient, new { htmlAttributes = new { @class = "touchspin", @aria_label = "Nhập hệ số LT", @data_bts_step = "0.01", @data_bts_decimals = "2" } })
+                <input type="text" class="touchspin" id="theoretical_coefficient" name="theoretical_coefficient" value="@Model.theoretical_coefficient.ToString(CultureInfo.InvariantCulture)" data-bts-step="0.01" data-bts-decimals="2" aria-label="Nhập hệ số LT" />
             </div>
         </div>
         <div class="col-6">
             <label class="form-label font-small-4" for="practice_coefficient">Hệ số TH: </label>
             <div class="input-group">
-                @Html.EditorFor(model => model.practice_coefficient, new { htmlAttributes = new { @class = "touchspin", @aria_label = "Nhập hệ số TH", @data_bts_step = "0.01", @data_bts_decimals = "2" } })
+                <input type="text" class="touchspin" id="practice_coefficient" name="practice_coefficient" value="@Model.practice_coefficient.ToString(CultureInfo.InvariantCulture)" data-bts-step="0.01" data-bts-decimals="2" aria-label="Nhập hệ số TH" />
             </div>
         </div>
     </div>
-
-    @Model.practice_coefficient.ToString(CultureInfo.InvariantCulture)
 
     <div class="float-end m-1">
         <button type="button" class="btn btn-outline-secondary waves-effect me-1" id="btnClose">Huỷ</button>
