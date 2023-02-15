@@ -428,6 +428,7 @@ if (subjectForm.length) {
         $this.TouchSpin({
             min: counterMin,
             max: counterMax,
+            forcestepdivisibility: 'none',
             buttondown_txt: feather.icons['minus'].toSvg(),
             buttonup_txt: feather.icons['plus'].toSvg()
         }).on('touchspin.on.startdownspin', function () {
