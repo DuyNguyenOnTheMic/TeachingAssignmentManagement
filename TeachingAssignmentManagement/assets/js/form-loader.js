@@ -3,7 +3,8 @@
     termForm = $('#term-form'),
     userForm = $('#user-form'),
     subjectForm = $('#subject-form'),
-    academicDegreeForm = $('#academicdegree-form');
+    academicDegreeForm = $('#academicdegree-form'),
+    academicDegreeRankForm = $('#academicdegreerank-form');
 
 // Close dialog on button click
 $('#btnClose').click(function () {
@@ -338,23 +339,7 @@ if (termForm.length) {
 }
 
 if (userForm.length) {
-    var select = $('.form-data');
-    // select2
-    select.each(function () {
-        var $this = $(this);
-        $this.wrap('<div class="position-relative"></div>');
-        $this
-            .select2({
-                placeholder: $this[0][0].innerHTML,
-                minimumResultsForSearch: Infinity,
-                forceabove: true,
-                dropdownParent: $this.parent()
-            })
-            .change(function () {
-                $(this).valid();
-            });
-    });
-
+    populateSelect2();
     // Create custom email check for VLU
     var email_domain = ["vlu.edu", "vanlanguni"]
     var regexpEmail = "^[A-Za-z0-9._%+-]+@(" + email_domain[0] + "|" + email_domain[1] + ").vn$";
@@ -509,5 +494,58 @@ if (academicDegreeForm.length) {
                 maxlength: "Tối đa 100 kí tự được cho phép"
             }
         }
+    });
+}
+
+if (academicDegreeRankForm.length) {
+    populateSelect2();
+    // Form validation for academic degree rank form
+    academicDegreeRankForm.validate({
+        rules: {
+            id: {
+                required: true,
+                idCheck: true,
+                maxlength: 50
+            },
+            academic_degree_id: {
+                required: true
+            }
+        },
+        messages: {
+            id: {
+                required: "Bạn chưa nhập mã cấp bậc",
+                idCheck: "Chỉ được nhập số-chữ không dấu và không có khoảng trắng!",
+                maxlength: "Tối đa 50 kí tự được cho phép"
+            },
+            academic_degree_id: {
+                required: "Bạn chưa chọn học hàm, học vị"
+            }
+        },
+        errorPlacement: function (error, element) {
+            if (element.hasClass("form-data")) {
+                error.insertAfter(element.siblings(".select2"));
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+}
+
+function populateSelect2() {
+    var select = $('.form-data');
+    // select2
+    select.each(function () {
+        var $this = $(this);
+        $this.wrap('<div class="position-relative"></div>');
+        $this
+            .select2({
+                placeholder: $this[0][0].innerHTML,
+                minimumResultsForSearch: Infinity,
+                forceabove: true,
+                dropdownParent: $this.parent()
+            })
+            .change(function () {
+                $(this).valid();
+            });
     });
 }
