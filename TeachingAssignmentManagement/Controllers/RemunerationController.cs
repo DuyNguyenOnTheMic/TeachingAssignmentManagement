@@ -98,7 +98,7 @@ namespace TeachingAssignmentManagement.Controllers
         public JsonResult GetAcademicDegreeData()
         {
             // Get Academics, Degrees data from database
-            return Json(unitOfWork.MajorRepository.GetMajors(), JsonRequestBehavior.AllowGet);
+            return Json(unitOfWork.AcademicDegreeRepository.GetAcademicDegrees(), JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
