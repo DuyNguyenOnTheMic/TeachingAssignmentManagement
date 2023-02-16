@@ -155,6 +155,19 @@ namespace TeachingAssignmentManagement.Controllers
             return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult AcademicDegreeRank()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public JsonResult GetAcademicDegreeRankData()
+        {
+            // Get Academic, Degree ranks data from database
+            return Json(unitOfWork.AcademicDegreeRepository.GetAcademicDegrees(), JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
