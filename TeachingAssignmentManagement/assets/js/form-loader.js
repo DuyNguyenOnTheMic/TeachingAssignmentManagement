@@ -310,17 +310,17 @@ if (termForm.length) {
             },
             start_week: {
                 required: "Bạn chưa nhập tuần bắt đầu",
-                min: "Vui lòng nhập lớn hoặc bằng 1",
+                min: "Vui lòng nhập lớn hơn hoặc bằng 1",
                 max: "Vui lòng nhập nhỏ hơn hoặc bằng 52"
             },
             max_lesson: {
                 required: "Bạn chưa nhập số tiết tối đa",
-                min: "Vui lòng nhập lớn hoặc bằng 3",
+                min: "Vui lòng nhập lớn hơn hoặc bằng 3",
                 max: "Vui lòng nhập nhỏ hơn hoặc bằng 15"
             },
             max_class: {
                 required: "Bạn chưa nhập số lớp tối đa",
-                min: "Vui lòng nhập lớn hoặc bằng 1",
+                min: "Vui lòng nhập lớn hơn hoặc bằng 1",
                 max: "Vui lòng nhập nhỏ hơn hoặc bằng 30"
             }
         },
@@ -466,12 +466,12 @@ if (subjectForm.length) {
         messages: {
             theoretical_coefficient: {
                 required: "Bạn chưa nhập số tiết tối đa",
-                min: "Vui lòng nhập lớn hoặc bằng 1",
+                min: "Vui lòng nhập lớn hơn hoặc bằng 1",
                 max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
             },
             practice_coefficient: {
                 required: "Bạn chưa nhập số lớp tối đa",
-                min: "Vui lòng nhập lớn hoặc bằng 1",
+                min: "Vui lòng nhập lớn hơn hoặc bằng 1",
                 max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
             }
         },
@@ -486,8 +486,32 @@ if (subjectForm.length) {
 }
 
 if (academicDegreeForm.length) {
+    var counterMin = 1,
+        counterMax = 100;
+    // Populate touchspin
+    $('.touchspin').each(function () {
+        var $this = $(this);
+        $this.TouchSpin({
+            min: counterMin,
+            max: counterMax,
+            buttondown_txt: feather.icons['minus'].toSvg(),
+            buttonup_txt: feather.icons['plus'].toSvg()
+        }).on('touchspin.on.startdownspin', function () {
+            $('.bootstrap-touchspin-up').removeClass('disabled-max-min');
+            if ($this.val() == counterMin) {
+                $(this).siblings().find('.bootstrap-touchspin-down').addClass('disabled-max-min');
+            }
+        }).on('touchspin.on.startupspin', function () {
+            $('.bootstrap-touchspin-down').removeClass('disabled-max-min');
+            if ($this.val() == counterMax) {
+                $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
+            }
+        });
+    })
+
     // Form validation for academic degree form
     academicDegreeForm.validate({
+        ignore: [],
         rules: {
             id: {
                 required: true,
@@ -497,6 +521,12 @@ if (academicDegreeForm.length) {
             name: {
                 required: true,
                 maxlength: 100
+            },
+            level: {
+                required: true,
+                number: false,
+                min: counterMin,
+                max: counterMax
             }
         },
         messages: {
@@ -508,6 +538,18 @@ if (academicDegreeForm.length) {
             name: {
                 required: "Bạn chưa nhập tên học hàm, học vị",
                 maxlength: "Tối đa 100 kí tự được cho phép"
+            },
+            level: {
+                required: "Bạn chưa nhập thứ tự",
+                min: "Vui lòng nhập lớn hơn hoặc bằng 1",
+                max: "Vui lòng nhập nhỏ hơn hoặc bằng 100"
+            }
+        },
+        errorPlacement: function (error, element) {
+            if (element.hasClass("touchspin")) {
+                error.insertAfter(element.closest(".bootstrap-touchspin"));
+            } else {
+                error.insertAfter(element);
             }
         }
     });
