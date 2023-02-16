@@ -4,7 +4,7 @@ var rootUrl = $('#loader').data('request-url');
 $(function () {
     'use strict';
 
-    // Populate Major datatable
+    // Populate Academic Degree datatable
     dataTable = $('#tblAcademicDegree').DataTable(
         {
             ajax: {
@@ -18,7 +18,6 @@ $(function () {
                 { 'data': '', defaultContent: '' },
                 { 'data': 'id' },
                 { 'data': 'name' },
-                { 'data': 'abbreviation' },
                 {
                     'data': 'id', 'render': function (data) {
                         return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + rootUrl + "Major/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a><a class='deleteRow text-danger p-0' data-original-title='Xoá' title='Xoá' onclick=deleteMajor('" + data + "') ><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
@@ -31,10 +30,10 @@ $(function () {
                     searchable: false,
                     orderable: false,
                     className: 'text-center',
-                    targets: [0, 4]
+                    targets: [0, 3]
                 },
                 { width: '5%', targets: 0 },
-                { width: '10%', targets: 4 }
+                { width: '10%', targets: 3 }
             ],
             order: [[1, 'asc']],
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
@@ -42,10 +41,10 @@ $(function () {
             lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "tất cả"]],
             buttons: [
                 {
-                    text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Thêm ngành mới',
+                    text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Thêm HH, HV mới',
                     className: 'createNew btn btn-primary',
                     attr: {
-                        'onclick': "popupForm('" + rootUrl + "Major/Create')"
+                        'onclick': "popupForm('" + rootUrl + "Remuneration/CreateAcademicDegree')"
                     },
                     init: function (api, node, config) {
                         $(node).removeClass('btn-secondary');
@@ -113,7 +112,7 @@ function popupForm(url) {
             popup = formDiv.dialog({
                 autoOpen: true,
                 resizable: false,
-                title: 'Quản lý ngành học',
+                title: 'Quản lý học hàm, học vị',
                 width: 550,
                 open: function () {
                     // Add close icon class
@@ -171,7 +170,7 @@ function submitForm(form) {
 function deleteMajor(id) {
     Swal.fire({
         title: 'Thông báo',
-        text: 'Bạn có chắc muốn xoá ngành này?',
+        text: 'Bạn có chắc muốn xoá học hàm, học vị này?',
         icon: 'warning',
         showCancelButton: true,
         cancelButtonText: 'Huỷ',
@@ -186,7 +185,7 @@ function deleteMajor(id) {
             // Delete item
             $.ajax({
                 type: 'POST',
-                url: rootUrl + 'Major/Delete/' + id,
+                url: rootUrl + 'Remuneration/DeleteAcademicDegree/' + id,
                 success: function (data) {
                     if (data.success) {
                         refreshTable();
