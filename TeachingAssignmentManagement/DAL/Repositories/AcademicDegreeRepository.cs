@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Data.Entity;
 using System.Linq;
 using TeachingAssignmentManagement.Models;
 
@@ -30,6 +31,17 @@ namespace TeachingAssignmentManagement.DAL
         public void InsertAcademicDegree(academic_degree academicDegree)
         {
             context.academic_degree.Add(academicDegree);
+        }
+
+        public void DeleteAcademicDegree(string academicDegreeId)
+        {
+            academic_degree academicDegree = context.academic_degree.Find(academicDegreeId);
+            context.academic_degree.Remove(academicDegree);
+        }
+
+        public void UpdateAcademicDegree(academic_degree academicDegree)
+        {
+            context.Entry(academicDegree).State = EntityState.Modified;
         }
     }
 }
