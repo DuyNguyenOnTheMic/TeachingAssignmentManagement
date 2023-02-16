@@ -109,7 +109,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateAcademicDegree([Bind(Include = "id,name,abbreviation")] academic_degree academicDegree)
+        public ActionResult CreateAcademicDegree([Bind(Include = "id,name")] academic_degree academicDegree)
         {
             try
             {
@@ -122,6 +122,21 @@ namespace TeachingAssignmentManagement.Controllers
                 return Json(new { error = true, message = "Mã học hàm, học vị này đã tồn tại!" }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult EditAcademicDegree(string id)
+        {
+            return View(unitOfWork.AcademicDegreeRepository.GetAcademicDegreeByID(id));
+        }
+
+        [HttpPost]
+        public ActionResult EditAcademicDegree([Bind(Include = "id,name")] academic_degree academicDegree)
+        {
+            // Update academic degree
+            unitOfWork.AcademicDegreeRepository.UpdateAcademicDegree(academicDegree);
+            unitOfWork.Save();
+            return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

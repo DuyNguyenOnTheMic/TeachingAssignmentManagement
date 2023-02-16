@@ -20,7 +20,7 @@ $(function () {
                 { 'data': 'name' },
                 {
                     'data': 'id', 'render': function (data) {
-                        return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + rootUrl + "Major/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a><a class='deleteRow text-danger p-0' data-original-title='Xoá' title='Xoá' onclick=deleteMajor('" + data + "') ><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
+                        return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + rootUrl + "Remuneration/EditAcademicDegree/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a><a class='deleteRow text-danger p-0' data-original-title='Xoá' title='Xoá' onclick=deleteAcademicDegree('" + data + "') ><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
                     }
                 }
             ],
@@ -167,7 +167,7 @@ function submitForm(form) {
     return false;
 }
 
-function deleteMajor(id) {
+function deleteAcademicDegree(id) {
     Swal.fire({
         title: 'Thông báo',
         text: 'Bạn có chắc muốn xoá học hàm, học vị này?',
