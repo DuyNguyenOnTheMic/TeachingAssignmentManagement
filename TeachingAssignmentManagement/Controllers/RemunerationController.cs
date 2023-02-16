@@ -49,7 +49,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateAcademicDegree([Bind(Include = "id,name")] academic_degree academicDegree)
+        public ActionResult CreateAcademicDegree([Bind(Include = "id,name,level")] academic_degree academicDegree)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditAcademicDegree([Bind(Include = "id,name")] academic_degree academicDegree)
+        public ActionResult EditAcademicDegree([Bind(Include = "id,name,level")] academic_degree academicDegree)
         {
             // Update academic degree
             unitOfWork.AcademicDegreeRepository.UpdateAcademicDegree(academicDegree);

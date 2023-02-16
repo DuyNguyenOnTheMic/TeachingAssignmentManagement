@@ -21,7 +21,7 @@ namespace TeachingAssignmentManagement.DAL
                 a.id,
                 a.name,
                 a.level
-            }).ToList();
+            }).OrderByDescending(a => a.level).ToList();
         }
 
         public academic_degree GetAcademicDegreeByID(string id)
