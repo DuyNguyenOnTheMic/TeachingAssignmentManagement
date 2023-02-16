@@ -79,7 +79,7 @@
                         @switch (roleName)
                         {
                             case "BCN khoa":
-                                <li class="nav-item @(ViewBag.Title == "Quản lý ngành" ? "active" : "")">
+                                <li class="nav-item @(ViewBag.Title == "Quản lý ngành" ? "active" : string.Empty)">
                                     <a class="d-flex align-items-center" href="@Url.Action("Index", "Term")"><i class="feather feather-layers"></i><span class="menu-title text-truncate">Học kỳ và ngành</span></a>
                                 </li>
                                 <li class="nav-item">
@@ -102,11 +102,11 @@
                                 <li class="nav-item">
                                     <a class="d-flex align-items-center" href="#"><i class="feather feather-dollar-sign"></i><span class="menu-title text-truncate">Thù lao</span></a>
                                     <ul class="menu-content">
-                                        <li>
-                                            <a class="d-flex align-items-center" href="@Url.Action("Subject", "Remuneration")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Môn học</span></a>
+                                        <li class="@(ViewBag.Title == "Quản lý cấp bậc" ? "active" : string.Empty)">
+                                            <a class="d-flex align-items-center" href="@Url.Action("AcademicDegree", "Remuneration")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Học hàm, học vị</span></a>
                                         </li>
                                         <li>
-                                            <a class="d-flex align-items-center" href="@Url.Action("AcademicDegree", "Remuneration")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Học hàm, học vị</span></a>
+                                            <a class="d-flex align-items-center" href="@Url.Action("Subject", "Remuneration")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Môn học</span></a>
                                         </li>
                                     </ul>
                                 </li>

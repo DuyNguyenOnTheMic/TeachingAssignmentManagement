@@ -28,6 +28,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration = 600, VaryByCustom = "userName")]
         public ActionResult AcademicDegree()
         {
             return View();
@@ -95,6 +96,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration = 600, VaryByCustom = "userName")]
         public ActionResult AcademicDegreeRank()
         {
             return View();
