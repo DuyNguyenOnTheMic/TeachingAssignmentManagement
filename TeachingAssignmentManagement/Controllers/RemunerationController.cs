@@ -101,6 +101,29 @@ namespace TeachingAssignmentManagement.Controllers
             return Json(unitOfWork.AcademicDegreeRepository.GetAcademicDegrees(), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        [OutputCache(Duration = 600, VaryByParam = "none")]
+        public ActionResult CreateAcademicDegree()
+        {
+            return View(new academic_degree());
+        }
+
+        [HttpPost]
+        public ActionResult CreateAcademicDegree([Bind(Include = "id,name,abbreviation")] academic_degree academicDegree)
+        {
+            try
+            {
+                // Create new academic degree
+                unitOfWork.AcademicDegreeRepository.InsertAcademicDegree(academicDegree);
+                unitOfWork.Save();
+            }
+            catch
+            {
+                return Json(new { error = true, message = "Mã học hàm, học vị này đã tồn tại!" }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();

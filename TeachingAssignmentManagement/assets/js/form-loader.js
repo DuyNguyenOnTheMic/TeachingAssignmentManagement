@@ -2,7 +2,8 @@
     majorForm = $('#major-form'),
     termForm = $('#term-form'),
     userForm = $('#user-form'),
-    subjectForm = $('#subject-form');
+    subjectForm = $('#subject-form'),
+    academicDegreeForm = $('#academicdegree-form');
 
 // Close dialog on button click
 $('#btnClose').click(function () {
@@ -478,6 +479,34 @@ if (subjectForm.length) {
                 error.insertAfter(element.closest(".bootstrap-touchspin"));
             } else {
                 error.insertAfter(element);
+            }
+        }
+    });
+}
+
+if (academicDegreeForm.length) {
+    // Form validation for academic degree form
+    academicDegreeForm.validate({
+        rules: {
+            id: {
+                required: true,
+                idCheck: true,
+                maxlength: 50
+            },
+            name: {
+                required: true,
+                maxlength: 100
+            }
+        },
+        messages: {
+            id: {
+                required: "Bạn chưa nhập mã học hàm, học vị",
+                idCheck: "Chỉ được nhập số-chữ không dấu và không có khoảng trắng!",
+                maxlength: "Tối đa 50 kí tự được cho phép"
+            },
+            name: {
+                required: "Bạn chưa nhập tên học hàm, học vị",
+                maxlength: "Tối đa 100 kí tự được cho phép"
             }
         }
     });

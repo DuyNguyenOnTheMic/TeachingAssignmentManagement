@@ -21,5 +21,15 @@ namespace TeachingAssignmentManagement.DAL
                 a.name
             }).ToList();
         }
+
+        public academic_degree GetAcademicDegreeByID(string id)
+        {
+            return context.academic_degree.Find(id);
+        }
+
+        public void InsertAcademicDegree(academic_degree academicDegree)
+        {
+            context.academic_degree.Add(academicDegree);
+        }
     }
 }
