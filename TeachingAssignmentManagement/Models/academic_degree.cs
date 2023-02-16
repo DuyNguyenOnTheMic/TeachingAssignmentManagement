@@ -22,6 +22,7 @@ namespace TeachingAssignmentManagement.Models
     
         public string id { get; set; }
         public string name { get; set; }
+        public int level { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<academic_degree_rank> academic_degree_rank { get; set; }

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="33320b89ab7d4dc99cc11882b389b272" Name="Diagram1">
+      <Diagram DiagramId="69a5b6524211423693ce21236d2df512" Name="Diagram1">
         <EntityTypeShape EntityType="CP25Team03Model.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CP25Team03Model.academic_degree" Width="1.5" PointX="8.75" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CP25Team03Model.academic_degree_rank" Width="1.5" PointX="11" PointY="7.5" IsExpanded="true" />

@@ -21,6 +21,7 @@
           </Key>
           <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="level" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="academic_degree_rank">
           <Key>
@@ -461,6 +462,7 @@
           </Key>
           <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="level" Type="Int32" Nullable="false" />
           <NavigationProperty Name="academic_degree_rank" Relationship="Self.FK_academic_degree_rank_academic_degree" FromRole="academic_degree" ToRole="academic_degree_rank" />
         </EntityType>
         <EntityType Name="academic_degree_rank">
@@ -890,6 +892,7 @@
               <MappingFragment StoreEntitySet="academic_degree">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="level" ColumnName="level" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
