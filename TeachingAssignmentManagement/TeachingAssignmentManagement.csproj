@@ -1256,6 +1256,7 @@
     <Content Include="Views\Remuneration\EditAcademicDegree.cshtml" />
     <Content Include="Views\Remuneration\AcademicDegreeRank.cshtml" />
     <Content Include="Views\Remuneration\CreateAcademicDegreeRank.cshtml" />
+    <Content Include="Views\Remuneration\EditAcademicDegreeRank.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

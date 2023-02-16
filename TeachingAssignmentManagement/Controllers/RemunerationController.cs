@@ -133,6 +133,39 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        public ActionResult EditAcademicDegreeRank(string id)
+        {
+            academic_degree_rank academicDegreeRank = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankByID(id);
+            ViewData["academic_degree_id"] = new SelectList(unitOfWork.AcademicDegreeRepository.GetAcademicDegrees(), "id", "name", academicDegreeRank.academic_degree_id);
+            return View(academicDegreeRank);
+        }
+
+        [HttpPost]
+        public ActionResult EditAcademicDegreeRank([Bind(Include = "id,academic_degree_id")] academic_degree_rank academicDegreeRank)
+        {
+            // Update academic degree rank
+            unitOfWork.AcademicDegreeRankRepository.UpdateAcademicDegreeRank(academicDegreeRank);
+            unitOfWork.Save();
+            return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteAcademicDegreeRank(string id)
+        {
+            try
+            {
+                // Delete academic degree rank
+                unitOfWork.AcademicDegreeRankRepository.DeleteAcademicDegreeRank(id);
+                unitOfWork.Save();
+            }
+            catch
+            {
+                return Json(new { error = true, message = "Không thể xoá do cấp bậc này đã có dữ liệu!" }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public ActionResult Subject()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
