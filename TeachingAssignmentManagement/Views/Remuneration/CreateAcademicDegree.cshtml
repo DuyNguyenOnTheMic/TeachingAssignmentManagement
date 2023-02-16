@@ -16,6 +16,14 @@
         @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tên học hàm, học vị", @aria_label = "Nhập tên học hàm, học vị" } })
     </div>
 
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="level">Thứ tự: </label>
+        <small class="text-muted"><i>(Thứ tự càng thấp thì bậc càng cao)</i></small>
+        <div class="input-group">
+            @Html.EditorFor(model => model.level, new { htmlAttributes = new { @type = "number", @class = "touchspin", @aria_label = "Nhập thứ tự học hàm, học vị" } })
+        </div>
+    </div>
+
     <div class="float-end m-1">
         <button type="button" class="btn btn-outline-secondary waves-effect me-1" id="btnClose">Huỷ</button>
         <button type="submit" class="btn btn-primary waves-effect waves-float waves-light">Lưu</button>

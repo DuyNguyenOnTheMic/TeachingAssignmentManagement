@@ -19,7 +19,8 @@ namespace TeachingAssignmentManagement.DAL
             return context.academic_degree.Select(a => new
             {
                 a.id,
-                a.name
+                a.name,
+                a.level
             }).ToList();
         }
 
