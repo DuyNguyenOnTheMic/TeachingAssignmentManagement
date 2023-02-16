@@ -4,7 +4,7 @@ var rootUrl = $('#loader').data('request-url');
 $(function () {
     'use strict';
 
-    var groupColumn = 3;
+    var groupColumn = 2;
     // Populate Academic Degree Rank datatable
     dataTable = $('#tblAcademicDegreeRank').DataTable(
         {
@@ -18,8 +18,7 @@ $(function () {
             columns: [
                 { 'data': '', defaultContent: '' },
                 { 'data': 'id' },
-                { 'data': 'academic_degree_id' },
-                { 'data': 'name' },
+                { 'data': 'group' },
                 {
                     'data': 'id', 'render': function (data) {
                         return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + rootUrl + "Remuneration/EditAcademicDegreeRank/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a><a class='deleteRow text-danger p-0' data-original-title='Xoá' title='Xoá' onclick=deleteAcademicDegreeRank('" + data + "') ><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
@@ -32,11 +31,11 @@ $(function () {
                     searchable: false,
                     orderable: false,
                     className: 'text-center',
-                    targets: [0, 4]
+                    targets: [0, 3]
                 },
                 { visible: false, targets: groupColumn },
                 { width: '5%', targets: 0 },
-                { width: '10%', targets: 4 }
+                { width: '10%', targets: 3 }
             ],
             order: [[groupColumn, 'asc']],
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
@@ -70,7 +69,7 @@ $(function () {
                         if (last !== group) {
                             $(rows)
                                 .eq(i)
-                                .before('<tr class="group"><td colspan="4">' + group + '</td></tr>');
+                                .before('<tr class="group"><td colspan="3">' + group + '</td></tr>');
 
                             last = group;
                         }
@@ -98,7 +97,6 @@ $(function () {
 
     // Order by the grouping
     $('#tblAcademicDegreeRank tbody').on('click', 'tr.group', function () {
-        alert('hehe');
         var currentOrder = dataTable.order()[0];
         if (currentOrder[0] === groupColumn && currentOrder[1] === 'asc') {
             dataTable.order([groupColumn, 'desc']).draw();

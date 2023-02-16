@@ -19,8 +19,7 @@ namespace TeachingAssignmentManagement.DAL
             return context.academic_degree_rank.Select(a => new
             {
                 a.id,
-                a.academic_degree_id,
-                a.academic_degree.name
+                group = a.academic_degree_id + " " + a.academic_degree.name,
             }).ToList();
         }
 
