@@ -139,6 +139,22 @@ namespace TeachingAssignmentManagement.Controllers
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult DeleteAcademicDegree(string id)
+        {
+            try
+            {
+                // Delete academic degree
+                unitOfWork.AcademicDegreeRepository.DeleteAcademicDegree(id);
+                unitOfWork.Save();
+            }
+            catch
+            {
+                return Json(new { error = true, message = "Không thể xoá do học hàm, học vị này đã có dữ liệu!" }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
