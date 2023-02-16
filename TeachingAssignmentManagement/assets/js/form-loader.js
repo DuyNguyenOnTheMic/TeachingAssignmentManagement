@@ -339,7 +339,23 @@ if (termForm.length) {
 }
 
 if (userForm.length) {
-    populateSelect2();
+    var select = $('.form-data');
+    // select2
+    select.each(function () {
+        var $this = $(this);
+        $this.wrap('<div class="position-relative"></div>');
+        $this
+            .select2({
+                placeholder: $this[0][0].innerHTML,
+                minimumResultsForSearch: Infinity,
+                forceabove: true,
+                dropdownParent: $this.parent()
+            })
+            .change(function () {
+                $(this).valid();
+            });
+    });
+
     // Create custom email check for VLU
     var email_domain = ["vlu.edu", "vanlanguni"]
     var regexpEmail = "^[A-Za-z0-9._%+-]+@(" + email_domain[0] + "|" + email_domain[1] + ").vn$";
@@ -498,6 +514,28 @@ if (academicDegreeForm.length) {
 }
 
 if (academicDegreeRankForm.length) {
+    var select = $('.form-data');
+    // select2
+    select.each(function () {
+        var $this = $(this);
+        $this.wrap('<div class="position-relative"></div>');
+        $this
+            .select2({
+                placeholder: $this[0][0].innerHTML,
+                minimumResultsForSearch: Infinity,
+                dropdownParent: $this.parent()
+            })
+            .on('select2:open', function () {
+                // Set dropdown height for select2
+                var dropdown = $this.parent().find('.select2-results__options');
+                if (dropdown.height() != 150) {
+                    dropdown.height(150);
+                }
+            })
+            .change(function () {
+                $(this).valid();
+            });
+    });
     // Form validation for academic degree rank form
     academicDegreeRankForm.validate({
         rules: {
@@ -527,24 +565,5 @@ if (academicDegreeRankForm.length) {
                 error.insertAfter(element);
             }
         }
-    });
-}
-
-function populateSelect2() {
-    var select = $('.form-data');
-    // select2
-    select.each(function () {
-        var $this = $(this);
-        $this.wrap('<div class="position-relative"></div>');
-        $this
-            .select2({
-                placeholder: $this[0][0].innerHTML,
-                minimumResultsForSearch: Infinity,
-                forceabove: true,
-                dropdownParent: $this.parent()
-            })
-            .change(function () {
-                $(this).valid();
-            });
     });
 }
