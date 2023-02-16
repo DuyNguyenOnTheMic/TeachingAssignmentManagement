@@ -4,7 +4,7 @@ var rootUrl = $('#loader').data('request-url');
 $(function () {
     'use strict';
 
-    var groupColumn = 2;
+    var groupColumn = 1;
     // Populate Academic Degree Rank datatable
     dataTable = $('#tblAcademicDegreeRank').DataTable(
         {
@@ -16,7 +16,6 @@ $(function () {
             },
             deferRender: true,
             columns: [
-                { 'data': '', defaultContent: '' },
                 { 'data': 'id' },
                 { 'data': 'group' },
                 {
@@ -31,13 +30,13 @@ $(function () {
                     searchable: false,
                     orderable: false,
                     className: 'text-center',
-                    targets: [0, 3]
+                    targets: 2
                 },
                 { visible: false, targets: groupColumn },
-                { width: '5%', targets: 0 },
-                { width: '10%', targets: 3 }
+                { className: 'ps-5', targets: 0 },
+                { width: '15%', targets: 2 }
             ],
-            order: [[groupColumn, 'asc']],
+            order: [[groupColumn, 'desc']],
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
             displayLength: 10,
             lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "tất cả"]],
@@ -83,10 +82,6 @@ $(function () {
 
     // Create Index column datatable
     dataTable.on('draw.dt', function () {
-        dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-            cell.innerHTML = i + 1;
-        });
-
         // Prevent user from add edit delete while dialog is populated
         if ($('.ui-dialog-content').dialog("isOpen") === true) {
             disableButtons(true);
