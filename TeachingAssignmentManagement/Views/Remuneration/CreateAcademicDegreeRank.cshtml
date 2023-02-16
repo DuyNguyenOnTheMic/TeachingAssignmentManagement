@@ -7,13 +7,13 @@
 @using (Html.BeginForm("CreateAcademicDegreeRank", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "academicdegreerank-form" }))
 {
     <div class="mb-1">
-        <label class="form-label font-small-4" for="id">Mã cấp bậc: </label>
-        @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập mã cấp bậc", @aria_label = "Nhập mã cấp bậc" } })
+        <label class="form-label font-small-4" for="academic_degree_id">Học hàm, học vị: </label>
+        @Html.DropDownList("academic_degree_id", null, "---- Chọn học hàm, học vị ----", htmlAttributes: new { @class = "form-data form-select", @aria_label = "Chọn học hàm, học vị" })
     </div>
 
     <div class="mb-1">
-        <label class="form-label font-small-4" for="academic_degree_id">Học hàm, học vị: </label>
-        @Html.DropDownList("academic_degree_id", null, "---- Chọn học hàm, học vị ----", htmlAttributes: new { @class = "form-data form-select", @aria_label = "Chọn học hàm, học vị" })
+        <label class="form-label font-small-4" for="id">Mã cấp bậc: </label>
+        @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập mã cấp bậc", @aria_label = "Nhập mã cấp bậc" } })
     </div>
 
     <div class="float-end m-1">

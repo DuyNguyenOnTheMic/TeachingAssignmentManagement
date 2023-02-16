@@ -498,7 +498,6 @@ if (academicDegreeForm.length) {
 }
 
 if (academicDegreeRankForm.length) {
-    populateSelect2();
     // Form validation for academic degree rank form
     academicDegreeRankForm.validate({
         rules: {
