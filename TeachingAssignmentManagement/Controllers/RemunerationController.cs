@@ -110,11 +110,10 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration = 600, VaryByParam = "none")]
         public ActionResult CreateAcademicDegreeRank()
         {
             ViewData["academic_degree_id"] = new SelectList(unitOfWork.AcademicDegreeRepository.GetAcademicDegrees(), "id", "name");
-            return View(new academic_degree());
+            return View(new academic_degree_rank());
         }
 
         [HttpPost]
