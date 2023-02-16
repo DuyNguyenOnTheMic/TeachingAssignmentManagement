@@ -4,6 +4,7 @@ var rootUrl = $('#loader').data('request-url');
 $(function () {
     'use strict';
 
+    var groupColumn = 3;
     // Populate Academic Degree Rank datatable
     dataTable = $('#tblAcademicDegreeRank').DataTable(
         {
@@ -33,10 +34,11 @@ $(function () {
                     className: 'text-center',
                     targets: [0, 4]
                 },
+                { visible: false, targets: groupColumn },
                 { width: '5%', targets: 0 },
                 { width: '10%', targets: 4 }
             ],
-            order: [[1, 'asc']],
+            order: [[groupColumn, 'asc']],
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
             displayLength: 10,
             lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "tất cả"]],
@@ -56,6 +58,24 @@ $(function () {
                     }
                 }
             ],
+            drawCallback: function (settings) {
+                var api = this.api();
+                var rows = api.rows({ page: 'current' }).nodes();
+                var last = null;
+
+                api
+                    .column(groupColumn, { page: 'current' })
+                    .data()
+                    .each(function (group, i) {
+                        if (last !== group) {
+                            $(rows)
+                                .eq(i)
+                                .before('<tr class="group"><td colspan="4">' + group + '</td></tr>');
+
+                            last = group;
+                        }
+                    });
+            },
 
             language: {
                 'url': rootUrl + 'app-assets/language/datatables/vi.json'
@@ -73,6 +93,17 @@ $(function () {
             disableButtons(true);
         } else {
             disableButtons(false);
+        }
+    });
+
+    // Order by the grouping
+    $('#tblAcademicDegreeRank tbody').on('click', 'tr.group', function () {
+        alert('hehe');
+        var currentOrder = dataTable.order()[0];
+        if (currentOrder[0] === groupColumn && currentOrder[1] === 'asc') {
+            dataTable.order([groupColumn, 'desc']).draw();
+        } else {
+            dataTable.order([groupColumn, 'asc']).draw();
         }
     });
 });
