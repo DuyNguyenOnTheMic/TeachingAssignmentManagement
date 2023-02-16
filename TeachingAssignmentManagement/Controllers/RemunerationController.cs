@@ -106,7 +106,7 @@ namespace TeachingAssignmentManagement.Controllers
         public JsonResult GetAcademicDegreeRankData()
         {
             // Get Academic, Degree ranks data from database
-            return Json(unitOfWork.AcademicDegreeRepository.GetAcademicDegrees(), JsonRequestBehavior.AllowGet);
+            return Json(unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRanks(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
