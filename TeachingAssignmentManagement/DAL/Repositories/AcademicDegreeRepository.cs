@@ -15,11 +15,10 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable GetAcademicDegrees()
         {
-            return context.academic_degree_rank.Select(a => new
+            return context.academic_degree.Select(a => new
             {
                 a.id,
-                a.academic_degree_id,
-                a.academic_degree.name
+                a.name
             }).ToList();
         }
     }
