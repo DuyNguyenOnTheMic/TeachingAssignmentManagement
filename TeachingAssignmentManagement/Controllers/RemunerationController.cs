@@ -110,6 +110,30 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration = 600, VaryByParam = "none")]
+        public ActionResult CreateAcademicDegreeRank()
+        {
+            ViewData["academic_degree_id"] = new SelectList(unitOfWork.AcademicDegreeRepository.GetAcademicDegrees(), "id", "name");
+            return View(new academic_degree());
+        }
+
+        [HttpPost]
+        public ActionResult CreateAcademicDegreeRank([Bind(Include = "id,academic_degree_id")] academic_degree_rank academicDegreeRank)
+        {
+            try
+            {
+                // Create new academic degree rank
+                unitOfWork.AcademicDegreeRankRepository.InsertAcademicDegreeRank(academicDegreeRank);
+                unitOfWork.Save();
+            }
+            catch
+            {
+                return Json(new { error = true, message = "Mã cấp bậc này đã tồn tại!" }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public ActionResult Subject()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");

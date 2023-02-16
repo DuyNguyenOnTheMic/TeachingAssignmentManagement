@@ -42,7 +42,7 @@ $(function () {
             lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "tất cả"]],
             buttons: [
                 {
-                    text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Thêm HH, HV mới',
+                    text: feather.icons['plus'].toSvg({ class: 'me-50 font-small-4' }) + 'Thêm cấp bậc mới',
                     className: 'createNew btn btn-primary',
                     attr: {
                         'onclick': "popupForm('" + rootUrl + "Remuneration/CreateAcademicDegreeRank')"
