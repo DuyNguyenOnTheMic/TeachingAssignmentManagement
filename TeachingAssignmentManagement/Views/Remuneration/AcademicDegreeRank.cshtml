@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Quản lý cấp bậc";
+}
+
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper p-0">
+        <div class="content-body">
+            <!-- Basic table -->
+            <section>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title-wrap">
+                                    <h4 class="card-title">@ViewBag.Title</h4>
+                                </div>
+                            </div>
+                            <div class="card-datatable">
+                                <ul class="nav nav-tabs ms-2">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="@Url.Action("AcademicDegree", "Remuneration")"><i class="feather feather-calendar"></i> Học hàm, học vị</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("AcademicDegreeRank", "Remuneration")"><i class="feather feather-list"></i> Cấp bậc</a>
+                                    </li>
+                                </ul>
+                                <table class="datatables-ajax table table-responsive" id="tblAcademicDegreeRank">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th></th>
+                                            <th>Mã cấp bậc</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ Basic table -->
+        </div>
+    </div>
+</div>
+
+<div id="loader" data-request-url="@Url.Content("~/")"></div>
+
+@section styles {
+    <link href="~/app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/app-assets/vendors/css/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+}
+
+@section scripts {
+    <script src="~/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
+    <script src="~/app-assets/vendors/js/jquery-ui/jquery-ui.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
