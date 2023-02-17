@@ -3,6 +3,25 @@
     subjectDiv = $('#subjectDiv'),
     url = rootUrl + 'Remuneration/GetSubjectPartial';
 
+// Reference the hub
+var hubNotif = $.connection.timetableHub;
+// Start the connection
+$.connection.hub.start();
+// Notify while anyChanges
+hubNotif.client.refreshedData = function (term, major) {
+    if (term == termId && major == majorId) {
+        // Refresh timetable after someone import or re-import data
+        getSubjectData(term, major);
+    } else if (term == termId && majorId == -1) {
+        // Refresh timetable when user is viewing all majors
+        major = -1;
+        getSubjectData(term, major);
+    } else if (term == termId && major == null) {
+        // Refresh timetable when someone change term status
+        getSubjectData(term, majorId);
+    }
+}
+
 $(function () {
     // Set selected option when form load
     formSelect.each(function () {
