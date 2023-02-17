@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using TeachingAssignmentManagement.Models;
@@ -21,6 +22,11 @@ namespace TeachingAssignmentManagement.DAL
                 a.id,
                 group = a.academic_degree.level + ". " + a.academic_degree_id + " (" + a.academic_degree.name + ")"
             }).ToList();
+        }
+
+        public IEnumerable<academic_degree_rank> GetAcademicDegreeRankDTO()
+        {
+            return context.academic_degree_rank.ToList();
         }
 
         public academic_degree_rank GetAcademicDegreeRankByID(string id)

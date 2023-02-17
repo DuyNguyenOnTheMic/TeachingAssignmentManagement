@@ -176,7 +176,7 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult GetRankData(int startYear, int endYear)
         {
             // Get ranks data from database
-            ViewBag.ranks = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRanks();
+            ViewBag.ranks = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO();
             return PartialView("_Rank", unitOfWork.RankCoefficientRepository.GetRankCoefficients(startYear, endYear));
         }
 
