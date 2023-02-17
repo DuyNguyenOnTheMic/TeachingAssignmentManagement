@@ -13,15 +13,26 @@
 </ul>
 <div class="tab-content">
     <div class="tab-pane active" id="home" aria-labelledby="home-tab" role="tabpanel">
-        <p>
-            Candy canes donut chupa chups candy canes lemon drops oat cake wafer. Cotton candy candy canes marzipan
-            carrot cake. Sesame snaps lemon drops candy marzipan donut brownie tootsie roll. Icing croissant bonbon
-            biscuit gummi bears. Pudding candy canes sugar plum cookie chocolate cake powder croissant.
-        </p>
-        <p>
-            Carrot cake tiramisu danish candy cake muffin croissant tart dessert. Tiramisu caramels candy canes
-            chocolate cake sweet roll liquorice icing cupcake. Candy cookie sweet roll bear claw sweet roll.
-        </p>
+        <div class="table-responsive">
+            <table class="table mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">Cấp bậc</th>
+                        <th scope="col">Đơn giá</th>
+                        <th scope="col">Hệ số tiếng Việt</th>
+                        <th scope="col">Hệ số tiếng Anh</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var rank in ViewBag.ranks)
+                    {
+                        <tr>
+                            <td>@rank.id</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="tab-pane" id="profile" aria-labelledby="profile-tab" role="tabpanel">
         <p>
