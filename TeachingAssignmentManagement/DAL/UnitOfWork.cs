@@ -11,6 +11,7 @@ namespace TeachingAssignmentManagement.DAL
         private ClassSectionRepository classSectionRepository;
         private SubjectRepository subjectRepository;
         private MajorRepository majorRepository;
+        private RankCoefficientRepository rankCoefficientRepository;
         private RoomRepository roomRepository;
         private TermRepository termRepository;
         private UserRepository userRepository;
@@ -65,6 +66,18 @@ namespace TeachingAssignmentManagement.DAL
                     majorRepository = new MajorRepository(context);
                 }
                 return majorRepository;
+            }
+        }
+
+        public RankCoefficientRepository RankCoefficientRepository
+        {
+            get
+            {
+                if (rankCoefficientRepository == null)
+                {
+                    rankCoefficientRepository = new RankCoefficientRepository(context);
+                }
+                return rankCoefficientRepository;
             }
         }
 
