@@ -268,6 +268,7 @@
     <Compile Include="DAL\Repositories\AcademicDegreeRankRepository.cs" />
     <Compile Include="DAL\Repositories\AcademicDegreeRepository.cs" />
     <Compile Include="DAL\Repositories\RankCoefficientRepository.cs" />
+    <Compile Include="Models\AcademicDegreeRankDTO.cs" />
     <Compile Include="Models\academic_degree.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -331,6 +332,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\RankViewModels.cs" />
     <Compile Include="Models\rank_coefficient.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

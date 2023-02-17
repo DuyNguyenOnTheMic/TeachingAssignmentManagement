@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TeachingAssignmentManagement.Models.rank_coefficient>
+﻿@model TeachingAssignmentManagement.Models.RankViewModels
 
 <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item">
@@ -24,10 +24,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var rank in ViewBag.ranks)
+                    @foreach (var rank in Model.AcademicDegreeRankDTOs)
                     {
                         <tr>
-                            <td>@rank.id</td>
+                            <td>@rank.Id</td>
                         </tr>
                     }
                 </tbody>

@@ -24,9 +24,12 @@ namespace TeachingAssignmentManagement.DAL
             }).ToList();
         }
 
-        public IEnumerable<academic_degree_rank> GetAcademicDegreeRankDTO()
+        public IEnumerable<AcademicDegreeRankDTO> GetAcademicDegreeRankDTO()
         {
-            return context.academic_degree_rank.ToList();
+            return context.academic_degree_rank.Select(a => new AcademicDegreeRankDTO
+            {
+                Id = a.id
+            }).ToList();
         }
 
         public academic_degree_rank GetAcademicDegreeRankByID(string id)
