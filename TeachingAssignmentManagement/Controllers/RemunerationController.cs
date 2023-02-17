@@ -166,6 +166,12 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        public ActionResult RankCoefficient()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult Subject()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
