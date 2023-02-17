@@ -173,6 +173,14 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        public ActionResult GetRankData(int startYear, int endYear)
+        {
+            // Get ranks data from database
+            IEnumerable query_ranks = unitOfWork.RankCoefficientRepository.GetRankCoefficients(startYear, endYear);
+            return PartialView("_Rank", query_ranks);
+        }
+
+        [HttpGet]
         public ActionResult Subject()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
