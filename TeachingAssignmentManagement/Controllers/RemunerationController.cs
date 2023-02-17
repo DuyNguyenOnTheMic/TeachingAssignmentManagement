@@ -166,8 +166,9 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult RankCoefficient()
+        public ActionResult Rank()
         {
+            ViewData["year"] = new SelectList(unitOfWork.TermRepository.GetYears(), "schoolyear", "schoolyear");
             return View();
         }
 

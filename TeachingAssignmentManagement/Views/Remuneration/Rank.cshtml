@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Quản lý hệ số cấp bậc";
+}
+
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper p-0">
+        <div class="content-body">
+            <!-- Basic table -->
+            <section>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title-wrap">
+                                    <h4 class="card-title">@ViewBag.Title</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 mb-1">
+                                        <label class="form-label font-small-4" for="year">Năm học: </label>
+                                        @Html.DropDownList("year", null, "---- Chọn năm học ----", htmlAttributes: new { @class = "form-data form-select" })
+                                    </div>
+                                </div>
+                                <div id="rankDiv"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ Basic table -->
+        </div>
+    </div>
+</div>
+
+<div id="loader" data-request-url="@Url.Content("~/")"></div>
+
+@section scripts {
+    <script src="~/app-assets/language/select2/vi.min.js"></script>
+}
