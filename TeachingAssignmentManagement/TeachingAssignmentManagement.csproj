@@ -267,6 +267,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\Repositories\AcademicDegreeRankRepository.cs" />
     <Compile Include="DAL\Repositories\AcademicDegreeRepository.cs" />
+    <Compile Include="DAL\Repositories\RankCoefficientRepository.cs" />
     <Compile Include="Models\academic_degree.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
