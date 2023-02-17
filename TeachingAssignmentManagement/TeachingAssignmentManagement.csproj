@@ -1130,6 +1130,7 @@
     <Content Include="assets\js\remuneration\academic-degree-rank.min.js" />
     <Content Include="assets\js\remuneration\academic-degree.js" />
     <Content Include="assets\js\remuneration\academic-degree.min.js" />
+    <Content Include="assets\js\remuneration\rank-load.js" />
     <Content Include="assets\js\remuneration\subject-load.js" />
     <Content Include="assets\js\remuneration\subject-load.min.js" />
     <Content Include="assets\js\remuneration\subject.js" />
