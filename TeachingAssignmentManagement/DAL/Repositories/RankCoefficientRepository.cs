@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TeachingAssignmentManagement.Models;
 
@@ -13,16 +13,9 @@ namespace TeachingAssignmentManagement.DAL
             this.context = context;
         }
 
-        public IEnumerable GetRankCoefficients(int startYear, int endYear)
+        public IEnumerable<rank_coefficient> GetRankCoefficients(int startYear, int endYear)
         {
-            return context.rank_coefficient.Where(r => r.start_year == startYear && r.end_year == endYear).Select(r => new
-            {
-                r.id,
-                r.type,
-                r.unit_price,
-                r.vietnamese_coefficient,
-                r.foreign_coefficient
-            });
+            return context.rank_coefficient.Where(r => r.start_year == startYear && r.end_year == endYear).ToList();
         }
     }
 }
