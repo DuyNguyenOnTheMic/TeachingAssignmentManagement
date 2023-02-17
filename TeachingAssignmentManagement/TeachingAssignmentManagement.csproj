@@ -332,6 +332,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\RankCoefficientDTO.cs" />
     <Compile Include="Models\RankViewModels.cs" />
     <Compile Include="Models\rank_coefficient.cs">
       <DependentUpon>Model1.tt</DependentUpon>
