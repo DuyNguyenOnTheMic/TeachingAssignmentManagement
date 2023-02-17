@@ -15,7 +15,12 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable<rank_coefficient> GetRankCoefficients(int startYear, int endYear)
         {
-            return context.rank_coefficient.Where(r => r.start_year == startYear && r.end_year == endYear).ToList();
+            return context.rank_coefficient.Where(r => r.start_year == startYear && r.end_year == endYear);
+        }
+
+        public IEnumerable<RankCoefficientDTO> GetStandardProgram(IEnumerable<RankCoefficientDTO> query_ranks)
+        {
+            return query_ranks.Where(r => r.Type == 0).ToList();
         }
     }
 }
