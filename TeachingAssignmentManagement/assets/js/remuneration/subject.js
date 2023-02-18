@@ -10,7 +10,7 @@ $(function () {
     dataTable = $('#tblSubject').DataTable(
         {
             ajax: {
-                url: rootUrl + 'Remuneration/GetSubjectData?termId=' + termId + '&majorId=' + majorId,
+                url: rootUrl + 'Remuneration/GetSubjectCoefficientPartial?termId=' + termId + '&majorId=' + majorId,
                 type: 'GET',
                 dataType: 'json',
                 dataSrc: ''
@@ -27,7 +27,7 @@ $(function () {
                 { 'data': 'practice_coefficient' },
                 {
                     'data': 'id', 'render': function (data) {
-                        return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + rootUrl + "Remuneration/EditSubject/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a>";
+                        return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + rootUrl + "Remuneration/EditSubjectCoefficient/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a>";
                     }
                 }
             ],

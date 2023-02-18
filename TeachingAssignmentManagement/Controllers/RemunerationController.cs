@@ -192,7 +192,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult Subject()
+        public ActionResult SubjectCoefficient()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
             ViewData["major"] = new SelectList(unitOfWork.MajorRepository.GetMajors(), "id", "name");
@@ -200,15 +200,15 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetSubjectPartial(int termId, string majorId)
+        public ActionResult GetSubjectCoefficientPartial(int termId, string majorId)
         {
             ViewData["termId"] = termId;
             ViewData["majorId"] = majorId;
-            return PartialView("_Subject");
+            return PartialView("_SubjectCoefficient");
         }
 
         [HttpGet]
-        public JsonResult GetSubjectData(int termId, string majorId)
+        public JsonResult GetSubjectCoefficientData(int termId, string majorId)
         {
             // Get subjects data from database
             IEnumerable query_subjects = majorId != "-1"
@@ -218,13 +218,13 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditSubject(string id)
+        public ActionResult EditSubjectCoefficient(string id)
         {
             return View(unitOfWork.SubjectRepository.GetSubjectByID(id));
         }
 
         [HttpPost]
-        public ActionResult EditSubject(string id, bool is_vietnamese, string theoretical_coefficient, string practice_coefficient)
+        public ActionResult EditSubjectCoefficient(string id, bool is_vietnamese, string theoretical_coefficient, string practice_coefficient)
         {
             // Update subject
             subject query_subject = unitOfWork.SubjectRepository.GetSubjectByID(id);
@@ -236,7 +236,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditAllSubjects(int termId, string majorId)
+        public ActionResult EditAllSubjectCoefficients(int termId, string majorId)
         {
             ViewData["termId"] = termId;
             ViewData["majorId"] = majorId;
@@ -244,7 +244,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditAllSubjects(int termId, string majorId, string theoretical_coefficient, string practice_coefficient)
+        public ActionResult EditAllSubjectCoefficients(int termId, string majorId, string theoretical_coefficient, string practice_coefficient)
         {
             // Update all subjects
             unitOfWork.SubjectRepository.EditAllSubjects(termId, majorId, theoretical_coefficient, practice_coefficient);

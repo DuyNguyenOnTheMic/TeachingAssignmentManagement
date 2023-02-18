@@ -1254,10 +1254,10 @@
     <Content Include="Views\Statistics\Personal.cshtml" />
     <Content Include="Views\Statistics\_PersonalChart.cshtml" />
     <Content Include="Views\Account\Lockout.cshtml" />
-    <Content Include="Views\Remuneration\Subject.cshtml" />
-    <Content Include="Views\Remuneration\_Subject.cshtml" />
-    <Content Include="Views\Remuneration\EditSubject.cshtml" />
-    <Content Include="Views\Remuneration\EditAllSubjects.cshtml" />
+    <Content Include="Views\Remuneration\SubjectCoefficient.cshtml" />
+    <Content Include="Views\Remuneration\_SubjectCoefficient.cshtml" />
+    <Content Include="Views\Remuneration\EditSubjectCoefficient.cshtml" />
+    <Content Include="Views\Remuneration\EditAllSubjectCoefficients.cshtml" />
     <Content Include="Views\Remuneration\AcademicDegree.cshtml" />
     <Content Include="Views\Remuneration\CreateAcademicDegree.cshtml" />
     <Content Include="Views\Remuneration\EditAcademicDegree.cshtml" />
