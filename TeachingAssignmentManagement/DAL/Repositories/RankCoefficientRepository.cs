@@ -29,5 +29,10 @@ namespace TeachingAssignmentManagement.DAL
                 AcademicDegreeRankId = r.academic_degree_rank_id
             }).ToList();
         }
+
+        public rank_coefficient GetRankByID(int id)
+        {
+            return context.rank_coefficient.Find(id);
+        }
     }
 }
