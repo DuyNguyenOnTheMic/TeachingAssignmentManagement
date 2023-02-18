@@ -30,17 +30,14 @@
                 <tbody>
                     @foreach (var rank in ranks)
                     {
-                        var rankCoefficients = Model.StandardProgramDTOs.Where(item => item.AcademicDegreeRankId == rank.Id);
+                        var rankCoefficient = Model.StandardProgramDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
                         <tr>
                             <td>@rank.Id</td>
-                            @if (rankCoefficients.Any())
+                            @if (rankCoefficient != null)
                             {
-                                foreach (var item in rankCoefficients)
-                                {
-                                    <td>@item.UnitPrice</td>
-                                    <td>@item.VietnameseCoefficient</td>
-                                    <td>@item.ForeignCoefficient</td>
-                                }
+                                <td>@rankCoefficient.UnitPrice</td>
+                                <td>@rankCoefficient.VietnameseCoefficient</td>
+                                <td>@rankCoefficient.ForeignCoefficient</td>
                             }
                         </tr>
                     }
