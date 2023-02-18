@@ -18,9 +18,15 @@ namespace TeachingAssignmentManagement.DAL
             return context.rank_coefficient.Where(r => r.start_year == startYear && r.end_year == endYear);
         }
 
-        public IEnumerable<RankCoefficientDTO> GetStandardProgram(IEnumerable<RankCoefficientDTO> query_rankCoefficients)
+        public IEnumerable<RankCoefficientDTO> GetStandardProgram(IEnumerable<rank_coefficient> query_rankCoefficients)
         {
-            return query_rankCoefficients.Where(r => r.Type == 0).ToList();
+            return query_rankCoefficients.Where(r => r.type == 0).Select(r => new RankCoefficientDTO
+            {
+                Id = r.id,
+                UnitPrice = r.unit_price,
+                VietnameseCoefficient = r.vietnamese_coefficient,
+                ForeignCoefficient = r.foreign_coefficient
+            }).ToList();
         }
     }
 }

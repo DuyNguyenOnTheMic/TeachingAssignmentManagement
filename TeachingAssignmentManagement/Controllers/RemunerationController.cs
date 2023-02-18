@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
@@ -176,7 +177,7 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult GetRankData(int startYear, int endYear)
         {
             // Get ranks data from database
-            unitOfWork.RankCoefficientRepository.GetRankCoefficients(startYear, endYear);
+            IEnumerable<rank_coefficient> query_rankCoefficients = unitOfWork.RankCoefficientRepository.GetRankCoefficients(startYear, endYear);
             return PartialView("_Rank", new RankViewModels
             {
                 AcademicDegreeRankDTOs = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO()
