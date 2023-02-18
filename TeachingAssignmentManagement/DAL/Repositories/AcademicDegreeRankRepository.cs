@@ -28,8 +28,9 @@ namespace TeachingAssignmentManagement.DAL
         {
             return context.academic_degree_rank.Select(a => new AcademicDegreeRankDTO
             {
-                Id = a.id
-            }).ToList();
+                Id = a.id,
+                Level = a.academic_degree.level
+            }).OrderByDescending(a => a.Level).ToList();
         }
 
         public academic_degree_rank GetAcademicDegreeRankByID(string id)
