@@ -10,7 +10,7 @@ $(function () {
     dataTable = $('#tblSubject').DataTable(
         {
             ajax: {
-                url: rootUrl + 'Remuneration/GetSubjectCoefficientPartial?termId=' + termId + '&majorId=' + majorId,
+                url: rootUrl + 'Remuneration/GetSubjectCoefficientData?termId=' + termId + '&majorId=' + majorId,
                 type: 'GET',
                 dataType: 'json',
                 dataSrc: ''
@@ -58,7 +58,7 @@ $(function () {
                     text: feather.icons['edit-2'].toSvg({ class: 'me-50 font-small-4' }) + 'Sửa tất cả',
                     className: 'editAll btn btn-primary',
                     attr: {
-                        'onclick': "popupForm('" + rootUrl + "Remuneration/EditAllSubjects?termId=" + termId + "&majorId=" + majorId + "')"
+                        'onclick': "popupForm('" + rootUrl + "Remuneration/EditAllSubjectCoefficients?termId=" + termId + "&majorId=" + majorId + "')"
                     },
                     init: function (api, node, config) {
                         $(node).removeClass('btn-secondary');
