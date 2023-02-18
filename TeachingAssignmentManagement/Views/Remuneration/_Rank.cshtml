@@ -22,22 +22,28 @@
                 <thead>
                     <tr>
                         <th scope="col">Cấp bậc</th>
-                        <th scope="col">Đơn giá</th>
-                        <th scope="col">Hệ số tiếng Việt</th>
-                        <th scope="col">Hệ số tiếng Anh</th>
+                        <th scope="col" class="text-center">Đơn giá</th>
+                        <th scope="col" class="text-center">Hệ số tiếng Việt</th>
+                        <th scope="col" class="text-center">Hệ số tiếng Anh</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var rank in ranks)
                     {
-                        var rankCoefficient = Model.StandardProgramDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
+                        var rankCoefficient = Model.StandardProgramDTOs.FirstOrDefault(item => item.AcademicDegreeRankId == rank.Id);
                         <tr>
                             <td>@rank.Id</td>
                             @if (rankCoefficient != null)
                             {
-                                <td>@rankCoefficient.UnitPrice</td>
-                                <td>@rankCoefficient.VietnameseCoefficient</td>
-                                <td>@rankCoefficient.ForeignCoefficient</td>
+                                <td class="text-center">@rankCoefficient.UnitPrice</td>
+                                <td class="text-center">@rankCoefficient.VietnameseCoefficient</td>
+                                <td class="text-center">@rankCoefficient.ForeignCoefficient</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             }
                         </tr>
                     }
