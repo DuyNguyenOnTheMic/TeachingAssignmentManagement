@@ -31,7 +31,7 @@
                 <tbody>
                     @foreach (var rank in ranks)
                     {
-                        var rankCoefficient = Model.StandardProgramDTOs.FirstOrDefault(item => item.AcademicDegreeRankId == rank.Id);
+                        var rankCoefficient = Model.StandardProgramDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
                         <tr>
                             <td>@rank.Id</td>
                             @if (rankCoefficient != null)
