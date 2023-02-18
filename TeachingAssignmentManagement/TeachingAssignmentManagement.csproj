@@ -1135,10 +1135,10 @@
     <Content Include="assets\js\remuneration\academic-degree.min.js" />
     <Content Include="assets\js\remuneration\rank-coefficient-load.js" />
     <Content Include="assets\js\remuneration\rank-coefficient.js" />
-    <Content Include="assets\js\remuneration\subject-load.js" />
-    <Content Include="assets\js\remuneration\subject-load.min.js" />
-    <Content Include="assets\js\remuneration\subject.js" />
-    <Content Include="assets\js\remuneration\subject.min.js" />
+    <Content Include="assets\js\remuneration\subject-coefficient-load.js" />
+    <Content Include="assets\js\remuneration\subject-coefficient-load.min.js" />
+    <Content Include="assets\js\remuneration\subject-coefficient.js" />
+    <Content Include="assets\js\remuneration\subject-coefficient.min.js" />
     <Content Include="assets\js\statistics\personal-statistics-load.js" />
     <Content Include="assets\js\statistics\personal-statistics-load.min.js" />
     <Content Include="assets\js\statistics\personal-statistics.js" />
