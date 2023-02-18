@@ -1133,8 +1133,8 @@
     <Content Include="assets\js\remuneration\academic-degree-rank.min.js" />
     <Content Include="assets\js\remuneration\academic-degree.js" />
     <Content Include="assets\js\remuneration\academic-degree.min.js" />
-    <Content Include="assets\js\remuneration\rank-load.js" />
-    <Content Include="assets\js\remuneration\rank.js" />
+    <Content Include="assets\js\remuneration\rank-coefficient-load.js" />
+    <Content Include="assets\js\remuneration\rank-coefficient.js" />
     <Content Include="assets\js\remuneration\subject-load.js" />
     <Content Include="assets\js\remuneration\subject-load.min.js" />
     <Content Include="assets\js\remuneration\subject.js" />
@@ -1265,7 +1265,7 @@
     <Content Include="Views\Remuneration\CreateAcademicDegreeRank.cshtml" />
     <Content Include="Views\Remuneration\EditAcademicDegreeRank.cshtml" />
     <Content Include="Views\Remuneration\RankCoefficient.cshtml" />
-    <Content Include="Views\Remuneration\_Rank.cshtml" />
+    <Content Include="Views\Remuneration\_RankCoefficient.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

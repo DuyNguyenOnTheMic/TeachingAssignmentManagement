@@ -178,7 +178,7 @@ namespace TeachingAssignmentManagement.Controllers
         {
             // Get ranks data from database
             IEnumerable<rank_coefficient> query_rankCoefficients = unitOfWork.RankCoefficientRepository.GetRankCoefficients(startYear, endYear);
-            return PartialView("_Rank", new RankViewModels
+            return PartialView("_RankCoefficient", new RankViewModels
             {
                 AcademicDegreeRankDTOs = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO(),
                 StandardProgramDTOs = unitOfWork.RankCoefficientRepository.GetPrograms(query_rankCoefficients, 0)
