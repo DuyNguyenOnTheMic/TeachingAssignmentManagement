@@ -167,14 +167,14 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult Rank()
+        public ActionResult RankCoefficient()
         {
             ViewData["year"] = new SelectList(unitOfWork.TermRepository.GetYears(), "schoolyear", "schoolyear");
             return View();
         }
 
         [HttpGet]
-        public ActionResult GetRankData(int startYear, int endYear)
+        public ActionResult GetRankCoefficientData(int startYear, int endYear)
         {
             // Get ranks data from database
             IEnumerable<rank_coefficient> query_rankCoefficients = unitOfWork.RankCoefficientRepository.GetRankCoefficients(startYear, endYear);
@@ -186,9 +186,9 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditRank(int id)
+        public ActionResult EditRankCoefficient(int id)
         {
-            return View(unitOfWork.RankCoefficientRepository.GetRankByID(id));
+            return View(unitOfWork.RankCoefficientRepository.GetRankCoefficientByID(id));
         }
 
         [HttpGet]

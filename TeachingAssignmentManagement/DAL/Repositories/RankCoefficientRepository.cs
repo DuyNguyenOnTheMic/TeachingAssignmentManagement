@@ -30,7 +30,7 @@ namespace TeachingAssignmentManagement.DAL
             }).ToList();
         }
 
-        public rank_coefficient GetRankByID(int id)
+        public rank_coefficient GetRankCoefficientByID(int id)
         {
             return context.rank_coefficient.Find(id);
         }
