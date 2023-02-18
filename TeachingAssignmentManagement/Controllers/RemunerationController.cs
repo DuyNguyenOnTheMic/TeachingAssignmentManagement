@@ -180,7 +180,8 @@ namespace TeachingAssignmentManagement.Controllers
             IEnumerable<rank_coefficient> query_rankCoefficients = unitOfWork.RankCoefficientRepository.GetRankCoefficients(startYear, endYear);
             return PartialView("_Rank", new RankViewModels
             {
-                AcademicDegreeRankDTOs = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO()
+                AcademicDegreeRankDTOs = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO(),
+                StandardProgramDTOs = unitOfWork.RankCoefficientRepository.GetPrograms(query_rankCoefficients, 0)
             });
         }
 

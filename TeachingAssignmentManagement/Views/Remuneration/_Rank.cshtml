@@ -1,5 +1,9 @@
 ﻿@model TeachingAssignmentManagement.Models.RankViewModels
 
+@{
+    var ranks = Model.AcademicDegreeRankDTOs;
+}
+
 <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item">
         <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" aria-controls="home" role="tab" aria-selected="true">Home</a>
@@ -24,10 +28,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var rank in Model.AcademicDegreeRankDTOs)
+                    @foreach (var rank in ranks)
                     {
+                        var rankCoefficients = Model.StandardProgramDTOs.Where(item => item.AcademicDegreeRankId == rank.Id);
                         <tr>
                             <td>@rank.Id</td>
+                            @foreach (var item in rankCoefficients)
+                            {
+
+                            }
                         </tr>
                     }
                 </tbody>
