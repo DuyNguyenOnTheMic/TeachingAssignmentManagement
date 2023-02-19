@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
@@ -183,9 +184,9 @@ namespace TeachingAssignmentManagement.Controllers
                 StartYear = startYear,
                 EndYear = endYear,
                 AcademicDegreeRankDTOs = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO(),
-                StandardProgramDTOs = unitOfWork.RankCoefficientRepository.GetPrograms(query_rankCoefficients, 0),
-                SpecialProgramDTOs = unitOfWork.RankCoefficientRepository.GetPrograms(query_rankCoefficients, 1),
-                ForeignDTOs = unitOfWork.RankCoefficientRepository.GetPrograms(query_rankCoefficients, 2)
+                StandardProgramDTOs = unitOfWork.RankCoefficientRepository.GetPrograms(query_rankCoefficients, Constants.StandardProgramType),
+                SpecialProgramDTOs = unitOfWork.RankCoefficientRepository.GetPrograms(query_rankCoefficients, Constants.SpecialProgramType),
+                ForeignDTOs = unitOfWork.RankCoefficientRepository.GetPrograms(query_rankCoefficients, Constants.ForeignType)
             });
         }
 
