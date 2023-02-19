@@ -570,8 +570,8 @@ if (academicDegreeRankForm.length) {
             .on('select2:open', function () {
                 // Set dropdown height for select2
                 var dropdown = $this.parent().find('.select2-results__options');
-                if (dropdown.height() != 150) {
-                    dropdown.height(150);
+                if (dropdown.css('max-height') != '150px') {
+                    dropdown.css({ 'max-height': '150px' });
                 }
             })
             .change(function () {
