@@ -109,7 +109,7 @@ $(function () {
                     .every(function () {
                         var column = this;
                         var select = $(
-                            '<select id="UserType" class="form-select text-capitalize mb-md-0 mb-2xx"><option value=""> Chọn loại GV để lọc </option></select>'
+                            '<select id="UserType" class="form-select text-capitalize mb-md-0 mb-2"><option value=""> Chọn loại GV để lọc </option></select>'
                         )
                             .appendTo('.user_type')
                             .on('change', function () {
