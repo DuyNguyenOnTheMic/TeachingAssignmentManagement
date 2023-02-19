@@ -2,7 +2,7 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("EditAllSubjectCoefficients", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "subject-form" }))
+@using (Html.BeginForm("EditAllSubjectCoefficients", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "subjectcoefficient-form" }))
 {
     @Html.Hidden("termId")
     @Html.Hidden("majorId")

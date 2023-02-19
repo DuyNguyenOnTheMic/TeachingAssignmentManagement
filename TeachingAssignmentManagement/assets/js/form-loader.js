@@ -2,7 +2,7 @@
     majorForm = $('#major-form'),
     termForm = $('#term-form'),
     userForm = $('#user-form'),
-    subjectForm = $('#subject-form'),
+    subjectCoefficientForm = $('#subjectcoefficient-form'),
     academicDegreeForm = $('#academicdegree-form'),
     academicDegreeRankForm = $('#academicdegreerank-form');
 
