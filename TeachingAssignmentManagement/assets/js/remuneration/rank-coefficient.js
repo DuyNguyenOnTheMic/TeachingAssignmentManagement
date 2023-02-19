@@ -5,7 +5,14 @@ var rootUrl = $('#loader').data('request-url'),
     endYear = yearData.data('endyear');
 
 function refreshTable() {
-    $("table").load(rootUrl + 'Remuneration/GetRankCoefficientData?startYear=' + startYear + '&endYear=' + endYear + " table>*");
+    // Refresh all tables when user updates
+    $.get(rootUrl + 'Remuneration/GetRankCoefficientData?startYear=' + startYear + '&endYear=' + endYear)
+        .done(function (r) {
+            var newDom = $(r);
+            $('#tblStandard').replaceWith($('#tblStandard', newDom));
+            $('#tblSpecial').replaceWith($('#tblSpecial', newDom));
+            $('#tblForeign').replaceWith($('#tblForeign', newDom));
+        });
 }
 
 function disableButtons(state) {

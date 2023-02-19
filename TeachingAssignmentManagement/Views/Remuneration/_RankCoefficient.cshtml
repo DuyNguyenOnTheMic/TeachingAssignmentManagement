@@ -23,7 +23,7 @@
 <div class="tab-content">
     <div class="tab-pane active" id="standard" aria-labelledby="standard-tab" role="tabpanel">
         <div class="table-responsive">
-            <table class="table mb-0">
+            <table class="table mb-0" id="tblStandard">
                 <thead>
                     <tr>
                         <th scope="col">Cấp bậc</th>
@@ -71,7 +71,7 @@
     </div>
     <div class="tab-pane" id="special" aria-labelledby="special-tab" role="tabpanel">
         <div class="table-responsive">
-            <table class="table mb-0">
+            <table class="table mb-0" id="tblSpecial">
                 <thead>
                     <tr>
                         <th scope="col">Cấp bậc</th>
@@ -118,15 +118,52 @@
         </div>
     </div>
     <div class="tab-pane" id="foreign" aria-labelledby="foreign-tab" role="tabpanel">
-        <p>
-            Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon bonbon
-            carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies dragée. Donut bear
-            claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll donut ice cream.
-        </p>
-        <p>
-            Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate cake topping powder.
-            Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton candy.
-        </p>
+        <div class="table-responsive">
+            <table class="table mb-0" id="tblForeign">
+                <thead>
+                    <tr>
+                        <th scope="col">Cấp bậc</th>
+                        <th scope="col" class="text-center">Đơn giá</th>
+                        <th scope="col" class="text-center">Hệ số tiếng Việt</th>
+                        <th scope="col" class="text-center">Hệ số tiếng Anh</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var rank in ranks)
+                    {
+                        var rankCoefficient = Model.SpecialProgramDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
+                        <tr>
+                            <td>@rank.Id</td>
+                            @if (rankCoefficient != null)
+                            {
+                                <td class="text-center">@rankCoefficient.UnitPrice.ToString("N0")</td>
+                                <td class="text-center">@rankCoefficient.VietnameseCoefficient</td>
+                                <td class="text-center">@rankCoefficient.ForeignCoefficient</td>
+                                <td>
+                                    <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("EditRankCoefficient", "Remuneration" , new { id = rankCoefficient.Id })')">
+                                        <i class="feather feather-edit font-medium-3 me-1"></i>
+                                    </a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td colspan="3">
+                                    <div class="text-center">
+                                        Chưa được đặt <i class="feather feather-help-circle"></i>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("CreateRankCoefficient", "Remuneration", new { rankId = rank.Id, type = Constants.ForeignType, startYear = startYear, endYear = endYear })')">
+                                        <i class="feather feather-edit font-medium-3 me-1"></i>
+                                    </a>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
