@@ -581,6 +581,9 @@ if (rankcoefficientForm.length) {
     rankcoefficientForm.validate({
         ignore: [],
         rules: {
+            unit_price: {
+                required: true
+            },
             vietnamese_coefficient: {
                 required: true,
                 number: false,
@@ -595,6 +598,9 @@ if (rankcoefficientForm.length) {
             }
         },
         messages: {
+            unit_price: {
+                required: "Bạn chưa nhập đơn giá"
+            },
             vietnamese_coefficient: {
                 required: "Bạn chưa nhập số tiết tối đa",
                 min: "Vui lòng nhập lớn hơn hoặc bằng 1",
