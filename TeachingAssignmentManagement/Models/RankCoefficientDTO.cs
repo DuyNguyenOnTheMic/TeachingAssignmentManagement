@@ -3,7 +3,6 @@
     public class RankCoefficientDTO
     {
         public int Id { get; set; }
-        public int Type { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal VietnameseCoefficient { get; set; }
         public decimal ForeignCoefficient { get; set; }
