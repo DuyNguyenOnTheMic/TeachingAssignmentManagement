@@ -198,10 +198,10 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateRankCoefficient([Bind(Include = "type,unit_price,start_year,end_year,academic_degree_rank_id")] rank_coefficient rankCoefficient, string vietnamese_coefficient, string foreign_coefficient)
+        public ActionResult CreateRankCoefficient([Bind(Include = "type,start_year,end_year,academic_degree_rank_id")] rank_coefficient rankCoefficient, string unit_price, string vietnamese_coefficient, string foreign_coefficient)
         {
             // Create new rank coefficient
-            rankCoefficient.unit_price = 1;
+            rankCoefficient.unit_price = decimal.Parse(unit_price, CultureInfo.InvariantCulture);
             rankCoefficient.vietnamese_coefficient = decimal.Parse(vietnamese_coefficient, CultureInfo.InvariantCulture);
             rankCoefficient.foreign_coefficient = decimal.Parse(foreign_coefficient, CultureInfo.InvariantCulture);
             unitOfWork.RankCoefficientRepository.InsertRankCoefficient(rankCoefficient);
@@ -216,10 +216,11 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditRankCoefficient(int id, string vietnamese_coefficient, string foreign_coefficient)
+        public ActionResult EditRankCoefficient(int id, string unit_price, string vietnamese_coefficient, string foreign_coefficient)
         {
             // Update rank coefficient
             rank_coefficient query_rankCoefficient = unitOfWork.RankCoefficientRepository.GetRankCoefficientByID(id);
+            query_rankCoefficient.unit_price = decimal.Parse(unit_price, CultureInfo.InvariantCulture);
             query_rankCoefficient.vietnamese_coefficient = decimal.Parse(vietnamese_coefficient, CultureInfo.InvariantCulture);
             query_rankCoefficient.foreign_coefficient = decimal.Parse(foreign_coefficient, CultureInfo.InvariantCulture);
             unitOfWork.Save();
