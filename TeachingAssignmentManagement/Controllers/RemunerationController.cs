@@ -215,6 +215,17 @@ namespace TeachingAssignmentManagement.Controllers
             return View(unitOfWork.RankCoefficientRepository.GetRankCoefficientByID(id));
         }
 
+        [HttpPost]
+        public ActionResult EditRankCoefficient(int id, string vietnamese_coefficient, string foreign_coefficient)
+        {
+            // Update rank coefficient
+            rank_coefficient query_rankCoefficient = unitOfWork.RankCoefficientRepository.GetRankCoefficientByID(id);
+            query_rankCoefficient.vietnamese_coefficient = decimal.Parse(vietnamese_coefficient, CultureInfo.InvariantCulture);
+            query_rankCoefficient.foreign_coefficient = decimal.Parse(foreign_coefficient, CultureInfo.InvariantCulture);
+            unitOfWork.Save();
+            return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpGet]
         public ActionResult SubjectCoefficient()
         {
