@@ -132,7 +132,7 @@
                 <tbody>
                     @foreach (var rank in ranks)
                     {
-                        var rankCoefficient = Model.SpecialProgramDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
+                        var rankCoefficient = Model.ForeignDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
                         <tr>
                             <td>@rank.Id</td>
                             @if (rankCoefficient != null)
