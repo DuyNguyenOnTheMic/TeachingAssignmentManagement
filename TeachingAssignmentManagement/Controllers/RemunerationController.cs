@@ -198,10 +198,12 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateRankCoefficient([Bind(Include = "type,unit_price,vietnamese_coefficient,foreign_coefficient,start_year,end_year,academic_degree_rank_id")] rank_coefficient rankCoefficient)
+        public ActionResult CreateRankCoefficient([Bind(Include = "type,unit_price,start_year,end_year,academic_degree_rank_id")] rank_coefficient rankCoefficient, string vietnamese_coefficient, string foreign_coefficient)
         {
             // Create new rank coefficient
             rankCoefficient.unit_price = 1;
+            rankCoefficient.vietnamese_coefficient = decimal.Parse(vietnamese_coefficient, CultureInfo.InvariantCulture);
+            rankCoefficient.foreign_coefficient = decimal.Parse(foreign_coefficient, CultureInfo.InvariantCulture);
             unitOfWork.RankCoefficientRepository.InsertRankCoefficient(rankCoefficient);
             unitOfWork.Save();
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
