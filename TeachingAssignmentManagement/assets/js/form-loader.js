@@ -546,7 +546,7 @@ if (academicDegreeRankForm.length) {
     });
 }
 
-if (subjectForm.length) {
+if (subjectCoefficientForm.length) {
     var counterMin = 1,
         counterMax = 9.99;
     // Populate touchspin
@@ -573,7 +573,7 @@ if (subjectForm.length) {
     })
 
     // Form validation for subject
-    subjectForm.validate({
+    subjectCoefficientForm.validate({
         ignore: [],
         rules: {
             theoretical_coefficient: {
