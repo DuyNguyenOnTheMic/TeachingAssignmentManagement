@@ -2,9 +2,10 @@
     majorForm = $('#major-form'),
     termForm = $('#term-form'),
     userForm = $('#user-form'),
-    subjectCoefficientForm = $('#subjectcoefficient-form'),
     academicDegreeForm = $('#academicdegree-form'),
-    academicDegreeRankForm = $('#academicdegreerank-form');
+    academicDegreeRankForm = $('#academicdegreerank-form'),
+    rankcoefficientForm = $('#rankcoefficient-form'),
+    subjectCoefficientForm = $('#subjectcoefficient-form');
 
 // Close dialog on button click
 $('#btnClose').click(function () {
@@ -420,71 +421,6 @@ if (userForm.length) {
     });
 }
 
-if (subjectForm.length) {
-    var counterMin = 1,
-        counterMax = 9.99;
-    // Populate touchspin
-    $('.touchspin').each(function () {
-        var $this = $(this);
-        $this.val() || $this.val(counterMin);
-        $this.TouchSpin({
-            min: counterMin,
-            max: counterMax,
-            forcestepdivisibility: 'none',
-            buttondown_txt: feather.icons['minus'].toSvg(),
-            buttonup_txt: feather.icons['plus'].toSvg()
-        }).on('touchspin.on.startdownspin', function () {
-            $('.bootstrap-touchspin-up').removeClass('disabled-max-min');
-            if ($this.val() == counterMin) {
-                $(this).siblings().find('.bootstrap-touchspin-down').addClass('disabled-max-min');
-            }
-        }).on('touchspin.on.startupspin', function () {
-            $('.bootstrap-touchspin-down').removeClass('disabled-max-min');
-            if ($this.val() == counterMax) {
-                $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
-            }
-        });
-    })
-
-    // Form validation for subject
-    subjectForm.validate({
-        ignore: [],
-        rules: {
-            theoretical_coefficient: {
-                required: true,
-                number: false,
-                min: counterMin,
-                max: counterMax
-            },
-            practice_coefficient: {
-                required: true,
-                number: false,
-                min: counterMin,
-                max: counterMax
-            }
-        },
-        messages: {
-            theoretical_coefficient: {
-                required: "Bạn chưa nhập số tiết tối đa",
-                min: "Vui lòng nhập lớn hơn hoặc bằng 1",
-                max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
-            },
-            practice_coefficient: {
-                required: "Bạn chưa nhập số lớp tối đa",
-                min: "Vui lòng nhập lớn hơn hoặc bằng 1",
-                max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
-            }
-        },
-        errorPlacement: function (error, element) {
-            if (element.hasClass("touchspin")) {
-                error.insertAfter(element.closest(".bootstrap-touchspin"));
-            } else {
-                error.insertAfter(element);
-            }
-        }
-    });
-}
-
 if (academicDegreeForm.length) {
     var counterMin = 1,
         counterMax = 100;
@@ -603,6 +539,136 @@ if (academicDegreeRankForm.length) {
         errorPlacement: function (error, element) {
             if (element.hasClass("form-data")) {
                 error.insertAfter(element.siblings(".select2"));
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+}
+
+if (subjectForm.length) {
+    var counterMin = 1,
+        counterMax = 9.99;
+    // Populate touchspin
+    $('.touchspin').each(function () {
+        var $this = $(this);
+        $this.val() || $this.val(counterMin);
+        $this.TouchSpin({
+            min: counterMin,
+            max: counterMax,
+            forcestepdivisibility: 'none',
+            buttondown_txt: feather.icons['minus'].toSvg(),
+            buttonup_txt: feather.icons['plus'].toSvg()
+        }).on('touchspin.on.startdownspin', function () {
+            $('.bootstrap-touchspin-up').removeClass('disabled-max-min');
+            if ($this.val() == counterMin) {
+                $(this).siblings().find('.bootstrap-touchspin-down').addClass('disabled-max-min');
+            }
+        }).on('touchspin.on.startupspin', function () {
+            $('.bootstrap-touchspin-down').removeClass('disabled-max-min');
+            if ($this.val() == counterMax) {
+                $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
+            }
+        });
+    })
+
+    // Form validation for subject
+    subjectForm.validate({
+        ignore: [],
+        rules: {
+            theoretical_coefficient: {
+                required: true,
+                number: false,
+                min: counterMin,
+                max: counterMax
+            },
+            practice_coefficient: {
+                required: true,
+                number: false,
+                min: counterMin,
+                max: counterMax
+            }
+        },
+        messages: {
+            theoretical_coefficient: {
+                required: "Bạn chưa nhập số tiết tối đa",
+                min: "Vui lòng nhập lớn hơn hoặc bằng 1",
+                max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
+            },
+            practice_coefficient: {
+                required: "Bạn chưa nhập số lớp tối đa",
+                min: "Vui lòng nhập lớn hơn hoặc bằng 1",
+                max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
+            }
+        },
+        errorPlacement: function (error, element) {
+            if (element.hasClass("touchspin")) {
+                error.insertAfter(element.closest(".bootstrap-touchspin"));
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+}
+
+if (rankcoefficientForm.length) {
+    var counterMin = 1,
+        counterMax = 9.99;
+    // Populate touchspin
+    $('.touchspin').each(function () {
+        var $this = $(this);
+        $this.val() || $this.val(counterMin);
+        $this.TouchSpin({
+            min: counterMin,
+            max: counterMax,
+            forcestepdivisibility: 'none',
+            buttondown_txt: feather.icons['minus'].toSvg(),
+            buttonup_txt: feather.icons['plus'].toSvg()
+        }).on('touchspin.on.startdownspin', function () {
+            $('.bootstrap-touchspin-up').removeClass('disabled-max-min');
+            if ($this.val() == counterMin) {
+                $(this).siblings().find('.bootstrap-touchspin-down').addClass('disabled-max-min');
+            }
+        }).on('touchspin.on.startupspin', function () {
+            $('.bootstrap-touchspin-down').removeClass('disabled-max-min');
+            if ($this.val() == counterMax) {
+                $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
+            }
+        });
+    })
+
+    // Form validation for rank
+    rankcoefficientForm.validate({
+        ignore: [],
+        rules: {
+            vietnamese_coefficient: {
+                required: true,
+                number: false,
+                min: counterMin,
+                max: counterMax
+            },
+            foreign_coefficient: {
+                required: true,
+                number: false,
+                min: counterMin,
+                max: counterMax
+            }
+        },
+        messages: {
+            vietnamese_coefficient: {
+                required: "Bạn chưa nhập số tiết tối đa",
+                min: "Vui lòng nhập lớn hơn hoặc bằng 1",
+                max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
+            },
+            foreign_coefficient: {
+                required: "Bạn chưa nhập số lớp tối đa",
+                min: "Vui lòng nhập lớn hơn hoặc bằng 1",
+                max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
+            }
+        },
+        errorPlacement: function (error, element) {
+            if (element.hasClass("touchspin")) {
+                error.insertAfter(element.closest(".bootstrap-touchspin"));
             } else {
                 error.insertAfter(element);
             }
