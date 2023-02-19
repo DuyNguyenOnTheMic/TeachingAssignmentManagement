@@ -4,7 +4,7 @@
     userForm = $('#user-form'),
     academicDegreeForm = $('#academicdegree-form'),
     academicDegreeRankForm = $('#academicdegreerank-form'),
-    rankcoefficientForm = $('#rankcoefficient-form'),
+    rankCoefficientForm = $('#rankcoefficient-form'),
     subjectCoefficientForm = $('#subjectcoefficient-form');
 
 // Close dialog on button click
@@ -546,7 +546,7 @@ if (academicDegreeRankForm.length) {
     });
 }
 
-if (rankcoefficientForm.length) {
+if (rankCoefficientForm.length) {
     var counterMin = 1,
         counterMax = 9.99;
     // Populate touchspin
@@ -578,11 +578,12 @@ if (rankcoefficientForm.length) {
     });
 
     // Form validation for rank
-    rankcoefficientForm.validate({
+    rankCoefficientForm.validate({
         ignore: [],
         rules: {
             unit_price: {
-                required: true
+                required: true,
+                maxlength: 18
             },
             vietnamese_coefficient: {
                 required: true,
@@ -599,7 +600,8 @@ if (rankcoefficientForm.length) {
         },
         messages: {
             unit_price: {
-                required: "Bạn chưa nhập đơn giá"
+                required: "Bạn chưa nhập đơn giá",
+                maxlength: "Tối đa 18 kí tự được cho phép"
             },
             vietnamese_coefficient: {
                 required: "Bạn chưa nhập số tiết tối đa",
