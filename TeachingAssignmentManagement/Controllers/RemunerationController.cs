@@ -204,12 +204,17 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult CreateRankCoefficient([Bind(Include = "type,start_year,end_year,academic_degree_rank_id")] rank_coefficient rankCoefficient, string unit_price, string vietnamese_coefficient, string foreign_coefficient)
         {
             // Create new rank coefficient
-            rankCoefficient.unit_price = decimal.Parse(unit_price, CultureInfo.InvariantCulture);
-            rankCoefficient.vietnamese_coefficient = decimal.Parse(vietnamese_coefficient, CultureInfo.InvariantCulture);
-            rankCoefficient.foreign_coefficient = decimal.Parse(foreign_coefficient, CultureInfo.InvariantCulture);
-            unitOfWork.RankCoefficientRepository.InsertRankCoefficient(rankCoefficient);
-            unitOfWork.Save();
-            return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
+            bool isRankCoefficientExists = unitOfWork.RankCoefficientRepository.CheckRankCoefficientExists(rankCoefficient.type, rankCoefficient.start_year, rankCoefficient.end_year, rankCoefficient.academic_degree_rank_id);
+            if (!isRankCoefficientExists)
+            {
+                rankCoefficient.unit_price = decimal.Parse(unit_price, CultureInfo.InvariantCulture);
+                rankCoefficient.vietnamese_coefficient = decimal.Parse(vietnamese_coefficient, CultureInfo.InvariantCulture);
+                rankCoefficient.foreign_coefficient = decimal.Parse(foreign_coefficient, CultureInfo.InvariantCulture);
+                unitOfWork.RankCoefficientRepository.InsertRankCoefficient(rankCoefficient);
+                unitOfWork.Save();
+                return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { error = true, message = "Đã xảy ra lỗi, vui lòng thử lại sau!" }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

@@ -35,6 +35,11 @@ namespace TeachingAssignmentManagement.DAL
             return context.rank_coefficient.Find(id);
         }
 
+        public bool CheckRankCoefficientExists(int type, int startYear, int endYear, string rankId)
+        {
+            return context.rank_coefficient.Any(r => r.type == type && r.start_year == startYear && r.end_year == endYear && r.academic_degree_rank_id == rankId);
+        }
+
         public void InsertRankCoefficient(rank_coefficient rankCoefficient)
         {
             context.rank_coefficient.Add(rankCoefficient);
