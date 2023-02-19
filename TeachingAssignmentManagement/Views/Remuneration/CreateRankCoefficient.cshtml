@@ -6,10 +6,15 @@
 
 @using (Html.BeginForm("CreateRankCoefficient", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "rankcoefficient-form" }))
 {
-    @Html.Hidden("academic_degree_rank_id")
     @Html.Hidden("type")
     @Html.Hidden("start_year")
     @Html.Hidden("end_year")
+
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="academic_degree_rank_id">Cấp bậc: </label>
+        @Html.Editor("academic_degree_rank_id", new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+    </div>
+
     <div class="row mb-1">
         <div class="col-6">
             <label class="form-label font-small-4" for="vietnamese_coefficient">Hệ số tiếng Việt: </label>

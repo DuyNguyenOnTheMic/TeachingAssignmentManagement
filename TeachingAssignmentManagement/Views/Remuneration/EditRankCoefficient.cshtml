@@ -9,6 +9,11 @@
 {
     @Html.HiddenFor(model => model.id)
 
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="academic_degree_rank_id">Cấp bậc: </label>
+        @Html.EditorFor(model => model.academic_degree_rank_id, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+    </div>
+
     <div class="row mb-1">
         <div class="col-6">
             <label class="form-label font-small-4" for="vietnamese_coefficient">Hệ số tiếng Việt: </label>
