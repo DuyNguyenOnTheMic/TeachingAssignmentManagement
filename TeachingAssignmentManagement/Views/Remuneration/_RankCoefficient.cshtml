@@ -40,7 +40,7 @@
                             <td>@rank.Id</td>
                             @if (rankCoefficient != null)
                             {
-                                <td class="text-center">@rankCoefficient.UnitPrice</td>
+                                <td class="text-center">@rankCoefficient.UnitPrice.ToString("N0")</td>
                                 <td class="text-center">@rankCoefficient.VietnameseCoefficient</td>
                                 <td class="text-center">@rankCoefficient.ForeignCoefficient</td>
                                 <td>
