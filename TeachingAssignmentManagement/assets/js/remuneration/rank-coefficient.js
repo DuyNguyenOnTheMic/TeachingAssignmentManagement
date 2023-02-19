@@ -1,6 +1,10 @@
 ﻿var popup;
 var rootUrl = $('#loader').data('request-url');
 
+function refreshTable() {
+    $("table").load(location.href + " table>*");
+}
+
 function disableButtons(state) {
     if (state === true) {
         // disable buttons
