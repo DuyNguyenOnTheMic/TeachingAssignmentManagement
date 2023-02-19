@@ -34,5 +34,10 @@ namespace TeachingAssignmentManagement.DAL
         {
             return context.rank_coefficient.Find(id);
         }
+
+        public void InsertRankCoefficient(rank_coefficient rankCoefficient)
+        {
+            context.rank_coefficient.Add(rankCoefficient);
+        }
     }
 }
