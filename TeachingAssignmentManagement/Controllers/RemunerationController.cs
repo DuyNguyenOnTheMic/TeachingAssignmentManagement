@@ -186,6 +186,13 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        public ActionResult CreateRankCoefficient(string rankId)
+        {
+            ViewData["rankId"] = rankId;
+            return View(new rank_coefficient());
+        }
+
+        [HttpGet]
         public ActionResult EditRankCoefficient(int id)
         {
             return View(unitOfWork.RankCoefficientRepository.GetRankCoefficientByID(id));
