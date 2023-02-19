@@ -1,8 +1,11 @@
 ﻿var popup;
-var rootUrl = $('#loader').data('request-url');
+var rootUrl = $('#loader').data('request-url'),
+    yearData = $('#yearData'),
+    startYear = yearData.data('startyear'),
+    endYear = yearData.data('endyear');
 
 function refreshTable() {
-    $("table").load(location.href + " table>*");
+    $("table").load(rootUrl + 'Remuneration/GetRankCoefficientData?startYear=' + startYear + '&endYear=' + endYear + " table>*");
 }
 
 function disableButtons(state) {
