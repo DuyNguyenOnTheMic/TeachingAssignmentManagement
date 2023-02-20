@@ -244,6 +244,14 @@ namespace TeachingAssignmentManagement.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult EditAllRankCoefficients(int type, int startYear, string endYear, string unit_price, string vietnamese_coefficient, string foreign_coefficient)
+        {
+            // Update all rank coefficients
+            unitOfWork.Save();
+            return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpGet]
         public ActionResult SubjectCoefficient()
         {
