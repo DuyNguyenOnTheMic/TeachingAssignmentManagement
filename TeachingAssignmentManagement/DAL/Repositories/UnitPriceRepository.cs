@@ -18,7 +18,7 @@ namespace TeachingAssignmentManagement.DAL
             return context.unit_price.Where(r => r.start_year == startYear && r.end_year == endYear);
         }
 
-        public IEnumerable<UnitPriceDTO> GetPrograms(IEnumerable<unit_price> query_unitPrices, int type)
+        public IEnumerable<UnitPriceDTO> GetUnitPricesByProgram(IEnumerable<unit_price> query_unitPrices, int type)
         {
             return query_unitPrices.Where(r => r.type == type).Select(r => new UnitPriceDTO
             {

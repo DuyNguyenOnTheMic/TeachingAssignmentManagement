@@ -184,9 +184,9 @@ namespace TeachingAssignmentManagement.Controllers
                 StartYear = startYear,
                 EndYear = endYear,
                 AcademicDegreeRankDTOs = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO(),
-                StandardProgramDTOs = unitOfWork.UnitPriceRepository.GetPrograms(query_unitPrices, Constants.StandardProgramType),
-                SpecialProgramDTOs = unitOfWork.UnitPriceRepository.GetPrograms(query_unitPrices, Constants.SpecialProgramType),
-                ForeignDTOs = unitOfWork.UnitPriceRepository.GetPrograms(query_unitPrices, Constants.ForeignType)
+                StandardProgramDTOs = unitOfWork.UnitPriceRepository.GetUnitPricesByProgram(query_unitPrices, Constants.StandardProgramType),
+                SpecialProgramDTOs = unitOfWork.UnitPriceRepository.GetUnitPricesByProgram(query_unitPrices, Constants.SpecialProgramType),
+                ForeignDTOs = unitOfWork.UnitPriceRepository.GetUnitPricesByProgram(query_unitPrices, Constants.ForeignType)
             });
         }
 
