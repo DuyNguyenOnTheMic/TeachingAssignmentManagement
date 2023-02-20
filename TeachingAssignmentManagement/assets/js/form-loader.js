@@ -5,7 +5,7 @@
     academicDegreeForm = $('#academicdegree-form'),
     academicDegreeRankForm = $('#academicdegreerank-form'),
     rankCoefficientForm = $('#rankcoefficient-form'),
-    subjectCoefficientForm = $('#subjectcoefficient-form');
+    subjectForm = $('#subject-form');
 
 // Close dialog on button click
 $('#btnClose').click(function () {
@@ -624,9 +624,9 @@ if (rankCoefficientForm.length) {
     });
 }
 
-if (subjectCoefficientForm.length) {
+if (subjectForm.length) {
     // Form validation for subject
-    subjectCoefficientForm.validate({
+    subjectForm.validate({
         ignore: [],
         rules: {
             theoretical_coefficient: {
