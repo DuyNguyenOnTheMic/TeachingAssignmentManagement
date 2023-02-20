@@ -44,5 +44,10 @@ namespace TeachingAssignmentManagement.DAL
         {
             context.rank_coefficient.Add(rankCoefficient);
         }
+
+        public void DeleteAllRankCoefficients(int type, int startYear, int endYear)
+        {
+            context.rank_coefficient.RemoveRange(context.rank_coefficient.Where(r => r.type == type && r.start_year == startYear && r.end_year == endYear));
+        }
     }
 }

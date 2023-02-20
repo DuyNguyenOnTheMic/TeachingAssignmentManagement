@@ -236,7 +236,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditAllRankCoefficients(int type, int startYear, string endYear)
+        public ActionResult EditAllRankCoefficients(int type, int startYear, int endYear)
         {
             ViewData["type"] = type;
             ViewData["startYear"] = startYear;
@@ -245,9 +245,10 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditAllRankCoefficients(int type, int startYear, string endYear, string unit_price, string vietnamese_coefficient, string foreign_coefficient)
+        public ActionResult EditAllRankCoefficients(int type, int startYear, int endYear, string unit_price, string vietnamese_coefficient, string foreign_coefficient)
         {
             // Update all rank coefficients
+            unitOfWork.RankCoefficientRepository.DeleteAllRankCoefficients(type, startYear, endYear);
             unitOfWork.Save();
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
