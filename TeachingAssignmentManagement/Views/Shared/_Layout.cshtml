@@ -100,20 +100,6 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="d-flex align-items-center" href="#"><i class="feather feather-dollar-sign"></i><span class="menu-title text-truncate">Thù lao</span></a>
-                                    <ul class="menu-content">
-                                        <li class="@(ViewBag.Title == "Quản lý cấp bậc" ? "active" : string.Empty)">
-                                            <a class="d-flex align-items-center" href="@Url.Action("AcademicDegree", "Remuneration")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Học hàm, học vị</span></a>
-                                        </li>
-                                        <li>
-                                            <a class="d-flex align-items-center" href="@Url.Action("RankCoefficient", "Remuneration")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Hệ số cấp bậc</span></a>
-                                        </li>
-                                        <li>
-                                            <a class="d-flex align-items-center" href="@Url.Action("SubjectCoefficient", "Remuneration")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Hệ số môn học</span></a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
                                     <a class="d-flex align-items-center" href="#"><i class="feather feather-bar-chart"></i><span class="menu-title text-truncate">Thống kê</span></a>
                                     <ul class="menu-content">
                                         <li>
@@ -124,6 +110,20 @@
                                         </li>
                                         <li>
                                             <a class="d-flex align-items-center" href="@Url.Action("Timetable", "Statistics")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Lịch giảng dạy</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="d-flex align-items-center" href="#"><i class="feather feather-dollar-sign"></i><span class="menu-title text-truncate">Thù lao</span></a>
+                                    <ul class="menu-content">
+                                        <li class="@(ViewBag.Title == "Quản lý cấp bậc" ? "active" : string.Empty)">
+                                            <a class="d-flex align-items-center" href="@Url.Action("AcademicDegree", "Remuneration")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Học hàm, học vị</span></a>
+                                        </li>
+                                        <li>
+                                            <a class="d-flex align-items-center" href="@Url.Action("RankCoefficient", "Remuneration")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Hệ số cấp bậc</span></a>
+                                        </li>
+                                        <li>
+                                            <a class="d-flex align-items-center" href="@Url.Action("SubjectCoefficient", "Remuneration")"><i class="feather feather-circle"></i><span class="menu-item text-truncate">Hệ số môn học</span></a>
                                         </li>
                                     </ul>
                                 </li>
