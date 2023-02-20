@@ -32,7 +32,7 @@ function disableButtons(state) {
 }
 
 // Show Create and Edit form
-function popupForm(url) {
+function popupForm(url, titleText) {
     var formDiv = $('<div/>')
     $.get(url)
         .done(function (response) {
@@ -41,7 +41,7 @@ function popupForm(url) {
             popup = formDiv.dialog({
                 autoOpen: true,
                 resizable: false,
-                title: 'Quản lý hệ số cấp bậc',
+                title: 'Quản lý hệ số cấp bậc ' + titleText,
                 width: 550,
                 open: function () {
                     // Add close icon class
