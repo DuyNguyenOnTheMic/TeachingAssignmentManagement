@@ -267,7 +267,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\Repositories\AcademicDegreeRankRepository.cs" />
     <Compile Include="DAL\Repositories\AcademicDegreeRepository.cs" />
-    <Compile Include="DAL\Repositories\RankCoefficientRepository.cs" />
+    <Compile Include="DAL\Repositories\CoefficientRepository.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Models\AcademicDegreeRankDTO.cs" />
     <Compile Include="Models\academic_degree.cs">
