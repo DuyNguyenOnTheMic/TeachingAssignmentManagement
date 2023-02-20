@@ -201,13 +201,12 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateRankCoefficient([Bind(Include = "type,start_year,end_year,academic_degree_rank_id")] coefficient rankCoefficient, string unit_price, string vietnamese_coefficient, string foreign_coefficient)
+        public ActionResult CreateRankCoefficient([Bind(Include = "type,start_year,end_year,academic_degree_rank_id")] coefficient rankCoefficient, string vietnamese_coefficient, string foreign_coefficient)
         {
             // Create new rank coefficient
-            bool isRankCoefficientExists = unitOfWork.CoefficientRepository.CheckRankCoefficientExists(rankCoefficient.type, rankCoefficient.start_year, rankCoefficient.end_year, rankCoefficient.academic_degree_rank_id);
+            bool isRankCoefficientExists = unitOfWork.CoefficientRepository.CheckRankCoefficientExists(rankCoefficient.start_year, rankCoefficient.end_year);
             if (!isRankCoefficientExists)
             {
-                rankCoefficient.unit_price = decimal.Parse(unit_price, CultureInfo.InvariantCulture);
                 rankCoefficient.vietnamese_coefficient = decimal.Parse(vietnamese_coefficient, CultureInfo.InvariantCulture);
                 rankCoefficient.foreign_coefficient = decimal.Parse(foreign_coefficient, CultureInfo.InvariantCulture);
                 unitOfWork.CoefficientRepository.InsertRankCoefficient(rankCoefficient);
