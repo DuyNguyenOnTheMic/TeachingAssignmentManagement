@@ -234,7 +234,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult SubjectCoefficient()
+        public ActionResult Subject()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
             ViewData["major"] = new SelectList(unitOfWork.MajorRepository.GetMajors(), "id", "name");
@@ -242,15 +242,15 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetSubjectCoefficientPartial(int termId, string majorId)
+        public ActionResult GetSubjectPartial(int termId, string majorId)
         {
             ViewData["termId"] = termId;
             ViewData["majorId"] = majorId;
-            return PartialView("_SubjectCoefficient");
+            return PartialView("_Subject");
         }
 
         [HttpGet]
-        public JsonResult GetSubjectCoefficientData(int termId, string majorId)
+        public JsonResult GetSubjectData(int termId, string majorId)
         {
             // Get subjects data from database
             IEnumerable query_subjects = majorId != "-1"
@@ -260,13 +260,13 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditSubjectCoefficient(string id)
+        public ActionResult EditSubject(string id)
         {
             return View(unitOfWork.SubjectRepository.GetSubjectByID(id));
         }
 
         [HttpPost]
-        public ActionResult EditSubjectCoefficient(string id, bool is_vietnamese)
+        public ActionResult EditSubject(string id, bool is_vietnamese)
         {
             // Update subject
             subject query_subject = unitOfWork.SubjectRepository.GetSubjectByID(id);
