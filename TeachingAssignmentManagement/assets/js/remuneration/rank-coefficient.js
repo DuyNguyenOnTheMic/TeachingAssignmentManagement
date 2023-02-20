@@ -4,6 +4,9 @@ var rootUrl = $('#loader').data('request-url'),
     startYear = yearData.data('startyear'),
     endYear = yearData.data('endyear');
 
+// Populate feather icon for partial view
+feather && feather.replace({ width: 14, height: 14 });
+
 function refreshTable() {
     // Refresh all tables when user updates
     $.get(rootUrl + 'Remuneration/GetRankCoefficientData?startYear=' + startYear + '&endYear=' + endYear)
