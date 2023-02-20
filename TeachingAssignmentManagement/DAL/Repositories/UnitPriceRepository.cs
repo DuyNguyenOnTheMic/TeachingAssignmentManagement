@@ -18,6 +18,11 @@ namespace TeachingAssignmentManagement.DAL
             return context.unit_price.Where(r => r.start_year == startYear && r.end_year == endYear);
         }
 
+        public bool CheckUnitPriceExists(int type, int startYear, int endYear, string rankId)
+        {
+            return context.unit_price.Any(r => r.type == type && r.start_year == startYear && r.end_year == endYear && r.academic_degree_rank_id == rankId);
+        }
+
         public IEnumerable<UnitPriceDTO> GetUnitPricesByProgram(IEnumerable<unit_price> query_unitPrices, int type)
         {
             return query_unitPrices.Where(r => r.type == type).Select(r => new UnitPriceDTO
@@ -26,6 +31,11 @@ namespace TeachingAssignmentManagement.DAL
                 UnitPrice = r.unit_price1,
                 AcademicDegreeRankId = r.academic_degree_rank_id
             }).ToList();
+        }
+
+        public void InsertUnitPrice(unit_price unitPrice)
+        {
+            context.unit_price.Add(unitPrice);
         }
     }
 }
