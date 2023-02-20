@@ -203,7 +203,7 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpPost]
         public ActionResult CreateUnitPrice([Bind(Include = "type,start_year,end_year,academic_degree_rank_id")] unit_price unitPrice, string price)
         {
-            // Create new rank coefficient
+            // Create new unit price
             bool isUnitPriceExists = unitOfWork.UnitPriceRepository.CheckUnitPriceExists(unitPrice.type, unitPrice.start_year, unitPrice.end_year, unitPrice.academic_degree_rank_id);
             if (!isUnitPriceExists)
             {
