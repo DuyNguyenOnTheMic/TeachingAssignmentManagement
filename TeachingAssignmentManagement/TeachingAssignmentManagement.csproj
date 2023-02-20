@@ -1269,7 +1269,6 @@
     <Content Include="Views\Remuneration\SubjectCoefficient.cshtml" />
     <Content Include="Views\Remuneration\_SubjectCoefficient.cshtml" />
     <Content Include="Views\Remuneration\EditSubjectCoefficient.cshtml" />
-    <Content Include="Views\Remuneration\EditAllSubjectCoefficients.cshtml" />
     <Content Include="Views\Remuneration\AcademicDegree.cshtml" />
     <Content Include="Views\Remuneration\CreateAcademicDegree.cshtml" />
     <Content Include="Views\Remuneration\EditAcademicDegree.cshtml" />

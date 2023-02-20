@@ -276,23 +276,6 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditAllSubjectCoefficients(int termId, string majorId)
-        {
-            ViewData["termId"] = termId;
-            ViewData["majorId"] = majorId;
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult EditAllSubjectCoefficients(int termId, string majorId, string theoretical_coefficient, string practice_coefficient)
-        {
-            // Update all subjects
-            unitOfWork.SubjectRepository.EditAllSubjects(termId, majorId, theoretical_coefficient, practice_coefficient);
-            unitOfWork.Save();
-            return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
         public ActionResult LecturerRank()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
