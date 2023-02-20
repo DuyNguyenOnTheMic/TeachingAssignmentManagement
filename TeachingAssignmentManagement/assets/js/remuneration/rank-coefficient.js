@@ -21,13 +21,13 @@ function refreshTable() {
 function disableButtons(state) {
     if (state === true) {
         // disable buttons
-        $('.createNew').prop('disabled', true);
+        $('.editAll').prop('disabled', true);
         $('.editRow').each(function () {
             this.style.pointerEvents = 'none';
         });
     } else {
         // enable buttons
-        $('.createNew').prop('disabled', false);
+        $('.editAll').prop('disabled', false);
         $('.editRow').each(function () {
             this.style.pointerEvents = 'auto';
         });

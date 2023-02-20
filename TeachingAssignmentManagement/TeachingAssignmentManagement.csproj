@@ -1139,6 +1139,7 @@
     <Content Include="assets\js\remuneration\rank-coefficient-load.js" />
     <Content Include="assets\js\remuneration\rank-coefficient-load.min.js" />
     <Content Include="assets\js\remuneration\rank-coefficient.js" />
+    <Content Include="assets\js\remuneration\rank-coefficient.min.js" />
     <Content Include="assets\js\remuneration\subject-coefficient-load.js" />
     <Content Include="assets\js\remuneration\subject-coefficient-load.min.js" />
     <Content Include="assets\js\remuneration\subject-coefficient.js" />
