@@ -178,15 +178,15 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult GetRankCoefficientData(int startYear, int endYear)
         {
             // Get ranks data from database
-            IEnumerable<coefficient> query_rankCoefficients = unitOfWork.CoefficientRepository.GetRankCoefficients(startYear, endYear);
+            IEnumerable<unit_price> query_unitPrices = unitOfWork.UnitPriceRepository.GetUnitPrices(startYear, endYear);
             return PartialView("_RankCoefficient", new RankViewModels
             {
                 StartYear = startYear,
                 EndYear = endYear,
                 AcademicDegreeRankDTOs = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO(),
-                StandardProgramDTOs = unitOfWork.CoefficientRepository.GetPrograms(query_rankCoefficients, Constants.StandardProgramType),
-                SpecialProgramDTOs = unitOfWork.CoefficientRepository.GetPrograms(query_rankCoefficients, Constants.SpecialProgramType),
-                ForeignDTOs = unitOfWork.CoefficientRepository.GetPrograms(query_rankCoefficients, Constants.ForeignType)
+                StandardProgramDTOs = unitOfWork.UnitPriceRepository.GetPrograms(query_unitPrices, Constants.StandardProgramType),
+                SpecialProgramDTOs = unitOfWork.UnitPriceRepository.GetPrograms(query_unitPrices, Constants.SpecialProgramType),
+                ForeignDTOs = unitOfWork.UnitPriceRepository.GetPrograms(query_unitPrices, Constants.ForeignType)
             });
         }
 
