@@ -23,8 +23,6 @@ $(function () {
                 { 'data': 'credits' },
                 { 'data': 'major', defaultContent: '' },
                 { 'data': 'is_vietnamese' },
-                { 'data': 'theoretical_coefficient' },
-                { 'data': 'practice_coefficient' },
                 {
                     'data': 'id', 'render': function (data) {
                         return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + rootUrl + "Remuneration/EditSubjectCoefficient/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a>";
@@ -43,32 +41,16 @@ $(function () {
                 {
                     searchable: false,
                     orderable: false,
-                    targets: [0, 8]
+                    targets: [0, 6]
                 },
-                { className: 'text-center', targets: [0, 3, 5, 6, 7, 8] },
+                { className: 'text-center', targets: [0, 3, 5, 6] },
                 { width: '5%', targets: 0 },
-                { width: '10%', targets: 8 }
+                { width: '10%', targets: 6 }
             ],
             order: [[1, 'asc']],
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
             displayLength: 10,
             lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "tất cả"]],
-            buttons: [
-                {
-                    text: feather.icons['edit-2'].toSvg({ class: 'me-50 font-small-4' }) + 'Sửa tất cả',
-                    className: 'editAll btn btn-primary',
-                    attr: {
-                        'onclick': "popupForm('" + rootUrl + "Remuneration/EditAllSubjectCoefficients?termId=" + termId + "&majorId=" + majorId + "')"
-                    },
-                    init: function (api, node, config) {
-                        $(node).removeClass('btn-secondary');
-                        $(node).parent().removeClass('btn-group');
-                        setTimeout(function () {
-                            $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex mt-50');
-                        }, 50);
-                    }
-                }
-            ],
 
             initComplete: function () {
                 majorId == '-1' ? setVisibleColumn(true) : setVisibleColumn(false);
@@ -102,13 +84,11 @@ function setVisibleColumn(state) {
 function disableButtons(state) {
     if (state === true) {
         // disable buttons
-        $('.editAll').prop('disabled', true);
         $('.editRow').each(function () {
             this.style.pointerEvents = 'none';
         });
     } else {
         // enable buttons
-        $('.editAll').prop('disabled', false);
         $('.editRow').each(function () {
             this.style.pointerEvents = 'auto';
         });
