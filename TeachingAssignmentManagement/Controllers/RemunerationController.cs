@@ -249,6 +249,21 @@ namespace TeachingAssignmentManagement.Controllers
         {
             // Update all rank coefficients
             unitOfWork.RankCoefficientRepository.DeleteAllRankCoefficients(type, startYear, endYear);
+            IEnumerable<AcademicDegreeRankDTO> academicDegreeRankDTOs = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO();
+            foreach (AcademicDegreeRankDTO item in academicDegreeRankDTOs)
+            {
+                rank_coefficient rankCoefficient = new rank_coefficient
+                {
+                    type = type,
+                    unit_price = decimal.Parse(unit_price, CultureInfo.InvariantCulture),
+                    vietnamese_coefficient = decimal.Parse(vietnamese_coefficient, CultureInfo.InvariantCulture),
+                    foreign_coefficient = decimal.Parse(foreign_coefficient, CultureInfo.InvariantCulture),
+                    start_year = startYear,
+                    end_year = endYear,
+                    academic_degree_rank_id = item.Id
+                };
+                unitOfWork.RankCoefficientRepository.InsertRankCoefficient(rankCoefficient);
+            }
             unitOfWork.Save();
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
