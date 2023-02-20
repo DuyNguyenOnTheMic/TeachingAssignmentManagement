@@ -37,7 +37,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public bool CheckRankCoefficientExists(int type, int startYear, int endYear, string rankId)
         {
-            return context.coefficients.Any(r => r.type == type && r.start_year == startYear && r.end_year == endYear && r.academic_degree_rank_id == rankId);
+            return context.coefficients.Any(r.start_year == startYear && r.end_year == endYear && r.academic_degree_rank_id == rankId);
         }
 
         public void InsertRankCoefficient(coefficient rankCoefficient)
@@ -47,7 +47,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public void DeleteAllRankCoefficients(int type, int startYear, int endYear)
         {
-            context.coefficients.RemoveRange(context.coefficients.Where(r => r.type == type && r.start_year == startYear && r.end_year == endYear));
+            context.coefficients.RemoveRange(context.coefficients.Where(r.start_year == startYear && r.end_year == endYear));
         }
     }
 }

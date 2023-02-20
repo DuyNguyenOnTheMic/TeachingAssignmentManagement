@@ -178,15 +178,15 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult GetRankCoefficientData(int startYear, int endYear)
         {
             // Get ranks data from database
-            IEnumerable<rank_coefficient> query_rankCoefficients = unitOfWork.RankCoefficientRepository.GetRankCoefficients(startYear, endYear);
+            IEnumerable<coefficient> query_rankCoefficients = unitOfWork.CoefficientRepository.GetRankCoefficients(startYear, endYear);
             return PartialView("_RankCoefficient", new RankViewModels
             {
                 StartYear = startYear,
                 EndYear = endYear,
                 AcademicDegreeRankDTOs = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO(),
-                StandardProgramDTOs = unitOfWork.RankCoefficientRepository.GetPrograms(query_rankCoefficients, Constants.StandardProgramType),
-                SpecialProgramDTOs = unitOfWork.RankCoefficientRepository.GetPrograms(query_rankCoefficients, Constants.SpecialProgramType),
-                ForeignDTOs = unitOfWork.RankCoefficientRepository.GetPrograms(query_rankCoefficients, Constants.ForeignType)
+                StandardProgramDTOs = unitOfWork.CoefficientRepository.GetPrograms(query_rankCoefficients, Constants.StandardProgramType),
+                SpecialProgramDTOs = unitOfWork.CoefficientRepository.GetPrograms(query_rankCoefficients, Constants.SpecialProgramType),
+                ForeignDTOs = unitOfWork.CoefficientRepository.GetPrograms(query_rankCoefficients, Constants.ForeignType)
             });
         }
 
@@ -197,20 +197,20 @@ namespace TeachingAssignmentManagement.Controllers
             ViewData["type"] = type;
             ViewData["start_year"] = startYear;
             ViewData["end_year"] = endYear;
-            return View(new rank_coefficient());
+            return View(new coefficient());
         }
 
         [HttpPost]
-        public ActionResult CreateRankCoefficient([Bind(Include = "type,start_year,end_year,academic_degree_rank_id")] rank_coefficient rankCoefficient, string unit_price, string vietnamese_coefficient, string foreign_coefficient)
+        public ActionResult CreateRankCoefficient([Bind(Include = "type,start_year,end_year,academic_degree_rank_id")] coefficient rankCoefficient, string unit_price, string vietnamese_coefficient, string foreign_coefficient)
         {
             // Create new rank coefficient
-            bool isRankCoefficientExists = unitOfWork.RankCoefficientRepository.CheckRankCoefficientExists(rankCoefficient.type, rankCoefficient.start_year, rankCoefficient.end_year, rankCoefficient.academic_degree_rank_id);
+            bool isRankCoefficientExists = unitOfWork.CoefficientRepository.CheckRankCoefficientExists(rankCoefficient.type, rankCoefficient.start_year, rankCoefficient.end_year, rankCoefficient.academic_degree_rank_id);
             if (!isRankCoefficientExists)
             {
                 rankCoefficient.unit_price = decimal.Parse(unit_price, CultureInfo.InvariantCulture);
                 rankCoefficient.vietnamese_coefficient = decimal.Parse(vietnamese_coefficient, CultureInfo.InvariantCulture);
                 rankCoefficient.foreign_coefficient = decimal.Parse(foreign_coefficient, CultureInfo.InvariantCulture);
-                unitOfWork.RankCoefficientRepository.InsertRankCoefficient(rankCoefficient);
+                unitOfWork.CoefficientRepository.InsertRankCoefficient(rankCoefficient);
                 unitOfWork.Save();
                 return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
             }
@@ -220,14 +220,14 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public ActionResult EditRankCoefficient(int id)
         {
-            return View(unitOfWork.RankCoefficientRepository.GetRankCoefficientByID(id));
+            return View(unitOfWork.CoefficientRepository.GetRankCoefficientByID(id));
         }
 
         [HttpPost]
         public ActionResult EditRankCoefficient(int id, string unit_price, string vietnamese_coefficient, string foreign_coefficient)
         {
             // Update rank coefficient
-            rank_coefficient query_rankCoefficient = unitOfWork.RankCoefficientRepository.GetRankCoefficientByID(id);
+            coefficient query_rankCoefficient = unitOfWork.CoefficientRepository.GetRankCoefficientByID(id);
             query_rankCoefficient.unit_price = decimal.Parse(unit_price, CultureInfo.InvariantCulture);
             query_rankCoefficient.vietnamese_coefficient = decimal.Parse(vietnamese_coefficient, CultureInfo.InvariantCulture);
             query_rankCoefficient.foreign_coefficient = decimal.Parse(foreign_coefficient, CultureInfo.InvariantCulture);
@@ -248,21 +248,19 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult EditAllRankCoefficients(int type, int startYear, int endYear, string unit_price, string vietnamese_coefficient, string foreign_coefficient)
         {
             // Update all rank coefficients
-            unitOfWork.RankCoefficientRepository.DeleteAllRankCoefficients(type, startYear, endYear);
+            unitOfWork.CoefficientRepository.DeleteAllRankCoefficients(type, startYear, endYear);
             IEnumerable<AcademicDegreeRankDTO> academicDegreeRankDTOs = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO();
             foreach (AcademicDegreeRankDTO item in academicDegreeRankDTOs)
             {
-                rank_coefficient rankCoefficient = new rank_coefficient
+                coefficient rankCoefficient = new coefficient
                 {
-                    type = type,
-                    unit_price = decimal.Parse(unit_price, CultureInfo.InvariantCulture),
                     vietnamese_coefficient = decimal.Parse(vietnamese_coefficient, CultureInfo.InvariantCulture),
                     foreign_coefficient = decimal.Parse(foreign_coefficient, CultureInfo.InvariantCulture),
                     start_year = startYear,
                     end_year = endYear,
-                    academic_degree_rank_id = item.Id
+                    subject_id = item.Id
                 };
-                unitOfWork.RankCoefficientRepository.InsertRankCoefficient(rankCoefficient);
+                unitOfWork.CoefficientRepository.InsertRankCoefficient(rankCoefficient);
             }
             unitOfWork.Save();
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
