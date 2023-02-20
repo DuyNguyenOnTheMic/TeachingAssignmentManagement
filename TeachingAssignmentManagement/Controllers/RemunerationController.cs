@@ -236,37 +236,6 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditAllRankCoefficients(int type, int startYear, int endYear)
-        {
-            ViewData["type"] = type;
-            ViewData["startYear"] = startYear;
-            ViewData["endYear"] = endYear;
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult EditAllRankCoefficients(int type, int startYear, int endYear, string unit_price, string vietnamese_coefficient, string foreign_coefficient)
-        {
-            // Update all rank coefficients
-            unitOfWork.CoefficientRepository.DeleteAllRankCoefficients(type, startYear, endYear);
-            IEnumerable<AcademicDegreeRankDTO> academicDegreeRankDTOs = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO();
-            foreach (AcademicDegreeRankDTO item in academicDegreeRankDTOs)
-            {
-                coefficient rankCoefficient = new coefficient
-                {
-                    vietnamese_coefficient = decimal.Parse(vietnamese_coefficient, CultureInfo.InvariantCulture),
-                    foreign_coefficient = decimal.Parse(foreign_coefficient, CultureInfo.InvariantCulture),
-                    start_year = startYear,
-                    end_year = endYear,
-                    subject_id = item.Id
-                };
-                unitOfWork.CoefficientRepository.InsertRankCoefficient(rankCoefficient);
-            }
-            unitOfWork.Save();
-            return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
         public ActionResult SubjectCoefficient()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
