@@ -236,6 +236,15 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        public ActionResult EditAllRankCoefficients(int type, int startYear, string endYear)
+        {
+            ViewData["type"] = type;
+            ViewData["startYear"] = startYear;
+            ViewData["endYear"] = endYear;
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult SubjectCoefficient()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
