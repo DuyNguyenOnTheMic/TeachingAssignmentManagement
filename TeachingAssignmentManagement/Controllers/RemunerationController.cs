@@ -329,6 +329,13 @@ namespace TeachingAssignmentManagement.Controllers
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult LecturerRank()
+        {
+            ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
