@@ -80,8 +80,14 @@
     </div>
     <div class="tab-pane" id="special" aria-labelledby="special-tab" role="tabpanel">
         <div class="table-responsive">
+            <div class="d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap mb-1">
+                <button class="editAll btn btn-primary" tabindex="0" aria-controls="tblStandard" type="button" onclick="popupForm('@Url.Action("EditAllRankCoefficients", "Remuneration", new { type = Constants.SpecialProgramType, startYear, endYear })', '@specialTitle')">
+                    <i data-feather="edit-2" class="me-25"></i>
+                    <span>Sửa tất cả</span>
+                </button>
+            </div>
             <table class="table mb-0" id="tblSpecial">
-                <thead>
+                <thead class="table-light">
                     <tr>
                         <th scope="col">Cấp bậc</th>
                         <th scope="col" class="text-center">Đơn giá</th>
@@ -128,8 +134,14 @@
     </div>
     <div class="tab-pane" id="foreign" aria-labelledby="foreign-tab" role="tabpanel">
         <div class="table-responsive">
+            <div class="d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap mb-1">
+                <button class="editAll btn btn-primary" tabindex="0" aria-controls="tblStandard" type="button" onclick="popupForm('@Url.Action("EditAllRankCoefficients", "Remuneration", new { type = Constants.ForeignType, startYear, endYear })', '@foreignTitle')">
+                    <i data-feather="edit-2" class="me-25"></i>
+                    <span>Sửa tất cả</span>
+                </button>
+            </div>
             <table class="table mb-0" id="tblForeign">
-                <thead>
+                <thead class="table-light">
                     <tr>
                         <th scope="col">Cấp bậc</th>
                         <th scope="col" class="text-center">Đơn giá</th>
