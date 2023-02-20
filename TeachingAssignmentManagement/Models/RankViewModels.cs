@@ -7,8 +7,8 @@ namespace TeachingAssignmentManagement.Models
         public int StartYear { get; set; }
         public int EndYear { get; set; }
         public IEnumerable<AcademicDegreeRankDTO> AcademicDegreeRankDTOs { get; set; }
-        public IEnumerable<RankCoefficientDTO> StandardProgramDTOs { get; set; }
-        public IEnumerable<RankCoefficientDTO> SpecialProgramDTOs { get; set; }
-        public IEnumerable<RankCoefficientDTO> ForeignDTOs { get; set; }
+        public IEnumerable<UnitPriceDTO> StandardProgramDTOs { get; set; }
+        public IEnumerable<UnitPriceDTO> SpecialProgramDTOs { get; set; }
+        public IEnumerable<UnitPriceDTO> ForeignDTOs { get; set; }
     }
 }
