@@ -125,7 +125,6 @@
           <Property Name="practice_coefficient" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="start_year" Type="int" Nullable="false" />
           <Property Name="end_year" Type="int" Nullable="false" />
-          <Property Name="subject_id" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="lecturer">
           <Key>
@@ -290,18 +289,6 @@
             </Principal>
             <Dependent Role="class_section">
               <PropertyRef Name="term_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_coefficient_subject">
-          <End Role="subject" Type="Self.subject" Multiplicity="1" />
-          <End Role="coefficient" Type="Self.coefficient" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="subject">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="coefficient">
-              <PropertyRef Name="subject_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -480,10 +467,6 @@
             <End Role="term" EntitySet="term" />
             <End Role="class_section" EntitySet="class_section" />
           </AssociationSet>
-          <AssociationSet Name="FK_coefficient_subject" Association="Self.FK_coefficient_subject">
-            <End Role="subject" EntitySet="subject" />
-            <End Role="coefficient" EntitySet="coefficient" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -658,8 +641,6 @@
           <Property Name="practice_coefficient" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="start_year" Type="Int32" Nullable="false" />
           <Property Name="end_year" Type="Int32" Nullable="false" />
-          <Property Name="subject_id" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="subject" Relationship="Self.FK_coefficient_subject" FromRole="coefficient" ToRole="subject" />
         </EntityType>
         <EntityType Name="lecturer">
           <Key>
@@ -718,7 +699,6 @@
           <Property Name="term_id" Type="Int32" Nullable="false" />
           <Property Name="major_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="class_section" Relationship="Self.FK_class_section_subject" FromRole="subject" ToRole="class_section" />
-          <NavigationProperty Name="coefficients" Relationship="Self.FK_coefficient_subject" FromRole="subject" ToRole="coefficient" />
           <NavigationProperty Name="major" Relationship="Self.FK_subject_major" FromRole="subject" ToRole="major" />
           <NavigationProperty Name="term" Relationship="Self.FK_subject_term" FromRole="subject" ToRole="term" />
         </EntityType>
@@ -896,18 +876,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_coefficient_subject">
-          <End Role="subject" Type="Self.subject" Multiplicity="1" />
-          <End Role="coefficient" Type="Self.coefficient" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="subject">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="coefficient">
-              <PropertyRef Name="subject_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_lecturer_rank_lecturer">
           <End Role="lecturer" Type="Self.lecturer" Multiplicity="1" />
           <End Role="lecturer_rank" Type="Self.lecturer_rank" Multiplicity="*" />
@@ -1021,10 +989,6 @@
           <AssociationSet Name="FK_class_section_term" Association="Self.FK_class_section_term">
             <End Role="term" EntitySet="terms" />
             <End Role="class_section" EntitySet="class_section" />
-          </AssociationSet>
-          <AssociationSet Name="FK_coefficient_subject" Association="Self.FK_coefficient_subject">
-            <End Role="subject" EntitySet="subjects" />
-            <End Role="coefficient" EntitySet="coefficients" />
           </AssociationSet>
           <AssociationSet Name="FK_lecturer_rank_lecturer" Association="Self.FK_lecturer_rank_lecturer">
             <End Role="lecturer" EntitySet="lecturers" />
@@ -1169,7 +1133,6 @@
                 <ScalarProperty Name="practice_coefficient" ColumnName="practice_coefficient" />
                 <ScalarProperty Name="start_year" ColumnName="start_year" />
                 <ScalarProperty Name="end_year" ColumnName="end_year" />
-                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

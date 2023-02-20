@@ -21,8 +21,5 @@ namespace TeachingAssignmentManagement.Models
         public decimal practice_coefficient { get; set; }
         public int start_year { get; set; }
         public int end_year { get; set; }
-        public string subject_id { get; set; }
-    
-        public virtual subject subject { get; set; }
     }
 }

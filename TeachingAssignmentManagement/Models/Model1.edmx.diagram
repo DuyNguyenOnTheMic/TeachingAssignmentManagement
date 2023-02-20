@@ -4,24 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="23b681f8f15944959c5c75acd74bb06c" Name="Diagram1">
-        <EntityTypeShape EntityType="CP25Team03Model.C__MigrationHistory" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="227a04c1161948d6bcba4772617b6601" Name="Diagram1">
+        <EntityTypeShape EntityType="CP25Team03Model.C__MigrationHistory" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CP25Team03Model.academic_degree" Width="1.5" PointX="1.5" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP25Team03Model.academic_degree_rank" Width="1.5" PointX="3.75" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP25Team03Model.AspNetRole" Width="1.5" PointX="8.75" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP25Team03Model.AspNetUserClaim" Width="1.5" PointX="13.25" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP25Team03Model.AspNetUserLogin" Width="1.5" PointX="13.25" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP25Team03Model.AspNetUser" Width="1.5" PointX="11" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP25Team03Model.academic_degree_rank" Width="1.5" PointX="3.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP25Team03Model.AspNetRole" Width="1.5" PointX="8.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP25Team03Model.AspNetUserClaim" Width="1.5" PointX="13.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP25Team03Model.AspNetUserLogin" Width="1.5" PointX="13.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP25Team03Model.AspNetUser" Width="1.5" PointX="11" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CP25Team03Model.class_section" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP25Team03Model.coefficient" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP25Team03Model.coefficient" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CP25Team03Model.lecturer" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP25Team03Model.lecturer_rank" Width="1.5" PointX="6" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP25Team03Model.major" Width="1.5" PointX="3.75" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP25Team03Model.room" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP25Team03Model.lecturer_rank" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP25Team03Model.major" Width="1.5" PointX="3.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP25Team03Model.room" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CP25Team03Model.subject" Width="1.5" PointX="6" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP25Team03Model.sysdiagram" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP25Team03Model.term" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP25Team03Model.unit_price" Width="1.5" PointX="6" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP25Team03Model.sysdiagram" Width="1.5" PointX="5.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP25Team03Model.term" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP25Team03Model.unit_price" Width="1.5" PointX="6" PointY="14.5" IsExpanded="true" />
         <AssociationConnector Association="CP25Team03Model.FK_academic_degree_rank_academic_degree" ManuallyRouted="false" />
         <AssociationConnector Association="CP25Team03Model.FK_lecturer_rank_academic_degree_rank" ManuallyRouted="false" />
         <AssociationConnector Association="CP25Team03Model.FK_unit_price_academic_degree_rank" ManuallyRouted="false" />
@@ -33,7 +33,6 @@
         <AssociationConnector Association="CP25Team03Model.FK_class_section_room" ManuallyRouted="false" />
         <AssociationConnector Association="CP25Team03Model.FK_class_section_subject" ManuallyRouted="false" />
         <AssociationConnector Association="CP25Team03Model.FK_class_section_term" ManuallyRouted="false" />
-        <AssociationConnector Association="CP25Team03Model.FK_coefficient_subject" ManuallyRouted="false" />
         <AssociationConnector Association="CP25Team03Model.FK_lecturer_rank_lecturer" ManuallyRouted="false" />
         <AssociationConnector Association="CP25Team03Model.FK_lecturer_rank_term" ManuallyRouted="false" />
         <AssociationConnector Association="CP25Team03Model.FK_subject_major" ManuallyRouted="false" />
