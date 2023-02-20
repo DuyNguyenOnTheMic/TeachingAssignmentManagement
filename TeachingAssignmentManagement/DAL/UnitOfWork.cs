@@ -14,6 +14,7 @@ namespace TeachingAssignmentManagement.DAL
         private CoefficientRepository coefficientRepository;
         private RoomRepository roomRepository;
         private TermRepository termRepository;
+        private UnitPriceRepository unitPriceRepository;
         private UserRepository userRepository;
 
         public UnitOfWork(CP25Team03Entities context)
@@ -114,6 +115,18 @@ namespace TeachingAssignmentManagement.DAL
                     termRepository = new TermRepository(context);
                 }
                 return termRepository;
+            }
+        }
+
+        public UnitPriceRepository UnitPriceRepository
+        {
+            get
+            {
+                if (unitPriceRepository == null)
+                {
+                    unitPriceRepository = new UnitPriceRepository(context);
+                }
+                return unitPriceRepository;
             }
         }
 
