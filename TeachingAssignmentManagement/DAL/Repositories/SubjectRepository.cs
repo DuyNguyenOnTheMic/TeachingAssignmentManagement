@@ -27,9 +27,7 @@ namespace TeachingAssignmentManagement.DAL
                 s.subject_id,
                 s.name,
                 s.credits,
-                s.is_vietnamese,
-                s.theoretical_coefficient,
-                s.practice_coefficient
+                s.is_vietnamese
             }).ToList();
         }
 
@@ -42,9 +40,7 @@ namespace TeachingAssignmentManagement.DAL
                 s.name,
                 s.credits,
                 major = s.major.name,
-                s.is_vietnamese,
-                s.theoretical_coefficient,
-                s.practice_coefficient
+                s.is_vietnamese
             }).ToList();
         }
 
@@ -61,14 +57,6 @@ namespace TeachingAssignmentManagement.DAL
         public void DeleteAllSubjects(int term, string major)
         {
             context.subjects.RemoveRange(context.subjects.Where(s => s.term_id == term && s.major_id == major));
-        }
-
-        public void EditAllSubjects(int term, string major, string theoretical_coefficient, string practice_coefficient)
-        {
-            string sql = major != "-1"
-                ? "UPDATE subject SET theoretical_coefficient = {0}, practice_coefficient = {1} WHERE term_id = {2} AND major_id = {3}"
-                : "UPDATE subject SET theoretical_coefficient = {0}, practice_coefficient = {1} WHERE term_id = {2}";
-            context.Database.ExecuteSqlCommand(sql, theoretical_coefficient, practice_coefficient, term, major);
         }
     }
 }
