@@ -1277,6 +1277,7 @@
     <Content Include="Views\Remuneration\EditRankCoefficient.cshtml" />
     <Content Include="Views\Remuneration\CreateRankCoefficient.cshtml" />
     <Content Include="Views\Remuneration\EditAllRankCoefficients.cshtml" />
+    <Content Include="Views\Remuneration\LecturerRank.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
