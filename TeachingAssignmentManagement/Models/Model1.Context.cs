@@ -34,6 +34,7 @@ namespace TeachingAssignmentManagement.Models
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<class_section> class_section { get; set; }
         public virtual DbSet<lecturer> lecturers { get; set; }
+        public virtual DbSet<lecturer_rank> lecturer_rank { get; set; }
         public virtual DbSet<major> majors { get; set; }
         public virtual DbSet<rank_coefficient> rank_coefficient { get; set; }
         public virtual DbSet<room> rooms { get; set; }

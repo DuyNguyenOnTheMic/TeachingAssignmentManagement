@@ -19,6 +19,7 @@ namespace TeachingAssignmentManagement.Models
         {
             this.class_section = new HashSet<class_section>();
             this.class_section1 = new HashSet<class_section>();
+            this.lecturer_rank = new HashSet<lecturer_rank>();
         }
     
         public string id { get; set; }
@@ -31,5 +32,7 @@ namespace TeachingAssignmentManagement.Models
         public virtual ICollection<class_section> class_section { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<class_section> class_section1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<lecturer_rank> lecturer_rank { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace TeachingAssignmentManagement.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public academic_degree_rank()
         {
+            this.lecturer_rank = new HashSet<lecturer_rank>();
             this.rank_coefficient = new HashSet<rank_coefficient>();
         }
     
@@ -24,6 +25,8 @@ namespace TeachingAssignmentManagement.Models
         public string academic_degree_id { get; set; }
     
         public virtual academic_degree academic_degree { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<lecturer_rank> lecturer_rank { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<rank_coefficient> rank_coefficient { get; set; }
     }

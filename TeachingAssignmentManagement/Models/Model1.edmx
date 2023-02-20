@@ -124,6 +124,15 @@
           <Property Name="type" Type="nvarchar" MaxLength="100" />
           <Property Name="status" Type="bit" />
         </EntityType>
+        <EntityType Name="lecturer_rank">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="academic_degree_rank_id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lecturer_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="term_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="major">
           <Key>
             <PropertyRef Name="id" />
@@ -331,6 +340,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_lecturer_rank_academic_degree_rank">
+          <End Role="academic_degree_rank" Type="Self.academic_degree_rank" Multiplicity="1" />
+          <End Role="lecturer_rank" Type="Self.lecturer_rank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="academic_degree_rank">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="lecturer_rank">
+              <PropertyRef Name="academic_degree_rank_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lecturer_rank_lecturer">
+          <End Role="lecturer" Type="Self.lecturer" Multiplicity="1" />
+          <End Role="lecturer_rank" Type="Self.lecturer_rank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lecturer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="lecturer_rank">
+              <PropertyRef Name="lecturer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lecturer_rank_term">
+          <End Role="term" Type="Self.term" Multiplicity="1" />
+          <End Role="lecturer_rank" Type="Self.lecturer_rank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="term">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="lecturer_rank">
+              <PropertyRef Name="term_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_rank_coefficient_academic_degree_rank">
           <End Role="academic_degree_rank" Type="Self.academic_degree_rank" Multiplicity="1" />
           <End Role="rank_coefficient" Type="Self.rank_coefficient" Multiplicity="*" />
@@ -378,6 +423,7 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="class_section" EntityType="Self.class_section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lecturer" EntityType="Self.lecturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lecturer_rank" EntityType="Self.lecturer_rank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="major" EntityType="Self.major" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rank_coefficient" EntityType="Self.rank_coefficient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="room" EntityType="Self.room" Schema="dbo" store:Type="Tables" />
@@ -428,6 +474,18 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_lecturer_rank_academic_degree_rank" Association="Self.FK_lecturer_rank_academic_degree_rank">
+            <End Role="academic_degree_rank" EntitySet="academic_degree_rank" />
+            <End Role="lecturer_rank" EntitySet="lecturer_rank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lecturer_rank_lecturer" Association="Self.FK_lecturer_rank_lecturer">
+            <End Role="lecturer" EntitySet="lecturer" />
+            <End Role="lecturer_rank" EntitySet="lecturer_rank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lecturer_rank_term" Association="Self.FK_lecturer_rank_term">
+            <End Role="term" EntitySet="term" />
+            <End Role="lecturer_rank" EntitySet="lecturer_rank" />
+          </AssociationSet>
           <AssociationSet Name="FK_rank_coefficient_academic_degree_rank" Association="Self.FK_rank_coefficient_academic_degree_rank">
             <End Role="academic_degree_rank" EntitySet="academic_degree_rank" />
             <End Role="rank_coefficient" EntitySet="rank_coefficient" />
@@ -472,6 +530,7 @@
           <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="academic_degree_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="academic_degree" Relationship="Self.FK_academic_degree_rank_academic_degree" FromRole="academic_degree_rank" ToRole="academic_degree" />
+          <NavigationProperty Name="lecturer_rank" Relationship="Self.FK_lecturer_rank_academic_degree_rank" FromRole="academic_degree_rank" ToRole="lecturer_rank" />
           <NavigationProperty Name="rank_coefficient" Relationship="Self.FK_rank_coefficient_academic_degree_rank" FromRole="academic_degree_rank" ToRole="rank_coefficient" />
         </EntityType>
         <EntityType Name="AspNetRole">
@@ -573,6 +632,19 @@
           <Property Name="status" Type="Boolean" />
           <NavigationProperty Name="class_section" Relationship="Self.FK_class_section_lecturer" FromRole="lecturer" ToRole="class_section" />
           <NavigationProperty Name="class_section1" Relationship="Self.FK_class_section_lecturer1" FromRole="lecturer" ToRole="class_section" />
+          <NavigationProperty Name="lecturer_rank" Relationship="Self.FK_lecturer_rank_lecturer" FromRole="lecturer" ToRole="lecturer_rank" />
+        </EntityType>
+        <EntityType Name="lecturer_rank">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="academic_degree_rank_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lecturer_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="term_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="academic_degree_rank" Relationship="Self.FK_lecturer_rank_academic_degree_rank" FromRole="lecturer_rank" ToRole="academic_degree_rank" />
+          <NavigationProperty Name="lecturer" Relationship="Self.FK_lecturer_rank_lecturer" FromRole="lecturer_rank" ToRole="lecturer" />
+          <NavigationProperty Name="term" Relationship="Self.FK_lecturer_rank_term" FromRole="lecturer_rank" ToRole="term" />
         </EntityType>
         <EntityType Name="major">
           <Key>
@@ -648,6 +720,7 @@
           <Property Name="max_class" Type="Int32" Nullable="false" />
           <Property Name="status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="class_section" Relationship="Self.FK_class_section_term" FromRole="term" ToRole="class_section" />
+          <NavigationProperty Name="lecturer_rank" Relationship="Self.FK_lecturer_rank_term" FromRole="term" ToRole="lecturer_rank" />
           <NavigationProperty Name="subjects" Relationship="Self.FK_subject_term" FromRole="term" ToRole="subject" />
         </EntityType>
         <Association Name="FK_academic_degree_rank_academic_degree">
@@ -659,6 +732,18 @@
             </Principal>
             <Dependent Role="academic_degree_rank">
               <PropertyRef Name="academic_degree_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lecturer_rank_academic_degree_rank">
+          <End Role="academic_degree_rank" Type="Self.academic_degree_rank" Multiplicity="1" />
+          <End Role="lecturer_rank" Type="Self.lecturer_rank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="academic_degree_rank">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="lecturer_rank">
+              <PropertyRef Name="academic_degree_rank_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -774,6 +859,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_lecturer_rank_lecturer">
+          <End Role="lecturer" Type="Self.lecturer" Multiplicity="1" />
+          <End Role="lecturer_rank" Type="Self.lecturer_rank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lecturer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="lecturer_rank">
+              <PropertyRef Name="lecturer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lecturer_rank_term">
+          <End Role="term" Type="Self.term" Multiplicity="1" />
+          <End Role="lecturer_rank" Type="Self.lecturer_rank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="term">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="lecturer_rank">
+              <PropertyRef Name="term_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_subject_major">
           <End Role="major" Type="Self.major" Multiplicity="1" />
           <End Role="subject" Type="Self.subject" Multiplicity="*" />
@@ -812,6 +921,7 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
           <EntitySet Name="class_section" EntityType="Self.class_section" />
           <EntitySet Name="lecturers" EntityType="Self.lecturer" />
+          <EntitySet Name="lecturer_rank" EntityType="Self.lecturer_rank" />
           <EntitySet Name="majors" EntityType="Self.major" />
           <EntitySet Name="rank_coefficient" EntityType="Self.rank_coefficient" />
           <EntitySet Name="rooms" EntityType="Self.room" />
@@ -821,6 +931,10 @@
           <AssociationSet Name="FK_academic_degree_rank_academic_degree" Association="Self.FK_academic_degree_rank_academic_degree">
             <End Role="academic_degree" EntitySet="academic_degree" />
             <End Role="academic_degree_rank" EntitySet="academic_degree_rank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lecturer_rank_academic_degree_rank" Association="Self.FK_lecturer_rank_academic_degree_rank">
+            <End Role="academic_degree_rank" EntitySet="academic_degree_rank" />
+            <End Role="lecturer_rank" EntitySet="lecturer_rank" />
           </AssociationSet>
           <AssociationSet Name="FK_rank_coefficient_academic_degree_rank" Association="Self.FK_rank_coefficient_academic_degree_rank">
             <End Role="academic_degree_rank" EntitySet="academic_degree_rank" />
@@ -857,6 +971,14 @@
           <AssociationSet Name="FK_class_section_term" Association="Self.FK_class_section_term">
             <End Role="term" EntitySet="terms" />
             <End Role="class_section" EntitySet="class_section" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lecturer_rank_lecturer" Association="Self.FK_lecturer_rank_lecturer">
+            <End Role="lecturer" EntitySet="lecturers" />
+            <End Role="lecturer_rank" EntitySet="lecturer_rank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lecturer_rank_term" Association="Self.FK_lecturer_rank_term">
+            <End Role="term" EntitySet="terms" />
+            <End Role="lecturer_rank" EntitySet="lecturer_rank" />
           </AssociationSet>
           <AssociationSet Name="FK_subject_major" Association="Self.FK_subject_major">
             <End Role="major" EntitySet="majors" />
@@ -991,6 +1113,16 @@
                 <ScalarProperty Name="full_name" ColumnName="full_name" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lecturer_rank">
+            <EntityTypeMapping TypeName="CP25Team03Model.lecturer_rank">
+              <MappingFragment StoreEntitySet="lecturer_rank">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="academic_degree_rank_id" ColumnName="academic_degree_rank_id" />
+                <ScalarProperty Name="lecturer_id" ColumnName="lecturer_id" />
+                <ScalarProperty Name="term_id" ColumnName="term_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
