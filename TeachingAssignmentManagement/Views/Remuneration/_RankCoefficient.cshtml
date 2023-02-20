@@ -47,7 +47,7 @@
                     {
                         var rankCoefficient = Model.StandardProgramDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
                         <tr>
-                            <td>@rank.Id</td>
+                            <td class="fw-bold">@rank.Id</td>
                             @if (rankCoefficient != null)
                             {
                                 <td class="text-center">@rankCoefficient.UnitPrice.ToString("N0")</td>
@@ -101,7 +101,7 @@
                     {
                         var rankCoefficient = Model.SpecialProgramDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
                         <tr>
-                            <td>@rank.Id</td>
+                            <td class="fw-bold">@rank.Id</td>
                             @if (rankCoefficient != null)
                             {
                                 <td class="text-center">@rankCoefficient.UnitPrice.ToString("N0")</td>
@@ -155,7 +155,7 @@
                     {
                         var rankCoefficient = Model.ForeignDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
                         <tr>
-                            <td>@rank.Id</td>
+                            <td class="fw-bold">@rank.Id</td>
                             @if (rankCoefficient != null)
                             {
                                 <td class="text-center">@rankCoefficient.UnitPrice.ToString("N0")</td>
