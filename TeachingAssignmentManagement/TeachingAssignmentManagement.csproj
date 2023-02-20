@@ -1275,7 +1275,7 @@
     <Content Include="Views\Remuneration\AcademicDegreeRank.cshtml" />
     <Content Include="Views\Remuneration\CreateAcademicDegreeRank.cshtml" />
     <Content Include="Views\Remuneration\EditAcademicDegreeRank.cshtml" />
-    <Content Include="Views\Remuneration\RankCoefficient.cshtml" />
+    <Content Include="Views\Remuneration\PriceCoefficient.cshtml" />
     <Content Include="Views\Remuneration\_RankCoefficient.cshtml" />
     <Content Include="Views\Remuneration\EditRankCoefficient.cshtml" />
     <Content Include="Views\Remuneration\CreateRankCoefficient.cshtml" />

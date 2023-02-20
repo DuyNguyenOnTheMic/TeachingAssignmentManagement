@@ -168,18 +168,18 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult RankCoefficient()
+        public ActionResult PriceCoefficient()
         {
             ViewData["year"] = new SelectList(unitOfWork.TermRepository.GetYears(), "schoolyear", "schoolyear");
             return View();
         }
 
         [HttpGet]
-        public ActionResult GetRankCoefficientData(int startYear, int endYear)
+        public ActionResult GetPriceCoefficientData(int startYear, int endYear)
         {
-            // Get ranks data from database
+            // Get price and coefficient data from database
             IEnumerable<unit_price> query_unitPrices = unitOfWork.UnitPriceRepository.GetUnitPrices(startYear, endYear);
-            return PartialView("_RankCoefficient", new RankViewModels
+            return PartialView("_PriceCoefficient", new RankViewModels
             {
                 StartYear = startYear,
                 EndYear = endYear,
