@@ -266,7 +266,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditSubjectCoefficient(string id, bool is_vietnamese, string theoretical_coefficient, string practice_coefficient)
+        public ActionResult EditSubjectCoefficient(string id, bool is_vietnamese)
         {
             // Update subject
             subject query_subject = unitOfWork.SubjectRepository.GetSubjectByID(id);
