@@ -227,7 +227,6 @@ namespace TeachingAssignmentManagement.Controllers
         {
             // Update rank coefficient
             coefficient query_rankCoefficient = unitOfWork.CoefficientRepository.GetRankCoefficientByID(id);
-            query_rankCoefficient.unit_price = decimal.Parse(unit_price, CultureInfo.InvariantCulture);
             query_rankCoefficient.vietnamese_coefficient = decimal.Parse(vietnamese_coefficient, CultureInfo.InvariantCulture);
             query_rankCoefficient.foreign_coefficient = decimal.Parse(foreign_coefficient, CultureInfo.InvariantCulture);
             unitOfWork.Save();
@@ -272,8 +271,6 @@ namespace TeachingAssignmentManagement.Controllers
             // Update subject
             subject query_subject = unitOfWork.SubjectRepository.GetSubjectByID(id);
             query_subject.is_vietnamese = is_vietnamese;
-            query_subject.theoretical_coefficient = decimal.Parse(theoretical_coefficient, CultureInfo.InvariantCulture);
-            query_subject.practice_coefficient = decimal.Parse(practice_coefficient, CultureInfo.InvariantCulture);
             unitOfWork.Save();
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
