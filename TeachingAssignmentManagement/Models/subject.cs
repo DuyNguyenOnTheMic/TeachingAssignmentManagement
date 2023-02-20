@@ -18,6 +18,7 @@ namespace TeachingAssignmentManagement.Models
         public subject()
         {
             this.class_section = new HashSet<class_section>();
+            this.coefficients = new HashSet<coefficient>();
         }
     
         public string id { get; set; }
@@ -25,13 +26,13 @@ namespace TeachingAssignmentManagement.Models
         public string name { get; set; }
         public int credits { get; set; }
         public bool is_vietnamese { get; set; }
-        public decimal theoretical_coefficient { get; set; }
-        public decimal practice_coefficient { get; set; }
         public int term_id { get; set; }
         public string major_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<class_section> class_section { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<coefficient> coefficients { get; set; }
         public virtual major major { get; set; }
         public virtual term term { get; set; }
     }

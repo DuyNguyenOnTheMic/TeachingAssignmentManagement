@@ -12,13 +12,11 @@ namespace TeachingAssignmentManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class rank_coefficient
+    public partial class unit_price
     {
         public int id { get; set; }
         public int type { get; set; }
-        public decimal unit_price { get; set; }
-        public decimal vietnamese_coefficient { get; set; }
-        public decimal foreign_coefficient { get; set; }
+        public decimal unit_price1 { get; set; }
         public int start_year { get; set; }
         public int end_year { get; set; }
         public string academic_degree_rank_id { get; set; }

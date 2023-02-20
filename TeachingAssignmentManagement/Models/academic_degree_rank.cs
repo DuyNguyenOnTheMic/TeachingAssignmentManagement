@@ -18,7 +18,7 @@ namespace TeachingAssignmentManagement.Models
         public academic_degree_rank()
         {
             this.lecturer_rank = new HashSet<lecturer_rank>();
-            this.rank_coefficient = new HashSet<rank_coefficient>();
+            this.unit_price = new HashSet<unit_price>();
         }
     
         public string id { get; set; }
@@ -28,6 +28,6 @@ namespace TeachingAssignmentManagement.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<lecturer_rank> lecturer_rank { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<rank_coefficient> rank_coefficient { get; set; }
+        public virtual ICollection<unit_price> unit_price { get; set; }
     }
 }
