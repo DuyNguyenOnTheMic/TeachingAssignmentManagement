@@ -198,7 +198,7 @@ namespace TeachingAssignmentManagement.Controllers
             ViewData["type"] = type;
             ViewData["start_year"] = startYear;
             ViewData["end_year"] = endYear;
-            return View(new coefficient());
+            return View();
         }
 
         [HttpPost]
