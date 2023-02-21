@@ -143,7 +143,7 @@ function getTimetable(termId, majorId) {
 
     if (termId && majorId) {
         // Display loading message while fetching data
-        assignLecturerDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
+        showLoading(assignLecturerDiv);
 
         // Get Partial View timetable data
         $.get(url, { termId, majorId }, function (data) {
