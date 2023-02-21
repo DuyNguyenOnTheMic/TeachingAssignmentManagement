@@ -371,6 +371,13 @@ namespace TeachingAssignmentManagement.Controllers
             return Json(unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult EditAllLecturerRanks(int termId)
+        {
+            ViewData["termId"] = termId;
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();

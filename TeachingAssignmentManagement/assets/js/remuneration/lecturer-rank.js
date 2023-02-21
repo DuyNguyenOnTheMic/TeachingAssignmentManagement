@@ -46,7 +46,7 @@ $(function () {
                     text: feather.icons['edit-2'].toSvg({ class: 'me-50 font-small-4' }) + 'Sửa tất cả',
                     className: 'editAll btn btn-primary',
                     attr: {
-                        'onclick': "popupForm('" + rootUrl + "Major/Create')"
+                        'onclick': "popupForm('" + rootUrl + "Remuneration/EditAllLecturerRanks?termId=" + termId + ")"
                     },
                     init: function (api, node, config) {
                         $(node).removeClass('btn-secondary');
