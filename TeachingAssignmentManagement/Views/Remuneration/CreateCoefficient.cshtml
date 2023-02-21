@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("CreateCoefficient", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "unitprice-form" }))
+{
+    @Html.Hidden("start_year")
+    @Html.Hidden("end_year")
+
+    <div class="row mb-1">
+        <div class="col-6">
+            <label class="form-label font-small-4" for="vietnamese_coefficient">Hệ số tiếng Việt: </label>
+            <div class="input-group">
+                <input type="text" class="touchspin" id="vietnamese_coefficient" name="vietnamese_coefficient" value="1" data-bts-step="0.1" data-bts-decimals="2" aria-label="Nhập hệ số tiếng Việt" />
+            </div>
+        </div>
+        <div class="col-6">
+            <label class="form-label font-small-4" for="foreign_coefficient">Hệ số tiếng Anh: </label>
+            <div class="input-group">
+                <input type="text" class="touchspin" id="foreign_coefficient" name="foreign_coefficient" value="1" data-bts-step="0.1" data-bts-decimals="2" aria-label="Nhập hệ số tiếng Anh" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-1">
+        <div class="col-6">
+            <label class="form-label font-small-4" for="theoretical_coefficient">Hệ số lý thuyết: </label>
+            <div class="input-group">
+                <input type="text" class="touchspin" id="theoretical_coefficient" name="theoretical_coefficient" value="1" data-bts-step="0.1" data-bts-decimals="2" aria-label="Nhập hệ số LT" />
+            </div>
+        </div>
+        <div class="col-6">
+            <label class="form-label font-small-4" for="practice_coefficient">Hệ số thực hành: </label>
+            <div class="input-group">
+                <input type="text" class="touchspin" id="practice_coefficient" name="practice_coefficient" value="1" data-bts-step="0.1" data-bts-decimals="2" aria-label="Nhập hệ số TH" />
+            </div>
+        </div>
+    </div>
+}
+
+<link href="~/app-assets/css/plugins/forms/form-validation.min.css" rel="stylesheet" />
+<script src="~/assets/js/form-loader.js"></script>
