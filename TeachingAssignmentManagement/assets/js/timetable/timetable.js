@@ -19,7 +19,7 @@ $(function () {
 
 // Display message when table have no data
 if (rowCount == 0) {
-    $('#assignLecturerDiv').empty().append('<h4 class="text-center mt-2">Học kỳ này chưa có dữ liệu <i class="feather feather-help-circle"></i></h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="Welcome" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
+    showNoData(assignLecturerDiv, '<i class="feather feather-help-circle"></i>');
 } else {
     // Initialize Tooltip
     $('#tblAssign [data-bs-toggle="tooltip"]').tooltip({
