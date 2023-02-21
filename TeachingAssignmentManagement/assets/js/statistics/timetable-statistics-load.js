@@ -37,20 +37,14 @@ termSelect.change(function () {
 
     var termId = $(this).val(),
         week = 0;
-    loading();
     fetchData(termId, week);
 });
 
 weekSelect.change(function () {
     var termId = termSelect.val(),
         week = $(this).val();
-    loading();
     fetchData(termId, week);
 });
-
-function loading() {
-    timetableStatisticsDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
-}
 
 function fetchData(termId, week) {
     // Dispose all tooltips and popovers
@@ -58,7 +52,7 @@ function fetchData(termId, week) {
 
     if (termId) {
         // Display loading message while fetching data
-        loading();
+        showLoading(timetableStatisticsDiv);
 
         // Get Partial View timetable data
         $.get(url, { termId, week }, function (data) {
