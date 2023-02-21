@@ -5,7 +5,8 @@
     academicDegreeForm = $('#academicdegree-form'),
     academicDegreeRankForm = $('#academicdegreerank-form'),
     unitPriceForm = $('#unitprice-form'),
-    coefficientForm = $('#coefficient-form');
+    coefficientForm = $('#coefficient-form'),
+    lecturerRankForm = $('#lecturerrank-form');
 
 // Close dialog on button click
 $('#btnClose').click(function () {
@@ -648,6 +649,52 @@ if (coefficientForm.length) {
         errorPlacement: function (error, element) {
             if (element.hasClass("touchspin")) {
                 error.insertAfter(element.closest(".bootstrap-touchspin"));
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+}
+
+if (lecturerRankForm.length) {
+    var select = $('.form-data');
+    // select2
+    select.each(function () {
+        var $this = $(this);
+        $this.wrap('<div class="position-relative"></div>');
+        $this
+            .select2({
+                placeholder: $this[0][0].innerHTML,
+                forceabove: true,
+                dropdownParent: $this.parent()
+            })
+            .on('select2:open', function () {
+                // Set dropdown height for select2
+                var dropdown = $this.parent().find('.select2-results__options');
+                if (dropdown.css('max-height') != '115px') {
+                    dropdown.css({ 'max-height': '115px' });
+                }
+            })
+            .change(function () {
+                $(this).valid();
+            });
+    });
+
+    // Form validation for academic degree rank form
+    lecturerRankForm.validate({
+        rules: {
+            academic_degree_rank_id: {
+                required: true
+            }
+        },
+        messages: {
+            academic_degree_rank_id: {
+                required: "Bạn chưa chọn cấp bậc cho giảng viên"
+            }
+        },
+        errorPlacement: function (error, element) {
+            if (element.hasClass("form-data")) {
+                error.insertAfter(element.siblings(".select2"));
             } else {
                 error.insertAfter(element);
             }

@@ -4,6 +4,10 @@
 
 @using (Html.BeginForm("EditAllLecturerRanks", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "lecturerrank-form" }))
 {
+    <div class="alert alert-primary py-2 mt-1 mb-2" role="alert">
+        <div class="alert-body"><b><i class="feather feather-help-circle"></i> Hướng dẫn: </b>Hệ thống sẽ tự động sửa cấp bậc cho tất cả các giảng viên nếu bạn chọn <strong>"Lưu"</strong>.</div>
+    </div>
+
     @Html.Hidden("termId")
     <div class="mb-1">
         <label class="form-label font-small-4" for="price">Đơn giá: </label>
