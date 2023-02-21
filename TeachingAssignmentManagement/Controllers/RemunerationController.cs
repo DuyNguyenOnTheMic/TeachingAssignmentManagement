@@ -384,13 +384,13 @@ namespace TeachingAssignmentManagement.Controllers
         {
             // Update all lecturer ranks
             unitOfWork.LecturerRankRepository.DeleteAllLecturerRanks(termId);
-            IEnumerable<dynamic> lecturers = (IEnumerable<dynamic>)unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
-            foreach (var item in lecturers)
+            IEnumerable<LecturerRankDTO> lecturers = unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
+            foreach (LecturerRankDTO lecturer in lecturers)
             {
                 lecturer_rank lecturerRank = new lecturer_rank
                 {
                     academic_degree_rank_id = rank_id,
-                    lecturer_id = item.id,
+                    lecturer_id = lecturer.Id,
                     term_id = termId
                 };
                 unitOfWork.LecturerRankRepository.InsertLecturerRank(lecturerRank);

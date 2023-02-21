@@ -320,6 +320,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LecturerDTO.cs" />
+    <Compile Include="Models\LecturerRankDTO.cs" />
     <Compile Include="Models\lecturer_rank.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

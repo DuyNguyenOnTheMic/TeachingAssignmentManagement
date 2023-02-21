@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TeachingAssignmentManagement.Models;
 
@@ -13,17 +13,17 @@ namespace TeachingAssignmentManagement.DAL
             this.context = context;
         }
 
-        public IEnumerable GetLecturerRanksInTerm(int term)
+        public IEnumerable<LecturerRankDTO> GetLecturerRanksInTerm(int term)
         {
             return (from u in context.lecturers.Where(l => l.type == "TG")
                     join l in context.lecturer_rank.Where(r => r.term_id == term) on u.id equals l.lecturer_id into lecturers
                     from lecturer in lecturers.DefaultIfEmpty()
-                    select new
+                    select new LecturerRankDTO
                     {
-                        u.id,
-                        u.staff_id,
-                        u.full_name,
-                        lecturer.academic_degree_rank_id
+                        Id = u.id,
+                        StaffId = u.staff_id,
+                        FullName = u.full_name,
+                        AcademicDegreeRankId = lecturer.academic_degree_rank_id
                     }).ToList();
         }
 
