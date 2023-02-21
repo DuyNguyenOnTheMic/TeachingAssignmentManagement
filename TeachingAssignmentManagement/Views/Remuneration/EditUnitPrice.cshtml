@@ -1,0 +1,29 @@
+﻿@model TeachingAssignmentManagement.Models.unit_price
+@using System.Globalization
+
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("EditUnitPrice", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "rankcoefficient-form" }))
+{
+    @Html.HiddenFor(model => model.id)
+
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="academic_degree_rank_id">Cấp bậc: </label>
+        @Html.EditorFor(model => model.academic_degree_rank_id, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+    </div>
+
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="price">Đơn giá: </label>
+        <input type="text" class="form-control" id="price" name="price" value="@Model.unit_price.ToString(CultureInfo.InvariantCulture)" placeholder="Nhập đơn giá" aria-label="Nhập đơn giá" />
+    </div>
+
+    <div class="float-end m-1">
+        <button type="button" class="btn btn-outline-secondary waves-effect me-1" id="btnClose">Huỷ</button>
+        <button type="submit" class="btn btn-primary waves-effect waves-float waves-light">Lưu</button>
+    </div>
+}
+
+<link href="~/app-assets/css/plugins/forms/form-validation.min.css" rel="stylesheet" />
+<script src="~/assets/js/form-loader.js"></script>
