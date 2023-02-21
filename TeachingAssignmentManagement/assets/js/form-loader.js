@@ -593,7 +593,7 @@ if (coefficientForm.length) {
             }
         });
     })
-
+        
     // Form validation for coefficient
     coefficientForm.validate({
         rules: {
