@@ -597,6 +597,18 @@ if (coefficientForm.length) {
     // Form validation for coefficient
     coefficientForm.validate({
         rules: {
+            vietnamese_coefficient: {
+                required: true,
+                number: false,
+                min: counterMin,
+                max: counterMax
+            },
+            foreign_coefficient: {
+                required: true,
+                number: false,
+                min: counterMin,
+                max: counterMax
+            },
             theoretical_coefficient: {
                 required: true,
                 number: false,
@@ -611,13 +623,23 @@ if (coefficientForm.length) {
             }
         },
         messages: {
+            vietnamese_coefficient: {
+                required: "Bạn chưa nhập hệ số tiếng Việt",
+                min: "Vui lòng nhập lớn hơn hoặc bằng 1",
+                max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
+            },
+            foreign_coefficient: {
+                required: "Bạn chưa nhập hệ số tiếng Anh",
+                min: "Vui lòng nhập lớn hơn hoặc bằng 1",
+                max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
+            },
             theoretical_coefficient: {
-                required: "Bạn chưa nhập số tiết tối đa",
+                required: "Bạn chưa nhập hệ số lý thuyết",
                 min: "Vui lòng nhập lớn hơn hoặc bằng 1",
                 max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
             },
             practice_coefficient: {
-                required: "Bạn chưa nhập số lớp tối đa",
+                required: "Bạn chưa nhập hệ số thực hành",
                 min: "Vui lòng nhập lớn hơn hoặc bằng 1",
                 max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
             }
