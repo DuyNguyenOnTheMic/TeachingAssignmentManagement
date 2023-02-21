@@ -341,7 +341,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\UnitPriceDTO.cs" />
-    <Compile Include="Models\RankViewModels.cs" />
+    <Compile Include="Models\PriceCoefficientViewModels.cs" />
     <Compile Include="Models\room.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

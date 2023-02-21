@@ -2,7 +2,7 @@
 
 namespace TeachingAssignmentManagement.Models
 {
-    public class RankViewModels
+    public class PriceCoefficientViewModels
     {
         public int StartYear { get; set; }
         public int EndYear { get; set; }

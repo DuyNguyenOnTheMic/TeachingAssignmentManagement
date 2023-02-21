@@ -179,7 +179,7 @@ namespace TeachingAssignmentManagement.Controllers
         {
             // Get price and coefficient data from database
             IEnumerable<unit_price> query_unitPrices = unitOfWork.UnitPriceRepository.GetUnitPrices(startYear, endYear);
-            return PartialView("_PriceCoefficient", new RankViewModels
+            return PartialView("_PriceCoefficient", new PriceCoefficientViewModels
             {
                 StartYear = startYear,
                 EndYear = endYear,
