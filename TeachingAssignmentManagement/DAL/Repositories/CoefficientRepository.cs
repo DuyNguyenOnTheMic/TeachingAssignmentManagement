@@ -12,7 +12,7 @@ namespace TeachingAssignmentManagement.DAL
             this.context = context;
         }
 
-        public coefficient GetCoefficientsInYear(int startYear, int endYear)
+        public coefficient GetCoefficientInYear(int startYear, int endYear)
         {
             return context.coefficients.SingleOrDefault(r => r.start_year == startYear && r.end_year == endYear);
         }

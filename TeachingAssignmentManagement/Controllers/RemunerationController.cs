@@ -187,7 +187,7 @@ namespace TeachingAssignmentManagement.Controllers
                 StandardProgramDTOs = unitOfWork.UnitPriceRepository.GetUnitPricesByProgram(query_unitPrices, Constants.StandardProgramType),
                 SpecialProgramDTOs = unitOfWork.UnitPriceRepository.GetUnitPricesByProgram(query_unitPrices, Constants.SpecialProgramType),
                 ForeignDTOs = unitOfWork.UnitPriceRepository.GetUnitPricesByProgram(query_unitPrices, Constants.ForeignType),
-                Coefficients = unitOfWork.CoefficientRepository.GetCoefficientsInYear(startYear, endYear)
+                Coefficients = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear)
             });
         }
 

@@ -15,6 +15,7 @@ function refreshTable() {
             $('#tblStandard').replaceWith($('#tblStandard', newDom));
             $('#tblSpecial').replaceWith($('#tblSpecial', newDom));
             $('#tblForeign').replaceWith($('#tblForeign', newDom));
+            $('#tblCoefficient').replaceWith($('#tblCoefficient', newDom));
         });
 }
 
