@@ -45,7 +45,7 @@ function popupForm(url, titleText) {
             popup = formDiv.dialog({
                 autoOpen: true,
                 resizable: false,
-                title: 'Quản lý hệ số cấp bậc ' + titleText,
+                title: 'Quản lý ' + titleText,
                 width: 550,
                 open: function () {
                     // Add close icon class
