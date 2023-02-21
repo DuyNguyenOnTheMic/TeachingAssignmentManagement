@@ -71,6 +71,18 @@ namespace TeachingAssignmentManagement.DAL
             }
         }
 
+        public LecturerRankRepository LecturerRankRepository
+        {
+            get
+            {
+                if (lecturerRankRepository == null)
+                {
+                    lecturerRankRepository = new LecturerRankRepository(context);
+                }
+                return lecturerRankRepository;
+            }
+        }
+
         public MajorRepository MajorRepository
         {
             get
