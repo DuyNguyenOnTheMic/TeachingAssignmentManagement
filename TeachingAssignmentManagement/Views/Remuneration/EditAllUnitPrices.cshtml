@@ -1,0 +1,22 @@
+﻿@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("EditUnitPrice", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "unitprice-form" }))
+{
+    @Html.Hidden("type")
+    @Html.Hidden("startYear")
+    @Html.Hidden("endYear")
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="price">Đơn giá: </label>
+        <input type="text" class="form-control" id="price" name="price" placeholder="Nhập đơn giá" aria-label="Nhập đơn giá" />
+    </div>
+
+    <div class="float-end m-1">
+        <button type="button" class="btn btn-outline-secondary waves-effect me-1" id="btnClose">Huỷ</button>
+        <button type="submit" class="btn btn-primary waves-effect waves-float waves-light">Lưu</button>
+    </div>
+}
+
+<link href="~/app-assets/css/plugins/forms/form-validation.min.css" rel="stylesheet" />
+<script src="~/assets/js/form-loader.js"></script>
