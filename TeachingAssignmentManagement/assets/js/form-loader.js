@@ -597,15 +597,36 @@ if (coefficientForm.length) {
     // Form validation for rank
     coefficientForm.validate({
         rules: {
-            vietnamese_coefficient: {
+            theoretical_coefficient: {
                 required: true,
-                maxlength: 18
+                number: false,
+                min: counterMin,
+                max: counterMax
+            },
+            practice_coefficient: {
+                required: true,
+                number: false,
+                min: counterMin,
+                max: counterMax
             }
         },
         messages: {
-            vietnamese_coefficient: {
-                required: "Bạn chưa nhập đơn giá",
-                maxlength: "Tối đa 18 kí tự được cho phép"
+            theoretical_coefficient: {
+                required: "Bạn chưa nhập số tiết tối đa",
+                min: "Vui lòng nhập lớn hơn hoặc bằng 1",
+                max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
+            },
+            practice_coefficient: {
+                required: "Bạn chưa nhập số lớp tối đa",
+                min: "Vui lòng nhập lớn hơn hoặc bằng 1",
+                max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
+            }
+        },
+        errorPlacement: function (error, element) {
+            if (element.hasClass("touchspin")) {
+                error.insertAfter(element.closest(".bootstrap-touchspin"));
+            } else {
+                error.insertAfter(element);
             }
         }
     });
