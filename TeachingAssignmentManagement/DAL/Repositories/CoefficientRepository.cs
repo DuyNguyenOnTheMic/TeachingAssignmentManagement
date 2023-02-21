@@ -24,7 +24,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public bool CheckCoefficientExists(int startYear, int endYear)
         {
-            return context.unit_price.Any(r => r.start_year == startYear && r.end_year == endYear);
+            return context.coefficients.Any(r => r.start_year == startYear && r.end_year == endYear);
         }
 
         public void InsertCoefficient(coefficient coefficient)
