@@ -5,7 +5,7 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("EditUnitPrice", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "rankcoefficient-form" }))
+@using (Html.BeginForm("EditUnitPrice", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "unitprice-form" }))
 {
     @Html.HiddenFor(model => model.id)
 

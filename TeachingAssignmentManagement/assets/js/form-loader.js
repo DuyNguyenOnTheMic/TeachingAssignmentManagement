@@ -4,7 +4,7 @@
     userForm = $('#user-form'),
     academicDegreeForm = $('#academicdegree-form'),
     academicDegreeRankForm = $('#academicdegreerank-form'),
-    rankCoefficientForm = $('#rankcoefficient-form'),
+    unitPriceForm = $('#unitprice-form'),
     subjectForm = $('#subject-form');
 
 // Close dialog on button click
@@ -546,14 +546,14 @@ if (academicDegreeRankForm.length) {
     });
 }
 
-if (rankCoefficientForm.length) {
+if (unitPriceForm.length) {
     new Cleave($('#price'), {
         numeral: true,
         numeralThousandsGroupStyle: 'thousand'
     });
 
     // Form validation for rank
-    rankCoefficientForm.validate({
+    unitPriceForm.validate({
         ignore: [],
         rules: {
             price: {
