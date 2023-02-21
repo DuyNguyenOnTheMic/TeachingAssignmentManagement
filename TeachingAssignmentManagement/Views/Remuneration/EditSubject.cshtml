@@ -8,15 +8,14 @@
 {
     @Html.HiddenFor(model => model.id)
 
-    <div class="row mb-1">
-        <div class="col-6">
-            <label class="form-label font-small-4" for="subject_id">Mã môn học: </label>
-            @Html.EditorFor(model => model.subject_id, new { htmlAttributes = new { @class = "form-control", @aria_label = "Mã môn học", @disabled = "@disabled" } })
-        </div>
-        <div class="col-6">
-            <label class="form-label font-small-4" for="name">Tên môn học: </label>
-            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @aria_label = "Tên môn học", @disabled = "@disabled" } })
-        </div>
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="subject_id">Mã môn học: </label>
+        @Html.EditorFor(model => model.subject_id, new { htmlAttributes = new { @class = "form-control", @aria_label = "Mã môn học", @disabled = "@disabled" } })
+    </div>
+
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="name">Tên môn học: </label>
+        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @aria_label = "Tên môn học", @disabled = "@disabled" } })
     </div>
 
     <div class="mb-1">
