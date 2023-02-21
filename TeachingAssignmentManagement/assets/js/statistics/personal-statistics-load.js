@@ -58,8 +58,7 @@ unitSelect.change(function () {
 formData.change(function () {
     var isLesson,
         type,
-        value,
-        lecturerType;
+        value;
     // Check if user select unit lesson
     isLessonCheck.is(":checked") ? isLesson = true : isLesson = false;
     // Check if term or year select is hidden
@@ -71,13 +70,9 @@ formData.change(function () {
         value = yearSelect.val();
     }
     // Display loading message while fetching data
-    loading();
+    showLoading(statisticsDiv);
     fetchData(isLesson, type, value);
 });
-
-function loading() {
-    statisticsDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
-}
 
 function fetchData(isLesson, type, value) {
     var url = rootUrl + 'Statistics/GetPersonalChart';
