@@ -177,16 +177,16 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public ActionResult GetPriceCoefficientData(int startYear, int endYear)
         {
-            // Get price and coefficient data from database
-            IEnumerable<unit_price> query_unitPrices = unitOfWork.UnitPriceRepository.GetUnitPrices(startYear, endYear);
+            // Get unit price and coefficient data from database
+            IEnumerable<unit_price> query_unitPrice = unitOfWork.UnitPriceRepository.GetUnitPriceInYear(startYear, endYear);
             return PartialView("_PriceCoefficient", new PriceCoefficientViewModels
             {
                 StartYear = startYear,
                 EndYear = endYear,
                 AcademicDegreeRankDTOs = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO(),
-                StandardProgramDTOs = unitOfWork.UnitPriceRepository.GetUnitPricesByProgram(query_unitPrices, Constants.StandardProgramType),
-                SpecialProgramDTOs = unitOfWork.UnitPriceRepository.GetUnitPricesByProgram(query_unitPrices, Constants.SpecialProgramType),
-                ForeignDTOs = unitOfWork.UnitPriceRepository.GetUnitPricesByProgram(query_unitPrices, Constants.ForeignType),
+                StandardProgramDTOs = unitOfWork.UnitPriceRepository.GetUnitPriceByProgram(query_unitPrice, Constants.StandardProgramType),
+                SpecialProgramDTOs = unitOfWork.UnitPriceRepository.GetUnitPriceByProgram(query_unitPrice, Constants.SpecialProgramType),
+                ForeignDTOs = unitOfWork.UnitPriceRepository.GetUnitPriceByProgram(query_unitPrice, Constants.ForeignType),
                 Coefficients = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear)
             });
         }
@@ -244,8 +244,8 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpPost]
         public ActionResult EditAllUnitPrice(int type, int startYear, int endYear, string unit_price)
         {
-            // Update all unit prices
-            unitOfWork.UnitPriceRepository.DeleteAllUnitPrices(type, startYear, endYear);
+            // Update all unit price
+            unitOfWork.UnitPriceRepository.DeleteAllUnitPrice(type, startYear, endYear);
             IEnumerable<AcademicDegreeRankDTO> academicDegreeRankDTOs = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO();
             foreach (AcademicDegreeRankDTO item in academicDegreeRankDTOs)
             {
