@@ -50,14 +50,14 @@
                         <tbody>
                             @foreach (var rank in ranks)
                             {
-                                var Coefficient = Model.StandardProgramDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
+                                var coefficient = Model.StandardProgramDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
                                 <tr>
                                     <td class="fw-bold">@rank.Id</td>
-                                    @if (Coefficient != null)
+                                    @if (coefficient != null)
                                     {
-                                        <td class="text-center">@Coefficient.UnitPrice.ToString("N0")</td>
+                                        <td class="text-center">@coefficient.UnitPrice.ToString("N0")</td>
                                         <td>
-                                            <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("EditUnitPrice", "Remuneration" , new { id = Coefficient.Id })', '@standardTitle')">
+                                            <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("EditUnitPrice", "Remuneration" , new { id = coefficient.Id })', '@standardTitle')">
                                                 <i class="feather feather-edit font-medium-3 me-1"></i>
                                             </a>
                                         </td>
@@ -100,14 +100,14 @@
                         <tbody>
                             @foreach (var rank in ranks)
                             {
-                                var Coefficient = Model.SpecialProgramDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
+                                var coefficient = Model.SpecialProgramDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
                                 <tr>
                                     <td class="fw-bold">@rank.Id</td>
-                                    @if (Coefficient != null)
+                                    @if (coefficient != null)
                                     {
-                                        <td class="text-center">@Coefficient.UnitPrice.ToString("N0")</td>
+                                        <td class="text-center">@coefficient.UnitPrice.ToString("N0")</td>
                                         <td>
-                                            <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("EditUnitPrice", "Remuneration" , new { id = Coefficient.Id })', '@specialTitle')">
+                                            <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("EditUnitPrice", "Remuneration" , new { id = coefficient.Id })', '@specialTitle')">
                                                 <i class="feather feather-edit font-medium-3 me-1"></i>
                                             </a>
                                         </td>
@@ -150,14 +150,14 @@
                         <tbody>
                             @foreach (var rank in ranks)
                             {
-                                var Coefficient = Model.ForeignDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
+                                var coefficient = Model.ForeignDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
                                 <tr>
                                     <td class="fw-bold">@rank.Id</td>
-                                    @if (Coefficient != null)
+                                    @if (coefficient != null)
                                     {
-                                        <td class="text-center">@Coefficient.UnitPrice.ToString("N0")</td>
+                                        <td class="text-center">@coefficient.UnitPrice.ToString("N0")</td>
                                         <td>
-                                            <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("EditUnitPrice", "Remuneration" , new { id = Coefficient.Id })', '@foreignTitle')">
+                                            <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("EditUnitPrice", "Remuneration" , new { id = coefficient.Id })', '@foreignTitle')">
                                                 <i class="feather feather-edit font-medium-3 me-1"></i>
                                             </a>
                                         </td>
