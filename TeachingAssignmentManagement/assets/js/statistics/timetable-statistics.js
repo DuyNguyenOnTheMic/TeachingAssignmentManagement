@@ -13,7 +13,7 @@
 // Display message when table have no data
 var classCount = $('#tblStatistics .class-card').length;
 if (classCount == 0) {
-    $('#timetableStatisticsDiv').empty().append('<h4 class="text-center mt-2">Chưa có dữ liệu <i class="feather feather-help-circle"></i></h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="Welcome" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
+    showNoData(timetableStatisticsDiv, '<i class="feather feather-help-circle"></i>');
 } else {
     // Initialize Tooltip
     $('#tblStatistics [data-bs-toggle="tooltip"]').tooltip({
