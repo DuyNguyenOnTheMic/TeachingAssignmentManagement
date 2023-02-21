@@ -6,235 +6,226 @@
     int startYear = Model.StartYear;
     int endYear = Model.EndYear;
     var coefficients = Model.Coefficients;
+    string unitPriceTitle = "Đơn giá";
+    string coefficientTitle = "Hệ số";
     string standardTitle = "CTĐT tiêu chuẩn";
     string specialTitle = "CTĐT đặc biệt";
     string foreignTitle = "Người nước ngoài";
-    string coefficientTitle = "Hệ số";
 }
 
 <div id="yearData" data-startyear="@startYear" data-endyear="@Model.EndYear"></div>
 
-<div class="row">
-    <div class="col-lg-6 col-12">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title-wrap">
-                    <h4 class="card-title">Đơn giá</h4>
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="unitprice-tab" data-bs-toggle="tab" href="#unitprice" aria-controls="unitprice" role="tab" aria-selected="true">@unitPriceTitle</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="coefficient-tab" data-bs-toggle="tab" href="#coefficient" aria-controls="coefficient" role="tab" aria-selected="false">@coefficientTitle</a>
+    </li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane active" id="unitprice" aria-labelledby="unitprice-tab" role="tabpanel">
+        <ul class="nav nav-tabs justify-content-center" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="standard-tab" data-bs-toggle="tab" href="#standard" aria-controls="standard" role="tab" aria-selected="true">@standardTitle</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="special-tab" data-bs-toggle="tab" href="#special" aria-controls="special" role="tab" aria-selected="false">@specialTitle</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="foreign-tab" data-bs-toggle="tab" href="#foreign" aria-controls="foreign" role="tab" aria-selected="false">@foreignTitle</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="standard" aria-labelledby="standard-tab" role="tabpanel">
+                <div class="table-responsive">
+                    <table class="table mb-0" id="tblStandard">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Cấp bậc</th>
+                                <th scope="col" class="text-center">Đơn giá</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var rank in ranks)
+                            {
+                                var rankCoefficient = Model.StandardProgramDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
+                                <tr>
+                                    <td class="fw-bold">@rank.Id</td>
+                                    @if (rankCoefficient != null)
+                                    {
+                                        <td class="text-center">@rankCoefficient.UnitPrice.ToString("N0")</td>
+                                        <td>
+                                            <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("EditRankCoefficient", "Remuneration" , new { id = rankCoefficient.Id })', '@standardTitle')">
+                                                <i class="feather feather-edit font-medium-3 me-1"></i>
+                                            </a>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <div class="text-center">
+                                                Chưa được đặt <i class="feather feather-help-circle"></i>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("CreateRankCoefficient", "Remuneration", new { rankId = rank.Id, type = Constants.StandardProgramType, startYear = startYear, endYear = endYear })', '@standardTitle')">
+                                                <i class="feather feather-edit font-medium-3 me-1"></i>
+                                            </a>
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="d-grid gap-2 mt-1">
+                        <button class="editAll btn btn-primary" tabindex="0" aria-controls="tblStandard" type="button" onclick="popupForm('@Url.Action("EditAllRankCoefficients", "Remuneration", new { type = Constants.StandardProgramType, startYear, endYear })', '@standardTitle')">
+                            <i data-feather="edit-2" class="me-25"></i>
+                            <span>Sửa tất cả</span>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="card-body">
-                <ul class="nav nav-tabs justify-content-center" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="standard-tab" data-bs-toggle="tab" href="#standard" aria-controls="standard" role="tab" aria-selected="true">@standardTitle</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="special-tab" data-bs-toggle="tab" href="#special" aria-controls="special" role="tab" aria-selected="false">@specialTitle</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="foreign-tab" data-bs-toggle="tab" href="#foreign" aria-controls="foreign" role="tab" aria-selected="false">@foreignTitle</a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="standard" aria-labelledby="standard-tab" role="tabpanel">
-                        <div class="table-responsive">
-                            <table class="table mb-0" id="tblStandard">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th scope="col">Cấp bậc</th>
-                                        <th scope="col" class="text-center">Đơn giá</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var rank in ranks)
+            <div class="tab-pane" id="special" aria-labelledby="special-tab" role="tabpanel">
+                <div class="table-responsive">
+                    <table class="table mb-0" id="tblSpecial">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Cấp bậc</th>
+                                <th scope="col" class="text-center">Đơn giá</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var rank in ranks)
+                            {
+                                var rankCoefficient = Model.SpecialProgramDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
+                                <tr>
+                                    <td class="fw-bold">@rank.Id</td>
+                                    @if (rankCoefficient != null)
                                     {
-                                        var rankCoefficient = Model.StandardProgramDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
-                                        <tr>
-                                            <td class="fw-bold">@rank.Id</td>
-                                            @if (rankCoefficient != null)
-                                            {
-                                                <td class="text-center">@rankCoefficient.UnitPrice.ToString("N0")</td>
-                                                <td>
-                                                    <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("EditRankCoefficient", "Remuneration" , new { id = rankCoefficient.Id })', '@standardTitle')">
-                                                        <i class="feather feather-edit font-medium-3 me-1"></i>
-                                                    </a>
-                                                </td>
-                                            }
-                                            else
-                                            {
-                                                <td>
-                                                    <div class="text-center">
-                                                        Chưa được đặt <i class="feather feather-help-circle"></i>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("CreateRankCoefficient", "Remuneration", new { rankId = rank.Id, type = Constants.StandardProgramType, startYear = startYear, endYear = endYear })', '@standardTitle')">
-                                                        <i class="feather feather-edit font-medium-3 me-1"></i>
-                                                    </a>
-                                                </td>
-                                            }
-                                        </tr>
+                                        <td class="text-center">@rankCoefficient.UnitPrice.ToString("N0")</td>
+                                        <td>
+                                            <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("EditRankCoefficient", "Remuneration" , new { id = rankCoefficient.Id })', '@specialTitle')">
+                                                <i class="feather feather-edit font-medium-3 me-1"></i>
+                                            </a>
+                                        </td>
                                     }
-                                </tbody>
-                            </table>
-                            <div class="d-grid gap-2 mt-1">
-                                <button class="editAll btn btn-primary" tabindex="0" aria-controls="tblStandard" type="button" onclick="popupForm('@Url.Action("EditAllRankCoefficients", "Remuneration", new { type = Constants.StandardProgramType, startYear, endYear })', '@standardTitle')">
-                                    <i data-feather="edit-2" class="me-25"></i>
-                                    <span>Sửa tất cả</span>
-                                </button>
-                            </div>
-                        </div>
+                                    else
+                                    {
+                                        <td>
+                                            <div class="text-center">
+                                                Chưa được đặt <i class="feather feather-help-circle"></i>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("CreateRankCoefficient", "Remuneration", new { rankId = rank.Id, type = Constants.SpecialProgramType, startYear = startYear, endYear = endYear })', '@specialTitle')">
+                                                <i class="feather feather-edit font-medium-3 me-1"></i>
+                                            </a>
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="d-grid gap-2 mt-1">
+                        <button class="editAll btn btn-primary" tabindex="0" aria-controls="tblStandard" type="button" onclick="popupForm('@Url.Action("EditAllRankCoefficients", "Remuneration", new { type = Constants.StandardProgramType, startYear, endYear })', '@standardTitle')">
+                            <i data-feather="edit-2" class="me-25"></i>
+                            <span>Sửa tất cả</span>
+                        </button>
                     </div>
-                    <div class="tab-pane" id="special" aria-labelledby="special-tab" role="tabpanel">
-                        <div class="table-responsive">
-                            <table class="table mb-0" id="tblSpecial">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th scope="col">Cấp bậc</th>
-                                        <th scope="col" class="text-center">Đơn giá</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var rank in ranks)
+                </div>
+            </div>
+            <div class="tab-pane" id="foreign" aria-labelledby="foreign-tab" role="tabpanel">
+                <div class="table-responsive">
+                    <table class="table mb-0" id="tblForeign">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Cấp bậc</th>
+                                <th scope="col" class="text-center">Đơn giá</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var rank in ranks)
+                            {
+                                var rankCoefficient = Model.ForeignDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
+                                <tr>
+                                    <td class="fw-bold">@rank.Id</td>
+                                    @if (rankCoefficient != null)
                                     {
-                                        var rankCoefficient = Model.SpecialProgramDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
-                                        <tr>
-                                            <td class="fw-bold">@rank.Id</td>
-                                            @if (rankCoefficient != null)
-                                            {
-                                                <td class="text-center">@rankCoefficient.UnitPrice.ToString("N0")</td>
-                                                <td>
-                                                    <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("EditRankCoefficient", "Remuneration" , new { id = rankCoefficient.Id })', '@specialTitle')">
-                                                        <i class="feather feather-edit font-medium-3 me-1"></i>
-                                                    </a>
-                                                </td>
-                                            }
-                                            else
-                                            {
-                                                <td>
-                                                    <div class="text-center">
-                                                        Chưa được đặt <i class="feather feather-help-circle"></i>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("CreateRankCoefficient", "Remuneration", new { rankId = rank.Id, type = Constants.SpecialProgramType, startYear = startYear, endYear = endYear })', '@specialTitle')">
-                                                        <i class="feather feather-edit font-medium-3 me-1"></i>
-                                                    </a>
-                                                </td>
-                                            }
-                                        </tr>
+                                        <td class="text-center">@rankCoefficient.UnitPrice.ToString("N0")</td>
+                                        <td>
+                                            <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("EditRankCoefficient", "Remuneration" , new { id = rankCoefficient.Id })', '@foreignTitle')">
+                                                <i class="feather feather-edit font-medium-3 me-1"></i>
+                                            </a>
+                                        </td>
                                     }
-                                </tbody>
-                            </table>
-                            <div class="d-grid gap-2 mt-1">
-                                <button class="editAll btn btn-primary" tabindex="0" aria-controls="tblStandard" type="button" onclick="popupForm('@Url.Action("EditAllRankCoefficients", "Remuneration", new { type = Constants.StandardProgramType, startYear, endYear })', '@standardTitle')">
-                                    <i data-feather="edit-2" class="me-25"></i>
-                                    <span>Sửa tất cả</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="foreign" aria-labelledby="foreign-tab" role="tabpanel">
-                        <div class="table-responsive">
-                            <table class="table mb-0" id="tblForeign">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th scope="col">Cấp bậc</th>
-                                        <th scope="col" class="text-center">Đơn giá</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var rank in ranks)
+                                    else
                                     {
-                                        var rankCoefficient = Model.ForeignDTOs.SingleOrDefault(item => item.AcademicDegreeRankId == rank.Id);
-                                        <tr>
-                                            <td class="fw-bold">@rank.Id</td>
-                                            @if (rankCoefficient != null)
-                                            {
-                                                <td class="text-center">@rankCoefficient.UnitPrice.ToString("N0")</td>
-                                                <td>
-                                                    <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("EditRankCoefficient", "Remuneration" , new { id = rankCoefficient.Id })', '@foreignTitle')">
-                                                        <i class="feather feather-edit font-medium-3 me-1"></i>
-                                                    </a>
-                                                </td>
-                                            }
-                                            else
-                                            {
-                                                <td>
-                                                    <div class="text-center">
-                                                        Chưa được đặt <i class="feather feather-help-circle"></i>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("CreateRankCoefficient", "Remuneration", new { rankId = rank.Id, type = Constants.ForeignType, startYear = startYear, endYear = endYear })', '@foreignTitle')">
-                                                        <i class="feather feather-edit font-medium-3 me-1"></i>
-                                                    </a>
-                                                </td>
-                                            }
-                                        </tr>
+                                        <td>
+                                            <div class="text-center">
+                                                Chưa được đặt <i class="feather feather-help-circle"></i>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("CreateRankCoefficient", "Remuneration", new { rankId = rank.Id, type = Constants.ForeignType, startYear = startYear, endYear = endYear })', '@foreignTitle')">
+                                                <i class="feather feather-edit font-medium-3 me-1"></i>
+                                            </a>
+                                        </td>
                                     }
-                                </tbody>
-                            </table>
-                            <div class="d-grid gap-2 mt-1">
-                                <button class="editAll btn btn-primary" tabindex="0" aria-controls="tblStandard" type="button" onclick="popupForm('@Url.Action("EditAllRankCoefficients", "Remuneration", new { type = Constants.StandardProgramType, startYear, endYear })', '@standardTitle')">
-                                    <i data-feather="edit-2" class="me-25"></i>
-                                    <span>Sửa tất cả</span>
-                                </button>
-                            </div>
-                        </div>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="d-grid gap-2 mt-1">
+                        <button class="editAll btn btn-primary" tabindex="0" aria-controls="tblStandard" type="button" onclick="popupForm('@Url.Action("EditAllRankCoefficients", "Remuneration", new { type = Constants.StandardProgramType, startYear, endYear })', '@standardTitle')">
+                            <i data-feather="edit-2" class="me-25"></i>
+                            <span>Sửa tất cả</span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-6 col-12">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title-wrap">
-                    <h4 class="card-title">Hệ số</h4>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table mb-0" id="tblStandard">
-                        <thead class="table-light">
-                            <tr>
-                                <th scope="col" class="text-center">Hệ số tiếng Việt</th>
-                                <th scope="col" class="text-center">Hệ số tiếng Anh</th>
-                                <th scope="col" class="text-center">Hệ số lý thuyết</th>
-                                <th scope="col" class="text-center">Hệ số thực hành</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                @if (coefficients != null)
-                                {
-                                    <td>@coefficients.vietnamese_coefficient</td>
-                                    <td>@coefficients.foreign_coefficient</td>
-                                    <td>@coefficients.theoretical_coefficient</td>
-                                    <td>@coefficients.practice_coefficient</td>
-                                }
-                                else
-                                {
-                                    <td colspan="4">
-                                        <div class="text-center">
-                                            Chưa được đặt <i class="feather feather-help-circle"></i>
-                                        </div>
-                                    </td>
-                                }
-                                <td>
-                                    <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("CreateCoefficient", "Remuneration", new { startYear = startYear, endYear = endYear })', '@coefficientTitle')">
-                                        <i class="feather feather-edit font-medium-3 me-1"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+    <div class="tab-pane" id="coefficient" aria-labelledby="coefficient-tab" role="tabpanel">
+        <div class="table-responsive">
+            <table class="table mb-0" id="tblStandard">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col" class="text-center">Hệ số tiếng Việt</th>
+                        <th scope="col" class="text-center">Hệ số tiếng Anh</th>
+                        <th scope="col" class="text-center">Hệ số lý thuyết</th>
+                        <th scope="col" class="text-center">Hệ số thực hành</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @if (coefficients != null)
+                        {
+                            <td>@coefficients.vietnamese_coefficient</td>
+                            <td>@coefficients.foreign_coefficient</td>
+                            <td>@coefficients.theoretical_coefficient</td>
+                            <td>@coefficients.practice_coefficient</td>
+                        }
+                        else
+                        {
+                            <td colspan="4">
+                                <div class="text-center">
+                                    Chưa được đặt <i class="feather feather-help-circle"></i>
+                                </div>
+                            </td>
+                        }
+                        <td>
+                            <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("CreateCoefficient", "Remuneration", new { startYear = startYear, endYear = endYear })', '@coefficientTitle')">
+                                <i class="feather feather-edit font-medium-3 me-1"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
