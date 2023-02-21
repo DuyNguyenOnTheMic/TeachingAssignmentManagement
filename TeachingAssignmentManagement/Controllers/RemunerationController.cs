@@ -364,6 +364,13 @@ namespace TeachingAssignmentManagement.Controllers
             return PartialView("_LecturerRank");
         }
 
+        [HttpGet]
+        public JsonResult GetLecturerRankData(int termId)
+        {
+            // Get lecturer rank data from database
+            return Json(unitOfWork.UserRepository.GetUsers(), JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
