@@ -1,6 +1,6 @@
 ﻿var formSelect = $('.form-select'),
     rootUrl = $('#loader').data('request-url'),
-    rankDiv = $('#priceCoefficientDiv'),
+    priceCoefficientDiv = $('#priceCoefficientDiv'),
     url = rootUrl + 'Remuneration/GetPriceCoefficientData';
 
 $(function () {
@@ -10,7 +10,7 @@ $(function () {
         $this.val($this.find('option:first').next().val());
     });
 
-    // Populate select2 for choosing term and major
+    // Populate select2 for choosing year
     formSelect.each(function () {
         var $this = $(this);
         $this.wrap('<div class="position-relative"></div>');
@@ -37,18 +37,18 @@ function fetchData() {
         endYear = yearSplit[1];
     if (startYear && endYear) {
         !0 === $(".ui-dialog-content").dialog("isOpen") && $(".ui-dialog-content").dialog("close");
-        getRankData(startYear, endYear);
+        getPriceCoefficientData(startYear, endYear);
     } else {
-        rankDiv.html('<h4 class="text-center mt-2">Chưa có dữ liệu năm học</h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="No data" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
+        priceCoefficientDiv.html('<h4 class="text-center mt-2">Chưa có dữ liệu năm học</h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="No data" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
     }
 }
 
-function getRankData(startYear, endYear) {
+function getPriceCoefficientData(startYear, endYear) {
     // Display loading message while fetching data
-    rankDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
+    showLoading(priceCoefficientDiv);
 
-    // Get Partial View Rank data
+    // Get Partial View Price Coefficient data
     $.get(url, { startYear, endYear }, function (data) {
-        rankDiv.html(data);
+        priceCoefficientDiv.html(data);
     });
 }
