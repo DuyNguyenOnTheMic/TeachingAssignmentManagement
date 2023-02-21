@@ -37,7 +37,7 @@ $(function () {
         // Get Partial View statistics data
         fetchData(false, termSelect.attr('id'), latestTermId, latestMajorId, lecturerTypeSelect.val());
     } else {
-        statisticsDiv.html('<h4 class="text-center mt-2">Chưa có dữ liệu học kỳ</h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="No data" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
+        showNoData(statisticsDiv, 'học kỳ');
     }
 });
 
