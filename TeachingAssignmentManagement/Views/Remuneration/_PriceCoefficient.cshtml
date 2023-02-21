@@ -5,9 +5,11 @@
     var ranks = Model.AcademicDegreeRankDTOs;
     int startYear = Model.StartYear;
     int endYear = Model.EndYear;
+    var coefficients = Model.Coefficients;
     string standardTitle = "CTĐT tiêu chuẩn";
     string specialTitle = "CTĐT đặc biệt";
     string foreignTitle = "Người nước ngoài";
+    string coefficientTitle = "Hệ số";
 }
 
 <div id="yearData" data-startyear="@startYear" data-endyear="@Model.EndYear"></div>
@@ -183,6 +185,54 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title-wrap">
+                    <h4 class="card-title">Hệ số</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table mb-0" id="tblStandard">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col" class="text-center">Hệ số tiếng Việt</th>
+                                <th scope="col" class="text-center">Hệ số tiếng Anh</th>
+                                <th scope="col" class="text-center">Hệ số lý thuyết</th>
+                                <th scope="col" class="text-center">Hệ số thực hành</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @if (coefficients != null)
+                                {
+                                    <td>@coefficients.vietnamese_coefficient</td>
+                                    <td>@coefficients.foreign_coefficient</td>
+                                    <td>@coefficients.theoretical_coefficient</td>
+                                    <td>@coefficients.practice_coefficient</td>
+                                }
+                                else
+                                {
+                                    <td colspan="4">
+                                        <div class="text-center">
+                                            Chưa được đặt <i class="feather feather-help-circle"></i>
+                                        </div>
+                                    </td>
+                                }
+                                <td>
+                                    <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("CreateCoefficient", "Remuneration", new { startYear = startYear, endYear = endYear })', '@coefficientTitle')">
+                                        <i class="feather feather-edit font-medium-3 me-1"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
