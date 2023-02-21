@@ -130,7 +130,7 @@
                         </tbody>
                     </table>
                     <div class="d-grid gap-2 mt-1">
-                        <button class="editAll btn btn-primary" tabindex="0" aria-controls="tblStandard" type="button" onclick="popupForm('@Url.Action("EditAllRankCoefficients", "Remuneration", new { type = Constants.StandardProgramType, startYear, endYear })', '@standardTitle')">
+                        <button class="editAll btn btn-primary" tabindex="0" aria-controls="tblSpecial" type="button" onclick="popupForm('@Url.Action("EditAllRankCoefficients", "Remuneration", new { type = Constants.StandardProgramType, startYear, endYear })', '@standardTitle')">
                             <i data-feather="edit-2" class="me-25"></i>
                             <span>Sửa tất cả</span>
                         </button>
@@ -180,7 +180,7 @@
                         </tbody>
                     </table>
                     <div class="d-grid gap-2 mt-1">
-                        <button class="editAll btn btn-primary" tabindex="0" aria-controls="tblStandard" type="button" onclick="popupForm('@Url.Action("EditAllRankCoefficients", "Remuneration", new { type = Constants.StandardProgramType, startYear, endYear })', '@standardTitle')">
+                        <button class="editAll btn btn-primary" tabindex="0" aria-controls="tblForeign" type="button" onclick="popupForm('@Url.Action("EditAllRankCoefficients", "Remuneration", new { type = Constants.StandardProgramType, startYear, endYear })', '@standardTitle')">
                             <i data-feather="edit-2" class="me-25"></i>
                             <span>Sửa tất cả</span>
                         </button>
@@ -191,7 +191,7 @@
     </div>
     <div class="tab-pane" id="coefficient" aria-labelledby="coefficient-tab" role="tabpanel">
         <div class="table-responsive">
-            <table class="table mb-0" id="tblStandard">
+            <table class="table mb-0" id="tblCoefficient">
                 <thead class="table-light">
                     <tr>
                         <th scope="col" class="text-center">Hệ số tiếng Việt</th>
