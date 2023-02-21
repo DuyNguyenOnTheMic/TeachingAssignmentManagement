@@ -120,7 +120,7 @@ $.ajax({
     success: function (response) {
         if (!response.length) {
             // Show no data message
-            statisticsDiv.empty().append('<h4 class="text-center mt-2">Chưa có dữ liệu <i class="feather feather-help-circle"></i></h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="Welcome" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
+            showNoData(statisticsDiv, '<i class="feather feather-help-circle"></i>');
         } else {
             // Get chart labels and data
             var labels = response.map(function (e) {
