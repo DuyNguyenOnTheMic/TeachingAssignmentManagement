@@ -59,18 +59,6 @@ namespace TeachingAssignmentManagement.DAL
             }
         }
 
-        public MajorRepository MajorRepository
-        {
-            get
-            {
-                if (majorRepository == null)
-                {
-                    majorRepository = new MajorRepository(context);
-                }
-                return majorRepository;
-            }
-        }
-
         public CoefficientRepository CoefficientRepository
         {
             get
@@ -80,6 +68,18 @@ namespace TeachingAssignmentManagement.DAL
                     coefficientRepository = new CoefficientRepository(context);
                 }
                 return coefficientRepository;
+            }
+        }
+
+        public MajorRepository MajorRepository
+        {
+            get
+            {
+                if (majorRepository == null)
+                {
+                    majorRepository = new MajorRepository(context);
+                }
+                return majorRepository;
             }
         }
 
