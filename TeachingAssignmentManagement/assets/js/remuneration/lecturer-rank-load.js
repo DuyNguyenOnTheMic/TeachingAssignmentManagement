@@ -46,7 +46,7 @@ function fetchData() {
 function getLecturerRankData(termId) {
     if (termId) {
         // Display loading message while fetching data
-        lecturerRankDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
+        showLoading(lecturerRankDiv);
 
         // Get Partial View Lecturer Rank data
         $.get(url, { termId }, function (data) {
