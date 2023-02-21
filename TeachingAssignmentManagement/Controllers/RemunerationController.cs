@@ -233,6 +233,29 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        public ActionResult CreateCoefficient(string rankId, int type, int startYear, int endYear)
+        {
+            ViewData["start_year"] = startYear;
+            ViewData["end_year"] = endYear;
+            return View(new coefficient());
+        }
+
+        [HttpPost]
+        public ActionResult CreateCoefficient([Bind(Include = "type,start_year,end_year,academic_degree_rank_id")] unit_price unitPrice, string price)
+        {
+            // Create new unit price
+            bool isUnitPriceExists = unitOfWork.UnitPriceRepository.CheckUnitPriceExists(unitPrice.type, unitPrice.start_year, unitPrice.end_year, unitPrice.academic_degree_rank_id);
+            if (!isUnitPriceExists)
+            {
+                unitPrice.unit_price1 = decimal.Parse(price, CultureInfo.InvariantCulture);
+                unitOfWork.UnitPriceRepository.InsertUnitPrice(unitPrice);
+                unitOfWork.Save();
+                return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { error = true, message = "Đã xảy ra lỗi, vui lòng thử lại sau!" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public ActionResult EditRankCoefficient(int id)
         {
             return View(unitOfWork.CoefficientRepository.GetRankCoefficientByID(id));
