@@ -233,7 +233,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult CreateCoefficient(string rankId, int type, int startYear, int endYear)
+        public ActionResult CreateCoefficient(int startYear, int endYear)
         {
             ViewData["start_year"] = startYear;
             ViewData["end_year"] = endYear;
@@ -241,14 +241,17 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateCoefficient([Bind(Include = "type,start_year,end_year,academic_degree_rank_id")] unit_price unitPrice, string price)
+        public ActionResult CreateCoefficient([Bind(Include = "start_year,end_year")] coefficient coefficient, string vietnamese_coefficient, string foreign_coefficient, string theoretical_coefficient, string practice_coefficient)
         {
-            // Create new unit price
-            bool isUnitPriceExists = unitOfWork.UnitPriceRepository.CheckUnitPriceExists(unitPrice.type, unitPrice.start_year, unitPrice.end_year, unitPrice.academic_degree_rank_id);
+            // Create new coefficient
+            bool isUnitPriceExists = unitOfWork.CoefficientRepository.CheckCoefficientExists(coefficient.start_year, coefficient.end_year);
             if (!isUnitPriceExists)
             {
-                unitPrice.unit_price1 = decimal.Parse(price, CultureInfo.InvariantCulture);
-                unitOfWork.UnitPriceRepository.InsertUnitPrice(unitPrice);
+                coefficient.vietnamese_coefficient = decimal.Parse(vietnamese_coefficient, CultureInfo.InvariantCulture);
+                coefficient.foreign_coefficient = decimal.Parse(foreign_coefficient, CultureInfo.InvariantCulture);
+                coefficient.theoretical_coefficient = decimal.Parse(theoretical_coefficient, CultureInfo.InvariantCulture);
+                coefficient.practice_coefficient = decimal.Parse(practice_coefficient, CultureInfo.InvariantCulture);
+                unitOfWork.CoefficientRepository.InsertCoefficient(coefficient);
                 unitOfWork.Save();
                 return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
             }

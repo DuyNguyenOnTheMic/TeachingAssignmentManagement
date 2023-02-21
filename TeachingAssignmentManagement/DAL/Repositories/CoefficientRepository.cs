@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.DAL
@@ -23,9 +22,14 @@ namespace TeachingAssignmentManagement.DAL
             return context.coefficients.Find(id);
         }
 
-        public void InsertRankCoefficient(coefficient rankCoefficient)
+        public bool CheckCoefficientExists(int startYear, int endYear)
         {
-            context.coefficients.Add(rankCoefficient);
+            return context.unit_price.Any(r => r.start_year == startYear && r.end_year == endYear);
+        }
+
+        public void InsertCoefficient(coefficient coefficient)
+        {
+            context.coefficients.Add(coefficient);
         }
 
         public void DeleteAllRankCoefficients(int startYear, int endYear)
