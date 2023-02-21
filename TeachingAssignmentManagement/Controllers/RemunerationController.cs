@@ -242,7 +242,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditAllUnitPrice(int type, int startYear, int endYear, string unit_price)
+        public ActionResult EditAllUnitPrice(int type, int startYear, int endYear, string price)
         {
             // Update all unit price
             unitOfWork.UnitPriceRepository.DeleteAllUnitPrice(type, startYear, endYear);
@@ -252,7 +252,7 @@ namespace TeachingAssignmentManagement.Controllers
                 unit_price unitPrice = new unit_price
                 {
                     type = type,
-                    unit_price1 = decimal.Parse(unit_price, CultureInfo.InvariantCulture),
+                    unit_price1 = decimal.Parse(price, CultureInfo.InvariantCulture),
                     start_year = startYear,
                     end_year = endYear,
                     academic_degree_rank_id = item.Id
