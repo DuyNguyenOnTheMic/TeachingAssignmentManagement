@@ -268,6 +268,7 @@
     <Compile Include="DAL\Repositories\AcademicDegreeRankRepository.cs" />
     <Compile Include="DAL\Repositories\AcademicDegreeRepository.cs" />
     <Compile Include="DAL\Repositories\CoefficientRepository.cs" />
+    <Compile Include="DAL\Repositories\LecturerRankRepository.cs" />
     <Compile Include="DAL\Repositories\UnitPriceRepository.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Models\AcademicDegreeRankDTO.cs" />
