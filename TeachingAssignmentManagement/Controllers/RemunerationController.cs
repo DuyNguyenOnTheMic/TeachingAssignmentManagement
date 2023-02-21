@@ -357,6 +357,13 @@ namespace TeachingAssignmentManagement.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult GetLecturerRankPartial(int termId)
+        {
+            ViewData["termId"] = termId;
+            return PartialView("_LecturerRank");
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
