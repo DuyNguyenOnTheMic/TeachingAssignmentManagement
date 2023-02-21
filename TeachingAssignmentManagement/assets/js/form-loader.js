@@ -513,6 +513,7 @@ if (academicDegreeRankForm.length) {
                 $(this).valid();
             });
     });
+
     // Form validation for academic degree rank form
     academicDegreeRankForm.validate({
         rules: {
@@ -593,7 +594,7 @@ if (coefficientForm.length) {
             }
         });
     })
-        
+
     // Form validation for coefficient
     coefficientForm.validate({
         rules: {
