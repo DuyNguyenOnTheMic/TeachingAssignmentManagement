@@ -9,7 +9,7 @@ feather && feather.replace({ width: 14, height: 14 });
 
 function refreshTable() {
     // Refresh all tables when user updates
-    $.get(rootUrl + 'Remuneration/GetRankCoefficientData?startYear=' + startYear + '&endYear=' + endYear)
+    $.get(rootUrl + 'Remuneration/GetPriceCoefficientData?startYear=' + startYear + '&endYear=' + endYear)
         .done(function (r) {
             var newDom = $(r);
             $('#tblStandard').replaceWith($('#tblStandard', newDom));
