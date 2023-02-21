@@ -249,7 +249,7 @@ namespace TeachingAssignmentManagement.Controllers
             IEnumerable<AcademicDegreeRankDTO> academicDegreeRankDTOs = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO();
             foreach (AcademicDegreeRankDTO item in academicDegreeRankDTOs)
             {
-                unit_price rankCoefficient = new unit_price
+                unit_price unitPrice = new unit_price
                 {
                     type = type,
                     unit_price1 = decimal.Parse(unit_price, CultureInfo.InvariantCulture),
@@ -257,7 +257,7 @@ namespace TeachingAssignmentManagement.Controllers
                     end_year = endYear,
                     academic_degree_rank_id = item.Id
                 };
-                unitOfWork.UnitPriceRepository.InsertUnitPrice(rankCoefficient);
+                unitOfWork.UnitPriceRepository.InsertUnitPrice(unitPrice);
             }
             unitOfWork.Save();
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
