@@ -1281,6 +1281,7 @@
     <Content Include="Views\Remuneration\CreateUnitPrice.cshtml" />
     <Content Include="Views\Remuneration\LecturerRank.cshtml" />
     <Content Include="Views\Remuneration\CreateCoefficient.cshtml" />
+    <Content Include="Views\Remuneration\EditCoefficient.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
