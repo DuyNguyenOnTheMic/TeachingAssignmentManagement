@@ -380,7 +380,7 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpPost]
         public ActionResult EditLecturerRank(string id, bool is_vietnamese)
         {
-            // Update subject
+            // Update lecturer rank
             subject query_subject = unitOfWork.SubjectRepository.GetSubjectByID(id);
             query_subject.is_vietnamese = is_vietnamese;
             unitOfWork.Save();

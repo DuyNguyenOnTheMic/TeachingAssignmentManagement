@@ -1,11 +1,23 @@
-﻿@{
+﻿@model TeachingAssignmentManagement.Models.lecturer_rank
+
+@{
     Layout = null;
 }
 
-@using (Html.BeginForm("EditAllLecturerRanks", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "lecturerrank-form" }))
+@using (Html.BeginForm("EditLecturerRank", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "lecturerrank-form" }))
 {
     <div class="mb-1">
-        <label class="form-label font-small-4" for="price">Đơn giá: </label>
+        <label class="form-label font-small-4" for="price">Mã giảng viên: </label>
+        @Html.EditorFor(model => model.lecturer.staff_id, new { htmlAttributes = new { @class = "form-control", @aria_label = "Mã giảng viên", @disabled = "@disabled" } })
+    </div>
+
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="price">Tên giảng viên: </label>
+        @Html.EditorFor(model => model.lecturer.full_name, new { htmlAttributes = new { @class = "form-control", @aria_label = "Tên giảng viên", @disabled = "@disabled" } })
+    </div>
+
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="price">Cấp bậc: </label>
         @Html.DropDownList("rank_id", null, "---- Chọn cấp bậc ----", htmlAttributes: new { @class = "form-data form-select", @aria_label = "Chọn cấp bậc" })
     </div>
 
