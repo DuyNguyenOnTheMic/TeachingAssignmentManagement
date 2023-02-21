@@ -551,7 +551,7 @@ if (unitPriceForm.length) {
         numeralThousandsGroupStyle: 'thousand'
     });
 
-    // Form validation for rank
+    // Form validation for unit price
     unitPriceForm.validate({
         rules: {
             price: {
@@ -594,7 +594,7 @@ if (coefficientForm.length) {
         });
     })
 
-    // Form validation for rank
+    // Form validation for coefficient
     coefficientForm.validate({
         rules: {
             theoretical_coefficient: {
