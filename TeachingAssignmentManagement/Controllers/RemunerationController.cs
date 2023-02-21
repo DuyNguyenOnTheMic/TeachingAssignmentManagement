@@ -375,6 +375,7 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult EditAllLecturerRanks(int termId)
         {
             ViewData["termId"] = termId;
+            ViewData["academic_degree_rank_id"] = new SelectList(unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO(), "Id", "Id");
             return View();
         }
 

@@ -46,7 +46,7 @@ $(function () {
                     text: feather.icons['edit-2'].toSvg({ class: 'me-50 font-small-4' }) + 'Sửa tất cả',
                     className: 'editAll btn btn-primary',
                     attr: {
-                        'onclick': "popupForm('" + rootUrl + "Remuneration/EditAllLecturerRanks?termId=" + termId + ")"
+                        'onclick': "popupForm('" + rootUrl + "Remuneration/EditAllLecturerRanks?termId=" + termId + "')"
                     },
                     init: function (api, node, config) {
                         $(node).removeClass('btn-secondary');
@@ -104,7 +104,7 @@ function popupForm(url) {
             popup = formDiv.dialog({
                 autoOpen: true,
                 resizable: false,
-                title: 'Quản lý thù lao môn học',
+                title: 'Quản lý cấp bậc giảng viên',
                 width: 550,
                 open: function () {
                     // Add close icon class
