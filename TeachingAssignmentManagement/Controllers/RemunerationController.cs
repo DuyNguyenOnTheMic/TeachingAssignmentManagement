@@ -383,19 +383,17 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult EditAllLecturerRanks(int termId, string rank_id)
         {
             // Update all lecturer ranks
-            unitOfWork.UnitPriceRepository.DeleteAllUnitPrice(type, startYear, endYear);
-            IEnumerable academicDegreeRankDTOs = unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
-            foreach (AcademicDegreeRankDTO item in academicDegreeRankDTOs)
+            unitOfWork.LecturerRankRepository.DeleteAllLecturerRanks(termId);
+            IEnumerable<dynamic> lecturers = (IEnumerable<dynamic>)unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
+            foreach (var item in lecturers)
             {
-                unit_price unitPrice = new unit_price
+                lecturer_rank lecturerRank = new lecturer_rank
                 {
-                    type = type,
-                    unit_price1 = decimal.Parse(price, CultureInfo.InvariantCulture),
-                    start_year = startYear,
-                    end_year = endYear,
-                    academic_degree_rank_id = item.Id
+                    academic_degree_rank_id = rank_id,
+                    lecturer_id = item.id,
+                    term_id = termId
                 };
-                unitOfWork.UnitPriceRepository.InsertUnitPrice(unitPrice);
+                unitOfWork.LecturerRankRepository.InsertLecturerRank(lecturerRank);
             }
             unitOfWork.Save();
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);

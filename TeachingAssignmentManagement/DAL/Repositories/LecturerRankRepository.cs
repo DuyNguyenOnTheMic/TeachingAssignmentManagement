@@ -26,5 +26,15 @@ namespace TeachingAssignmentManagement.DAL
                         lecturer.academic_degree_rank_id
                     }).ToList();
         }
+
+        public void InsertLecturerRank(lecturer_rank lecturerRank)
+        {
+            context.lecturer_rank.Add(lecturerRank);
+        }
+
+        public void DeleteAllLecturerRanks(int term)
+        {
+            context.lecturer_rank.RemoveRange(context.lecturer_rank.Where(r => r.term_id == term));
+        }
     }
 }
