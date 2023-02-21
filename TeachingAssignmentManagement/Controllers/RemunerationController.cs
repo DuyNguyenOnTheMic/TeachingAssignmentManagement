@@ -375,8 +375,30 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult EditAllLecturerRanks(int termId)
         {
             ViewData["termId"] = termId;
-            ViewData["academic_degree_rank_id"] = new SelectList(unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO(), "Id", "Id");
+            ViewData["rank_id"] = new SelectList(unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO(), "Id", "Id");
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditAllLecturerRanks(int termId, string rank_id)
+        {
+            // Update all lecturer ranks
+            unitOfWork.UnitPriceRepository.DeleteAllUnitPrice(type, startYear, endYear);
+            IEnumerable academicDegreeRankDTOs = unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
+            foreach (AcademicDegreeRankDTO item in academicDegreeRankDTOs)
+            {
+                unit_price unitPrice = new unit_price
+                {
+                    type = type,
+                    unit_price1 = decimal.Parse(price, CultureInfo.InvariantCulture),
+                    start_year = startYear,
+                    end_year = endYear,
+                    academic_degree_rank_id = item.Id
+                };
+                unitOfWork.UnitPriceRepository.InsertUnitPrice(unitPrice);
+            }
+            unitOfWork.Save();
+            return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
