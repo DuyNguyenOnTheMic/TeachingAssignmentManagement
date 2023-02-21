@@ -18,6 +18,11 @@ namespace TeachingAssignmentManagement.DAL
             return context.unit_price.Where(r => r.start_year == startYear && r.end_year == endYear);
         }
 
+        public unit_price GetUnitPriceByID(int id)
+        {
+            return context.unit_price.Find(id);
+        }
+
         public bool CheckUnitPriceExists(int type, int startYear, int endYear, string rankId)
         {
             return context.unit_price.Any(r => r.type == type && r.start_year == startYear && r.end_year == endYear && r.academic_degree_rank_id == rankId);

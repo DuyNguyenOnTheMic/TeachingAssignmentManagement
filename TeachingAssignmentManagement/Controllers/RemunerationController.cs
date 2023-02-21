@@ -217,6 +217,22 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        public ActionResult EditUnitPrice(int id)
+        {
+            return View(unitOfWork.UnitPriceRepository.GetUnitPriceByID(id));
+        }
+
+        [HttpPost]
+        public ActionResult EditUnitPrice(int id, string price)
+        {
+            // Update unit price
+            unit_price query_unitPrice = unitOfWork.UnitPriceRepository.GetUnitPriceByID(id);
+            query_unitPrice.unit_price1 = decimal.Parse(price, CultureInfo.InvariantCulture);
+            unitOfWork.Save();
+            return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public ActionResult EditRankCoefficient(int id)
         {
             return View(unitOfWork.CoefficientRepository.GetRankCoefficientByID(id));
