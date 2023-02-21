@@ -192,7 +192,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult CreateRankCoefficient(string rankId, int type, int startYear, int endYear)
+        public ActionResult CreateUnitPrice(string rankId, int type, int startYear, int endYear)
         {
             ViewData["academic_degree_rank_id"] = rankId;
             ViewData["type"] = type;

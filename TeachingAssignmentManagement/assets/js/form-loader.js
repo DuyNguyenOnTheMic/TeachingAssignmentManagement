@@ -572,7 +572,7 @@ if (rankCoefficientForm.length) {
         });
     })
 
-    new Cleave($('#unit_price'), {
+    new Cleave($('#price'), {
         numeral: true,
         numeralThousandsGroupStyle: 'thousand'
     });
@@ -581,7 +581,7 @@ if (rankCoefficientForm.length) {
     rankCoefficientForm.validate({
         ignore: [],
         rules: {
-            unit_price: {
+            price: {
                 required: true,
                 maxlength: 18
             },
@@ -599,7 +599,7 @@ if (rankCoefficientForm.length) {
             }
         },
         messages: {
-            unit_price: {
+            price: {
                 required: "Bạn chưa nhập đơn giá",
                 maxlength: "Tối đa 18 kí tự được cho phép"
             },

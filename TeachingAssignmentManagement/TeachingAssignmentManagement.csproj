@@ -1278,7 +1278,7 @@
     <Content Include="Views\Remuneration\PriceCoefficient.cshtml" />
     <Content Include="Views\Remuneration\_PriceCoefficient.cshtml" />
     <Content Include="Views\Remuneration\EditRankCoefficient.cshtml" />
-    <Content Include="Views\Remuneration\CreateRankCoefficient.cshtml" />
+    <Content Include="Views\Remuneration\CreateUnitPrice.cshtml" />
     <Content Include="Views\Remuneration\LecturerRank.cshtml" />
   </ItemGroup>
   <PropertyGroup>

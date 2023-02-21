@@ -1,23 +1,24 @@
-﻿@model TeachingAssignmentManagement.Models.rank_coefficient
+﻿@model TeachingAssignmentManagement.Models.coefficient
 
 @{
     Layout = null;
 }
 
-@using (Html.BeginForm("CreateRankCoefficient", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "rankcoefficient-form" }))
+@using (Html.BeginForm("CreateUnitPrice", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "rankcoefficient-form" }))
 {
+    @Html.Hidden("academic_degree_rank_id")
     @Html.Hidden("type")
     @Html.Hidden("start_year")
     @Html.Hidden("end_year")
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="academic_degree_rank_id">Cấp bậc: </label>
-        @Html.Editor("academic_degree_rank_id", new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        <input type="text" class="form-control" value="@ViewData["academic_degree_rank_id"]" disabled />
     </div>
 
     <div class="mb-1">
-        <label class="form-label font-small-4" for="unit_price">Đơn giá: </label>
-        <input type="text" class="form-control" id="unit_price" name="unit_price" placeholder="Nhập đơn giá" aria-label="Nhập đơn giá" />
+        <label class="form-label font-small-4" for="price">Đơn giá: </label>
+        <input type="text" class="form-control" id="price" name="price" placeholder="Nhập đơn giá" aria-label="Nhập đơn giá" />
     </div>
 
     <div class="row mb-1">
