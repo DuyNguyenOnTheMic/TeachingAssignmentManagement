@@ -9,10 +9,11 @@ namespace TeachingAssignmentManagement.DAL
         private AcademicDegreeRankRepository academicDegreeRankRepository;
         private AcademicDegreeRepository academicDegreeRepository;
         private ClassSectionRepository classSectionRepository;
-        private SubjectRepository subjectRepository;
-        private MajorRepository majorRepository;
         private CoefficientRepository coefficientRepository;
+        private LecturerRankRepository lecturerRankRepository;
+        private MajorRepository majorRepository;
         private RoomRepository roomRepository;
+        private SubjectRepository subjectRepository;
         private TermRepository termRepository;
         private UnitPriceRepository unitPriceRepository;
         private UserRepository userRepository;
