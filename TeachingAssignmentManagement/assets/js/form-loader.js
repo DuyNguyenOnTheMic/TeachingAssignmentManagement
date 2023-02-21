@@ -5,7 +5,7 @@
     academicDegreeForm = $('#academicdegree-form'),
     academicDegreeRankForm = $('#academicdegreerank-form'),
     unitPriceForm = $('#unitprice-form'),
-    subjectForm = $('#subject-form');
+    coefficientForm = $('#coefficient-form');
 
 // Close dialog on button click
 $('#btnClose').click(function () {
@@ -447,7 +447,6 @@ if (academicDegreeForm.length) {
 
     // Form validation for academic degree form
     academicDegreeForm.validate({
-        ignore: [],
         rules: {
             id: {
                 required: true,
@@ -554,7 +553,6 @@ if (unitPriceForm.length) {
 
     // Form validation for rank
     unitPriceForm.validate({
-        ignore: [],
         rules: {
             price: {
                 required: true,
@@ -570,34 +568,44 @@ if (unitPriceForm.length) {
     });
 }
 
-if (subjectForm.length) {
-    // Form validation for subject
-    subjectForm.validate({
-        ignore: [],
+if (coefficientForm.length) {
+    var counterMin = 1,
+        counterMax = 9.99;
+    // Populate touchspin
+    $('.touchspin').each(function () {
+        var $this = $(this);
+        $this.val() || $this.val(counterMin);
+        $this.TouchSpin({
+            min: counterMin,
+            max: counterMax,
+            forcestepdivisibility: 'none',
+            buttondown_txt: feather.icons['minus'].toSvg(),
+            buttonup_txt: feather.icons['plus'].toSvg()
+        }).on('touchspin.on.startdownspin', function () {
+            $('.bootstrap-touchspin-up').removeClass('disabled-max-min');
+            if ($this.val() == counterMin) {
+                $(this).siblings().find('.bootstrap-touchspin-down').addClass('disabled-max-min');
+            }
+        }).on('touchspin.on.startupspin', function () {
+            $('.bootstrap-touchspin-down').removeClass('disabled-max-min');
+            if ($this.val() == counterMax) {
+                $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
+            }
+        });
+    })
+
+    // Form validation for rank
+    coefficientForm.validate({
         rules: {
-            theoretical_coefficient: {
+            vietnamese_coefficient: {
                 required: true,
-                number: false,
-                min: counterMin,
-                max: counterMax
-            },
-            practice_coefficient: {
-                required: true,
-                number: false,
-                min: counterMin,
-                max: counterMax
+                maxlength: 18
             }
         },
         messages: {
-            theoretical_coefficient: {
-                required: "Bạn chưa nhập số tiết tối đa",
-                min: "Vui lòng nhập lớn hơn hoặc bằng 1",
-                max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
-            },
-            practice_coefficient: {
-                required: "Bạn chưa nhập số lớp tối đa",
-                min: "Vui lòng nhập lớn hơn hoặc bằng 1",
-                max: "Vui lòng nhập nhỏ hơn hoặc bằng 9.99"
+            vietnamese_coefficient: {
+                required: "Bạn chưa nhập đơn giá",
+                maxlength: "Tối đa 18 kí tự được cho phép"
             }
         }
     });
