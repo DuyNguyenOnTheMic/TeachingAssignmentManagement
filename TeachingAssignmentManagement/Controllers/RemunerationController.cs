@@ -233,7 +233,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditAllUnitPrices(int type, int startYear, int endYear)
+        public ActionResult EditAllUnitPrice(int type, int startYear, int endYear)
         {
             ViewData["type"] = type;
             ViewData["startYear"] = startYear;
@@ -242,7 +242,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditAllUnitPrices(int type, int startYear, int endYear, string unit_price)
+        public ActionResult EditAllUnitPrice(int type, int startYear, int endYear, string unit_price)
         {
             // Update all unit prices
             unitOfWork.UnitPriceRepository.DeleteAllUnitPrices(type, startYear, endYear);
