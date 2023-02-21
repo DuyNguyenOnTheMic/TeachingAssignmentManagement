@@ -13,9 +13,9 @@ namespace TeachingAssignmentManagement.DAL
             this.context = context;
         }
 
-        public IEnumerable<coefficient> GetRankCoefficients(int startYear, int endYear)
+        public coefficient GetRankCoefficients(int startYear, int endYear)
         {
-            return context.coefficients.Where(r => r.start_year == startYear && r.end_year == endYear);
+            return context.coefficients.Single(r => r.start_year == startYear && r.end_year == endYear);
         }
 
         public coefficient GetRankCoefficientByID(int id)

@@ -10,6 +10,6 @@ namespace TeachingAssignmentManagement.Models
         public IEnumerable<UnitPriceDTO> StandardProgramDTOs { get; set; }
         public IEnumerable<UnitPriceDTO> SpecialProgramDTOs { get; set; }
         public IEnumerable<UnitPriceDTO> ForeignDTOs { get; set; }
-        public IEnumerable<CoefficientDTO> CoefficientDTOs { get; set; }
+        public coefficient Coefficients { get; set; }
     }
 }
