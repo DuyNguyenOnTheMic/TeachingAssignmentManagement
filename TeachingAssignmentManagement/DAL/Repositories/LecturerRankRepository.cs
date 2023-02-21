@@ -27,6 +27,11 @@ namespace TeachingAssignmentManagement.DAL
                     }).ToList();
         }
 
+        public lecturer_rank GetLecturerRankByID(int id)
+        {
+            return context.lecturer_rank.Find(id);
+        }
+
         public void InsertLecturerRank(lecturer_rank lecturerRank)
         {
             context.lecturer_rank.Add(lecturerRank);

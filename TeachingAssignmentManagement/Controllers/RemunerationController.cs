@@ -372,6 +372,22 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        public ActionResult EditLecturerRank(int id)
+        {
+            return View(unitOfWork.LecturerRankRepository.GetLecturerRankByID(id));
+        }
+
+        [HttpPost]
+        public ActionResult EditLecturerRank(string id, bool is_vietnamese)
+        {
+            // Update subject
+            subject query_subject = unitOfWork.SubjectRepository.GetSubjectByID(id);
+            query_subject.is_vietnamese = is_vietnamese;
+            unitOfWork.Save();
+            return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public ActionResult EditAllLecturerRanks(int termId)
         {
             ViewData["termId"] = termId;

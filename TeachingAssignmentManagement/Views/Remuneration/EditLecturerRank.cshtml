@@ -1,0 +1,19 @@
+﻿@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("EditAllLecturerRanks", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "lecturerrank-form" }))
+{
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="price">Đơn giá: </label>
+        @Html.DropDownList("rank_id", null, "---- Chọn cấp bậc ----", htmlAttributes: new { @class = "form-data form-select", @aria_label = "Chọn cấp bậc" })
+    </div>
+
+    <div class="float-end m-1">
+        <button type="button" class="btn btn-outline-secondary waves-effect me-1" id="btnClose">Huỷ</button>
+        <button type="submit" class="btn btn-primary waves-effect waves-float waves-light">Lưu</button>
+    </div>
+}
+
+<link href="~/app-assets/css/plugins/forms/form-validation.min.css" rel="stylesheet" />
+<script src="~/assets/js/form-loader.js"></script>

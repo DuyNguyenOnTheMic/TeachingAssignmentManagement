@@ -22,7 +22,7 @@ $(function () {
                 { 'data': 'AcademicDegreeRankId' },
                 {
                     'data': 'Id', 'render': function (data) {
-                        return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + rootUrl + "Remuneration/EditSubject/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a>";
+                        return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + rootUrl + "Remuneration/EditLecturerRank/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a>";
                     }
                 }
             ],
