@@ -368,7 +368,7 @@ namespace TeachingAssignmentManagement.Controllers
         public JsonResult GetLecturerRankData(int termId)
         {
             // Get lecturer rank data from database
-            return Json(unitOfWork.UserRepository.GetUsers(), JsonRequestBehavior.AllowGet);
+            return Json(unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId), JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
