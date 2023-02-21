@@ -205,10 +205,10 @@
                     <tr>
                         @if (coefficient != null)
                         {
-                            <td>@coefficient.vietnamese_coefficient</td>
-                            <td>@coefficient.foreign_coefficient</td>
-                            <td>@coefficient.theoretical_coefficient</td>
-                            <td>@coefficient.practice_coefficient</td>
+                            <td class="text-center">@coefficient.vietnamese_coefficient</td>
+                            <td class="text-center">@coefficient.foreign_coefficient</td>
+                            <td class="text-center">@coefficient.theoretical_coefficient</td>
+                            <td class="text-center">@coefficient.practice_coefficient</td>
                             <td>
                                 <a class="editRow text-success p-0" data-original-title="Chỉnh sửa" title="Chỉnh sửa" onclick="popupForm('@Url.Action("EditCoefficient", "Remuneration", new { id = coefficient.id })', '@coefficientTitle')">
                                     <i class="feather feather-edit font-medium-3 me-1"></i>
