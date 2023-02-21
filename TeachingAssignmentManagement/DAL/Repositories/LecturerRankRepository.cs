@@ -15,15 +15,16 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable<LecturerRankDTO> GetLecturerRanksInTerm(int term)
         {
-            return (from u in context.lecturers.Where(l => l.type == "TG")
-                    join l in context.lecturer_rank.Where(r => r.term_id == term) on u.id equals l.lecturer_id into lecturers
-                    from lecturer in lecturers.DefaultIfEmpty()
+            return (from l in context.lecturers.Where(l => l.type == "TG")
+                    join r in context.lecturer_rank.Where(r => r.term_id == term) on l.id equals r.lecturer_id into ranks
+                    from rank in ranks.DefaultIfEmpty()
                     select new LecturerRankDTO
                     {
-                        Id = u.id,
-                        StaffId = u.staff_id,
-                        FullName = u.full_name,
-                        AcademicDegreeRankId = lecturer.academic_degree_rank_id
+                        Id = rank.id,
+                        LecturerId = rank.lecturer_id,
+                        StaffId = l.staff_id,
+                        FullName = l.full_name,
+                        AcademicDegreeRankId = rank.academic_degree_rank_id
                     }).ToList();
         }
 
