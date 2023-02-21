@@ -41,6 +41,22 @@ $(function () {
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
             displayLength: 10,
             lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "tất cả"]],
+            buttons: [
+                {
+                    text: feather.icons['edit-2'].toSvg({ class: 'me-50 font-small-4' }) + 'Sửa tất cả',
+                    className: 'editAll btn btn-primary',
+                    attr: {
+                        'onclick': "popupForm('" + rootUrl + "Major/Create')"
+                    },
+                    init: function (api, node, config) {
+                        $(node).removeClass('btn-secondary');
+                        $(node).parent().removeClass('btn-group');
+                        setTimeout(function () {
+                            $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex mt-50');
+                        }, 50);
+                    }
+                }
+            ],
 
             language: {
                 'url': rootUrl + 'app-assets/language/datatables/vi.json'
@@ -65,11 +81,13 @@ $(function () {
 function disableButtons(state) {
     if (state === true) {
         // disable buttons
+        $('.editAll').prop('disabled', true);
         $('.editRow').each(function () {
             this.style.pointerEvents = 'none';
         });
     } else {
         // enable buttons
+        $('.editAll').prop('disabled', false);
         $('.editRow').each(function () {
             this.style.pointerEvents = 'auto';
         });
