@@ -66,7 +66,7 @@ function fetchData() {
 function getSubjectData(termId, majorId) {
     if (termId && majorId) {
         // Display loading message while fetching data
-        subjectDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
+        showLoading(subjectDiv);
 
         // Get Partial View Subject data
         $.get(url, { termId, majorId }, function (data) {
