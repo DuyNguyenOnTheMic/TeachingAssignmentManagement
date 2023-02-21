@@ -587,3 +587,7 @@ window.colors = {
 function showLoading(div) {
     div.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
 }
+
+function showNoData(div, text) {
+    div.html('<h4 class="text-center mt-2">Chưa có dữ liệu ' + text + '</h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="No data" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
+}
