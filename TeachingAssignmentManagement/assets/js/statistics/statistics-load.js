@@ -81,13 +81,9 @@ formData.change(function () {
     major = majorSelect.val();
     lecturerType = lecturerTypeSelect.val();
     // Display loading message while fetching data
-    loading();
+    showLoading(statisticsDiv);
     fetchData(isLesson, type, value, major, lecturerType);
 });
-
-function loading() {
-    statisticsDiv.html('<div class="d-flex justify-content-center mt-2"><div class="spinner-border text-primary me-1" role="status"><span class="visually-hidden">Loading...</span></div><p class="my-auto">Đang tải...</p></div>');
-}
 
 function fetchData(isLesson, type, value, major, lecturerType) {
     var url = rootUrl + 'Statistics/GetChart';
