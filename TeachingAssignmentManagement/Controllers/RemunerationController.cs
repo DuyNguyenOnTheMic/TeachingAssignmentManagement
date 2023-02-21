@@ -233,6 +233,37 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        public ActionResult EditAllUnitPrices(int type, int startYear, int endYear)
+        {
+            ViewData["type"] = type;
+            ViewData["startYear"] = startYear;
+            ViewData["endYear"] = endYear;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditAllUnitPrices(int type, int startYear, int endYear, string unit_price)
+        {
+            // Update all unit prices
+            unitOfWork.UnitPriceRepository.DeleteAllUnitPrices(type, startYear, endYear);
+            IEnumerable<AcademicDegreeRankDTO> academicDegreeRankDTOs = unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO();
+            foreach (AcademicDegreeRankDTO item in academicDegreeRankDTOs)
+            {
+                unit_price rankCoefficient = new unit_price
+                {
+                    type = type,
+                    unit_price1 = decimal.Parse(unit_price, CultureInfo.InvariantCulture),
+                    start_year = startYear,
+                    end_year = endYear,
+                    academic_degree_rank_id = item.Id
+                };
+                unitOfWork.UnitPriceRepository.InsertUnitPrice(rankCoefficient);
+            }
+            unitOfWork.Save();
+            return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public ActionResult CreateCoefficient(int startYear, int endYear)
         {
             ViewData["start_year"] = startYear;
