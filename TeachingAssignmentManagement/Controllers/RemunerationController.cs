@@ -187,7 +187,7 @@ namespace TeachingAssignmentManagement.Controllers
                 StandardProgramDTOs = unitOfWork.UnitPriceRepository.GetUnitPricesByProgram(query_unitPrices, Constants.StandardProgramType),
                 SpecialProgramDTOs = unitOfWork.UnitPriceRepository.GetUnitPricesByProgram(query_unitPrices, Constants.SpecialProgramType),
                 ForeignDTOs = unitOfWork.UnitPriceRepository.GetUnitPricesByProgram(query_unitPrices, Constants.ForeignType),
-                Coefficients = unitOfWork.CoefficientRepository.GetRankCoefficients(startYear, endYear)
+                Coefficients = unitOfWork.CoefficientRepository.GetCoefficientsInYear(startYear, endYear)
             });
         }
 
@@ -259,18 +259,20 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditRankCoefficient(int id)
+        public ActionResult EditCoefficient(int id)
         {
-            return View(unitOfWork.CoefficientRepository.GetRankCoefficientByID(id));
+            return View(unitOfWork.CoefficientRepository.GetCoefficientByID(id));
         }
 
         [HttpPost]
-        public ActionResult EditRankCoefficient(int id, string unit_price, string vietnamese_coefficient, string foreign_coefficient)
+        public ActionResult EditCoefficient(int id, string vietnamese_coefficient, string foreign_coefficient, string theoretical_coefficient, string practice_coefficient)
         {
-            // Update rank coefficient
-            coefficient query_rankCoefficient = unitOfWork.CoefficientRepository.GetRankCoefficientByID(id);
-            query_rankCoefficient.vietnamese_coefficient = decimal.Parse(vietnamese_coefficient, CultureInfo.InvariantCulture);
-            query_rankCoefficient.foreign_coefficient = decimal.Parse(foreign_coefficient, CultureInfo.InvariantCulture);
+            // Update coefficient
+            coefficient query_coefficient = unitOfWork.CoefficientRepository.GetCoefficientByID(id);
+            query_coefficient.vietnamese_coefficient = decimal.Parse(vietnamese_coefficient, CultureInfo.InvariantCulture);
+            query_coefficient.foreign_coefficient = decimal.Parse(foreign_coefficient, CultureInfo.InvariantCulture);
+            query_coefficient.theoretical_coefficient = decimal.Parse(theoretical_coefficient, CultureInfo.InvariantCulture);
+            query_coefficient.practice_coefficient = decimal.Parse(practice_coefficient, CultureInfo.InvariantCulture);
             unitOfWork.Save();
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
