@@ -39,7 +39,7 @@ function fetchData() {
         !0 === $(".ui-dialog-content").dialog("isOpen") && $(".ui-dialog-content").dialog("close");
         getPriceCoefficientData(startYear, endYear);
     } else {
-        priceCoefficientDiv.html('<h4 class="text-center mt-2">Chưa có dữ liệu năm học</h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="No data" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
+        showNoData(priceCoefficientDiv, 'năm học');
     }
 }
 
