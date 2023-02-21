@@ -1144,6 +1144,7 @@
     <Content Include="assets\js\remuneration\academic-degree.js" />
     <Content Include="assets\js\remuneration\academic-degree.min.js" />
     <Content Include="assets\js\remuneration\lecturer-rank-load.js" />
+    <Content Include="assets\js\remuneration\lecturer-rank.js" />
     <Content Include="assets\js\remuneration\price-coefficient-load.js" />
     <Content Include="assets\js\remuneration\price-coefficient-load.min.js" />
     <Content Include="assets\js\remuneration\price-coefficient.js" />
