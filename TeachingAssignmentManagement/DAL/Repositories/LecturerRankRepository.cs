@@ -21,6 +21,7 @@ namespace TeachingAssignmentManagement.DAL
                     select new
                     {
                         u.id,
+                        u.staff_id,
                         u.full_name,
                         lecturer.academic_degree_rank_id
                     }).ToList();

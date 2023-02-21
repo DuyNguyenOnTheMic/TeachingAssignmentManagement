@@ -17,7 +17,7 @@ $(function () {
             deferRender: true,
             columns: [
                 { 'data': '', defaultContent: '' },
-                { 'data': 'id' },
+                { 'data': 'staff_id' },
                 { 'data': 'full_name' },
                 { 'data': 'academic_degree_rank_id' },
                 {
