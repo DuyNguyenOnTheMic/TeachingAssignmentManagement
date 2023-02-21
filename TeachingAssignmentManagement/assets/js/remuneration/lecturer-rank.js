@@ -17,11 +17,11 @@ $(function () {
             deferRender: true,
             columns: [
                 { 'data': '', defaultContent: '' },
-                { 'data': 'staff_id' },
-                { 'data': 'full_name' },
-                { 'data': 'academic_degree_rank_id' },
+                { 'data': 'StaffId' },
+                { 'data': 'FullName' },
+                { 'data': 'AcademicDegreeRankId' },
                 {
-                    'data': 'id', 'render': function (data) {
+                    'data': 'Id', 'render': function (data) {
                         return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + rootUrl + "Remuneration/EditSubject/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a>";
                     }
                 }
