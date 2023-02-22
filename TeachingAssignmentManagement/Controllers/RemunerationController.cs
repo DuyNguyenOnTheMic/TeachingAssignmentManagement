@@ -83,6 +83,9 @@ namespace TeachingAssignmentManagement.Controllers
 
                         // Calculate time coefficient
                         timeCoefficient = item.start_lesson_2 == 13 ? decimal.One : 1.2m;
+
+                        // Calculate language coefficient
+                        languageCoefficient = item.subject.is_vietnamese ? coefficient.vietnamese_coefficient : coefficient.foreign_coefficient;
                     }
                 }
             }
