@@ -213,7 +213,7 @@ namespace TeachingAssignmentManagement.Controllers
                 unitOfWork.Save();
                 return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { error = true, message = "Đã xảy ra lỗi, vui lòng thử lại sau!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { error = true, message = "Đơn giá cho cấp bậc đã được đặt trong năm học này, vui lòng thử lại sau!" }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -286,7 +286,7 @@ namespace TeachingAssignmentManagement.Controllers
                 unitOfWork.Save();
                 return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { error = true, message = "Đã xảy ra lỗi, vui lòng thử lại sau!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { error = true, message = "Hệ số cho cấp bậc đã được đặt trong năm học này, vui lòng thử lại sau!" }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
