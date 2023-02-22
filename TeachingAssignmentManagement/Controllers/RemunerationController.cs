@@ -53,10 +53,12 @@ namespace TeachingAssignmentManagement.Controllers
 
             foreach (LecturerRankDTO rank in lecturerRanks)
             {
+                decimal teachingRemuneration = decimal.Zero;
+
                 // Check if lecturer have been assigned a rank
                 if (rank.Id != null)
                 {
-                    decimal teachingRemuneration = decimal.Zero, unitPriceByLevel, crowdedClassCoefficient, timeCoefficient, languageCoefficient, classTypeCoefficient;
+                    decimal unitPriceByLevel, crowdedClassCoefficient, timeCoefficient, languageCoefficient, classTypeCoefficient;
 
                     // Get classes in term of lecturer
                     IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
@@ -98,15 +100,14 @@ namespace TeachingAssignmentManagement.Controllers
                         // Calculate total remuneration for this class
                         teachingRemuneration += unitPriceByLevel * crowdedClassCoefficient * timeCoefficient * classTypeCoefficient * languageCoefficient;
                     }
-
-                    remunerationDTOs.Add(new RemunerationDTO
-                    {
-                        StaffId = rank.StaffId,
-                        FullName = rank.FullName,
-                        AcademicDegreeRankId = rank.AcademicDegreeRankId,
-                        Remuneration = teachingRemuneration
-                    });
                 }
+                remunerationDTOs.Add(new RemunerationDTO
+                {
+                    StaffId = rank.StaffId,
+                    FullName = rank.FullName,
+                    AcademicDegreeRankId = rank.AcademicDegreeRankId,
+                    Remuneration = teachingRemuneration
+                });
             }
             var wwow = remunerationDTOs;
             return Json("_Remuneration");
