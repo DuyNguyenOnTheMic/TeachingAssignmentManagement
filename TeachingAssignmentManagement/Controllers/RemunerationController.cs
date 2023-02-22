@@ -107,9 +107,8 @@ namespace TeachingAssignmentManagement.Controllers
                         Remuneration = teachingRemuneration
                     });
                 }
-
-                var wwow = remunerationDTOs;
             }
+            var wwow = remunerationDTOs;
             return Json("_Remuneration");
         }
 
