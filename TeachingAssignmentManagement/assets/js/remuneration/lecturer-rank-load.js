@@ -10,7 +10,7 @@ $(function () {
         $this.val($this.find('option:first').next().val());
     });
 
-    // Populate select2 for choosing term and major
+    // Populate select2 for choosing term
     formSelect.each(function () {
         var $this = $(this);
         $this.wrap('<div class="position-relative"></div>');
