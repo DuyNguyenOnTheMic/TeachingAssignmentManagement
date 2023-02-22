@@ -60,7 +60,7 @@ namespace TeachingAssignmentManagement.Controllers
                     foreach (class_section item in query_classes)
                     {
                         // Get unit price for lecturer rank
-                        unitPriceByLevel = unitPrice.SingleOrDefault(u => u.academic_degree_rank_id == rank.AcademicDegreeRankId && u.type == Constants.SpecialProgramType).unit_price1;
+                        unitPriceByLevel = unitPrice.SingleOrDefault(u => u.academic_degree_rank_id == rank.AcademicDegreeRankId && u.type == Constants.StandardProgramType).unit_price1;
 
                         // Check if class is theoretical or practice
                         int studentNumber;
