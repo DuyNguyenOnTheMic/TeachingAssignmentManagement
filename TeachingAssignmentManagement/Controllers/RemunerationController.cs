@@ -41,6 +41,7 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public JsonResult GetRemunerationData(int termId)
         {
+            // Declare variables
             termId = 223;
             IEnumerable<LecturerRankDTO> lecturerRanks = unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
             term term = unitOfWork.TermRepository.GetTermByID(termId);
@@ -48,6 +49,8 @@ namespace TeachingAssignmentManagement.Controllers
             int endYear = term.end_year;
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
             IEnumerable<unit_price> unitPrice = unitOfWork.UnitPriceRepository.GetUnitPriceInYear(startYear, endYear);
+            List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
+
             foreach (LecturerRankDTO rank in lecturerRanks)
             {
                 // Check if lecturer have been assigned a rank
@@ -96,8 +99,16 @@ namespace TeachingAssignmentManagement.Controllers
                         teachingRemuneration += unitPriceByLevel * crowdedClassCoefficient * timeCoefficient * classTypeCoefficient * languageCoefficient;
                     }
 
-                    var hehe = teachingRemuneration;
+                    remunerationDTOs.Add(new RemunerationDTO
+                    {
+                        StaffId = rank.StaffId,
+                        FullName = rank.FullName,
+                        AcademicDegreeRankId= rank.AcademicDegreeRankId,
+                        Remuneration = teachingRemuneration
+                    });
                 }
+
+                var wwow = remunerationDTOs;
             }
             return Json("_Remuneration");
         }

@@ -342,6 +342,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\RemunerationDTO.cs" />
     <Compile Include="Models\UnitPriceDTO.cs" />
     <Compile Include="Models\PriceCoefficientViewModels.cs" />
     <Compile Include="Models\room.cs">
