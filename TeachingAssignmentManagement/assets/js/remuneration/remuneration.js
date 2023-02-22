@@ -29,7 +29,7 @@ $(function () {
                     orderable: false,
                     targets: 0
                 },
-                { className: 'text-center', targets: 3 },
+                { className: 'text-center', targets: [3, 4] },
                 { width: '5%', targets: 0 }
             ],
             order: [[1, 'asc']],

@@ -42,7 +42,6 @@ namespace TeachingAssignmentManagement.Controllers
         public JsonResult GetRemunerationData(int termId)
         {
             // Declare variables
-            termId = 223;
             IEnumerable<LecturerRankDTO> lecturerRanks = unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
             term term = unitOfWork.TermRepository.GetTermByID(termId);
             int startYear = term.start_year;
