@@ -380,11 +380,9 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditLecturerRank(string id, bool is_vietnamese)
+        public ActionResult EditLecturerRank([Bind(Include = "id,academic_degree_rank_id")] lecturer_rank lecturerRank)
         {
             // Update lecturer rank
-            subject query_subject = unitOfWork.SubjectRepository.GetSubjectByID(id);
-            query_subject.is_vietnamese = is_vietnamese;
             unitOfWork.Save();
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
