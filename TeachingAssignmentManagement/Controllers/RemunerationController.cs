@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -60,7 +61,7 @@ namespace TeachingAssignmentManagement.Controllers
                 // Check if lecturer have been assigned a rank
                 if (rank.Id != null)
                 {
-                    decimal unitPriceByLevel, crowdedClassCoefficient, timeCoefficient, languageCoefficient, classTypeCoefficient;
+                    decimal unitPriceByLevel;
 
                     // Get unit price for lecturer rank
                     unit_price query_unitPrice = unitPrice.SingleOrDefault(u => u.academic_degree_rank_id == rank.AcademicDegreeRankId && u.type == Constants.StandardProgramType);
@@ -78,31 +79,7 @@ namespace TeachingAssignmentManagement.Controllers
                     IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
                     foreach (class_section item in query_classes)
                     {
-                        // Check if class is theoretical or practice
-                        int studentNumber;
-                        if (item.type == Constants.TheoreticalClassType)
-                        {
-                            studentNumber = 50;
-                            classTypeCoefficient = coefficient.theoretical_coefficient;
-                        }
-                        else
-                        {
-                            studentNumber = 30;
-                            classTypeCoefficient = coefficient.practice_coefficient;
-                        }
-
-                        // Calculate crowded class coefficient
-                        int? studentRegistered = item.student_registered_number;
-                        crowdedClassCoefficient = studentRegistered <= studentNumber ? decimal.One : (decimal)(decimal.One + (studentRegistered - studentNumber) * 0.0025m);
-
-                        // Calculate time coefficient
-                        timeCoefficient = item.start_lesson_2 != 13 ? decimal.One : 1.2m;
-
-                        // Calculate language coefficient
-                        languageCoefficient = item.subject.is_vietnamese ? coefficient.vietnamese_coefficient : coefficient.foreign_coefficient;
-
-                        // Calculate total remuneration for this class
-                        teachingRemuneration += unitPriceByLevel * crowdedClassCoefficient * timeCoefficient * classTypeCoefficient * languageCoefficient;
+                        teachingRemuneration += CalculateRemuneration(item, unitPriceByLevel, coefficient);
                     }
                 }
                 remunerationDTOs.Add(new RemunerationDTO
@@ -115,6 +92,37 @@ namespace TeachingAssignmentManagement.Controllers
                 });
             }
             return Json(remunerationDTOs, JsonRequestBehavior.AllowGet);
+        }
+
+        private decimal CalculateRemuneration(class_section item, decimal unitPriceByLevel, coefficient coefficient)
+        {
+            decimal crowdedClassCoefficient, timeCoefficient, languageCoefficient, classTypeCoefficient;
+
+            // Check if class is theoretical or practice
+            int studentNumber;
+            if (item.type == Constants.TheoreticalClassType)
+            {
+                studentNumber = 50;
+                classTypeCoefficient = coefficient.theoretical_coefficient;
+            }
+            else
+            {
+                studentNumber = 30;
+                classTypeCoefficient = coefficient.practice_coefficient;
+            }
+
+            // Calculate crowded class coefficient
+            int? studentRegistered = item.student_registered_number;
+            crowdedClassCoefficient = studentRegistered <= studentNumber ? decimal.One : (decimal)(decimal.One + (studentRegistered - studentNumber) * 0.0025m);
+
+            // Calculate time coefficient
+            timeCoefficient = item.start_lesson_2 != 13 ? decimal.One : 1.2m;
+
+            // Calculate language coefficient
+            languageCoefficient = item.subject.is_vietnamese ? coefficient.vietnamese_coefficient : coefficient.foreign_coefficient;
+
+            // Calculate total remuneration for this class
+            return unitPriceByLevel * crowdedClassCoefficient * timeCoefficient * classTypeCoefficient * languageCoefficient;
         }
 
         [HttpGet]
