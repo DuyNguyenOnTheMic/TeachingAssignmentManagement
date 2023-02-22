@@ -52,7 +52,10 @@ namespace TeachingAssignmentManagement.Controllers
                     IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
                     foreach (class_section item in query_classes)
                     {
+                        if (item.type == Constants.TheoreticalClassType)
+                        {
 
+                        }
                     }
                 }
             }

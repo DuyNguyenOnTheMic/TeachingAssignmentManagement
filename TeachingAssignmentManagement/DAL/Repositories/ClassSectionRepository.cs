@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.DAL
@@ -231,8 +232,8 @@ namespace TeachingAssignmentManagement.DAL
                 subject_credits = c.FirstOrDefault().subject.credits,
                 subject_major = c.FirstOrDefault().major.name,
                 subject_hours = c.Sum(item => item.total_lesson),
-                theory_count = c.Count(item => item.type == "Lý thuyết"),
-                practice_count = c.Count(item => item.type == "Thực hành")
+                theory_count = c.Count(item => item.type == Constants.TheoreticalClassType),
+                practice_count = c.Count(item => item.type == Constants.PracticeClassType)
             }).ToList();
         }
 
@@ -324,8 +325,8 @@ namespace TeachingAssignmentManagement.DAL
                 subject_credits = c.FirstOrDefault().subject.credits,
                 subject_major = c.FirstOrDefault().major.name,
                 subject_hours = c.Sum(item => item.total_lesson),
-                theory_count = c.Count(item => item.type == "Lý thuyết"),
-                practice_count = c.Count(item => item.type == "Thực hành")
+                theory_count = c.Count(item => item.type == Constants.TheoreticalClassType),
+                practice_count = c.Count(item => item.type == Constants.PracticeClassType)
             }).ToList();
         }
 
@@ -341,8 +342,8 @@ namespace TeachingAssignmentManagement.DAL
                     subject_credits = c.FirstOrDefault().subject.credits,
                     subject_major = c.FirstOrDefault().major.name,
                     subject_hours = c.Sum(item => item.total_lesson),
-                    theory_count = c.Count(item => item.type == "Lý thuyết"),
-                    practice_count = c.Count(item => item.type == "Thực hành")
+                    theory_count = c.Count(item => item.type == Constants.TheoreticalClassType),
+                    practice_count = c.Count(item => item.type == Constants.PracticeClassType)
                 }).OrderByDescending(c => c.subject_hours).ToList();
             }
             else
@@ -354,8 +355,8 @@ namespace TeachingAssignmentManagement.DAL
                     subject_credits = c.FirstOrDefault().subject.credits,
                     subject_major = c.FirstOrDefault().major.name,
                     subject_hours = c.Sum(item => item.total_lesson),
-                    theory_count = c.Count(item => item.type == "Lý thuyết"),
-                    practice_count = c.Count(item => item.type == "Thực hành"),
+                    theory_count = c.Count(item => item.type == Constants.TheoreticalClassType),
+                    practice_count = c.Count(item => item.type == Constants.PracticeClassType),
                     sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
                     sumLesson4 = c.Where(item => item.start_lesson_2 == 4).Sum(item => item.total_lesson),
                     sumLesson7 = c.Where(item => item.start_lesson_2 == 7).Sum(item => item.total_lesson),
@@ -377,8 +378,8 @@ namespace TeachingAssignmentManagement.DAL
                     subject_credits = c.FirstOrDefault().subject.credits,
                     subject_major = c.FirstOrDefault().major.name,
                     subject_hours = c.Sum(item => item.total_lesson),
-                    theory_count = c.Count(item => item.type == "Lý thuyết"),
-                    practice_count = c.Count(item => item.type == "Thực hành")
+                    theory_count = c.Count(item => item.type == Constants.TheoreticalClassType),
+                    practice_count = c.Count(item => item.type == Constants.PracticeClassType)
                 }).OrderByDescending(c => c.subject_hours).ToList();
             }
             else
@@ -390,8 +391,8 @@ namespace TeachingAssignmentManagement.DAL
                     subject_credits = c.FirstOrDefault().subject.credits,
                     subject_major = c.FirstOrDefault().major.name,
                     subject_hours = c.Sum(item => item.total_lesson),
-                    theory_count = c.Count(item => item.type == "Lý thuyết"),
-                    practice_count = c.Count(item => item.type == "Thực hành"),
+                    theory_count = c.Count(item => item.type == Constants.TheoreticalClassType),
+                    practice_count = c.Count(item => item.type == Constants.PracticeClassType),
                     sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
                     sumLesson4 = c.Where(item => item.start_lesson_2 == 4).Sum(item => item.total_lesson),
                     sumLesson7 = c.Where(item => item.start_lesson_2 == 7).Sum(item => item.total_lesson),
