@@ -21,13 +21,14 @@ $(function () {
                 { 'data': 'FullName' },
                 { 'data': 'AcademicDegreeRankId' },
                 {
-                    'data': 'Id', 'render': function (data) {
+                    'data': 'Id', 'render': function (data, type, full, meta) {
                         // Set url action to be create or edit lecturer rank
                         var actionUrl;
+                        var $lecturerId = full['LecturerId'];
                         if (data) {
                             actionUrl = rootUrl + "Remuneration/EditLecturerRank/" + data;
                         } else {
-                            actionUrl = rootUrl + "Remuneration/CreateLecturerRank";
+                            actionUrl = rootUrl + "Remuneration/CreateLecturerRank?termId=" + termId + "&lecturerId=" + $lecturerId;
                         }
                         return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + actionUrl + "')><i class='feather feather-edit font-medium-3 me-1'></i></a>";
                     }

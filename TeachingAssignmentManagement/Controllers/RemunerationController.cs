@@ -372,6 +372,14 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        public ActionResult CreateLecturerRank(int termId, string lecturerId)
+        {
+            ViewData["termId"] = termId;
+            ViewData["lecturerId"] = lecturerId;
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult EditLecturerRank(int id)
         {
             lecturer_rank lecturerRank = unitOfWork.LecturerRankRepository.GetLecturerRankByID(id);
