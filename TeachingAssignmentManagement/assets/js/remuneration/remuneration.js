@@ -20,7 +20,7 @@ $(function () {
                 { 'data': 'StaffId' },
                 { 'data': 'FullName' },
                 { 'data': 'AcademicDegreeRankId' },
-                { 'data': 'Remuneration', 'render': DataTable.render.number('.', ',', 0, null, ' đ') }
+                { 'data': 'Remuneration', 'render': DataTable.render.number('.', ',', 0, null, ' ₫') }
             ],
 
             columnDefs: [
