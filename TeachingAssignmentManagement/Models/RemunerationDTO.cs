@@ -6,6 +6,6 @@
         public string FullName { get; set; }
         public string AcademicDegreeRankId { get; set; }
         public decimal Remuneration { get; set; }
-        public bool IsMissing { get; set; }
+        public bool Status { get; set; }
     }
 }

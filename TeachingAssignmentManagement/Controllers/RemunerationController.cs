@@ -116,7 +116,7 @@ namespace TeachingAssignmentManagement.Controllers
                     FullName = lecturer.FullName,
                     AcademicDegreeRankId = lecturer.AcademicDegreeRankId,
                     Remuneration = teachingRemuneration,
-                    IsMissing = isMissing
+                    Status = isMissing
                 });
             }
             return Json(remunerationDTOs, JsonRequestBehavior.AllowGet);
