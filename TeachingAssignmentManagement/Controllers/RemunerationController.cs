@@ -51,28 +51,28 @@ namespace TeachingAssignmentManagement.Controllers
             IEnumerable<unit_price> unitPrice = unitOfWork.UnitPriceRepository.GetUnitPriceInYear(startYear, endYear);
             List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
 
-            foreach (LecturerRankDTO rank in lecturerRanks)
+            foreach (LecturerRankDTO lecturer in lecturerRanks)
             {
                 decimal teachingRemuneration = decimal.Zero;
 
                 // Check if lecturer have been assigned a rank
-                if (rank.Id != null)
+                if (lecturer.Id != null)
                 {
                     decimal unitPriceByLevel, crowdedClassCoefficient, timeCoefficient, languageCoefficient, classTypeCoefficient;
 
                     // Get classes in term of lecturer
-                    IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
+                    IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, lecturer.LecturerId);
                     foreach (class_section item in query_classes)
                     {
                         // Get unit price for lecturer rank
-                        var query_unitPrice = unitPrice.SingleOrDefault(u => u.academic_degree_rank_id == rank.AcademicDegreeRankId && u.type == Constants.StandardProgramType);
+                        var query_unitPrice = unitPrice.SingleOrDefault(u => u.academic_degree_rank_id == lecturer.AcademicDegreeRankId && u.type == Constants.StandardProgramType);
                         if (query_classes != null)
                         {
                             unitPriceByLevel = query_unitPrice.unit_price1;
                         }
                         else
                         {
-                            unitPriceByLevel = 0;
+                            break;
                         }
 
                         // Check if class is theoretical or practice
@@ -111,9 +111,9 @@ namespace TeachingAssignmentManagement.Controllers
                 }
                 remunerationDTOs.Add(new RemunerationDTO
                 {
-                    StaffId = rank.StaffId,
-                    FullName = rank.FullName,
-                    AcademicDegreeRankId = rank.AcademicDegreeRankId,
+                    StaffId = lecturer.StaffId,
+                    FullName = lecturer.FullName,
+                    AcademicDegreeRankId = lecturer.AcademicDegreeRankId,
                     Remuneration = teachingRemuneration
                 });
             }
