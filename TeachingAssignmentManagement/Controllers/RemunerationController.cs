@@ -380,9 +380,11 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditLecturerRank([Bind(Include = "id,academic_degree_rank_id")] lecturer_rank lecturerRank)
+        public ActionResult EditLecturerRank(int id, string academic_degree_rank_id)
         {
             // Update lecturer rank
+            lecturer_rank lecturerRank = unitOfWork.LecturerRankRepository.GetLecturerRankByID(id);
+            lecturerRank.academic_degree_rank_id = academic_degree_rank_id;
             unitOfWork.Save();
             return Json(new { success = true, message = "Cập nhật thành công!" }, JsonRequestBehavior.AllowGet);
         }
