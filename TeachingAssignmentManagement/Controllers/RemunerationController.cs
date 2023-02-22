@@ -53,7 +53,9 @@ namespace TeachingAssignmentManagement.Controllers
 
             foreach (LecturerRankDTO lecturer in lecturerRanks)
             {
+                // Reset values in loop
                 decimal teachingRemuneration = decimal.Zero;
+                isMissing = false;
 
                 // Check if lecturer have been assigned a rank
                 if (lecturer.Id != null)

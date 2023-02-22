@@ -1,4 +1,8 @@
 ﻿var popup, dataTable;
+var statusBadgeObj = {
+    'true': { title: 'Thiếu thông tin', class: 'badge-light-warning' },
+    'false': { title: 'OK', class: 'badge-light-success' }
+};
 
 // Setup data
 var dataLoader = $('#data-loader'),
@@ -26,11 +30,36 @@ $(function () {
 
             columnDefs: [
                 {
+                    // Remuneration status
+                    targets: 5,
+                    render: function (data, type, row) {
+                        console.log(row['AcademicDegreeRankId']);
+                        var $status = data,
+                            $class,
+                            $title;
+                        if (row['AcademicDegreeRankId']) {
+                            // Set remuneration status when user has a rank
+                            if ($status) {
+                                $class = 'badge-light-warning';
+                                $title = 'Thiếu thông tin'
+                            } else if (!$status) {
+                                $class = 'badge-light-success';
+                                $title = 'OK'
+                            }
+                        } else {
+                            // Set no rank title
+                            $class = 'badge-light-danger';
+                            $title = 'Chưa đặt cấp bậc'
+                        }
+                        return '<span class="badge rounded-pill ' + $class + ' text-capitalized">' + $title + '</span>';
+                    }
+                },
+                {
                     searchable: false,
                     orderable: false,
                     targets: 0
                 },
-                { className: 'text-center', targets: [3, 4] },
+                { className: 'text-center', targets: [3, 4, 5] },
                 { width: '5%', targets: 0 }
             ],
             order: [[1, 'asc']],
