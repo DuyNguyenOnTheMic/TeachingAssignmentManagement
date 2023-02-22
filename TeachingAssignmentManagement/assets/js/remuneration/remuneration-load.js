@@ -33,7 +33,6 @@ formSelect.change(function () {
 function fetchData() {
     var termId = $('#term').val();
     if (termId) {
-        !0 === $(".ui-dialog-content").dialog("isOpen") && $(".ui-dialog-content").dialog("close");
         getLecturerRankData(termId);
     } else {
         showNoData(remunerationDiv, 'học kỳ');
