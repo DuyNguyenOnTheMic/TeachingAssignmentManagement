@@ -1,7 +1,7 @@
 ﻿var formSelect = $('.form-select'),
     rootUrl = $('#loader').data('request-url'),
-    lecturerRankDiv = $('#lecturerRankDiv'),
-    url = rootUrl + 'Remuneration/GetLecturerRankPartial';
+    remunerationDiv = $('#remunerationDiv'),
+    url = rootUrl + 'Remuneration/GetRemunerationPartial';
 
 $(function () {
     // Set selected option when form load
@@ -10,7 +10,7 @@ $(function () {
         $this.val($this.find('option:first').next().val());
     });
 
-    // Populate select2 for choosing term and major
+    // Populate select2 for choosing term
     formSelect.each(function () {
         var $this = $(this);
         $this.wrap('<div class="position-relative"></div>');
@@ -36,18 +36,18 @@ function fetchData() {
         !0 === $(".ui-dialog-content").dialog("isOpen") && $(".ui-dialog-content").dialog("close");
         getLecturerRankData(termId);
     } else {
-        showNoData(lecturerRankDiv, 'học kỳ');
+        showNoData(remunerationDiv, 'học kỳ');
     }
 }
 
 function getLecturerRankData(termId) {
     if (termId) {
         // Display loading message while fetching data
-        showLoading(lecturerRankDiv);
+        showLoading(remunerationDiv);
 
-        // Get Partial View Lecturer Rank data
+        // Get Partial View Remuneration data
         $.get(url, { termId }, function (data) {
-            lecturerRankDiv.html(data);
+            remunerationDiv.html(data);
         });
     }
 }
