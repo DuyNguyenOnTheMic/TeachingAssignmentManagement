@@ -52,6 +52,7 @@ namespace TeachingAssignmentManagement.Controllers
                     IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
                     foreach (class_section item in query_classes)
                     {
+                        // Calculate crowded class coefficient
                         int studentNumber = item.type == Constants.TheoreticalClassType ? 50 : 30;
                         int? studentRegistered = item.student_registered_number;
                         if (studentRegistered <= studentNumber)
@@ -62,6 +63,9 @@ namespace TeachingAssignmentManagement.Controllers
                         {
                             crowdedClassCoefficient = (decimal)(1 + (studentRegistered - studentNumber) * 0.0025);
                         }
+
+                        // Calculate time coefficient
+                        timeCoefficient = (decimal)(item.start_lesson_2 == 13 ? 1 : 1.2); 
                     }
                 }
             }
