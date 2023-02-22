@@ -97,6 +97,8 @@ namespace TeachingAssignmentManagement.Controllers
                         // Calculate total remuneration for this class
                         teachingRemuneration += unitPriceByLevel * crowdedClassCoefficient * timeCoefficient * subjectCoefficient;
                     }
+
+                    var hehe = teachingRemuneration;
                 }
             }
             return Json("_Remuneration");
