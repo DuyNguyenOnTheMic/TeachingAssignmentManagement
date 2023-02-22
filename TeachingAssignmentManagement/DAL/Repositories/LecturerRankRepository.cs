@@ -21,7 +21,7 @@ namespace TeachingAssignmentManagement.DAL
                     select new LecturerRankDTO
                     {
                         Id = rank.id,
-                        LecturerId = rank.lecturer_id,
+                        LecturerId = l.id,
                         StaffId = l.staff_id,
                         FullName = l.full_name,
                         AcademicDegreeRankId = rank.academic_degree_rank_id
