@@ -1,4 +1,5 @@
 ﻿@model TeachingAssignmentManagement.Models.TimetableViewModels
+@using TeachingAssignmentManagement.Helpers
 
 <div id="weekData" data-start-week="@ViewData["startWeek"]" data-end-week="@ViewData["endWeek"]" data-current-week="@ViewData["currentWeek"]"></div>
 
@@ -79,7 +80,7 @@
                                 <td @dividerClass data-day="@day" data-startlesson="@startLesson">
                                     @foreach (var item in classes)
                                     {
-                                        string cardClass = "Lý thuyết" == item.Type ? "btn-success" : "btn-warning";
+                                        string cardClass = Constants.TheoreticalClassType == item.Type ? "btn-success" : "btn-warning";
                                         <button class="btn @cardClass text-nowrap class-card my-25 p-25" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>@item.ClassSectionId</b><br /><b>Tên HP: </b>@item.Subject.name<br /><b>Ngành: </b>@item.MajorName<br /><b>Phòng: </b>@item.RoomId">@item.Subject.name</button>
                                     }
                                 </td>

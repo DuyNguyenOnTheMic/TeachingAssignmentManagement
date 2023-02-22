@@ -1,4 +1,5 @@
 ﻿@model TeachingAssignmentManagement.Models.TimetableViewModels
+@using TeachingAssignmentManagement.Helpers
 
 <div id="weekData" data-start-week="@ViewData["startWeek"]" data-end-week="@ViewData["endWeek"]" data-current-week="@ViewData["currentWeek"]"></div>
 
@@ -30,7 +31,7 @@
                             <td>
                                 @foreach (var item in classes)
                                 {
-                                    string cardClass = "Lý thuyết" == item.Type ? "theory-class" : "practical-class";
+                                    string cardClass = Constants.TheoreticalClassType == item.Type ? "theory-class" : "practical-class";
                                     <div class="@cardClass" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>Thứ @day <br />Lớp:</b> @item.Type">
                                         <b>@item.Subject.name</b><br><b><u>Mã LHP:</u></b> @item.ClassSectionId<br><b><u>Phòng:</u></b> @item.RoomId<br><b><u>Tiết:</u></b> @item.LessonTime
                                     </div>
