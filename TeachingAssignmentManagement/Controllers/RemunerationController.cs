@@ -117,8 +117,7 @@ namespace TeachingAssignmentManagement.Controllers
                     Remuneration = teachingRemuneration
                 });
             }
-            var wwow = remunerationDTOs;
-            return Json("_Remuneration");
+            return Json(remunerationDTOs, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
