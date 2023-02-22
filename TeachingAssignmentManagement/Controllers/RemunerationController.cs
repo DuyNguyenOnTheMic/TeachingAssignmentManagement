@@ -41,6 +41,21 @@ namespace TeachingAssignmentManagement.Controllers
         public JsonResult GetRemunerationData(int termId)
         {
             IEnumerable<LecturerRankDTO> lecturerRanks = unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
+            foreach (LecturerRankDTO rank in lecturerRanks)
+            {
+                // Check if lecturer have been assigned a rank
+                if (rank.Id != null)
+                {
+                    decimal teachingRemuneration = decimal.Zero;
+
+                    // Get classes in term of lecturer
+                    IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
+                    foreach (class_section item in query_classes)
+                    {
+
+                    }
+                }
+            }
             return Json("_Remuneration");
         }
 
