@@ -103,7 +103,7 @@ namespace TeachingAssignmentManagement.Controllers
                     {
                         StaffId = rank.StaffId,
                         FullName = rank.FullName,
-                        AcademicDegreeRankId= rank.AcademicDegreeRankId,
+                        AcademicDegreeRankId = rank.AcademicDegreeRankId,
                         Remuneration = teachingRemuneration
                     });
                 }
