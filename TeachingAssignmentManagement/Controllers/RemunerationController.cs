@@ -49,6 +49,7 @@ namespace TeachingAssignmentManagement.Controllers
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
             IEnumerable<unit_price> unitPrice = unitOfWork.UnitPriceRepository.GetUnitPriceInYear(startYear, endYear);
             List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
+            bool isMissing = coefficient == null;
 
             foreach (LecturerRankDTO lecturer in lecturerRanks)
             {
@@ -71,6 +72,7 @@ namespace TeachingAssignmentManagement.Controllers
                         }
                         else
                         {
+                            isMissing = true;
                             break;
                         }
 
@@ -113,7 +115,8 @@ namespace TeachingAssignmentManagement.Controllers
                     StaffId = lecturer.StaffId,
                     FullName = lecturer.FullName,
                     AcademicDegreeRankId = lecturer.AcademicDegreeRankId,
-                    Remuneration = teachingRemuneration
+                    Remuneration = teachingRemuneration,
+                    IsMissing = isMissing
                 });
             }
             return Json(remunerationDTOs, JsonRequestBehavior.AllowGet);
