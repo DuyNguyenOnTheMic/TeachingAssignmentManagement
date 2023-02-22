@@ -46,7 +46,7 @@ namespace TeachingAssignmentManagement.Controllers
                 // Check if lecturer have been assigned a rank
                 if (rank.Id != null)
                 {
-                    decimal teachingRemuneration = decimal.Zero;
+                    decimal teachingRemuneration, crowdedClassCoefficient, timeCoefficient, subjectCoefficient;
 
                     // Get classes in term of lecturer
                     IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
