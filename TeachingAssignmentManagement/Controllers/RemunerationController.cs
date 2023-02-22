@@ -93,14 +93,7 @@ namespace TeachingAssignmentManagement.Controllers
 
                         // Calculate crowded class coefficient
                         int? studentRegistered = item.student_registered_number;
-                        if (studentRegistered <= studentNumber)
-                        {
-                            crowdedClassCoefficient = decimal.One;
-                        }
-                        else
-                        {
-                            crowdedClassCoefficient = (decimal)(decimal.One + (studentRegistered - studentNumber) * 0.0025m);
-                        }
+                        crowdedClassCoefficient = studentRegistered <= studentNumber ? decimal.One : (decimal)(decimal.One + (studentRegistered - studentNumber) * 0.0025m);
 
                         // Calculate time coefficient
                         timeCoefficient = item.start_lesson_2 != 13 ? decimal.One : 1.2m;
