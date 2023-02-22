@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -94,13 +93,13 @@ namespace TeachingAssignmentManagement.Controllers
             return Json(remunerationDTOs, JsonRequestBehavior.AllowGet);
         }
 
-        private decimal CalculateRemuneration(class_section item, decimal unitPriceByLevel, coefficient coefficient)
+        public decimal CalculateRemuneration(class_section classSection, decimal unitPriceByLevel, coefficient coefficient)
         {
             decimal crowdedClassCoefficient, timeCoefficient, languageCoefficient, classTypeCoefficient;
 
             // Check if class is theoretical or practice
             int studentNumber;
-            if (item.type == Constants.TheoreticalClassType)
+            if (classSection.type == Constants.TheoreticalClassType)
             {
                 studentNumber = 50;
                 classTypeCoefficient = coefficient.theoretical_coefficient;
@@ -112,14 +111,14 @@ namespace TeachingAssignmentManagement.Controllers
             }
 
             // Calculate crowded class coefficient
-            int? studentRegistered = item.student_registered_number;
+            int? studentRegistered = classSection.student_registered_number;
             crowdedClassCoefficient = studentRegistered <= studentNumber ? decimal.One : (decimal)(decimal.One + (studentRegistered - studentNumber) * 0.0025m);
 
             // Calculate time coefficient
-            timeCoefficient = item.start_lesson_2 != 13 ? decimal.One : 1.2m;
+            timeCoefficient = classSection.start_lesson_2 != 13 ? decimal.One : 1.2m;
 
             // Calculate language coefficient
-            languageCoefficient = item.subject.is_vietnamese ? coefficient.vietnamese_coefficient : coefficient.foreign_coefficient;
+            languageCoefficient = classSection.subject.is_vietnamese ? coefficient.vietnamese_coefficient : coefficient.foreign_coefficient;
 
             // Calculate total remuneration for this class
             return unitPriceByLevel * crowdedClassCoefficient * timeCoefficient * classTypeCoefficient * languageCoefficient;
