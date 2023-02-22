@@ -92,7 +92,7 @@ namespace TeachingAssignmentManagement.Controllers
                         languageCoefficient = item.subject.is_vietnamese ? coefficient.vietnamese_coefficient : coefficient.foreign_coefficient;
 
                         // Calculate total remuneration for this class
-                        teachingRemuneration += unitPriceByLevel * crowdedClassCoefficient * timeCoefficient * (classTypeCoefficient * languageCoefficient);
+                        teachingRemuneration += unitPriceByLevel * crowdedClassCoefficient * timeCoefficient * classTypeCoefficient * languageCoefficient;
                     }
 
                     var hehe = teachingRemuneration;
