@@ -52,7 +52,7 @@ namespace TeachingAssignmentManagement.Controllers
                 // Check if lecturer have been assigned a rank
                 if (rank.Id != null)
                 {
-                    decimal teachingRemuneration = decimal.Zero, unitPriceByLevel, crowdedClassCoefficient, timeCoefficient, languageCoefficient, classTypeCoefficient, subjectCoefficient;
+                    decimal teachingRemuneration = decimal.Zero, unitPriceByLevel, crowdedClassCoefficient, timeCoefficient, languageCoefficient, classTypeCoefficient;
 
                     // Get classes in term of lecturer
                     IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
@@ -91,11 +91,8 @@ namespace TeachingAssignmentManagement.Controllers
                         // Calculate language coefficient
                         languageCoefficient = item.subject.is_vietnamese ? coefficient.vietnamese_coefficient : coefficient.foreign_coefficient;
 
-                        // Calculate subject coefficient
-                        subjectCoefficient = classTypeCoefficient * languageCoefficient;
-
                         // Calculate total remuneration for this class
-                        teachingRemuneration += unitPriceByLevel * crowdedClassCoefficient * timeCoefficient * subjectCoefficient;
+                        teachingRemuneration += unitPriceByLevel * crowdedClassCoefficient * timeCoefficient * (classTypeCoefficient * languageCoefficient);
                     }
 
                     var hehe = teachingRemuneration;
