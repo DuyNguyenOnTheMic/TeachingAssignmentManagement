@@ -398,7 +398,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditAllLecturerRanks(int termId, string rank_id)
+        public ActionResult EditAllLecturerRanks(int termId, string academic_degree_rank_id)
         {
             // Update all lecturer ranks
             unitOfWork.LecturerRankRepository.DeleteAllLecturerRanks(termId);
@@ -407,7 +407,7 @@ namespace TeachingAssignmentManagement.Controllers
             {
                 lecturer_rank lecturerRank = new lecturer_rank
                 {
-                    academic_degree_rank_id = rank_id,
+                    academic_degree_rank_id = academic_degree_rank_id,
                     lecturer_id = item.LecturerId,
                     term_id = termId
                 };
