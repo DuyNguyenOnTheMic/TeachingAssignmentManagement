@@ -38,6 +38,13 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        public JsonResult GetRemunerationData(int termId)
+        {
+            IEnumerable<LecturerRankDTO> lecturerRanks = unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
+            return Json("_Remuneration");
+        }
+
+        [HttpGet]
         [OutputCache(Duration = 600, VaryByCustom = "userName")]
         public ActionResult AcademicDegree()
         {
