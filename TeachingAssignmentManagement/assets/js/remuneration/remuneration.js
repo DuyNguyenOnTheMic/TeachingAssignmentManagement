@@ -78,6 +78,7 @@ $(function () {
     dataTable.on('draw.dt', function () {
         dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1;
+            dataTable.cell(cell).invalidate('dom');
         });
     });
 });
