@@ -46,7 +46,7 @@ namespace TeachingAssignmentManagement.Controllers
                 // Check if lecturer have been assigned a rank
                 if (rank.Id != null)
                 {
-                    decimal teachingRemuneration, crowdedClassCoefficient, timeCoefficient, subjectCoefficient;
+                    decimal teachingRemuneration, crowdedClassCoefficient, timeCoefficient, languageCoefficient, classTypeCoefficient, subjectCoefficient;
 
                     // Get classes in term of lecturer
                     IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
@@ -65,7 +65,7 @@ namespace TeachingAssignmentManagement.Controllers
                         }
 
                         // Calculate time coefficient
-                        timeCoefficient = item.start_lesson_2 == 13 ? 1 : 1.2m; 
+                        timeCoefficient = item.start_lesson_2 == 13 ? 1 : 1.2m;
                     }
                 }
             }
