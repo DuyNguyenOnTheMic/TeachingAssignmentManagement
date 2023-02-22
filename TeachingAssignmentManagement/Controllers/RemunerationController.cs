@@ -61,11 +61,11 @@ namespace TeachingAssignmentManagement.Controllers
                         }
                         else
                         {
-                            crowdedClassCoefficient = (decimal)(1 + (studentRegistered - studentNumber) * 0.0025);
+                            crowdedClassCoefficient = (decimal)(1 + (studentRegistered - studentNumber) * 0.0025m);
                         }
 
                         // Calculate time coefficient
-                        timeCoefficient = (decimal)(item.start_lesson_2 == 13 ? 1 : 1.2); 
+                        timeCoefficient = item.start_lesson_2 == 13 ? 1 : 1.2m; 
                     }
                 }
             }
