@@ -31,6 +31,13 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        public ActionResult GetRemunerationPartial(int termId)
+        {
+            ViewData["termId"] = termId;
+            return PartialView("_Remuneration");
+        }
+
+        [HttpGet]
         [OutputCache(Duration = 600, VaryByCustom = "userName")]
         public ActionResult AcademicDegree()
         {

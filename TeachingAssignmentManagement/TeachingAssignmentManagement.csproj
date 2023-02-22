@@ -1295,6 +1295,7 @@
     <Content Include="Views\Remuneration\EditLecturerRank.cshtml" />
     <Content Include="Views\Remuneration\CreateLecturerRank.cshtml" />
     <Content Include="Views\Remuneration\Index.cshtml" />
+    <Content Include="Views\Remuneration\_Remuneration.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
