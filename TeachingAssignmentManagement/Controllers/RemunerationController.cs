@@ -41,6 +41,11 @@ namespace TeachingAssignmentManagement.Controllers
         public JsonResult GetRemunerationData(int termId)
         {
             IEnumerable<LecturerRankDTO> lecturerRanks = unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
+            term term = unitOfWork.TermRepository.GetTermByID(termId);
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
+            IEnumerable<unit_price> unitPirce = unitOfWork.UnitPriceRepository.GetUnitPriceInYear(startYear, endYear);
             foreach (LecturerRankDTO rank in lecturerRanks)
             {
                 // Check if lecturer have been assigned a rank
@@ -57,10 +62,12 @@ namespace TeachingAssignmentManagement.Controllers
                         if (item.type == Constants.TheoreticalClassType)
                         {
                             studentNumber = 50;
+                            classTypeCoefficient = coefficient.theoretical_coefficient;
                         }
                         else
                         {
                             studentNumber = 30;
+                            classTypeCoefficient = coefficient.practice_coefficient;
                         }
 
                         // Calculate crowded class coefficient
