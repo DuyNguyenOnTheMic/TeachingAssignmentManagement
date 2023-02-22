@@ -4,8 +4,11 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("EditLecturerRank", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "lecturerrank-form" }))
+@using (Html.BeginForm("CreateLecturerRank", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "lecturerrank-form" }))
 {
+    @Html.Hidden("termId")
+    @Html.HiddenFor(model => model.id)
+
     <div class="mb-1">
         <label class="form-label font-small-4" for="staff_id">Mã giảng viên: </label>
         @Html.EditorFor(model => model.staff_id, new { htmlAttributes = new { @class = "form-control", @aria_label = "Mã giảng viên", @disabled = "@disabled" } })

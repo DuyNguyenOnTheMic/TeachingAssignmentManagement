@@ -33,6 +33,11 @@ namespace TeachingAssignmentManagement.DAL
             return context.lecturer_rank.Find(id);
         }
 
+        public bool CheckLecturerRankExists(int term, string lecturer)
+        {
+            return context.lecturer_rank.Any(r => r.term_id == term && r.lecturer_id == lecturer);
+        }
+
         public void InsertLecturerRank(lecturer_rank lecturerRank)
         {
             context.lecturer_rank.Add(lecturerRank);

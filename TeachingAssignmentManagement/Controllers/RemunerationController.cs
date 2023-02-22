@@ -275,8 +275,8 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult CreateCoefficient([Bind(Include = "start_year,end_year")] coefficient coefficient, string vietnamese_coefficient, string foreign_coefficient, string theoretical_coefficient, string practice_coefficient)
         {
             // Create new coefficient
-            bool isUnitPriceExists = unitOfWork.CoefficientRepository.CheckCoefficientExists(coefficient.start_year, coefficient.end_year);
-            if (!isUnitPriceExists)
+            bool isCoefficientExists = unitOfWork.CoefficientRepository.CheckCoefficientExists(coefficient.start_year, coefficient.end_year);
+            if (!isCoefficientExists)
             {
                 coefficient.vietnamese_coefficient = decimal.Parse(vietnamese_coefficient, CultureInfo.InvariantCulture);
                 coefficient.foreign_coefficient = decimal.Parse(foreign_coefficient, CultureInfo.InvariantCulture);
@@ -377,6 +377,26 @@ namespace TeachingAssignmentManagement.Controllers
             ViewData["termId"] = termId;
             ViewData["academic_degree_rank_id"] = new SelectList(unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO(), "Id", "Id");
             return View(unitOfWork.UserRepository.GetLecturerByID(lecturerId));
+        }
+
+        [HttpPost]
+        public ActionResult CreateLecturerRank(int termId, string id, string academic_degree_rank_id)
+        {
+            // Create new lecturer rank
+            bool isLecturerRankExists = unitOfWork.LecturerRankRepository.CheckLecturerRankExists(termId, id);
+            if (!isLecturerRankExists)
+            {
+                lecturer_rank lecturerRank = new lecturer_rank
+                {
+                    academic_degree_rank_id = academic_degree_rank_id,
+                    lecturer_id = id,
+                    term_id = termId
+                };
+                unitOfWork.LecturerRankRepository.InsertLecturerRank(lecturerRank);
+                unitOfWork.Save();
+                return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { error = true, message = "Giảng viên đã được phân cấp bậc trong học kỳ này, vui lòng thử lại sau!" }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
