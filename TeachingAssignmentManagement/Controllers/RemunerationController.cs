@@ -51,19 +51,19 @@ namespace TeachingAssignmentManagement.Controllers
             List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
             bool isMissing = coefficient == null;
 
-            foreach (LecturerRankDTO lecturer in lecturerRanks)
+            foreach (LecturerRankDTO rank in lecturerRanks)
             {
                 // Reset values in loop
                 decimal teachingRemuneration = decimal.Zero;
                 isMissing = false;
 
                 // Check if lecturer have been assigned a rank
-                if (lecturer.Id != null)
+                if (rank.Id != null)
                 {
                     decimal unitPriceByLevel, crowdedClassCoefficient, timeCoefficient, languageCoefficient, classTypeCoefficient;
 
                     // Get unit price for lecturer rank
-                    unit_price query_unitPrice = unitPrice.SingleOrDefault(u => u.academic_degree_rank_id == lecturer.AcademicDegreeRankId && u.type == Constants.StandardProgramType);
+                    unit_price query_unitPrice = unitPrice.SingleOrDefault(u => u.academic_degree_rank_id == rank.AcademicDegreeRankId && u.type == Constants.StandardProgramType);
                     if (query_unitPrice != null)
                     {
                         unitPriceByLevel = query_unitPrice.unit_price1;
@@ -75,7 +75,7 @@ namespace TeachingAssignmentManagement.Controllers
                     }
 
                     // Get classes in term of lecturer
-                    IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, lecturer.LecturerId);
+                    IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
                     foreach (class_section item in query_classes)
                     {
                         // Check if class is theoretical or practice
@@ -114,9 +114,9 @@ namespace TeachingAssignmentManagement.Controllers
                 }
                 remunerationDTOs.Add(new RemunerationDTO
                 {
-                    StaffId = lecturer.StaffId,
-                    FullName = lecturer.FullName,
-                    AcademicDegreeRankId = lecturer.AcademicDegreeRankId,
+                    StaffId = rank.StaffId,
+                    FullName = rank.FullName,
+                    AcademicDegreeRankId = rank.AcademicDegreeRankId,
                     Remuneration = teachingRemuneration,
                     Status = isMissing
                 });
