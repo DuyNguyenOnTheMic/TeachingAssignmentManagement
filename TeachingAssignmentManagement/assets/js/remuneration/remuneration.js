@@ -20,11 +20,7 @@ $(function () {
                 { 'data': 'StaffId' },
                 { 'data': 'FullName' },
                 { 'data': 'AcademicDegreeRankId' },
-                {
-                    'data': 'Remuneration', 'render': function (data) {
-                        return '$' + parseInt(data).toLocaleString('en-US');
-                    }
-                }
+                { 'data': 'Remuneration', 'render': DataTable.render.number(',', '.', 0, null, ' đ') }
             ],
 
             columnDefs: [
