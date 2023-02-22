@@ -375,8 +375,8 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult CreateLecturerRank(int termId, string lecturerId)
         {
             ViewData["termId"] = termId;
-            ViewData["lecturerId"] = lecturerId;
-            return View();
+            ViewData["academic_degree_rank_id"] = new SelectList(unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO(), "Id", "Id");
+            return View(unitOfWork.UserRepository.GetLecturerByID(lecturerId));
         }
 
         [HttpGet]
