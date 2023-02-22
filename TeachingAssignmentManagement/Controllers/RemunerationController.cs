@@ -62,22 +62,22 @@ namespace TeachingAssignmentManagement.Controllers
                 {
                     decimal unitPriceByLevel, crowdedClassCoefficient, timeCoefficient, languageCoefficient, classTypeCoefficient;
 
+                    // Get unit price for lecturer rank
+                    unit_price query_unitPrice = unitPrice.SingleOrDefault(u => u.academic_degree_rank_id == lecturer.AcademicDegreeRankId && u.type == Constants.StandardProgramType);
+                    if (query_unitPrice != null)
+                    {
+                        unitPriceByLevel = query_unitPrice.unit_price1;
+                    }
+                    else
+                    {
+                        isMissing = true;
+                        unitPriceByLevel = decimal.Zero;
+                    }
+
                     // Get classes in term of lecturer
                     IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, lecturer.LecturerId);
                     foreach (class_section item in query_classes)
                     {
-                        // Get unit price for lecturer rank
-                        unit_price query_unitPrice = unitPrice.SingleOrDefault(u => u.academic_degree_rank_id == lecturer.AcademicDegreeRankId && u.type == Constants.StandardProgramType);
-                        if (query_unitPrice != null)
-                        {
-                            unitPriceByLevel = query_unitPrice.unit_price1;
-                        }
-                        else
-                        {
-                            isMissing = true;
-                            break;
-                        }
-
                         // Check if class is theoretical or practice
                         int studentNumber;
                         if (item.type == Constants.TheoreticalClassType)
