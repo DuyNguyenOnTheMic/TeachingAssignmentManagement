@@ -65,8 +65,8 @@ namespace TeachingAssignmentManagement.Controllers
                     foreach (class_section item in query_classes)
                     {
                         // Get unit price for lecturer rank
-                        var query_unitPrice = unitPrice.SingleOrDefault(u => u.academic_degree_rank_id == lecturer.AcademicDegreeRankId && u.type == Constants.StandardProgramType);
-                        if (query_classes != null)
+                        unit_price query_unitPrice = unitPrice.SingleOrDefault(u => u.academic_degree_rank_id == lecturer.AcademicDegreeRankId && u.type == Constants.StandardProgramType);
+                        if (query_unitPrice != null)
                         {
                             unitPriceByLevel = query_unitPrice.unit_price1;
                         }
