@@ -26,6 +26,7 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
             return View();
         }
 
