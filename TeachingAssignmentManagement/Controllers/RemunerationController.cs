@@ -52,9 +52,15 @@ namespace TeachingAssignmentManagement.Controllers
                     IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
                     foreach (class_section item in query_classes)
                     {
-                        if (item.type == Constants.TheoreticalClassType)
+                        int studentNumber = item.type == Constants.TheoreticalClassType ? 50 : 30;
+                        int? studentRegistered = item.student_registered_number;
+                        if (studentRegistered <= studentNumber)
                         {
-
+                            crowdedClassCoefficient = decimal.One;
+                        }
+                        else
+                        {
+                            crowdedClassCoefficient = (decimal)(1 + (studentRegistered - studentNumber) * 0.0025);
                         }
                     }
                 }
