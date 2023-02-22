@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Helpers;
@@ -45,18 +46,21 @@ namespace TeachingAssignmentManagement.Controllers
             int startYear = term.start_year;
             int endYear = term.end_year;
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
-            IEnumerable<unit_price> unitPirce = unitOfWork.UnitPriceRepository.GetUnitPriceInYear(startYear, endYear);
+            IEnumerable<unit_price> unitPrice = unitOfWork.UnitPriceRepository.GetUnitPriceInYear(startYear, endYear);
             foreach (LecturerRankDTO rank in lecturerRanks)
             {
                 // Check if lecturer have been assigned a rank
                 if (rank.Id != null)
                 {
-                    decimal teachingRemuneration, crowdedClassCoefficient, timeCoefficient, languageCoefficient, classTypeCoefficient, subjectCoefficient;
+                    decimal teachingRemuneration, unitPriceByLevel, crowdedClassCoefficient, timeCoefficient, languageCoefficient, classTypeCoefficient, subjectCoefficient;
 
                     // Get classes in term of lecturer
                     IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
                     foreach (class_section item in query_classes)
                     {
+                        // Get unit price for lecturer rank
+                        unitPriceByLevel = unitPrice.SingleOrDefault(u => u.academic_degree_rank_id == rank.AcademicDegreeRankId).unit_price1;
+
                         // Check if class is theoretical or practice
                         int studentNumber;
                         if (item.type == Constants.TheoreticalClassType)
@@ -86,6 +90,12 @@ namespace TeachingAssignmentManagement.Controllers
 
                         // Calculate language coefficient
                         languageCoefficient = item.subject.is_vietnamese ? coefficient.vietnamese_coefficient : coefficient.foreign_coefficient;
+
+                        // Calculate subject coefficient
+                        subjectCoefficient = classTypeCoefficient * languageCoefficient;
+
+                        // Calculate total remuneration for this class
+                        teachingRemuneration += unitPriceByLevel * crowdedClassCoefficient * timeCoefficient * subjectCoefficient;
                     }
                 }
             }
