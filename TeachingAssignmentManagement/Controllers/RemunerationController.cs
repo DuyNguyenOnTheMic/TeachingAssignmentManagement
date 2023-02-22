@@ -53,7 +53,7 @@ namespace TeachingAssignmentManagement.Controllers
 
             foreach (LecturerRankDTO rank in lecturerRanks)
             {
-                // Reset values in loop
+                // Reset values in each loop
                 decimal teachingRemuneration = decimal.Zero;
                 isMissing = false;
 
