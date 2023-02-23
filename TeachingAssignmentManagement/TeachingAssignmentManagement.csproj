@@ -1153,10 +1153,10 @@
     <Content Include="assets\js\remuneration\lecturer-rank-load.min.js" />
     <Content Include="assets\js\remuneration\lecturer-rank.js" />
     <Content Include="assets\js\remuneration\lecturer-rank.min.js" />
-    <Content Include="assets\js\remuneration\price-coefficient-load.js" />
-    <Content Include="assets\js\remuneration\price-coefficient-load.min.js" />
-    <Content Include="assets\js\remuneration\price-coefficient.js" />
-    <Content Include="assets\js\remuneration\price-coefficient.min.js" />
+    <Content Include="assets\js\price-coefficient\price-coefficient-load.js" />
+    <Content Include="assets\js\price-coefficient\price-coefficient-load.min.js" />
+    <Content Include="assets\js\price-coefficient\price-coefficient.js" />
+    <Content Include="assets\js\price-coefficient\price-coefficient.min.js" />
     <Content Include="assets\js\remuneration\remuneration-load.js" />
     <Content Include="assets\js\remuneration\remuneration.js" />
     <Content Include="assets\js\remuneration\subject-load.js" />
@@ -1286,7 +1286,7 @@
     <Content Include="Views\AcademicDegreeRank\Index.cshtml" />
     <Content Include="Views\AcademicDegreeRank\Create.cshtml" />
     <Content Include="Views\AcademicDegreeRank\Edit.cshtml" />
-    <Content Include="Views\PriceCoefficient\PriceCoefficient.cshtml" />
+    <Content Include="Views\PriceCoefficient\Index.cshtml" />
     <Content Include="Views\PriceCoefficient\_PriceCoefficient.cshtml" />
     <Content Include="Views\Remuneration\EditUnitPrice.cshtml" />
     <Content Include="Views\PriceCoefficient\CreateUnitPrice.cshtml" />
