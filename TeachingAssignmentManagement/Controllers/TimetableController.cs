@@ -166,7 +166,7 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpPost]
         [Authorize(Roles = "BCN khoa")]
-        public ActionResult Import(HttpPostedFileBase postedFile, int term, string major, bool isUpdate)
+        public ActionResult Import(HttpPostedFileBase postedFile, int term, string major, bool isUpdate, bool isCheckStudentNumber)
         {
             string path = Server.MapPath("~/Uploads/");
             if (!Directory.Exists(path))
@@ -313,7 +313,7 @@ namespace TeachingAssignmentManagement.Controllers
                     }
 
                     // Check if student registered number is less than 1
-                    if (ToInt(studentRegisteredNumber) <= 0)
+                    if (ToInt(studentRegisteredNumber) <= 0 & isCheckStudentNumber)
                     {
                         Response.Write($"Có một số lớp có sinh viên đăng ký là 0, bạn có muốn import tiếp không?");
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
