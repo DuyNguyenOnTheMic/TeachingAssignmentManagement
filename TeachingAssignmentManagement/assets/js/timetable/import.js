@@ -141,7 +141,22 @@ dropzone.dropzone({
                         }
                     })
                 } else if (xhr.status == 400) {
-                    
+                    Swal.fire({
+                        title: 'Thông báo',
+                        text: errorMessage,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        cancelButtonText: 'Huỷ',
+                        confirmButtonText: 'Import tiếp',
+                        customClass: {
+                            confirmButton: 'btn btn-primary',
+                            cancelButton: 'btn btn-outline-danger ms-1'
+                        },
+                        buttonsStyling: false
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    })
                 }
             }
         });
