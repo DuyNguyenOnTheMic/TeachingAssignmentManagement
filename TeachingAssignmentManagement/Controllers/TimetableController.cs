@@ -303,13 +303,20 @@ namespace TeachingAssignmentManagement.Controllers
                     string note2 = row["Ghi chú 2"].ToString();
 
                     // Check if values is null
-                    string[] validRows = { originalId, subjectId, classSectionid, name, credits, type, totalLesson, day, startLesson, lessonNumber, roomId, learnWeek, day2, startLesson2, startWeek, endWeek };
+                    string[] validRows = { originalId, subjectId, classSectionid, name, credits, type, totalLesson, day, startLesson, lessonNumber, roomId, learnWeek, day2, startLesson2, studentRegisteredNumber, startWeek, endWeek };
                     string checkNull = ValidateNotNull(validRows);
                     if (checkNull != null)
                     {
                         int excelRow = dt.Rows.IndexOf(row) + 2;
                         Response.Write($"Oops, có lỗi đã xảy ra ở dòng số <strong>" + excelRow + "</strong>, vui lòng kiểm tra lại tệp tin.");
                         return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
+                    }
+
+                    // Check if student registered number is less than 1
+                    if (ToInt(studentRegisteredNumber) <= 0)
+                    {
+                        Response.Write($"Có một số lớp có sinh viên đăng ký là 0, bạn có muốn import tiếp không?");
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
 
                     // Check if start lessons is true
