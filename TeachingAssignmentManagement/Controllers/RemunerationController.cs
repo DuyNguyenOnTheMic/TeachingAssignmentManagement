@@ -93,7 +93,7 @@ namespace TeachingAssignmentManagement.Controllers
             return Json(remunerationDTOs, JsonRequestBehavior.AllowGet);
         }
 
-        public decimal CalculateRemuneration(class_section classSection, decimal unitPriceByLevel, coefficient coefficient)
+        public static decimal CalculateRemuneration(class_section classSection, decimal unitPriceByLevel, coefficient coefficient)
         {
             decimal crowdedClassCoefficient, timeCoefficient, languageCoefficient, classTypeCoefficient;
 

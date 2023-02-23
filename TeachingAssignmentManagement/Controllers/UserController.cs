@@ -330,7 +330,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         #region Helpers
-        public static string SetNullOnEmpty(string value)
+        public string SetNullOnEmpty(string value)
         {
             // Check if string is empty
             return value != null && string.IsNullOrEmpty(value.Trim()) ? null : value;

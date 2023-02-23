@@ -710,19 +710,19 @@ namespace TeachingAssignmentManagement.Controllers
             return null;
         }
 
-        public static string ToNullableString(string value)
+        public string ToNullableString(string value)
         {
             // Check if string is empty
             return value != null && string.IsNullOrEmpty(value.Trim()) ? null : value;
         }
 
-        public static int? ToNullableInt(string value)
+        public int? ToNullableInt(string value)
         {
             // Convert string to nullable int
             return value != null && string.IsNullOrEmpty(value.Trim()) ? (int?)null : int.Parse(value);
         }
 
-        public static int ToInt(string value)
+        public int ToInt(string value)
         {
             // Convert string to int
             return int.Parse(value);
