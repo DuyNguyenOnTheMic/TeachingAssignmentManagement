@@ -313,7 +313,7 @@ namespace TeachingAssignmentManagement.Controllers
                     }
 
                     // Check if student registered number is less than 1
-                    if (ToInt(studentRegisteredNumber) <= 0 & isCheckStudentNumber)
+                    if (ToInt(studentRegisteredNumber) <= 0 && isCheckStudentNumber)
                     {
                         Response.Write($"Có một số lớp có sinh viên đăng ký là 0, bạn có muốn import tiếp không?");
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
