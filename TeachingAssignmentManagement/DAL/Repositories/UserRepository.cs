@@ -28,7 +28,8 @@ namespace TeachingAssignmentManagement.DAL
                         lecturer.staff_id,
                         lecturer.full_name,
                         lecturer.type,
-                        lecturer.status
+                        lecturer.status,
+                        lecturer.is_vietnamese
                     }).ToList();
         }
 
