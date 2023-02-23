@@ -158,10 +158,7 @@ dropzone.dropzone({
                     }).then((result) => {
                         if (result.isConfirmed) {
                             isCheckStudentNumber.val(false);
-                            if (isUpdate.val() == true) {
-                                // Update timetable
-                                importAgain(myDropzone, true);
-                            }
+                            importAgain(myDropzone, isUpdate.val());
                         }
                     })
                 }
