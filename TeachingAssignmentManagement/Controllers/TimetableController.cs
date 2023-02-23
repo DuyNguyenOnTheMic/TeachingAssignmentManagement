@@ -252,7 +252,7 @@ namespace TeachingAssignmentManagement.Controllers
             }
 
             int itemsCount = dt.Rows.Count;
-            TimetableViewModel timetableViewModels = new TimetableViewModel();
+            TimetableViewModel timetableViewModel = new TimetableViewModel();
             List<class_section> classSectionList = new List<class_section>();
             IEnumerable<class_section> query_classSectionWhere = classSectionList;
             if (isUpdate)
@@ -320,7 +320,7 @@ namespace TeachingAssignmentManagement.Controllers
                     }
 
                     // Check if start lessons is true
-                    if (!timetableViewModels.startLessons.Contains(ToInt(startLesson2)))
+                    if (!timetableViewModel.startLessons.Contains(ToInt(startLesson2)))
                     {
                         int excelRow = dt.Rows.IndexOf(row) + 2;
                         Response.Write($"Oops, có lỗi đã xảy ra ở dòng số <strong>" + excelRow + "</strong>, tiết bắt đầu phải là 1, 4, 7, 10 hoặc 13.");
