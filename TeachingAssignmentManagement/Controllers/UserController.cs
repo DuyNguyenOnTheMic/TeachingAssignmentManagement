@@ -74,7 +74,8 @@ namespace TeachingAssignmentManagement.Controllers
                         id = user.Id,
                         staff_id = id,
                         full_name = fullName,
-                        status = true
+                        status = true,
+                        is_vietnamese = true
                     };
                     unitOfWork.UserRepository.InsertLecturer(lecturer);
                     unitOfWork.Save();
