@@ -1,7 +1,8 @@
 ﻿var select = $('.select2'),
-    dropzone = $('#dpz-single-file')
-    isUpdate = $('#isUpdate');
-var rootUrl = $('#loader').data('request-url');
+    dropzone = $('#dpz-single-file'),
+    isUpdate = $('#isUpdate'),
+    isCheckStudentNumber = $('#isCheckStudentNumber'),
+    rootUrl = $('#loader').data('request-url');
 
 // Populate select2 for choosing term and major
 select.each(function () {
