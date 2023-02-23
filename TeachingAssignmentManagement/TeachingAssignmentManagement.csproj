@@ -1214,7 +1214,6 @@
   <ItemGroup>
     <Folder Include="app-assets\vendors\css\tables\datatable\extensions\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Views\AcademicDegree\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app-assets\fonts\feather\fonts\feather.eot" />
@@ -1280,7 +1279,6 @@
     <Content Include="Views\Remuneration\Subject.cshtml" />
     <Content Include="Views\Remuneration\_Subject.cshtml" />
     <Content Include="Views\Remuneration\EditSubject.cshtml" />
-    <Content Include="Views\Remuneration\AcademicDegree.cshtml" />
     <Content Include="Views\Remuneration\CreateAcademicDegree.cshtml" />
     <Content Include="Views\Remuneration\EditAcademicDegree.cshtml" />
     <Content Include="Views\Remuneration\AcademicDegreeRank.cshtml" />
@@ -1300,6 +1298,7 @@
     <Content Include="Views\Remuneration\CreateLecturerRank.cshtml" />
     <Content Include="Views\Remuneration\Index.cshtml" />
     <Content Include="Views\Remuneration\_Remuneration.cshtml" />
+    <Content Include="Views\AcademicDegree\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
