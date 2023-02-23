@@ -108,7 +108,8 @@ namespace TeachingAssignmentManagement.Controllers
         {
             try
             {
-                // Delete major
+                // Delete term
+                unitOfWork.LecturerRankRepository.DeleteAllLecturerRanks(id);
                 unitOfWork.TermRepository.DeleteTerm(id);
                 unitOfWork.Save();
             }
