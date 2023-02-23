@@ -34,7 +34,7 @@ namespace TeachingAssignmentManagement.Controllers
         {
             // Get unit price and coefficient data from database
             IEnumerable<unit_price> query_unitPrice = unitOfWork.UnitPriceRepository.GetUnitPriceInYear(startYear, endYear);
-            return PartialView("_PriceCoefficient", new PriceCoefficientViewModels
+            return PartialView("_PriceCoefficient", new PriceCoefficientViewModel
             {
                 StartYear = startYear,
                 EndYear = endYear,

@@ -133,7 +133,7 @@ namespace TeachingAssignmentManagement.Controllers
                 ViewData["endWeek"] = endWeek;
                 ViewData["currentWeek"] = currentWeek;
                 ViewData["weekLabel"] = weekLabel;
-                return PartialView("_PersonalTimetable", new TimetableViewModels
+                return PartialView("_PersonalTimetable", new TimetableViewModel
                 {
                     ClassSectionDTOs = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, currentWeek)
                 });
@@ -149,7 +149,7 @@ namespace TeachingAssignmentManagement.Controllers
             ViewData["termStatus"] = unitOfWork.TermRepository.GetTermByID(termId).status;
             ViewBag.subjects = unitOfWork.SubjectRepository.GetSubjects(query_classes);
             ViewBag.lecturers = new SelectList(unitOfWork.UserRepository.GetLecturers(), "Id", "FullName");
-            return PartialView("_Timetable", new TimetableViewModels
+            return PartialView("_Timetable", new TimetableViewModel
             {
                 ClassSectionDTOs = query_classes.ToList()
             });
@@ -252,7 +252,7 @@ namespace TeachingAssignmentManagement.Controllers
             }
 
             int itemsCount = dt.Rows.Count;
-            TimetableViewModels timetableViewModels = new TimetableViewModels();
+            TimetableViewModel timetableViewModels = new TimetableViewModel();
             List<class_section> classSectionList = new List<class_section>();
             IEnumerable<class_section> query_classSectionWhere = classSectionList;
             if (isUpdate)

@@ -290,7 +290,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Act
             PartialViewResult result = controller.GetData(termId, majorId) as PartialViewResult;
-            TimetableViewModels modelResult = result.Model as TimetableViewModels;
+            TimetableViewModel modelResult = result.Model as TimetableViewModel;
             IEnumerable<ClassSectionDTO> classSectionDTOs = modelResult.ClassSectionDTOs;
 
             // Assert
@@ -308,7 +308,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Act
             PartialViewResult result = controller.GetData(termId, majorId) as PartialViewResult;
-            TimetableViewModels modelResult = result.Model as TimetableViewModels;
+            TimetableViewModel modelResult = result.Model as TimetableViewModel;
             IEnumerable<ClassSectionDTO> classSectionDTOs = modelResult.ClassSectionDTOs;
 
             // Assert
@@ -326,7 +326,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Act
             PartialViewResult result = controller.GetData(termId, majorId) as PartialViewResult;
-            TimetableViewModels modelResult = result.Model as TimetableViewModels;
+            TimetableViewModel modelResult = result.Model as TimetableViewModel;
             List<ClassSectionDTO> classSectionDTOs = modelResult.ClassSectionDTOs.ToList();
             List<class_section> classSectionList = listClassSection.ToList();
 
@@ -392,7 +392,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Act
             PartialViewResult result = controller.GetData(termId, "-1") as PartialViewResult;
-            TimetableViewModels modelResult = result.Model as TimetableViewModels;
+            TimetableViewModel modelResult = result.Model as TimetableViewModel;
             IEnumerable<ClassSectionDTO> classSectionDTOs = modelResult.ClassSectionDTOs;
 
             // Assert
@@ -410,7 +410,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Act
             PartialViewResult result = controller.GetData(termId, "-1") as PartialViewResult;
-            TimetableViewModels modelResult = result.Model as TimetableViewModels;
+            TimetableViewModel modelResult = result.Model as TimetableViewModel;
             List<ClassSectionDTO> classSectionDTOs = modelResult.ClassSectionDTOs.ToList();
             List<class_section> classSectionList = listClassSection.ToList();
 
@@ -443,7 +443,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Act
             PartialViewResult result = controller.GetData(termId, "-1") as PartialViewResult;
-            TimetableViewModels modelResult = result.Model as TimetableViewModels;
+            TimetableViewModel modelResult = result.Model as TimetableViewModel;
             List<int> timetableDays = modelResult.days;
 
             // Assert
@@ -459,11 +459,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             TimetableController controller = new TimetableController(unitOfWork);
             term term = listTerm.First();
             mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
-            List<int> daysList = new TimetableViewModels().days;
+            List<int> daysList = new TimetableViewModel().days;
 
             // Act
             PartialViewResult result = controller.GetData(termId, "-1") as PartialViewResult;
-            TimetableViewModels modelResult = result.Model as TimetableViewModels;
+            TimetableViewModel modelResult = result.Model as TimetableViewModel;
             List<int> timetableDays = modelResult.days;
 
             // Assert
@@ -478,11 +478,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             TimetableController controller = new TimetableController(unitOfWork);
             term term = listTerm.First();
             mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
-            List<int> daysList = new TimetableViewModels().days;
+            List<int> daysList = new TimetableViewModel().days;
 
             // Act
             PartialViewResult result = controller.GetData(termId, "-1") as PartialViewResult;
-            TimetableViewModels modelResult = result.Model as TimetableViewModels;
+            TimetableViewModel modelResult = result.Model as TimetableViewModel;
             List<int> timetableDays = modelResult.days;
 
             // Assert
@@ -503,7 +503,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Act
             PartialViewResult result = controller.GetData(termId, "-1") as PartialViewResult;
-            TimetableViewModels modelResult = result.Model as TimetableViewModels;
+            TimetableViewModel modelResult = result.Model as TimetableViewModel;
             List<int> timetableStartLessons = modelResult.startLessons;
 
             // Assert
@@ -519,11 +519,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             TimetableController controller = new TimetableController(unitOfWork);
             term term = listTerm.First();
             mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
-            List<int> startLessonsList = new TimetableViewModels().startLessons;
+            List<int> startLessonsList = new TimetableViewModel().startLessons;
 
             // Act
             PartialViewResult result = controller.GetData(termId, "-1") as PartialViewResult;
-            TimetableViewModels modelResult = result.Model as TimetableViewModels;
+            TimetableViewModel modelResult = result.Model as TimetableViewModel;
             List<int> timetableStartLessons = modelResult.startLessons;
 
             // Assert
@@ -538,11 +538,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             TimetableController controller = new TimetableController(unitOfWork);
             term term = listTerm.First();
             mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(term);
-            List<int> startLessonsList = new TimetableViewModels().startLessons;
+            List<int> startLessonsList = new TimetableViewModel().startLessons;
 
             // Act
             PartialViewResult result = controller.GetData(termId, "-1") as PartialViewResult;
-            TimetableViewModels modelResult = result.Model as TimetableViewModels;
+            TimetableViewModel modelResult = result.Model as TimetableViewModel;
             List<int> timetableStartLessons = modelResult.startLessons;
 
             // Assert

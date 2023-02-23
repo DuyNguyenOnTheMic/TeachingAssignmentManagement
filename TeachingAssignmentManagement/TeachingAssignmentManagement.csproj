@@ -308,7 +308,7 @@
     <Compile Include="Helpers\HtmlMinifierExtensions.cs" />
     <Compile Include="Helpers\IdentityExtensions.cs" />
     <Compile Include="Hubs\ProgressHub.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ViewModels\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\class_section.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -347,7 +347,7 @@
     </Compile>
     <Compile Include="Models\DTOs\RemunerationDTO.cs" />
     <Compile Include="Models\DTOs\UnitPriceDTO.cs" />
-    <Compile Include="Models\PriceCoefficientViewModels.cs" />
+    <Compile Include="Models\ViewModels\PriceCoefficientViewModel.cs" />
     <Compile Include="Models\room.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -360,7 +360,7 @@
     <Compile Include="Models\term.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TimetableViewModels.cs" />
+    <Compile Include="Models\ViewModels\TimetableViewModel.cs" />
     <Compile Include="Models\unit_price.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
