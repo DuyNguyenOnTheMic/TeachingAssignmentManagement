@@ -1281,7 +1281,7 @@
     <Content Include="Views\Account\Lockout.cshtml" />
     <Content Include="Views\Subject\Index.cshtml" />
     <Content Include="Views\Subject\_Subject.cshtml" />
-    <Content Include="Views\Subject\EditSubject.cshtml" />
+    <Content Include="Views\Subject\Edit.cshtml" />
     <Content Include="Views\AcademicDegree\Create.cshtml" />
     <Content Include="Views\AcademicDegree\Edit.cshtml" />
     <Content Include="Views\AcademicDegreeRank\Index.cshtml" />

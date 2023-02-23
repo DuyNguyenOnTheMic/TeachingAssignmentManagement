@@ -36,7 +36,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetSubjectData(int termId, string majorId)
+        public JsonResult GetData(int termId, string majorId)
         {
             // Get subjects data from database
             IEnumerable query_subjects = majorId != "-1"
@@ -46,13 +46,13 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditSubject(string id)
+        public ActionResult Edit(string id)
         {
             return View(unitOfWork.SubjectRepository.GetSubjectByID(id));
         }
 
         [HttpPost]
-        public ActionResult EditSubject(string id, bool is_vietnamese)
+        public ActionResult Edit(string id, bool is_vietnamese)
         {
             // Update subject
             subject query_subject = unitOfWork.SubjectRepository.GetSubjectByID(id);
