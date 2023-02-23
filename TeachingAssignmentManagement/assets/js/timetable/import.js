@@ -140,6 +140,8 @@ dropzone.dropzone({
                             deleteAndImport(myDropzone);
                         }
                     })
+                } else if (xhr.status == 400) {
+                    
                 }
             }
         });
