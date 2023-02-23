@@ -1297,9 +1297,9 @@
     <Content Include="Views\PriceCoefficient\EditCoefficient.cshtml" />
     <Content Include="Views\PriceCoefficient\EditAllUnitPrice.cshtml" />
     <Content Include="Views\LecturerRank\_LecturerRank.cshtml" />
-    <Content Include="Views\LecturerRank\EditAllLecturerRanks.cshtml" />
-    <Content Include="Views\LecturerRank\EditLecturerRank.cshtml" />
-    <Content Include="Views\LecturerRank\CreateLecturerRank.cshtml" />
+    <Content Include="Views\LecturerRank\EditAll.cshtml" />
+    <Content Include="Views\LecturerRank\Edit.cshtml" />
+    <Content Include="Views\LecturerRank\Create.cshtml" />
     <Content Include="Views\Remuneration\Index.cshtml" />
     <Content Include="Views\Remuneration\_Remuneration.cshtml" />
     <Content Include="Views\AcademicDegree\Index.cshtml" />

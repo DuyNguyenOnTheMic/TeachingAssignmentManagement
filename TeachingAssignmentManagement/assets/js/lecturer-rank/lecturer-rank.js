@@ -9,7 +9,7 @@ $(function () {
     dataTable = $('#tblLecturerRank').DataTable(
         {
             ajax: {
-                url: rootUrl + 'Remuneration/GetLecturerRankData?termId=' + termId,
+                url: rootUrl + 'LecturerRank/GetData?termId=' + termId,
                 type: 'GET',
                 dataType: 'json',
                 dataSrc: ''
@@ -26,9 +26,9 @@ $(function () {
                         var actionUrl;
                         var $lecturerId = full['LecturerId'];
                         if (data) {
-                            actionUrl = rootUrl + "Remuneration/EditLecturerRank/" + data;
+                            actionUrl = rootUrl + "LecturerRank/Edit/" + data;
                         } else {
-                            actionUrl = rootUrl + "Remuneration/CreateLecturerRank?termId=" + termId + "&lecturerId=" + $lecturerId;
+                            actionUrl = rootUrl + "LecturerRank/Create?termId=" + termId + "&lecturerId=" + $lecturerId;
                         }
                         return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + actionUrl + "')><i class='feather feather-edit font-medium-3 me-1'></i></a>";
                     }
@@ -54,7 +54,7 @@ $(function () {
                     text: feather.icons['edit-2'].toSvg({ class: 'me-50 font-small-4' }) + 'Sửa tất cả',
                     className: 'editAll btn btn-primary',
                     attr: {
-                        'onclick': "popupForm('" + rootUrl + "Remuneration/EditAllLecturerRanks?termId=" + termId + "')"
+                        'onclick': "popupForm('" + rootUrl + "LecturerRank/EditAll?termId=" + termId + "')"
                     },
                     init: function (api, node, config) {
                         $(node).removeClass('btn-secondary');
