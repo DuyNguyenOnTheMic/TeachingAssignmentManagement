@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("EditAcademicDegreeRank", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "academicdegreerank-form" }))
+@using (Html.BeginForm("Edit", "AcademicDegreeRank", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "academicdegreerank-form" }))
 {
     <div class="mb-1">
         <label class="form-label font-small-4" for="academic_degree_id">Học hàm, học vị: </label>
