@@ -20,7 +20,8 @@ namespace TeachingAssignmentManagement.DAL
             {
                 m.id,
                 m.name,
-                m.abbreviation
+                m.abbreviation,
+                m.program_type
             }).OrderByDescending(m => m.name.Contains("công nghệ thông tin")).ToList();
         }
 
