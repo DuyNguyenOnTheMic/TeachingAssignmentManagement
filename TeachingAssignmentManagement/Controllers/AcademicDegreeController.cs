@@ -4,6 +4,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
 {
+    [Authorize(Roles = "BCN khoa")]
     public class AcademicDegreeController : Controller
     {
         private readonly UnitOfWork unitOfWork;

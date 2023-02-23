@@ -4,11 +4,11 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("CreateAcademicDegree", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "academicdegree-form" }))
+@using (Html.BeginForm("Edit", "AcademicDegree", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "academicdegree-form" }))
 {
     <div class="mb-1">
         <label class="form-label font-small-4" for="id">Mã học hàm, học vị: </label>
-        @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập mã học hàm, học vị", @aria_label = "Nhập mã học hàm, học vị" } })
+        @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập mã học hàm, học vị", @aria_label = "Nhập mã học hàm, học vị", @disabled = "disabled" } })
     </div>
 
     <div class="mb-1">
