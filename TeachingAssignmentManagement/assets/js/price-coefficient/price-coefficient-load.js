@@ -1,7 +1,7 @@
 ﻿var formSelect = $('.form-select'),
     rootUrl = $('#loader').data('request-url'),
     priceCoefficientDiv = $('#priceCoefficientDiv'),
-    url = rootUrl + 'Remuneration/GetPriceCoefficientData';
+    url = rootUrl + 'PriceCoefficient/GetData';
 
 $(function () {
     // Set selected option when form load

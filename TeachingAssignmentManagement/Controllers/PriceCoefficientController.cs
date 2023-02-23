@@ -30,7 +30,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetPriceCoefficientData(int startYear, int endYear)
+        public ActionResult GetData(int startYear, int endYear)
         {
             // Get unit price and coefficient data from database
             IEnumerable<unit_price> query_unitPrice = unitOfWork.UnitPriceRepository.GetUnitPriceInYear(startYear, endYear);
