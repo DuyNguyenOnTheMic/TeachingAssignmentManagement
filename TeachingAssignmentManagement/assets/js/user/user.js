@@ -26,6 +26,7 @@ $(function () {
                 { 'data': 'type' },
                 { 'data': 'role' },
                 { 'data': 'status' },
+                { 'data': 'is_vietnamese' },
                 {
                     'data': 'id', 'render': function (data, type, row) {
                         return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + rootUrl + "User/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a><a class='deleteRow text-danger p-0' data-original-title='Xoá' title='Xoá' onclick=deleteUser('" + data + "','" + row.email + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
@@ -72,11 +73,11 @@ $(function () {
                 {
                     searchable: false,
                     orderable: false,
-                    targets: [0, 7]
+                    targets: [0, 8]
                 },
-                { className: 'text-center', targets: [0, 6, 7] },
+                { className: 'text-center', targets: [0, 6, 7, 8] },
                 { width: '5%', targets: 0 },
-                { width: '10%', targets: 7 }
+                { width: '10%', targets: 8 }
             ],
 
             order: [[3, 'asc']],
@@ -158,7 +159,7 @@ $(function () {
                     });
 
                 // Add a filter select for show and hide columns
-                $('div.column-filter').html('<div class="dataTables_showhide"><label><select class="form-select" id="columnFilter" name="columnFilter" multiple="multiple"><option value="1" selected="selected">Mã giảng viên</option><option value="2" selected="selected">Tên giảng viên</option><option value="3" selected="selected">Email</option><option value="4" selected="selected">Loại</option><option value="5" selected="selected">Role</option><option value="6">Trạng thái</option></select></label></div>');
+                $('div.column-filter').html('<div class="dataTables_showhide"><label><select class="form-select" id="columnFilter" name="columnFilter" multiple="multiple"><option value="1" selected="selected">Mã giảng viên</option><option value="2" selected="selected">Tên giảng viên</option><option value="3" selected="selected">Email</option><option value="4" selected="selected">Loại</option><option value="5" selected="selected">Role</option><option value="6">Trạng thái</option><option value="7">Quốc gia</option></select></label></div>');
 
                 // Populate select2 for column filter
                 var columnFilter = $('#columnFilter');
