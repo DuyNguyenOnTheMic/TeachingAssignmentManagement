@@ -1217,7 +1217,6 @@
   <ItemGroup>
     <Folder Include="app-assets\vendors\css\tables\datatable\extensions\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Subject\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app-assets\fonts\feather\fonts\feather.eot" />
@@ -1280,9 +1279,9 @@
     <Content Include="Views\Statistics\Personal.cshtml" />
     <Content Include="Views\Statistics\_PersonalChart.cshtml" />
     <Content Include="Views\Account\Lockout.cshtml" />
-    <Content Include="Views\Remuneration\Subject.cshtml" />
-    <Content Include="Views\Remuneration\_Subject.cshtml" />
-    <Content Include="Views\Remuneration\EditSubject.cshtml" />
+    <Content Include="Views\Subject\Index.cshtml" />
+    <Content Include="Views\Subject\_Subject.cshtml" />
+    <Content Include="Views\Subject\EditSubject.cshtml" />
     <Content Include="Views\AcademicDegree\Create.cshtml" />
     <Content Include="Views\AcademicDegree\Edit.cshtml" />
     <Content Include="Views\AcademicDegreeRank\Index.cshtml" />
