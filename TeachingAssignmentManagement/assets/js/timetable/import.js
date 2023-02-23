@@ -161,9 +161,6 @@ dropzone.dropzone({
                             if (isUpdate.val() == true) {
                                 // Update timetable
                                 importAgain(myDropzone, true);
-                            } else {
-                                // Delete and import timetable again
-                                deleteAndImport(myDropzone);
                             }
                         }
                     })
