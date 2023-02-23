@@ -1,7 +1,7 @@
 ﻿var formSelect = $('.form-select'),
     rootUrl = $('#loader').data('request-url'),
     subjectDiv = $('#subjectDiv'),
-    url = rootUrl + 'Remuneration/GetSubjectPartial';
+    url = rootUrl + 'Subject/GetSubjectPartial';
 
 // Reference the hub
 var hubNotif = $.connection.timetableHub;
