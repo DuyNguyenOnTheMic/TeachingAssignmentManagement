@@ -76,7 +76,7 @@ namespace TeachingAssignmentManagement.Controllers
                             unitPriceByLevel = decimal.Zero;
                         }
 
-                        teachingRemuneration += CalculateRemuneration(item, unitPriceByLevel, coefficient);
+                        teachingRemuneration += unitPriceByLevel * CalculateRemuneration(item, coefficient);
                     }
                 }
                 remunerationDTOs.Add(new RemunerationDTO
@@ -91,7 +91,7 @@ namespace TeachingAssignmentManagement.Controllers
             return Json(remunerationDTOs, JsonRequestBehavior.AllowGet);
         }
 
-        public static decimal CalculateRemuneration(class_section classSection, decimal unitPriceByLevel, coefficient coefficient)
+        public static decimal CalculateRemuneration(class_section classSection, coefficient coefficient)
         {
             decimal crowdedClassCoefficient, timeCoefficient, languageCoefficient, classTypeCoefficient;
 
@@ -119,7 +119,7 @@ namespace TeachingAssignmentManagement.Controllers
             languageCoefficient = classSection.subject.is_vietnamese ? coefficient.vietnamese_coefficient : coefficient.foreign_coefficient;
 
             // Calculate total remuneration for this class
-            return unitPriceByLevel * crowdedClassCoefficient * timeCoefficient * classTypeCoefficient * languageCoefficient;
+            return crowdedClassCoefficient * timeCoefficient * classTypeCoefficient * languageCoefficient;
         }
 
         protected override void Dispose(bool disposing)
