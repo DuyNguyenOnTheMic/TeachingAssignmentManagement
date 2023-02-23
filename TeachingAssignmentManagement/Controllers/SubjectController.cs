@@ -5,6 +5,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
 {
+    [Authorize(Roles = "BCN khoa")]
     public class SubjectController : Controller
     {
         private readonly UnitOfWork unitOfWork;
