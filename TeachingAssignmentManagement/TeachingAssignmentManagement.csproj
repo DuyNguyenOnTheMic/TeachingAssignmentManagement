@@ -262,6 +262,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MajorController.cs" />
+    <Compile Include="Controllers\PriceCoefficientController.cs" />
     <Compile Include="Controllers\RemunerationController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\TermController.cs" />
@@ -1215,6 +1216,7 @@
   <ItemGroup>
     <Folder Include="app-assets\vendors\css\tables\datatable\extensions\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Views\PriceCoefficient\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app-assets\fonts\feather\fonts\feather.eot" />
