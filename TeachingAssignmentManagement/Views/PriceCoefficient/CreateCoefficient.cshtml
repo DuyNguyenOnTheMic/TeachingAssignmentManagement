@@ -2,7 +2,7 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("CreateCoefficient", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "coefficient-form" }))
+@using (Html.BeginForm("CreateCoefficient", "PriceCoefficient", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "coefficient-form" }))
 {
     @Html.Hidden("start_year")
     @Html.Hidden("end_year")

@@ -2,7 +2,7 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("CreateUnitPrice", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "unitprice-form" }))
+@using (Html.BeginForm("CreateUnitPrice", "PriceCoefficient", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "unitprice-form" }))
 {
     @Html.Hidden("academic_degree_rank_id")
     @Html.Hidden("type")

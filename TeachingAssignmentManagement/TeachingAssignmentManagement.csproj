@@ -1288,7 +1288,7 @@
     <Content Include="Views\AcademicDegreeRank\Edit.cshtml" />
     <Content Include="Views\PriceCoefficient\Index.cshtml" />
     <Content Include="Views\PriceCoefficient\_PriceCoefficient.cshtml" />
-    <Content Include="Views\Remuneration\EditUnitPrice.cshtml" />
+    <Content Include="Views\PriceCoefficient\EditUnitPrice.cshtml" />
     <Content Include="Views\PriceCoefficient\CreateUnitPrice.cshtml" />
     <Content Include="Views\Remuneration\LecturerRank.cshtml" />
     <Content Include="Views\PriceCoefficient\CreateCoefficient.cshtml" />

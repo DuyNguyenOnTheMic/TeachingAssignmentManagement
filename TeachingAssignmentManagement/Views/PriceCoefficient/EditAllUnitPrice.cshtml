@@ -2,7 +2,7 @@
     Layout = null;
 }
 
-@using (Html.BeginForm("EditAllUnitPrice", "Remuneration", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "unitprice-form" }))
+@using (Html.BeginForm("EditAllUnitPrice", "PriceCoefficient", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "unitprice-form" }))
 {
     <div class="alert alert-primary py-2 mt-1 mb-2" role="alert">
         <div class="alert-body"><b><i class="feather feather-help-circle"></i> Hướng dẫn: </b>Chức năng này sẽ giúp bạn tự động cập nhật đơn giá cho tất cả các cấp bậc trong năm học.</div>
