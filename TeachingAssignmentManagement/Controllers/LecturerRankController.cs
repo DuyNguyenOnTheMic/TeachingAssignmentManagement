@@ -21,7 +21,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult LecturerRank()
+        public ActionResult Index()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
             return View();
@@ -35,14 +35,14 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetLecturerRankData(int termId)
+        public JsonResult GetData(int termId)
         {
             // Get lecturer rank data from database
             return Json(unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public ActionResult CreateLecturerRank(int termId, string lecturerId)
+        public ActionResult Create(int termId, string lecturerId)
         {
             ViewData["termId"] = termId;
             ViewData["academic_degree_rank_id"] = new SelectList(unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO(), "Id", "Id");
@@ -50,7 +50,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateLecturerRank(int termId, string id, string academic_degree_rank_id)
+        public ActionResult Create(int termId, string id, string academic_degree_rank_id)
         {
             // Create new lecturer rank
             bool isLecturerRankExists = unitOfWork.LecturerRankRepository.CheckLecturerRankExists(termId, id);
@@ -70,7 +70,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditLecturerRank(int id)
+        public ActionResult Edit(int id)
         {
             lecturer_rank lecturerRank = unitOfWork.LecturerRankRepository.GetLecturerRankByID(id);
             ViewData["academic_degree_rank_id"] = new SelectList(unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO(), "Id", "Id", lecturerRank.academic_degree_rank_id);
@@ -78,7 +78,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditLecturerRank(int id, string academic_degree_rank_id)
+        public ActionResult Edit(int id, string academic_degree_rank_id)
         {
             // Update lecturer rank
             lecturer_rank lecturerRank = unitOfWork.LecturerRankRepository.GetLecturerRankByID(id);
@@ -88,7 +88,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditAllLecturerRanks(int termId)
+        public ActionResult EditAll(int termId)
         {
             ViewData["termId"] = termId;
             ViewData["academic_degree_rank_id"] = new SelectList(unitOfWork.AcademicDegreeRankRepository.GetAcademicDegreeRankDTO(), "Id", "Id");
@@ -96,7 +96,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditAllLecturerRanks(int termId, string academic_degree_rank_id)
+        public ActionResult EditAll(int termId, string academic_degree_rank_id)
         {
             // Update all lecturer ranks
             unitOfWork.LecturerRankRepository.DeleteAllLecturerRanks(termId);
@@ -113,6 +113,12 @@ namespace TeachingAssignmentManagement.Controllers
             }
             unitOfWork.Save();
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            unitOfWork.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
