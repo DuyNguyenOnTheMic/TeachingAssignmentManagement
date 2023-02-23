@@ -1160,10 +1160,10 @@
     <Content Include="assets\js\price-coefficient\price-coefficient.min.js" />
     <Content Include="assets\js\remuneration\remuneration-load.js" />
     <Content Include="assets\js\remuneration\remuneration.js" />
-    <Content Include="assets\js\remuneration\subject-load.js" />
-    <Content Include="assets\js\remuneration\subject-load.min.js" />
-    <Content Include="assets\js\remuneration\subject.js" />
-    <Content Include="assets\js\remuneration\subject.min.js" />
+    <Content Include="assets\js\subject\subject-load.js" />
+    <Content Include="assets\js\subject\subject-load.min.js" />
+    <Content Include="assets\js\subject\subject.js" />
+    <Content Include="assets\js\subject\subject.min.js" />
     <Content Include="assets\js\statistics\personal-statistics-load.js" />
     <Content Include="assets\js\statistics\personal-statistics-load.min.js" />
     <Content Include="assets\js\statistics\personal-statistics.js" />
