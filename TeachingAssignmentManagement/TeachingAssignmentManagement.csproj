@@ -1215,7 +1215,6 @@
   <ItemGroup>
     <Folder Include="app-assets\vendors\css\tables\datatable\extensions\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Views\AcademicDegreeRank\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app-assets\fonts\feather\fonts\feather.eot" />
@@ -1283,9 +1282,9 @@
     <Content Include="Views\Remuneration\EditSubject.cshtml" />
     <Content Include="Views\AcademicDegree\Create.cshtml" />
     <Content Include="Views\AcademicDegree\Edit.cshtml" />
-    <Content Include="Views\Remuneration\AcademicDegreeRank.cshtml" />
-    <Content Include="Views\Remuneration\CreateAcademicDegreeRank.cshtml" />
-    <Content Include="Views\Remuneration\EditAcademicDegreeRank.cshtml" />
+    <Content Include="Views\AcademicDegreeRank\Index.cshtml" />
+    <Content Include="Views\AcademicDegreeRank\Create.cshtml" />
+    <Content Include="Views\AcademicDegreeRank\Edit.cshtml" />
     <Content Include="Views\Remuneration\PriceCoefficient.cshtml" />
     <Content Include="Views\Remuneration\_PriceCoefficient.cshtml" />
     <Content Include="Views\Remuneration\EditUnitPrice.cshtml" />
