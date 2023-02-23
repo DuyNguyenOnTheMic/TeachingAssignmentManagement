@@ -1144,8 +1144,8 @@
     <Content Include="assets\images\img_welcome.svg" />
     <Content Include="assets\js\major\major.js" />
     <Content Include="assets\js\major\major.min.js" />
-    <Content Include="assets\js\remuneration\academic-degree-rank.js" />
-    <Content Include="assets\js\remuneration\academic-degree-rank.min.js" />
+    <Content Include="assets\js\academic-degree-rank\academic-degree-rank.js" />
+    <Content Include="assets\js\academic-degree-rank\academic-degree-rank.min.js" />
     <Content Include="assets\js\academic-degree\academic-degree.js" />
     <Content Include="assets\js\academic-degree\academic-degree.min.js" />
     <Content Include="assets\js\remuneration\lecturer-rank-load.js" />
