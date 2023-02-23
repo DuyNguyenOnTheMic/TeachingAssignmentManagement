@@ -24,10 +24,10 @@
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="program_type">CTĐT: </label>
-        <select class="form-data form-select" id="program_type" name="program_type">
+        <select class="form-data form-select" id="program_type" name="program_type" aria-label="Chọn CTĐT">
             <option value="">---- Chọn CTĐT ----</option>
-            <option value="0">Tiêu chuẩn</option>
-            <option value="1">Đặc biệt</option>
+            <option value="@Constants.StandardProgramType">Tiêu chuẩn</option>
+            <option value="@Constants.SpecialProgramType">Đặc biệt</option>
         </select>
     </div>
 

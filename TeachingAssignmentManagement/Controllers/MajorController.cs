@@ -1,5 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
@@ -59,7 +61,13 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public ActionResult Edit(string id)
         {
-            return View(unitOfWork.MajorRepository.GetMajorByID(id));
+            major major = unitOfWork.MajorRepository.GetMajorByID(id);
+            ViewData["program_type"] = new SelectList(new Dictionary<int, string>
+            {
+                { Constants.StandardProgramType, "Tiêu chuẩn" },
+                { Constants.SpecialProgramType, "Đặc biệt" }
+            }, "Key", "Value", major.program_type);
+            return View(major);
         }
 
         [HttpPost]
