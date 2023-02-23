@@ -32,7 +32,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetAcademicDegreeData()
+        public JsonResult GetData()
         {
             // Get Academics, Degrees data from database
             return Json(unitOfWork.AcademicDegreeRepository.GetAcademicDegrees(), JsonRequestBehavior.AllowGet);
@@ -40,13 +40,13 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [OutputCache(Duration = 600, VaryByParam = "none")]
-        public ActionResult CreateAcademicDegree()
+        public ActionResult Create()
         {
             return View(new academic_degree());
         }
 
         [HttpPost]
-        public ActionResult CreateAcademicDegree([Bind(Include = "id,name,level")] academic_degree academicDegree)
+        public ActionResult Create([Bind(Include = "id,name,level")] academic_degree academicDegree)
         {
             try
             {
@@ -62,13 +62,13 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditAcademicDegree(string id)
+        public ActionResult Edit(string id)
         {
             return View(unitOfWork.AcademicDegreeRepository.GetAcademicDegreeByID(id));
         }
 
         [HttpPost]
-        public ActionResult EditAcademicDegree([Bind(Include = "id,name,level")] academic_degree academicDegree)
+        public ActionResult Edit([Bind(Include = "id,name,level")] academic_degree academicDegree)
         {
             // Update academic degree
             unitOfWork.AcademicDegreeRepository.UpdateAcademicDegree(academicDegree);
@@ -77,7 +77,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteAcademicDegree(string id)
+        public ActionResult Delete(string id)
         {
             try
             {
