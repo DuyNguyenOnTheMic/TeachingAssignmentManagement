@@ -1,5 +1,9 @@
 ﻿var popup, dataTable;
 var rootUrl = $('#loader').data('request-url');
+var typeBadgeObj = {
+    0: { title: 'Tiêu chuẩn', class: 'badge-light-primary' },
+    1: { title: 'Đặc biệt', class: 'badge-light-warning' }
+};
 
 $(function () {
     'use strict';
@@ -28,6 +32,14 @@ $(function () {
             ],
 
             columnDefs: [
+                {
+                    // Program type
+                    targets: 4,
+                    render: function (data) {
+                        var $type = data;
+                        return '<span class="badge rounded-pill ' + typeBadgeObj[$type].class + ' text-capitalized">' + typeBadgeObj[$type].title + '</span>';
+                    }
+                },
                 {
                     searchable: false,
                     orderable: false,
