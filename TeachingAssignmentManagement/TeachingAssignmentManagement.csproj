@@ -1279,8 +1279,8 @@
     <Content Include="Views\Remuneration\Subject.cshtml" />
     <Content Include="Views\Remuneration\_Subject.cshtml" />
     <Content Include="Views\Remuneration\EditSubject.cshtml" />
-    <Content Include="Views\Remuneration\CreateAcademicDegree.cshtml" />
-    <Content Include="Views\Remuneration\EditAcademicDegree.cshtml" />
+    <Content Include="Views\AcademicDegree\CreateAcademicDegree.cshtml" />
+    <Content Include="Views\AcademicDegree\EditAcademicDegree.cshtml" />
     <Content Include="Views\Remuneration\AcademicDegreeRank.cshtml" />
     <Content Include="Views\Remuneration\CreateAcademicDegreeRank.cshtml" />
     <Content Include="Views\Remuneration\EditAcademicDegreeRank.cshtml" />
