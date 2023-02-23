@@ -82,6 +82,23 @@ if (profileForm.length) {
 }
 
 if (majorForm.length) {
+    var select = $('.form-data');
+    // select2
+    select.each(function () {
+        var $this = $(this);
+        $this.wrap('<div class="position-relative"></div>');
+        $this
+            .select2({
+                placeholder: $this[0][0].innerHTML,
+                minimumResultsForSearch: Infinity,
+                forceabove: true,
+                dropdownParent: $this.parent()
+            })
+            .change(function () {
+                $(this).valid();
+            });
+    });
+
     // Form validation for major
     majorForm.validate({
         rules: {
@@ -97,6 +114,9 @@ if (majorForm.length) {
             abbreviation: {
                 required: true,
                 maxlength: 50
+            },
+            program_type: {
+                required: true
             }
         },
         messages: {
@@ -112,6 +132,16 @@ if (majorForm.length) {
             abbreviation: {
                 required: "Bạn chưa nhập tên viết tắt của ngành",
                 maxlength: "Tối đa 50 kí tự được cho phép"
+            },
+            program_type: {
+                required: "Bạn chưa chọn CTĐT"
+            }
+        },
+        errorPlacement: function (error, element) {
+            if (element.hasClass("form-data")) {
+                error.insertAfter(element.siblings(".select2"));
+            } else {
+                error.insertAfter(element);
             }
         }
     });
