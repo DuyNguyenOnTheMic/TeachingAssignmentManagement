@@ -190,14 +190,14 @@ namespace TeachingAssignmentManagement.Controllers
                     {
                         cmdExcel.Connection = connExcel;
 
-                        //Get the name of First Sheet.
+                        // Get the name of First Sheet.
                         connExcel.Open();
                         DataTable dtExcelSchema;
                         dtExcelSchema = connExcel.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
                         string sheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();
                         connExcel.Close();
 
-                        //Read Data from First Sheet.
+                        // Read Data from First Sheet.
                         connExcel.Open();
                         cmdExcel.CommandText = "SELECT * From [" + sheetName + "]";
                         odaExcel.SelectCommand = cmdExcel;
