@@ -24,6 +24,7 @@ namespace TeachingAssignmentManagement.Models
         public string id { get; set; }
         public string name { get; set; }
         public string abbreviation { get; set; }
+        public int program_type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<class_section> class_section { get; set; }

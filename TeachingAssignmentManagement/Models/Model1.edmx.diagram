@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="227a04c1161948d6bcba4772617b6601" Name="Diagram1">
+      <Diagram DiagramId="bad51d6a182640b382c059c4f1d09713" Name="Diagram1">
         <EntityTypeShape EntityType="CP25Team03Model.C__MigrationHistory" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CP25Team03Model.academic_degree" Width="1.5" PointX="1.5" PointY="14.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CP25Team03Model.academic_degree_rank" Width="1.5" PointX="3.75" PointY="14.75" IsExpanded="true" />
@@ -16,7 +16,7 @@
         <EntityTypeShape EntityType="CP25Team03Model.coefficient" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CP25Team03Model.lecturer" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CP25Team03Model.lecturer_rank" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CP25Team03Model.major" Width="1.5" PointX="3.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CP25Team03Model.major" Width="1.5" PointX="3.75" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CP25Team03Model.room" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CP25Team03Model.subject" Width="1.5" PointX="6" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CP25Team03Model.sysdiagram" Width="1.5" PointX="5.75" PointY="10.75" IsExpanded="true" />
