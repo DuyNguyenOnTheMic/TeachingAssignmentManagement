@@ -135,6 +135,7 @@
           <Property Name="full_name" Type="nvarchar" MaxLength="255" />
           <Property Name="type" Type="nvarchar" MaxLength="100" />
           <Property Name="status" Type="bit" />
+          <Property Name="is_vietnamese" Type="bit" />
         </EntityType>
         <EntityType Name="lecturer_rank">
           <Key>
@@ -652,6 +653,7 @@
           <Property Name="full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="status" Type="Boolean" />
+          <Property Name="is_vietnamese" Type="Boolean" />
           <NavigationProperty Name="class_section" Relationship="Self.FK_class_section_lecturer" FromRole="lecturer" ToRole="class_section" />
           <NavigationProperty Name="class_section1" Relationship="Self.FK_class_section_lecturer1" FromRole="lecturer" ToRole="class_section" />
           <NavigationProperty Name="lecturer_rank" Relationship="Self.FK_lecturer_rank_lecturer" FromRole="lecturer" ToRole="lecturer_rank" />
@@ -1146,6 +1148,7 @@
                 <ScalarProperty Name="full_name" ColumnName="full_name" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="is_vietnamese" ColumnName="is_vietnamese" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
