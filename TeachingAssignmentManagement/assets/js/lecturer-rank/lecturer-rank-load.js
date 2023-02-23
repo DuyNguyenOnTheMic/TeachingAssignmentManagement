@@ -1,7 +1,7 @@
 ﻿var formSelect = $('.form-select'),
     rootUrl = $('#loader').data('request-url'),
     lecturerRankDiv = $('#lecturerRankDiv'),
-    url = rootUrl + 'Remuneration/GetLecturerRankPartial';
+    url = rootUrl + 'LecturerRank/GetLecturerRankPartial';
 
 $(function () {
     // Set selected option when form load
