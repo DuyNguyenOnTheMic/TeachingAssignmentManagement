@@ -41,7 +41,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create([Bind(Include = "id,name,abbreviation")] major major)
+        public ActionResult Create([Bind(Include = "id,name,abbreviation,program_type")] major major)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "id,name,abbreviation")] major major)
+        public ActionResult Edit([Bind(Include = "id,name,abbreviation,program_type")] major major)
         {
             // Update major
             unitOfWork.MajorRepository.UpdateMajor(major);

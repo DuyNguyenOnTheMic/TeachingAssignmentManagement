@@ -1,4 +1,5 @@
 ﻿@model TeachingAssignmentManagement.Models.major
+@using TeachingAssignmentManagement.Helpers
 
 @{
     Layout = null;
@@ -19,6 +20,15 @@
     <div class="mb-1">
         <label class="form-label font-small-4" for="abbreviation">Tên viết tắt: </label>
         @Html.EditorFor(model => model.abbreviation, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tên viết tắt của ngành", @aria_label = "Nhập tên viết tắt của ngành" } })
+    </div>
+
+    <div class="mb-1">
+        <label class="form-label font-small-4" for="program_type">CTĐT: </label>
+        <select class="form-data form-select" id="program_type" name="program_type">
+            <option value="">---- Chọn CTĐT ----</option>
+            <option value="0">Tiêu chuẩn</option>
+            <option value="1">Đặc biệt</option>
+        </select>
     </div>
 
     <div class="float-end m-1">
