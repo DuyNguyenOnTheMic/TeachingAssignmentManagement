@@ -99,7 +99,7 @@ dropzone.dropzone({
         this.on('error', function (data, errorMessage, xhr) {
 
             Swal.close();
-            isUpdate.val(false);
+            isCheckStudentNumber.val(true);
             $('#errorLecturers-section').hide();
             window.onbeforeunload = null;
 
@@ -133,6 +133,7 @@ dropzone.dropzone({
                         },
                         buttonsStyling: false
                     }).then((result) => {
+                        isUpdate.val(false);
                         if (result.isConfirmed) {
                             // Update timetable
                             importAgain(myDropzone, true);
@@ -156,6 +157,14 @@ dropzone.dropzone({
                         buttonsStyling: false
                     }).then((result) => {
                         if (result.isConfirmed) {
+                            isCheckStudentNumber.val(false);
+                            if (isUpdate.val() == true) {
+                                // Update timetable
+                                importAgain(myDropzone, true);
+                            } else {
+                                // Delete and import timetable again
+                                deleteAndImport(myDropzone);
+                            }
                         }
                     })
                 }
