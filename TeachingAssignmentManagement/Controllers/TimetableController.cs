@@ -414,7 +414,7 @@ namespace TeachingAssignmentManagement.Controllers
                     }
                     else
                     {
-                        class_section query_classSection = unitOfWork.ClassSectionRepository.FindClassSection(query_classSectionWhere, classSection.class_section_id, classSection.day_2, classSection.room_id);
+                        class_section query_classSection = unitOfWork.ClassSectionRepository.FindClassSection(query_classSectionWhere, classSection.class_section_id, classSection.day_2, classSection.start_lesson_2, classSection.room_id);
                         if (query_classSection == null)
                         {
                             // Create new class if no class found

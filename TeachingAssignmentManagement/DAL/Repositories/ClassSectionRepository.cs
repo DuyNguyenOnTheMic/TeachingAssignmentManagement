@@ -407,9 +407,9 @@ namespace TeachingAssignmentManagement.DAL
             return context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
         }
 
-        public class_section FindClassSection(IEnumerable<class_section> classSection, string classSectionId, int day2, string roomId)
+        public class_section FindClassSection(IEnumerable<class_section> classSection, string classSectionId, int day2, int startLesson2, string roomId)
         {
-            return classSection.FirstOrDefault(c => c.class_section_id == classSectionId && c.day_2 == day2 && c.room_id == roomId);
+            return classSection.FirstOrDefault(c => c.class_section_id == classSectionId && c.day_2 == day2 && c.start_lesson_2 == startLesson2 && c.room_id == roomId);
         }
 
         public class_section CheckTermMajor(int termId, string majorId)
