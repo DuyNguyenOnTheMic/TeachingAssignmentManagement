@@ -107,6 +107,7 @@ dropzone.dropzone({
                 var errorDisplay = document.querySelectorAll('[data-dz-errormessage]');
                 errorDisplay[errorDisplay.length - 1].innerHTML = 'Đã xảy ra lỗi! Vui lòng kiểm tra và chọn lại tệp tin.';
                 if (xhr.status == 417) {
+                    isUpdate.val(false);
                     Swal.fire({
                         title: 'Thông báo',
                         html: errorMessage,
@@ -117,6 +118,7 @@ dropzone.dropzone({
                         buttonsStyling: false
                     });
                 } else if (xhr.status == 409) {
+                    isUpdate.val(false);
                     Swal.fire({
                         title: 'Thông báo',
                         text: errorMessage,
@@ -133,7 +135,6 @@ dropzone.dropzone({
                         },
                         buttonsStyling: false
                     }).then((result) => {
-                        isUpdate.val(false);
                         if (result.isConfirmed) {
                             // Update timetable
                             importAgain(myDropzone, true);
@@ -157,6 +158,7 @@ dropzone.dropzone({
                         buttonsStyling: false
                     }).then((result) => {
                         if (result.isConfirmed) {
+                            // Keep importing the timetable
                             isCheckStudentNumber.val(false);
                             importAgain(myDropzone, isUpdate.val());
                         }
