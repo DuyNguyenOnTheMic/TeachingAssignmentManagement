@@ -39,6 +39,11 @@ namespace TeachingAssignmentManagement.Controllers
         [OutputCache(Duration = 600, VaryByParam = "none")]
         public ActionResult Create()
         {
+            ViewData["program_type"] = new SelectList(new Dictionary<int, string>
+            {
+                { Constants.StandardProgramType, "Tiêu chuẩn" },
+                { Constants.SpecialProgramType, "Đặc biệt" }
+            }, "Key", "Value");
             return View(new major());
         }
 

@@ -1,5 +1,4 @@
 ﻿@model TeachingAssignmentManagement.Models.major
-@using TeachingAssignmentManagement.Helpers
 
 @{
     Layout = null;
@@ -24,11 +23,7 @@
 
     <div class="mb-1">
         <label class="form-label font-small-4" for="program_type">CTĐT: </label>
-        <select class="form-data form-select" id="program_type" name="program_type" aria-label="Chọn CTĐT">
-            <option value="">---- Chọn CTĐT ----</option>
-            <option value="@Constants.StandardProgramType">Tiêu chuẩn</option>
-            <option value="@Constants.SpecialProgramType">Đặc biệt</option>
-        </select>
+        @Html.DropDownList("program_type", null, "---- Chọn CTĐT ----", htmlAttributes: new { @class = "form-data form-select", @aria_label = "Chọn CTĐT" })
     </div>
 
     <div class="float-end m-1">
