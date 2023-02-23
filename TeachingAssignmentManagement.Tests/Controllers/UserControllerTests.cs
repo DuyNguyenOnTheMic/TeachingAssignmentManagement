@@ -242,10 +242,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Return_Original_String_When_Not_Empty_Test()
         {
             // Arrange
+            UserController controller = new UserController(unitOfWork);
             string test = "Nguyễn Văn A";
 
             // Act
-            string result = UserController.SetNullOnEmpty(test);
+            string result = controller.SetNullOnEmpty(test);
 
             // Assert
             Assert.AreEqual(test, result);
@@ -255,10 +256,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Set_Null_On_Empty_String_Test()
         {
             // Arrange
+            UserController controller = new UserController(unitOfWork);
             string test = "";
 
             // Act
-            string result = UserController.SetNullOnEmpty(test);
+            string result = controller.SetNullOnEmpty(test);
 
             // Assert
             Assert.AreEqual(null, result);
@@ -268,10 +270,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Set_Null_On_Empty_String_Type_Test()
         {
             // Arrange
+            UserController controller = new UserController(unitOfWork);
             string test = string.Empty;
 
             // Act
-            string result = UserController.SetNullOnEmpty(test);
+            string result = controller.SetNullOnEmpty(test);
 
             // Assert
             Assert.AreEqual(null, result);
@@ -281,10 +284,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void String_Should_Convert_To_Null_If_Have_Space_Test()
         {
             // Arrange
+            UserController controller = new UserController(unitOfWork);
             string test = "      ";
 
             // Act
-            string result = UserController.SetNullOnEmpty(test);
+            string result = controller.SetNullOnEmpty(test);
 
             // Assert
             Assert.AreEqual(null, result);

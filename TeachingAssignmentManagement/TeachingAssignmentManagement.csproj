@@ -1216,7 +1216,6 @@
   <ItemGroup>
     <Folder Include="app-assets\vendors\css\tables\datatable\extensions\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Views\PriceCoefficient\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app-assets\fonts\feather\fonts\feather.eot" />
@@ -1287,14 +1286,14 @@
     <Content Include="Views\AcademicDegreeRank\Index.cshtml" />
     <Content Include="Views\AcademicDegreeRank\Create.cshtml" />
     <Content Include="Views\AcademicDegreeRank\Edit.cshtml" />
-    <Content Include="Views\Remuneration\PriceCoefficient.cshtml" />
-    <Content Include="Views\Remuneration\_PriceCoefficient.cshtml" />
+    <Content Include="Views\PriceCoefficient\PriceCoefficient.cshtml" />
+    <Content Include="Views\PriceCoefficient\_PriceCoefficient.cshtml" />
     <Content Include="Views\Remuneration\EditUnitPrice.cshtml" />
-    <Content Include="Views\Remuneration\CreateUnitPrice.cshtml" />
+    <Content Include="Views\PriceCoefficient\CreateUnitPrice.cshtml" />
     <Content Include="Views\Remuneration\LecturerRank.cshtml" />
-    <Content Include="Views\Remuneration\CreateCoefficient.cshtml" />
-    <Content Include="Views\Remuneration\EditCoefficient.cshtml" />
-    <Content Include="Views\Remuneration\EditAllUnitPrice.cshtml" />
+    <Content Include="Views\PriceCoefficient\CreateCoefficient.cshtml" />
+    <Content Include="Views\PriceCoefficient\EditCoefficient.cshtml" />
+    <Content Include="Views\PriceCoefficient\EditAllUnitPrice.cshtml" />
     <Content Include="Views\Remuneration\_LecturerRank.cshtml" />
     <Content Include="Views\Remuneration\EditAllLecturerRanks.cshtml" />
     <Content Include="Views\Remuneration\EditLecturerRank.cshtml" />

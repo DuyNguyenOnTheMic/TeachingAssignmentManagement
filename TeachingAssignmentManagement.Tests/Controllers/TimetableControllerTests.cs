@@ -1774,10 +1774,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Return_Original_String_When_Not_Empty_Test()
         {
             // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
             string test = "Nguyễn Văn A";
 
             // Act
-            string result = TimetableController.ToNullableString(test);
+            string result = controller.ToNullableString(test);
 
             // Assert
             Assert.AreEqual(test, result);
@@ -1787,10 +1788,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Set_Null_String_On_Empty_String_Test()
         {
             // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
             string test = "";
 
             // Act
-            string result = TimetableController.ToNullableString(test);
+            string result = controller.ToNullableString(test);
 
             // Assert
             Assert.AreEqual(null, result);
@@ -1800,10 +1802,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Set_Null_String_On_Empty_String_Type_Test()
         {
             // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
             string test = string.Empty;
 
             // Act
-            string result = TimetableController.ToNullableString(test);
+            string result = controller.ToNullableString(test);
 
             // Assert
             Assert.AreEqual(null, result);
@@ -1813,10 +1816,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void String_Should_Convert_To_Null_If_Have_Space_Test()
         {
             // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
             string test = "      ";
 
             // Act
-            string result = TimetableController.ToNullableString(test);
+            string result = controller.ToNullableString(test);
 
             // Assert
             Assert.AreEqual(null, result);
@@ -1826,11 +1830,12 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Return_Int_When_Not_Empty_Test()
         {
             // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
             string stringTest = "123";
             int intTest = int.Parse(stringTest);
 
             // Act
-            int? result = TimetableController.ToNullableInt(stringTest);
+            int? result = controller.ToNullableInt(stringTest);
 
             // Assert
             Assert.AreEqual(intTest, result);
@@ -1840,10 +1845,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Set_Null_On_Empty_Int_Test()
         {
             // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
             string test = "";
 
             // Act
-            int? result = TimetableController.ToNullableInt(test);
+            int? result = controller.ToNullableInt(test);
 
             // Assert
             Assert.AreEqual(null, result);
@@ -1853,10 +1859,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Set_Null_Int_On_Empty_String_Type_Test()
         {
             // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
             string test = string.Empty;
 
             // Act
-            int? result = TimetableController.ToNullableInt(test);
+            int? result = controller.ToNullableInt(test);
 
             // Assert
             Assert.AreEqual(null, result);
@@ -1866,10 +1873,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void String_Should_Convert_To_Null_Int_If_Have_Space_Test()
         {
             // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
             string test = "      ";
 
             // Act
-            int? result = TimetableController.ToNullableInt(test);
+            int? result = controller.ToNullableInt(test);
 
             // Assert
             Assert.AreEqual(null, result);
@@ -1879,11 +1887,12 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void String_Should_Convert_To_Int_Test()
         {
             // Arrange
+            TimetableController controller = new TimetableController(unitOfWork);
             string stringTest = "123";
             int intTest = int.Parse(stringTest);
 
             // Act
-            int result = TimetableController.ToInt(stringTest);
+            int result = controller.ToInt(stringTest);
 
             // Assert
             Assert.AreEqual(intTest, result);
