@@ -553,18 +553,24 @@ if (unitPriceForm.length) {
         numeralThousandsGroupStyle: 'thousand'
     });
 
+    jQuery.validator.addMethod("numberOnly", function (value, element) {
+        return this.optional(element) || /^[0-9,.]+$/i.test(value);
+    });
+
     // Form validation for unit price
     unitPriceForm.validate({
         rules: {
             price: {
                 required: true,
-                maxlength: 18
+                maxlength: 18,
+                numberOnly: true
             }
         },
         messages: {
             price: {
                 required: "Bạn chưa nhập đơn giá",
-                maxlength: "Tối đa 18 kí tự được cho phép"
+                maxlength: "Tối đa 18 kí tự được cho phép",
+                numberOnly: "Đơn giá phải lớn hơn hoặc bằng 0"
             }
         }
     });
