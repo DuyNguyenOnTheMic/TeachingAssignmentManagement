@@ -20,14 +20,8 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpGet]
         [OutputCache(Duration = 600, VaryByCustom = "userName")]
-        public ActionResult AcademicDegree()
+        public ActionResult Index()
         {
             return View();
         }
@@ -35,7 +29,7 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public JsonResult GetData()
         {
-            // Get Academics, Degrees data from database
+            // Get academics and degrees data from database
             return Json(unitOfWork.AcademicDegreeRepository.GetAcademicDegrees(), JsonRequestBehavior.AllowGet);
         }
 
