@@ -438,6 +438,7 @@ namespace TeachingAssignmentManagement.Controllers
                                 errorAssignList.Add(Tuple.Create(lecturerId, fullName, classSectionid, day, lessonTime, checkState.message));
                             }
                         }
+                        query_classSection.student_registered_number = classSection.student_registered_number;
                     }
                     ProgressHub.SendProgress("Đang import...", dt.Rows.IndexOf(row), itemsCount);
                 }
