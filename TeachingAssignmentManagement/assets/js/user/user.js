@@ -65,9 +65,9 @@ $(function () {
                     targets: 6,
                     visible: false,
                     render: function (data, type, row) {
-                        var $status = data;
-                        var isChecked = $status ? 'checked' : '';
-                        return type === 'display' ? "<div class='form-check form-check-primary form-switch d-flex justify-content-center'><input type='checkbox' class='form-check-input user-status' aria-label='Trạng thái người dùng' onchange=editStatus('" + row.id + "','" + !$status + "') " + isChecked + "></div>" : data;
+                        var isChecked = '';
+                        (data || null == data) && (isChecked = 'checked');
+                        return type === 'display' ? "<div class='form-check form-check-primary form-switch d-flex justify-content-center'><input type='checkbox' class='form-check-input user-status' aria-label='Trạng thái người dùng' onchange=editStatus('" + row.id + "','" + !data + "') " + isChecked + "></div>" : data;
                     }
                 },
                 {

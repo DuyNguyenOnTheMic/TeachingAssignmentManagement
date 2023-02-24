@@ -281,7 +281,7 @@ namespace TeachingAssignmentManagement.Controllers
                 lecturer lecturer = new lecturer
                 {
                     id = id,
-                    status = true
+                    status = false
                 };
                 unitOfWork.UserRepository.InsertLecturer(lecturer);
             }
