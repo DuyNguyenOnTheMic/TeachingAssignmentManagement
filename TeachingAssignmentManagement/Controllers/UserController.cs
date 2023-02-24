@@ -98,7 +98,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string staff_id, string full_name, string email, string type, string role_id)
+        public ActionResult Create(string staff_id, string full_name, string email, string type, string role_id, bool is_vietnamese)
         {
             // Declare variables
             string txtStaffId = SetNullOnEmpty(staff_id);
@@ -128,6 +128,7 @@ namespace TeachingAssignmentManagement.Controllers
                     staff_id = txtStaffId,
                     full_name = txtFullName,
                     type = type,
+                    is_vietnamese = is_vietnamese,
                     status = true
                 };
                 unitOfWork.UserRepository.InsertLecturer(lecturer);
@@ -185,7 +186,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(string id, string staff_id, string full_name, string email, string type, string role_id)
+        public ActionResult Edit(string id, string staff_id, string full_name, string email, string type, string role_id, bool is_vietnamese)
         {
             // Declare variables
             ApplicationUser user = UserManager.FindById(id);
@@ -217,6 +218,7 @@ namespace TeachingAssignmentManagement.Controllers
                     query_lecturer.staff_id = txtStaffId;
                     query_lecturer.full_name = txtFullName;
                     query_lecturer.type = type;
+                    query_lecturer.is_vietnamese = is_vietnamese;
                 }
                 else
                 {
@@ -227,6 +229,7 @@ namespace TeachingAssignmentManagement.Controllers
                         staff_id = txtStaffId,
                         full_name = txtFullName,
                         type = type,
+                        is_vietnamese = is_vietnamese,
                         status = true
                     };
                     unitOfWork.UserRepository.InsertLecturer(lecturer);
