@@ -33,7 +33,6 @@ $(function () {
                     // Remuneration status
                     targets: 5,
                     render: function (data, type, row) {
-                        console.log(row['AcademicDegreeRankId']);
                         var $status = data,
                             $class,
                             $title;
