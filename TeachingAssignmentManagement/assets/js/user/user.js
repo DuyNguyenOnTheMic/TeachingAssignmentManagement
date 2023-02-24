@@ -169,7 +169,7 @@ $(function () {
                     });
 
                 // Add a filter select for show and hide columns
-                $('div.column-filter').html('<div class="dataTables_showhide"><label><select class="form-select" id="columnFilter" name="columnFilter" multiple="multiple"><option value="1" selected="selected">Mã giảng viên</option><option value="2" selected="selected">Tên giảng viên</option><option value="3" selected="selected">Email</option><option value="4" selected="selected">Loại</option><option value="5" selected="selected">Role</option><option value="6">Trạng thái</option><option value="7">Quốc gia</option></select></label></div>');
+                $('div.column-filter').html('<div class="dataTables_showhide"><label><select class="form-select" id="columnFilter" name="columnFilter" multiple="multiple"><option value="1" selected="selected">Mã giảng viên</option><option value="2" selected="selected">Tên giảng viên</option><option value="3" selected="selected">Email</option><option value="4" selected="selected">Loại</option><option value="5" selected="selected">Role</option><option value="6">Trạng thái</option><option value="7">Quốc tịch</option></select></label></div>');
 
                 // Populate select2 for column filter
                 var columnFilter = $('#columnFilter');
