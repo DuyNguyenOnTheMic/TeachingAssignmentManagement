@@ -34,6 +34,15 @@
         @Html.DropDownList("role_id", null, "---- Chọn role ----", htmlAttributes: new { @class = "form-data form-select", @aria_label = "Chọn role" })
     </div>
 
+    <div class="mb-1">
+        <label class="form-label font-small-4 mb-50" for="is_vietnamese">Quốc tịch: </label>
+        <small class="text-muted"><i>(Bỏ chọn nếu giảng viên không phải người Việt)</i></small>
+        <div class="form-check form-check-inline">
+            @Html.CheckBox("is_vietnamese", Model.is_vietnamese ?? true, new { @class = "form-check-input" })
+            <label class="form-check-label" for="is_vietnamese">Tiếng Việt</label>
+        </div>
+    </div>
+
     <div class="float-end m-1">
         <button type="button" class="btn btn-outline-secondary waves-effect me-1" id="btnClose">Huỷ</button>
         <button type="submit" class="btn btn-primary waves-effect waves-float waves-light">Lưu</button>
