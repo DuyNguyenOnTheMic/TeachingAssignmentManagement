@@ -47,13 +47,12 @@ namespace TeachingAssignmentManagement.Controllers
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
             IEnumerable<unit_price> unitPrice = unitOfWork.UnitPriceRepository.GetUnitPriceInYear(startYear, endYear);
             List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
-            bool isMissing = coefficient == null;
 
             foreach (LecturerRankDTO rank in lecturerRanks)
             {
                 // Reset values in each loop
                 decimal teachingRemuneration = decimal.Zero;
-                isMissing = false;
+                bool isMissing = false;
 
                 // Check if lecturer have been assigned a rank
                 if (rank.Id != null)
