@@ -25,8 +25,8 @@ $(function () {
                 { 'data': 'email' },
                 { 'data': 'type' },
                 { 'data': 'role' },
-                { 'data': 'status' },
                 { 'data': 'is_vietnamese' },
+                { 'data': 'status' },
                 {
                     'data': 'id', 'render': function (data, type, row) {
                         return "<a class='editRow text-success p-0' data-original-title='Chỉnh sửa' title='Chỉnh sửa' onclick=popupForm('" + rootUrl + "User/Edit/" + data + "')><i class='feather feather-edit font-medium-3 me-1'></i></a><a class='deleteRow text-danger p-0' data-original-title='Xoá' title='Xoá' onclick=deleteUser('" + data + "','" + row.email + "')><i class='feather feather-trash-2 font-medium-3 me-1'></i></a>";
@@ -61,23 +61,23 @@ $(function () {
                     }
                 },
                 {
-                    // User status
-                    targets: 6,
-                    visible: false,
-                    render: function (data, type, row) {
-                        var isChecked = '';
-                        (data || null == data) && (isChecked = 'checked');
-                        return type === 'display' ? "<div class='form-check form-check-primary form-switch d-flex justify-content-center'><input type='checkbox' class='form-check-input user-status' aria-label='Trạng thái người dùng' onchange=editStatus('" + row.id + "','" + !data + "') " + isChecked + "></div>" : data;
-                    }
-                },
-                {
                     // User country
-                    targets: 7,
+                    targets: 6,
                     visible: false,
                     render: function (data) {
                         var flag;
                         flag = data || null == data ? '<i class="flag-icon flag-icon-vn me-50"></i>Việt' : '<i class="flag-icon flag-icon-us me-50"></i>Ngoại quốc';
                         return flag;
+                    }
+                },
+                {
+                    // User status
+                    targets: 7,
+                    visible: false,
+                    render: function (data, type, row) {
+                        var isChecked = '';
+                        (data || null == data) && (isChecked = 'checked');
+                        return type === 'display' ? "<div class='form-check form-check-primary form-switch d-flex justify-content-center'><input type='checkbox' class='form-check-input user-status' aria-label='Trạng thái người dùng' onchange=editStatus('" + row.id + "','" + !data + "') " + isChecked + "></div>" : data;
                     }
                 },
                 {
@@ -169,7 +169,7 @@ $(function () {
                     });
 
                 // Add a filter select for show and hide columns
-                $('div.column-filter').html('<div class="dataTables_showhide"><label><select class="form-select" id="columnFilter" name="columnFilter" multiple="multiple"><option value="1" selected="selected">Mã giảng viên</option><option value="2" selected="selected">Tên giảng viên</option><option value="3" selected="selected">Email</option><option value="4" selected="selected">Loại</option><option value="5" selected="selected">Role</option><option value="6">Trạng thái</option><option value="7">Quốc tịch</option></select></label></div>');
+                $('div.column-filter').html('<div class="dataTables_showhide"><label><select class="form-select" id="columnFilter" name="columnFilter" multiple="multiple"><option value="1" selected="selected">Mã giảng viên</option><option value="2" selected="selected">Tên giảng viên</option><option value="3" selected="selected">Email</option><option value="4" selected="selected">Loại</option><option value="5" selected="selected">Role</option><option value="6">Quốc tịch</option><option value="7">Trạng thái</option></select></label></div>');
 
                 // Populate select2 for column filter
                 var columnFilter = $('#columnFilter');
