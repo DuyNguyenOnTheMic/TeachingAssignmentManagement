@@ -32,8 +32,14 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public ActionResult GetRemunerationPartial(int termId)
         {
-            ViewData["termId"] = termId;
-            return PartialView("_Remuneration");
+            term term = unitOfWork.TermRepository.GetTermByID(termId);
+            coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(term.start_year, term.end_year);
+            if (coefficient != null)
+            {
+                ViewData["termId"] = termId;
+                return PartialView("_Remuneration");
+            }
+            return PartialView("_Error");
         }
 
         [HttpGet]
