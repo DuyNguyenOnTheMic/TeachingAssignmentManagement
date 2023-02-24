@@ -26,8 +26,8 @@ namespace TeachingAssignmentManagement.Models
         public string staff_id { get; set; }
         public string full_name { get; set; }
         public string type { get; set; }
-        public Nullable<bool> status { get; set; }
         public Nullable<bool> is_vietnamese { get; set; }
+        public Nullable<bool> status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<class_section> class_section { get; set; }
