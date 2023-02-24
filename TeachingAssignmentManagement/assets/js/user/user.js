@@ -66,7 +66,7 @@ $(function () {
                     visible: false,
                     render: function (data) {
                         var flag;
-                        flag = data || null == data ? '<i class="flag-icon flag-icon-vn me-50"></i>Việt' : '<i class="flag-icon flag-icon-us me-50"></i>Ngoại quốc';
+                        flag = data || null == data ? '<i class="flag-icon flag-icon-vn me-50"></i>Việt' : '<i class="flag-icon flag-icon-us me-50"></i>Ngoại';
                         return flag;
                     }
                 },
