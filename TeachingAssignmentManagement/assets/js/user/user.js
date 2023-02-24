@@ -71,6 +71,16 @@ $(function () {
                     }
                 },
                 {
+                    // User country
+                    targets: 7,
+                    visible: false,
+                    render: function (data) {
+                        var flag;
+                        flag = data || null == data ? '<i class="flag-icon flag-icon-vn me-50"></i>Việt' : '<i class="flag-icon flag-icon-us me-50"></i>Ngoại quốc';
+                        return flag;
+                    }
+                },
+                {
                     searchable: false,
                     orderable: false,
                     targets: [0, 8]
