@@ -65,7 +65,8 @@ namespace TeachingAssignmentManagement.Controllers
                     foreach (class_section item in query_classes)
                     {
                         // Get unit price for lecturer rank
-                        unit_price query_unitPrice = unitPrice.SingleOrDefault(u => u.academic_degree_rank_id == rank.AcademicDegreeRankId && u.type == item.major.program_type);
+                        int unitPriceType = rank.IsVietnamese == false ? Constants.ForeignType : item.major.program_type;
+                        unit_price query_unitPrice = unitPrice.SingleOrDefault(u => u.academic_degree_rank_id == rank.AcademicDegreeRankId && u.type == unitPriceType);
                         if (query_unitPrice != null)
                         {
                             unitPriceByLevel = query_unitPrice.unit_price1;

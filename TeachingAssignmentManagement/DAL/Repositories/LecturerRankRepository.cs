@@ -24,6 +24,7 @@ namespace TeachingAssignmentManagement.DAL
                         LecturerId = l.id,
                         StaffId = l.staff_id,
                         FullName = l.full_name,
+                        IsVietnamese = l.is_vietnamese,
                         AcademicDegreeRankId = rank.academic_degree_rank_id
                     }).ToList();
         }
