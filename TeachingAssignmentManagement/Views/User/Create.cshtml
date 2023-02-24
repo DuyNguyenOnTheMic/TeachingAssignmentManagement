@@ -2,6 +2,7 @@
 
 @{
     Layout = null;
+    bool? isVietnamese = Model.is_vietnamese;
 }
 
 @using (Html.BeginForm("Create", "User", FormMethod.Post, new { onsubmit = "return submitForm(this)", id = "user-form" }))
@@ -40,7 +41,7 @@
         <label class="form-label font-small-4 mb-50" for="is_vietnamese">Quốc tịch: </label>
         <small class="text-muted"><i>(Bỏ chọn nếu giảng viên không phải người Việt)</i></small>
         <div class="form-check form-check-inline">
-            @Html.CheckBoxFor(model => model.is_vietnamese, new { @class = "form-check-input form-data" })
+            <input class="form-check-input" type="checkbox" id="is_vietnamese" name="is_vietnamese" value="true" @((isVietnamese == true || isVietnamese == null) ? "checked" : string.Empty) />
             <label class="form-check-label" for="is_vietnamese">Tiếng Việt</label>
         </div>
     </div>
