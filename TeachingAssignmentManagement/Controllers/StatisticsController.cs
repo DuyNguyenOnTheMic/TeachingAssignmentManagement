@@ -262,7 +262,7 @@ namespace TeachingAssignmentManagement.Controllers
                             StaffId = rank.StaffId,
                             FullName = rank.FullName,
                             AcademicDegreeRankId = rank.AcademicDegreeRankId,
-                            Remuneration = teachingRemuneration
+                            Remuneration = Math.Round(teachingRemuneration)
                         });
                     }
                 }
