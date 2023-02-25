@@ -214,6 +214,13 @@ namespace TeachingAssignmentManagement.Controllers
             return Json(unitOfWork.ClassSectionRepository.GetPersonalYearStatistics(isLesson, startYear, endYear, userId), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult Remuneration()
+        {
+            ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
