@@ -99,11 +99,7 @@ $.ajax({
         } else {
             // Get chart labels and data
             var labels = response.map(function (e) {
-                if (lecturerType == '-1') {
-                    return e.FullName + ' (' + e.lecturer_type + ')';
-                } else {
-                    return e.FullName;
-                }
+                return e.FullName;
             });
 
             var chartData;

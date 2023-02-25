@@ -22,7 +22,7 @@ $(function () {
         });
     })
 
-    if (latestTermId && latestMajorId) {
+    if (latestTermId) {
         // Get Partial View statistics data
         fetchData(latestTermId);
     } else {
@@ -39,7 +39,7 @@ formData.change(function () {
 
 function fetchData(value) {
     var url = rootUrl + 'Statistics/GetRemunerationChart';
-    $.get(url, { isLesson, type, value, major, lecturerType }, function (data) {
+    $.get(url, { value }, function (data) {
         // Populate statistics data
         statisticsDiv.html(data);
     });

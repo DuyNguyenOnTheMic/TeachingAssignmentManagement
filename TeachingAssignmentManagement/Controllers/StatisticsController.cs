@@ -222,9 +222,9 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetRemunerationChart(int termId)
+        public ActionResult GetRemunerationChart(int value)
         {
-            ViewData["termId"] = termId;
+            ViewData["value"] = value;
             return PartialView("_Remuneration");
         }
 
@@ -251,7 +251,6 @@ namespace TeachingAssignmentManagement.Controllers
             {
                 // Reset values in each loop
                 decimal teachingRemuneration = decimal.Zero;
-                bool isMissing = false;
 
                 // Check if lecturer have been assigned a rank
                 if (rank.Id != null)
@@ -263,14 +262,16 @@ namespace TeachingAssignmentManagement.Controllers
                         teachingRemuneration += item.total_lesson.GetValueOrDefault(1) * RemunerationController.CalculateRemuneration(item, coefficient);
                     }
                 }
-                remunerationDTOs.Add(new RemunerationDTO
+                if (teachingRemuneration > 0)
                 {
-                    StaffId = rank.StaffId,
-                    FullName = rank.FullName,
-                    AcademicDegreeRankId = rank.AcademicDegreeRankId,
-                    Remuneration = teachingRemuneration,
-                    Status = isMissing
-                });
+                    remunerationDTOs.Add(new RemunerationDTO
+                    {
+                        StaffId = rank.StaffId,
+                        FullName = rank.FullName,
+                        AcademicDegreeRankId = rank.AcademicDegreeRankId,
+                        Remuneration = teachingRemuneration
+                    });
+                }
             }
             return Json(remunerationDTOs, JsonRequestBehavior.AllowGet);
         }
