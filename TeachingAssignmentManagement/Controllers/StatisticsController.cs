@@ -265,7 +265,7 @@ namespace TeachingAssignmentManagement.Controllers
                     });
                 }
             }
-            return Json(remunerationDTOs, JsonRequestBehavior.AllowGet);
+            return Json(remunerationDTOs.OrderByDescending(r => r.Remuneration), JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

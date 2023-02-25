@@ -10,7 +10,7 @@ var labelColor = '#6e6b7b',
 var dataLoader = $('#data-loader'),
     value = dataLoader.val(),
     url = rootUrl + 'Statistics/GetRemunerationData',
-    titleText = 'Thống kê số giờ học kỳ ' + value,
+    titleText = 'Thống kê số giờ thù lao học kỳ ' + value,
     fileName = 'ThongKeSoGio_HK' + value,
     data = { 'termId': value };
 
@@ -127,7 +127,7 @@ $.ajax({
                 ]
             };
 
-            chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ: ' + hoursSum(response, 'sum');
+            chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ: ' + hoursSum(response, 'Remuneration');
 
             // Create the chart
             var chart = new Chart(ctx, {
@@ -136,39 +136,6 @@ $.ajax({
                 options: chartOptions,
                 plugins: [ChartDataLabels]
             });
-
-            // Get on legend click event
-            chart.options.plugins.legend.onClick = function (event, legendItem, legend) {
-                const index = legendItem.datasetIndex;
-                const ci = legend.chart;
-                if (ci.isDatasetVisible(index)) {
-                    ci.hide(index);
-                    legendItem.hidden = true;
-                } else {
-                    ci.show(index);
-                    legendItem.hidden = false;
-                }
-
-                var sum = 0;
-                var array = [];
-                // Loop through each legend item to sum total hours
-                for (var i = 0; i < 5; i++) {
-                    if (ci.isDatasetVisible(i)) {
-                        const dataSet = chart.data.datasets[i].data;
-                        sum += dataSet.reduce((a, b) => a + b, 0);
-                        array.push(dataSet);
-                    }
-                }
-                // Update lecturer count
-                var lecturerCount = 0;
-                if (array.length) {
-                    lecturerCount = array.reduce((r, a) => r.map((b, i) => a[i] + b)).filter(x => x > 0).length;
-                }
-
-                // Update chart title
-                chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + lecturerCount + ' / Tổng số giờ: ' + sum;
-                chart.update();
-            }
 
             // Detect Dark Layout and change color
             $('.nav-link-style').on('click', function () {
