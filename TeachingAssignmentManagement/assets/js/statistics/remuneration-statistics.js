@@ -278,9 +278,7 @@ function populateDatatable(data) {
                     }
                 }
             ],
-            initComplete: function () {
-                isLessonCheck.is(":checked") ? setVisibleColumn(true) : setVisibleColumn(false);
-            },
+
             language: {
                 'url': rootUrl + 'app-assets/language/datatables/vi.json'
             }
@@ -292,53 +290,6 @@ function populateDatatable(data) {
             cell.innerHTML = i + 1;
             dataTable.cell(cell).invalidate('dom');
         });
-    });
-
-    // Add event listener for opening and closing details
-    $('#tblStatistics tbody').on('click', 'td .viewInfo ', function () {
-        var $this = $(this),
-            tr = $this.closest('tr'),
-            row = dataTable.row(tr),
-            lecturerId = $this.data('id'),
-            subjectUrl = rootUrl + 'Statistics/',
-            subjectData;
-
-        if (row.child.isShown()) {
-            // Update icon on click
-            $this.removeClass('btn-danger').addClass('btn-success');
-            $this.find('i').removeClass('feather-minus').addClass('feather-plus');
-            // This row is already open - close it
-            row.child.hide();
-            tr.removeClass('shown');
-        } else {
-            // Update icon on click
-            $this.removeClass('btn-success').addClass('btn-danger');
-            $this.find('i').removeClass('feather-plus').addClass('feather-minus');
-
-            // Get data for ajax request
-            if (type == yearSelect.attr('id')) {
-                var yearSplit = value.split(" - "),
-                    startYear = yearSplit[0],
-                    endYear = yearSplit[1];
-                subjectUrl += 'GetYearsubjects';
-                subjectData = { startYear, endYear, majorId, lecturerId };
-            } else {
-                subjectUrl += 'GetTermsubjects';
-                subjectData = { 'termId': value, majorId, lecturerId };
-            }
-
-            // Send request to fetch subjects
-            $.ajax({
-                type: 'GET',
-                url: subjectUrl,
-                data: subjectData,
-                success: function (data) {
-                    // Open this row
-                    row.child(format(data)).show();
-                    tr.addClass('shown');
-                }
-            });
-        }
     });
 }
 
@@ -353,66 +304,4 @@ function setVisibleColumn(state) {
         table.column(i).visible(state, state);
     }
     table.columns.adjust().draw(state); // adjust column sizing and redraw
-}
-
-// HTML format for child rows of viewing statistics
-function format(d) {
-    // `d` is the original data object for the row
-    var arrayLength = d.length,
-        tableRow = '';
-
-    // Map data object
-    var subjectId = d.map(function (e) {
-        return e.id;
-    });
-    var subjectName = d.map(function (e) {
-        return e.subject_name;
-    });
-    var subjectCredits = d.map(function (e) {
-        return e.subject_credits;
-    });
-    var subjectMajor = d.map(function (e) {
-        return e.subject_major;
-    });
-    var subjectHours = d.map(function (e) {
-        return e.subject_hours;
-    });
-    var totalClass = d.map(function (e) {
-        var theoryClass = e.theory_count + 'LT',
-            practiceClass = e.practice_count + 'TH',
-            totalClass;
-        if (e.theory_count && e.practice_count) {
-            totalClass = theoryClass + ' + ' + practiceClass;
-        } else if (e.theory_count) {
-            totalClass = theoryClass;
-        } else if (e.practice_count) {
-            totalClass = practiceClass;
-        }
-        return totalClass;
-    });
-
-    // Append HTML rows
-    for (var i = 0; i < arrayLength; i++) {
-        tableRow += '<tr><td>' + subjectId[i] + '</td><td>' + subjectName[i] + '</td><td>' + subjectMajor[i] + '</td><td class="text-center">' + subjectCredits[i] + '</td><td class="text-center">' + totalClass[i] + '</td><td class="text-center">' + subjectHours[i] + '</td></tr>';
-    }
-
-    // Render rows
-    return ('<div class="slider">' +
-        '<table class="table table-sm">' +
-        '<thead class="table-light">' +
-        '<tr>' +
-        '<th>Mã HP</th>' +
-        '<th>Tên HP</th>' +
-        '<th>Ngành</th>' +
-        '<th class="text-center">Số TC</th>' +
-        '<th class="text-center">Số lớp</th>' +
-        '<th class="text-center">Số giờ</th>' +
-        '</tr>' +
-        '</thead>' +
-        '<tbody>' +
-        tableRow +
-        '</tbody>' +
-        '</table>' +
-        '</div>'
-    );
 }
