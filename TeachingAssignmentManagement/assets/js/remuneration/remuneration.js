@@ -1,24 +1,9 @@
 ﻿var popup, dataTable;
-var statusBadgeObj = {
-    'true': { title: 'Thiếu thông tin', class: 'badge-light-warning' },
-    'false': { title: 'OK', class: 'badge-light-success' }
-};
-
-// Setup data
-var dataLoader = $('#data-loader'),
-    termId = dataLoader.data('termid');
 
 $(function () {
     // Populate LecturerRank datatable
     dataTable = $('#tblRemuneration').DataTable(
         {
-            ajax: {
-                url: rootUrl + 'Remuneration/GetRemunerationData?termId=' + termId,
-                type: 'GET',
-                dataType: 'json',
-                dataSrc: ''
-            },
-            deferRender: true,
             columns: [
                 { 'data': '', defaultContent: '' },
                 { 'data': 'StaffId' },
@@ -38,10 +23,10 @@ $(function () {
                             $title;
                         if (row['AcademicDegreeRankId']) {
                             // Set remuneration status when user has a rank
-                            if ($status) {
+                            if ($status == 'True') {
                                 $class = 'badge-light-warning';
                                 $title = 'Thiếu thông tin'
-                            } else if (!$status) {
+                            } else if ($status == 'False') {
                                 $class = 'badge-light-success';
                                 $title = 'OK'
                             }

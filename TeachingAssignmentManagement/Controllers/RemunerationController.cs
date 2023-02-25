@@ -32,25 +32,20 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public ActionResult GetRemunerationPartial(int termId)
         {
-            term term = unitOfWork.TermRepository.GetTermByID(termId);
-            coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(term.start_year, term.end_year);
-            if (coefficient != null)
-            {
-                ViewData["termId"] = termId;
-                return PartialView("_Remuneration");
-            }
-            return PartialView("_Error");
-        }
-
-        [HttpGet]
-        public JsonResult GetRemunerationData(int termId)
-        {
             // Declare variables
-            IEnumerable<LecturerRankDTO> lecturerRanks = unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
             term term = unitOfWork.TermRepository.GetTermByID(termId);
             int startYear = term.start_year;
             int endYear = term.end_year;
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
+
+            // Check if coefficient is null
+            if (coefficient == null)
+            {
+                return PartialView("_Error");
+            }
+
+            // Keep declaring variables
+            IEnumerable<LecturerRankDTO> lecturerRanks = unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
             IEnumerable<unit_price> unitPrice = unitOfWork.UnitPriceRepository.GetUnitPriceInYear(startYear, endYear);
             List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
 
@@ -94,7 +89,7 @@ namespace TeachingAssignmentManagement.Controllers
                     Status = isMissing
                 });
             }
-            return Json(remunerationDTOs, JsonRequestBehavior.AllowGet);
+            return PartialView("_Remuneration", remunerationDTOs);
         }
 
         public static decimal CalculateRemuneration(class_section classSection, coefficient coefficient)

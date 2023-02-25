@@ -1,4 +1,4 @@
-﻿<input type="hidden" id="data-loader" data-termid="@ViewData["TermId"]" />
+﻿@model List<TeachingAssignmentManagement.Models.RemunerationDTO>
 
 <div class="alert alert-primary mt-1" role="alert">
     <div class="alert-body"><b><i class="feather feather-help-circle"></i> Lưu ý: </b>Hệ thống chỉ hiển thị thù lao của những giảng viên thỉnh giảng.</div>
@@ -15,6 +15,19 @@
                 <th>Trạng thái</th>
             </tr>
         </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td></td>
+                    <td>@item.StaffId</td>
+                    <td>@item.FullName</td>
+                    <td>@item.AcademicDegreeRankId</td>
+                    <td>@item.Remuneration</td>
+                    <td>@item.Status</td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>
 
