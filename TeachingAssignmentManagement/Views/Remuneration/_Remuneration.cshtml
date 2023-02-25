@@ -18,13 +18,33 @@
         <tbody>
             @foreach (var item in Model)
             {
+                string rank = item.AcademicDegreeRankId, className, title;
+                bool status = item.Status;
+                if (rank != null)
+                {
+                    if (status)
+                    {
+                        className = "badge-light-warning";
+                        title = "Thiếu thông tin";
+                    }
+                    else
+                    {
+                        className = "badge-light-success";
+                        title = "OK";
+                    }
+                }
+                else
+                {
+                    className = "badge-light-danger";
+                    title = "Chưa đặt cấp bậc";
+                }
                 <tr>
                     <td></td>
                     <td>@item.StaffId</td>
                     <td>@item.FullName</td>
-                    <td>@item.AcademicDegreeRankId</td>
+                    <td>@rank</td>
                     <td>@item.Remuneration</td>
-                    <td>@item.Status</td>
+                    <td><span class="badge rounded-pill @className text-capitalized">@title</span></td>
                 </tr>
             }
         </tbody>

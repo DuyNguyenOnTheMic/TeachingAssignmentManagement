@@ -15,30 +15,6 @@ $(function () {
 
             columnDefs: [
                 {
-                    // Remuneration status
-                    targets: 5,
-                    render: function (data, type, row) {
-                        var $status = data,
-                            $class,
-                            $title;
-                        if (row['AcademicDegreeRankId']) {
-                            // Set remuneration status when user has a rank
-                            if ($status == 'True') {
-                                $class = 'badge-light-warning';
-                                $title = 'Thiếu thông tin'
-                            } else if ($status == 'False') {
-                                $class = 'badge-light-success';
-                                $title = 'OK'
-                            }
-                        } else {
-                            // Set no rank title
-                            $class = 'badge-light-danger';
-                            $title = 'Chưa đặt cấp bậc'
-                        }
-                        return '<span class="badge rounded-pill ' + $class + ' text-capitalized">' + $title + '</span>';
-                    }
-                },
-                {
                     searchable: false,
                     orderable: false,
                     targets: 0
