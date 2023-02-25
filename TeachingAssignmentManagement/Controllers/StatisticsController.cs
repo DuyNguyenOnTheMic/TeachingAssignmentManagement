@@ -253,16 +253,17 @@ namespace TeachingAssignmentManagement.Controllers
                     {
                         teachingRemuneration += item.total_lesson.GetValueOrDefault(1) * RemunerationController.CalculateRemuneration(item, coefficient);
                     }
-                }
-                if (teachingRemuneration > 0)
-                {
-                    remunerationDTOs.Add(new RemunerationDTO
+
+                    if (teachingRemuneration > 0)
                     {
-                        StaffId = rank.StaffId,
-                        FullName = rank.FullName,
-                        AcademicDegreeRankId = rank.AcademicDegreeRankId,
-                        Remuneration = teachingRemuneration
-                    });
+                        remunerationDTOs.Add(new RemunerationDTO
+                        {
+                            StaffId = rank.StaffId,
+                            FullName = rank.FullName,
+                            AcademicDegreeRankId = rank.AcademicDegreeRankId,
+                            Remuneration = teachingRemuneration
+                        });
+                    }
                 }
             }
             return Json(remunerationDTOs.OrderByDescending(r => r.Remuneration), JsonRequestBehavior.AllowGet);
