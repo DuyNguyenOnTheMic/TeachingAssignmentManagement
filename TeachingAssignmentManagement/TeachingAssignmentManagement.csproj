@@ -1305,6 +1305,7 @@
     <Content Include="Views\AcademicDegree\Index.cshtml" />
     <Content Include="Views\Remuneration\_Error.cshtml" />
     <Content Include="Views\Statistics\Remuneration.cshtml" />
+    <Content Include="Views\Statistics\_Remuneration.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

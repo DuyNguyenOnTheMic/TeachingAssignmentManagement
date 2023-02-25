@@ -222,14 +222,14 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetRemunerationPartial(int termId)
+        public ActionResult GetRemunerationChart(int termId)
         {
             ViewData["termId"] = termId;
             return PartialView("_Remuneration");
         }
 
         [HttpGet]
-        public ActionResult GetRemunerationChart(int termId)
+        public ActionResult GetRemunerationData(int termId)
         {
             // Declare variables
             term term = unitOfWork.TermRepository.GetTermByID(termId);

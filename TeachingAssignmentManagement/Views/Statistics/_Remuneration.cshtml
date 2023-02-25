@@ -1,0 +1,49 @@
+﻿<input type="hidden" id="data-loader" value="@ViewData["termId"]" />
+
+<div class="d-flex justify-content-between align-items-center row">
+    <div class="col-sm-12 col-lg-6 d-flex justify-content-center justify-content-lg-start flex-lg-nowrap flex-wrap">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="chart-tab" data-bs-toggle="tab" href="#chartIcon" aria-controls="chart" role="tab" aria-selected="true"><i class="feather feather-bar-chart-2"></i> Biểu đồ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="table-tab" data-bs-toggle="tab" href="#tableIcon" aria-controls="table" role="tab" aria-selected="false"><i class="feather feather-grid"></i> Bảng biểu</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="tab-content">
+    <div class="tab-pane active" id="chartIcon" aria-labelledby="chart-tab" role="tabpanel">
+        <canvas class="chartjs" id="statistics-chart" data-height="750"></canvas>
+    </div>
+    <div class="tab-pane" id="tableIcon" aria-labelledby="table-tab" role="tabpanel">
+        <div class="alert alert-primary my-25" role="alert">
+            <div class="alert-body"><b><i class="feather feather-help-circle"></i> Hướng dẫn: </b>Nếu bạn chọn vào icon <i class="feather feather-plus-circle"></i> thì hệ thống sẽ hiển thị những môn học mà giảng viên đã dạy.</div>
+        </div>
+        <div class="card-datatable">
+            <div class=" table-responsive">
+                <table class="datatables-ajax table" id="tblStatistics">
+                    <thead class="table-light">
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>Mã GV</th>
+                            <th>Tên GV</th>
+                            <th>Loại GV</th>
+                            <th>Số môn</th>
+                            <th>Số lớp</th>
+                            <th>Số giờ</th>
+                            <th>Ca 1</th>
+                            <th>Ca 2</th>
+                            <th>Ca 3</th>
+                            <th>Ca 4</th>
+                            <th>Ca 5</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/js/statistics/remuneration-statistics.js"></script>
