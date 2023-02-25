@@ -1,4 +1,4 @@
-﻿var popup, dataTable;
+﻿var dataTable;
 
 // Populate LecturerRank datatable
 dataTable = $('#tblRemuneration').DataTable(
