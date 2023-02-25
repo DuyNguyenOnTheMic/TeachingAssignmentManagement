@@ -30,7 +30,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetRemunerationPartial(int termId)
+        public ActionResult GetData(int termId)
         {
             // Declare variables
             term term = unitOfWork.TermRepository.GetTermByID(termId);
