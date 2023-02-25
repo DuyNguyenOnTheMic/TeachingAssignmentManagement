@@ -100,109 +100,36 @@ $.ajax({
             // Get chart labels and data
             var labels = response.map(function (e) {
                 if (lecturerType == '-1') {
-                    return e.full_name + ' (' + e.lecturer_type + ')';
+                    return e.FullName + ' (' + e.lecturer_type + ')';
                 } else {
-                    return e.full_name;
+                    return e.FullName;
                 }
             });
 
             var chartData;
             var totalLessons = response.map(function (e) {
-                return e.sum;
+                return e.Remuneration;
             });
 
-            if (isLesson == 'False') {
-                // Fetch chart data
-                chartData = {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: 'Số giờ giảng',
-                            data: totalLessons,
-                            backgroundColor: 'rgba(115, 103, 240, 0.8)',
-                            borderColor: 'transparent',
-                            borderWidth: 1,
-                            borderRadius: 3,
-                            datalabels: {
-                                anchor: 'end',
-                                align: 'start',
-                                offset: -30
-                            }
+            // Fetch chart data
+            chartData = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Số giờ giảng',
+                        data: totalLessons,
+                        backgroundColor: 'rgba(115, 103, 240, 0.8)',
+                        borderColor: 'transparent',
+                        borderWidth: 1,
+                        borderRadius: 3,
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'start',
+                            offset: -30
                         }
-                    ]
-                };
-            } else {
-                // Get lesson data mapping
-                var sumLessons1 = response.map(function (e) {
-                    return e.sumLesson1;
-                });
-                var sumLessons4 = response.map(function (e) {
-                    return e.sumLesson4;
-                });
-                var sumLessons7 = response.map(function (e) {
-                    return e.sumLesson7;
-                });
-                var sumLessons10 = response.map(function (e) {
-                    return e.sumLesson10;
-                });
-                var sumLessons13 = response.map(function (e) {
-                    return e.sumLesson13;
-                });
-
-                // Fetch lessons chart data
-                chartData = {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: 'Ca 1',
-                            data: sumLessons1,
-                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1,
-                            borderRadius: 3
-                        },
-                        {
-                            label: 'Ca 2',
-                            data: sumLessons4,
-                            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 1,
-                            borderRadius: 3
-                        },
-                        {
-                            label: 'Ca 3',
-                            data: sumLessons7,
-                            backgroundColor: 'rgba(255, 205, 86, 0.5)',
-                            borderColor: 'rgba(255, 205, 86, 1)',
-                            borderWidth: 1,
-                            borderRadius: 3
-                        },
-                        {
-                            label: 'Ca 4',
-                            data: sumLessons10,
-                            backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1,
-                            borderRadius: 3
-                        },
-                        {
-                            label: 'Ca 5',
-                            data: sumLessons13,
-                            backgroundColor: 'rgba(153, 102, 255, 0.5)',
-                            borderColor: 'rgba(153, 102, 255, 1)',
-                            borderWidth: 1,
-                            borderRadius: 3
-                        }
-                    ]
-                };
-
-                chartOptions.plugins.datalabels = {
-                    color: labelColor,
-                    font: {
-                        size: '9'
                     }
-                };
-            }
+                ]
+            };
 
             chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ: ' + hoursSum(response, 'sum');
 
