@@ -254,6 +254,7 @@ namespace TeachingAssignmentManagement.Controllers
                         teachingRemuneration += item.total_lesson.GetValueOrDefault(1) * RemunerationController.CalculateRemuneration(item, coefficient);
                     }
 
+                    // Check if remuneration hours is larger than 0
                     if (teachingRemuneration > 0)
                     {
                         remunerationDTOs.Add(new RemunerationDTO
