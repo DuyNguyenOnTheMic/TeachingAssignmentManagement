@@ -221,6 +221,60 @@ namespace TeachingAssignmentManagement.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult GetRemunerationPartial(int termId)
+        {
+            ViewData["termId"] = termId;
+            return PartialView("_Remuneration");
+        }
+
+        [HttpGet]
+        public ActionResult GetRemunerationChart(int termId)
+        {
+            // Declare variables
+            term term = unitOfWork.TermRepository.GetTermByID(termId);
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
+
+            // Check if coefficient is null
+            if (coefficient == null)
+            {
+                return PartialView("_Error");
+            }
+
+            // Keep declaring variables
+            IEnumerable<LecturerRankDTO> lecturerRanks = unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
+            List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
+
+            foreach (LecturerRankDTO rank in lecturerRanks)
+            {
+                // Reset values in each loop
+                decimal teachingRemuneration = decimal.Zero;
+                bool isMissing = false;
+
+                // Check if lecturer have been assigned a rank
+                if (rank.Id != null)
+                {
+                    // Get classes in term of lecturer
+                    IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
+                    foreach (class_section item in query_classes)
+                    {
+                        teachingRemuneration += RemunerationController.CalculateRemuneration(item, coefficient);
+                    }
+                }
+                remunerationDTOs.Add(new RemunerationDTO
+                {
+                    StaffId = rank.StaffId,
+                    FullName = rank.FullName,
+                    AcademicDegreeRankId = rank.AcademicDegreeRankId,
+                    Remuneration = teachingRemuneration,
+                    Status = isMissing
+                });
+            }
+            return Json(remunerationDTOs, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
