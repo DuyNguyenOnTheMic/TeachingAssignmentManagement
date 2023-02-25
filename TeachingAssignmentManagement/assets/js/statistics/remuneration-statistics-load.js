@@ -32,6 +32,8 @@ $(function () {
 
 // Fetch data on form select change
 formData.change(function () {
+    var value = termSelect.val();
+
     // Display loading message while fetching data
     showLoading(statisticsDiv);
     fetchData(value);

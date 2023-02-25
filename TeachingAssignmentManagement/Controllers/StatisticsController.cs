@@ -237,12 +237,6 @@ namespace TeachingAssignmentManagement.Controllers
             int endYear = term.end_year;
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
 
-            // Check if coefficient is null
-            if (coefficient == null)
-            {
-                return PartialView("_Error");
-            }
-
             // Keep declaring variables
             IEnumerable<LecturerRankDTO> lecturerRanks = unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
             List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
