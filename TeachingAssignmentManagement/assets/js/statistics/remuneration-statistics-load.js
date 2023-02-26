@@ -25,7 +25,7 @@ $(function () {
 
     if (latestTermId) {
         // Get Partial View statistics data
-        fetchData(latestTermId);
+        fetchData(false, latestTermId);
     } else {
         showNoData(statisticsDiv, 'học kỳ');
     }
