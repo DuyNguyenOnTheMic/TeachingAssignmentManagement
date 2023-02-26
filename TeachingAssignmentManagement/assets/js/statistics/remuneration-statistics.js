@@ -8,11 +8,12 @@ var labelColor = '#6e6b7b',
 
 // Setup data
 var dataLoader = $('#data-loader'),
+    isLesson = dataLoader.data('islesson'),
     value = dataLoader.val(),
     url = rootUrl + 'Statistics/GetRemunerationData',
     titleText = 'Thống kê số giờ thù lao học kỳ ' + value,
     fileName = 'ThongKeSoGio_HK' + value,
-    data = { 'termId': value };
+    data = { isLesson, 'termId': value };
 
 // Detect Dark Layout
 if ($('html').hasClass('dark-layout')) {
