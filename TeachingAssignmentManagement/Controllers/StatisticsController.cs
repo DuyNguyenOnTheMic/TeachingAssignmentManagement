@@ -231,7 +231,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetRemunerationData(bool isLesson, int termId)
+        public ActionResult GetRemunerationData(bool isLesson, int termId, string majorId)
         {
             // Declare variables
             term term = unitOfWork.TermRepository.GetTermByID(termId);
