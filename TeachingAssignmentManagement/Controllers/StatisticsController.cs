@@ -237,8 +237,13 @@ namespace TeachingAssignmentManagement.Controllers
             int endYear = term.end_year;
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
             IEnumerable<LecturerRankDTO> lecturerRanks = unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
-            List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
+            List<RemunerationDTO> remunerationDTOs = GetRemunerationData(termId, coefficient, lecturerRanks);
+            return Json(remunerationDTOs.OrderByDescending(r => r.Remuneration), JsonRequestBehavior.AllowGet);
+        }
 
+        private List<RemunerationDTO> GetRemunerationData(int termId, coefficient coefficient, IEnumerable<LecturerRankDTO> lecturerRanks)
+        {
+            List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
             foreach (LecturerRankDTO rank in lecturerRanks)
             {
                 // Reset values in each loop
@@ -267,7 +272,7 @@ namespace TeachingAssignmentManagement.Controllers
                     }
                 }
             }
-            return Json(remunerationDTOs.OrderByDescending(r => r.Remuneration), JsonRequestBehavior.AllowGet);
+            return remunerationDTOs;
         }
 
         protected override void Dispose(bool disposing)
