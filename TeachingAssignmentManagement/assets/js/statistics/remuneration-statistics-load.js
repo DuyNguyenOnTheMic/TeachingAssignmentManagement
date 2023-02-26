@@ -8,7 +8,7 @@
 $(function () {
     var formSelect = $('.form-select');
 
-    // Set latest term and major value
+    // Set latest term value
     termSelect.val(latestTermId);
 
     // Populate select2
