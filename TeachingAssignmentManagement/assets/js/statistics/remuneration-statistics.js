@@ -167,6 +167,12 @@ $.ajax({
     }
 });
 
+function hoursSum(items, prop) {
+    return items.reduce(function (a, b) {
+        return a + b[prop];
+    }, 0);
+};
+
 function populateDatatable(data) {
     var dataTable;
     var exportColumns = isLessonCheck.is(":checked") ? [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] : [0, 2, 3, 4, 5, 6, 7];
