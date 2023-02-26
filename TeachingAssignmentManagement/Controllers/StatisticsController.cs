@@ -229,7 +229,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetRemunerationData(int termId)
+        public ActionResult GetRemunerationData(bool isLesson, int termId)
         {
             // Declare variables
             term term = unitOfWork.TermRepository.GetTermByID(termId);
@@ -237,11 +237,47 @@ namespace TeachingAssignmentManagement.Controllers
             int endYear = term.end_year;
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
             IEnumerable<LecturerRankDTO> lecturerRanks = unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
-            List<RemunerationDTO> remunerationDTOs = GetRemunerationData(termId, coefficient, lecturerRanks);
+            List<RemunerationDTO> remunerationDTOs = !isLesson
+                ? GetRemunerationData(termId, coefficient, lecturerRanks)
+                : GetRemunerationDataByLesson(termId, coefficient, lecturerRanks);
             return Json(remunerationDTOs.OrderByDescending(r => r.Remuneration), JsonRequestBehavior.AllowGet);
         }
 
         private List<RemunerationDTO> GetRemunerationData(int termId, coefficient coefficient, IEnumerable<LecturerRankDTO> lecturerRanks)
+        {
+            List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
+            foreach (LecturerRankDTO rank in lecturerRanks)
+            {
+                // Reset values in each loop
+                decimal teachingRemuneration = decimal.Zero;
+
+                // Check if lecturer have been assigned a rank
+                if (rank.Id != null)
+                {
+                    // Get classes in term of lecturer
+                    IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
+                    foreach (class_section item in query_classes)
+                    {
+                        teachingRemuneration += item.total_lesson.GetValueOrDefault(0) * RemunerationController.CalculateRemuneration(item, coefficient);
+                    }
+
+                    // Check if remuneration hours is larger than 0
+                    if (teachingRemuneration > 0)
+                    {
+                        remunerationDTOs.Add(new RemunerationDTO
+                        {
+                            StaffId = rank.StaffId,
+                            FullName = rank.FullName,
+                            AcademicDegreeRankId = rank.AcademicDegreeRankId,
+                            Remuneration = Math.Round(teachingRemuneration)
+                        });
+                    }
+                }
+            }
+            return remunerationDTOs;
+        }
+
+        private List<RemunerationDTO> GetRemunerationDataByLesson(int termId, coefficient coefficient, IEnumerable<LecturerRankDTO> lecturerRanks)
         {
             List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
             foreach (LecturerRankDTO rank in lecturerRanks)
