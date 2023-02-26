@@ -78,7 +78,11 @@ var chartOptions = {
             color: titleColor
         },
         datalabels: {
-            color: labelColor
+            color: labelColor,
+            display: function (context) {
+                // Only return positive values
+                return context.dataset.data[context.dataIndex] !== 0;
+            }
         },
         legend: {
             labels: {
@@ -197,6 +201,10 @@ $.ajax({
                     color: labelColor,
                     font: {
                         size: '9'
+                    },
+                    display: function (context) {
+                        // Only return positive values
+                        return context.dataset.data[context.dataIndex] !== 0;
                     }
                 };
             }
