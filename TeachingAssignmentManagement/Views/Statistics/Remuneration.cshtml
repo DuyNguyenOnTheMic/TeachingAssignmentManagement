@@ -26,9 +26,13 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-12 mb-1" id="termDiv">
+                                    <div class="col-lg-6 mb-1">
                                         <label class="form-label font-small-4" for="term">Học kỳ: </label>
                                         @Html.DropDownList("term", null, "---- Chọn học kỳ ----", htmlAttributes: new { @class = "form-data form-select" })
+                                    </div>
+                                    <div class="col-lg-3 mb-1">
+                                        <label class="form-label font-small-4" for="major">Ngành: </label>
+                                        @Html.DropDownList("major", null, "---- Chọn ngành ----", htmlAttributes: new { @class = "form-data form-select" })
                                     </div>
                                 </div>
                                 <div id="statisticsDiv">
