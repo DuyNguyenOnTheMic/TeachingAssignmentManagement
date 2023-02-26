@@ -222,8 +222,9 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetRemunerationChart(int value)
+        public ActionResult GetRemunerationChart(bool isLesson, int value)
         {
+            ViewData["isLesson"] = isLesson;
             ViewData["value"] = value;
             return PartialView("_Remuneration");
         }

@@ -1,4 +1,5 @@
 ﻿var termSelect = $('#term'),
+    isLessonCheck = $('#isLesson'),
     formData = $('.form-data'),
     rootUrl = $('#loader').data('request-url'),
     statisticsDiv = $('#statisticsDiv'),
@@ -32,16 +33,20 @@ $(function () {
 
 // Fetch data on form select change
 formData.change(function () {
-    var value = termSelect.val();
+    var isLesson,
+        value = termSelect.val();
+
+    // Check if user select unit lesson
+    isLessonCheck.is(":checked") ? isLesson = true : isLesson = false;
 
     // Display loading message while fetching data
     showLoading(statisticsDiv);
-    fetchData(value);
+    fetchData(isLesson, value);
 });
 
-function fetchData(value) {
+function fetchData(isLesson, value) {
     var url = rootUrl + 'Statistics/GetRemunerationChart';
-    $.get(url, { value }, function (data) {
+    $.get(url, { isLesson, value }, function (data) {
         // Populate statistics data
         statisticsDiv.html(data);
     });
