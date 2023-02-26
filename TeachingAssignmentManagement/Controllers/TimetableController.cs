@@ -383,7 +383,7 @@ namespace TeachingAssignmentManagement.Controllers
                         type = ToNullableString(type),
                         student_class_id = ToNullableString(studentClassId),
                         minimum_student = ToNullableInt(minimumStudent),
-                        total_lesson = ToNullableInt(totalLesson),
+                        total_lesson = ToInt(totalLesson),
                         day = ToNullableString(day),
                         start_lesson = ToInt(startLesson),
                         lesson_number = ToInt(lessonNumber),

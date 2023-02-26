@@ -251,7 +251,7 @@ namespace TeachingAssignmentManagement.Controllers
                     IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
                     foreach (class_section item in query_classes)
                     {
-                        teachingRemuneration += item.total_lesson.GetValueOrDefault(1) * RemunerationController.CalculateRemuneration(item, coefficient);
+                        teachingRemuneration += item.total_lesson * RemunerationController.CalculateRemuneration(item, coefficient);
                     }
 
                     // Check if remuneration hours is larger than 0

@@ -91,7 +91,7 @@
           <Property Name="type" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="student_class_id" Type="varchar(max)" />
           <Property Name="minimum_student" Type="int" />
-          <Property Name="total_lesson" Type="int" />
+          <Property Name="total_lesson" Type="int" Nullable="false" />
           <Property Name="day" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="start_lesson" Type="int" Nullable="false" />
           <Property Name="lesson_number" Type="int" Nullable="false" />
@@ -99,7 +99,7 @@
           <Property Name="student_number" Type="int" />
           <Property Name="free_slot" Type="int" />
           <Property Name="state" Type="nvarchar" MaxLength="255" />
-          <Property Name="learn_week" Type="nvarchar" MaxLength="255" />
+          <Property Name="learn_week" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="day_2" Type="int" Nullable="false" />
           <Property Name="start_lesson_2" Type="int" Nullable="false" />
           <Property Name="student_registered_number" Type="int" />
@@ -603,7 +603,7 @@
           <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="student_class_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="minimum_student" Type="Int32" />
-          <Property Name="total_lesson" Type="Int32" />
+          <Property Name="total_lesson" Type="Int32" Nullable="false" />
           <Property Name="day" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="start_lesson" Type="Int32" Nullable="false" />
           <Property Name="lesson_number" Type="Int32" Nullable="false" />
@@ -611,7 +611,7 @@
           <Property Name="student_number" Type="Int32" />
           <Property Name="free_slot" Type="Int32" />
           <Property Name="state" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="learn_week" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="learn_week" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="day_2" Type="Int32" Nullable="false" />
           <Property Name="start_lesson_2" Type="Int32" Nullable="false" />
           <Property Name="student_registered_number" Type="Int32" />
