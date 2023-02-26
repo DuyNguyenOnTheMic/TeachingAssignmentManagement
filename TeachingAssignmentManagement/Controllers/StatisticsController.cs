@@ -284,7 +284,12 @@ namespace TeachingAssignmentManagement.Controllers
             foreach (LecturerRankDTO rank in lecturerRanks)
             {
                 // Reset values in each loop
-                decimal teachingRemuneration = decimal.Zero;
+                decimal teachingRemuneration = decimal.Zero,
+                        sumLesson1 = decimal.Zero,
+                        sumLesson4 = decimal.Zero,
+                        sumLesson7 = decimal.Zero,
+                        sumLesson10 = decimal.Zero,
+                        sumLesson13 = decimal.Zero;
 
                 // Check if lecturer have been assigned a rank
                 if (rank.Id != null)
@@ -293,7 +298,15 @@ namespace TeachingAssignmentManagement.Controllers
                     IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
                     foreach (class_section item in query_classes)
                     {
-                        teachingRemuneration += item.total_lesson.GetValueOrDefault(0) * RemunerationController.CalculateRemuneration(item, coefficient);
+                        decimal remunerationCoefficient = RemunerationController.CalculateRemuneration(item, coefficient);
+                        int totalLesson = item.total_lesson.GetValueOrDefault(0);
+                        decimal classRemuneration = totalLesson * remunerationCoefficient;
+                        teachingRemuneration += classRemuneration;
+                        sumLesson1 += item.start_lesson_2 == 1 ? classRemuneration : decimal.Zero;
+                        sumLesson4 += item.start_lesson_2 == 4 ? classRemuneration : decimal.Zero;
+                        sumLesson7 += item.start_lesson_2 == 7 ? classRemuneration : decimal.Zero;
+                        sumLesson10 += item.start_lesson_2 == 10 ? classRemuneration : decimal.Zero;
+                        sumLesson13 += item.start_lesson_2 == 13 ? classRemuneration : decimal.Zero;
                     }
 
                     // Check if remuneration hours is larger than 0
@@ -304,7 +317,12 @@ namespace TeachingAssignmentManagement.Controllers
                             StaffId = rank.StaffId,
                             FullName = rank.FullName,
                             AcademicDegreeRankId = rank.AcademicDegreeRankId,
-                            Remuneration = Math.Round(teachingRemuneration)
+                            Remuneration = Math.Round(teachingRemuneration),
+                            SumLesson1 = sumLesson1,
+                            SumLesson4 = sumLesson4,
+                            SumLesson7 = sumLesson7,
+                            SumLesson10 = sumLesson10,
+                            SumLesson13 = sumLesson13
                         });
                     }
                 }
