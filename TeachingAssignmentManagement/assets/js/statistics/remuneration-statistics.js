@@ -78,11 +78,7 @@ var chartOptions = {
             color: titleColor
         },
         datalabels: {
-            color: labelColor,
-            display: function (context) {
-                // Only return positive values
-                return context.dataset.data[context.dataIndex] !== 0;
-            }
+            color: labelColor
         },
         legend: {
             labels: {
