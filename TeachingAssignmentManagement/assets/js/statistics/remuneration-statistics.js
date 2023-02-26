@@ -167,12 +167,6 @@ $.ajax({
     }
 });
 
-function hoursSum(items, prop) {
-    return items.reduce(function (a, b) {
-        return a + b[prop];
-    }, 0);
-};
-
 function populateDatatable(data) {
     var dataTable;
     var exportColumns = isLessonCheck.is(":checked") ? [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] : [0, 2, 3, 4, 5, 6, 7];
@@ -297,11 +291,3 @@ function populateDatatable(data) {
 $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
     $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
 });
-
-function setVisibleColumn(state) {
-    var table = $('#tblStatistics').DataTable();
-    for (var i = 8; i <= 12; i++) {
-        table.column(i).visible(state, state);
-    }
-    table.columns.adjust().draw(state); // adjust column sizing and redraw
-}
