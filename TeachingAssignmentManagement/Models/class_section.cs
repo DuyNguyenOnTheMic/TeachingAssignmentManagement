@@ -20,7 +20,7 @@ namespace TeachingAssignmentManagement.Models
         public string type { get; set; }
         public string student_class_id { get; set; }
         public Nullable<int> minimum_student { get; set; }
-        public int total_lesson { get; set; }
+        public Nullable<int> total_lesson { get; set; }
         public string day { get; set; }
         public int start_lesson { get; set; }
         public int lesson_number { get; set; }
