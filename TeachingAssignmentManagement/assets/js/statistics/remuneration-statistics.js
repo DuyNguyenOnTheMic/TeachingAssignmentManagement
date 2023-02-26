@@ -108,25 +108,98 @@ $.ajax({
                 return e.Remuneration;
             });
 
-            // Fetch chart data
-            chartData = {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Số giờ giảng',
-                        data: totalLessons,
-                        backgroundColor: 'rgba(115, 103, 240, 0.8)',
-                        borderColor: 'transparent',
-                        borderWidth: 1,
-                        borderRadius: 3,
-                        datalabels: {
-                            anchor: 'end',
-                            align: 'start',
-                            offset: -30
+            if (isLesson == 'False') {
+                // Fetch chart data
+                chartData = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Số giờ giảng',
+                            data: totalLessons,
+                            backgroundColor: 'rgba(115, 103, 240, 0.8)',
+                            borderColor: 'transparent',
+                            borderWidth: 1,
+                            borderRadius: 3,
+                            datalabels: {
+                                anchor: 'end',
+                                align: 'start',
+                                offset: -30
+                            }
                         }
+                    ]
+                };
+            } else {
+                // Get lesson data mapping
+                var sumLessons1 = response.map(function (e) {
+                    return e.SumLesson1;
+                });
+                var sumLessons4 = response.map(function (e) {
+                    return e.SumLesson4;
+                });
+                var sumLessons7 = response.map(function (e) {
+                    return e.SumLesson7;
+                });
+                var sumLessons10 = response.map(function (e) {
+                    return e.SumLesson10;
+                });
+                var sumLessons13 = response.map(function (e) {
+                    return e.SumLesson13;
+                });
+
+                // Fetch lessons chart data
+                chartData = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Ca 1',
+                            data: sumLessons1,
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1,
+                            borderRadius: 3
+                        },
+                        {
+                            label: 'Ca 2',
+                            data: sumLessons4,
+                            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1,
+                            borderRadius: 3
+                        },
+                        {
+                            label: 'Ca 3',
+                            data: sumLessons7,
+                            backgroundColor: 'rgba(255, 205, 86, 0.5)',
+                            borderColor: 'rgba(255, 205, 86, 1)',
+                            borderWidth: 1,
+                            borderRadius: 3
+                        },
+                        {
+                            label: 'Ca 4',
+                            data: sumLessons10,
+                            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1,
+                            borderRadius: 3
+                        },
+                        {
+                            label: 'Ca 5',
+                            data: sumLessons13,
+                            backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                            borderColor: 'rgba(153, 102, 255, 1)',
+                            borderWidth: 1,
+                            borderRadius: 3
+                        }
+                    ]
+                };
+
+                chartOptions.plugins.datalabels = {
+                    color: labelColor,
+                    font: {
+                        size: '9'
                     }
-                ]
-            };
+                };
+            }
 
             chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ: ' + hoursSum(response, 'Remuneration');
 
@@ -137,6 +210,39 @@ $.ajax({
                 options: chartOptions,
                 plugins: [ChartDataLabels]
             });
+
+            // Get on legend click event
+            chart.options.plugins.legend.onClick = function (event, legendItem, legend) {
+                const index = legendItem.datasetIndex;
+                const ci = legend.chart;
+                if (ci.isDatasetVisible(index)) {
+                    ci.hide(index);
+                    legendItem.hidden = true;
+                } else {
+                    ci.show(index);
+                    legendItem.hidden = false;
+                }
+
+                var sum = 0;
+                var array = [];
+                // Loop through each legend item to sum total hours
+                for (var i = 0; i < 5; i++) {
+                    if (ci.isDatasetVisible(i)) {
+                        const dataSet = chart.data.datasets[i].data;
+                        sum += dataSet.reduce((a, b) => a + b, 0);
+                        array.push(dataSet);
+                    }
+                }
+                // Update lecturer count
+                var lecturerCount = 0;
+                if (array.length) {
+                    lecturerCount = array.reduce((r, a) => r.map((b, i) => a[i] + b)).filter(x => x > 0).length;
+                }
+
+                // Update chart title
+                chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + lecturerCount + ' / Tổng số giờ: ' + sum;
+                chart.update();
+            }
 
             // Detect Dark Layout and change color
             $('.nav-link-style').on('click', function () {
@@ -298,3 +404,11 @@ function populateDatatable(data) {
 $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
     $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
 });
+
+function setVisibleColumn(state) {
+    var table = $('#tblStatistics').DataTable();
+    for (var i = 8; i <= 12; i++) {
+        table.column(i).visible(state, state);
+    }
+    table.columns.adjust().draw(state); // adjust column sizing and redraw
+}
