@@ -318,11 +318,11 @@ namespace TeachingAssignmentManagement.Controllers
                             FullName = rank.FullName,
                             AcademicDegreeRankId = rank.AcademicDegreeRankId,
                             Remuneration = Math.Round(teachingRemuneration),
-                            SumLesson1 = sumLesson1,
-                            SumLesson4 = sumLesson4,
-                            SumLesson7 = sumLesson7,
-                            SumLesson10 = sumLesson10,
-                            SumLesson13 = sumLesson13
+                            SumLesson1 = Math.Round(sumLesson1),
+                            SumLesson4 = Math.Round(sumLesson4),
+                            SumLesson7 = Math.Round(sumLesson7),
+                            SumLesson10 = Math.Round(sumLesson10),
+                            SumLesson13 = Math.Round(sumLesson13)
                         });
                     }
                 }
