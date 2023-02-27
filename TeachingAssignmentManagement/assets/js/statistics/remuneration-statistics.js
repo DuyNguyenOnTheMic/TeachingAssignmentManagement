@@ -78,7 +78,7 @@ var chartOptions = {
             color: titleColor
         },
         datalabels: {
-            color: labelColor
+            color: '#fff'
         },
         legend: {
             labels: {
@@ -119,12 +119,7 @@ $.ajax({
                             backgroundColor: 'rgba(115, 103, 240, 0.8)',
                             borderColor: 'transparent',
                             borderWidth: 1,
-                            borderRadius: 3,
-                            datalabels: {
-                                anchor: 'end',
-                                align: 'start',
-                                offset: -30
-                            }
+                            borderRadius: 3
                         }
                     ]
                 };
@@ -195,9 +190,6 @@ $.ajax({
 
                 chartOptions.plugins.datalabels = {
                     color: labelColor,
-                    font: {
-                        size: '9'
-                    },
                     display: function (context) {
                         // Only return positive values
                         return context.dataset.data[context.dataIndex] !== 0;
@@ -265,7 +257,7 @@ $.ajax({
                 }
                 chart.options.plugins.subtitle.color = titleColor;
                 chart.options.plugins.title.color = titleColor;
-                chart.options.plugins.datalabels.color = titleColor;
+                chart.options.plugins.datalabels.color = isLessonCheck.is(":checked") ? titleColor : '#fff';
                 chart.options.plugins.legend.labels.color = textColor;
                 chart.options.scales.x.ticks.color = textColor;
                 chart.options.scales.y.ticks.color = textColor;
