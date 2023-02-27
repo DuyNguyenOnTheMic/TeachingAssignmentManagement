@@ -107,7 +107,7 @@ $.ajax({
 
             var chartData;
             var totalLessons = response.map(function (e) {
-                return e.Remuneration;
+                return e.RemunerationHours;
             });
 
             if (isLesson == 'False') {
@@ -199,7 +199,7 @@ $.ajax({
                 };
             }
 
-            chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ: ' + hoursSum(response, 'Remuneration');
+            chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ: ' + hoursSum(response, 'RemunerationHours');
 
             // Create the chart
             var chart = new Chart(ctx, {

@@ -244,7 +244,7 @@ namespace TeachingAssignmentManagement.Controllers
             List<RemunerationDTO> remunerationDTOs = !isLesson
                 ? GetRemunerationData(termId, majorId, coefficient, lecturerRanks)
                 : GetRemunerationDataByLesson(termId, majorId, coefficient, lecturerRanks);
-            return Json(remunerationDTOs.OrderByDescending(r => r.Remuneration), JsonRequestBehavior.AllowGet);
+            return Json(remunerationDTOs.OrderByDescending(r => r.RemunerationHours), JsonRequestBehavior.AllowGet);
         }
 
         private List<RemunerationDTO> GetRemunerationData(int termId, string majorId, coefficient coefficient, IEnumerable<LecturerRankDTO> lecturerRanks)
@@ -273,7 +273,7 @@ namespace TeachingAssignmentManagement.Controllers
                             StaffId = rank.StaffId,
                             FullName = rank.FullName,
                             AcademicDegreeRankId = rank.AcademicDegreeRankId,
-                            Remuneration = Math.Round(teachingRemuneration)
+                            RemunerationHours = Math.Round(teachingRemuneration)
                         });
                     }
                 }
@@ -320,7 +320,7 @@ namespace TeachingAssignmentManagement.Controllers
                             StaffId = rank.StaffId,
                             FullName = rank.FullName,
                             AcademicDegreeRankId = rank.AcademicDegreeRankId,
-                            Remuneration = Math.Round(teachingRemuneration),
+                            RemunerationHours = Math.Round(teachingRemuneration),
                             SumLesson1 = Math.Round(sumLesson1),
                             SumLesson4 = Math.Round(sumLesson4),
                             SumLesson7 = Math.Round(sumLesson7),
