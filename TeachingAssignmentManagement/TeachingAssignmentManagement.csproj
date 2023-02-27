@@ -481,7 +481,6 @@
     <Content Include="app-assets\fonts\feather\fonts\feather.svg" />
     <Content Include="app-assets\fonts\feather\iconfont.css" />
     <Content Include="app-assets\vendors\js\forms\cleave\cleave.min.js" />
-    <Content Include="app-assets\vendors\js\tables\datatable\dataTables.checkboxes.min.js" />
     <Content Include="assets\flags\4x3\us.svg" />
     <Content Include="assets\flags\4x3\vn.svg" />
     <Content Include="app-assets\fonts\font-awesome\css\font-awesome.css" />
