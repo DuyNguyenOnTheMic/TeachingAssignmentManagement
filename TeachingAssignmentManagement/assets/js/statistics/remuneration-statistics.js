@@ -9,11 +9,13 @@ var labelColor = '#6e6b7b',
 // Setup data
 var dataLoader = $('#data-loader'),
     isLesson = dataLoader.data('islesson'),
+    majorId = dataLoader.data('major'),
+    majorAbb = dataLoader.data('majorabb'),
     value = dataLoader.val(),
     url = rootUrl + 'Statistics/GetRemunerationData',
-    titleText = 'Thống kê số giờ thù lao học kỳ ' + value,
+    titleText = 'Thống kê số giờ học kỳ ' + value + ' ngành ' + majorAbb,
     fileName = 'ThongKeSoGio_HK' + value,
-    data = { isLesson, 'termId': value };
+    data = { isLesson, 'termId': value, majorId };
 
 // Detect Dark Layout
 if ($('html').hasClass('dark-layout')) {
