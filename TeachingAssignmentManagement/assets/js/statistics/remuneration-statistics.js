@@ -267,7 +267,7 @@ $.ajax({
             });
 
             // populate table for viewing statistics
-            // populateDatatable(response);
+            populateDatatable(response);
         }
     }
 });
@@ -280,30 +280,22 @@ function hoursSum(items, prop) {
 
 function populateDatatable(data) {
     var dataTable;
-    var exportColumns = isLessonCheck.is(":checked") ? [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] : [0, 2, 3, 4, 5, 6, 7];
+    var exportColumns = isLessonCheck.is(":checked") ? ':visible' : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     // Populate statistics table
     dataTable = $('#tblStatistics').DataTable(
         {
             columns: [
                 { 'data': '', defaultContent: '' },
-                {
-                    'data': 'Key',
-                    'render': function (data) {
-                        return "<button type='button' class='btn btn-icon btn-icon rounded-circle btn-success waves-effect waves-float waves-light p-25 viewInfo' title='Xem môn học' data-id='" + data + "'><i class='feather feather-plus'></i></button>";
-                    }
-                },
-                { 'data': 'staff_id' },
-                { 'data': 'full_name' },
-                { 'data': 'lecturer_type' },
-                { 'data': 'subject_count' },
-                { 'data': 'class_count' },
-                { 'data': 'sum' },
-                { 'data': 'sumLesson1', defaultContent: '' },
-                { 'data': 'sumLesson4', defaultContent: '' },
-                { 'data': 'sumLesson7', defaultContent: '' },
-                { 'data': 'sumLesson10', defaultContent: '' },
-                { 'data': 'sumLesson13', defaultContent: '' }
+                { 'data': 'StaffId' },
+                { 'data': 'FullName' },
+                { 'data': 'AcademicDegreeRankId' },
+                { 'data': 'RemunerationHours' },
+                { 'data': 'SumLesson1', defaultContent: '' },
+                { 'data': 'SumLesson4', defaultContent: '' },
+                { 'data': 'SumLesson7', defaultContent: '' },
+                { 'data': 'SumLesson10', defaultContent: '' },
+                { 'data': 'SumLesson13', defaultContent: '' }
             ],
             data: data,
             columnDefs: [
@@ -313,25 +305,9 @@ function populateDatatable(data) {
                     width: '1%',
                     targets: [0, 1]
                 },
-                {
-                    // User type
-                    targets: 4,
-                    render: function (data) {
-                        var $status = data;
-                        if ($status) {
-                            var typeBadgeObj = {
-                                'CH': { title: 'Cơ hữu', class: 'badge-light-success' },
-                                'TG': { title: 'Thỉnh giảng', class: 'badge-light-warning' }
-                            };
-                            return '<span class="badge rounded-pill ' + typeBadgeObj[$status].class + ' text-capitalized">' + typeBadgeObj[$status].title + '</span>';
-                        } else {
-                            return null;
-                        }
-                    }
-                },
-                { className: 'text-center', target: [0, 1, 4, 5, 6, 7, 8, 9, 10, 11, 12] }
+                { className: 'text-center', target: [0, 3, 4, 5, 6, 7, 8, 9] }
             ],
-            order: [[7, 'desc']],
+            order: [[4, 'desc']],
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
             displayLength: 10,
             lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "tất cả"]],
