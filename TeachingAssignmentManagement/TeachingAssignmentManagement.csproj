@@ -1160,6 +1160,7 @@
     <Content Include="assets\js\price-coefficient\price-coefficient.js" />
     <Content Include="assets\js\price-coefficient\price-coefficient.min.js" />
     <Content Include="assets\js\remuneration\remuneration-load.js" />
+    <Content Include="assets\js\remuneration\remuneration-load.min.js" />
     <Content Include="assets\js\remuneration\remuneration.js" />
     <Content Include="assets\js\statistics\remuneration-statistics-load.js" />
     <Content Include="assets\js\statistics\remuneration-statistics.js" />
