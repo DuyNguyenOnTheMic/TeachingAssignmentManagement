@@ -223,10 +223,12 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetRemunerationChart(bool isLesson, int value)
+        public ActionResult GetRemunerationChart(bool isLesson, int value, string major)
         {
             ViewData["isLesson"] = isLesson;
             ViewData["value"] = value;
+            ViewData["major"] = major;
+            ViewData["majorAbb"] = major != "-1" ? unitOfWork.MajorRepository.GetMajorByID(major).abbreviation : "tất cả";
             return PartialView("_Remuneration");
         }
 
