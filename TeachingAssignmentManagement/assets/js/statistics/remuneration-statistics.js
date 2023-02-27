@@ -381,7 +381,7 @@ $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
 
 function setVisibleColumn(state) {
     var table = $('#tblStatistics').DataTable();
-    for (var i = 8; i <= 12; i++) {
+    for (var i = 5; i <= 9; i++) {
         table.column(i).visible(state, state);
     }
     table.columns.adjust().draw(state); // adjust column sizing and redraw
