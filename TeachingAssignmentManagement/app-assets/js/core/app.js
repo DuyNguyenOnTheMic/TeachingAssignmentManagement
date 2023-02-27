@@ -451,9 +451,7 @@ window.colors = {
     });
 
     $(window).on('pageshow', function (e) {
-        var historyTraversal = event.persisted ||
-            (typeof window.performance != "undefined" &&
-                window.performance.navigation.type === 2);
+        var historyTraversal = e.originalEvent.persisted || (typeof window.performance != "undefined" && window.performance.getEntriesByType("navigation")[0].type === "back_forward");
         if (historyTraversal) {
             // Handle page restore.
             window.location.reload();
