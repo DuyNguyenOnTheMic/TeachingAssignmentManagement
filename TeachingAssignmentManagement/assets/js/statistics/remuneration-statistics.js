@@ -359,7 +359,9 @@ function populateDatatable(data) {
                     }
                 }
             ],
-
+            initComplete: function () {
+                isLessonCheck.is(":checked") ? setVisibleColumn(true) : setVisibleColumn(false);
+            },
             language: {
                 'url': rootUrl + 'app-assets/language/datatables/vi.json'
             }
