@@ -242,12 +242,12 @@ namespace TeachingAssignmentManagement.Controllers
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
             IEnumerable<LecturerRankDTO> lecturerRanks = unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
             List<RemunerationDTO> remunerationDTOs = !isLesson
-                ? GetRemunerationData(termId, coefficient, lecturerRanks)
-                : GetRemunerationDataByLesson(termId, coefficient, lecturerRanks);
+                ? GetRemunerationData(termId, majorId, coefficient, lecturerRanks)
+                : GetRemunerationDataByLesson(termId, majorId, coefficient, lecturerRanks);
             return Json(remunerationDTOs.OrderByDescending(r => r.Remuneration), JsonRequestBehavior.AllowGet);
         }
 
-        private List<RemunerationDTO> GetRemunerationData(int termId, coefficient coefficient, IEnumerable<LecturerRankDTO> lecturerRanks)
+        private List<RemunerationDTO> GetRemunerationData(int termId, string majorId, coefficient coefficient, IEnumerable<LecturerRankDTO> lecturerRanks)
         {
             List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
             foreach (LecturerRankDTO rank in lecturerRanks)
@@ -281,7 +281,7 @@ namespace TeachingAssignmentManagement.Controllers
             return remunerationDTOs;
         }
 
-        private List<RemunerationDTO> GetRemunerationDataByLesson(int termId, coefficient coefficient, IEnumerable<LecturerRankDTO> lecturerRanks)
+        private List<RemunerationDTO> GetRemunerationDataByLesson(int termId, string majorId, coefficient coefficient, IEnumerable<LecturerRankDTO> lecturerRanks)
         {
             List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
             foreach (LecturerRankDTO rank in lecturerRanks)
