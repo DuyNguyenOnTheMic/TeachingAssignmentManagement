@@ -1162,6 +1162,7 @@
     <Content Include="assets\js\remuneration\remuneration-load.js" />
     <Content Include="assets\js\remuneration\remuneration-load.min.js" />
     <Content Include="assets\js\remuneration\remuneration.js" />
+    <Content Include="assets\js\remuneration\remuneration.min.js" />
     <Content Include="assets\js\statistics\remuneration-statistics-load.js" />
     <Content Include="assets\js\statistics\remuneration-statistics.js" />
     <Content Include="assets\js\subject\subject-load.js" />
