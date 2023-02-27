@@ -61,7 +61,7 @@ namespace TeachingAssignmentManagement.Controllers
                     decimal unitPriceByLevel;
 
                     // Get classes in term of lecturer
-                    IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
+                    IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, "-1", rank.LecturerId);
                     foreach (class_section item in query_classes)
                     {
                         // Get unit price for lecturer rank

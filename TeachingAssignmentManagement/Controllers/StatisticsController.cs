@@ -259,7 +259,7 @@ namespace TeachingAssignmentManagement.Controllers
                 if (rank.Id != null)
                 {
                     // Get classes in term of lecturer
-                    IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
+                    IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, rank.LecturerId);
                     foreach (class_section item in query_classes)
                     {
                         teachingRemuneration += item.total_lesson.GetValueOrDefault(0) * RemunerationController.CalculateRemuneration(item, coefficient);
@@ -298,7 +298,7 @@ namespace TeachingAssignmentManagement.Controllers
                 if (rank.Id != null)
                 {
                     // Get classes in term of lecturer
-                    IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
+                    IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, rank.LecturerId);
                     foreach (class_section item in query_classes)
                     {
                         decimal remunerationCoefficient = RemunerationController.CalculateRemuneration(item, coefficient);
