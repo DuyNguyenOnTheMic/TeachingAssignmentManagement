@@ -19,8 +19,8 @@
             }
         </select>
         <select class="form-select" id="lecturerType" name="lecturerType" multiple aria-label="Lọc loại giảng viên">
-            <option value="CH">Cơ hữu</option>
-            <option value="TG">Thỉnh giảng</option>
+            <option value="@MyConstants.FacultyMemberType">Cơ hữu</option>
+            <option value="@MyConstants.visitingLecturerType">Thỉnh giảng</option>
         </select>
         <select class="form-select" id="lessonFilter" name="lessonFilter" multiple aria-label="Lọc ca giảng">
             <option value="1" selected>Ca 1</option>
@@ -80,7 +80,7 @@
                                 <td @dividerClass data-day="@day" data-startlesson="@startLesson">
                                     @foreach (var item in classes)
                                     {
-                                        string cardClass = Constants.TheoreticalClassType == item.Type ? "btn-success" : "btn-warning";
+                                        string cardClass = MyConstants.TheoreticalClassType == item.Type ? "btn-success" : "btn-warning";
                                         <button class="btn @cardClass text-nowrap class-card my-25 p-25" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>@item.ClassSectionId</b><br /><b>Tên HP: </b>@item.Subject.name<br /><b>Ngành: </b>@item.MajorName<br /><b>Phòng: </b>@item.RoomId">@item.Subject.name</button>
                                     }
                                 </td>
