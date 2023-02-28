@@ -240,7 +240,7 @@ namespace TeachingAssignmentManagement.Controllers
             int startYear = term.start_year;
             int endYear = term.end_year;
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
-            IEnumerable<lecturer> lecturers = unitOfWork.UserRepository.GetFacultyMembers(termId, majorId);
+            IEnumerable<lecturer> lecturers = unitOfWork.UserRepository.GetFacultyMembersInTerm(termId, majorId).ToList();
 
             // Check if this term and major have data
             bool haveData = unitOfWork.ClassSectionRepository.CheckClassesInTermMajor(termId, majorId);
