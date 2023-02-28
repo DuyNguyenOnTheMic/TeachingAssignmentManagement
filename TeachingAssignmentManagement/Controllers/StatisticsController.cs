@@ -277,7 +277,6 @@ namespace TeachingAssignmentManagement.Controllers
                     {
                         StaffId = lecturer.staff_id,
                         FullName = lecturer.full_name,
-                        AcademicDegreeRankId = "hehe",
                         OriginalHours = originalHours,
                         RemunerationHours = Math.Round(remunerationHours)
                     });
@@ -292,6 +291,7 @@ namespace TeachingAssignmentManagement.Controllers
             foreach (lecturer lecturer in lecturers)
             {
                 // Reset values in each loop
+                int? originalHours = 0;
                 decimal remunerationHours = decimal.Zero,
                         sumLesson1 = decimal.Zero,
                         sumLesson4 = decimal.Zero,
@@ -306,6 +306,7 @@ namespace TeachingAssignmentManagement.Controllers
                     decimal remunerationCoefficient = RemunerationController.CalculateRemuneration(item, coefficient);
                     int totalLesson = item.total_lesson.GetValueOrDefault(0);
                     decimal classRemuneration = totalLesson * remunerationCoefficient;
+                    originalHours += totalLesson;
                     remunerationHours += classRemuneration;
                     sumLesson1 += item.start_lesson_2 == 1 ? classRemuneration : decimal.Zero;
                     sumLesson4 += item.start_lesson_2 == 4 ? classRemuneration : decimal.Zero;
@@ -321,7 +322,7 @@ namespace TeachingAssignmentManagement.Controllers
                     {
                         StaffId = lecturer.staff_id,
                         FullName = lecturer.full_name,
-                        AcademicDegreeRankId = "hehe",
+                        OriginalHours = originalHours,
                         RemunerationHours = Math.Round(remunerationHours),
                         SumLesson1 = Math.Round(sumLesson1),
                         SumLesson4 = Math.Round(sumLesson4),
