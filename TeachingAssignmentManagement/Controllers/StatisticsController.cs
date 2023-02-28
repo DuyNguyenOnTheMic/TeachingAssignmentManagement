@@ -240,51 +240,47 @@ namespace TeachingAssignmentManagement.Controllers
             int startYear = term.start_year;
             int endYear = term.end_year;
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
-            IEnumerable<LecturerRankDTO> lecturerRanks = unitOfWork.LecturerRankRepository.GetLecturerRanksInTerm(termId);
+            IEnumerable<lecturer> lecturerRanks = unitOfWork.UserRepository.GetFacultyMembersInTerm(termId, majorId);
             List<RemunerationDTO> remunerationDTOs = !isLesson
                 ? GetRemunerationData(termId, majorId, coefficient, lecturerRanks)
                 : GetRemunerationDataByLesson(termId, majorId, coefficient, lecturerRanks);
             return Json(remunerationDTOs.OrderByDescending(r => r.RemunerationHours), JsonRequestBehavior.AllowGet);
         }
 
-        private List<RemunerationDTO> GetRemunerationData(int termId, string majorId, coefficient coefficient, IEnumerable<LecturerRankDTO> lecturerRanks)
+        private List<RemunerationDTO> GetRemunerationData(int termId, string majorId, coefficient coefficient, IEnumerable<lecturer> lecturerRanks)
         {
             List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
-            foreach (LecturerRankDTO rank in lecturerRanks)
+            foreach (var rank in lecturerRanks)
             {
                 // Reset values in each loop
                 decimal remunerationHours = decimal.Zero;
 
-                // Check if lecturer have been assigned a rank
-                if (rank.Id != null)
+                // Get classes in term of lecturer
+                IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, rank.id);
+                foreach (class_section item in query_classes)
                 {
-                    // Get classes in term of lecturer
-                    IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, rank.LecturerId);
-                    foreach (class_section item in query_classes)
-                    {
-                        remunerationHours += item.total_lesson.GetValueOrDefault(0) * RemunerationController.CalculateRemuneration(item, coefficient);
-                    }
+                    remunerationHours += item.total_lesson.GetValueOrDefault(0) * RemunerationController.CalculateRemuneration(item, coefficient);
+                }
 
-                    // Check if remuneration hours is larger than 0
-                    if (remunerationHours > 0)
+                // Check if remuneration hours is larger than 0
+                if (remunerationHours > 0)
+                {
+                    remunerationDTOs.Add(new RemunerationDTO
                     {
-                        remunerationDTOs.Add(new RemunerationDTO
-                        {
-                            StaffId = rank.StaffId,
-                            FullName = rank.FullName,
-                            AcademicDegreeRankId = rank.AcademicDegreeRankId,
-                            RemunerationHours = Math.Round(remunerationHours)
-                        });
-                    }
+                        StaffId = rank.staff_id,
+                        FullName = rank.full_name,
+                        AcademicDegreeRankId = "hehe",
+                        RemunerationHours = Math.Round(remunerationHours)
+                    });
                 }
             }
             return remunerationDTOs;
         }
 
-        private List<RemunerationDTO> GetRemunerationDataByLesson(int termId, string majorId, coefficient coefficient, IEnumerable<LecturerRankDTO> lecturerRanks)
+        private List<RemunerationDTO> GetRemunerationDataByLesson(int termId, string majorId, coefficient coefficient, IEnumerable<lecturer> lecturerRanks)
         {
             List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
-            foreach (LecturerRankDTO rank in lecturerRanks)
+            foreach (var rank in lecturerRanks)
             {
                 // Reset values in each loop
                 decimal remunerationHours = decimal.Zero,
@@ -294,40 +290,36 @@ namespace TeachingAssignmentManagement.Controllers
                         sumLesson10 = decimal.Zero,
                         sumLesson13 = decimal.Zero;
 
-                // Check if lecturer have been assigned a rank
-                if (rank.Id != null)
+                // Get classes in term of lecturer
+                IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, rank.id);
+                foreach (class_section item in query_classes)
                 {
-                    // Get classes in term of lecturer
-                    IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, rank.LecturerId);
-                    foreach (class_section item in query_classes)
-                    {
-                        decimal remunerationCoefficient = RemunerationController.CalculateRemuneration(item, coefficient);
-                        int totalLesson = item.total_lesson.GetValueOrDefault(0);
-                        decimal classRemuneration = totalLesson * remunerationCoefficient;
-                        remunerationHours += classRemuneration;
-                        sumLesson1 += item.start_lesson_2 == 1 ? classRemuneration : decimal.Zero;
-                        sumLesson4 += item.start_lesson_2 == 4 ? classRemuneration : decimal.Zero;
-                        sumLesson7 += item.start_lesson_2 == 7 ? classRemuneration : decimal.Zero;
-                        sumLesson10 += item.start_lesson_2 == 10 ? classRemuneration : decimal.Zero;
-                        sumLesson13 += item.start_lesson_2 == 13 ? classRemuneration : decimal.Zero;
-                    }
+                    decimal remunerationCoefficient = RemunerationController.CalculateRemuneration(item, coefficient);
+                    int totalLesson = item.total_lesson.GetValueOrDefault(0);
+                    decimal classRemuneration = totalLesson * remunerationCoefficient;
+                    remunerationHours += classRemuneration;
+                    sumLesson1 += item.start_lesson_2 == 1 ? classRemuneration : decimal.Zero;
+                    sumLesson4 += item.start_lesson_2 == 4 ? classRemuneration : decimal.Zero;
+                    sumLesson7 += item.start_lesson_2 == 7 ? classRemuneration : decimal.Zero;
+                    sumLesson10 += item.start_lesson_2 == 10 ? classRemuneration : decimal.Zero;
+                    sumLesson13 += item.start_lesson_2 == 13 ? classRemuneration : decimal.Zero;
+                }
 
-                    // Check if remuneration hours is larger than 0
-                    if (remunerationHours > 0)
+                // Check if remuneration hours is larger than 0
+                if (remunerationHours > 0)
+                {
+                    remunerationDTOs.Add(new RemunerationDTO
                     {
-                        remunerationDTOs.Add(new RemunerationDTO
-                        {
-                            StaffId = rank.StaffId,
-                            FullName = rank.FullName,
-                            AcademicDegreeRankId = rank.AcademicDegreeRankId,
-                            RemunerationHours = Math.Round(remunerationHours),
-                            SumLesson1 = Math.Round(sumLesson1),
-                            SumLesson4 = Math.Round(sumLesson4),
-                            SumLesson7 = Math.Round(sumLesson7),
-                            SumLesson10 = Math.Round(sumLesson10),
-                            SumLesson13 = Math.Round(sumLesson13)
-                        });
-                    }
+                        StaffId = rank.staff_id,
+                        FullName = rank.full_name,
+                        AcademicDegreeRankId = "hehe",
+                        RemunerationHours = Math.Round(remunerationHours),
+                        SumLesson1 = Math.Round(sumLesson1),
+                        SumLesson4 = Math.Round(sumLesson4),
+                        SumLesson7 = Math.Round(sumLesson7),
+                        SumLesson10 = Math.Round(sumLesson10),
+                        SumLesson13 = Math.Round(sumLesson13)
+                    });
                 }
             }
             return remunerationDTOs;

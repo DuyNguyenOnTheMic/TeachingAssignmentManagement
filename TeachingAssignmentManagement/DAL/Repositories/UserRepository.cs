@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.DAL
@@ -55,6 +56,13 @@ namespace TeachingAssignmentManagement.DAL
                         FullName = lecturer.full_name,
                         Type = lecturer.type
                     }).ToList();
+        }
+
+        public IEnumerable<lecturer> GetFacultyMembersInTerm(int termId, string majorId)
+        {
+            return majorId != "-1"
+                ? context.class_section.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == MyConstants.FacultyMemberType).Select(c => c.lecturer).Distinct()
+                : context.class_section.Where(c => c.term_id == termId && c.lecturer.type == MyConstants.FacultyMemberType).Select(c => c.lecturer).Distinct();
         }
 
         public lecturer GetLecturerByID(string id)
