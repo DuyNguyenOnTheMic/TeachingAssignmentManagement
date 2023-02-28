@@ -58,11 +58,14 @@ namespace TeachingAssignmentManagement.DAL
                     }).ToList();
         }
 
-        public IEnumerable<lecturer> GetFacultyMembersInTerm(int termId, string majorId)
+        public IEnumerable<lecturer> GetFacultyMembers()
         {
-            return majorId != "-1"
-                ? context.class_section.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == MyConstants.FacultyMemberType).Select(c => c.lecturer).Distinct()
-                : context.class_section.Where(c => c.term_id == termId && c.lecturer.type == MyConstants.FacultyMemberType).Select(c => c.lecturer).Distinct();
+            return context.lecturers.Where(l => l.type == MyConstants.FacultyMemberType);
+        }
+
+        public IEnumerable<AspNetUser> GetFacultyBoards()
+        {
+            return context.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN khoa");
         }
 
         public lecturer GetLecturerByID(string id)
@@ -73,11 +76,6 @@ namespace TeachingAssignmentManagement.DAL
         public lecturer GetLecturerByStaffId(string id)
         {
             return context.lecturers.FirstOrDefault(l => l.staff_id == id);
-        }
-
-        public IEnumerable<AspNetUser> GetFacultyBoards()
-        {
-            return context.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN khoa");
         }
 
         public void InsertLecturer(lecturer lecturer)

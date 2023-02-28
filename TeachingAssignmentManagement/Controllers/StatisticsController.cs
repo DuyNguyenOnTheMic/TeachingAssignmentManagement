@@ -240,7 +240,7 @@ namespace TeachingAssignmentManagement.Controllers
             int startYear = term.start_year;
             int endYear = term.end_year;
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
-            IEnumerable<lecturer> lecturerRanks = unitOfWork.UserRepository.GetFacultyMembersInTerm(termId, majorId);
+            IEnumerable<lecturer> lecturerRanks = unitOfWork.UserRepository.GetFacultyMembers();
             List<RemunerationDTO> remunerationDTOs = !isLesson
                 ? GetRemunerationData(termId, majorId, coefficient, lecturerRanks)
                 : GetRemunerationDataByLesson(termId, majorId, coefficient, lecturerRanks);
