@@ -1,5 +1,8 @@
 ﻿<input type="hidden" id="data-loader" data-islesson="@ViewData["isLesson"]" value="@ViewData["value"]" data-major="@ViewData["major"]" data-majorabb="@ViewData["majorAbb"]" />
 
+<div class="alert alert-primary my-25" role="alert">
+    <div class="alert-body"><b><i class="feather feather-help-circle"></i> Hướng dẫn: </b>Nếu bạn chọn vào icon <i class="feather feather-plus-circle"></i> thì hệ thống sẽ hiển thị những môn học mà giảng viên đã dạy.</div>
+</div>
 <div class="d-flex justify-content-between align-items-center row">
     <div class="col-sm-12 col-lg-6 d-flex justify-content-center justify-content-lg-start flex-lg-nowrap flex-wrap">
         <ul class="nav nav-tabs" role="tablist">
@@ -17,9 +20,6 @@
         <canvas class="chartjs" id="statistics-chart" data-height="750"></canvas>
     </div>
     <div class="tab-pane" id="tableIcon" aria-labelledby="table-tab" role="tabpanel">
-        <div class="alert alert-primary my-25" role="alert">
-            <div class="alert-body"><b><i class="feather feather-help-circle"></i> Hướng dẫn: </b>Nếu bạn chọn vào icon <i class="feather feather-plus-circle"></i> thì hệ thống sẽ hiển thị những môn học mà giảng viên đã dạy.</div>
-        </div>
         <div class="card-datatable">
             <div class=" table-responsive">
                 <table class="datatables-ajax table" id="tblStatistics">
