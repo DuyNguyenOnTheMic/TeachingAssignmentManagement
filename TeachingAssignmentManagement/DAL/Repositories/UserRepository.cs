@@ -58,9 +58,9 @@ namespace TeachingAssignmentManagement.DAL
                     }).ToList();
         }
 
-        public IEnumerable<lecturer> GetFacultyMembers()
+        public IEnumerable<lecturer> GetFacultyMembers(int termId, string majorId)
         {
-            return context.lecturers.Where(l => l.type == MyConstants.FacultyMemberType);
+            return context.class_section.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == MyConstants.FacultyMemberType).Select(c => c.lecturer).Distinct();
         }
 
         public IEnumerable<AspNetUser> GetFacultyBoards()

@@ -229,8 +229,8 @@ namespace TeachingAssignmentManagement.Controllers
             if (!isUpdate)
             {
                 // Check if this term and major already has data
-                class_section query_term_major = unitOfWork.ClassSectionRepository.CheckTermMajor(term, major);
-                if (query_term_major != null)
+                bool haveData = unitOfWork.ClassSectionRepository.CheckClassesInTermMajor(term, major);
+                if (haveData)
                 {
                     Response.Write($"Học kỳ và ngành này đã có dữ liệu trong hệ thống, bạn muốn cập nhật hay thay thế thời khoá biểu?");
                     return new HttpStatusCodeResult(HttpStatusCode.Conflict);

@@ -240,11 +240,11 @@ namespace TeachingAssignmentManagement.Controllers
             int startYear = term.start_year;
             int endYear = term.end_year;
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
-            IEnumerable<lecturer> lecturers = unitOfWork.UserRepository.GetFacultyMembers();
+            IEnumerable<lecturer> lecturers = unitOfWork.UserRepository.GetFacultyMembers(termId, majorId);
 
-            // Check if this term and major have any classes
-            bool haveClasses = unitOfWork.ClassSectionRepository.CheckClassesInTerm(termId, majorId);
-            List<RemunerationDTO> remunerationDTOs = haveClasses
+            // Check if this term and major have data
+            bool haveData = unitOfWork.ClassSectionRepository.CheckClassesInTermMajor(termId, majorId);
+            List<RemunerationDTO> remunerationDTOs = haveData
                 ? !isLesson
                     ? GetRemunerationData(termId, majorId, coefficient, lecturers)
                     : GetRemunerationDataByLesson(termId, majorId, coefficient, lecturers)
