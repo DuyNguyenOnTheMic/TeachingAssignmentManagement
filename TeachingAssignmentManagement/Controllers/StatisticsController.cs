@@ -258,8 +258,8 @@ namespace TeachingAssignmentManagement.Controllers
             foreach (lecturer lecturer in lecturers)
             {
                 // Reset values in each loop
-                int classCount = 0,
-                    subjectCount = 0;
+                int subjectCount = 0,
+                    classCount = 0;
                 int? originalHours = 0;
                 decimal remunerationHours = decimal.Zero;
                 string previousSubjectId = string.Empty;
@@ -269,11 +269,15 @@ namespace TeachingAssignmentManagement.Controllers
                 foreach (class_section item in query_classes)
                 {
                     int totalLesson = item.total_lesson.GetValueOrDefault(0);
+
+                    // Count subjects and classes of lecturer
                     if (item.subject.subject_id != previousSubjectId)
                     {
                         subjectCount++;
                     }
                     classCount++;
+
+                    // Sum up remuneration hours for this class
                     originalHours += totalLesson;
                     remunerationHours += totalLesson * RemunerationController.CalculateRemuneration(item, coefficient);
                     previousSubjectId = item.subject.subject_id;
@@ -302,6 +306,8 @@ namespace TeachingAssignmentManagement.Controllers
             foreach (lecturer lecturer in lecturers)
             {
                 // Reset values in each loop
+                int subjectCount = 0,
+                    classCount = 0;
                 int? originalHours = 0;
                 decimal remunerationHours = decimal.Zero,
                         sumLesson1 = decimal.Zero,
@@ -309,6 +315,7 @@ namespace TeachingAssignmentManagement.Controllers
                         sumLesson7 = decimal.Zero,
                         sumLesson10 = decimal.Zero,
                         sumLesson13 = decimal.Zero;
+                string previousSubjectId = string.Empty;
 
                 // Get classes in term of lecturer
                 IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, lecturer.id);
@@ -317,6 +324,15 @@ namespace TeachingAssignmentManagement.Controllers
                     decimal remunerationCoefficient = RemunerationController.CalculateRemuneration(item, coefficient);
                     int totalLesson = item.total_lesson.GetValueOrDefault(0);
                     decimal classRemuneration = totalLesson * remunerationCoefficient;
+
+                    // Count subjects and classes of lecturer
+                    if (item.subject.subject_id != previousSubjectId)
+                    {
+                        subjectCount++;
+                    }
+                    classCount++;
+
+                    // Sum up remuneration hours for this class
                     originalHours += totalLesson;
                     remunerationHours += classRemuneration;
                     sumLesson1 += item.start_lesson_2 == 1 ? classRemuneration : decimal.Zero;
@@ -324,6 +340,7 @@ namespace TeachingAssignmentManagement.Controllers
                     sumLesson7 += item.start_lesson_2 == 7 ? classRemuneration : decimal.Zero;
                     sumLesson10 += item.start_lesson_2 == 10 ? classRemuneration : decimal.Zero;
                     sumLesson13 += item.start_lesson_2 == 13 ? classRemuneration : decimal.Zero;
+                    previousSubjectId = item.subject.subject_id;
                 }
 
                 // Check if remuneration hours is larger than 0
@@ -333,6 +350,8 @@ namespace TeachingAssignmentManagement.Controllers
                     {
                         StaffId = lecturer.staff_id,
                         FullName = lecturer.full_name,
+                        SubjectCount = subjectCount,
+                        ClassCount = classCount,
                         OriginalHours = originalHours,
                         RemunerationHours = Math.Round(remunerationHours),
                         SumLesson1 = Math.Round(sumLesson1),
