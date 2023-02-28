@@ -262,21 +262,21 @@ namespace TeachingAssignmentManagement.Controllers
                     subjectCount = 0;
                 int? originalHours = 0;
                 decimal remunerationHours = decimal.Zero;
-                string currentSubjectId = string.Empty;
+                string previousSubjectId = string.Empty;
 
                 // Get classes in term of lecturer
                 IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, lecturer.id);
                 foreach (class_section item in query_classes)
                 {
                     int totalLesson = item.total_lesson.GetValueOrDefault(0);
-                    if (item.subject.subject_id != currentSubjectId)
+                    if (item.subject.subject_id != previousSubjectId)
                     {
                         subjectCount++;
                     }
                     classCount++;
                     originalHours += totalLesson;
                     remunerationHours += totalLesson * RemunerationController.CalculateRemuneration(item, coefficient);
-                    currentSubjectId = item.subject.subject_id;
+                    previousSubjectId = item.subject.subject_id;
                 }
 
                 // Check if remuneration hours is larger than 0
