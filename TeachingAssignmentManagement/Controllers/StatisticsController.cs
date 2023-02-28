@@ -240,23 +240,23 @@ namespace TeachingAssignmentManagement.Controllers
             int startYear = term.start_year;
             int endYear = term.end_year;
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
-            IEnumerable<lecturer> lecturerRanks = unitOfWork.UserRepository.GetFacultyMembers();
+            IEnumerable<lecturer> lecturers = unitOfWork.UserRepository.GetFacultyMembers();
             List<RemunerationDTO> remunerationDTOs = !isLesson
-                ? GetRemunerationData(termId, majorId, coefficient, lecturerRanks)
-                : GetRemunerationDataByLesson(termId, majorId, coefficient, lecturerRanks);
+                ? GetRemunerationData(termId, majorId, coefficient, lecturers)
+                : GetRemunerationDataByLesson(termId, majorId, coefficient, lecturers);
             return Json(remunerationDTOs.OrderByDescending(r => r.RemunerationHours), JsonRequestBehavior.AllowGet);
         }
 
-        private List<RemunerationDTO> GetRemunerationData(int termId, string majorId, coefficient coefficient, IEnumerable<lecturer> lecturerRanks)
+        private List<RemunerationDTO> GetRemunerationData(int termId, string majorId, coefficient coefficient, IEnumerable<lecturer> lecturers)
         {
             List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
-            foreach (var rank in lecturerRanks)
+            foreach (lecturer lecturer in lecturers)
             {
                 // Reset values in each loop
                 decimal remunerationHours = decimal.Zero;
 
                 // Get classes in term of lecturer
-                IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, rank.id);
+                IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, lecturer.id);
                 foreach (class_section item in query_classes)
                 {
                     remunerationHours += item.total_lesson.GetValueOrDefault(0) * RemunerationController.CalculateRemuneration(item, coefficient);
@@ -267,8 +267,8 @@ namespace TeachingAssignmentManagement.Controllers
                 {
                     remunerationDTOs.Add(new RemunerationDTO
                     {
-                        StaffId = rank.staff_id,
-                        FullName = rank.full_name,
+                        StaffId = lecturer.staff_id,
+                        FullName = lecturer.full_name,
                         AcademicDegreeRankId = "hehe",
                         RemunerationHours = Math.Round(remunerationHours)
                     });
@@ -277,10 +277,10 @@ namespace TeachingAssignmentManagement.Controllers
             return remunerationDTOs;
         }
 
-        private List<RemunerationDTO> GetRemunerationDataByLesson(int termId, string majorId, coefficient coefficient, IEnumerable<lecturer> lecturerRanks)
+        private List<RemunerationDTO> GetRemunerationDataByLesson(int termId, string majorId, coefficient coefficient, IEnumerable<lecturer> lecturers)
         {
             List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
-            foreach (var rank in lecturerRanks)
+            foreach (lecturer lecturer in lecturers)
             {
                 // Reset values in each loop
                 decimal remunerationHours = decimal.Zero,
@@ -291,7 +291,7 @@ namespace TeachingAssignmentManagement.Controllers
                         sumLesson13 = decimal.Zero;
 
                 // Get classes in term of lecturer
-                IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, rank.id);
+                IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, lecturer.id);
                 foreach (class_section item in query_classes)
                 {
                     decimal remunerationCoefficient = RemunerationController.CalculateRemuneration(item, coefficient);
@@ -310,8 +310,8 @@ namespace TeachingAssignmentManagement.Controllers
                 {
                     remunerationDTOs.Add(new RemunerationDTO
                     {
-                        StaffId = rank.staff_id,
-                        FullName = rank.full_name,
+                        StaffId = lecturer.staff_id,
+                        FullName = lecturer.full_name,
                         AcademicDegreeRankId = "hehe",
                         RemunerationHours = Math.Round(remunerationHours),
                         SumLesson1 = Math.Round(sumLesson1),
