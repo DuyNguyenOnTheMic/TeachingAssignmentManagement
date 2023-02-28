@@ -161,8 +161,8 @@ namespace TeachingAssignmentManagement.Controllers
             lecturer lecturer = unitOfWork.UserRepository.GetLecturerByID(id);
             List<SelectListItem> lecturerType = new List<SelectListItem>()
             {
-                new SelectListItem() { Text = "Cơ hữu", Value = Constants.FacultyMemberType },
-                new SelectListItem() { Text = "Thỉnh giảng", Value = Constants.visitingLecturerType }
+                new SelectListItem() { Text = "Cơ hữu", Value = MyConstants.FacultyMemberType },
+                new SelectListItem() { Text = "Thỉnh giảng", Value = MyConstants.visitingLecturerType }
             };
 
             // Set selected value for lecturer type

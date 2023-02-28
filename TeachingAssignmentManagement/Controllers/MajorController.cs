@@ -41,8 +41,8 @@ namespace TeachingAssignmentManagement.Controllers
         {
             ViewData["program_type"] = new SelectList(new Dictionary<int, string>
             {
-                { Constants.StandardProgramType, "Tiêu chuẩn" },
-                { Constants.SpecialProgramType, "Đặc biệt" }
+                { MyConstants.StandardProgramType, "Tiêu chuẩn" },
+                { MyConstants.SpecialProgramType, "Đặc biệt" }
             }, "Key", "Value");
             return View(new major());
         }
@@ -69,8 +69,8 @@ namespace TeachingAssignmentManagement.Controllers
             major major = unitOfWork.MajorRepository.GetMajorByID(id);
             ViewData["program_type"] = new SelectList(new Dictionary<int, string>
             {
-                { Constants.StandardProgramType, "Tiêu chuẩn" },
-                { Constants.SpecialProgramType, "Đặc biệt" }
+                { MyConstants.StandardProgramType, "Tiêu chuẩn" },
+                { MyConstants.SpecialProgramType, "Đặc biệt" }
             }, "Key", "Value", major.program_type);
             return View(major);
         }

@@ -1,6 +1,6 @@
 ﻿namespace TeachingAssignmentManagement.Helpers
 {
-    public static class Constants
+    public static class MyConstants
     {
         // Timetable constants
         public static readonly string TheoreticalClassType = "Lý thuyết";

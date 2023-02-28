@@ -65,7 +65,7 @@ namespace TeachingAssignmentManagement.Controllers
                     foreach (class_section item in query_classes)
                     {
                         // Get unit price for lecturer rank
-                        int unitPriceType = rank.IsVietnamese == false ? Constants.ForeignType : item.major.program_type;
+                        int unitPriceType = rank.IsVietnamese == false ? MyConstants.ForeignType : item.major.program_type;
                         unit_price query_unitPrice = unitPrice.SingleOrDefault(u => u.academic_degree_rank_id == rank.AcademicDegreeRankId && u.type == unitPriceType);
                         if (query_unitPrice != null)
                         {
@@ -98,7 +98,7 @@ namespace TeachingAssignmentManagement.Controllers
 
             // Check if class is theoretical or practice
             int studentNumber;
-            if (classSection.type == Constants.TheoreticalClassType)
+            if (classSection.type == MyConstants.TheoreticalClassType)
             {
                 studentNumber = 50;
                 classTypeCoefficient = coefficient.theoretical_coefficient;
