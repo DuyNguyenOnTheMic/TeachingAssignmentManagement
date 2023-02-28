@@ -297,6 +297,7 @@ function populateDatatable(data) {
                 { 'data': '', defaultContent: '' },
                 { 'data': 'StaffId' },
                 { 'data': 'FullName' },
+                { 'data': 'OriginalHours' },
                 { 'data': 'RemunerationHours' },
                 { 'data': 'SumLesson1', defaultContent: '' },
                 { 'data': 'SumLesson4', defaultContent: '' },
@@ -312,7 +313,7 @@ function populateDatatable(data) {
                     width: '1%',
                     targets: [0, 1]
                 },
-                { className: 'text-center', target: [0, 3, 4, 5, 6, 7, 8] }
+                { className: 'text-center', target: [0, 3, 4, 5, 6, 7, 8, 9] }
             ],
             order: [[4, 'desc']],
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
@@ -390,7 +391,7 @@ $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
 
 function setVisibleColumn(state) {
     var table = $('#tblStatistics').DataTable();
-    for (var i = 4; i <= 8; i++) {
+    for (var i = 5; i <= 9; i++) {
         table.column(i).visible(state, state);
     }
     table.columns.adjust().draw(state); // adjust column sizing and redraw

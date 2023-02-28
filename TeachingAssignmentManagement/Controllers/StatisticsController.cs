@@ -258,13 +258,16 @@ namespace TeachingAssignmentManagement.Controllers
             foreach (lecturer lecturer in lecturers)
             {
                 // Reset values in each loop
+                int? originalHours = 0;
                 decimal remunerationHours = decimal.Zero;
 
                 // Get classes in term of lecturer
                 IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, lecturer.id);
                 foreach (class_section item in query_classes)
                 {
-                    remunerationHours += item.total_lesson.GetValueOrDefault(0) * RemunerationController.CalculateRemuneration(item, coefficient);
+                    int totalLesson = item.total_lesson.GetValueOrDefault(0);
+                    originalHours += totalLesson;
+                    remunerationHours += totalLesson * RemunerationController.CalculateRemuneration(item, coefficient);
                 }
 
                 // Check if remuneration hours is larger than 0
@@ -275,6 +278,7 @@ namespace TeachingAssignmentManagement.Controllers
                         StaffId = lecturer.staff_id,
                         FullName = lecturer.full_name,
                         AcademicDegreeRankId = "hehe",
+                        OriginalHours = originalHours,
                         RemunerationHours = Math.Round(remunerationHours)
                     });
                 }

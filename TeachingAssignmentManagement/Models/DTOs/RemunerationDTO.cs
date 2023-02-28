@@ -7,6 +7,7 @@
         public string AcademicDegreeRankId { get; set; }
         public decimal Remuneration { get; set; }
         public bool Status { get; set; }
+        public int? OriginalHours { get; set; }
         public decimal RemunerationHours { get; set; }
         public decimal SumLesson1 { get; set; }
         public decimal SumLesson4 { get; set; }
