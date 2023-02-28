@@ -263,7 +263,7 @@ namespace TeachingAssignmentManagement.Controllers
                 }
 
                 // Check if remuneration hours is larger than 0
-                if (remunerationHours > 0)
+                if (remunerationHours > decimal.Zero)
                 {
                     remunerationDTOs.Add(new RemunerationDTO
                     {
@@ -306,7 +306,7 @@ namespace TeachingAssignmentManagement.Controllers
                 }
 
                 // Check if remuneration hours is larger than 0
-                if (remunerationHours > 0)
+                if (remunerationHours > decimal.Zero)
                 {
                     remunerationDTOs.Add(new RemunerationDTO
                     {
