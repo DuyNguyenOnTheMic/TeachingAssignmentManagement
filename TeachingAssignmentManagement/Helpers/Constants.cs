@@ -1,14 +1,18 @@
 ﻿namespace TeachingAssignmentManagement.Helpers
 {
-    public class Constants
+    public static class Constants
     {
         // Timetable constants
-        public const string TheoreticalClassType = "Lý thuyết";
-        public const string PracticeClassType = "Thực hành";
+        public static readonly string TheoreticalClassType = "Lý thuyết";
+        public static readonly string PracticeClassType = "Thực hành";
+
+        // Lecturer type constants
+        public static readonly string FacultyMemberType = "CH";
+        public static readonly string visitingLecturerType = "TG";
 
         // Remuneration constants
-        public const int StandardProgramType = 0;
-        public const int SpecialProgramType = 1;
-        public const int ForeignType = 2;
+        public static readonly int StandardProgramType = 0;
+        public static readonly int SpecialProgramType = 1;
+        public static readonly int ForeignType = 2;
     }
 }

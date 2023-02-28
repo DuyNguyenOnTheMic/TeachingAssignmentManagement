@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Hubs;
 using TeachingAssignmentManagement.Models;
 
@@ -160,8 +161,8 @@ namespace TeachingAssignmentManagement.Controllers
             lecturer lecturer = unitOfWork.UserRepository.GetLecturerByID(id);
             List<SelectListItem> lecturerType = new List<SelectListItem>()
             {
-                new SelectListItem() { Text = "Cơ hữu", Value = "CH" },
-                new SelectListItem() { Text = "Thỉnh giảng", Value = "TG" }
+                new SelectListItem() { Text = "Cơ hữu", Value = Constants.FacultyMemberType },
+                new SelectListItem() { Text = "Thỉnh giảng", Value = Constants.visitingLecturerType }
             };
 
             // Set selected value for lecturer type

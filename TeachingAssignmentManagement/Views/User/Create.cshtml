@@ -1,4 +1,5 @@
 ﻿@model TeachingAssignmentManagement.Models.lecturer
+@using TeachingAssignmentManagement.Helpers
 
 @{
     Layout = null;
@@ -26,8 +27,8 @@
         <small class="text-muted"><i>(Giảng viên cơ hữu hoặc giảng viên thỉnh giảng)</i></small>
         <select class="form-data form-select" id="type" name="type">
             <option value="">---- Chọn loại giảng viên ----</option>
-            <option value="CH">Cơ hữu</option>
-            <option value="TG">Thỉnh giảng</option>
+            <option value="@Constants.FacultyMemberType">Cơ hữu</option>
+            <option value="@Constants.visitingLecturerType">Thỉnh giảng</option>
         </select>
     </div>
 

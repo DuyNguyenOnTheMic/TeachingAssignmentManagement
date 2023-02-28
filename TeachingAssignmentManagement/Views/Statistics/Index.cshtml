@@ -1,4 +1,6 @@
-﻿@{
+﻿@using TeachingAssignmentManagement.Helpers
+
+@{
     ViewBag.Title = "Thống kê số giờ giảng viên";
 }
 
@@ -50,8 +52,8 @@
                                         <select class="form-data form-select" id="lecturerType" name="lecturerType">
                                             <option value="">---- Chọn loại giảng viên ----</option>
                                             <option value="-1">Tất cả</option>
-                                            <option value="CH" selected>Cơ hữu</option>
-                                            <option value="TG">Thỉnh giảng</option>
+                                            <option value="@Constants.FacultyMemberType" selected>Cơ hữu</option>
+                                            <option value="@Constants.visitingLecturerType">Thỉnh giảng</option>
                                         </select>
                                     </div>
                                 </div>
