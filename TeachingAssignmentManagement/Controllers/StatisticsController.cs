@@ -322,6 +322,7 @@ namespace TeachingAssignmentManagement.Controllers
                 foreach (class_section item in query_classes)
                 {
                     decimal remunerationCoefficient = RemunerationController.CalculateRemuneration(item, coefficient);
+                    int startLesson = item.start_lesson_2;
                     int totalLesson = item.total_lesson.GetValueOrDefault(0);
                     decimal classRemuneration = totalLesson * remunerationCoefficient;
 
@@ -335,11 +336,26 @@ namespace TeachingAssignmentManagement.Controllers
                     // Sum up remuneration hours for this class
                     originalHours += totalLesson;
                     remunerationHours += classRemuneration;
-                    sumLesson1 += item.start_lesson_2 == 1 ? classRemuneration : decimal.Zero;
-                    sumLesson4 += item.start_lesson_2 == 4 ? classRemuneration : decimal.Zero;
-                    sumLesson7 += item.start_lesson_2 == 7 ? classRemuneration : decimal.Zero;
-                    sumLesson10 += item.start_lesson_2 == 10 ? classRemuneration : decimal.Zero;
-                    sumLesson13 += item.start_lesson_2 == 13 ? classRemuneration : decimal.Zero;
+                    switch (startLesson)
+                    {
+                        case 1:
+                            sumLesson1 += classRemuneration;
+                            break;
+                        case 4:
+                            sumLesson4 += classRemuneration;
+                            break;
+                        case 7:
+                            sumLesson7 += classRemuneration;
+                            break;
+                        case 10:
+                            sumLesson10 += classRemuneration;
+                            break;
+                        case 13:
+                            sumLesson13 += classRemuneration;
+                            break;
+                        default:
+                            break;
+                    }
                     previousSubjectId = item.subject.subject_id;
                 }
 
