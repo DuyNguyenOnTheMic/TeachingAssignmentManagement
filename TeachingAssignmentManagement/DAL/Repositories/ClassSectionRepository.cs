@@ -409,6 +409,13 @@ namespace TeachingAssignmentManagement.DAL
                 : context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
         }
 
+        public bool CheckClassesInTerm(int termId, string majorId)
+        {
+            return majorId != "-1"
+                ? context.class_section.Any(c => c.term_id == termId && c.major_id == majorId)
+                : context.class_section.Any(c => c.term_id == termId);
+        }
+
         public class_section FindClassSection(IEnumerable<class_section> classSection, string classSectionId, int day2, int startLesson2, string roomId)
         {
             return classSection.FirstOrDefault(c => c.class_section_id == classSectionId && c.day_2 == day2 && c.start_lesson_2 == startLesson2 && c.room_id == roomId);
