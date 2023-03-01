@@ -487,7 +487,7 @@ namespace TeachingAssignmentManagement.Controllers
             foreach (class_section item in classes)
             {
                 // Add data to table
-                dt.Rows.Add(item.original_id, item.subject_id, item.class_section_id, item.subject.name,
+                dt.Rows.Add(item.original_id, item.subject.subject_id, item.class_section_id, item.subject.name,
                     item.subject.credits, item.type, item.student_class_id, item.minimum_student, item.total_lesson,
                     item.room.room_2, item.day, item.start_lesson, item.lesson_number, item.lesson_time, item.room_id,
                     item.lecturer?.staff_id, item.lecturer?.full_name, item.room.type, item.room.capacity, item.student_number,
