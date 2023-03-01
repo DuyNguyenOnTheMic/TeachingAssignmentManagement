@@ -283,7 +283,7 @@ namespace TeachingAssignmentManagement.Controllers
                 }
                 previousSubjectId = item.subject.subject_id;
             }
-            return Json(null, JsonRequestBehavior.AllowGet);
+            return Json(subjects, JsonRequestBehavior.AllowGet);
         }
 
         private List<RemunerationDTO> GetRemunerationData(int termId, string majorId, coefficient coefficient, IEnumerable<lecturer> lecturers)
