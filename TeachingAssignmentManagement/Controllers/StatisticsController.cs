@@ -215,6 +215,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "BCN khoa, Bộ môn")]
         public ActionResult Remuneration()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
@@ -223,6 +224,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "BCN khoa, Bộ môn")]
         public ActionResult GetRemunerationChart(bool isLesson, int value, string major)
         {
             ViewData["isLesson"] = isLesson;
@@ -233,6 +235,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "BCN khoa, Bộ môn")]
         public ActionResult GetRemunerationData(bool isLesson, int termId, string majorId)
         {
             // Declare variables
