@@ -255,6 +255,15 @@ namespace TeachingAssignmentManagement.Controllers
             return Json(remunerationDTOs.OrderByDescending(r => r.RemunerationHours), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        [Authorize(Roles = "BCN khoa, Bộ môn")]
+        public ActionResult GetRemunerationSubjects(int termId, string majorId, string lecturerId)
+        {
+            // Get classes in term of lecturer
+            IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, lecturerId);
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
         private List<RemunerationDTO> GetRemunerationData(int termId, string majorId, coefficient coefficient, IEnumerable<lecturer> lecturers)
         {
             List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
