@@ -303,7 +303,7 @@ namespace TeachingAssignmentManagement.Controllers
                 string previousSubjectId = string.Empty;
 
                 // Get classes in term of lecturer
-                IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, lecturer.id);
+                IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTermOrderBySubject(termId, majorId, lecturer.id);
                 foreach (class_section item in query_classes)
                 {
                     int totalLesson = item.total_lesson.GetValueOrDefault(0);
@@ -357,7 +357,7 @@ namespace TeachingAssignmentManagement.Controllers
                 string previousSubjectId = string.Empty;
 
                 // Get classes in term of lecturer
-                IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, lecturer.id);
+                IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTermOrderBySubject(termId, majorId, lecturer.id);
                 foreach (class_section item in query_classes)
                 {
                     decimal remunerationCoefficient = RemunerationController.CalculateRemuneration(item, coefficient);
