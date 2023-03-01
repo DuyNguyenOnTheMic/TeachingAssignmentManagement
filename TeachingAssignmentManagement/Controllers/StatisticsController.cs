@@ -274,7 +274,8 @@ namespace TeachingAssignmentManagement.Controllers
                     int? subjectHours = 0;
                     foreach (var subject in query_subjects)
                     {
-                        subjectHours += subject.total_lesson;
+                        int? subjectTotalLesson = subject.total_lesson;
+                        subjectHours += subjectTotalLesson;
                     }
                     subjects.Add(new SubjectDTO
                     {
