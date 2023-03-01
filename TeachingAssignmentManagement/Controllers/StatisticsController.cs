@@ -322,6 +322,7 @@ namespace TeachingAssignmentManagement.Controllers
                 {
                     remunerationDTOs.Add(new RemunerationDTO
                     {
+                        LecturerId = lecturer.id,
                         StaffId = lecturer.staff_id,
                         FullName = lecturer.full_name,
                         OriginalHours = originalHours,
@@ -398,6 +399,7 @@ namespace TeachingAssignmentManagement.Controllers
                 {
                     remunerationDTOs.Add(new RemunerationDTO
                     {
+                        LecturerId = lecturer.id,
                         StaffId = lecturer.staff_id,
                         FullName = lecturer.full_name,
                         SubjectCount = subjectCount,
