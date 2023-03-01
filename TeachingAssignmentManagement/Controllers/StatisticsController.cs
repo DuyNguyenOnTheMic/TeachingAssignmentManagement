@@ -263,11 +263,11 @@ namespace TeachingAssignmentManagement.Controllers
             IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTermOrderBySubject(termId, majorId, lecturerId);
             List<SubjectDTO> subjects = new List<SubjectDTO>();
             string previousSubjectId = string.Empty;
-            decimal remunerationHours = decimal.Zero;
             foreach (var item in query_classes)
             {
                 // Loop through each class to find subjects
                 string currentSubjectId = item.subject.subject_id;
+                decimal remunerationHours = decimal.Zero;
                 if (currentSubjectId != previousSubjectId)
                 {
                     IEnumerable<class_section> query_subjectClasses = query_classes.Where(c => c.subject.subject_id == currentSubjectId);
@@ -285,7 +285,7 @@ namespace TeachingAssignmentManagement.Controllers
                         Credits = item.subject.credits,
                         Major = item.major.name,
                         Hours = subjectHours,
-                        RemunerationHours = remunerationHours
+                        RemunerationHours = Math.Round(remunerationHours)
                     });
                 }
                 previousSubjectId = currentSubjectId;

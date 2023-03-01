@@ -462,6 +462,9 @@ function format(d) {
     var subjectHours = d.map(function (e) {
         return e.Hours;
     });
+    var subjectRemuneratioHours = d.map(function (e) {
+        return e.RemunerationHours;
+    });
     var totalClass = d.map(function (e) {
         var theoryClass = e.theory_count + 'LT',
             practiceClass = e.practice_count + 'TH',
@@ -478,7 +481,7 @@ function format(d) {
 
     // Append HTML rows
     for (var i = 0; i < arrayLength; i++) {
-        tableRow += '<tr><td>' + subjectId[i] + '</td><td>' + subjectName[i] + '</td><td>' + subjectMajor[i] + '</td><td class="text-center">' + subjectCredits[i] + '</td><td class="text-center">' + totalClass[i] + '</td><td class="text-center">' + subjectHours[i] + '</td></tr>';
+        tableRow += '<tr><td>' + subjectId[i] + '</td><td>' + subjectName[i] + '</td><td>' + subjectMajor[i] + '</td><td class="text-center">' + subjectCredits[i] + '</td><td class="text-center">' + totalClass[i] + '</td><td class="text-center">' + subjectHours[i] + '</td><td class="text-center">' + subjectRemuneratioHours[i] + '</td></tr>';
     }
 
     // Render rows
@@ -492,6 +495,7 @@ function format(d) {
         '<th class="text-center">Số TC</th>' +
         '<th class="text-center">Số lớp</th>' +
         '<th class="text-center">Số giờ</th>' +
+        '<th class="text-center">Số giờ thù lao</th>' +
         '</tr>' +
         '</thead>' +
         '<tbody>' +
