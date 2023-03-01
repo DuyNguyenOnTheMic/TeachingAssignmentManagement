@@ -258,7 +258,7 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult GetRemunerationSubjects(int termId, string majorId, string lecturerId)
         {
             // Get classes in term of lecturer
-            IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, lecturerId);
+            IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTermOrderBySubject(termId, majorId, lecturerId);
             List<SubjectDTO> subjects = new List<SubjectDTO>();
             string previousSubjectId = string.Empty;
             foreach (var item in query_classes)

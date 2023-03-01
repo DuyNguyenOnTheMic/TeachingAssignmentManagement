@@ -402,11 +402,9 @@ namespace TeachingAssignmentManagement.DAL
             }
         }
 
-        public IEnumerable<class_section> GetPersonalClassesInTerm(int termId, string majorId, string lecturerId)
+        public IEnumerable<class_section> GetPersonalClassesInTerm(int termId, string lecturerId)
         {
-            return majorId != "-1"
-                ? context.class_section.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer_id == lecturerId)
-                : context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
+            return context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
         }
 
         public IEnumerable<class_section> GetPersonalClassesInTermOrderBySubject(int termId, string majorId, string lecturerId)
