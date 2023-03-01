@@ -264,7 +264,6 @@ namespace TeachingAssignmentManagement.Controllers
             foreach (var item in query_classes)
             {
                 string currentSubjectId = item.subject.subject_id;
-                int totalLesson = item.total_lesson.GetValueOrDefault(0);
 
                 if (currentSubjectId != previousSubjectId)
                 {
