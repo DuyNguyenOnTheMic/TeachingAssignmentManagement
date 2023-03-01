@@ -261,6 +261,25 @@ namespace TeachingAssignmentManagement.Controllers
         {
             // Get classes in term of lecturer
             IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, lecturerId);
+            List<subject> subjects = new List<subject>();
+            string previousSubjectId = string.Empty;
+            foreach (var item in query_classes)
+            {
+                if (item.subject.subject_id != previousSubjectId)
+                {
+                    subjects.Add(new subject
+                    {
+                        id = item.subject.subject_id,
+                        name = item.subject.name,
+                        credits = item.subject.credits,
+                        major = item.major.name,
+                        subject_hours = c.Sum(item => item.total_lesson),
+                        theory_count = c.Count(item => item.type == MyConstants.TheoreticalClassType),
+                        practice_count = c.Count(item => item.type == MyConstants.PracticeClassType)
+                    });
+                }
+                previousSubjectId = item.subject.subject_id;
+            }
             return Json(null, JsonRequestBehavior.AllowGet);
         }
 
