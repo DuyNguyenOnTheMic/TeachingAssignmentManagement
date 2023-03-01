@@ -321,7 +321,7 @@ function populateDatatable(data) {
                     width: '1%',
                     targets: [0, 1]
                 },
-                { className: 'text-center', target: [0, 3, 4, 5, 6, 7, 8, 9, 10, 11] }
+                { className: 'text-center', target: [0, 4, 5, 6, 7, 8, 9, 10, 11, 12] }
             ],
             order: [[4, 'desc']],
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
@@ -397,8 +397,8 @@ function populateDatatable(data) {
             tr = $this.closest('tr'),
             row = dataTable.row(tr),
             lecturerId = $this.data('id'),
-            subjectUrl = rootUrl + 'Statistics/',
-            subjectData;
+            subjectUrl = rootUrl + 'Statistics/GetRemunerationSubjects',
+            subjectData = { 'termId': value, majorId, lecturerId };
 
         if (row.child.isShown()) {
             // Update icon on click
@@ -411,18 +411,6 @@ function populateDatatable(data) {
             // Update icon on click
             $this.removeClass('btn-success').addClass('btn-danger');
             $this.find('i').removeClass('feather-plus').addClass('feather-minus');
-
-            // Get data for ajax request
-            if (type == yearSelect.attr('id')) {
-                var yearSplit = value.split(" - "),
-                    startYear = yearSplit[0],
-                    endYear = yearSplit[1];
-                subjectUrl += 'GetYearsubjects';
-                subjectData = { startYear, endYear, majorId, lecturerId };
-            } else {
-                subjectUrl += 'GetTermsubjects';
-                subjectData = { 'termId': value, majorId, lecturerId };
-            }
 
             // Send request to fetch subjects
             $.ajax({
@@ -446,7 +434,7 @@ $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
 
 function setVisibleColumn(state) {
     var table = $('#tblStatistics').DataTable();
-    for (var i = 7; i <= 11; i++) {
+    for (var i = 8; i <= 12; i++) {
         table.column(i).visible(state, state);
     }
     table.columns.adjust().draw(state); // adjust column sizing and redraw
@@ -460,19 +448,19 @@ function format(d) {
 
     // Map data object
     var subjectId = d.map(function (e) {
-        return e.id;
+        return e.Id;
     });
     var subjectName = d.map(function (e) {
-        return e.subject_name;
+        return e.Name;
     });
     var subjectCredits = d.map(function (e) {
-        return e.subject_credits;
+        return e.Credits;
     });
     var subjectMajor = d.map(function (e) {
-        return e.subject_major;
+        return e.Major;
     });
     var subjectHours = d.map(function (e) {
-        return e.subject_hours;
+        return e.Hours;
     });
     var totalClass = d.map(function (e) {
         var theoryClass = e.theory_count + 'LT',
