@@ -466,14 +466,14 @@ function format(d) {
         return e.RemunerationHours;
     });
     var totalClass = d.map(function (e) {
-        var theoryClass = e.theory_count + 'LT',
-            practiceClass = e.practice_count + 'TH',
+        var theoryClass = e.TheoryCount + 'LT',
+            practiceClass = e.PracticeCount + 'TH',
             totalClass;
-        if (e.theory_count && e.practice_count) {
+        if (e.TheoryCount && e.PracticeCount) {
             totalClass = theoryClass + ' + ' + practiceClass;
-        } else if (e.theory_count) {
+        } else if (e.TheoryCount) {
             totalClass = theoryClass;
-        } else if (e.practice_count) {
+        } else if (e.PracticeCount) {
             totalClass = practiceClass;
         }
         return totalClass;

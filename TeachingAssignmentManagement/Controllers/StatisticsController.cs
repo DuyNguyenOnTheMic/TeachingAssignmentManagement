@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
@@ -283,7 +284,9 @@ namespace TeachingAssignmentManagement.Controllers
                     Credits = item.credits,
                     Major = item.major.name,
                     Hours = subjectHours,
-                    RemunerationHours = Math.Round(remunerationHours)
+                    RemunerationHours = Math.Round(remunerationHours),
+                    TheoryCount = query_subjectClasses.Count(c => c.type == MyConstants.TheoreticalClassType),
+                    PracticeCount = query_subjectClasses.Count(c => c.type == MyConstants.PracticeClassType)
                 });
             }
             return Json(subjects, JsonRequestBehavior.AllowGet);
