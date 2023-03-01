@@ -261,34 +261,30 @@ namespace TeachingAssignmentManagement.Controllers
             term term = unitOfWork.TermRepository.GetTermByID(termId);
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(term.start_year, term.end_year);
             IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTermOrderBySubject(termId, majorId, lecturerId);
+            IEnumerable<subject> query_subjects = query_classes.Select(c => c.subject).Distinct();
             List<SubjectDTO> subjects = new List<SubjectDTO>();
             string previousSubjectId = string.Empty;
-            foreach (var item in query_classes)
+            foreach (var item in query_subjects)
             {
-                // Loop through each class to find subjects
-                string currentSubjectId = item.subject.subject_id;
+                // Loop through each subjects to find classes
                 decimal remunerationHours = decimal.Zero;
-                if (currentSubjectId != previousSubjectId)
+                IEnumerable<class_section> query_subjectClasses = query_classes.Where(c => c.subject.subject_id == item.subject_id);
+                int? subjectHours = 0;
+                foreach (var subjectClass in query_subjectClasses)
                 {
-                    IEnumerable<class_section> query_subjectClasses = query_classes.Where(c => c.subject.subject_id == currentSubjectId);
-                    int? subjectHours = 0;
-                    foreach (var subjectClass in query_subjectClasses)
-                    {
-                        int subjectTotalLesson = subjectClass.total_lesson.GetValueOrDefault(0);
-                        subjectHours += subjectTotalLesson;
-                        remunerationHours += subjectTotalLesson * RemunerationController.CalculateRemuneration(subjectClass, coefficient);
-                    }
-                    subjects.Add(new SubjectDTO
-                    {
-                        Id = currentSubjectId,
-                        Name = item.subject.name,
-                        Credits = item.subject.credits,
-                        Major = item.major.name,
-                        Hours = subjectHours,
-                        RemunerationHours = Math.Round(remunerationHours)
-                    });
+                    int subjectTotalLesson = subjectClass.total_lesson.GetValueOrDefault(0);
+                    subjectHours += subjectTotalLesson;
+                    remunerationHours += subjectTotalLesson * RemunerationController.CalculateRemuneration(subjectClass, coefficient);
                 }
-                previousSubjectId = currentSubjectId;
+                subjects.Add(new SubjectDTO
+                {
+                    Id = item.subject_id,
+                    Name = item.name,
+                    Credits = item.credits,
+                    Major = item.major.name,
+                    Hours = subjectHours,
+                    RemunerationHours = Math.Round(remunerationHours)
+                });
             }
             return Json(subjects, JsonRequestBehavior.AllowGet);
         }
