@@ -270,13 +270,19 @@ namespace TeachingAssignmentManagement.Controllers
 
                 if (currentSubjectId != previousSubjectId)
                 {
+                    IEnumerable<class_section> query_subjects = query_classes.Where(c => c.subject.subject_id == currentSubjectId);
+                    int? subjectHours = 0;
+                    foreach (var subject in query_subjects)
+                    {
+                        subjectHours += subject.total_lesson;
+                    }
                     subjects.Add(new SubjectDTO
                     {
                         Id = currentSubjectId,
                         Name = item.subject.name,
                         Credits = item.subject.credits,
                         Major = item.major.name,
-                        Hours = query_classes.Where(c => c.subject.subject_id == currentSubjectId).Sum(c => c.total_lesson),
+                        Hours = subjectHours,
                     });
                 }
                 previousSubjectId = item.subject.subject_id;
