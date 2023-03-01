@@ -263,23 +263,21 @@ namespace TeachingAssignmentManagement.Controllers
             IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, majorId, lecturerId);
             List<SubjectDTO> subjects = new List<SubjectDTO>();
             string previousSubjectId = string.Empty;
-            int subjectHours = 0;
             foreach (var item in query_classes)
             {
+                string currentSubjectId = item.subject.subject_id;
                 int totalLesson = item.total_lesson.GetValueOrDefault(0);
-                subjectHours += totalLesson;
 
-                if (item.subject.subject_id != previousSubjectId)
+                if (currentSubjectId != previousSubjectId)
                 {
                     subjects.Add(new SubjectDTO
                     {
-                        Id = item.subject.subject_id,
+                        Id = currentSubjectId,
                         Name = item.subject.name,
                         Credits = item.subject.credits,
                         Major = item.major.name,
-                        Hours = subjectHours,
+                        Hours = query_classes.Where(c => c.subject.subject_id == currentSubjectId).Sum(c => c.total_lesson),
                     });
-                    subjectHours = 0;
                 }
                 previousSubjectId = item.subject.subject_id;
             }
