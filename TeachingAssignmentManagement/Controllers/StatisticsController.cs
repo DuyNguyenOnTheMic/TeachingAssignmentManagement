@@ -267,11 +267,11 @@ namespace TeachingAssignmentManagement.Controllers
 
                 if (currentSubjectId != previousSubjectId)
                 {
-                    IEnumerable<class_section> query_subjects = query_classes.Where(c => c.subject.subject_id == currentSubjectId);
+                    IEnumerable<class_section> query_subjectClasses = query_classes.Where(c => c.subject.subject_id == currentSubjectId);
                     int? subjectHours = 0;
-                    foreach (var subject in query_subjects)
+                    foreach (var subjectClass in query_subjectClasses)
                     {
-                        int? subjectTotalLesson = subject.total_lesson;
+                        int? subjectTotalLesson = subjectClass.total_lesson;
                         subjectHours += subjectTotalLesson;
                     }
                     subjects.Add(new SubjectDTO
@@ -283,7 +283,7 @@ namespace TeachingAssignmentManagement.Controllers
                         Hours = subjectHours,
                     });
                 }
-                previousSubjectId = item.subject.subject_id;
+                previousSubjectId = currentSubjectId;
             }
             return Json(subjects, JsonRequestBehavior.AllowGet);
         }
