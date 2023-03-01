@@ -7,6 +7,7 @@
         public int Credits { get; set; }
         public string Major { get; set; }
         public int? Hours { get; set; }
+        public decimal? RemunerationHours { get; set; }
         public int TheoryCount { get; set; }
         public int PracticeCount { get; set; }
     }

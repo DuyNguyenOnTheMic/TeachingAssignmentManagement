@@ -258,9 +258,12 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult GetRemunerationSubjects(int termId, string majorId, string lecturerId)
         {
             // Get classes in term of lecturer
+            term term = unitOfWork.TermRepository.GetTermByID(termId);
+            coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(term.start_year, term.end_year);
             IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTermOrderBySubject(termId, majorId, lecturerId);
             List<SubjectDTO> subjects = new List<SubjectDTO>();
             string previousSubjectId = string.Empty;
+            decimal remunerationHours = decimal.Zero;
             foreach (var item in query_classes)
             {
                 // Loop through each class to find subjects
@@ -271,8 +274,9 @@ namespace TeachingAssignmentManagement.Controllers
                     int? subjectHours = 0;
                     foreach (var subjectClass in query_subjectClasses)
                     {
-                        int? subjectTotalLesson = subjectClass.total_lesson;
+                        int subjectTotalLesson = subjectClass.total_lesson.GetValueOrDefault(0);
                         subjectHours += subjectTotalLesson;
+                        remunerationHours += subjectTotalLesson * RemunerationController.CalculateRemuneration(subjectClass, coefficient);
                     }
                     subjects.Add(new SubjectDTO
                     {
@@ -281,6 +285,7 @@ namespace TeachingAssignmentManagement.Controllers
                         Credits = item.subject.credits,
                         Major = item.major.name,
                         Hours = subjectHours,
+                        RemunerationHours = remunerationHours
                     });
                 }
                 previousSubjectId = currentSubjectId;
