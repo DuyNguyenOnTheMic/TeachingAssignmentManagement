@@ -263,8 +263,8 @@ namespace TeachingAssignmentManagement.Controllers
             string previousSubjectId = string.Empty;
             foreach (var item in query_classes)
             {
+                // Loop through each class to find subjects
                 string currentSubjectId = item.subject.subject_id;
-
                 if (currentSubjectId != previousSubjectId)
                 {
                     IEnumerable<class_section> query_subjectClasses = query_classes.Where(c => c.subject.subject_id == currentSubjectId);
