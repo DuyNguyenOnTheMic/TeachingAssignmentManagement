@@ -8,7 +8,7 @@ dataTable = $('#tblRemuneration').DataTable(
             { 'data': 'StaffId' },
             { 'data': 'FullName' },
             { 'data': 'AcademicDegreeRankId' },
-            { 'data': 'Remuneration', 'render': DataTable.render.number('.', ',', 0, '', ' ₫') },
+            { 'data': 'Remuneration', 'type': 'num-fmt', 'render': DataTable.render.number('.', ',', 0, '', ' ₫') },
             { 'data': 'Status' }
         ],
 
