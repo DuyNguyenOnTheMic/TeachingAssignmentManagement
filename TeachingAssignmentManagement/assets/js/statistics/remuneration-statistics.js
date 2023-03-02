@@ -288,7 +288,7 @@ function hoursSum(items, prop) {
 
 function populateDatatable(data) {
     var dataTable;
-    var exportColumns = isLessonCheck.is(":checked") ? [0, 2, 3, 4, 5, 6, 7] : [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    var exportColumns = isLessonCheck.is(":checked") ? [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] : [0, 2, 3, 4, 5, 6, 7];
 
     // Populate statistics table
     dataTable = $('#tblStatistics').DataTable(
