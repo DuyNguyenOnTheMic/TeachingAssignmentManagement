@@ -13,7 +13,7 @@ var dataLoader = $('#data-loader'),
     majorAbb = dataLoader.data('majorabb'),
     value = dataLoader.val(),
     url = rootUrl + 'Statistics/GetRemunerationData',
-    titleText = 'Thống kê số giờ thù lao học kỳ ' + value + ' ngành ' + majorAbb,
+    titleText = 'Thống kê số giờ quy đổi học kỳ ' + value + ' ngành ' + majorAbb,
     fileName = 'ThongKeSoGio_HK' + value,
     data = { isLesson, 'termId': value, majorId };
 
