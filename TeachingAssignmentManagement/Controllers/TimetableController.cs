@@ -415,6 +415,7 @@ namespace TeachingAssignmentManagement.Controllers
                     else
                     {
                         class_section query_classSection = unitOfWork.ClassSectionRepository.FindClassSection(query_classSectionWhere, classSection.class_section_id, classSection.day_2, classSection.start_lesson_2, classSection.room_id);
+                        query_classSection.student_registered_number = classSection.student_registered_number;
                         if (query_classSection == null)
                         {
                             // Create new class if no class found
@@ -438,7 +439,6 @@ namespace TeachingAssignmentManagement.Controllers
                                 errorAssignList.Add(Tuple.Create(lecturerId, fullName, classSectionid, day, lessonTime, checkState.message));
                             }
                         }
-                        query_classSection.student_registered_number = classSection.student_registered_number;
                     }
                     ProgressHub.SendProgress("Đang import...", dt.Rows.IndexOf(row), itemsCount);
                 }
