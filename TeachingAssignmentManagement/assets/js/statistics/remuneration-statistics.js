@@ -116,7 +116,7 @@ $.ajax({
                     labels: labels,
                     datasets: [
                         {
-                            label: 'Số giờ thù lao',
+                            label: 'Số giờ quy đổi',
                             data: totalLessons,
                             backgroundColor: 'rgba(115, 103, 240, 0.8)',
                             borderColor: 'transparent',
@@ -495,7 +495,7 @@ function format(d) {
         '<th class="text-center">Số TC</th>' +
         '<th class="text-center">Số lớp</th>' +
         '<th class="text-center">Số giờ</th>' +
-        '<th class="text-center">Số giờ thù lao</th>' +
+        '<th class="text-center">Số giờ quy đổi</th>' +
         '</tr>' +
         '</thead>' +
         '<tbody>' +
