@@ -52,14 +52,13 @@ namespace TeachingAssignmentManagement.Controllers
             foreach (LecturerRankDTO rank in lecturerRanks)
             {
                 // Reset values in each loop
-                decimal teachingRemuneration = decimal.Zero;
+                decimal unitPriceByLevel = decimal.Zero,
+                        teachingRemuneration = decimal.Zero;
                 bool isMissing = false;
 
                 // Check if lecturer have been assigned a rank
                 if (rank.Id != null)
                 {
-                    decimal unitPriceByLevel;
-
                     // Get classes in term of lecturer
                     IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTerm(termId, rank.LecturerId);
                     foreach (class_section item in query_classes)
@@ -74,17 +73,18 @@ namespace TeachingAssignmentManagement.Controllers
                         else
                         {
                             isMissing = true;
-                            unitPriceByLevel = decimal.Zero;
                         }
 
                         teachingRemuneration += unitPriceByLevel * CalculateRemuneration(item, coefficient);
                     }
                 }
+                string lecturerRank = rank.AcademicDegreeRankId;
+                string academicDegreeRankId = lecturerRank != null ? $"{lecturerRank} ({unitPriceByLevel:N0} ₫)" : null;
                 remunerationDTOs.Add(new RemunerationDTO
                 {
                     StaffId = rank.StaffId,
                     FullName = rank.FullName,
-                    AcademicDegreeRankId = rank.AcademicDegreeRankId,
+                    AcademicDegreeRankId = academicDegreeRankId,
                     Remuneration = teachingRemuneration,
                     Status = isMissing
                 });
