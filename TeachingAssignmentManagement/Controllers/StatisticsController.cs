@@ -242,10 +242,16 @@ namespace TeachingAssignmentManagement.Controllers
             // Declare variables
             term term = unitOfWork.TermRepository.GetTermByID(termId);
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(term.start_year, term.end_year);
-            IEnumerable<lecturer> lecturers = unitOfWork.UserRepository.GetFacultyMembersInTerm(termId, majorId);
+
+            // Check if coefficient is null
+            if (coefficient == null)
+            {
+                return Json(new { error = true, message = "Chưa có dữ liệu hệ số cho năm học này" }, JsonRequestBehavior.AllowGet);
+            }
 
             // Check if this term and major have data
             bool haveData = unitOfWork.ClassSectionRepository.CheckClassesInTermMajor(termId, majorId);
+            IEnumerable<lecturer> lecturers = unitOfWork.UserRepository.GetFacultyMembersInTerm(termId, majorId);
             List<RemunerationDTO> remunerationDTOs = haveData
                 ? !isLesson
                     ? GetRemunerationData(termId, majorId, coefficient, lecturers)
