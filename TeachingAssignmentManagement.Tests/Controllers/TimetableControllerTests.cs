@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers.Tests
@@ -16,11 +17,14 @@ namespace TeachingAssignmentManagement.Controllers.Tests
     {
         private IQueryable<term> listTerm;
         private IQueryable<major> listMajor;
+        private ICollection<AspNetRole> listRole;
+        private IQueryable<AspNetUser> listUser;
         private IQueryable<lecturer> listLecturer;
         private IQueryable<subject> listSubject;
         private IQueryable<class_section> listClassSection;
         private Mock<DbSet<term>> mockSetTerm;
         private Mock<DbSet<major>> mockSetMajor;
+        private Mock<DbSet<AspNetUser>> mockSetUser;
         private Mock<DbSet<lecturer>> mockSetLecturer;
         private Mock<DbSet<class_section>> mockSetClassSection;
         private Mock<CP25Team03Entities> mockContext;
@@ -30,16 +34,22 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         readonly string userId1 = Guid.NewGuid().ToString();
         readonly string userId2 = Guid.NewGuid().ToString();
 
-        [TestInitialize()]
-        public void Initialize()
+        public TimetableControllerTests()
         {
             listTerm = new List<term> {
                 new term() { id = 123, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6, status = true },
                 new term() { id = 124, start_year = 2023, end_year = 2024, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6, status = true }
             }.AsQueryable();
             listMajor = new List<major> {
-                new major { id = "7480103", name = "Kỹ Thuật Phần Mềm", abbreviation = "KTPM" },
-                new major { id = "7480201", name = "Công Nghệ Thông Tin", abbreviation = "CNTT" }
+                new major { id = "7480103", name = "Kỹ Thuật Phần Mềm", abbreviation = "KTPM", program_type = MyConstants.StandardProgramType },
+                new major { id = "7480201", name = "Công Nghệ Thông Tin", abbreviation = "CNTT", program_type = MyConstants.StandardProgramType }
+            }.AsQueryable();
+            listRole = new List<AspNetRole> {
+                new AspNetRole() { Id = "1", Name = "BCN khoa" }
+            };
+            listUser = new List<AspNetUser> {
+                new AspNetUser() { Id = userId1, Email = "a.nv@vanlanguni.vn", UserName = "a.nv@vanlanguni.vn", AspNetRoles = listRole },
+                new AspNetUser() { Id = userId2, Email = "b.nv@vlu.edu.vn", UserName = "b.nv@vlu.edu.vn", AspNetRoles = listRole }
             }.AsQueryable();
             listLecturer = new List<lecturer> {
                 new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = "TG", status = true },
@@ -56,6 +66,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             }.AsQueryable();
             mockSetTerm = new Mock<DbSet<term>>();
             mockSetMajor = new Mock<DbSet<major>>();
+            mockSetUser = new Mock<DbSet<AspNetUser>>();
             mockSetLecturer = new Mock<DbSet<lecturer>>();
             mockSetClassSection = new Mock<DbSet<class_section>>();
             mockContext = new Mock<CP25Team03Entities>();
@@ -68,6 +79,10 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockSetMajor.As<IQueryable<major>>().Setup(m => m.Expression).Returns(listMajor.Expression);
             mockSetMajor.As<IQueryable<major>>().Setup(m => m.ElementType).Returns(listMajor.ElementType);
             mockSetMajor.As<IQueryable<major>>().Setup(m => m.GetEnumerator()).Returns(listMajor.GetEnumerator());
+            mockSetUser.As<IQueryable<AspNetUser>>().Setup(m => m.Provider).Returns(listUser.Provider);
+            mockSetUser.As<IQueryable<AspNetUser>>().Setup(m => m.Expression).Returns(listUser.Expression);
+            mockSetUser.As<IQueryable<AspNetUser>>().Setup(m => m.ElementType).Returns(listUser.ElementType);
+            mockSetUser.As<IQueryable<AspNetUser>>().Setup(m => m.GetEnumerator()).Returns(listUser.GetEnumerator());
             mockSetLecturer.As<IQueryable<lecturer>>().Setup(m => m.Provider).Returns(listLecturer.Provider);
             mockSetLecturer.As<IQueryable<lecturer>>().Setup(m => m.Expression).Returns(listLecturer.Expression);
             mockSetLecturer.As<IQueryable<lecturer>>().Setup(m => m.ElementType).Returns(listLecturer.ElementType);
@@ -78,6 +93,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockSetClassSection.As<IQueryable<class_section>>().Setup(m => m.GetEnumerator()).Returns(listClassSection.GetEnumerator());
             mockContext.Setup(c => c.terms).Returns(() => mockSetTerm.Object);
             mockContext.Setup(c => c.majors).Returns(() => mockSetMajor.Object);
+            mockContext.Setup(c => c.AspNetUsers).Returns(() => mockSetUser.Object);
             mockContext.Setup(c => c.lecturers).Returns(() => mockSetLecturer.Object);
             mockContext.Setup(c => c.class_section).Returns(() => mockSetClassSection.Object);
         }

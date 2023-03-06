@@ -356,10 +356,9 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult);
             for (int i = 0; i < listLecturer.Count(); i++)
             {
-                Assert.AreEqual(actionResult[i].id, lecturerList[i].id);
-                Assert.AreEqual(actionResult[i].staff_id, lecturerList[i].staff_id);
-                Assert.AreEqual(actionResult[i].full_name, lecturerList[i].full_name);
-                Assert.AreEqual(actionResult[i].type, lecturerList[i].type);
+                Assert.AreEqual(actionResult[i].Id, lecturerList[i].id);
+                Assert.AreEqual(actionResult[i].FullName, lecturerList[i].full_name);
+                Assert.AreEqual(actionResult[i].Type, lecturerList[i].type);
             }
         }
 
@@ -401,9 +400,8 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 dynamic json = actionResult[i];
 
                 Assert.IsNotNull(json);
-                Assert.IsNotNull(json.staff_id);
-                Assert.IsNotNull(json.full_name);
-                Assert.IsNotNull(json.type);
+                Assert.IsNotNull(json.FullName);
+                Assert.IsNotNull(json.Type);
             }
         }
 
