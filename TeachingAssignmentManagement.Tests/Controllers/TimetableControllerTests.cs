@@ -53,8 +53,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 new AspNetUser() { Id = userId2, Email = "b.nv@vlu.edu.vn", UserName = "b.nv@vlu.edu.vn", AspNetRoles = listRole }
             }.AsQueryable();
             listLecturer = new List<lecturer> {
-                new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = "TG", status = true },
-                new lecturer() { id = userId2, staff_id = "1002", full_name = "Nguyễn Văn B", type = "CH", status = true }
+                new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = "TG", is_vietnamese = true, status = true },
+                new lecturer() { id = userId2, staff_id = "1002", full_name = "Nguyễn Văn B", type = "CH", is_vietnamese = true, status = true }
             }.AsQueryable();
             listSubject = new List<subject>
             {
