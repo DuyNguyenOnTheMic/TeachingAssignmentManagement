@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.UI.WebControls;
+using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.DAL.Tests
@@ -20,8 +21,8 @@ namespace TeachingAssignmentManagement.DAL.Tests
         public void Initialize()
         {
             listMajor = new List<major> {
-                new major() { id = "1", name = "Công Nghệ Thông Tin", abbreviation = "CNTT" },
-                new major() { id = "2", name = "Kỹ Thuật Phần Mềm", abbreviation = "KTPM" }
+                new major() { id = "1", name = "Công Nghệ Thông Tin", abbreviation = "CNTT", program_type = MyConstants.StandardProgramType },
+                new major() { id = "2", name = "Kỹ Thuật Phần Mềm", abbreviation = "KTPM", program_type = MyConstants.StandardProgramType }
             }.AsQueryable();
             mockSet = new Mock<DbSet<major>>();
             mockContext = new Mock<CP25Team03Entities>();
