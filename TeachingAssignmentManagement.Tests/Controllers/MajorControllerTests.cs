@@ -6,6 +6,7 @@ using System.Linq;
 using System.Transactions;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers.Tests
@@ -23,8 +24,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Initialize()
         {
             listMajor = new List<major> {
-                new major() { id = "1", name = "Công Nghệ Thông Tin", abbreviation = "CNTT" },
-                new major() { id = "2", name = "Kỹ Thuật Phần Mềm", abbreviation = "KTPM" }
+                new major() { id = "1", name = "Công Nghệ Thông Tin", abbreviation = "CNTT", program_type = MyConstants.StandardProgramType },
+                new major() { id = "2", name = "Kỹ Thuật Phần Mềm", abbreviation = "KTPM", program_type = MyConstants.StandardProgramType }
             }.AsQueryable();
             mockSet = new Mock<DbSet<major>>();
             mockContext = new Mock<CP25Team03Entities>();
@@ -321,6 +322,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Arrange
             MajorController controller = new MajorController(unitOfWork);
             major major = new major() { id = "test", name = "Hệ thống thông tin" };
+            mockSet.Setup(m => m.Find(It.IsAny<string>())).Returns(major);
 
             // Act
             ViewResult result;

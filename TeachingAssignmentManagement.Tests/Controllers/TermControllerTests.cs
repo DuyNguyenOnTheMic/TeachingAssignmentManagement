@@ -399,13 +399,25 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             TermController controller = new TermController(unitOfWork);
+            int termId = listTerm.First().id;
+            IQueryable<lecturer_rank> listLecturerRank = new List<lecturer_rank>
+            {
+                new lecturer_rank() { id = 1, academic_degree_rank_id = "CN1", lecturer_id = Guid.NewGuid().ToString(), term_id = termId }
+            }.AsQueryable();
+            Mock<DbSet<lecturer_rank>> mockSetLecturerRank = new Mock<DbSet<lecturer_rank>>();
+            mockSetLecturerRank.As<IQueryable<lecturer_rank>>().Setup(m => m.Provider).Returns(listLecturerRank.Provider);
+            mockSetLecturerRank.As<IQueryable<lecturer_rank>>().Setup(m => m.Expression).Returns(listLecturerRank.Expression);
+            mockSetLecturerRank.As<IQueryable<lecturer_rank>>().Setup(m => m.ElementType).Returns(listLecturerRank.ElementType);
+            mockSetLecturerRank.As<IQueryable<lecturer_rank>>().Setup(m => m.GetEnumerator()).Returns(listLecturerRank.GetEnumerator());
+            mockContext.Setup(c => c.lecturer_rank).Returns(() => mockSetLecturerRank.Object);
 
             // Act
-            JsonResult result = controller.Delete(listTerm.First().id) as JsonResult;
+            JsonResult result = controller.Delete(termId) as JsonResult;
             dynamic jsonCollection = result.Data;
 
             // Assert
             Assert.IsNotNull(jsonCollection);
+            mockSetLecturerRank.Verify(r => r.RemoveRange(It.IsAny<IEnumerable<lecturer_rank>>()));
             mockSet.Verify(r => r.Remove(It.IsAny<term>()));
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
