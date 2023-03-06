@@ -34,7 +34,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         readonly string userId1 = Guid.NewGuid().ToString();
         readonly string userId2 = Guid.NewGuid().ToString();
 
-        public TimetableControllerTests()
+        [TestInitialize()]
+        public void Initialize()
         {
             listTerm = new List<term> {
                 new term() { id = 123, start_year = 2022, end_year = 2023, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6, status = true },
@@ -57,7 +58,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             }.AsQueryable();
             listSubject = new List<subject>
             {
-                new subject() { id = "71ITBS10103", name = "Nhập môn Công nghệ thông tin", credits = 3 }
+                new subject() { id = "71ITBS10103", name = "Nhập môn Công nghệ thông tin", credits = 3, term_id = termId, major_id = majorId }
             }.AsQueryable();
             listClassSection = new List<class_section>
             {
@@ -255,11 +256,9 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(result);
             for (int i = 0; i < lecturerList.Count(); i++)
             {
-                Assert.AreEqual(viewBagResult[i].id, lecturerList[i].id);
-                Assert.AreEqual(viewBagResult[i].staff_id, lecturerList[i].staff_id);
-                Assert.AreEqual(viewBagResult[i].full_name, lecturerList[i].full_name);
-                Assert.AreEqual(viewBagResult[i].type, lecturerList[i].type);
-                Assert.AreEqual(viewBagResult[i].status, lecturerList[i].status);
+                Assert.AreEqual(viewBagResult[i].Id, lecturerList[i].id);
+                Assert.AreEqual(viewBagResult[i].FullName, lecturerList[i].full_name);
+                Assert.AreEqual(viewBagResult[i].Type, lecturerList[i].type);
             }
         }
 
@@ -1606,6 +1605,12 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             TimetableController controller = new TimetableController(unitOfWork);
+            Mock<DbSet<subject>> mockSetSubject = new Mock<DbSet<subject>>();
+            mockSetSubject.As<IQueryable<subject>>().Setup(m => m.Provider).Returns(listSubject.Provider);
+            mockSetSubject.As<IQueryable<subject>>().Setup(m => m.Expression).Returns(listSubject.Expression);
+            mockSetSubject.As<IQueryable<subject>>().Setup(m => m.ElementType).Returns(listSubject.ElementType);
+            mockSetSubject.As<IQueryable<subject>>().Setup(m => m.GetEnumerator()).Returns(listSubject.GetEnumerator());
+            mockContext.Setup(c => c.subjects).Returns(() => mockSetSubject.Object);
 
             // Act
             JsonResult result = controller.DeleteAll(termId, majorId) as JsonResult;
@@ -1614,6 +1619,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.IsNotNull(jsonCollection);
             mockSetClassSection.Verify(r => r.RemoveRange(It.IsAny<IEnumerable<class_section>>()));
+            mockSetSubject.Verify(r => r.RemoveRange(It.IsAny<IEnumerable<subject>>()));
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
 
