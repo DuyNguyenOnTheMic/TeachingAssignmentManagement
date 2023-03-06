@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.DAL.Tests
@@ -35,16 +36,16 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 new term() { id = 124, start_year = 2023, end_year = 2024, start_week = 1, start_date = DateTime.Now, max_lesson = 6, max_class = 6, status = true }
             }.AsQueryable();
             listMajor = new List<major> {
-                new major { id = "7480103", name = "Kỹ Thuật Phần Mềm", abbreviation = "KTPM" },
-                new major { id = "7480201", name = "Công Nghệ Thông Tin", abbreviation = "CNTT" }
+                new major() { id = "1", name = "Công Nghệ Thông Tin", abbreviation = "CNTT", program_type = MyConstants.StandardProgramType },
+                new major() { id = "2", name = "Kỹ Thuật Phần Mềm", abbreviation = "KTPM", program_type = MyConstants.StandardProgramType }
             }.AsQueryable();
             listLecturer = new List<lecturer> {
-                new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = "TG", status = true },
-                new lecturer() { id = userId2, staff_id = "1002", full_name = "Nguyễn Văn B", type = "CH", status = true }
+                new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = "TG", is_vietnamese = true, status = true },
+                new lecturer() { id = userId2, staff_id = "1002", full_name = "Nguyễn Văn B", type = "CH", is_vietnamese = true, status = true }
             }.AsQueryable();
             listSubject = new List<subject>
             {
-                new subject() { id = "71ITBS10103", name = "Nhập môn Công nghệ thông tin", credits = 3 }
+                new subject() { id = "71ITBS10103", name = "Nhập môn Công nghệ thông tin", credits = 3, term_id = termId, major_id = majorId }
             }.AsQueryable();
             listClassSection = new List<class_section>
             {
