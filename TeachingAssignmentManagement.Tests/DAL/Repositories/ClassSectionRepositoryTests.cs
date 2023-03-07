@@ -765,5 +765,20 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.AreEqual(actionResult[i].subject, classSectionList[i].subject);
             }
         }
+
+        [TestMethod()]
+        public void Export_Data_Should_Be_IEnumerable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetExportData(termId, majorId).ToList();
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
     }
 }
