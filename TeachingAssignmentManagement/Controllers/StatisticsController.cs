@@ -13,7 +13,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
 {
-    [Authorize(Roles = "BCN khoa, Bộ môn, Giảng viên")]
+    [Authorize(Roles = CustomRoles.AllRoles)]
     public class StatisticsController : Controller
     {
         private ApplicationUserManager _userManager;
