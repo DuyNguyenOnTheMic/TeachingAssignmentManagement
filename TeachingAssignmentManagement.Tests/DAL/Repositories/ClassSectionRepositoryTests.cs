@@ -1069,5 +1069,24 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult);
             Assert.IsTrue(actionResult.Count == 0);
         }
+
+        [TestMethod()]
+        public void Classes_In_Campus_Data_Should_Return_Empty_IEnumerable_Test()
+        {
+            // Arrange
+            class_section classSection = listClassSection.First();
+
+            // Act
+            IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetClassesByTerm(termId);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassesInCampus(query_classes, 1, classSection.room_id).ToList();
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(actionResult.Count == 0);
+        }
     }
 }
