@@ -85,6 +85,8 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.AreEqual(actionResult[i].staff_id, lecturerList[i].staff_id);
                 Assert.AreEqual(actionResult[i].full_name, lecturerList[i].full_name);
                 Assert.AreEqual(actionResult[i].type, lecturerList[i].type);
+                Assert.AreEqual(actionResult[i].is_vietnamese, lecturerList[i].is_vietnamese);
+                Assert.AreEqual(actionResult[i].status, lecturerList[i].status);
             }
         }
 
@@ -132,6 +134,8 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.IsNotNull(json.staff_id);
                 Assert.IsNotNull(json.full_name);
                 Assert.IsNotNull(json.type);
+                Assert.IsNotNull(json.is_vietnamese);
+                Assert.IsNotNull(json.status);
             }
         }
 
@@ -400,6 +404,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 dynamic json = actionResult[i];
 
                 Assert.IsNotNull(json);
+                Assert.IsNotNull(json.Id);
                 Assert.IsNotNull(json.FullName);
                 Assert.IsNotNull(json.Type);
             }
@@ -454,6 +459,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.AreEqual(lecturer.staff_id, actionResult.staff_id);
             Assert.AreEqual(lecturer.full_name, actionResult.full_name);
             Assert.AreEqual(lecturer.type, actionResult.type);
+            Assert.AreEqual(lecturer.is_vietnamese, actionResult.is_vietnamese);
             Assert.AreEqual(lecturer.status, actionResult.status);
         }
 
@@ -543,7 +549,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         public void Insert_Lecturer_Test()
         {
             // Arrange
-            lecturer lecturer = new lecturer() { id = Guid.NewGuid().ToString(), staff_id = "123", full_name = "Nguyễn Văn C", type = "CH", status = true };
+            lecturer lecturer = new lecturer() { id = Guid.NewGuid().ToString(), staff_id = "123", full_name = "Nguyễn Văn C", type = "CH", is_vietnamese = true, status = true };
 
             // Act
             unitOfWork.UserRepository.InsertLecturer(lecturer);
