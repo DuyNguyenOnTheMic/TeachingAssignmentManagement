@@ -1038,5 +1038,19 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult);
             Assert.AreEqual(query_classSection.Count(), actionResult.Count);
         }
+
+        [TestMethod()]
+        public void Get_Classes_In_Campus_Not_Null_Test()
+        {
+            // Arrange
+            class_section classSection = listClassSection.First();
+
+            // Act
+            IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetClassesByTerm(termId);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassesInCampus(query_classes, 1, classSection.room_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
     }
 }
