@@ -157,7 +157,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "BCN khoa")]
+        [Authorize(Roles = CustomRoles.FacultyBoard)]
         public ActionResult Import()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
@@ -166,7 +166,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "BCN khoa")]
+        [Authorize(Roles = CustomRoles.FacultyBoard)]
         public ActionResult Import(HttpPostedFileBase postedFile, int term, string major, bool isUpdate, bool isCheckStudentNumber)
         {
             string path = Server.MapPath("~/Uploads/");
@@ -635,7 +635,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "BCN khoa")]
+        [Authorize(Roles = CustomRoles.FacultyBoard)]
         public ActionResult Delete(int id)
         {
             // Delete class
@@ -648,7 +648,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "BCN khoa")]
+        [Authorize(Roles = CustomRoles.FacultyBoard)]
         public ActionResult DeleteAll(int term, string major)
         {
             // Delete all records in class section table

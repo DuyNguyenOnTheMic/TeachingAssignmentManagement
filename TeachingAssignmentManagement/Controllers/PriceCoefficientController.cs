@@ -7,7 +7,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
 {
-    [Authorize(Roles = "BCN khoa")]
+    [Authorize(Roles = CustomRoles.FacultyBoard)]
     public class PriceCoefficientController : Controller
     {
         private readonly UnitOfWork unitOfWork;

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
 {
-    [Authorize(Roles = "BCN khoa")]
+    [Authorize(Roles = CustomRoles.FacultyBoard)]
     public class LecturerRankController : Controller
     {
         private readonly UnitOfWork unitOfWork;

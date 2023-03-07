@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Hubs;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
 {
-    [Authorize(Roles = "BCN khoa")]
+    [Authorize(Roles = CustomRoles.FacultyBoard)]
     public class TermController : Controller
     {
         private readonly UnitOfWork unitOfWork;

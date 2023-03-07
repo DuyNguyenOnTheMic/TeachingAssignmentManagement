@@ -6,7 +6,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
 {
-    [Authorize(Roles = "BCN khoa")]
+    [Authorize(Roles = CustomRoles.FacultyBoard)]
     public class MajorController : Controller
     {
         private readonly UnitOfWork unitOfWork;

@@ -11,7 +11,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
 {
-    [Authorize(Roles = "BCN khoa")]
+    [Authorize(Roles = CustomRoles.FacultyBoard)]
     public class UserController : Controller
     {
         private ApplicationUserManager _userManager;
