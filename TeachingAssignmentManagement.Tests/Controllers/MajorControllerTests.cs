@@ -74,6 +74,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             {
                 Assert.IsNotNull(json.id);
                 Assert.IsNotNull(json.name);
+                Assert.IsNotNull(json.abbreviation);
+                Assert.IsNotNull(json.program_type);
             }
         }
 
@@ -94,6 +96,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             {
                 Assert.AreEqual(jsonCollection[i].id, majorList[i].id);
                 Assert.AreEqual(jsonCollection[i].name, majorList[i].name);
+                Assert.AreEqual(jsonCollection[i].abbreviation, majorList[i].abbreviation);
+                Assert.AreEqual(jsonCollection[i].program_type, majorList[i].program_type);
             }
         }
 
@@ -115,6 +119,10 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                     "JSON record does not contain \"id\" required property.");
                 Assert.IsNotNull(json.name,
                     "JSON record does not contain \"name\" required property.");
+                Assert.IsNotNull(json.abbreviation,
+                    "JSON record does not contain \"abbreviation\" required property.");
+                Assert.IsNotNull(json.program_type,
+                    "JSON record does not contain \"program_type\" required property.");
             }
         }
 
@@ -172,6 +180,10 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                    "JSON record does not contain \"id\" required property.");
                 Assert.IsNotNull(json.name,
                     "JSON record does not contain \"name\" required property.");
+                Assert.IsNotNull(json.abbreviation,
+                    "JSON record does not contain \"abbreviation\" required property.");
+                Assert.IsNotNull(json.program_type,
+                    "JSON record does not contain \"program_type\" required property.");
             }
         }
 
@@ -223,7 +235,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             MajorController controller = new MajorController(unitOfWork);
-            major major = new major() { id = "122", name = "hehe" };
+            major major = new major() { id = "122", name = "hehe", abbreviation = "HH", program_type = MyConstants.StandardProgramType };
 
             // Act
             controller.Create(major);
@@ -238,7 +250,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             MajorController controller = new MajorController();
-            major major = new major() { id = null, name = "Test" };
+            major major = new major() { id = null, name = "hehe", abbreviation = "HH", program_type = MyConstants.StandardProgramType };
 
             // Act
             JsonResult result = controller.Create(major) as JsonResult;
@@ -253,7 +265,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             MajorController controller = new MajorController();
-            major major = new major() { id = "blabla", name = null };
+            major major = new major() { id = "122", name = null, abbreviation = "HH", program_type = MyConstants.StandardProgramType };
 
             // Act
             JsonResult result = controller.Create(major) as JsonResult;
@@ -268,7 +280,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             MajorController controller = new MajorController();
-            major major = new major() { id = "usposueremisedaccumsanliguladiamatdsdasdsaddasasadd", name = "Test" };
+            major major = new major() { id = "usposueremisedaccumsanliguladiamatdsdasdsaddasasadd", name = "Test", abbreviation = "T", program_type = MyConstants.StandardProgramType };
 
             // Act
             JsonResult result = controller.Create(major) as JsonResult;
@@ -284,7 +296,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             MajorController controller = new MajorController();
-            major major = new major() { id = "test", name = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris efficitur, massa non aliquet accumsan, ligula risus posuere mi, sed accumsan ligula diam at ante. Duis fermentum blandit ante, viverra convallis magna varius et. Sed congue ut elit vitae ufsaa" };
+            major major = new major() { id = "test", name = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris efficitur, massa non aliquet accumsan, ligula risus posuere mi, sed accumsan ligula diam at ante. Duis fermentum blandit ante, viverra convallis magna varius et. Sed congue ut elit vitae ufsaa", abbreviation = "T", program_type = MyConstants.StandardProgramType };
 
             // Act
             JsonResult result = controller.Create(major) as JsonResult;
@@ -300,7 +312,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             MajorController controller = new MajorController();
-            major major = new major() { id = "test", name = "Hệ thống thông tin" };
+            major major = new major() { id = "test", name = "Hệ thống thông tin", abbreviation = "HTTT", program_type = MyConstants.StandardProgramType };
 
             // Act
             JsonResult result;
@@ -321,7 +333,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             MajorController controller = new MajorController(unitOfWork);
-            major major = new major() { id = "test", name = "Hệ thống thông tin" };
+            major major = new major() { id = "test", name = "Hệ thống thông tin", abbreviation = "HTTT", program_type = MyConstants.StandardProgramType };
             mockSet.Setup(m => m.Find(It.IsAny<string>())).Returns(major);
 
             // Act
@@ -341,7 +353,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             MajorController controller = new MajorController();
-            major major = new major() { id = "test", name = "Hệ thống thông tin" };
+            major major = new major() { id = "test", name = "Hệ thống thông tin", abbreviation = "HTTT", program_type = MyConstants.StandardProgramType };
 
             // Act
             ViewResult result;
@@ -364,7 +376,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             MajorController controller = new MajorController(unitOfWork);
-            major major = new major() { id = "test", name = "Hệ thống thông tin" };
+            major major = new major() { id = "test", name = "Hệ thống thông tin", abbreviation = "HTTT", program_type = MyConstants.StandardProgramType };
 
             // Act
             JsonResult result = controller.Edit(major) as JsonResult;
@@ -381,7 +393,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Arrange
             MajorController controller = new MajorController();
             unitOfWork = new UnitOfWork(new CP25Team03Entities());
-            major major = new major() { id = "test", name = "Hệ thống thông tin", abbreviation = "HTTT" };
+            major major = new major() { id = "test", name = "Hệ thống thông tin", abbreviation = "HTTT", program_type = MyConstants.StandardProgramType };
 
             // Act
             major majorEdited;
@@ -396,6 +408,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.AreEqual(majorEdited.id, "test");
             Assert.AreEqual(majorEdited.name, "testName");
+            Assert.AreEqual(majorEdited.abbreviation, "HTTT");
+            Assert.AreEqual(majorEdited.program_type, MyConstants.StandardProgramType);
         }
 
         [TestMethod()]
