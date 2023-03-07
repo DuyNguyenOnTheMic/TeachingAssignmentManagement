@@ -1165,5 +1165,37 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert                
             Assert.IsNotNull(actionResult[0]);
         }
+
+        [TestMethod()]
+        public void Classes_In_Campus_Should_Return_Different_Campus_Classes_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            string differentCampus = "CS4.F.04.01";
+
+            // Act
+            IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetClassesByTerm(termId);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassesInCampus(query_classes, 1, differentCampus).ToList();
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.class_section_id);
+                Assert.IsNotNull(json.type);
+                Assert.IsNotNull(json.day_2);
+                Assert.IsNotNull(json.start_lesson_2);
+                Assert.IsNotNull(json.learn_week);
+                Assert.IsNotNull(json.start_week);
+                Assert.IsNotNull(json.end_week);
+                Assert.IsNotNull(json.lecturer_id);
+                Assert.IsNotNull(json.lecturer.full_name);
+                Assert.IsNotNull(json.room_id);
+                Assert.IsNotNull(json.major.name);
+                Assert.IsNotNull(json.subject);
+            }
+        }
     }
 }
