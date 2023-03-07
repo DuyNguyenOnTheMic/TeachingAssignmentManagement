@@ -780,5 +780,15 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert
             Assert.IsTrue(count > 0);
         }
+
+        [TestMethod()]
+        public void Export_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetExportData(termId, majorId).ToList();
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
     }
 }
