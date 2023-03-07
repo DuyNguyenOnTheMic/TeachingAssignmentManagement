@@ -818,5 +818,17 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.IsNotNull(json.subject);
             }
         }
+
+        [TestMethod()]
+        public void Get_Export_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetExportData(termId, majorId).ToList();
+            List<class_section> query_classSection = listClassSection.Where(c => c.term_id == termId && c.major_id == majorId).ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
     }
 }
