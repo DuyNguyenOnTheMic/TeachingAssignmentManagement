@@ -1040,7 +1040,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Get_Classes_In_Campus_Not_Null_Test()
+        public void Get_Classes_In_Campus_Should_Return_Empty_IEnumerable_Not_Null_Test()
         {
             // Arrange
             class_section classSection = listClassSection.First();
@@ -1051,6 +1051,23 @@ namespace TeachingAssignmentManagement.DAL.Tests
 
             // Assert
             Assert.IsNotNull(actionResult);
+        }
+
+
+        [TestMethod()]
+        public void Get_Classes_In_Campus_Data_Should_Return_Empty_IEnumerable_Is_Correct_Test()
+        {
+            // Arrange
+            class_section classSection = listClassSection.First();
+
+            // Act
+            IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetClassesByTerm(termId);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassesInCampus(query_classes, 1, classSection.room_id).ToList();
+            List<class_section> classSectionList = listClassSection.Where(c => c.start_lesson_2 == 1).ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.IsTrue(actionResult.Count == 0);
         }
     }
 }
