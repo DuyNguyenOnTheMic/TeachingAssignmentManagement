@@ -1088,5 +1088,19 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert
             Assert.IsTrue(actionResult.Count == 0);
         }
+
+        [TestMethod()]
+        public void Get_Classes_In_Campus_Should_Return_Different_Campus_Classes_Not_Null_Test()
+        {
+            // Arrange
+            string differentCampus = "CS4.F.04.01";
+
+            // Act
+            IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetClassesByTerm(termId);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassesInCampus(query_classes, 1, differentCampus).ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
     }
 }
