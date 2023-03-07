@@ -14,12 +14,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Hubs;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
 {
-    [Authorize(Roles = "BCN khoa, Bộ môn, Giảng viên")]
+    [Authorize(Roles = CustomRoles.AllRoles)]
     public class TimetableController : Controller
     {
         private ApplicationUserManager _userManager;
