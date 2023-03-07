@@ -790,5 +790,33 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert                
             Assert.IsNotNull(actionResult[0]);
         }
+
+        [TestMethod()]
+        public void Export_Data_Should_Be_Indexable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetExportData(termId, majorId).ToList();
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.class_section_id);
+                Assert.IsNotNull(json.type);
+                Assert.IsNotNull(json.day_2);
+                Assert.IsNotNull(json.start_lesson_2);
+                Assert.IsNotNull(json.learn_week);
+                Assert.IsNotNull(json.start_week);
+                Assert.IsNotNull(json.end_week);
+                Assert.IsNotNull(json.lecturer_id);
+                Assert.IsNotNull(json.lecturer.full_name);
+                Assert.IsNotNull(json.room_id);
+                Assert.IsNotNull(json.major.name);
+                Assert.IsNotNull(json.subject);
+            }
+        }
     }
 }
