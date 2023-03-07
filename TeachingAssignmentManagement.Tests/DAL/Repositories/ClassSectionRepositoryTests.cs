@@ -1132,5 +1132,24 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.AreEqual(actionResult[i].subject, classSectionList[i].subject);
             }
         }
+
+        [TestMethod()]
+        public void Classes_In_Campus_Should_Return_Different_Campus_Classes_Data_Should_Be_IEnumerable_Test()
+        {
+            // Arrange
+            string differentCampus = "CS4.F.04.01";
+
+            // Act
+            IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetClassesByTerm(termId);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassesInCampus(query_classes, 1, differentCampus).ToList();
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
     }
 }
