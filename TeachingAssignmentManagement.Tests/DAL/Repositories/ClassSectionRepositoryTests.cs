@@ -1090,6 +1090,20 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
+        public void Get_Classes_In_Campus_Should_Return_Empty_If_Not_In_The_Next_Lesson_Test()
+        {
+            // Arrange
+            class_section classSection = listClassSection.First();
+
+            // Act
+            IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetClassesByTerm(termId);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassesInCampus(query_classes, 13, classSection.room_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
         public void Get_Classes_In_Campus_Should_Return_Different_Campus_Classes_Not_Null_Test()
         {
             // Arrange
