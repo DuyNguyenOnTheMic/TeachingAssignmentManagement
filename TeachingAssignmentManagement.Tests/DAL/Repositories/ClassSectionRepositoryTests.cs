@@ -739,5 +739,31 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert
             Assert.IsNotNull(actionResult);
         }
+
+        [TestMethod()]
+        public void Get_Export_Data_Is_Correct_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetExportData(termId, majorId).ToList();
+            List<class_section> classSectionList = listClassSection.ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            for (int i = 0; i < classSectionList.Count; i++)
+            {
+                Assert.AreEqual(actionResult[i].class_section_id, classSectionList[i].class_section_id);
+                Assert.AreEqual(actionResult[i].type, classSectionList[i].type);
+                Assert.AreEqual(actionResult[i].day_2, classSectionList[i].day_2);
+                Assert.AreEqual(actionResult[i].start_lesson_2, classSectionList[i].start_lesson_2);
+                Assert.AreEqual(actionResult[i].learn_week, classSectionList[i].learn_week);
+                Assert.AreEqual(actionResult[i].start_week, classSectionList[i].start_week);
+                Assert.AreEqual(actionResult[i].end_week, classSectionList[i].end_week);
+                Assert.AreEqual(actionResult[i].lecturer_id, classSectionList[i].lecturer_id);
+                Assert.AreEqual(actionResult[i].lecturer.full_name, classSectionList[i].lecturer.full_name);
+                Assert.AreEqual(actionResult[i].room_id, classSectionList[i].room_id);
+                Assert.AreEqual(actionResult[i].major.name, classSectionList[i].major.name);
+                Assert.AreEqual(actionResult[i].subject, classSectionList[i].subject);
+            }
+        }
     }
 }
