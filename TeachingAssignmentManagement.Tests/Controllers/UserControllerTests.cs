@@ -92,6 +92,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.IsNotNull(json.staff_id);
                 Assert.IsNotNull(json.full_name);
                 Assert.IsNotNull(json.type);
+                Assert.IsNotNull(json.is_vietnamese);
+                Assert.IsNotNull(json.status);
             }
         }
 
@@ -121,6 +123,10 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                     "JSON record does not contain \"full_name\" required property.");
                 Assert.IsNotNull(json.type,
                     "JSON record does not contain \"type\" required property.");
+                Assert.IsNotNull(json.is_vietnamese,
+                    "JSON record does not contain \"is_vietnamese\" required property.");
+                Assert.IsNotNull(json.status,
+                    "JSON record does not contain \"status\" required property.");
             }
         }
 
@@ -185,6 +191,10 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                     "JSON record does not contain \"full_name\" required property.");
                 Assert.IsNotNull(json.type,
                     "JSON record does not contain \"type\" required property.");
+                Assert.IsNotNull(json.is_vietnamese,
+                    "JSON record does not contain \"is_vietnamese\" required property.");
+                Assert.IsNotNull(json.status,
+                    "JSON record does not contain \"status\" required property.");
             }
         }
 
