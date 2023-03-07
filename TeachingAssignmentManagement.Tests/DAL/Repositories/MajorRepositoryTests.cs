@@ -64,6 +64,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.AreEqual(actionResult[i].id, majorList[i].id);
                 Assert.AreEqual(actionResult[i].name, majorList[i].name);
                 Assert.AreEqual(actionResult[i].abbreviation, majorList[i].abbreviation);
+                Assert.AreEqual(actionResult[i].program_type, majorList[i].program_type);
             }
         }
 
@@ -105,8 +106,10 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 dynamic json = actionResult[i];
 
                 Assert.IsNotNull(json);
+                Assert.IsNotNull(json.id);
                 Assert.IsNotNull(json.name);
                 Assert.IsNotNull(json.abbreviation);
+                Assert.IsNotNull(json.program_type);
             }
         }
 
@@ -147,13 +150,14 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.AreEqual(major.id, actionResult.id);
             Assert.AreEqual(major.name, actionResult.name);
             Assert.AreEqual(major.abbreviation, actionResult.abbreviation);
+            Assert.AreEqual(major.program_type, actionResult.program_type);
         }
 
         [TestMethod()]
         public void Insert_Major_Repository_Test()
         {
             // Arrange
-            major major = new major() { id = "122", name = "hehe" };
+            major major = new major() { id = "122", name = "hehe", abbreviation = "HH", program_type = MyConstants.StandardProgramType };
 
             // Act
             unitOfWork.MajorRepository.InsertMajor(major);
