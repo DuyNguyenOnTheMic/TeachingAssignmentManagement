@@ -42,7 +42,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "BCN khoa, Bộ môn")]
+        [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public ActionResult Index()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
@@ -52,7 +52,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "BCN khoa, Bộ môn")]
+        [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public ActionResult GetChart(bool isLesson, string type, string value, string major, string lecturerType)
         {
             ViewData["isLesson"] = isLesson;
@@ -65,7 +65,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "BCN khoa, Bộ môn")]
+        [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public JsonResult GetTermData(bool isLesson, int termId, string majorId, string lecturerType)
         {
             IEnumerable query_classes = lecturerType != "-1"
@@ -75,14 +75,14 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "BCN khoa, Bộ môn")]
+        [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public ActionResult GetTermSubjects(int termId, string majorId, string lecturerId)
         {
             return Json(unitOfWork.ClassSectionRepository.GetTermSubjects(termId, majorId, lecturerId), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        [Authorize(Roles = "BCN khoa, Bộ môn")]
+        [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public JsonResult GetYearData(bool isLesson, int startYear, int endYear, string majorId, string lecturerType)
         {
             IEnumerable query_classes = lecturerType != "-1"
@@ -92,7 +92,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "BCN khoa, Bộ môn")]
+        [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public ActionResult GetYearsubjects(int startYear, int endYear, string majorId, string lecturerId)
         {
             return Json(unitOfWork.ClassSectionRepository.GetYearsubjects(startYear, endYear, majorId, lecturerId), JsonRequestBehavior.AllowGet);
@@ -216,7 +216,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "BCN khoa, Bộ môn")]
+        [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public ActionResult Remuneration()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
@@ -225,7 +225,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "BCN khoa, Bộ môn")]
+        [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public ActionResult GetRemunerationChart(bool isLesson, int value, string major)
         {
             ViewData["isLesson"] = isLesson;
@@ -236,7 +236,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "BCN khoa, Bộ môn")]
+        [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public ActionResult GetRemunerationData(bool isLesson, int termId, string majorId)
         {
             // Declare variables
@@ -261,7 +261,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "BCN khoa, Bộ môn")]
+        [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public ActionResult GetRemunerationSubjects(int termId, string majorId, string lecturerId)
         {
             // Get classes in term of lecturer

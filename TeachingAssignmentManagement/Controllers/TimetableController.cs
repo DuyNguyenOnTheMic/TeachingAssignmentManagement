@@ -525,7 +525,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "BCN khoa, Bộ môn")]
+        [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public ActionResult Assign()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
@@ -534,7 +534,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "BCN khoa, Bộ môn")]
+        [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public JsonResult Assign(int id, string lecturerId)
         {
             // Declare variables
@@ -561,7 +561,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "BCN khoa, Bộ môn")]
+        [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public JsonResult CheckState(int id, int termId, string lecturerId, bool warning)
         {
             if (lecturerId != string.Empty)

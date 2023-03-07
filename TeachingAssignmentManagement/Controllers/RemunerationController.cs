@@ -7,7 +7,7 @@ using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers
 {
-    [Authorize(Roles = "BCN khoa, Bộ môn")]
+    [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
     public class RemunerationController : Controller
     {
         private readonly UnitOfWork unitOfWork;
