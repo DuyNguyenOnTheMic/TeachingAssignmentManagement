@@ -105,8 +105,8 @@ namespace TeachingAssignmentManagement.Controllers
             string role = identity.GetRole();
             switch (role)
             {
-                case "Bộ môn":
-                case "Giảng viên":
+                case CustomRoles.Department:
+                case CustomRoles.Lecturer:
                     return RedirectToAction("Index", "Timetable");
                 default:
                     return RedirectToAction("Index", "Home");
