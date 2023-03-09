@@ -160,7 +160,11 @@ dropzone.dropzone({
                         if (result.isConfirmed) {
                             // Keep importing the timetable
                             isCheckStudentNumber.val(false);
-                            importAgain(myDropzone, isUpdate.val());
+                            if (isUpdate.val() == 'true') {
+                                importAgain(myDropzone, true);
+                            } else {
+                                deleteAndImport(myDropzone);
+                            }
                         }
                     })
                 }
