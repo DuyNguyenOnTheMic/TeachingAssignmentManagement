@@ -1,4 +1,6 @@
-﻿@{
+﻿@using TeachingAssignmentManagement.Helpers
+
+@{
     string classId = this.ViewData["classId"].ToString() ?? string.Empty;
     string lecturerId = this.ViewData["lecturerId"].ToString() ?? string.Empty;
     SelectList select = (SelectList)ViewData["lecturer"];
@@ -15,7 +17,7 @@
     <button class="btn btn-primary waves-effect waves-float waves-light btn-icon btn-assign ms-25" data-id="@classId" type="button" aria-label="Assign">
         <i class="feather feather-check"></i>
     </button>
-    @if (User.IsInRole("BCN khoa"))
+    @if (User.IsInRole(CustomRoles.FacultyBoard))
     {
         <button class="btn btn-danger waves-effect waves-float waves-light btn-icon btn-delete ms-25" data-id="@classId" type="button" aria-label="Delete">
             <i class="feather feather-trash"></i>
