@@ -4,51 +4,53 @@
     <div class="alert-body"><b><i class="feather feather-help-circle"></i> Lưu ý: </b>Hệ thống chỉ hiển thị thù lao của những giảng viên thỉnh giảng.</div>
 </div>
 <div class="card-datatable">
-    <table class="datatables-ajax table" id="tblRemuneration">
-        <thead class="table-light">
-            <tr>
-                <th></th>
-                <th>Mã GV</th>
-                <th>Tên GV</th>
-                <th>Cấp bậc</th>
-                <th>Thù lao</th>
-                <th>Trạng thái</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                string rank = item.AcademicDegreeRankId, className, title;
-                bool status = item.Status;
-                if (rank != null)
+    <div class="table-responsive">
+        <table class="datatables-ajax table" id="tblRemuneration">
+            <thead class="table-light">
+                <tr>
+                    <th></th>
+                    <th>Mã GV</th>
+                    <th>Tên GV</th>
+                    <th>Cấp bậc</th>
+                    <th>Thù lao</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
                 {
-                    if (status)
+                    string rank = item.AcademicDegreeRankId, className, title;
+                    bool status = item.Status;
+                    if (rank != null)
                     {
-                        className = "badge-light-warning";
-                        title = "Thiếu thông tin";
+                        if (status)
+                        {
+                            className = "badge-light-warning";
+                            title = "Thiếu thông tin";
+                        }
+                        else
+                        {
+                            className = "badge-light-success";
+                            title = "OK";
+                        }
                     }
                     else
                     {
-                        className = "badge-light-success";
-                        title = "OK";
+                        className = "badge-light-danger";
+                        title = "Chưa đặt cấp bậc";
                     }
+                    <tr>
+                        <td></td>
+                        <td>@item.StaffId</td>
+                        <td>@item.FullName</td>
+                        <td>@rank</td>
+                        <td>@item.Remuneration</td>
+                        <td><span class="badge rounded-pill @className text-capitalized">@title</span></td>
+                    </tr>
                 }
-                else
-                {
-                    className = "badge-light-danger";
-                    title = "Chưa đặt cấp bậc";
-                }
-                <tr>
-                    <td></td>
-                    <td>@item.StaffId</td>
-                    <td>@item.FullName</td>
-                    <td>@rank</td>
-                    <td>@item.Remuneration</td>
-                    <td><span class="badge rounded-pill @className text-capitalized">@title</span></td>
-                </tr>
-            }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script src="~/assets/js/remuneration/remuneration.min.js"></script>
