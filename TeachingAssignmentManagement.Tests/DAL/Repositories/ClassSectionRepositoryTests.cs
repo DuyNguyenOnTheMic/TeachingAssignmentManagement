@@ -1474,5 +1474,31 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult);
             Assert.AreEqual(query_classSection.Count(), actionResult.Count);
         }
+
+        [TestMethod()]
+        public void Find_Class_Section_Correctly_Test()
+        {
+            // Arrange
+            class_section classSection = listClassSection.First();
+            mockSetClassSection.Setup(m => m.Find(It.IsAny<int>())).Returns(classSection);
+
+            // Act
+            var actionResult = unitOfWork.ClassSectionRepository.GetClassByID(classSection.id);
+
+            // Assert
+            mockSetClassSection.Verify(x => x.Find(It.IsAny<int>()), Times.Once());
+            Assert.AreEqual(classSection.class_section_id, actionResult.class_section_id);
+            Assert.AreEqual(classSection.type, actionResult.type);
+            Assert.AreEqual(classSection.day_2, actionResult.day_2);
+            Assert.AreEqual(classSection.start_lesson_2, actionResult.start_lesson_2);
+            Assert.AreEqual(classSection.learn_week, actionResult.learn_week);
+            Assert.AreEqual(classSection.start_week, actionResult.start_week);
+            Assert.AreEqual(classSection.end_week, actionResult.end_week);
+            Assert.AreEqual(classSection.lecturer_id, actionResult.lecturer_id);
+            Assert.AreEqual(classSection.lecturer.full_name, actionResult.lecturer.full_name);
+            Assert.AreEqual(classSection.room_id, actionResult.room_id);
+            Assert.AreEqual(classSection.major.name, actionResult.major.name);
+            Assert.AreEqual(classSection.subject, actionResult.subject);
+        }
     }
 }
