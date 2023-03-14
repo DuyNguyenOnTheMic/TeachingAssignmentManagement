@@ -1506,7 +1506,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         {
             // Act
             bool isLesson = false;
-            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(isLesson, termId, majorId, MyConstants.FacultyMemberType);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(isLesson, termId, majorId, MyConstants.VisitingLecturerType);
 
             // Assert
             Assert.IsNotNull(actionResult);
@@ -1517,7 +1517,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         {
             // Act
             bool isLesson = false;
-            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(isLesson, termId, majorId, MyConstants.FacultyMemberType);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(isLesson, termId, majorId, MyConstants.VisitingLecturerType);
             int count = 0;
             foreach (dynamic value in actionResult)
             {
