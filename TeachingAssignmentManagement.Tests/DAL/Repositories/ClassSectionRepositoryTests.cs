@@ -1737,10 +1737,11 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.IsNotNull(json.subject_count);
                 Assert.IsNotNull(json.class_count);
                 Assert.IsNotNull(json.sum);
-                Assert.IsNotNull(json.lecturer_type);
-                Assert.IsNotNull(json.lecturer_type);
-                Assert.IsNotNull(json.lecturer_type);
-                Assert.IsNotNull(json.lecturer_type);
+                Assert.IsNotNull(json.sumLesson1);
+                Assert.IsNotNull(json.sumLesson4);
+                Assert.IsNotNull(json.sumLesson7);
+                Assert.IsNotNull(json.sumLesson10);
+                Assert.IsNotNull(json.sumLesson13);
                 Assert.IsNotNull(json.lecturer_type);
             }
         }
@@ -1826,6 +1827,11 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.IsNotNull(json.subject_count);
                 Assert.IsNotNull(json.class_count);
                 Assert.IsNotNull(json.sum);
+                Assert.IsNotNull(json.sumLesson1);
+                Assert.IsNotNull(json.sumLesson4);
+                Assert.IsNotNull(json.sumLesson7);
+                Assert.IsNotNull(json.sumLesson10);
+                Assert.IsNotNull(json.sumLesson13);
                 Assert.IsNotNull(json.lecturer_type);
             }
         }
