@@ -1908,5 +1908,24 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult);
             Assert.AreEqual(query_classSection.Count(), actionResult.Count);
         }
+
+        [TestMethod()]
+        public void Get_Term_Lesson_Statistics_Should_Order_By_Largest_To_Smallest_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+            int previousSum = 0;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(isLesson, termId, "-1", MyConstants.VisitingLecturerType);
+
+            // Assert
+            foreach (dynamic json in actionResult)
+            {
+                int currentSum = json.sum;
+                Assert.IsTrue(currentSum >= previousSum);
+                previousSum = json.sum;
+            }
+        }
     }
 }
