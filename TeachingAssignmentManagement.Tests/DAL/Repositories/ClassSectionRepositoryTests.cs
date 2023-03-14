@@ -1670,5 +1670,94 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult);
             Assert.AreEqual(query_classSection.Count(), actionResult.Count);
         }
+
+        [TestMethod()]
+        public void Get_Term_And_Major_Lesson_Statistics_Not_Null_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(isLesson, termId, majorId, MyConstants.VisitingLecturerType);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Term_And_Major_Lesson_Statistics_Data_Should_Be_IEnumerable_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(isLesson, termId, majorId, MyConstants.VisitingLecturerType);
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod()]
+        public void Term_And_Major_Lesson_Statistics_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(isLesson, termId, majorId, MyConstants.VisitingLecturerType);
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod()]
+        public void Term_And_Major_Lesson_Statistics_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(isLesson, termId, majorId, MyConstants.VisitingLecturerType);
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.Key);
+                Assert.IsNotNull(json.staff_id);
+                Assert.IsNotNull(json.full_name);
+                Assert.IsNotNull(json.subject_count);
+                Assert.IsNotNull(json.class_count);
+                Assert.IsNotNull(json.sum);
+                Assert.IsNotNull(json.lecturer_type);
+                Assert.IsNotNull(json.lecturer_type);
+                Assert.IsNotNull(json.lecturer_type);
+                Assert.IsNotNull(json.lecturer_type);
+                Assert.IsNotNull(json.lecturer_type);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Term_And_Major_Lesson_Statistics_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(isLesson, termId, majorId, MyConstants.VisitingLecturerType);
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == MyConstants.VisitingLecturerType).GroupBy(c => c.lecturer_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
     }
 }
