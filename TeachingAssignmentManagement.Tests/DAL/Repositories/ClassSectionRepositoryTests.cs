@@ -40,8 +40,8 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 new major() { id = "2", name = "Kỹ Thuật Phần Mềm", abbreviation = "KTPM", program_type = MyConstants.StandardProgramType }
             }.AsQueryable();
             listLecturer = new List<lecturer> {
-                new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = "TG", is_vietnamese = true, status = true },
-                new lecturer() { id = userId2, staff_id = "1002", full_name = "Nguyễn Văn B", type = "CH", is_vietnamese = true, status = true }
+                new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = MyConstants.VisitingLecturerType, is_vietnamese = true, status = true },
+                new lecturer() { id = userId2, staff_id = "1002", full_name = "Nguyễn Văn B", type = MyConstants.FacultyMemberType, is_vietnamese = true, status = true }
             }.AsQueryable();
             listSubject = new List<subject>
             {
@@ -1499,6 +1499,16 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.AreEqual(classSection.room_id, actionResult.room_id);
             Assert.AreEqual(classSection.major.name, actionResult.major.name);
             Assert.AreEqual(classSection.subject, actionResult.subject);
+        }
+
+        [TestMethod()]
+        public void Get_Term_Statistics_Not_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(true, termId, majorId, MyConstants.FacultyMemberType);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
         }
     }
 }

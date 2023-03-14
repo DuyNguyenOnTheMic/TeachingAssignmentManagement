@@ -8,7 +8,7 @@
 
         // Lecturer type constants
         public static readonly string FacultyMemberType = "CH";
-        public static readonly string visitingLecturerType = "TG";
+        public static readonly string VisitingLecturerType = "TG";
 
         // Remuneration constants
         public static readonly int StandardProgramType = 0;

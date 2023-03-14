@@ -16,7 +16,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable<LecturerRankDTO> GetLecturerRanksInTerm(int term)
         {
-            return (from l in context.lecturers.Where(l => l.type == MyConstants.visitingLecturerType && l.staff_id != null && l.full_name != null && l.status == true)
+            return (from l in context.lecturers.Where(l => l.type == MyConstants.VisitingLecturerType && l.staff_id != null && l.full_name != null && l.status == true)
                     join r in context.lecturer_rank.Where(r => r.term_id == term) on l.id equals r.lecturer_id into ranks
                     from rank in ranks.DefaultIfEmpty()
                     select new LecturerRankDTO

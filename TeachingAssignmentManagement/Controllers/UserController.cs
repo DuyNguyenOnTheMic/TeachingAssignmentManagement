@@ -162,7 +162,7 @@ namespace TeachingAssignmentManagement.Controllers
             List<SelectListItem> lecturerType = new List<SelectListItem>()
             {
                 new SelectListItem() { Text = "Cơ hữu", Value = MyConstants.FacultyMemberType },
-                new SelectListItem() { Text = "Thỉnh giảng", Value = MyConstants.visitingLecturerType }
+                new SelectListItem() { Text = "Thỉnh giảng", Value = MyConstants.VisitingLecturerType }
             };
 
             // Set selected value for lecturer type
