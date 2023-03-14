@@ -1587,6 +1587,25 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
+        public void Get_Term_And_Major_Statistics_Should_Order_By_Largest_To_Smallest_Test()
+        {
+            // Arrange
+            bool isLesson = false;
+            int previousSum = 0;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(isLesson, termId, majorId, MyConstants.VisitingLecturerType);
+
+            // Assert
+            foreach (dynamic json in actionResult)
+            {
+                int currentSum = json.sum;
+                Assert.IsTrue(currentSum >= previousSum);
+                previousSum = json.sum;
+            }
+        }
+
+        [TestMethod()]
         public void Get_Term_Statistics_Not_Null_Test()
         {
             // Arrange
