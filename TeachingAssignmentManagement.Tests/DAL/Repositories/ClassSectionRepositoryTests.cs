@@ -1483,7 +1483,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             mockSetClassSection.Setup(m => m.Find(It.IsAny<int>())).Returns(classSection);
 
             // Act
-            var actionResult = unitOfWork.ClassSectionRepository.GetClassByID(classSection.id);
+            class_section actionResult = unitOfWork.ClassSectionRepository.GetClassByID(classSection.id);
 
             // Assert
             mockSetClassSection.Verify(x => x.Find(It.IsAny<int>()), Times.Once());
@@ -1505,10 +1505,37 @@ namespace TeachingAssignmentManagement.DAL.Tests
         public void Get_Term_And_Major_Statistics_Not_Null_Test()
         {
             // Act
-            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(false, termId, majorId, MyConstants.FacultyMemberType);
+            bool isLesson = false;
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(isLesson, termId, majorId, MyConstants.FacultyMemberType);
 
             // Assert
             Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Get_Term_And_Major_Data_Is_Correct_Test()
+        {
+            // Act
+            bool isLesson = false;
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(isLesson, termId, majorId, MyConstants.VisitingLecturerType);
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == MyConstants.VisitingLecturerType).GroupBy(c => c.lecturer_id);
+            int subjectCount = query_classSection.Select(c => c.GroupBy(item => item.subject.id)).Count();
+            int classCount = query_classSection.Select(c => c.Count()).FirstOrDefault();
+            int? sum = query_classSection.Select(x => x.Sum(c => c.total_lesson)).FirstOrDefault();
+            List<IGrouping<string, class_section>> classSectionList = query_classSection.ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            for (int i = 0; i < classSectionList.Count; i++)
+            {
+                Assert.AreEqual(actionResult[i].Key, classSectionList[i].Key);
+                Assert.AreEqual(actionResult[i].staff_id, classSectionList[i].FirstOrDefault().lecturer.staff_id);
+                Assert.AreEqual(actionResult[i].full_name, classSectionList[i].FirstOrDefault().lecturer.full_name);
+                Assert.AreEqual(actionResult[i].subject_count, subjectCount);
+                Assert.AreEqual(actionResult[i].class_count, classCount);
+                Assert.AreEqual(actionResult[i].sum, sum);
+                Assert.AreEqual(actionResult[i].lecturer_type, classSectionList[i].FirstOrDefault().lecturer.type);
+            }
         }
     }
 }

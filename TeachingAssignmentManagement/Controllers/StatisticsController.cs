@@ -271,13 +271,13 @@ namespace TeachingAssignmentManagement.Controllers
             IEnumerable<subject> query_subjects = query_classes.Select(c => c.subject).Distinct();
             List<SubjectDTO> subjects = new List<SubjectDTO>();
             string previousSubjectId = string.Empty;
-            foreach (var item in query_subjects)
+            foreach (subject item in query_subjects)
             {
                 // Loop through each subjects to find classes
                 decimal remunerationHours = decimal.Zero;
                 IEnumerable<class_section> query_subjectClasses = query_classes.Where(c => c.subject.subject_id == item.subject_id);
                 int? subjectHours = 0;
-                foreach (var subjectClass in query_subjectClasses)
+                foreach (class_section subjectClass in query_subjectClasses)
                 {
                     int subjectTotalLesson = subjectClass.total_lesson.GetValueOrDefault(0);
                     subjectHours += subjectTotalLesson;
