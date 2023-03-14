@@ -1502,10 +1502,10 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Get_Term_Statistics_Not_Null_Test()
+        public void Get_Term_And_Major_Statistics_Not_Null_Test()
         {
             // Act
-            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(true, termId, majorId, MyConstants.FacultyMemberType);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(false, termId, majorId, MyConstants.FacultyMemberType);
 
             // Assert
             Assert.IsNotNull(actionResult);
