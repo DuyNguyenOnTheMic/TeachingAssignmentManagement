@@ -1561,17 +1561,13 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 dynamic json = actionResult[i];
 
                 Assert.IsNotNull(json);
-                Assert.IsNotNull(json.ClassSectionId);
-                Assert.IsNotNull(json.Type);
-                Assert.IsNotNull(json.LessonTime);
-                Assert.IsNotNull(json.Day2);
-                Assert.IsNotNull(json.StartLesson2);
-                Assert.IsNotNull(json.LearnWeek);
-                Assert.IsNotNull(json.StartWeek);
-                Assert.IsNotNull(json.EndWeek);
-                Assert.IsNotNull(json.SubjectId);
-                Assert.IsNotNull(json.RoomId);
-                Assert.IsNotNull(json.Subject);
+                Assert.IsNotNull(json.Key);
+                Assert.IsNotNull(json.staff_id);
+                Assert.IsNotNull(json.full_name);
+                Assert.IsNotNull(json.subject_count);
+                Assert.IsNotNull(json.class_count);
+                Assert.IsNotNull(json.sum);
+                Assert.IsNotNull(json.lecturer_type);
             }
         }
 
@@ -1583,7 +1579,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
 
             // Act
             dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatistics(isLesson, termId, majorId, MyConstants.VisitingLecturerType);
-            List<class_section> query_classSection = listClassSection.Where(c => c.term_id == termId && c.lecturer_id == userId1).ToList();
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == MyConstants.VisitingLecturerType).GroupBy(c => c.lecturer_id);
 
             // Assert
             Assert.IsNotNull(actionResult);
