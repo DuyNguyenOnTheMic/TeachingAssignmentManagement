@@ -1927,5 +1927,432 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 previousSum = json.sum;
             }
         }
+
+        [TestMethod()]
+        public void Get_Term_And_Major_Statistics_All_Not_Null_Test()
+        {
+            // Arrange
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, majorId);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Term_And_Major_Statistics_All_Data_Should_Be_IEnumerable_Test()
+        {
+            // Arrange
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, majorId);
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod()]
+        public void Term_And_Major_Statistics_All_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, majorId);
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod()]
+        public void Term_And_Major_Statistics_All_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, majorId);
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.Key);
+                Assert.IsNotNull(json.staff_id);
+                Assert.IsNotNull(json.full_name);
+                Assert.IsNotNull(json.subject_count);
+                Assert.IsNotNull(json.class_count);
+                Assert.IsNotNull(json.sum);
+                Assert.IsNotNull(json.lecturer_type);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Term_And_Major_Statistics_All_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Arrange
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, majorId);
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == MyConstants.VisitingLecturerType).GroupBy(c => c.lecturer_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
+
+        [TestMethod()]
+        public void Get_Term_And_Major_Statistics_All_Should_Order_By_Largest_To_Smallest_Test()
+        {
+            // Arrange
+            bool isLesson = false;
+            int previousSum = 0;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, majorId);
+
+            // Assert
+            foreach (dynamic json in actionResult)
+            {
+                int currentSum = json.sum;
+                Assert.IsTrue(currentSum >= previousSum);
+                previousSum = json.sum;
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Term_Statistics_All_Not_Null_Test()
+        {
+            // Arrange
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, "-1");
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Term_Statistics_All_Data_Should_Be_IEnumerable_Test()
+        {
+            // Arrange
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, "-1");
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod()]
+        public void Term_Statistics_All_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, "-1");
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod()]
+        public void Term_Statistics_All_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, "-1");
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.Key);
+                Assert.IsNotNull(json.staff_id);
+                Assert.IsNotNull(json.full_name);
+                Assert.IsNotNull(json.subject_count);
+                Assert.IsNotNull(json.class_count);
+                Assert.IsNotNull(json.sum);
+                Assert.IsNotNull(json.lecturer_type);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Term_Statistics_All_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Arrange
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, "-1");
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term_id == termId && c.lecturer.type == MyConstants.VisitingLecturerType).GroupBy(c => c.lecturer_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
+
+        [TestMethod()]
+        public void Get_Term_Statistics_All_Should_Order_By_Largest_To_Smallest_Test()
+        {
+            // Arrange
+            bool isLesson = false;
+            int previousSum = 0;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, "-1");
+
+            // Assert
+            foreach (dynamic json in actionResult)
+            {
+                int currentSum = json.sum;
+                Assert.IsTrue(currentSum >= previousSum);
+                previousSum = json.sum;
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Term_And_Major_Lesson_Statistics_All_Not_Null_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, majorId);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Term_And_Major_Lesson_Statistics_All_Data_Should_Be_IEnumerable_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, majorId);
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod()]
+        public void Term_And_Major_Lesson_Statistics_All_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, majorId);
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod()]
+        public void Term_And_Major_Lesson_Statistics_All_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, majorId);
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.Key);
+                Assert.IsNotNull(json.staff_id);
+                Assert.IsNotNull(json.full_name);
+                Assert.IsNotNull(json.subject_count);
+                Assert.IsNotNull(json.class_count);
+                Assert.IsNotNull(json.sum);
+                Assert.IsNotNull(json.sumLesson1);
+                Assert.IsNotNull(json.sumLesson4);
+                Assert.IsNotNull(json.sumLesson7);
+                Assert.IsNotNull(json.sumLesson10);
+                Assert.IsNotNull(json.sumLesson13);
+                Assert.IsNotNull(json.lecturer_type);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Term_And_Major_Lesson_Statistics_All_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, majorId);
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == MyConstants.VisitingLecturerType).GroupBy(c => c.lecturer_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
+
+
+        [TestMethod()]
+        public void Get_Term_And_Major_Lesson_Statistics_All_Should_Order_By_Largest_To_Smallest_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+            int previousSum = 0;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, majorId);
+
+            // Assert
+            foreach (dynamic json in actionResult)
+            {
+                int currentSum = json.sum;
+                Assert.IsTrue(currentSum >= previousSum);
+                previousSum = json.sum;
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Term_Lesson_Statistics_All_Not_Null_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, "-1");
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Term_Lesson_Statistics_All_Data_Should_Be_IEnumerable_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, "-1");
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod()]
+        public void Term_Lesson_Statistics_All_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, "-1");
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod()]
+        public void Term_Lesson_Statistics_All_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, "-1");
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.Key);
+                Assert.IsNotNull(json.staff_id);
+                Assert.IsNotNull(json.full_name);
+                Assert.IsNotNull(json.subject_count);
+                Assert.IsNotNull(json.class_count);
+                Assert.IsNotNull(json.sum);
+                Assert.IsNotNull(json.sumLesson1);
+                Assert.IsNotNull(json.sumLesson4);
+                Assert.IsNotNull(json.sumLesson7);
+                Assert.IsNotNull(json.sumLesson10);
+                Assert.IsNotNull(json.sumLesson13);
+                Assert.IsNotNull(json.lecturer_type);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Term_Lesson_Statistics_All_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, "-1");
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term_id == termId && c.lecturer.type == MyConstants.VisitingLecturerType).GroupBy(c => c.lecturer_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
+
+        [TestMethod()]
+        public void Get_Term_Lesson_Statistics_All_Should_Order_By_Largest_To_Smallest_Test()
+        {
+            // Arrange
+            bool isLesson = true;
+            int previousSum = 0;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermStatisticsAll(isLesson, termId, "-1");
+
+            // Assert
+            foreach (dynamic json in actionResult)
+            {
+                int currentSum = json.sum;
+                Assert.IsTrue(currentSum >= previousSum);
+                previousSum = json.sum;
+            }
+        }
     }
 }
