@@ -2412,5 +2412,17 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.IsNotNull(json.practice_count);
             }
         }
+
+        [TestMethod()]
+        public void Get_Term_Major_Subjects_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermSubjects(termId, majorId, userId1);
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer_id == userId1).GroupBy(c => c.subject_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
     }
 }
