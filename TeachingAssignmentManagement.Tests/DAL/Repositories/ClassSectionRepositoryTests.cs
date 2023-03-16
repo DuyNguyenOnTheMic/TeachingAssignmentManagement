@@ -2356,7 +2356,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Get_Term_Subjects_Not_Null_Test()
+        public void Get_Term_Major_Subjects_Not_Null_Test()
         {
             // Act
             dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermSubjects(termId, majorId, userId1);
