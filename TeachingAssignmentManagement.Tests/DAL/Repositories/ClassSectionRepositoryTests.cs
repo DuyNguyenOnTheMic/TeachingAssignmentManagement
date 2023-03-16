@@ -2389,5 +2389,28 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert                
             Assert.IsNotNull(actionResult[0]);
         }
+
+        [TestMethod()]
+        public void Term_Major_Subjects_Data_Should_Be_Indexable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermSubjects(termId, majorId, userId1);
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.id);
+                Assert.IsNotNull(json.subject_name);
+                Assert.IsNotNull(json.subject_credits);
+                Assert.IsNotNull(json.subject_major);
+                Assert.IsNotNull(json.subject_hours);
+                Assert.IsNotNull(json.theory_count);
+                Assert.IsNotNull(json.practice_count);
+            }
+        }
     }
 }
