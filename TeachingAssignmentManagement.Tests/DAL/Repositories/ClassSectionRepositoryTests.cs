@@ -2379,5 +2379,15 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert
             Assert.IsTrue(count > 0);
         }
+
+        [TestMethod()]
+        public void Term_Major_Subjects_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermSubjects(termId, majorId, userId1);
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
     }
 }
