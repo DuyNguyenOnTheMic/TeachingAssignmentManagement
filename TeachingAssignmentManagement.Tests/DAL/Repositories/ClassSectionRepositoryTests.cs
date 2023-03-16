@@ -45,7 +45,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             }.AsQueryable();
             listSubject = new List<subject>
             {
-                new subject() { id = "71ITBS10103", name = "Nhập môn Công nghệ thông tin", credits = 3, term_id = termId, major_id = majorId }
+                new subject() { id = "1", subject_id = "71ITBS10103", name = "Nhập môn Công nghệ thông tin", credits = 3, term_id = termId, major_id = majorId }
             }.AsQueryable();
             listClassSection = new List<class_section>
             {
@@ -2418,6 +2418,76 @@ namespace TeachingAssignmentManagement.DAL.Tests
         {
             // Act
             dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermSubjects(termId, majorId, userId1);
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer_id == userId1).GroupBy(c => c.subject_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
+
+        [TestMethod()]
+        public void Get_Term_Subjects_Not_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermSubjects(termId, "-1", userId1);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Term_Subjects_Data_Should_Be_IEnumerable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermSubjects(termId, "-1", userId1);
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod()]
+        public void Term_Subjects_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermSubjects(termId, "-1", userId1);
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod()]
+        public void Term_Subjects_Data_Should_Be_Indexable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermSubjects(termId, "-1", userId1);
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.id);
+                Assert.IsNotNull(json.subject_name);
+                Assert.IsNotNull(json.subject_credits);
+                Assert.IsNotNull(json.subject_major);
+                Assert.IsNotNull(json.subject_hours);
+                Assert.IsNotNull(json.theory_count);
+                Assert.IsNotNull(json.practice_count);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Term_Subjects_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermSubjects(termId, "-1", userId1);
             IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer_id == userId1).GroupBy(c => c.subject_id);
 
             // Assert

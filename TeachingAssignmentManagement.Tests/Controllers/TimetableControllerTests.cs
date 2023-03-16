@@ -58,7 +58,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             }.AsQueryable();
             listSubject = new List<subject>
             {
-                new subject() { id = "71ITBS10103", name = "Nhập môn Công nghệ thông tin", credits = 3, term_id = termId, major_id = majorId }
+                new subject() { id = "1", subject_id = "71ITBS10103", name = "Nhập môn Công nghệ thông tin", credits = 3, term_id = termId, major_id = majorId }
             }.AsQueryable();
             listClassSection = new List<class_section>
             {
