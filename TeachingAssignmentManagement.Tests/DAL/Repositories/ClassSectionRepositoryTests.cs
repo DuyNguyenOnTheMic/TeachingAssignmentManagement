@@ -49,8 +49,8 @@ namespace TeachingAssignmentManagement.DAL.Tests
             }.AsQueryable();
             listClassSection = new List<class_section>
             {
-                new class_section() { id = 1, class_section_id = "221_71ITBS10103_01", original_id = "221_71ITBS10103_01", type = MyConstants.TheoreticalClassType, student_class_id = "71K28CNTT02 71K28CNTT03 71K28CNTT01", minimum_student = 60, total_lesson = 30, day = "Thứ Bảy", start_lesson = 4, lesson_number = 3, lesson_time = "4 - 6", student_number = 90, free_slot = 20, state = "Đang lập kế hoạch", learn_week = "07,08,09,10,11,12,13,14,15,16", day_2 = 7, start_lesson_2 = 4, student_registered_number = 0, start_week = 7, end_week = 16, note_1 = "Mi input 27/9", note_2 = null, lecturer1 = listLecturer.Last(), lecturer_id = listLecturer.First().id, lecturer = listLecturer.First(), term_id = termId, major_id = majorId, major = listMajor.First(), subject_id = listSubject.First().id, subject = listSubject.First(), room_id = "CS3.F.04.01" },
-                new class_section() { id = 2, class_section_id = "221_71ITBS10103_02", original_id = "221_71ITBS10103_02", type = MyConstants.PracticeClassType, student_class_id = "71K28CNTT02 71K28CNTT03 71K28CNTT01", minimum_student = 60, total_lesson = 30, day = "Thứ Bảy", start_lesson = 1, lesson_number = 3, lesson_time = "1 - 3", student_number = 90, free_slot = 20, state = "Đang lập kế hoạch", learn_week = "07,08,09,10,11,12,13,14,15,16", day_2 = 7, start_lesson_2 = 1, student_registered_number = 0, start_week = 7, end_week = 16, note_1 = "Mi input 27/9", note_2 = null, lecturer1 = listLecturer.Last(), lecturer_id = listLecturer.First().id, lecturer = listLecturer.First(), term_id = termId, major_id = majorId, major = listMajor.First(), subject_id = listSubject.First().id, subject = listSubject.First(), room_id = "CS3.F.04.01" }
+                new class_section() { id = 1, class_section_id = "221_71ITBS10103_01", original_id = "221_71ITBS10103_01", type = MyConstants.TheoreticalClassType, student_class_id = "71K28CNTT02 71K28CNTT03 71K28CNTT01", minimum_student = 60, total_lesson = 30, day = "Thứ Bảy", start_lesson = 4, lesson_number = 3, lesson_time = "4 - 6", student_number = 90, free_slot = 20, state = "Đang lập kế hoạch", learn_week = "07,08,09,10,11,12,13,14,15,16", day_2 = 7, start_lesson_2 = 4, student_registered_number = 0, start_week = 7, end_week = 16, note_1 = "Mi input 27/9", note_2 = null, lecturer1 = listLecturer.Last(), lecturer_id = listLecturer.First().id, lecturer = listLecturer.First(), term = listTerm.First(), term_id = termId, major_id = majorId, major = listMajor.First(), subject_id = listSubject.First().id, subject = listSubject.First(), room_id = "CS3.F.04.01" },
+                new class_section() { id = 2, class_section_id = "221_71ITBS10103_02", original_id = "221_71ITBS10103_02", type = MyConstants.PracticeClassType, student_class_id = "71K28CNTT02 71K28CNTT03 71K28CNTT01", minimum_student = 60, total_lesson = 30, day = "Thứ Bảy", start_lesson = 1, lesson_number = 3, lesson_time = "1 - 3", student_number = 90, free_slot = 20, state = "Đang lập kế hoạch", learn_week = "07,08,09,10,11,12,13,14,15,16", day_2 = 7, start_lesson_2 = 1, student_registered_number = 0, start_week = 7, end_week = 16, note_1 = "Mi input 27/9", note_2 = null, lecturer1 = listLecturer.Last(), lecturer_id = listLecturer.First().id, lecturer = listLecturer.First(), term = listTerm.First(), term_id = termId, major_id = majorId, major = listMajor.First(), subject_id = listSubject.First().id, subject = listSubject.First(), room_id = "CS3.F.04.01" }
             }.AsQueryable();
             mockSetTerm = new Mock<DbSet<term>>();
             mockSetMajor = new Mock<DbSet<major>>();
@@ -2493,6 +2493,505 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert
             Assert.IsNotNull(actionResult);
             Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
+
+        [TestMethod()]
+        public void Get_Year_And_Major_Statistics_Not_Null_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, majorId, MyConstants.VisitingLecturerType);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Year_And_Major_Statistics_Data_Should_Be_IEnumerable_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, majorId, MyConstants.VisitingLecturerType);
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod()]
+        public void Year_And_Major_Statistics_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, majorId, MyConstants.VisitingLecturerType);
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod()]
+        public void Year_And_Major_Statistics_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, majorId, MyConstants.VisitingLecturerType);
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.Key);
+                Assert.IsNotNull(json.staff_id);
+                Assert.IsNotNull(json.full_name);
+                Assert.IsNotNull(json.subject_count);
+                Assert.IsNotNull(json.class_count);
+                Assert.IsNotNull(json.sum);
+                Assert.IsNotNull(json.lecturer_type);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Year_And_Major_Statistics_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, majorId, MyConstants.VisitingLecturerType);
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer.type == MyConstants.VisitingLecturerType).GroupBy(c => c.lecturer_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
+
+        [TestMethod()]
+        public void Get_Year_And_Major_Statistics_Should_Order_By_Largest_To_Smallest_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = false;
+            int previousSum = 0;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, majorId, MyConstants.VisitingLecturerType);
+
+            // Assert
+            foreach (dynamic json in actionResult)
+            {
+                int currentSum = json.sum;
+                Assert.IsTrue(currentSum >= previousSum);
+                previousSum = json.sum;
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Year_Statistics_Not_Null_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, "-1", MyConstants.VisitingLecturerType);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Year_Statistics_Data_Should_Be_IEnumerable_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, "-1", MyConstants.VisitingLecturerType);
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod()]
+        public void Year_Statistics_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, "-1", MyConstants.VisitingLecturerType);
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod()]
+        public void Year_Statistics_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, "-1", MyConstants.VisitingLecturerType);
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.Key);
+                Assert.IsNotNull(json.staff_id);
+                Assert.IsNotNull(json.full_name);
+                Assert.IsNotNull(json.subject_count);
+                Assert.IsNotNull(json.class_count);
+                Assert.IsNotNull(json.sum);
+                Assert.IsNotNull(json.lecturer_type);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Year_Statistics_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, "-1", MyConstants.VisitingLecturerType);
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type == MyConstants.VisitingLecturerType).GroupBy(c => c.lecturer_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
+
+        [TestMethod()]
+        public void Get_Year_Statistics_Should_Order_By_Largest_To_Smallest_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = false;
+            int previousSum = 0;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, "-1", MyConstants.VisitingLecturerType);
+
+            // Assert
+            foreach (dynamic json in actionResult)
+            {
+                int currentSum = json.sum;
+                Assert.IsTrue(currentSum >= previousSum);
+                previousSum = json.sum;
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Year_And_Major_Lesson_Statistics_Not_Null_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, majorId, MyConstants.VisitingLecturerType);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Year_And_Major_Lesson_Statistics_Data_Should_Be_IEnumerable_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, majorId, MyConstants.VisitingLecturerType);
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod()]
+        public void Year_And_Major_Lesson_Statistics_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, majorId, MyConstants.VisitingLecturerType);
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod()]
+        public void Year_And_Major_Lesson_Statistics_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, majorId, MyConstants.VisitingLecturerType);
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.Key);
+                Assert.IsNotNull(json.staff_id);
+                Assert.IsNotNull(json.full_name);
+                Assert.IsNotNull(json.subject_count);
+                Assert.IsNotNull(json.class_count);
+                Assert.IsNotNull(json.sum);
+                Assert.IsNotNull(json.sumLesson1);
+                Assert.IsNotNull(json.sumLesson4);
+                Assert.IsNotNull(json.sumLesson7);
+                Assert.IsNotNull(json.sumLesson10);
+                Assert.IsNotNull(json.sumLesson13);
+                Assert.IsNotNull(json.lecturer_type);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Year_And_Major_Lesson_Statistics_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, majorId, MyConstants.VisitingLecturerType);
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer.type == MyConstants.VisitingLecturerType).GroupBy(c => c.lecturer_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
+
+
+        [TestMethod()]
+        public void Get_Year_And_Major_Lesson_Statistics_Should_Order_By_Largest_To_Smallest_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = true;
+            int previousSum = 0;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, majorId, MyConstants.VisitingLecturerType);
+
+            // Assert
+            foreach (dynamic json in actionResult)
+            {
+                int currentSum = json.sum;
+                Assert.IsTrue(currentSum >= previousSum);
+                previousSum = json.sum;
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Year_Lesson_Statistics_Not_Null_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, "-1", MyConstants.VisitingLecturerType);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Year_Lesson_Statistics_Data_Should_Be_IEnumerable_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, "-1", MyConstants.VisitingLecturerType);
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod()]
+        public void Year_Lesson_Statistics_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, "-1", MyConstants.VisitingLecturerType);
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod()]
+        public void Year_Lesson_Statistics_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, "-1", MyConstants.VisitingLecturerType);
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.Key);
+                Assert.IsNotNull(json.staff_id);
+                Assert.IsNotNull(json.full_name);
+                Assert.IsNotNull(json.subject_count);
+                Assert.IsNotNull(json.class_count);
+                Assert.IsNotNull(json.sum);
+                Assert.IsNotNull(json.sumLesson1);
+                Assert.IsNotNull(json.sumLesson4);
+                Assert.IsNotNull(json.sumLesson7);
+                Assert.IsNotNull(json.sumLesson10);
+                Assert.IsNotNull(json.sumLesson13);
+                Assert.IsNotNull(json.lecturer_type);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Year_Lesson_Statistics_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = true;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, "-1", MyConstants.VisitingLecturerType);
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type == MyConstants.VisitingLecturerType).GroupBy(c => c.lecturer_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
+
+        [TestMethod()]
+        public void Get_Year_Lesson_Statistics_Should_Order_By_Largest_To_Smallest_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = true;
+            int previousSum = 0;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearStatistics(isLesson, startYear, endYear, "-1", MyConstants.VisitingLecturerType);
+
+            // Assert
+            foreach (dynamic json in actionResult)
+            {
+                int currentSum = json.sum;
+                Assert.IsTrue(currentSum >= previousSum);
+                previousSum = json.sum;
+            }
         }
     }
 }
