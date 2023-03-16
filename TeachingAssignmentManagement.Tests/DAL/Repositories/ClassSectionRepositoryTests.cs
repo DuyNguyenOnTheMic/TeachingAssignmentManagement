@@ -2364,5 +2364,20 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert
             Assert.IsNotNull(actionResult);
         }
+
+        [TestMethod()]
+        public void Term_Major_Subjects_Data_Should_Be_IEnumerable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTermSubjects(termId, majorId, userId1);
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
     }
 }
