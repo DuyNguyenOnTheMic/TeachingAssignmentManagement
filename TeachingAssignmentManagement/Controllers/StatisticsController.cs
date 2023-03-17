@@ -95,7 +95,7 @@ namespace TeachingAssignmentManagement.Controllers
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public ActionResult GetYearsubjects(int startYear, int endYear, string majorId, string lecturerId)
         {
-            return Json(unitOfWork.ClassSectionRepository.GetYearsubjects(startYear, endYear, majorId, lecturerId), JsonRequestBehavior.AllowGet);
+            return Json(unitOfWork.ClassSectionRepository.GetYearSubjects(startYear, endYear, majorId, lecturerId), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

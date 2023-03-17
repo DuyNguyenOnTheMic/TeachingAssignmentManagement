@@ -3492,5 +3492,195 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 previousSum = json.sum;
             }
         }
+
+        [TestMethod()]
+        public void Get_Term_Year_Subjects_Not_Null_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearSubjects(startYear, endYear, majorId, userId1);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Term_Year_Subjects_Data_Should_Be_IEnumerable_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearSubjects(startYear, endYear, majorId, userId1);
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod()]
+        public void Term_Year_Subjects_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearSubjects(startYear, endYear, majorId, userId1);
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod()]
+        public void Term_Year_Subjects_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearSubjects(startYear, endYear, majorId, userId1);
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.id);
+                Assert.IsNotNull(json.subject_name);
+                Assert.IsNotNull(json.subject_credits);
+                Assert.IsNotNull(json.subject_major);
+                Assert.IsNotNull(json.subject_hours);
+                Assert.IsNotNull(json.theory_count);
+                Assert.IsNotNull(json.practice_count);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Term_Year_Subjects_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearSubjects(startYear, endYear, majorId, userId1);
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer_id == userId1).GroupBy(c => c.subject_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
+
+        [TestMethod()]
+        public void Get_Year_Subjects_Not_Null_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearSubjects(startYear, endYear, "-1", userId1);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Year_Subjects_Data_Should_Be_IEnumerable_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearSubjects(startYear, endYear, "-1", userId1);
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod()]
+        public void Year_Subjects_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearSubjects(startYear, endYear, "-1", userId1);
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod()]
+        public void Year_Subjects_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearSubjects(startYear, endYear, "-1", userId1);
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.id);
+                Assert.IsNotNull(json.subject_name);
+                Assert.IsNotNull(json.subject_credits);
+                Assert.IsNotNull(json.subject_major);
+                Assert.IsNotNull(json.subject_hours);
+                Assert.IsNotNull(json.theory_count);
+                Assert.IsNotNull(json.practice_count);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Year_Subjects_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetYearSubjects(startYear, endYear, "-1", userId1);
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer_id == userId1).GroupBy(c => c.subject_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
     }
 }

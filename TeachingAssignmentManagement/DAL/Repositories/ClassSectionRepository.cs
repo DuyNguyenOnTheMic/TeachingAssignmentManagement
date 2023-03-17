@@ -313,7 +313,7 @@ namespace TeachingAssignmentManagement.DAL
             }
         }
 
-        public IEnumerable GetYearsubjects(int startYear, int endYear, string majorId, string lecturerId)
+        public IEnumerable GetYearSubjects(int startYear, int endYear, string majorId, string lecturerId)
         {
             IQueryable<class_section> query_classes = majorId != "-1"
                 ? context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer_id == lecturerId)
