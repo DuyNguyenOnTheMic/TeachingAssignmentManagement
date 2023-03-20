@@ -4346,5 +4346,107 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult);
             Assert.AreEqual(query_classSection.Count(), actionResult.Count);
         }
+
+        [TestMethod()]
+        public void Get_Personal_Classes_In_Term_Order_By_Subject_Not_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetPersonalClassesInTermOrderBySubject(termId, "-1", userId1);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Get_Personal_Classes_In_Term_Order_By_Subject_Data_Is_Correct_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetPersonalClassesInTermOrderBySubject(termId, "-1", userId1).ToList();
+            List<class_section> classSectionList = listClassSection.Where(c => c.lecturer_id == userId1).ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            for (int i = 0; i < classSectionList.Count; i++)
+            {
+                Assert.AreEqual(actionResult[i].class_section_id, classSectionList[i].class_section_id);
+                Assert.AreEqual(actionResult[i].type, classSectionList[i].type);
+                Assert.AreEqual(actionResult[i].day_2, classSectionList[i].day_2);
+                Assert.AreEqual(actionResult[i].start_lesson_2, classSectionList[i].start_lesson_2);
+                Assert.AreEqual(actionResult[i].learn_week, classSectionList[i].learn_week);
+                Assert.AreEqual(actionResult[i].start_week, classSectionList[i].start_week);
+                Assert.AreEqual(actionResult[i].end_week, classSectionList[i].end_week);
+                Assert.AreEqual(actionResult[i].lecturer_id, classSectionList[i].lecturer_id);
+                Assert.AreEqual(actionResult[i].lecturer.full_name, classSectionList[i].lecturer.full_name);
+                Assert.AreEqual(actionResult[i].room_id, classSectionList[i].room_id);
+                Assert.AreEqual(actionResult[i].major.name, classSectionList[i].major.name);
+                Assert.AreEqual(actionResult[i].subject, classSectionList[i].subject);
+            }
+        }
+
+        [TestMethod()]
+        public void Personal_Classes_In_Term_Order_By_Subject_Data_Should_Be_IEnumerable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetPersonalClassesInTermOrderBySubject(termId, "-1", userId1).ToList();
+            int count = 0;
+            foreach (dynamic value in actionResult)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod()]
+        public void Personal_Classes_In_Term_Order_By_Subject_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetPersonalClassesInTermOrderBySubject(termId, "-1", userId1).ToList();
+
+            // Assert                
+            Assert.IsNotNull(actionResult[0]);
+        }
+
+        [TestMethod()]
+        public void Personal_Classes_In_Term_Order_By_Subject_Data_Should_Be_Indexable_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetPersonalClassesInTermOrderBySubject(termId, "-1", userId1).ToList();
+
+            // Assert
+            for (int i = 0; i < actionResult.Count; i++)
+            {
+
+                dynamic json = actionResult[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.class_section_id);
+                Assert.IsNotNull(json.type);
+                Assert.IsNotNull(json.day_2);
+                Assert.IsNotNull(json.start_lesson_2);
+                Assert.IsNotNull(json.learn_week);
+                Assert.IsNotNull(json.start_week);
+                Assert.IsNotNull(json.end_week);
+                Assert.IsNotNull(json.lecturer_id);
+                Assert.IsNotNull(json.lecturer.full_name);
+                Assert.IsNotNull(json.room_id);
+                Assert.IsNotNull(json.major.name);
+                Assert.IsNotNull(json.subject);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Personal_Classes_In_Term_Order_By_Subject_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetPersonalClassesInTermOrderBySubject(termId, "-1", userId1).ToList();
+            List<class_section> query_classSection = listClassSection.Where(c => c.term_id == termId && c.lecturer_id == userId1).ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
+        }
+
     }
 }
