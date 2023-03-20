@@ -3684,7 +3684,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Get_Personal_Term_Statistics_All_Not_Null_Test()
+        public void Get_Personal_Term_Statistics_Not_Null_Test()
         {
             // Arrange
             bool isLesson = false;
@@ -3697,7 +3697,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Personal_Term_Statistics_All_Data_Should_Be_IEnumerable_Test()
+        public void Personal_Term_Statistics_Data_Should_Be_IEnumerable_Test()
         {
             // Arrange
             bool isLesson = false;
@@ -3715,7 +3715,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Personal_Term_Statistics_All_Data_Index_at_0_Should_Not_Be_Null_Test()
+        public void Personal_Term_Statistics_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Arrange
             bool isLesson = false;
@@ -3728,7 +3728,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Personal_Term_Statistics_All_Data_Should_Be_Indexable_Test()
+        public void Personal_Term_Statistics_Data_Should_Be_Indexable_Test()
         {
             // Arrange
             bool isLesson = false;
@@ -3754,7 +3754,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Get_Personal_Term_Statistics_All_List_Should_Be_Not_Null_And_Equal_Test()
+        public void Get_Personal_Term_Statistics_List_Should_Be_Not_Null_And_Equal_Test()
         {
             // Arrange
             bool isLesson = false;
@@ -3769,7 +3769,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Get_Personal_Term_Statistics_All_Should_Order_By_Largest_To_Smallest_Test()
+        public void Get_Personal_Term_Statistics_Should_Order_By_Largest_To_Smallest_Test()
         {
             // Arrange
             bool isLesson = false;
@@ -3788,7 +3788,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Get_Personal_Term_Lesson_Statistics_All_Not_Null_Test()
+        public void Get_Personal_Term_Lesson_Statistics_Not_Null_Test()
         {
             // Arrange
             bool isLesson = true;
@@ -3801,7 +3801,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Personal_Term_Lesson_Statistics_All_Data_Should_Be_IEnumerable_Test()
+        public void Personal_Term_Lesson_Statistics_Data_Should_Be_IEnumerable_Test()
         {
             // Arrange
             bool isLesson = true;
@@ -3819,7 +3819,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Personal_Term_Lesson_Statistics_All_Data_Index_at_0_Should_Not_Be_Null_Test()
+        public void Personal_Term_Lesson_Statistics_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Arrange
             bool isLesson = true;
@@ -3832,7 +3832,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Personal_Term_Lesson_Statistics_All_Data_Should_Be_Indexable_Test()
+        public void Personal_Term_Lesson_Statistics_Data_Should_Be_Indexable_Test()
         {
             // Arrange
             bool isLesson = true;
@@ -3863,7 +3863,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Get_Personal_Term_Lesson_Statistics_All_List_Should_Be_Not_Null_And_Equal_Test()
+        public void Get_Personal_Term_Lesson_Statistics_List_Should_Be_Not_Null_And_Equal_Test()
         {
             // Arrange
             bool isLesson = true;
@@ -3878,7 +3878,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Get_Personal_Term_Lesson_Statistics_All_Should_Order_By_Largest_To_Smallest_Test()
+        public void Get_Personal_Term_Lesson_Statistics_Should_Order_By_Largest_To_Smallest_Test()
         {
             // Arrange
             bool isLesson = true;
@@ -3894,6 +3894,22 @@ namespace TeachingAssignmentManagement.DAL.Tests
                 Assert.IsTrue(currentSum >= previousSum);
                 previousSum = json.subject_hours;
             }
+        }
+
+        [TestMethod()]
+        public void Get_Personal_Year_Statistics_Not_Null_Test()
+        {
+            // Arrange
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+            bool isLesson = false;
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetPersonalYearStatistics(isLesson, startYear, endYear, userId1);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
         }
     }
 }
