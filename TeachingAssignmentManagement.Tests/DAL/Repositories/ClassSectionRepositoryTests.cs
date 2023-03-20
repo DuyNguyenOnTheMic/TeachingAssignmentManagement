@@ -4448,5 +4448,24 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.AreEqual(query_classSection.Count(), actionResult.Count);
         }
 
+        [TestMethod()]
+        public void Check_Classes_In_Term_Major_Not_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.CheckClassesInTermMajor(termId, majorId);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Check_Classes_In_Term_Major_Should_Return_True_If_Has_Classes_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.CheckClassesInTermMajor(termId, majorId);
+
+            // Assert
+            Assert.IsTrue(actionResult);
+        }
     }
 }
