@@ -4467,5 +4467,15 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert
             Assert.IsTrue(actionResult);
         }
+
+        [TestMethod()]
+        public void Check_Classes_In_Term_Major_Should_Return_False_If_Has_No_Class_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.CheckClassesInTermMajor(termId, Guid.NewGuid().ToString());
+
+            // Assert
+            Assert.IsFalse(actionResult);
+        }
     }
 }
