@@ -4535,5 +4535,18 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult.major.name);
             Assert.IsNotNull(actionResult.subject);
         }
+
+        [TestMethod()]
+        public void Find_Class_Section_Should_Return_Equal_Data_Test()
+        {
+            // Arrange
+            class_section classSection = listClassSection.First();
+
+            // Act
+            var actionResult = unitOfWork.ClassSectionRepository.FindClassSection(listClassSection, classSection.class_section_id, classSection.day_2, classSection.start_lesson_2, classSection.room_id);
+
+            // Assert
+            Assert.AreEqual(classSection, actionResult);
+        }
     }
 }
