@@ -4477,5 +4477,38 @@ namespace TeachingAssignmentManagement.DAL.Tests
             // Assert
             Assert.IsFalse(actionResult);
         }
+
+        [TestMethod()]
+        public void Check_Classes_In_Term_Not_Null_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.CheckClassesInTermMajor(termId, "-1");
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Check_Classes_In_Term_Should_Return_True_If_Has_Classes_Test()
+        {
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.CheckClassesInTermMajor(termId, "-1");
+
+            // Assert
+            Assert.IsTrue(actionResult);
+        }
+
+        [TestMethod()]
+        public void Find_Class_Section_Should_Return_Not_Null_Test()
+        {
+            // Arrange
+            class_section classSection = listClassSection.First();
+
+            // Act
+            dynamic actionResult = unitOfWork.ClassSectionRepository.FindClassSection(listClassSection, classSection.class_section_id, classSection.day_2, classSection.start_lesson_2, classSection.room_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+        }
     }
 }
