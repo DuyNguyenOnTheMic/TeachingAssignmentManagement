@@ -4505,10 +4505,36 @@ namespace TeachingAssignmentManagement.DAL.Tests
             class_section classSection = listClassSection.First();
 
             // Act
-            dynamic actionResult = unitOfWork.ClassSectionRepository.FindClassSection(listClassSection, classSection.class_section_id, classSection.day_2, classSection.start_lesson_2, classSection.room_id);
+            var actionResult = unitOfWork.ClassSectionRepository.FindClassSection(listClassSection, classSection.class_section_id, classSection.day_2, classSection.start_lesson_2, classSection.room_id);
 
             // Assert
             Assert.IsNotNull(actionResult);
+        }
+
+        [TestMethod()]
+        public void Find_Class_Section_Data_Should_Be_Not_Null_Test()
+        {
+            // Arrange
+            class_section classSection = listClassSection.First();
+
+            // Act
+            var actionResult = unitOfWork.ClassSectionRepository.FindClassSection(listClassSection, classSection.class_section_id, classSection.day_2, classSection.start_lesson_2, classSection.room_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.IsNotNull(actionResult.class_section_id);
+            Assert.IsNotNull(actionResult.type);
+            Assert.IsNotNull(actionResult.day_2);
+            Assert.IsNotNull(actionResult.start_lesson_2);
+            Assert.IsNotNull(actionResult.learn_week);
+            Assert.IsNotNull(actionResult.start_week);
+            Assert.IsNotNull(actionResult.end_week);
+            Assert.IsNotNull(actionResult.lecturer_id);
+            Assert.IsNotNull(actionResult.lecturer.full_name);
+            Assert.IsNotNull(actionResult.room_id);
+            Assert.IsNotNull(actionResult.major.name);
+            Assert.IsNotNull(actionResult.subject);
+            }
         }
     }
 }
