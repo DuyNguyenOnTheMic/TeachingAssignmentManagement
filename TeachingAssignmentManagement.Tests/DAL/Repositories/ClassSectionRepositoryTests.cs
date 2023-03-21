@@ -4534,7 +4534,6 @@ namespace TeachingAssignmentManagement.DAL.Tests
             Assert.IsNotNull(actionResult.room_id);
             Assert.IsNotNull(actionResult.major.name);
             Assert.IsNotNull(actionResult.subject);
-            }
         }
     }
 }
