@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Sockets;
 using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
 
@@ -4547,6 +4548,21 @@ namespace TeachingAssignmentManagement.DAL.Tests
 
             // Assert
             Assert.AreEqual(classSection, actionResult);
+        }
+
+        [TestMethod()]
+        public void Insert_Major_Repository_Test()
+        {
+            // Arrange
+            class_section classSection = listClassSection.First();
+
+            // Act
+            unitOfWork.ClassSectionRepository.InsertClassSection(classSection);
+            unitOfWork.Save();
+
+            // Assert
+            mockSetClassSection.Verify(r => r.Add(classSection), Times.Once);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
     }
 }
