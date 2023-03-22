@@ -4551,7 +4551,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Insert_Major_Repository_Test()
+        public void Insert_Class_Section_Repository_Test()
         {
             // Arrange
             class_section classSection = listClassSection.First();
@@ -4562,6 +4562,18 @@ namespace TeachingAssignmentManagement.DAL.Tests
 
             // Assert
             mockSetClassSection.Verify(r => r.Add(classSection), Times.Once);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod()]
+        public void Delete_Class_Section_Repository_Test()
+        {
+            // Act
+            unitOfWork.ClassSectionRepository.DeleteClass(listClassSection.FirstOrDefault().id);
+            unitOfWork.Save();
+
+            // Assert
+            mockSetClassSection.Verify(x => x.Remove(It.IsAny<class_section>()), Times.Once());
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
     }
