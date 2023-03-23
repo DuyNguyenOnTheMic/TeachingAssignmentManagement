@@ -250,7 +250,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_User_Edit_Status_Not_Null_When_Status_Is_True_Test()
+        public void Get_Existed_User_Edit_Status_Not_Null_When_Status_Is_True_Test()
         {
             // Arrange
             UserController controller = new UserController(unitOfWork);
@@ -266,7 +266,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_User_Edit_Status_Not_Null_When_Status_Is_False_Test()
+        public void Get_Existed_User_Edit_Status_Not_Null_When_Status_Is_False_Test()
         {
             // Arrange
             UserController controller = new UserController(unitOfWork);
@@ -282,7 +282,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Edit_User_Status_Mock_Should_Return_Success_When_Status_Is_True()
+        public void Edit_Existed_User_Status_Mock_Should_Return_Success_When_Status_Is_True()
         {
             // Arrange
             UserController controller = new UserController(unitOfWork);
@@ -298,7 +298,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Edit_User_Status_Mock_Should_Return_Success_When_Status_Is_False()
+        public void Edit_Existed_User_Status_Mock_Should_Return_Success_When_Status_Is_False()
         {
             // Arrange
             UserController controller = new UserController(unitOfWork);
