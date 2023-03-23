@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Sockets;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
@@ -249,13 +250,30 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_User_Edit_Status_Data_Not_Null_Test()
+        public void Get_User_Edit_Status_Not_Null_When_Status_Is_True_Test()
         {
             // Arrange
             UserController controller = new UserController(unitOfWork);
+            mockSetLecturer.Setup(m => m.Find(It.IsAny<string>())).Returns(listLecturer.First());
 
             // Act
             JsonResult actionResult = controller.EditStatus(userId1, true) as JsonResult;
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            Assert.IsNotNull(jsonCollection);
+        }
+
+        [TestMethod()]
+        public void Get_User_Edit_Status_Not_Null_When_Status_Is_False_Test()
+        {
+            // Arrange
+            UserController controller = new UserController(unitOfWork);
+            mockSetLecturer.Setup(m => m.Find(It.IsAny<string>())).Returns(listLecturer.First());
+
+            // Act
+            JsonResult actionResult = controller.EditStatus(userId1, false) as JsonResult;
             dynamic jsonCollection = actionResult.Data;
 
             // Assert
@@ -268,6 +286,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             UserController controller = new UserController(unitOfWork);
+            mockSetLecturer.Setup(m => m.Find(It.IsAny<string>())).Returns(listLecturer.First());
 
             // Act
             JsonResult actionResult = controller.EditStatus(userId1, true) as JsonResult;
@@ -283,6 +302,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             UserController controller = new UserController(unitOfWork);
+            mockSetLecturer.Setup(m => m.Find(It.IsAny<string>())).Returns(listLecturer.First());
 
             // Act
             JsonResult actionResult = controller.EditStatus(userId1, false) as JsonResult;
