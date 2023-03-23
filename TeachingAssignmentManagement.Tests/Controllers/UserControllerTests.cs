@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Net.Sockets;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers.Tests
@@ -35,8 +35,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 new AspNetUser() { Id = userId2, Email = "b.nv@vlu.edu.vn", UserName = "b.nv@vlu.edu.vn", AspNetRoles = listRole }
             }.AsQueryable();
             listLecturer = new List<lecturer> {
-                new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = "TG", is_vietnamese = true, status = true },
-                new lecturer() { id = userId2, staff_id = "1002", full_name = "Nguyễn Văn B", type = "CH", is_vietnamese = true, status = true }
+                new lecturer() { id = userId1, staff_id = "1001", full_name = "Nguyễn Văn A", type = MyConstants.VisitingLecturerType, is_vietnamese = true, status = true },
+                new lecturer() { id = userId2, staff_id = "1002", full_name = "Nguyễn Văn B", type = MyConstants.FacultyMemberType, is_vietnamese = true, status = true }
             }.AsQueryable();
             mockSetLecturer = new Mock<DbSet<lecturer>>();
             mockSetUser = new Mock<DbSet<AspNetUser>>();
@@ -369,6 +369,22 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Assert
             Assert.AreEqual(true, jsonCollection.success);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod()]
+        public void Edit_New_User_Status_Mock_Should_Create_New_User_When_Null_Test()
+        {
+            // Arrange
+            UserController controller = new UserController(unitOfWork);
+            string newLecturerId = Guid.NewGuid().ToString();
+
+            // Act
+            JsonResult actionResult = controller.EditStatus(newLecturerId, false) as JsonResult;
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            mockSetLecturer.Verify(r => r.Add(It.IsAny<lecturer>()), Times.Once);
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
 
