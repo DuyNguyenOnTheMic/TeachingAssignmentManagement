@@ -120,5 +120,24 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                     "JSON record does not contain \"level\" required property.");
             }
         }
+
+        [TestMethod()]
+        public void Academic_Degree_Json_Data_Should_Convert_To_IEnumerable_Test()
+        {
+            // Arrange
+            AcademicDegreeController controller = new AcademicDegreeController(unitOfWork);
+
+            // Act
+            JsonResult actionResult = controller.GetData();
+            dynamic jsonCollection = actionResult.Data;
+            int count = 0;
+            foreach (dynamic value in jsonCollection)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
     }
 }
