@@ -97,5 +97,28 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.AreEqual(jsonCollection[i].level, academicDegreeList[i].level);
             }
         }
+
+        [TestMethod()]
+        public void Get_Academic_Degree_Json_Data_Not_False_Test()
+        {
+            // Arrange
+            AcademicDegreeController controller = new AcademicDegreeController(unitOfWork);
+
+            // Act
+            JsonResult actionResult = controller.GetData();
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            dynamic jsonCollection = actionResult.Data;
+            foreach (dynamic json in jsonCollection)
+            {
+                Assert.IsNotNull(json.id,
+                    "JSON record does not contain \"id\" required property.");
+                Assert.IsNotNull(json.name,
+                    "JSON record does not contain \"name\" required property.");
+                Assert.IsNotNull(json.level,
+                    "JSON record does not contain \"level\" required property.");
+            }
+        }
     }
 }
