@@ -58,7 +58,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_Major_Json_Data_Not_Null_Test()
+        public void Get_Academic_Degree_Json_Data_Not_Null_Test()
         {
             // Arrange
             AcademicDegreeController controller = new AcademicDegreeController(unitOfWork);
@@ -74,6 +74,27 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.IsNotNull(json.id);
                 Assert.IsNotNull(json.name);
                 Assert.IsNotNull(json.level);
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Academic_Degree_Json_Data_Is_Correct_Test()
+        {
+            // Arrange
+            AcademicDegreeController controller = new AcademicDegreeController(unitOfWork);
+
+            // Act
+            JsonResult actionResult = controller.GetData();
+            dynamic jsonCollection = actionResult.Data;
+            List<academic_degree> academicDegreeList = listAcademicDegree.ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            for (int i = 0; i < listAcademicDegree.Count(); i++)
+            {
+                Assert.AreEqual(jsonCollection[i].id, academicDegreeList[i].id);
+                Assert.AreEqual(jsonCollection[i].name, academicDegreeList[i].name);
+                Assert.AreEqual(jsonCollection[i].level, academicDegreeList[i].level);
             }
         }
     }
