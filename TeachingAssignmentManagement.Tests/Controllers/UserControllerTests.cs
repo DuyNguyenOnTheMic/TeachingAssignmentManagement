@@ -279,6 +279,21 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
+        public void Edit_User_Status_Mock_Should_Return_Success_When_Status_Is_False()
+        {
+            // Arrange
+            UserController controller = new UserController(unitOfWork);
+
+            // Act
+            JsonResult actionResult = controller.EditStatus(userId1, false) as JsonResult;
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            Assert.AreEqual(true, jsonCollection.success);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod()]
         public void Return_Original_String_When_Not_Empty_Test()
         {
             // Arrange
