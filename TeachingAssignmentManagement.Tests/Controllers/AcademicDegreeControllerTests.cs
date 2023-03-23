@@ -56,5 +56,25 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.IsNotNull(result);
         }
+
+        [TestMethod()]
+        public void Get_Major_Json_Data_Not_Null_Test()
+        {
+            // Arrange
+            AcademicDegreeController controller = new AcademicDegreeController(unitOfWork);
+
+            // Act
+            JsonResult actionResult = controller.GetData();
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            foreach (dynamic json in jsonCollection)
+            {
+                Assert.IsNotNull(json.id);
+                Assert.IsNotNull(json.name);
+                Assert.IsNotNull(json.level);
+            }
+        }
     }
 }
