@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net.Sockets;
+using System.Web.Mvc;
+using TeachingAssignmentManagement.Controllers;
 using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
 
@@ -4574,6 +4576,18 @@ namespace TeachingAssignmentManagement.DAL.Tests
 
             // Assert
             mockSetClassSection.Verify(x => x.Remove(It.IsAny<class_section>()), Times.Once());
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod()]
+        public void Delete_All_Classes_Test()
+        {
+            // Act
+            unitOfWork.ClassSectionRepository.DeleteAllClasses(termId, majorId);
+            unitOfWork.Save();
+
+            // Assert
+            mockSetClassSection.Verify(r => r.RemoveRange(It.IsAny<IEnumerable<class_section>>()));
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
     }
