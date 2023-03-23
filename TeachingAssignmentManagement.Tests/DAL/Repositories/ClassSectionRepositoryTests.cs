@@ -4505,7 +4505,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             class_section classSection = listClassSection.First();
 
             // Act
-            var actionResult = unitOfWork.ClassSectionRepository.FindClassSection(listClassSection, classSection.class_section_id, classSection.day_2, classSection.start_lesson_2, classSection.room_id);
+            class_section actionResult = unitOfWork.ClassSectionRepository.FindClassSection(listClassSection, classSection.class_section_id, classSection.day_2, classSection.start_lesson_2, classSection.room_id);
 
             // Assert
             Assert.IsNotNull(actionResult);
@@ -4518,7 +4518,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             class_section classSection = listClassSection.First();
 
             // Act
-            var actionResult = unitOfWork.ClassSectionRepository.FindClassSection(listClassSection, classSection.class_section_id, classSection.day_2, classSection.start_lesson_2, classSection.room_id);
+            class_section actionResult = unitOfWork.ClassSectionRepository.FindClassSection(listClassSection, classSection.class_section_id, classSection.day_2, classSection.start_lesson_2, classSection.room_id);
 
             // Assert
             Assert.IsNotNull(actionResult);
@@ -4543,7 +4543,7 @@ namespace TeachingAssignmentManagement.DAL.Tests
             class_section classSection = listClassSection.First();
 
             // Act
-            var actionResult = unitOfWork.ClassSectionRepository.FindClassSection(listClassSection, classSection.class_section_id, classSection.day_2, classSection.start_lesson_2, classSection.room_id);
+            class_section actionResult = unitOfWork.ClassSectionRepository.FindClassSection(listClassSection, classSection.class_section_id, classSection.day_2, classSection.start_lesson_2, classSection.room_id);
 
             // Assert
             Assert.AreEqual(classSection, actionResult);
