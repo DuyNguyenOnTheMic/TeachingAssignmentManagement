@@ -302,7 +302,66 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             UserController controller = new UserController(unitOfWork);
-            mockSetLecturer.Setup(m => m.Find(It.IsAny<string>())).Returns(listLecturer.First());
+
+            // Act
+            JsonResult actionResult = controller.EditStatus(userId1, false) as JsonResult;
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            Assert.AreEqual(true, jsonCollection.success);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod()]
+        public void Get_New_User_Edit_Status_Not_Null_When_Status_Is_True_Test()
+        {
+            // Arrange
+            UserController controller = new UserController(unitOfWork);
+
+            // Act
+            JsonResult actionResult = controller.EditStatus(userId1, true) as JsonResult;
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            Assert.IsNotNull(jsonCollection);
+        }
+
+        [TestMethod()]
+        public void Get_New_User_Edit_Status_Not_Null_When_Status_Is_False_Test()
+        {
+            // Arrange
+            UserController controller = new UserController(unitOfWork);
+
+            // Act
+            JsonResult actionResult = controller.EditStatus(userId1, false) as JsonResult;
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            Assert.IsNotNull(jsonCollection);
+        }
+
+        [TestMethod()]
+        public void Edit_New_User_Status_Mock_Should_Return_Success_When_Status_Is_True()
+        {
+            // Arrange
+            UserController controller = new UserController(unitOfWork);
+
+            // Act
+            JsonResult actionResult = controller.EditStatus(userId1, true) as JsonResult;
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            Assert.AreEqual(true, jsonCollection.success);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod()]
+        public void Edit_New_User_Status_Mock_Should_Return_Success_When_Status_Is_False()
+        {
+            // Arrange
+            UserController controller = new UserController(unitOfWork);
 
             // Act
             JsonResult actionResult = controller.EditStatus(userId1, false) as JsonResult;
