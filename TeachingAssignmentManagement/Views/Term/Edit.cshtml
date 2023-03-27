@@ -36,12 +36,14 @@
     <div class="row mb-1">
         <div class="col-6">
             <label class="form-label font-small-4" for="max_lesson">Tiết tối đa: </label>
+            <small class="text-muted"><i>(Tiết tối đa trong 1 ngày)</i></small>
             <div class="input-group">
                 @Html.EditorFor(model => model.max_lesson, new { htmlAttributes = new { @type = "number", @class = "touchspin touchspin-maxlesson", @aria_label = "Nhập tiết tối đa" } })
             </div>
         </div>
         <div class="col-6">
             <label class="form-label font-small-4" for="max_class">Lớp tối đa: </label>
+            <small class="text-muted"><i>(Lớp tối đa trong 1 tuần)</i></small>
             <div class="input-group">
                 @Html.EditorFor(model => model.max_class, new { htmlAttributes = new { @type = "number", @class = "touchspin touchspin-maxclass", @aria_label = "Nhập lớp tối đa" } })
             </div>
