@@ -67,7 +67,7 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable<AspNetUser> GetFacultyBoards()
         {
-            return context.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == "BCN khoa");
+            return context.AspNetUsers.Where(u => u.AspNetRoles.FirstOrDefault().Name == CustomRoles.FacultyBoard);
         }
 
         public lecturer GetLecturerByID(string id)

@@ -78,7 +78,7 @@
                         </li>
                         @switch (roleName)
                         {
-                            case "BCN khoa":
+                            case CustomRoles.FacultyBoard:
                                 <li class="nav-item @(ViewBag.Title == "Quản lý ngành" ? "active" : string.Empty)">
                                     <a class="d-flex align-items-center" href="@Url.Action("Index", "Term")"><i class="feather feather-layers"></i><span class="menu-title text-truncate">Học kỳ và ngành</span></a>
                                 </li>
@@ -137,7 +137,7 @@
                                     </ul>
                                 </li>
                                 break;
-                            case "Bộ môn":
+                            case CustomRoles.Department:
                                 <li class="nav-item">
                                     <a class="d-flex align-items-center" href="#"><i class="feather feather-clock"></i><span class="menu-title text-truncate">Thời khoá biểu</span></a>
                                     <ul class="menu-content">
@@ -170,7 +170,7 @@
                                     <a class="d-flex align-items-center" href="@Url.Action("Index", "Remuneration")"><i class="feather feather-dollar-sign"></i><span class="menu-title text-truncate">Thù lao</span></a>
                                 </li>
                                 break;
-                            case "Giảng viên":
+                            case CustomRoles.Lecturer:
                                 <li class="nav-item">
                                     <a class="d-flex align-items-center" href="@Url.Action("Index", "Timetable")"><i class="feather feather-clock"></i><span class="menu-title text-truncate">Thời khoá biểu</span></a>
                                 </li>
