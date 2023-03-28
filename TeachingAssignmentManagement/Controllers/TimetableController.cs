@@ -543,8 +543,8 @@ namespace TeachingAssignmentManagement.Controllers
             string currentLecturerName = unitOfWork.UserRepository.GetLecturerByID(currentLecturerId).full_name;
             lecturerId = ToNullableString(lecturerId);
 
-            // Check if user is in role Department head to restrict assignment
-            if (User.IsInRole("Bộ môn") && classSection.last_assigned_by != null && classSection.last_assigned_by != currentLecturerId)
+            // Check if user is in role Department to restrict assignment
+            if (User.IsInRole(CustomRoles.Department) && classSection.last_assigned_by != null && classSection.last_assigned_by != currentLecturerId)
             {
                 string lastAssignedBy = unitOfWork.UserRepository.GetLecturerByID(classSection.last_assigned_by).full_name;
                 return Json(new { error = true, message = "Lớp học phần này đã được phân công bởi " + lastAssignedBy + "!" }, JsonRequestBehavior.AllowGet);
