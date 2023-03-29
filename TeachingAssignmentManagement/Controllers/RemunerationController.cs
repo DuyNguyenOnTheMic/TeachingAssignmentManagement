@@ -75,7 +75,7 @@ namespace TeachingAssignmentManagement.Controllers
                             isMissing = true;
                         }
 
-                        teachingRemuneration += unitPriceByLevel * CalculateRemuneration(item, coefficient);
+                        teachingRemuneration += unitPriceByLevel * CalculateRemuneration(item, coefficient) * (decimal)item.total_lesson;
                     }
                 }
                 string lecturerRank = rank.AcademicDegreeRankId;
