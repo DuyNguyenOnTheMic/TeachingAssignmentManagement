@@ -10,5 +10,10 @@
         public decimal? RemunerationHours { get; set; }
         public int TheoryCount { get; set; }
         public int PracticeCount { get; set; }
+        public int? SumLesson1 { get; set; }
+        public int? SumLesson4 { get; set; }
+        public int? SumLesson7 { get; set; }
+        public int? SumLesson10 { get; set; }
+        public int? SumLesson13 { get; set; }
     }
 }

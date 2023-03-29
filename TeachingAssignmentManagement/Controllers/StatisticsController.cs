@@ -214,7 +214,7 @@ namespace TeachingAssignmentManagement.Controllers
         public JsonResult GetPersonalTermData(bool isLesson, int termId)
         {
             string userId = UserManager.FindByEmail(User.Identity.Name).Id;
-            return Json(GetPersonalTermStatistics(termId, "-1", userId), JsonRequestBehavior.AllowGet);
+            return Json(GetPersonalTermStatistics(isLesson, termId, "-1", userId), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -282,10 +282,10 @@ namespace TeachingAssignmentManagement.Controllers
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public ActionResult GetRemunerationSubjects(int termId, string majorId, string lecturerId)
         {
-            return Json(GetPersonalTermStatistics(termId, majorId, lecturerId), JsonRequestBehavior.AllowGet);
+            return Json(GetPersonalTermStatistics(false, termId, majorId, lecturerId), JsonRequestBehavior.AllowGet);
         }
 
-        private List<SubjectDTO> GetPersonalTermStatistics(int termId, string majorId, string lecturerId)
+        private List<SubjectDTO> GetPersonalTermStatistics(bool isLesson, int termId, string majorId, string lecturerId)
         {
             // Get classes in term of lecturer
             term term = unitOfWork.TermRepository.GetTermByID(termId);
@@ -306,17 +306,40 @@ namespace TeachingAssignmentManagement.Controllers
                     subjectHours += subjectTotalLesson;
                     remunerationHours += subjectTotalLesson * RemunerationController.CalculateRemuneration(subjectClass, coefficient);
                 }
-                subjects.Add(new SubjectDTO
+                if (!isLesson)
                 {
-                    Id = item.subject_id,
-                    Name = item.name,
-                    Credits = item.credits,
-                    Major = item.major.name,
-                    Hours = subjectHours,
-                    RemunerationHours = Math.Round(remunerationHours),
-                    TheoryCount = query_subjectClasses.Count(c => c.type == MyConstants.TheoreticalClassType),
-                    PracticeCount = query_subjectClasses.Count(c => c.type == MyConstants.PracticeClassType)
-                });
+                    subjects.Add(new SubjectDTO
+                    {
+                        Id = item.subject_id,
+                        Name = item.name,
+                        Credits = item.credits,
+                        Major = item.major.name,
+                        Hours = subjectHours,
+                        RemunerationHours = Math.Round(remunerationHours),
+                        TheoryCount = query_subjectClasses.Count(c => c.type == MyConstants.TheoreticalClassType),
+                        PracticeCount = query_subjectClasses.Count(c => c.type == MyConstants.PracticeClassType)
+                    });
+                }
+                else
+                {
+                    subjects.Add(new SubjectDTO
+                    {
+                        Id = item.subject_id,
+                        Name = item.name,
+                        Credits = item.credits,
+                        Major = item.major.name,
+                        Hours = subjectHours,
+                        RemunerationHours = Math.Round(remunerationHours),
+                        TheoryCount = query_subjectClasses.Count(c => c.type == MyConstants.TheoreticalClassType),
+                        PracticeCount = query_subjectClasses.Count(c => c.type == MyConstants.PracticeClassType),
+                        SumLesson1 = query_subjectClasses.Where(c => c.start_lesson_2 == 1).Sum(c => c.total_lesson),
+                        SumLesson4 = query_subjectClasses.Where(c => c.start_lesson_2 == 4).Sum(c => c.total_lesson),
+                        SumLesson7 = query_subjectClasses.Where(c => c.start_lesson_2 == 7).Sum(c => c.total_lesson),
+                        SumLesson10 = query_subjectClasses.Where(c => c.start_lesson_2 == 10).Sum(c => c.total_lesson),
+                        SumLesson13 = query_subjectClasses.Where(c => c.start_lesson_2 == 13).Sum(c => c.total_lesson)
+                    });
+
+                }
             }
             return subjects;
         }

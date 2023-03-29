@@ -124,51 +124,65 @@ $.ajax({
         } else {
             // Get chart labels and data
             var labels = response.map(function (e) {
-                return e.subject_name;
+                return e.Name;
             });
-            var labels_adjusted = labels.map(label => splitLabel(label, 3));
+            var labelsAdjusted = labels.map(label => splitLabel(label, 3));
 
             var chartData;
-            var totalLessons = response.map(function (e) {
-                return e.subject_hours;
+            var originalHours = response.map(function (e) {
+                return e.Hours;
+            });
+            var remunerationHours = response.map(function (e) {
+                return e.RemunerationHours;
             });
 
             if (isLesson == 'False') {
                 // Fetch chart data
                 chartData = {
-                    labels: labels_adjusted,
+                    labels: labelsAdjusted,
                     datasets: [
                         {
                             label: 'Số giờ giảng',
-                            data: totalLessons,
+                            data: originalHours,
                             backgroundColor: 'rgba(115, 103, 240, 0.8)',
                             borderColor: 'transparent',
                             borderWidth: 1,
-                            borderRadius: 3
+                            borderRadius: 3,
+                            stack: 'Stack 0'
+                        },
+                        {
+                            label: 'Số giờ quy đổi',
+                            data: remunerationHours,
+                            backgroundColor: 'rgba(255,159,67, 0.8)',
+                            borderColor: 'transparent',
+                            borderWidth: 1,
+                            borderRadius: 3,
+                            stack: 'Stack 1'
                         }
                     ]
                 };
+                chartOptions.plugins.subtitle.text = 'Số môn học: ' + response.length + ' / Tổng số giờ: ' + (hoursSum(response, 'Hours') + hoursSum(response, 'RemunerationHours'));
             } else {
                 // Get lesson data mapping
                 var sumLessons1 = response.map(function (e) {
-                    return e.sumLesson1;
+                    return e.SumLesson1;
                 });
                 var sumLessons4 = response.map(function (e) {
-                    return e.sumLesson4;
+                    return e.SumLesson4;
                 });
                 var sumLessons7 = response.map(function (e) {
-                    return e.sumLesson7;
+                    return e.SumLesson7;
                 });
                 var sumLessons10 = response.map(function (e) {
-                    return e.sumLesson10;
+                    return e.SumLesson10;
                 });
                 var sumLessons13 = response.map(function (e) {
-                    return e.sumLesson13;
+                    return e.SumLesson13;
                 });
 
                 // Fetch lessons chart data
                 chartData = {
-                    labels: labels_adjusted,
+                    labels: labelsAdjusted,
                     datasets: [
                         {
                             label: 'Ca 1',
@@ -213,12 +227,15 @@ $.ajax({
                     ]
                 };
 
+                chartOptions.plugins.subtitle.text = 'Số môn học: ' + response.length + ' / Tổng số giờ: ' + hoursSum(response, 'Hours');
                 chartOptions.plugins.datalabels = {
-                    color: labelColor
+                    color: labelColor,
+                    display: function (context) {
+                        // Only return positive values
+                        return context.dataset.data[context.dataIndex] !== 0;
+                    }
                 };
             }
-
-            chartOptions.plugins.subtitle.text = 'Số môn học: ' + response.length + ' / Tổng số giờ: ' + hoursSum(response, 'subject_hours');
 
             // Create the chart
             var chart = new Chart(ctx, {
@@ -305,38 +322,40 @@ function hoursSum(items, prop) {
 
 function populateDatatable(data) {
     var dataTable;
+    var exportColumns = isLessonCheck.is(":checked") ? [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] : [0, 1, 2, 3, 4, 5, 6, 7];
 
     // Populate statistics table
     dataTable = $('#tblStatistics').DataTable(
         {
             columns: [
                 { 'data': '', defaultContent: '' },
-                { 'data': 'id' },
-                { 'data': 'subject_name' },
-                { 'data': 'subject_major' },
-                { 'data': 'subject_credits' },
+                { 'data': 'Id' },
+                { 'data': 'Name' },
+                { 'data': 'Major' },
+                { 'data': 'Credits' },
                 {
                     'data': function (data) {
                         // Render total class column
-                        var theoryClass = data.theory_count + 'LT',
-                            practiceClass = data.practice_count + 'TH',
+                        var theoryClass = data.TheoryCount + 'LT',
+                            practiceClass = data.PracticeCount + 'TH',
                             totalClass;
-                        if (data.theory_count && data.practice_count) {
+                        if (data.TheoryCount && data.PracticeCount) {
                             totalClass = theoryClass + ' + ' + practiceClass;
-                        } else if (data.theory_count) {
+                        } else if (data.TheoryCount) {
                             totalClass = theoryClass;
-                        } else if (data.practice_count) {
+                        } else if (data.PracticeCount) {
                             totalClass = practiceClass;
                         }
                         return totalClass;
                     }
                 },
-                { 'data': 'subject_hours' },
-                { 'data': 'sumLesson1', defaultContent: '' },
-                { 'data': 'sumLesson4', defaultContent: '' },
-                { 'data': 'sumLesson7', defaultContent: '' },
-                { 'data': 'sumLesson10', defaultContent: '' },
-                { 'data': 'sumLesson13', defaultContent: '' }
+                { 'data': 'Hours' },
+                { 'data': 'RemunerationHours' },
+                { 'data': 'SumLesson1', defaultContent: '' },
+                { 'data': 'SumLesson4', defaultContent: '' },
+                { 'data': 'SumLesson7', defaultContent: '' },
+                { 'data': 'SumLesson10', defaultContent: '' },
+                { 'data': 'SumLesson13', defaultContent: '' }
             ],
             data: data,
             columnDefs: [
@@ -346,7 +365,7 @@ function populateDatatable(data) {
                     width: '1%',
                     targets: 0
                 },
-                { className: 'text-center', target: [0, 4, 5, 6] }
+                { className: 'text-center', target: [0, 4, 5, 6, 7] }
             ],
             order: [[6, 'desc']],
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
@@ -361,22 +380,34 @@ function populateDatatable(data) {
                         {
                             extend: 'print',
                             className: 'dropdown-item',
-                            title: fileName
+                            title: fileName,
+                            exportOptions: {
+                                columns: exportColumns
+                            }
                         },
                         {
                             extend: 'excel',
                             className: 'dropdown-item',
-                            title: fileName
+                            title: fileName,
+                            exportOptions: {
+                                columns: exportColumns
+                            }
                         },
                         {
                             extend: 'pdf',
                             className: 'dropdown-item',
-                            title: fileName
+                            title: fileName,
+                            exportOptions: {
+                                columns: exportColumns
+                            }
                         },
                         {
                             extend: 'copy',
                             className: 'dropdown-item',
-                            title: fileName
+                            title: fileName,
+                            exportOptions: {
+                                columns: exportColumns
+                            }
                         }
                     ],
                     init: function (api, node, config) {
@@ -412,7 +443,7 @@ $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
 
 function setVisibleColumn(state) {
     var table = $('#tblStatistics').DataTable();
-    for (var i = 7; i <= 11; i++) {
+    for (var i = 8; i <= 12; i++) {
         table.column(i).visible(state, state);
     }
     table.columns.adjust().draw(state); // adjust column sizing and redraw
