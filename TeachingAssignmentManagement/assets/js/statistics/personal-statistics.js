@@ -27,7 +27,7 @@ if (type == yearSelect.attr('id')) {
     url += 'GetPersonalYearData';
 } else {
     data = { isLesson, 'termId': value };
-    titleText = 'Thống kê số giờ học kỳ ' + value;
+    titleText = 'Thống kê số giờ giảng học kỳ ' + value;
     fileName = 'ThongKeSoGio_HK' + value;
     url += 'GetPersonalTermData';
 }
