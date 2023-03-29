@@ -221,7 +221,7 @@ namespace TeachingAssignmentManagement.Controllers
         public JsonResult GetPersonalYearData(bool isLesson, int startYear, int endYear)
         {
             string userId = UserManager.FindByEmail(User.Identity.Name).Id;
-            return Json(unitOfWork.ClassSectionRepository.GetPersonalYearStatistics(isLesson, startYear, endYear, userId), JsonRequestBehavior.AllowGet);
+            return GetPersonalYearStatistics(isLesson, startYear, endYear, userId);
         }
 
         [HttpGet]
@@ -305,7 +305,7 @@ namespace TeachingAssignmentManagement.Controllers
             {
                 // Loop through each subjects to find classes
                 decimal remunerationHours = decimal.Zero;
-                IEnumerable<class_section> query_subjectClasses = query_classes.Where(c => c.subject.subject_id == item.subject_id);
+                IEnumerable<class_section> query_subjectClasses = query_classes.Where(c => c.subject.id == item.id);
                 int? subjectHours = 0;
                 foreach (class_section subjectClass in query_subjectClasses)
                 {
@@ -345,10 +345,73 @@ namespace TeachingAssignmentManagement.Controllers
                         SumLesson10 = query_subjectClasses.Where(c => c.start_lesson_2 == 10).Sum(c => c.total_lesson),
                         SumLesson13 = query_subjectClasses.Where(c => c.start_lesson_2 == 13).Sum(c => c.total_lesson)
                     });
-
                 }
             }
-            return Json(subjects, JsonRequestBehavior.AllowGet);
+            return Json(subjects.OrderByDescending(s => s.Hours), JsonRequestBehavior.AllowGet);
+        }
+
+        private JsonResult GetPersonalYearStatistics(bool isLesson, int startYear, int endYear, string lecturerId)
+        {
+            // Get classes in year of lecturer
+            coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
+
+            // Check if coefficient is null
+            if (coefficient == null)
+            {
+                return Json(new { error = true }, JsonRequestBehavior.AllowGet);
+            }
+
+            IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInYear(startYear, endYear, lecturerId);
+            IEnumerable<subject> query_subjects = query_classes.Select(c => c.subject).Distinct();
+            List<SubjectDTO> subjects = new List<SubjectDTO>();
+            string previousSubjectId = string.Empty;
+            foreach (subject item in query_subjects)
+            {
+                // Loop through each subjects to find classes
+                decimal remunerationHours = decimal.Zero;
+                IEnumerable<class_section> query_subjectClasses = query_classes.Where(c => c.subject.id == item.id);
+                int? subjectHours = 0;
+                foreach (class_section subjectClass in query_subjectClasses)
+                {
+                    int subjectTotalLesson = subjectClass.total_lesson.GetValueOrDefault(0);
+                    subjectHours += subjectTotalLesson;
+                    remunerationHours += subjectTotalLesson * RemunerationController.CalculateRemuneration(subjectClass, coefficient);
+                }
+                if (!isLesson)
+                {
+                    subjects.Add(new SubjectDTO
+                    {
+                        Id = item.subject_id,
+                        Name = item.name,
+                        Credits = item.credits,
+                        Major = item.major.name,
+                        Hours = subjectHours,
+                        RemunerationHours = Math.Round(remunerationHours),
+                        TheoryCount = query_subjectClasses.Count(c => c.type == MyConstants.TheoreticalClassType),
+                        PracticeCount = query_subjectClasses.Count(c => c.type == MyConstants.PracticeClassType)
+                    });
+                }
+                else
+                {
+                    subjects.Add(new SubjectDTO
+                    {
+                        Id = item.subject_id,
+                        Name = item.name,
+                        Credits = item.credits,
+                        Major = item.major.name,
+                        Hours = subjectHours,
+                        RemunerationHours = Math.Round(remunerationHours),
+                        TheoryCount = query_subjectClasses.Count(c => c.type == MyConstants.TheoreticalClassType),
+                        PracticeCount = query_subjectClasses.Count(c => c.type == MyConstants.PracticeClassType),
+                        SumLesson1 = query_subjectClasses.Where(c => c.start_lesson_2 == 1).Sum(c => c.total_lesson),
+                        SumLesson4 = query_subjectClasses.Where(c => c.start_lesson_2 == 4).Sum(c => c.total_lesson),
+                        SumLesson7 = query_subjectClasses.Where(c => c.start_lesson_2 == 7).Sum(c => c.total_lesson),
+                        SumLesson10 = query_subjectClasses.Where(c => c.start_lesson_2 == 10).Sum(c => c.total_lesson),
+                        SumLesson13 = query_subjectClasses.Where(c => c.start_lesson_2 == 13).Sum(c => c.total_lesson)
+                    });
+                }
+            }
+            return Json(subjects.OrderByDescending(s => s.Hours), JsonRequestBehavior.AllowGet);
         }
 
         private List<RemunerationDTO> GetRemunerationData(int termId, string majorId, coefficient coefficient, IEnumerable<lecturer> lecturers)

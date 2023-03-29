@@ -407,6 +407,11 @@ namespace TeachingAssignmentManagement.DAL
             return context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
         }
 
+        public IEnumerable<class_section> GetPersonalClassesInYear(int startYear, int endYear, string lecturerId)
+        {
+            return context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id == lecturerId);
+        }
+
         public IEnumerable<class_section> GetPersonalClassesInTermOrderBySubject(int termId, string majorId, string lecturerId)
         {
             return (majorId != "-1"
