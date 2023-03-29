@@ -214,7 +214,7 @@ namespace TeachingAssignmentManagement.Controllers
         public JsonResult GetPersonalTermData(bool isLesson, int termId)
         {
             string userId = UserManager.FindByEmail(User.Identity.Name).Id;
-            return Json(unitOfWork.ClassSectionRepository.GetPersonalTermStatistics(isLesson, termId, userId), JsonRequestBehavior.AllowGet);
+            return Json(GetPersonalTermStatistics(termId, "-1", userId), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -282,6 +282,11 @@ namespace TeachingAssignmentManagement.Controllers
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public ActionResult GetRemunerationSubjects(int termId, string majorId, string lecturerId)
         {
+            return Json(GetPersonalTermStatistics(termId, majorId, lecturerId), JsonRequestBehavior.AllowGet);
+        }
+
+        private List<SubjectDTO> GetPersonalTermStatistics(int termId, string majorId, string lecturerId)
+        {
             // Get classes in term of lecturer
             term term = unitOfWork.TermRepository.GetTermByID(termId);
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(term.start_year, term.end_year);
@@ -313,7 +318,7 @@ namespace TeachingAssignmentManagement.Controllers
                     PracticeCount = query_subjectClasses.Count(c => c.type == MyConstants.PracticeClassType)
                 });
             }
-            return Json(subjects, JsonRequestBehavior.AllowGet);
+            return subjects;
         }
 
         private List<RemunerationDTO> GetRemunerationData(int termId, string majorId, coefficient coefficient, IEnumerable<lecturer> lecturers)
