@@ -26,12 +26,12 @@ if (type == yearSelect.attr('id')) {
         startYear = yearSplit[0],
         endYear = yearSplit[1];
     data = { isLesson, startYear, endYear, majorId, lecturerType };
-    titleText = 'Thống kê số giờ năm học ' + value + ' ngành ' + majorName;
+    titleText = 'Thống kê số giờ giảng năm học ' + value + ' ngành ' + majorName;
     fileName = 'ThongKeSoGio_NamHoc_' + startYear + '-' + endYear + '_Nganh_' + majorAbb;
     url += 'GetYearData';
 } else {
     data = { isLesson, 'termId': value, majorId, lecturerType };
-    titleText = 'Thống kê số giờ học kỳ ' + value + ' ngành ' + majorName;
+    titleText = 'Thống kê số giờ giảng HK' + value + ' ngành ' + majorName;
     fileName = 'ThongKeSoGio_HK' + value + '_Nganh_' + majorAbb;
     url += 'GetTermData';
 }

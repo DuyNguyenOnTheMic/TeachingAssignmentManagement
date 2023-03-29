@@ -14,7 +14,7 @@ var dataLoader = $('#data-loader'),
     majorName = dataLoader.data('majorname'),
     value = dataLoader.val(),
     url = rootUrl + 'Statistics/GetRemunerationData',
-    titleText = 'Thống kê số giờ quy đổi học kỳ ' + value + ' ngành ' + majorName,
+    titleText = 'Thống kê số giờ quy đổi HK' + value + ' ngành ' + majorName,
     fileName = 'ThongKeSoGio_HK' + value + '_Nganh_' + majorAbb;
     data = { isLesson, 'termId': value, majorId };
 
