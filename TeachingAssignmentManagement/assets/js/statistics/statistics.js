@@ -12,6 +12,7 @@ var dataLoader = $('#data-loader'),
     type = dataLoader.data('type'),
     majorId = dataLoader.data('major'),
     majorAbb = dataLoader.data('majorabb'),
+    majorName = dataLoader.data('majorname'),
     lecturerType = dataLoader.data('lecturertype'),
     value = dataLoader.val(),
     url = rootUrl + 'Statistics/',
@@ -25,12 +26,12 @@ if (type == yearSelect.attr('id')) {
         startYear = yearSplit[0],
         endYear = yearSplit[1];
     data = { isLesson, startYear, endYear, majorId, lecturerType };
-    titleText = 'Thống kê số giờ năm học ' + value + ' ngành ' + majorAbb;
+    titleText = 'Thống kê số giờ năm học ' + value + ' ngành ' + majorName;
     fileName = 'ThongKeSoGio_NamHoc_' + startYear + '-' + endYear + '_Nganh_' + majorAbb;
     url += 'GetYearData';
 } else {
     data = { isLesson, 'termId': value, majorId, lecturerType };
-    titleText = 'Thống kê số giờ học kỳ ' + value + ' ngành ' + majorAbb;
+    titleText = 'Thống kê số giờ học kỳ ' + value + ' ngành ' + majorName;
     fileName = 'ThongKeSoGio_HK' + value + '_Nganh_' + majorAbb;
     url += 'GetTermData';
 }
@@ -151,6 +152,12 @@ $.ajax({
                             }
                         }
                     ]
+                };
+
+                // Hide legend and add padding for subtitle
+                chartOptions.plugins.legend.display = false;
+                chartOptions.plugins.subtitle.padding = {
+                    bottom: 10
                 };
             } else {
                 // Get lesson data mapping
