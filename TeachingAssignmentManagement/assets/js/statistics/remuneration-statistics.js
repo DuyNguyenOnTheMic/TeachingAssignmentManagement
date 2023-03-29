@@ -11,23 +11,17 @@ var dataLoader = $('#data-loader'),
     isLesson = dataLoader.data('islesson'),
     majorId = dataLoader.data('major'),
     majorAbb = dataLoader.data('majorabb'),
+    majorName = dataLoader.data('majorname'),
     value = dataLoader.val(),
     url = rootUrl + 'Statistics/GetRemunerationData',
-    titleText = 'Thống kê số giờ quy đổi học kỳ ' + value + ' ngành ' + majorAbb,
-    fileName = 'ThongKeSoGio_HK' + value,
+    titleText = 'Thống kê số giờ quy đổi học kỳ ' + value + ' ngành ' + majorName,
+    fileName = 'ThongKeSoGio_HK' + value + '_Nganh_' + majorAbb;
     data = { isLesson, 'termId': value, majorId };
 
 // Detect Dark Layout
 if ($('html').hasClass('dark-layout')) {
     titleColor = '#d0d2d6';
     labelColor = '#b4b7bd';
-}
-
-// Wrap charts with div of height according to their data-height
-if (chartWrapper.length) {
-    chartWrapper.each(function () {
-        $(this).wrap($('<div style="height:' + this.getAttribute('data-height') + 'px"></div>'));
-    });
 }
 
 Chart.defaults.font.family = 'Montserrat,Helvetica,Arial,serif';
@@ -109,18 +103,25 @@ $.ajax({
             });
 
             var chartData;
-            var totalLessons = response.map(function (e) {
+            var originalHours = response.map(function (e) {
+                return e.OriginalHours;
+            });
+            var remunerationHours = response.map(function (e) {
                 return e.RemunerationHours;
             });
 
+            var chartHeight;
             if (isLesson == 'False') {
+                // Set chart height to be larger
+                chartHeight = 1200;
+
                 // Fetch chart data
                 chartData = {
                     labels: labels,
                     datasets: [
                         {
-                            label: 'Số giờ quy đổi',
-                            data: totalLessons,
+                            label: 'Số giờ giảng',
+                            data: originalHours,
                             backgroundColor: 'rgba(115, 103, 240, 0.8)',
                             borderColor: 'transparent',
                             borderWidth: 1,
@@ -129,11 +130,29 @@ $.ajax({
                                 anchor: 'end',
                                 align: 'start',
                                 offset: -30
-                            }
+                            },
+                            stack: 'Stack 0'
+                        },
+                        {
+                            label: 'Số giờ quy đổi',
+                            data: remunerationHours,
+                            backgroundColor: 'rgba(255,159,67, 0.8)',
+                            borderColor: 'transparent',
+                            borderWidth: 1,
+                            borderRadius: 3,
+                            datalabels: {
+                                anchor: 'end',
+                                align: 'start',
+                                offset: -30
+                            },
+                            stack: 'Stack 1'
                         }
                     ]
                 };
             } else {
+                // Set chart height as in data-height
+                chartHeight = chartWrapper.data('height');
+
                 // Get lesson data mapping
                 var sumLessons1 = response.map(function (e) {
                     return e.SumLesson1;
@@ -210,7 +229,14 @@ $.ajax({
                 };
             }
 
-            chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ: ' + hoursSum(response, 'RemunerationHours');
+            chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ: ' + (hoursSum(response, 'OriginalHours') + hoursSum(response, 'RemunerationHours'));
+
+            // Wrap charts with div of height according to their data-height
+            if (chartWrapper.length) {
+                chartWrapper.each(function () {
+                    $(this).wrap($('<div style="height:' + chartHeight + 'px"></div>'));
+                });
+            }
 
             // Create the chart
             var chart = new Chart(ctx, {

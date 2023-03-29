@@ -240,7 +240,16 @@ namespace TeachingAssignmentManagement.Controllers
             ViewData["isLesson"] = isLesson;
             ViewData["value"] = value;
             ViewData["major"] = major;
-            ViewData["majorAbb"] = major != "-1" ? unitOfWork.MajorRepository.GetMajorByID(major).abbreviation : "tất cả";
+            if (major != "-1")
+            {
+                ViewData["majorAbb"] = unitOfWork.MajorRepository.GetMajorByID(major).abbreviation;
+                ViewData["majorName"] = unitOfWork.MajorRepository.GetMajorByID(major).name;
+            }
+            else
+            {
+                ViewData["majorAbb"] = "TatCa";
+                ViewData["majorName"] = "Tất cả";
+            }
             return PartialView("_Remuneration");
         }
 
