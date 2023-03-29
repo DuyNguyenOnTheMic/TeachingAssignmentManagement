@@ -217,7 +217,7 @@ $.ajax({
                         }
                     ]
                 };
-                chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ: ' + hoursSum(response, 'RemunerationHours');
+                chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + response.length + ' / Tổng số giờ quy đổi: ' + hoursSum(response, 'RemunerationHours');
                 chartOptions.plugins.datalabels = {
                     color: labelColor,
                     font: {
@@ -258,7 +258,7 @@ $.ajax({
                     }
 
                     // Update chart title
-                    chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + lecturerCount + ' / Tổng số giờ: ' + sum;
+                    chartOptions.plugins.subtitle.text = 'Số giảng viên: ' + lecturerCount + ' / Tổng số giờ quy đổi: ' + sum;
                     chart.update();
                 }
             }
