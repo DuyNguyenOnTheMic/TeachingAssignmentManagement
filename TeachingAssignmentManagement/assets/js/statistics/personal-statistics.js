@@ -27,7 +27,7 @@ if (type == yearSelect.attr('id')) {
     url += 'GetPersonalYearData';
 } else {
     data = { isLesson, 'termId': value };
-    titleText = 'Thống kê số giờ giảng học kỳ ' + value;
+    titleText = 'Thống kê số giờ học kỳ ' + value;
     fileName = 'ThongKeSoGio_HK' + value;
     url += 'GetPersonalTermData';
 }
@@ -164,7 +164,7 @@ $.ajax({
                         }
                     ]
                 };
-                chartOptions.plugins.subtitle.text = 'Số môn học: ' + response.length + ' / Tổng số giờ: ' + (hoursSum(response, 'Hours') + hoursSum(response, 'RemunerationHours'));
+                chartOptions.plugins.subtitle.text = 'Số môn học: ' + response.length + ' / Tổng số giờ giảng: ' + hoursSum(response, 'Hours') + ' / Tổng số giờ quy đổi: ' + hoursSum(response, 'RemunerationHours');
             } else {
                 // Get lesson data mapping
                 var sumLessons1 = response.map(function (e) {
@@ -229,8 +229,7 @@ $.ajax({
                         }
                     ]
                 };
-
-                chartOptions.plugins.subtitle.text = 'Số môn học: ' + response.length + ' / Tổng số giờ: ' + hoursSum(response, 'Hours');
+                chartOptions.plugins.subtitle.text = 'Số môn học: ' + response.length + ' / Tổng số giờ giảng: ' + hoursSum(response, 'Hours');
                 chartOptions.plugins.datalabels = {
                     color: labelColor,
                     display: function (context) {
@@ -238,6 +237,39 @@ $.ajax({
                         return context.dataset.data[context.dataIndex] !== 0;
                     }
                 };
+
+                // Get on legend click event
+                chartOptions.plugins.legend.onClick = function (event, legendItem, legend) {
+                    const index = legendItem.datasetIndex;
+                    const ci = legend.chart;
+                    if (ci.isDatasetVisible(index)) {
+                        ci.hide(index);
+                        legendItem.hidden = true;
+                    } else {
+                        ci.show(index);
+                        legendItem.hidden = false;
+                    }
+
+                    var sum = 0;
+                    var array = [];
+                    // Loop through each legend item to sum total hours
+                    for (var i = 0; i < 5; i++) {
+                        if (ci.isDatasetVisible(i)) {
+                            const dataSet = chart.data.datasets[i].data;
+                            sum += dataSet.reduce((a, b) => a + b, 0);
+                            array.push(dataSet);
+                        }
+                    }
+                    // Update lecturer count
+                    var lecturerCount = 0;
+                    if (array.length) {
+                        lecturerCount = array.reduce((r, a) => r.map((b, i) => a[i] + b)).filter(x => x > 0).length;
+                    }
+
+                    // Update chart title
+                    chartOptions.plugins.subtitle.text = 'Số môn học: ' + lecturerCount + ' / Tổng số giờ giảng: ' + sum;
+                    chart.update();
+                }
             }
 
             // Create the chart
@@ -247,39 +279,6 @@ $.ajax({
                 options: chartOptions,
                 plugins: [ChartDataLabels]
             });
-
-            // Get on legend click event
-            chart.options.plugins.legend.onClick = function (event, legendItem, legend) {
-                const index = legendItem.datasetIndex;
-                const ci = legend.chart;
-                if (ci.isDatasetVisible(index)) {
-                    ci.hide(index);
-                    legendItem.hidden = true;
-                } else {
-                    ci.show(index);
-                    legendItem.hidden = false;
-                }
-
-                var sum = 0;
-                var array = [];
-                // Loop through each legend item to sum total hours
-                for (var i = 0; i < 5; i++) {
-                    if (ci.isDatasetVisible(i)) {
-                        const dataSet = chart.data.datasets[i].data;
-                        sum += dataSet.reduce((a, b) => a + b, 0);
-                        array.push(dataSet);
-                    }
-                }
-                // Update lecturer count
-                var lecturerCount = 0;
-                if (array.length) {
-                    lecturerCount = array.reduce((r, a) => r.map((b, i) => a[i] + b)).filter(x => x > 0).length;
-                }
-
-                // Update chart title
-                chartOptions.plugins.subtitle.text = 'Số môn học: ' + lecturerCount + ' / Tổng số giờ: ' + sum;
-                chart.update();
-            }
 
             // Detect Dark Layout and change color
             $('.nav-link-style').on('click', function () {
