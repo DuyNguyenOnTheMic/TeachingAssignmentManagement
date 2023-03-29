@@ -214,7 +214,7 @@ namespace TeachingAssignmentManagement.Controllers
         public JsonResult GetPersonalTermData(bool isLesson, int termId)
         {
             string userId = UserManager.FindByEmail(User.Identity.Name).Id;
-            return Json(GetPersonalTermStatistics(isLesson, termId, "-1", userId), JsonRequestBehavior.AllowGet);
+            return GetPersonalTermStatistics(isLesson, termId, "-1", userId);
         }
 
         [HttpGet]
@@ -264,7 +264,7 @@ namespace TeachingAssignmentManagement.Controllers
             // Check if coefficient is null
             if (coefficient == null)
             {
-                return Json(new { error = true, message = "Chưa có dữ liệu hệ số cho năm học này" }, JsonRequestBehavior.AllowGet);
+                return Json(new { error = true }, JsonRequestBehavior.AllowGet);
             }
 
             // Check if this term and major have data
@@ -282,14 +282,21 @@ namespace TeachingAssignmentManagement.Controllers
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public ActionResult GetRemunerationSubjects(int termId, string majorId, string lecturerId)
         {
-            return Json(GetPersonalTermStatistics(false, termId, majorId, lecturerId), JsonRequestBehavior.AllowGet);
+            return GetPersonalTermStatistics(false, termId, majorId, lecturerId);
         }
 
-        private List<SubjectDTO> GetPersonalTermStatistics(bool isLesson, int termId, string majorId, string lecturerId)
+        private JsonResult GetPersonalTermStatistics(bool isLesson, int termId, string majorId, string lecturerId)
         {
             // Get classes in term of lecturer
             term term = unitOfWork.TermRepository.GetTermByID(termId);
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(term.start_year, term.end_year);
+
+            // Check if coefficient is null
+            if (coefficient == null)
+            {
+                return Json(new { error = true }, JsonRequestBehavior.AllowGet);
+            }
+
             IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTermOrderBySubject(termId, majorId, lecturerId);
             IEnumerable<subject> query_subjects = query_classes.Select(c => c.subject).Distinct();
             List<SubjectDTO> subjects = new List<SubjectDTO>();
@@ -341,7 +348,7 @@ namespace TeachingAssignmentManagement.Controllers
 
                 }
             }
-            return subjects;
+            return Json(subjects, JsonRequestBehavior.AllowGet);
         }
 
         private List<RemunerationDTO> GetRemunerationData(int termId, string majorId, coefficient coefficient, IEnumerable<lecturer> lecturers)

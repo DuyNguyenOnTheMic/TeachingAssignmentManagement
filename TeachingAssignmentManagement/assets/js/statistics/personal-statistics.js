@@ -118,7 +118,10 @@ $.ajax({
     data: data,
     async: false,
     success: function (response) {
-        if (!response.length) {
+        if (response.error) {
+            // Show no coefficients set for year
+            showNoData(statisticsDiv, 'hệ số cho năm học này <i class="feather feather-help-circle"></i>');
+        } else if (!response.length) {
             // Show no data message
             showNoData(statisticsDiv, '<i class="feather feather-help-circle"></i>');
         } else {
