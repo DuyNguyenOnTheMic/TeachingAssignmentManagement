@@ -277,6 +277,7 @@
     <Compile Include="DAL\Repositories\UnitPriceRepository.cs" />
     <Compile Include="Helpers\CustomRoles.cs" />
     <Compile Include="Helpers\MyConstants.cs" />
+    <Compile Include="Helpers\RemunerationService.cs" />
     <Compile Include="Models\academic_degree.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

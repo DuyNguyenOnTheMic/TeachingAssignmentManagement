@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
+using TeachingAssignmentManagement.Services;
 
 namespace TeachingAssignmentManagement.Controllers
 {
@@ -311,7 +312,7 @@ namespace TeachingAssignmentManagement.Controllers
                 {
                     int subjectTotalLesson = subjectClass.total_lesson.GetValueOrDefault(0);
                     subjectHours += subjectTotalLesson;
-                    remunerationHours += subjectTotalLesson * RemunerationController.CalculateRemuneration(subjectClass, coefficient);
+                    remunerationHours += subjectTotalLesson * RemunerationService.CalculateRemuneration(subjectClass, coefficient);
                 }
                 if (!isLesson)
                 {
@@ -375,7 +376,7 @@ namespace TeachingAssignmentManagement.Controllers
                 {
                     int subjectTotalLesson = subjectClass.total_lesson.GetValueOrDefault(0);
                     subjectHours += subjectTotalLesson;
-                    remunerationHours += subjectTotalLesson * RemunerationController.CalculateRemuneration(subjectClass, coefficient);
+                    remunerationHours += subjectTotalLesson * RemunerationService.CalculateRemuneration(subjectClass, coefficient);
                 }
                 if (!isLesson)
                 {
@@ -441,7 +442,7 @@ namespace TeachingAssignmentManagement.Controllers
 
                     // Sum up remuneration hours for this class
                     originalHours += totalLesson;
-                    remunerationHours += totalLesson * RemunerationController.CalculateRemuneration(item, coefficient);
+                    remunerationHours += totalLesson * RemunerationService.CalculateRemuneration(item, coefficient);
                     previousSubjectId = item.subject.subject_id;
                 }
 
@@ -484,7 +485,7 @@ namespace TeachingAssignmentManagement.Controllers
                 IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTermOrderBySubject(termId, majorId, lecturer.id);
                 foreach (class_section item in query_classes)
                 {
-                    decimal remunerationCoefficient = RemunerationController.CalculateRemuneration(item, coefficient);
+                    decimal remunerationCoefficient = RemunerationService.CalculateRemuneration(item, coefficient);
                     int startLesson = item.start_lesson_2;
                     int totalLesson = item.total_lesson.GetValueOrDefault(0);
                     decimal classRemuneration = totalLesson * remunerationCoefficient;

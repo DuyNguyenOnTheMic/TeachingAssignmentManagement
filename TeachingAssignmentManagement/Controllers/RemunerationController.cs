@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
+using TeachingAssignmentManagement.Services;
 
 namespace TeachingAssignmentManagement.Controllers
 {
@@ -75,7 +76,7 @@ namespace TeachingAssignmentManagement.Controllers
                             isMissing = true;
                         }
 
-                        teachingRemuneration += unitPriceByLevel * CalculateRemuneration(item, coefficient) * (decimal)item.total_lesson;
+                        teachingRemuneration += unitPriceByLevel * RemunerationService.CalculateRemuneration(item, coefficient) * (decimal)item.total_lesson;
                     }
                 }
                 string lecturerRank = rank.AcademicDegreeRankId;
@@ -90,37 +91,6 @@ namespace TeachingAssignmentManagement.Controllers
                 });
             }
             return PartialView("_Remuneration", remunerationDTOs);
-        }
-
-        public static decimal CalculateRemuneration(class_section classSection, coefficient coefficient)
-        {
-            decimal crowdedClassCoefficient, timeCoefficient, languageCoefficient, classTypeCoefficient;
-
-            // Check if class is theoretical or practice
-            int studentNumber;
-            if (classSection.type == MyConstants.TheoreticalClassType)
-            {
-                studentNumber = 50;
-                classTypeCoefficient = coefficient.theoretical_coefficient;
-            }
-            else
-            {
-                studentNumber = 30;
-                classTypeCoefficient = coefficient.practice_coefficient;
-            }
-
-            // Calculate crowded class coefficient
-            int? studentRegistered = classSection.student_registered_number;
-            crowdedClassCoefficient = studentRegistered <= studentNumber ? decimal.One : (decimal)(decimal.One + (studentRegistered - studentNumber) * 0.0025m);
-
-            // Calculate time coefficient
-            timeCoefficient = classSection.start_lesson_2 != 13 ? decimal.One : 1.2m;
-
-            // Calculate language coefficient
-            languageCoefficient = classSection.subject.is_vietnamese ? coefficient.vietnamese_coefficient : coefficient.foreign_coefficient;
-
-            // Calculate total remuneration for this class
-            return crowdedClassCoefficient * timeCoefficient * classTypeCoefficient * languageCoefficient;
         }
 
         protected override void Dispose(bool disposing)
