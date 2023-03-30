@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
+using TeachingAssignmentManagement.Models.ViewModels;
 using TeachingAssignmentManagement.Services;
 
 namespace TeachingAssignmentManagement.Controllers
@@ -237,20 +238,25 @@ namespace TeachingAssignmentManagement.Controllers
         [Authorize(Roles = CustomRoles.FacultyBoard)]
         public ActionResult GetVisitingLecturerData(int[] termIds)
         {
+            // Create a list to store all term statistics
             List<VisitingLecturerStatisticsDTO> lecturerDTOs = new List<VisitingLecturerStatisticsDTO>();
             foreach (int termId in termIds)
             {
-                IEnumerable<VisitingLecturerStatisticsDTO> termStatistics = unitOfWork.ClassSectionRepository.GetVisitingLecturerStatistics(termId);
-                lecturerDTOs.AddRange(termStatistics);
+                lecturerDTOs.AddRange(unitOfWork.ClassSectionRepository.GetVisitingLecturerStatistics(termId));
             }
-            var haha = lecturerDTOs.GroupBy(l => l.Id).Select(l => new
+            
+            // Get final list after getting all term statistics
+            List<VisitingLecturerStatisticsDTO> visitingLecturerStatistics = lecturerDTOs.GroupBy(l => l.Id).Select(l => new VisitingLecturerStatisticsDTO
             {
-                l.FirstOrDefault().StaffId,
-                l.FirstOrDefault().FullName,
-                hehe = l.Select(item => item.TermId),
-                subjects = l.Select(item => item.Subjects),
+                StaffId = l.FirstOrDefault().StaffId,
+                FullName = l.FirstOrDefault().FullName,
+                AllTermSubjects = l.Select(item => item.Subjects),
             }).ToList();
-            return PartialView("_VisitingLecturer");
+            return PartialView("_VisitingLecturer", new VisitingLecturerStatisticsViewModel
+            {
+                TermList = termIds,
+                lecturerDTOs = visitingLecturerStatistics
+            });
         }
 
         [HttpGet]

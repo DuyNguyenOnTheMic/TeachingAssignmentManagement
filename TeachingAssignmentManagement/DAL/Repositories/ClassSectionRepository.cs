@@ -354,7 +354,6 @@ namespace TeachingAssignmentManagement.DAL
                 Id = c.Key,
                 StaffId = c.FirstOrDefault().lecturer.staff_id,
                 FullName = c.FirstOrDefault().lecturer.full_name,
-                TermId = termId,
                 Subjects = c.Select(item => item.subject_id)
             });
         }
