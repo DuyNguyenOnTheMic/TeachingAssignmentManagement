@@ -4,7 +4,7 @@ namespace TeachingAssignmentManagement.Models.ViewModels
 {
     public class VisitingLecturerStatisticsViewModel
     {
-        public int[] TermList { get; set; }
-        public List<VisitingLecturerStatisticsDTO> lecturerDTOs { get; set; }
+        public int[] TermIds { get; set; }
+        public List<VisitingLecturerStatisticsDTO> VisitingLecturerStatisticsDTOs { get; set; }
     }
 }

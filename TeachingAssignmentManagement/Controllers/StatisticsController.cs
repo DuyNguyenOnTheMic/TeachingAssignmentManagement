@@ -254,8 +254,8 @@ namespace TeachingAssignmentManagement.Controllers
             }).ToList();
             return PartialView("_VisitingLecturer", new VisitingLecturerStatisticsViewModel
             {
-                TermList = termIds,
-                lecturerDTOs = visitingLecturerStatistics
+                TermIds = termIds,
+                VisitingLecturerStatisticsDTOs = visitingLecturerStatistics
             });
         }
 
