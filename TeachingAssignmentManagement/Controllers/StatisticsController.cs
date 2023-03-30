@@ -243,7 +243,14 @@ namespace TeachingAssignmentManagement.Controllers
                 IEnumerable<VisitingLecturerStatisticsDTO> termStatistics = unitOfWork.ClassSectionRepository.GetVisitingLecturerStatistics(termId);
                 lecturerDTOs.AddRange(termStatistics);
             }
-            return View();
+            var haha = lecturerDTOs.GroupBy(l => l.Id).Select(l => new
+            {
+                l.FirstOrDefault().StaffId,
+                l.FirstOrDefault().FullName,
+                hehe = l.Select(item => item.TermId),
+                subjects = l.Select(item => item.Subjects),
+            }).ToList();
+            return PartialView("_VisitingLecturer");
         }
 
         [HttpGet]
