@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Thống kê giảng viên thỉnh giảng";
+}
+
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper p-0">
+        <div class="content-body">
+            <!-- ChartJS section start -->
+            <section>
+                <!-- Line Chart Starts-->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title-wrap">
+                                    <h4 class="card-title">@ViewBag.Title</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12 mb-1">
+                                        <label class="form-label font-small-4" for="term">Học kỳ: </label>
+                                        @Html.DropDownList("term", null, "---- Chọn học kỳ ----", htmlAttributes: new { @class = "form-data form-select", @multiple = "multiple" })
+                                    </div>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary font-medium-2" id="submit-all">
+                                        <i data-feather="thumbs-up" class="me-25 font-medium-2"></i>
+                                        <span>Thống kê</span>
+                                    </button>
+                                </div>
+                                <div id="statisticsDiv"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Line Chart Ends-->
+            </section>
+            <!-- ChartJS section end -->
+        </div>
+    </div>
+</div>
+
+<div id="loader" data-request-url="@Url.Content("~/")"></div>
+
+@section styles {
+    <link href="~/app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script src="~/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
+    @Scripts.Render("~/bundles/export-dt")
+    <script src="~/app-assets/language/select2/vi.min.js"></script>
+    <script src="~/assets/js/statistics/visiting-lecturer-statistics.js"></script>
+}

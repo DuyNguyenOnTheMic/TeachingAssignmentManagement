@@ -226,6 +226,21 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = CustomRoles.FacultyBoard)]
+        public ActionResult VisitingLecturer()
+        {
+            ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
+            return View();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = CustomRoles.FacultyBoard)]
+        public ActionResult GetVisitingLecturerData(int termId)
+        {
+            return View();
+        }
+
+        [HttpGet]
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public ActionResult Remuneration()
         {

@@ -1169,6 +1169,7 @@
     <Content Include="assets\js\statistics\remuneration-statistics-load.min.js" />
     <Content Include="assets\js\statistics\remuneration-statistics.js" />
     <Content Include="assets\js\statistics\remuneration-statistics.min.js" />
+    <Content Include="assets\js\statistics\visiting-lecturer-statistics.js" />
     <Content Include="assets\js\subject\subject-load.js" />
     <Content Include="assets\js\subject\subject-load.min.js" />
     <Content Include="assets\js\subject\subject.js" />
@@ -1314,6 +1315,7 @@
     <Content Include="Views\Remuneration\_Error.cshtml" />
     <Content Include="Views\Statistics\Remuneration.cshtml" />
     <Content Include="Views\Statistics\_Remuneration.cshtml" />
+    <Content Include="Views\Statistics\VisitingLecturer.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
