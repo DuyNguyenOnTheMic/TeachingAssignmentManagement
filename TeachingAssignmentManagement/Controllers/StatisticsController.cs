@@ -250,7 +250,7 @@ namespace TeachingAssignmentManagement.Controllers
             {
                 StaffId = l.FirstOrDefault().StaffId,
                 FullName = l.FirstOrDefault().FullName,
-                AllTermSubjects = l.Select(item => item.Subjects),
+                AllTermSubjects = l.Select(item => new { item.TermId, item.Subjects }),
             }).ToList();
             return PartialView("_VisitingLecturer", new VisitingLecturerStatisticsViewModel
             {

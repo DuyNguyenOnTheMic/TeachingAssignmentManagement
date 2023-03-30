@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace TeachingAssignmentManagement.Models
 {
@@ -7,7 +8,8 @@ namespace TeachingAssignmentManagement.Models
         public string Id { get; set; }
         public string StaffId { get; set; }
         public string FullName { get; set; }
+        public int TermId { get; set; }
         public IEnumerable<string> Subjects { get; set; }
-        public IEnumerable<IEnumerable<string>> AllTermSubjects { get; set; }
+        public IEnumerable AllTermSubjects { get; set; }
     }
 }
