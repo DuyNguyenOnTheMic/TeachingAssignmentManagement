@@ -244,7 +244,7 @@ namespace TeachingAssignmentManagement.Controllers
             {
                 lecturerDTOs.AddRange(unitOfWork.ClassSectionRepository.GetVisitingLecturerStatistics(termId));
             }
-            
+
             // Get final list after getting all term statistics
             List<VisitingLecturerStatisticsDTO> visitingLecturerStatistics = lecturerDTOs.GroupBy(l => l.Id).Select(l => new VisitingLecturerStatisticsDTO
             {
