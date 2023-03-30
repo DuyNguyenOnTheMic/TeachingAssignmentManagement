@@ -15,7 +15,7 @@ var dataLoader = $('#data-loader'),
     value = dataLoader.val(),
     url = rootUrl + 'Statistics/GetRemunerationData',
     titleText = 'Thống kê số giờ quy đổi HK' + value + ' ngành ' + majorName,
-    fileName = 'ThongKeSoGio_HK' + value + '_Nganh_' + majorAbb;
+    fileName = 'ThongKeSoGioQuyDoi_HK' + value + '_Nganh_' + majorAbb;
     data = { isLesson, 'termId': value, majorId };
 
 // Detect Dark Layout
@@ -316,7 +316,7 @@ function hoursSum(items, prop) {
 
 function populateDatatable(data) {
     var dataTable;
-    var exportColumns = isLessonCheck.is(":checked") ? [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] : [0, 2, 3, 4, 5, 6, 7];
+    var exportColumns = isLessonCheck.is(":checked") ? [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17] : [0, 2, 3, 4, 5, 6, 7];
 
     // Populate statistics table
     dataTable = $('#tblStatistics').DataTable(
@@ -335,10 +335,15 @@ function populateDatatable(data) {
                 { 'data': 'ClassCount' },
                 { 'data': 'OriginalHours' },
                 { 'data': 'RemunerationHours' },
+                { 'data': 'OriginalSumLesson1', defaultContent: '' },
                 { 'data': 'SumLesson1', defaultContent: '' },
+                { 'data': 'OriginalSumLesson4', defaultContent: '' },
                 { 'data': 'SumLesson4', defaultContent: '' },
+                { 'data': 'OriginalSumLesson7', defaultContent: '' },
                 { 'data': 'SumLesson7', defaultContent: '' },
+                { 'data': 'OriginalSumLesson10', defaultContent: '' },
                 { 'data': 'SumLesson10', defaultContent: '' },
+                { 'data': 'OriginalSumLesson13', defaultContent: '' },
                 { 'data': 'SumLesson13', defaultContent: '' }
             ],
             data: data,
@@ -462,7 +467,7 @@ $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
 
 function setVisibleColumn(state) {
     var table = $('#tblStatistics').DataTable();
-    for (var i = 8; i <= 12; i++) {
+    for (var i = 8; i <= 17; i++) {
         table.column(i).visible(state, state);
     }
     table.columns.adjust().draw(state); // adjust column sizing and redraw

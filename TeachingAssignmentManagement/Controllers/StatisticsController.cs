@@ -472,7 +472,12 @@ namespace TeachingAssignmentManagement.Controllers
                 // Reset values in each loop
                 int subjectCount = 0,
                     classCount = 0;
-                int? originalHours = 0;
+                int? originalHours = 0,
+                     originalSumLesson1 = 0,
+                     originalSumLesson4 = 0,
+                     originalSumLesson7 = 0,
+                     originalSumLesson10 = 0,
+                     originalSumLesson13 = 0;
                 decimal remunerationHours = decimal.Zero,
                         sumLesson1 = decimal.Zero,
                         sumLesson4 = decimal.Zero,
@@ -503,18 +508,23 @@ namespace TeachingAssignmentManagement.Controllers
                     switch (startLesson)
                     {
                         case 1:
+                            originalSumLesson1 += totalLesson;
                             sumLesson1 += classRemuneration;
                             break;
                         case 4:
+                            originalSumLesson4 += totalLesson;
                             sumLesson4 += classRemuneration;
                             break;
                         case 7:
+                            originalSumLesson7 += totalLesson;
                             sumLesson7 += classRemuneration;
                             break;
                         case 10:
+                            originalSumLesson10 += totalLesson;
                             sumLesson10 += classRemuneration;
                             break;
                         case 13:
+                            originalSumLesson13 += totalLesson;
                             sumLesson13 += classRemuneration;
                             break;
                         default:
@@ -535,6 +545,11 @@ namespace TeachingAssignmentManagement.Controllers
                         ClassCount = classCount,
                         OriginalHours = originalHours,
                         RemunerationHours = Math.Round(remunerationHours),
+                        OriginalSumLesson1 = originalSumLesson1,
+                        OriginalSumLesson4 = originalSumLesson4,
+                        OriginalSumLesson7 = originalSumLesson7,
+                        OriginalSumLesson10 = originalSumLesson10,
+                        OriginalSumLesson13 = originalSumLesson13,
                         SumLesson1 = Math.Round(sumLesson1),
                         SumLesson4 = Math.Round(sumLesson4),
                         SumLesson7 = Math.Round(sumLesson7),
