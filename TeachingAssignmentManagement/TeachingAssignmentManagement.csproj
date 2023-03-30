@@ -322,6 +322,7 @@
     <Compile Include="Helpers\IdentityExtensions.cs" />
     <Compile Include="Hubs\ProgressHub.cs" />
     <Compile Include="Models\DTOs\SubjectDTO.cs" />
+    <Compile Include="Models\DTOs\VisitingLecturerStatisticsDTO.cs" />
     <Compile Include="Models\lecturer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

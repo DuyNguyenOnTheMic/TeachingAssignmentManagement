@@ -347,6 +347,17 @@ namespace TeachingAssignmentManagement.DAL
                 : context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId)).OrderBy(c => c.subject.subject_id);
         }
 
+        public IEnumerable<VisitingLecturerStatisticsDTO> GetVisitingLecturerStatistics(int termId)
+        {
+            return context.class_section.Where(c => c.term_id == termId && c.lecturer.type == MyConstants.VisitingLecturerType && c.lecturer.staff_id != null && c.lecturer.full_name != null && c.lecturer.status == true).GroupBy(c => c.lecturer_id).Select(c => new VisitingLecturerStatisticsDTO
+            {
+                Id = c.Key,
+                StaffId = c.FirstOrDefault().lecturer.staff_id,
+                FullName = c.FirstOrDefault().lecturer.full_name,
+                Subjects = c.Select(item => item.subject_id)
+            });
+        }
+
         public bool CheckClassesInTermMajor(int termId, string majorId)
         {
             return majorId != "-1"

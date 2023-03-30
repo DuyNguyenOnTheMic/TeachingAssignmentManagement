@@ -235,8 +235,14 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = CustomRoles.FacultyBoard)]
-        public ActionResult GetVisitingLecturerData(int termId)
+        public ActionResult GetVisitingLecturerData(int[] termIds)
         {
+            List<VisitingLecturerStatisticsDTO> lecturerDTOs = new List<VisitingLecturerStatisticsDTO>();
+            foreach (int termId in termIds)
+            {
+                IEnumerable<VisitingLecturerStatisticsDTO> termStatistics = unitOfWork.ClassSectionRepository.GetVisitingLecturerStatistics(termId);
+                lecturerDTOs.AddRange(termStatistics);
+            }
             return View();
         }
 

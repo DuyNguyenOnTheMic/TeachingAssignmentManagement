@@ -16,8 +16,10 @@ $(function () {
 });
 
 submit.on('click', function () {
-    var termId = termSelect.val();
-    $.get(url, { termId }, function (data) {
+    var termIds = termSelect.val().map(Number);
+    console.log(termIds);
+    $.ajaxSettings.traditional = true;
+    $.get(url, { termIds }, function (data) {
         // Populate statistics data
         statisticsDiv.html(data);
     });
