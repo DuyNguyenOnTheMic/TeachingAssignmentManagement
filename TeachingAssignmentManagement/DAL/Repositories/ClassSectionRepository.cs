@@ -353,7 +353,7 @@ namespace TeachingAssignmentManagement.DAL
             {
                 StaffId = c.FirstOrDefault().lecturer.staff_id,
                 FullName = c.FirstOrDefault().lecturer.full_name,
-                Subjects = c.Select(item => item.subject)
+                Subjects = c.Select(item => item.subject).Distinct()
             }).ToList();
         }
 

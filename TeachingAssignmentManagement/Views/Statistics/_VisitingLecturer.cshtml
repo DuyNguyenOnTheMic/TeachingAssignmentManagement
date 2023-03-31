@@ -24,7 +24,12 @@
                         @foreach (var termId in Model.TermIds)
                         {
                             var subjects = item.Subjects.Where(s => s.term_id == termId);
-                            @*<td>@subjects.Select(s => s.name).ToString()</td>*@
+                            string subjectsString = string.Empty;
+                            foreach (var subject in subjects)
+                            {
+                                subjectsString += subject.subject_id + "-" + subject.name + "; ";
+                            }
+                            <td>@Html.Raw(subjectsString)</td>
                         }
                     </tr>
                 }
