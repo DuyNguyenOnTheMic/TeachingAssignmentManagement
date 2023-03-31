@@ -10,7 +10,6 @@ using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
-using TeachingAssignmentManagement.Models.ViewModels;
 using TeachingAssignmentManagement.Services;
 
 namespace TeachingAssignmentManagement.Controllers

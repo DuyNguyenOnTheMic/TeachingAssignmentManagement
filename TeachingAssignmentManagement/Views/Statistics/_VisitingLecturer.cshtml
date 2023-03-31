@@ -2,17 +2,16 @@
 
 <div class="card-datatable">
     <div class="table-responsive">
-        <table class="datatables-ajax table" id="tblSubject">
+        <table class="datatables-ajax table" id="tblStatistics">
             <thead class="table-light">
                 <tr>
                     <th></th>
                     <th>Mã GVTG</th>
                     <th>Họ tên GVTG</th>
-                    @foreach (var item in Model.TermIds)
+                    @foreach (var termId in Model.TermIds)
                     {
-
+                        <th>@termId</th>
                     }
-                    <th></th>
                 </tr>
             </thead>
         </table>
