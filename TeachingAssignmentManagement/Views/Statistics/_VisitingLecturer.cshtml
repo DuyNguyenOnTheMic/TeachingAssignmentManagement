@@ -14,6 +14,21 @@
                     }
                 </tr>
             </thead>
+            <tbody>
+                @foreach (var item in Model.VisitingLecturerStatisticsDTOs)
+                {
+                    <tr>
+                        <td></td>
+                        <td>@item.StaffId</td>
+                        <td>@item.FullName</td>
+                        @foreach (var termId in Model.TermIds)
+                        {
+                            var subjects = item.Subjects.Where(s => s.term_id == termId);
+                            @*<td>@subjects.Select(s => s.name).ToString()</td>*@
+                        }
+                    </tr>
+                }
+            </tbody>
         </table>
     </div>
 </div>

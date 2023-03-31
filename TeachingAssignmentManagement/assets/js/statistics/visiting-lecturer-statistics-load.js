@@ -5,9 +5,6 @@
     url = rootUrl + 'Statistics/GetVisitingLecturerData';
 
 $(function () {
-    // Adding multiple attribute to select
-    termSelect.prop('multiple', true);
-
     // Populate select2
     termSelect.wrap('<div class="position-relative"></div>').select2({
         width: '100%',
