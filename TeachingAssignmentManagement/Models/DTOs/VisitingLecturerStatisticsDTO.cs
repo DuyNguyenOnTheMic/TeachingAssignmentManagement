@@ -7,7 +7,6 @@ namespace TeachingAssignmentManagement.Models
         public string Id { get; set; }
         public string StaffId { get; set; }
         public string FullName { get; set; }
-        public int TermId { get; set; }
         public IEnumerable<subject> Subjects { get; set; }
     }
 }
