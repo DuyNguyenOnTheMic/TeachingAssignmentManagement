@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TeachingAssignmentManagement.Models.ViewModels
+namespace TeachingAssignmentManagement.Models
 {
     public class VisitingLecturerStatisticsViewModel
     {

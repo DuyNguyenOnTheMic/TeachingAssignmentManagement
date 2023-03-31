@@ -1,1 +1,20 @@
-﻿
+﻿@model TeachingAssignmentManagement.Models.VisitingLecturerStatisticsViewModel
+
+<div class="card-datatable">
+    <div class="table-responsive">
+        <table class="datatables-ajax table" id="tblSubject">
+            <thead class="table-light">
+                <tr>
+                    <th></th>
+                    <th>Mã GVTG</th>
+                    <th>Họ tên GVTG</th>
+                    @foreach (var item in Model.TermIds)
+                    {
+
+                    }
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
