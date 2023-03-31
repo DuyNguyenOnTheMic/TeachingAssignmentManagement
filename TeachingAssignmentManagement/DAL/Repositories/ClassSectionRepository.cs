@@ -347,16 +347,15 @@ namespace TeachingAssignmentManagement.DAL
                 : context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId)).OrderBy(c => c.subject.subject_id);
         }
 
-        public IEnumerable<VisitingLecturerStatisticsDTO> GetVisitingLecturerStatistics(int termId)
+        public IEnumerable<VisitingLecturerStatisticsDTO> GetVisitingLecturerStatistics(int[] termIds)
         {
-            return context.class_section.Where(c => c.term_id == termId && c.lecturer.type == MyConstants.VisitingLecturerType && c.lecturer.staff_id != null && c.lecturer.full_name != null && c.lecturer.status == true).GroupBy(c => c.lecturer_id).Select(c => new VisitingLecturerStatisticsDTO
+            return context.class_section.Where(c => termIds.Contains(c.term_id) && c.lecturer.type == MyConstants.VisitingLecturerType && c.lecturer.staff_id != null && c.lecturer.full_name != null && c.lecturer.status == true).GroupBy(c => c.lecturer_id).Select(c => new VisitingLecturerStatisticsDTO
             {
                 Id = c.Key,
                 StaffId = c.FirstOrDefault().lecturer.staff_id,
                 FullName = c.FirstOrDefault().lecturer.full_name,
-                TermId = termId,
-                Subjects = c.Select(item => item.subject_id)
-            });
+                Subjects = c.Select(item => item.subject)
+            }).ToList();
         }
 
         public bool CheckClassesInTermMajor(int termId, string majorId)

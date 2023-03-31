@@ -238,24 +238,10 @@ namespace TeachingAssignmentManagement.Controllers
         [Authorize(Roles = CustomRoles.FacultyBoard)]
         public ActionResult GetVisitingLecturerData(int[] termIds)
         {
-            // Create a list to store all term statistics
-            List<VisitingLecturerStatisticsDTO> lecturerDTOs = new List<VisitingLecturerStatisticsDTO>();
-            foreach (int termId in termIds)
-            {
-                lecturerDTOs.AddRange(unitOfWork.ClassSectionRepository.GetVisitingLecturerStatistics(termId));
-            }
-
-            // Get final list after getting all term statistics
-            List<VisitingLecturerStatisticsDTO> visitingLecturerStatistics = lecturerDTOs.GroupBy(l => l.Id).Select(l => new VisitingLecturerStatisticsDTO
-            {
-                StaffId = l.FirstOrDefault().StaffId,
-                FullName = l.FirstOrDefault().FullName,
-                AllTermSubjects = l.Select(item => new { item.TermId, item.Subjects }),
-            }).ToList();
             return PartialView("_VisitingLecturer", new VisitingLecturerStatisticsViewModel
             {
                 TermIds = termIds,
-                VisitingLecturerStatisticsDTOs = visitingLecturerStatistics
+                VisitingLecturerStatisticsDTOs = unitOfWork.ClassSectionRepository.GetVisitingLecturerStatistics(termIds)
             });
         }
 
