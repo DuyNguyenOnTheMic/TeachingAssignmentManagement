@@ -351,7 +351,6 @@ namespace TeachingAssignmentManagement.DAL
         {
             return context.class_section.Where(c => termIds.Contains(c.term_id) && c.lecturer.type == MyConstants.VisitingLecturerType && c.lecturer.staff_id != null && c.lecturer.full_name != null && c.lecturer.status == true).GroupBy(c => c.lecturer_id).Select(c => new VisitingLecturerStatisticsDTO
             {
-                Id = c.Key,
                 StaffId = c.FirstOrDefault().lecturer.staff_id,
                 FullName = c.FirstOrDefault().lecturer.full_name,
                 Subjects = c.Select(item => item.subject)
