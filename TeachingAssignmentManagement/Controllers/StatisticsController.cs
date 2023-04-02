@@ -226,7 +226,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = CustomRoles.FacultyBoard)]
+        [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public ActionResult VisitingLecturer()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
@@ -234,7 +234,7 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = CustomRoles.FacultyBoard)]
+        [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public ActionResult GetVisitingLecturerData(int[] termIds)
         {
             return PartialView("_VisitingLecturer", new VisitingLecturerStatisticsViewModel
