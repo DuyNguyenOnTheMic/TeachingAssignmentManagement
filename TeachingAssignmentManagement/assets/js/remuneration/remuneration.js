@@ -3,15 +3,6 @@
 // Populate LecturerRank datatable
 dataTable = $('#tblRemuneration').DataTable(
     {
-        columns: [
-            { 'data': '', defaultContent: '' },
-            { 'data': 'StaffId' },
-            { 'data': 'FullName' },
-            { 'data': 'AcademicDegreeRankId' },
-            { 'data': 'Remuneration', 'type': 'num-fmt', 'render': DataTable.render.number('.', ',', 0, '', ' ₫') },
-            { 'data': 'Status' }
-        ],
-
         columnDefs: [
             {
                 searchable: false,
@@ -19,7 +10,8 @@ dataTable = $('#tblRemuneration').DataTable(
                 targets: 0
             },
             { className: 'text-center', targets: [3, 4, 5] },
-            { width: '5%', targets: 0 }
+            { width: '5%', targets: 0 },
+            { render: DataTable.render.number('.', ',', 0, '', ' ₫'), targets: 4 }
         ],
         order: [[4, 'desc']],
         dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row mt-75"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
