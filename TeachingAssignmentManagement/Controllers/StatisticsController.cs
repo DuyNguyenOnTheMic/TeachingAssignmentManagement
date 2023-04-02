@@ -580,6 +580,55 @@ namespace TeachingAssignmentManagement.Controllers
             return remunerationDTOs;
         }
 
+        private List<RemunerationDTO> GetYearRemunerationData(int startYear, int endYear, string majorId, coefficient coefficient, IEnumerable<lecturer> lecturers)
+        {
+            List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
+            foreach (lecturer lecturer in lecturers)
+            {
+                // Reset values in each loop
+                int subjectCount = 0,
+                    classCount = 0;
+                int? originalHours = 0;
+                decimal remunerationHours = decimal.Zero;
+                string previousSubjectId = string.Empty;
+
+                // Get classes in year of lecturer
+                IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInYearOrderBySubject(startYear, endYear, majorId, lecturer.id);
+                foreach (class_section item in query_classes)
+                {
+                    int totalLesson = item.total_lesson.GetValueOrDefault(0);
+
+                    // Count subjects and classes of lecturer
+                    if (item.subject.subject_id != previousSubjectId)
+                    {
+                        subjectCount++;
+                    }
+                    classCount++;
+
+                    // Sum up remuneration hours for this class
+                    originalHours += totalLesson;
+                    remunerationHours += totalLesson * RemunerationService.CalculateRemuneration(item, coefficient);
+                    previousSubjectId = item.subject.subject_id;
+                }
+
+                // Check if remuneration hours is larger than 0
+                if (remunerationHours > decimal.Zero)
+                {
+                    remunerationDTOs.Add(new RemunerationDTO
+                    {
+                        LecturerId = lecturer.id,
+                        StaffId = lecturer.staff_id,
+                        FullName = lecturer.full_name,
+                        OriginalHours = originalHours,
+                        SubjectCount = subjectCount,
+                        ClassCount = classCount,
+                        RemunerationHours = Math.Round(remunerationHours)
+                    });
+                }
+            }
+            return remunerationDTOs;
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
