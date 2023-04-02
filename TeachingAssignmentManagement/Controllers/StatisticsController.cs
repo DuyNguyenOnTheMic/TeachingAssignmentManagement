@@ -275,7 +275,7 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
-        public ActionResult GetRemunerationData(bool isLesson, int termId, string majorId)
+        public ActionResult GetTermRemunerationData(bool isLesson, int termId, string majorId)
         {
             // Declare variables
             term term = unitOfWork.TermRepository.GetTermByID(termId);
@@ -292,8 +292,8 @@ namespace TeachingAssignmentManagement.Controllers
             IEnumerable<lecturer> lecturers = unitOfWork.UserRepository.GetFacultyMembersInTerm(termId, majorId);
             List<RemunerationDTO> remunerationDTOs = haveData
                 ? !isLesson
-                    ? GetRemunerationData(termId, majorId, coefficient, lecturers)
-                    : GetRemunerationDataByLesson(termId, majorId, coefficient, lecturers)
+                    ? GetTermRemunerationData(termId, majorId, coefficient, lecturers)
+                    : GetTermRemunerationDataByLesson(termId, majorId, coefficient, lecturers)
                 : new List<RemunerationDTO>();
             return Json(remunerationDTOs.OrderByDescending(r => r.RemunerationHours), JsonRequestBehavior.AllowGet);
         }
@@ -434,7 +434,7 @@ namespace TeachingAssignmentManagement.Controllers
             return Json(subjects.OrderByDescending(s => s.Hours), JsonRequestBehavior.AllowGet);
         }
 
-        private List<RemunerationDTO> GetRemunerationData(int termId, string majorId, coefficient coefficient, IEnumerable<lecturer> lecturers)
+        private List<RemunerationDTO> GetTermRemunerationData(int termId, string majorId, coefficient coefficient, IEnumerable<lecturer> lecturers)
         {
             List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
             foreach (lecturer lecturer in lecturers)
@@ -483,7 +483,7 @@ namespace TeachingAssignmentManagement.Controllers
             return remunerationDTOs;
         }
 
-        private List<RemunerationDTO> GetRemunerationDataByLesson(int termId, string majorId, coefficient coefficient, IEnumerable<lecturer> lecturers)
+        private List<RemunerationDTO> GetTermRemunerationDataByLesson(int termId, string majorId, coefficient coefficient, IEnumerable<lecturer> lecturers)
         {
             List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
             foreach (lecturer lecturer in lecturers)
