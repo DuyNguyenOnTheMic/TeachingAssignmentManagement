@@ -1137,7 +1137,6 @@
     <Content Include="app-assets\vendors\js\waves\waves.min.js" />
     <Content Include="assets\css\timetable.css" />
     <Content Include="assets\css\timetable.min.css" />
-    <Content Include="assets\images\img_assign.svg" />
     <Content Include="assets\images\img_error.svg" />
     <Content Include="assets\images\img_excel.svg" />
     <Content Include="assets\images\img_login_background.jpg" />
@@ -1145,6 +1144,7 @@
     <Content Include="assets\images\img_no_data.svg" />
     <Content Include="assets\images\img_sidebar_background.jpg" />
     <Content Include="assets\images\img_sorry.svg" />
+    <Content Include="assets\images\img_statistics.svg" />
     <Content Include="assets\images\img_user_avatar.png" />
     <Content Include="assets\images\img_vlu_logo.png" />
     <Content Include="assets\images\img_vlu_name.png" />
