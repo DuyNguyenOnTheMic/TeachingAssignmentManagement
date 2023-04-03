@@ -631,6 +631,103 @@ namespace TeachingAssignmentManagement.Controllers
             return remunerationDTOs;
         }
 
+        private List<RemunerationDTO> GetYearRemunerationDataByLesson(int startYear, int endYear, string majorId, coefficient coefficient, IEnumerable<lecturer> lecturers)
+        {
+            List<RemunerationDTO> remunerationDTOs = new List<RemunerationDTO>();
+            foreach (lecturer lecturer in lecturers)
+            {
+                // Reset values in each loop
+                int subjectCount = 0,
+                    classCount = 0;
+                int? originalHours = 0,
+                     originalSumLesson1 = 0,
+                     originalSumLesson4 = 0,
+                     originalSumLesson7 = 0,
+                     originalSumLesson10 = 0,
+                     originalSumLesson13 = 0;
+                decimal remunerationHours = decimal.Zero,
+                        sumLesson1 = decimal.Zero,
+                        sumLesson4 = decimal.Zero,
+                        sumLesson7 = decimal.Zero,
+                        sumLesson10 = decimal.Zero,
+                        sumLesson13 = decimal.Zero;
+                string previousSubjectId = string.Empty;
+
+                // Get classes in year of lecturer
+                IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInYearOrderBySubject(startYear, endYear, majorId, lecturer.id);
+                foreach (class_section item in query_classes)
+                {
+                    decimal remunerationCoefficient = RemunerationService.CalculateRemuneration(item, coefficient);
+                    int startLesson = item.start_lesson_2;
+                    int totalLesson = item.total_lesson.GetValueOrDefault(0);
+                    decimal classRemuneration = totalLesson * remunerationCoefficient;
+
+                    // Count subjects and classes of lecturer
+                    if (item.subject.subject_id != previousSubjectId)
+                    {
+                        subjectCount++;
+                    }
+                    classCount++;
+
+                    // Sum up remuneration hours for this class
+                    originalHours += totalLesson;
+                    remunerationHours += classRemuneration;
+                    switch (startLesson)
+                    {
+                        case 1:
+                            originalSumLesson1 += totalLesson;
+                            sumLesson1 += classRemuneration;
+                            break;
+                        case 4:
+                            originalSumLesson4 += totalLesson;
+                            sumLesson4 += classRemuneration;
+                            break;
+                        case 7:
+                            originalSumLesson7 += totalLesson;
+                            sumLesson7 += classRemuneration;
+                            break;
+                        case 10:
+                            originalSumLesson10 += totalLesson;
+                            sumLesson10 += classRemuneration;
+                            break;
+                        case 13:
+                            originalSumLesson13 += totalLesson;
+                            sumLesson13 += classRemuneration;
+                            break;
+                        default:
+                            break;
+                    }
+                    previousSubjectId = item.subject.subject_id;
+                }
+
+                // Check if remuneration hours is larger than 0
+                if (remunerationHours > decimal.Zero)
+                {
+                    remunerationDTOs.Add(new RemunerationDTO
+                    {
+                        LecturerId = lecturer.id,
+                        StaffId = lecturer.staff_id,
+                        FullName = lecturer.full_name,
+                        SubjectCount = subjectCount,
+                        ClassCount = classCount,
+                        OriginalHours = originalHours,
+                        RemunerationHours = Math.Round(remunerationHours),
+                        OriginalSumLesson1 = originalSumLesson1,
+                        OriginalSumLesson4 = originalSumLesson4,
+                        OriginalSumLesson7 = originalSumLesson7,
+                        OriginalSumLesson10 = originalSumLesson10,
+                        OriginalSumLesson13 = originalSumLesson13,
+                        SumLesson1 = Math.Round(sumLesson1),
+                        SumLesson4 = Math.Round(sumLesson4),
+                        SumLesson7 = Math.Round(sumLesson7),
+                        SumLesson10 = Math.Round(sumLesson10),
+                        SumLesson13 = Math.Round(sumLesson13)
+                    });
+                }
+            }
+            return remunerationDTOs;
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
