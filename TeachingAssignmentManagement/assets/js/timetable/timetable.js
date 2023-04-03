@@ -8,7 +8,7 @@
 
 $(function () {
     // Update count on document ready
-    updateCount();
+    updateTotalCount();
     $('#subjectCount').text(rowCount);
 
     // Update focus for select2 inside popover

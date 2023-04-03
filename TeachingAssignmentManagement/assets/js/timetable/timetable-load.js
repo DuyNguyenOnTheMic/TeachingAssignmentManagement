@@ -20,7 +20,7 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, currentLec
             element.popover('dispose');
             element.remove();
         }
-        updateCount();
+        updateTotalCount();
     }
 }
 
@@ -116,7 +116,7 @@ function updateClass(element, lecturerId, lecturerName, currentLecturerName) {
     $('[data-bs-toggle="popover"]').popover('update');
 }
 
-function updateCount() {
+function updateTotalCount() {
     var assignedCount = $('#assignedCount'),
         totalCount = $('#totalCount'),
         allClass = $('#tblAssign tbody .assign-card'),
