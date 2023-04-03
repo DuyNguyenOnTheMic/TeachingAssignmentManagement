@@ -60,9 +60,16 @@ namespace TeachingAssignmentManagement.DAL
 
         public IEnumerable<lecturer> GetFacultyMembersInTerm(int termId, string majorId)
         {
-            return majorId != "-1"
-                ? context.class_section.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == MyConstants.FacultyMemberType).Select(c => c.lecturer).Distinct()
-                : context.class_section.Where(c => c.term_id == termId && c.lecturer.type == MyConstants.FacultyMemberType).Select(c => c.lecturer).Distinct();
+            return (majorId != "-1"
+                ? context.class_section.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == MyConstants.FacultyMemberType)
+                : context.class_section.Where(c => c.term_id == termId && c.lecturer.type == MyConstants.FacultyMemberType)).Select(c => c.lecturer).Distinct();
+        }
+
+        public IEnumerable<lecturer> GetFacultyMembersInYear(int startYear, int endYear, string majorId)
+        {
+            return (majorId != "-1"
+                ? context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer.type == MyConstants.FacultyMemberType)
+                : context.class_section.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer.type == MyConstants.FacultyMemberType)).Select(c => c.lecturer).Distinct();
         }
 
         public IEnumerable<AspNetUser> GetFacultyBoards()

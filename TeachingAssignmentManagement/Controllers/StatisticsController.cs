@@ -256,7 +256,7 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
-        public ActionResult GetRemunerationChart(bool isLesson, string type, int value, string major)
+        public ActionResult GetRemunerationChart(bool isLesson, string type, string value, string major)
         {
             ViewData["isLesson"] = isLesson;
             ViewData["type"] = type;
@@ -302,11 +302,10 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
-        public ActionResult GetYearRemunerationData(bool isLesson, int startYear, int endYear, int termId, string majorId)
+        public ActionResult GetYearRemunerationData(bool isLesson, int startYear, int endYear, string majorId)
         {
             // Declare variables
-            term term = unitOfWork.TermRepository.GetTermByID(termId);
-            coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(term.start_year, term.end_year);
+            coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
 
             // Check if coefficient is null
             if (coefficient == null)
@@ -314,9 +313,9 @@ namespace TeachingAssignmentManagement.Controllers
                 return Json(new { error = true }, JsonRequestBehavior.AllowGet);
             }
 
-            // Check if this term and major have data
-            bool haveData = unitOfWork.ClassSectionRepository.CheckClassesInTermMajor(termId, majorId);
-            IEnumerable<lecturer> lecturers = unitOfWork.UserRepository.GetFacultyMembersInTerm(termId, majorId);
+            // Check if this year have data
+            bool haveData = unitOfWork.ClassSectionRepository.CheckClassesInYearMajor(startYear, endYear, majorId);
+            IEnumerable<lecturer> lecturers = unitOfWork.UserRepository.GetFacultyMembersInYear(startYear, endYear, majorId);
             List<RemunerationDTO> remunerationDTOs = haveData
                 ? !isLesson
                     ? GetYearRemunerationData(startYear, endYear, majorId, coefficient, lecturers)
