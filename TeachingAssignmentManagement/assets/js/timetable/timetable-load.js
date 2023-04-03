@@ -126,6 +126,15 @@ function updateTotalCount() {
     totalCount.text(allClass.length);
 }
 
+function updateClassCount() {
+    var theoryCount = $('#theoryCount'),
+        practicalCount = $('#practicalCount'),
+        theoryClass = $('#tblAssign tbody .btn-success'),
+        practicalClass = $('#tblAssign tbody .btn-warning');
+    theoryCount.text(theoryClass.length);
+    practicalCount.text(practicalClass.length)
+}
+
 function fetchData() {
     var termId = $('#term').val(),
         majorId = $('#major').val();
