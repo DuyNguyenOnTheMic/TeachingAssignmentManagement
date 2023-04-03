@@ -486,7 +486,7 @@ namespace TeachingAssignmentManagement.Controllers
                     int totalLesson = item.total_lesson.GetValueOrDefault(0);
 
                     // Count subjects and classes of lecturer
-                    if (item.subject.subject_id != previousSubjectId)
+                    if (item.subject_id != previousSubjectId)
                     {
                         subjectCount++;
                     }
@@ -495,7 +495,7 @@ namespace TeachingAssignmentManagement.Controllers
                     // Sum up remuneration hours for this class
                     originalHours += totalLesson;
                     remunerationHours += totalLesson * RemunerationService.CalculateRemuneration(item, coefficient);
-                    previousSubjectId = item.subject.subject_id;
+                    previousSubjectId = item.subject_id;
                 }
 
                 // Check if remuneration hours is larger than 0
@@ -548,7 +548,7 @@ namespace TeachingAssignmentManagement.Controllers
                     decimal classRemuneration = totalLesson * remunerationCoefficient;
 
                     // Count subjects and classes of lecturer
-                    if (item.subject.subject_id != previousSubjectId)
+                    if (item.subject_id != previousSubjectId)
                     {
                         subjectCount++;
                     }
@@ -582,7 +582,7 @@ namespace TeachingAssignmentManagement.Controllers
                         default:
                             break;
                     }
-                    previousSubjectId = item.subject.subject_id;
+                    previousSubjectId = item.subject_id;
                 }
 
                 // Check if remuneration hours is larger than 0
@@ -632,7 +632,7 @@ namespace TeachingAssignmentManagement.Controllers
                     int totalLesson = item.total_lesson.GetValueOrDefault(0);
 
                     // Count subjects and classes of lecturer
-                    if (item.subject.subject_id != previousSubjectId)
+                    if (item.subject_id != previousSubjectId)
                     {
                         subjectCount++;
                     }
@@ -641,7 +641,7 @@ namespace TeachingAssignmentManagement.Controllers
                     // Sum up remuneration hours for this class
                     originalHours += totalLesson;
                     remunerationHours += totalLesson * RemunerationService.CalculateRemuneration(item, coefficient);
-                    previousSubjectId = item.subject.subject_id;
+                    previousSubjectId = item.subject_id;
                 }
 
                 // Check if remuneration hours is larger than 0
@@ -694,7 +694,7 @@ namespace TeachingAssignmentManagement.Controllers
                     decimal classRemuneration = totalLesson * remunerationCoefficient;
 
                     // Count subjects and classes of lecturer
-                    if (item.subject.subject_id != previousSubjectId)
+                    if (item.subject_id != previousSubjectId)
                     {
                         subjectCount++;
                     }
@@ -728,7 +728,7 @@ namespace TeachingAssignmentManagement.Controllers
                         default:
                             break;
                     }
-                    previousSubjectId = item.subject.subject_id;
+                    previousSubjectId = item.subject_id;
                 }
 
                 // Check if remuneration hours is larger than 0
