@@ -302,6 +302,31 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
+        public ActionResult GetYearRemunerationData(bool isLesson, int startYear, int endYear, int termId, string majorId)
+        {
+            // Declare variables
+            term term = unitOfWork.TermRepository.GetTermByID(termId);
+            coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(term.start_year, term.end_year);
+
+            // Check if coefficient is null
+            if (coefficient == null)
+            {
+                return Json(new { error = true }, JsonRequestBehavior.AllowGet);
+            }
+
+            // Check if this term and major have data
+            bool haveData = unitOfWork.ClassSectionRepository.CheckClassesInTermMajor(termId, majorId);
+            IEnumerable<lecturer> lecturers = unitOfWork.UserRepository.GetFacultyMembersInTerm(termId, majorId);
+            List<RemunerationDTO> remunerationDTOs = haveData
+                ? !isLesson
+                    ? GetYearRemunerationData(startYear, endYear, majorId, coefficient, lecturers)
+                    : GetYearRemunerationDataByLesson(startYear, endYear, majorId, coefficient, lecturers)
+                : new List<RemunerationDTO>();
+            return Json(remunerationDTOs.OrderByDescending(r => r.RemunerationHours), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public ActionResult GetRemunerationSubjects(int termId, string majorId, string lecturerId)
         {
             return GetPersonalTermStatistics(false, termId, majorId, lecturerId);
