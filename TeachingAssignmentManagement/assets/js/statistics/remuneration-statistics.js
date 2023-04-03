@@ -16,7 +16,7 @@ var dataLoader = $('#data-loader'),
     value = dataLoader.val(),
     url = rootUrl + 'Statistics/',
     titleText,
-    fileName;
+    fileName,
     data;
 
 // Detect Dark Layout

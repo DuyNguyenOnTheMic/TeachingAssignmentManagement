@@ -34,7 +34,7 @@ $(function () {
 
     if (latestTermId && latestMajorId) {
         // Get Partial View statistics data
-        fetchData(false, latestTermId, latestMajorId);
+        fetchData(false, termSelect.attr('id'), latestTermId, latestMajorId);
     } else {
         showNoData(statisticsDiv, 'học kỳ');
     }
@@ -84,7 +84,7 @@ formData.change(function () {
 
 function fetchData(isLesson, type, value, major) {
     var url = rootUrl + 'Statistics/GetRemunerationChart';
-    $.get(url, { isLesson, value, major }, function (data) {
+    $.get(url, { isLesson, type, value, major }, function (data) {
         // Populate statistics data
         statisticsDiv.html(data);
     });
