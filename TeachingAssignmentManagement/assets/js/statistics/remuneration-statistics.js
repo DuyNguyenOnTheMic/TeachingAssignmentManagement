@@ -9,19 +9,36 @@ var labelColor = '#6e6b7b',
 // Setup data
 var dataLoader = $('#data-loader'),
     isLesson = dataLoader.data('islesson'),
+    type = dataLoader.data('type'),
     majorId = dataLoader.data('major'),
     majorAbb = dataLoader.data('majorabb'),
     majorName = dataLoader.data('majorname'),
     value = dataLoader.val(),
-    url = rootUrl + 'Statistics/GetTermRemunerationData',
-    titleText = 'Thống kê số giờ quy đổi HK' + value + ' ngành ' + majorName,
-    fileName = 'ThongKeSoGioQuyDoi_HK' + value + '_Nganh_' + majorAbb;
-    data = { isLesson, 'termId': value, majorId };
+    url = rootUrl + 'Statistics/',
+    titleText,
+    fileName;
+    data;
 
 // Detect Dark Layout
 if ($('html').hasClass('dark-layout')) {
     titleColor = '#d0d2d6';
     labelColor = '#b4b7bd';
+}
+
+// Check if user is selecting term or year
+if (type == yearSelect.attr('id')) {
+    var yearSplit = value.split(" - "),
+        startYear = yearSplit[0],
+        endYear = yearSplit[1];
+    data = { isLesson, startYear, endYear, majorId };
+    titleText = 'Thống kê số giờ quy đổi năm học ' + value + ' ngành ' + majorName;
+    fileName = 'ThongKeSoGioQuyDoi_NamHoc_' + startYear + '-' + endYear + '_Nganh_' + majorAbb;
+    url += 'GetYearRemunerationData';
+} else {
+    data = { isLesson, 'termId': value, majorId };
+    titleText = 'Thống kê số giờ quy đổi HK' + value + ' ngành ' + majorName;
+    fileName = 'ThongKeSoGio_HK' + value + '_Nganh_' + majorAbb;
+    url += 'GetTermRemunerationData';
 }
 
 Chart.defaults.font.family = 'Montserrat,Helvetica,Arial,serif';
