@@ -1,5 +1,6 @@
 ﻿var unitSelect = $('#unit'),
     termSelect = $('#term'),
+    yearSelect = $('#year'),
     majorSelect = $('#major'),
     isLessonCheck = $('#isLesson'),
     formData = $('.form-data'),
