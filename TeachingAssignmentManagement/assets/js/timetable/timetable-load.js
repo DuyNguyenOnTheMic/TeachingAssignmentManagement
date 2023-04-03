@@ -132,8 +132,8 @@ function updateTotalCount() {
 function updateClassCount() {
     var theoreticalCount = $('#theoreticalCount'),
         practicalCount = $('#practicalCount'),
-        theoreticalClass = $('#tblAssign tbody .assign-card[data-classtype="' + theoreticalClassType + '"]'),
-        practicalClass = $('#tblAssign tbody .assign-card[data-classtype="' + practiceClassType + '"]');
+        theoreticalClass = $('#tblAssign tbody .assign-card[data-classtype="' + theoreticalClassType + '"]:visible'),
+        practicalClass = $('#tblAssign tbody .assign-card[data-classtype="' + practiceClassType + '"]:visible');
     theoreticalCount.text(theoreticalClass.length);
     practicalCount.text(practicalClass.length)
 }

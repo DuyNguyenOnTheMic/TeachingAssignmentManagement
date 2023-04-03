@@ -72,16 +72,16 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
         $rendered.find('.select2-dropdown').prepend($btnContainer);
         $selectAll.on('click', function () {
             hidePopover();
-            if (self.$element.attr('id') == 'subjectFilter') {
-                subjectFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options of subject filter
-                filterCount(subjectFilter);
-            } else if (self.$element.attr('id') == 'lecturerFilter') {
+            subjectFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options of subject filter
+            filterCount(subjectFilter);
+            if (self.$element.attr('id') == 'lecturerFilter') {
                 lecturerFilter.find('option').prop('selected', 'selected').trigger('change'); // Select All Options of lecturer filter
                 filterCount(lecturerFilter);
                 $('.assign-card').show();
             }
             self.trigger('close');
             $('#tblAssign tbody tr').show();
+            updateClassCount();
         });
         $unselectAll.on('click', function () {
             hidePopover();
@@ -94,6 +94,7 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
             }
             self.trigger('close');
             $('#tblAssign tbody tr').hide();
+            updateClassCount();
         });
         return $rendered;
     };
@@ -124,11 +125,13 @@ subjectFilter.on('select2:select', function (e) {
     var subjectId = $('#' + e.params.data.id);
     subjectId.show();
     filterCount(subjectFilter);
+    updateClassCount();
 }).on('select2:unselect', function (e) {
     // Hide table row on unselect
     var subjectId = $('#' + e.params.data.id);
     subjectId.hide();
     filterCount(subjectFilter);
+    updateClassCount();
 });
 
 // Populate select2 for lecturer filter
@@ -159,6 +162,7 @@ lecturerFilter.on('select2:select', function (e) {
         tableRow.not(lecturerClass.closest('tr')).hide();
         updateRow(tableRow);
     }
+    updateClassCount();
 }).on('select2:unselect', function (e) {
     var tableRow = $('#tblAssign tbody tr'),
         lecturerId = e.params.data.id,
@@ -167,6 +171,7 @@ lecturerFilter.on('select2:select', function (e) {
     lecturerClass.hide();
     filterCount(lecturerFilter);
     updateRow(tableRow);
+    updateClassCount();
 });
 
 // Split lecturerName
