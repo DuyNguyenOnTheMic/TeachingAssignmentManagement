@@ -544,7 +544,7 @@ function format(d) {
         '<th>Ngành</th>' +
         '<th class="text-center">Số TC</th>' +
         '<th class="text-center">Số lớp</th>' +
-        '<th class="text-center">Số giờ</th>' +
+        '<th class="text-center">Số giờ giảng</th>' +
         '</tr>' +
         '</thead>' +
         '<tbody>' +
