@@ -326,7 +326,7 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
-        public ActionResult GetRemunerationSubjects(int termId, string majorId, string lecturerId)
+        public ActionResult GetTermRemunerationSubjects(int termId, string majorId, string lecturerId)
         {
             return GetPersonalTermStatistics(false, termId, majorId, lecturerId);
         }

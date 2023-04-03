@@ -447,8 +447,8 @@ function populateDatatable(data) {
             tr = $this.closest('tr'),
             row = dataTable.row(tr),
             lecturerId = $this.data('id'),
-            subjectUrl = rootUrl + 'Statistics/GetRemunerationSubjects',
-            subjectData = { 'termId': value, majorId, lecturerId };
+            subjectUrl = rootUrl + 'Statistics/',
+            subjectData;
 
         if (row.child.isShown()) {
             // Update icon on click
@@ -461,6 +461,18 @@ function populateDatatable(data) {
             // Update icon on click
             $this.removeClass('btn-success').addClass('btn-danger');
             $this.find('i').removeClass('feather-plus').addClass('feather-minus');
+
+            // Get data for ajax request
+            if (type == yearSelect.attr('id')) {
+                var yearSplit = value.split(" - "),
+                    startYear = yearSplit[0],
+                    endYear = yearSplit[1];
+                subjectUrl += 'GetYearRemunerationSubjects';
+                subjectData = { startYear, endYear, majorId, lecturerId };
+            } else {
+                subjectUrl += 'GetTermRemunerationSubjects';
+                subjectData = { 'termId': value, majorId, lecturerId };
+            }
 
             // Send request to fetch subjects
             $.ajax({
