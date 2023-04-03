@@ -256,9 +256,10 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
-        public ActionResult GetRemunerationChart(bool isLesson, int value, string major)
+        public ActionResult GetRemunerationChart(bool isLesson, string type, int value, string major)
         {
             ViewData["isLesson"] = isLesson;
+            ViewData["type"] = type;
             ViewData["value"] = value;
             ViewData["major"] = major;
             if (major != "-1")

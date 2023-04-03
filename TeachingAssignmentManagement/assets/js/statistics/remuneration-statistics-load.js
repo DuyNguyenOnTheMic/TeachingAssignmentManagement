@@ -63,18 +63,26 @@ unitSelect.change(function () {
 // Fetch data on form select change
 formData.change(function () {
     var isLesson,
-        value = termSelect.val(),
-        major = majorSelect.val();
-
+        type,
+        value,
+        major;
     // Check if user select unit lesson
     isLessonCheck.is(":checked") ? isLesson = true : isLesson = false;
-
+    // Check if term or year select is hidden
+    if (termSelect.is(':visible')) {
+        type = termSelect.attr('id');
+        value = termSelect.val();
+    } else {
+        type = yearSelect.attr('id');
+        value = yearSelect.val();
+    }
+    major = majorSelect.val();
     // Display loading message while fetching data
     showLoading(statisticsDiv);
-    fetchData(isLesson, value, major);
+    fetchData(isLesson, type, value, major);
 });
 
-function fetchData(isLesson, value, major) {
+function fetchData(isLesson, type, value, major) {
     var url = rootUrl + 'Statistics/GetRemunerationChart';
     $.get(url, { isLesson, value, major }, function (data) {
         // Populate statistics data
