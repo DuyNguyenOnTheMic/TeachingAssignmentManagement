@@ -22,6 +22,7 @@ hubNotif.client.updatedData = function (id, lecturerId, lecturerName, currentLec
             element.parent().tooltip('dispose');
             element.popover('dispose');
             element.remove();
+            updateClassCount(false);
         }
         updateTotalCount();
     }
@@ -129,11 +130,12 @@ function updateTotalCount() {
     totalCount.text(allClass.length);
 }
 
-function updateClassCount() {
+function updateClassCount(isVisible) {
     var theoreticalCount = $('#theoreticalCount'),
         practicalCount = $('#practicalCount'),
-        theoreticalClass = $('#tblAssign tbody .assign-card[data-classtype="' + theoreticalClassType + '"]:visible'),
-        practicalClass = $('#tblAssign tbody .assign-card[data-classtype="' + practiceClassType + '"]:visible');
+        isVisibleSelector = isVisible === false ? '' : ':visible',
+        theoreticalClass = $('#tblAssign tbody .assign-card[data-classtype="' + theoreticalClassType + '"]' + isVisibleSelector),
+        practicalClass = $('#tblAssign tbody .assign-card[data-classtype="' + practiceClassType + '"]' + isVisibleSelector);
     theoreticalCount.text(theoreticalClass.length);
     practicalCount.text(practicalClass.length)
 }
