@@ -1,10 +1,12 @@
-﻿var termSelect = $('#term'),
+﻿var unitSelect = $('#unit'),
+    termSelect = $('#term'),
     majorSelect = $('#major'),
     isLessonCheck = $('#isLesson'),
     formData = $('.form-data'),
     rootUrl = $('#loader').data('request-url'),
     statisticsDiv = $('#statisticsDiv'),
     latestTermId = $('#term option:eq(1)').val(),
+    latestYearId = $('#year option:eq(1)').val(),
     latestMajorId = $('#major option:eq(1)').val();
 
 $(function () {
@@ -34,6 +36,26 @@ $(function () {
         fetchData(false, latestTermId, latestMajorId);
     } else {
         showNoData(statisticsDiv, 'học kỳ');
+    }
+});
+
+// Unit select event for viewing statistics
+unitSelect.change(function () {
+    var $this = $(this);
+    if ($this.val() == 'term') {
+        // Show term select2 field
+        $('#termDiv').show();
+        $('#yearDiv').hide();
+
+        // Set latest term
+        termSelect.val(latestTermId).trigger('change');
+    } else {
+        // Show year select2 field
+        $('#yearDiv').show();
+        $('#termDiv').hide();
+
+        // Set latest year
+        yearSelect.val(latestYearId).trigger('change');
     }
 });
 

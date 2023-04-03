@@ -26,11 +26,22 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-6 mb-1">
+                                    <div class="col-lg-4 mb-1">
+                                        <label class="form-label font-small-4" for="unit">Thống kê theo: </label>
+                                        <select class="form-select" id="unit" name="unit">
+                                            <option value="term">Học kỳ</option>
+                                            <option value="year">Năm học</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4 mb-1" id="termDiv">
                                         <label class="form-label font-small-4" for="term">Học kỳ: </label>
                                         @Html.DropDownList("term", null, "---- Chọn học kỳ ----", htmlAttributes: new { @class = "form-data form-select" })
                                     </div>
-                                    <div class="col-lg-6 mb-1">
+                                    <div class="col-lg-3 mb-1" id="yearDiv" style="display: none">
+                                        <label class="form-label font-small-4" for="year">Năm học: </label>
+                                        @Html.DropDownList("year", null, "---- Chọn năm học ----", htmlAttributes: new { @class = "form-data form-select" })
+                                    </div>
+                                    <div class="col-lg-4 mb-1">
                                         <label class="form-label font-small-4" for="major">Ngành: </label>
                                         @Html.DropDownList("major", null, "---- Chọn ngành ----", htmlAttributes: new { @class = "form-data form-select" })
                                     </div>
@@ -64,5 +75,5 @@
     <script src="~/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
     @Scripts.Render("~/bundles/export-dt")
     <script src="~/app-assets/language/select2/vi.min.js"></script>
-    <script src="~/assets/js/statistics/remuneration-statistics-load.min.js"></script>
+    <script src="~/assets/js/statistics/remuneration-statistics-load.js"></script>
 }
