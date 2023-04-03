@@ -222,7 +222,7 @@ namespace TeachingAssignmentManagement.Controllers
         public JsonResult GetPersonalYearData(bool isLesson, int startYear, int endYear)
         {
             string userId = UserManager.FindByEmail(User.Identity.Name).Id;
-            return GetPersonalYearStatistics(isLesson, startYear, endYear, userId);
+            return GetPersonalYearStatistics(isLesson, startYear, endYear, "-1", userId);
         }
 
         [HttpGet]
@@ -331,6 +331,13 @@ namespace TeachingAssignmentManagement.Controllers
             return GetPersonalTermStatistics(false, termId, majorId, lecturerId);
         }
 
+        [HttpGet]
+        [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
+        public ActionResult GetYearRemunerationSubjects(int startYear, int endYear, string majorId, string lecturerId)
+        {
+            return GetPersonalYearStatistics(false, startYear, endYear, majorId, lecturerId);
+        }
+
         private JsonResult GetPersonalTermStatistics(bool isLesson, int termId, string majorId, string lecturerId)
         {
             // Get classes in term of lecturer
@@ -396,7 +403,7 @@ namespace TeachingAssignmentManagement.Controllers
             return Json(subjects.OrderByDescending(s => s.Hours), JsonRequestBehavior.AllowGet);
         }
 
-        private JsonResult GetPersonalYearStatistics(bool isLesson, int startYear, int endYear, string lecturerId)
+        private JsonResult GetPersonalYearStatistics(bool isLesson, int startYear, int endYear, string majorId, string lecturerId)
         {
             // Get classes in year of lecturer
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
@@ -407,7 +414,7 @@ namespace TeachingAssignmentManagement.Controllers
                 return Json(new { error = true }, JsonRequestBehavior.AllowGet);
             }
 
-            IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInYear(startYear, endYear, lecturerId);
+            IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInYearOrderBySubject(startYear, endYear, majorId, lecturerId);
             IEnumerable<subject> query_subjects = query_classes.Select(c => c.subject).Distinct();
             List<SubjectDTO> subjects = new List<SubjectDTO>();
             string previousSubjectId = string.Empty;
