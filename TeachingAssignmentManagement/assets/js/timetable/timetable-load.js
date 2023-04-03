@@ -1,5 +1,8 @@
 ﻿var formSelect = $('.form-select'),
     rootUrl = $('#loader').data('request-url'),
+    classTypeData = $('#classTypeData'),
+    theoreticalClassType = classTypeData.data('theoreticalclasstype'),
+    practiceClassType = classTypeData.data('practiceclasstype'),
     assignLecturerDiv = $('#assignLecturerDiv'),
     url = rootUrl + 'Timetable/GetData';
 
@@ -88,7 +91,7 @@ function updateClass(element, lecturerId, lecturerName, currentLecturerName) {
     element.removeClass('btn-success btn-warning btn-secondary unassigned-theory unassigned-practical');
     tooltipElement.tooltip('dispose');
     if (lecturerId) {
-        if (classType == 'Lý thuyết') {
+        if (classType == theoreticalClassType) {
             // color of theory class
             element.addClass('btn-success');
         } else {
@@ -100,7 +103,7 @@ function updateClass(element, lecturerId, lecturerName, currentLecturerName) {
         lecturerName = splitString(lecturerName);
     } else {
         lecturerName = 'Chưa phân';
-        if (classType == 'Lý thuyết') {
+        if (classType == theoreticalClassType) {
             // color of theory class
             element.addClass('btn-secondary unassigned-theory');
         } else {
@@ -129,8 +132,8 @@ function updateTotalCount() {
 function updateClassCount() {
     var theoreticalCount = $('#theoreticalCount'),
         practicalCount = $('#practicalCount'),
-        theoreticalClass = $('#tblAssign tbody .assign-card[data-classtype="Lý thuyết"]'),
-        practicalClass = $('#tblAssign tbody .assign-card[data-classtype="Thực hành"]');
+        theoreticalClass = $('#tblAssign tbody .assign-card[data-classtype="' + theoreticalClassType + '"]'),
+        practicalClass = $('#tblAssign tbody .assign-card[data-classtype="' + practiceClassType + '"]');
     theoreticalCount.text(theoreticalClass.length);
     practicalCount.text(practicalClass.length)
 }
