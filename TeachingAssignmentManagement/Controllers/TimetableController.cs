@@ -212,6 +212,7 @@ namespace TeachingAssignmentManagement.Controllers
             bool termStatus = unitOfWork.TermRepository.GetTermByID(term).status;
             if (!termStatus)
             {
+                Response.TrySkipIisCustomErrors = true;
                 Response.Write($"Học kỳ này đã được khoá phân công trên hệ thống!");
                 return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
             }
@@ -223,6 +224,7 @@ namespace TeachingAssignmentManagement.Controllers
             lecturer lecturer = unitOfWork.UserRepository.GetLecturerByID(userId);
             if (lecturer?.staff_id == null || lecturer?.full_name == null)
             {
+                Response.TrySkipIisCustomErrors = true;
                 Response.Write($"Bạn chưa điền đầy đủ thông tin của bạn (<strong>mã giảng viên</strong> và <strong>tên giảng viên</strong>) để hệ thống có thể ghi nhận phân công bởi bạn.");
                 return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
             }
@@ -233,6 +235,7 @@ namespace TeachingAssignmentManagement.Controllers
                 bool haveData = unitOfWork.ClassSectionRepository.CheckClassesInTermMajor(term, major);
                 if (haveData)
                 {
+                    Response.TrySkipIisCustomErrors = true;
                     Response.Write($"Học kỳ và ngành này đã có dữ liệu trong hệ thống, bạn muốn cập nhật hay thay thế thời khoá biểu?");
                     return new HttpStatusCodeResult(HttpStatusCode.Conflict);
                 }
@@ -248,6 +251,7 @@ namespace TeachingAssignmentManagement.Controllers
             string isValid = ValidateColumns(dt);
             if (isValid != null)
             {
+                Response.TrySkipIisCustomErrors = true;
                 Response.Write($"Có vẻ như bạn đã sai hoặc thiếu tên cột <strong>" + isValid + "</strong>, vui lòng kiểm tra lại tệp tin!");
                 return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
             }
@@ -309,6 +313,7 @@ namespace TeachingAssignmentManagement.Controllers
                     if (checkNull != null)
                     {
                         int excelRow = dt.Rows.IndexOf(row) + 2;
+                        Response.TrySkipIisCustomErrors = true;
                         Response.Write($"Oops, có lỗi đã xảy ra ở dòng số <strong>" + excelRow + "</strong>, vui lòng kiểm tra lại tệp tin.");
                         return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
                     }
@@ -316,6 +321,7 @@ namespace TeachingAssignmentManagement.Controllers
                     // Check if student registered number is less than 1
                     if (ToInt(studentRegisteredNumber) <= 0 && isCheckStudentNumber)
                     {
+                        Response.TrySkipIisCustomErrors = true;
                         Response.Write($"Có một số lớp có sinh viên đăng ký là 0, bạn có muốn import tiếp không?");
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
@@ -324,6 +330,7 @@ namespace TeachingAssignmentManagement.Controllers
                     if (!timetableViewModel.startLessons.Contains(ToInt(startLesson2)))
                     {
                         int excelRow = dt.Rows.IndexOf(row) + 2;
+                        Response.TrySkipIisCustomErrors = true;
                         Response.Write($"Oops, có lỗi đã xảy ra ở dòng số <strong>" + excelRow + "</strong>, tiết bắt đầu phải là 1, 4, 7, 10 hoặc 13.");
                         return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
                     }
@@ -451,6 +458,7 @@ namespace TeachingAssignmentManagement.Controllers
             }
             catch
             {
+                Response.TrySkipIisCustomErrors = true;
                 Response.Write($"Oops, có lỗi đã xảy ra, vui lòng kiểm tra lại tệp tin");
                 return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
             }
