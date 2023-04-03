@@ -40,7 +40,7 @@
 </div>
 
 <div id="loader" data-request-url="@Url.Content("~/")"></div>
-<div id="classTypeData" data-theoreticalclasstype="@MyConstants.TheoreticalClassType" data-practiceclasstype="@MyConstants.PracticeClassType"></div>
+<div id="classTypeData" data-theoreticalclasstype="@ViewData["theoreticalClassType"]" data-practiceclasstype="@ViewData["practiceClassType"]"></div>
 
 @section styles {
     <link href="~/assets/css/timetable.min.css" rel="stylesheet" />

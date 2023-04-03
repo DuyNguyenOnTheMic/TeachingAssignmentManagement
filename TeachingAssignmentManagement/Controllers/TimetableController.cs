@@ -530,6 +530,8 @@ namespace TeachingAssignmentManagement.Controllers
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
             ViewData["major"] = new SelectList(unitOfWork.MajorRepository.GetMajors(), "id", "name");
+            ViewData["theoreticalClassType"] = MyConstants.TheoreticalClassType;
+            ViewData["practiceClassType"] = MyConstants.PracticeClassType;
             return View();
         }
 
