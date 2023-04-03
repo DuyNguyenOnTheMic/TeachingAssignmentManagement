@@ -8,6 +8,7 @@
 
 $(function () {
     // Update count on document ready
+    updateClassCount();
     updateTotalCount();
     $('#subjectCount').text(rowCount);
 

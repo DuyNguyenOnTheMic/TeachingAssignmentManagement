@@ -120,18 +120,18 @@ function updateTotalCount() {
     var assignedCount = $('#assignedCount'),
         totalCount = $('#totalCount'),
         allClass = $('#tblAssign tbody .assign-card'),
-        theoryClass = $('#tblAssign tbody .btn-success'),
+        theoreticalClass = $('#tblAssign tbody .btn-success'),
         practicalClass = $('#tblAssign tbody .btn-warning');
-    assignedCount.text(theoryClass.length + practicalClass.length);
+    assignedCount.text(theoreticalClass.length + practicalClass.length);
     totalCount.text(allClass.length);
 }
 
 function updateClassCount() {
-    var theoryCount = $('#theoryCount'),
+    var theoreticalCount = $('#theoreticalCount'),
         practicalCount = $('#practicalCount'),
-        theoryClass = $('#tblAssign tbody .btn-success'),
-        practicalClass = $('#tblAssign tbody .btn-warning');
-    theoryCount.text(theoryClass.length);
+        theoreticalClass = $('#tblAssign tbody .assign-card[data-classtype="Lý thuyết"]'),
+        practicalClass = $('#tblAssign tbody .assign-card[data-classtype="Thực hành"]');
+    theoreticalCount.text(theoreticalClass.length);
     practicalCount.text(practicalClass.length)
 }
 
