@@ -186,28 +186,28 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Get_Class_In_Week_Data_Not_Null_Test()
+        public void Get_Timetable_In_Week_Data_Not_Null_Test()
         {
             // Arrange
             int week = 7;
 
             // Act
             IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
-            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, week);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableInWeek(query_classes, week);
 
             // Assert
             Assert.IsNotNull(actionResult);
         }
 
         [TestMethod()]
-        public void Get_Class_In_Week_Data_Is_Correct_Test()
+        public void Get_Timetable_In_Week_Data_Is_Correct_Test()
         {
             // Arrange
             int week = 7;
 
             // Act
             IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
-            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, week).ToList();
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableInWeek(query_classes, week).ToList();
             List<class_section> classSectionList = listClassSection.Where(c => c.term_id == termId && c.lecturer_id == userId1).ToList();
 
             // Assert
@@ -229,14 +229,14 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Class_In_Week_Data_Should_Be_IEnumerable_Test()
+        public void Timetable_In_Week_Data_Should_Be_IEnumerable_Test()
         {
             // Arrange
             int week = 7;
 
             // Act
             IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
-            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, week);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableInWeek(query_classes, week);
             int count = 0;
             foreach (dynamic value in actionResult)
             {
@@ -248,28 +248,28 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Class_In_Week_Data_Index_at_0_Should_Not_Be_Null_Test()
+        public void Timetable_In_Week_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Arrange
             int week = 7;
 
             // Act
             IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
-            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, week).ToList();
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableInWeek(query_classes, week).ToList();
 
             // Assert                
             Assert.IsNotNull(actionResult[0]);
         }
 
         [TestMethod()]
-        public void Class_In_Week_Data_Should_Be_Indexable_Test()
+        public void Timetable_In_Week_Data_Should_Be_Indexable_Test()
         {
             // Arrange
             int week = 7;
 
             // Act
             IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
-            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, week).ToList();
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableInWeek(query_classes, week).ToList();
 
             // Assert
             for (int i = 0; i < actionResult.Count; i++)
@@ -293,14 +293,14 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Get_Class_In_Week_List_Should_Be_Not_Null_And_Equal_Test()
+        public void Get_Timetable_In_Week_List_Should_Be_Not_Null_And_Equal_Test()
         {
             // Arrange
             int week = 7;
 
             // Act
             IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
-            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, week).ToList();
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableInWeek(query_classes, week).ToList();
             List<class_section> query_classSection = listClassSection.Where(c => c.term_id == termId && c.lecturer_id == userId1).ToList();
 
             // Assert
@@ -309,28 +309,28 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Get_Class_In_Week_Data_Not_Null_When_Week_Have_Zero_Test()
+        public void Get_Timetable_In_Week_Data_Not_Null_When_Week_Have_Zero_Test()
         {
             // Arrange
             int week = 07;
 
             // Act
             IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
-            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, week);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableInWeek(query_classes, week);
 
             // Assert
             Assert.IsNotNull(actionResult);
         }
 
         [TestMethod()]
-        public void Get_Class_In_Week_Data_Is_Correct_When_Week_Have_Zero_Test()
+        public void Get_Timetable_In_Week_Data_Is_Correct_When_Week_Have_Zero_Test()
         {
             // Arrange
             int week = 07;
 
             // Act
             IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
-            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, week).ToList();
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableInWeek(query_classes, week).ToList();
             List<class_section> classSectionList = listClassSection.Where(c => c.term_id == termId && c.lecturer_id == userId1).ToList();
 
             // Assert
@@ -352,14 +352,14 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Class_In_Week_Data_Should_Be_IEnumerable_When_Week_Have_Zero_Test()
+        public void Timetable_In_Week_Data_Should_Be_IEnumerable_When_Week_Have_Zero_Test()
         {
             // Arrange
             int week = 07;
 
             // Act
             IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
-            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, week);
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableInWeek(query_classes, week);
             int count = 0;
             foreach (dynamic value in actionResult)
             {
@@ -371,28 +371,28 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Class_In_Week_Data_Index_at_0_Should_Not_Be_Null_When_Week_Have_Zero_Test()
+        public void Timetable_In_Week_Data_Index_at_0_Should_Not_Be_Null_When_Week_Have_Zero_Test()
         {
             // Arrange
             int week = 07;
 
             // Act
             IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
-            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, week).ToList();
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableInWeek(query_classes, week).ToList();
 
             // Assert                
             Assert.IsNotNull(actionResult[0]);
         }
 
         [TestMethod()]
-        public void Class_In_Week_Data_Should_Be_Indexable_When_Week_Have_Zero_Test()
+        public void Timetable_In_Week_Data_Should_Be_Indexable_When_Week_Have_Zero_Test()
         {
             // Arrange
             int week = 07;
 
             // Act
             IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
-            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, week).ToList();
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableInWeek(query_classes, week).ToList();
 
             // Assert
             for (int i = 0; i < actionResult.Count; i++)
@@ -416,14 +416,14 @@ namespace TeachingAssignmentManagement.DAL.Tests
         }
 
         [TestMethod()]
-        public void Get_Class_In_Week_List_Should_Be_Not_Null_And_Equal_When_Week_Have_Zero_Test()
+        public void Get_Timetable_In_Week_List_Should_Be_Not_Null_And_Equal_When_Week_Have_Zero_Test()
         {
             // Arrange
             int week = 07;
 
             // Act
             IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId1);
-            dynamic actionResult = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, week).ToList();
+            dynamic actionResult = unitOfWork.ClassSectionRepository.GetTimetableInWeek(query_classes, week).ToList();
             List<class_section> query_classSection = listClassSection.Where(c => c.term_id == termId && c.lecturer_id == userId1).ToList();
 
             // Assert

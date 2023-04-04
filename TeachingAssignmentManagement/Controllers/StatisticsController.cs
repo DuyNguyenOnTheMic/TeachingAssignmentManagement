@@ -189,7 +189,7 @@ namespace TeachingAssignmentManagement.Controllers
             ViewData["weekLabel"] = weekLabel;
             return PartialView("_Timetable", new TimetableViewModel
             {
-                ClassSectionDTOs = unitOfWork.ClassSectionRepository.GetClassInWeek(query_classes, currentWeek),
+                ClassSectionDTOs = unitOfWork.ClassSectionRepository.GetTimetableInWeek(query_classes, currentWeek),
                 LecturerDTOs = unitOfWork.UserRepository.GetLecturers()
             });
         }
