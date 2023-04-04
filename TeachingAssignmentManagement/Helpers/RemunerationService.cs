@@ -27,7 +27,7 @@ namespace TeachingAssignmentManagement.Services
             crowdedClassCoefficient = studentRegistered <= studentNumber ? decimal.One : (decimal)(decimal.One + (studentRegistered - studentNumber) * 0.0025m);
 
             // Calculate time coefficient
-            timeCoefficient = (classSection.start_lesson_2 != 13 || classSection.day_2 != 8) ? decimal.One : 1.2m;
+            timeCoefficient = (classSection.start_lesson_2 != 13 && classSection.day_2 != 8) ? decimal.One : 1.2m;
 
             // Calculate language coefficient
             languageCoefficient = classSection.subject.is_vietnamese ? coefficient.vietnamese_coefficient : coefficient.foreign_coefficient;
