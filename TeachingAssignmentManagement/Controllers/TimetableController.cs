@@ -578,13 +578,13 @@ namespace TeachingAssignmentManagement.Controllers
             {
                 // Declare variables
                 class_section classSection = unitOfWork.ClassSectionRepository.GetClassByID(id);
+                int[] currentLearnWeek = Array.ConvertAll(classSection.learn_week.Split(','), int.Parse);
                 term term = unitOfWork.TermRepository.GetTermByID(termId);
                 IEnumerable<class_section> query_classWeek = unitOfWork.ClassSectionRepository.GetClassesInTerm(termId, lecturerId);
-                //List<int> currentLearnWeek = Array.ConvertAll(classSection.learn_week.Split(','), int.Parse).ToList();
-                //List<class_section> isContainWeek = query_classWeek.Where(c => Array.Exists(c.learn_week.Split(','), element => currentLearnWeek.Contains(int.Parse(element)))).ToList();
                 IEnumerable<class_section> query_classDay = unitOfWork.ClassSectionRepository.GetClassesInDay(query_classWeek, classSection.day_2);
-                IEnumerable<class_section> query_classLesson = unitOfWork.ClassSectionRepository.GetClassesInLesson(query_classDay, classSection.start_lesson_2);
-                IEnumerable<class_section> query_classCampus = unitOfWork.ClassSectionRepository.GetClassesInCampus(query_classDay, classSection.start_lesson_2, classSection.room_id);
+                IEnumerable<class_section> query_classLearnWeek = unitOfWork.ClassSectionRepository.GetClassesInLearnWeek(query_classDay, currentLearnWeek);
+                IEnumerable<class_section> query_classLesson = unitOfWork.ClassSectionRepository.GetClassesInLesson(query_classLearnWeek, classSection.start_lesson_2);
+                IEnumerable<class_section> query_classCampus = unitOfWork.ClassSectionRepository.GetClassesInCampus(query_classLearnWeek, classSection.start_lesson_2, classSection.room_id);
 
                 // Check not duplicate class in the same time
                 if (query_classLesson.Count() >= 1)
