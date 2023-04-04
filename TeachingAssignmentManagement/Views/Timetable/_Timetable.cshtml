@@ -57,7 +57,7 @@
                 <th>THỨ</th>
                 @foreach (int day in Model.days)
                 {
-                    <th colspan="5">THỨ @day</th>
+                    <th colspan="5">@(day != 8 ? "THỨ " + day : "CHỦ NHẬT")</th>
                 }
             </tr>
             <tr class="text-center text-nowrap">

@@ -14,7 +14,7 @@
                 <th>TIẾT</th>
                 @foreach (int day in Model.days)
                 {
-                    <th>THỨ @day</th>
+                    <th>@(day != 8 ? "THỨ " + day : "CHỦ NHẬT")</th>
                 }
             </tr>
         </thead>
