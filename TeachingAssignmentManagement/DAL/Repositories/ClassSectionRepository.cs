@@ -34,7 +34,7 @@ namespace TeachingAssignmentManagement.DAL
             });
         }
 
-        public IEnumerable<ClassSectionDTO> GetClassInWeek(IEnumerable<ClassSectionDTO> query_classes, int week)
+        public IEnumerable<ClassSectionDTO> GetTimetableInWeek(IEnumerable<ClassSectionDTO> query_classes, int week)
         {
             return query_classes.Where(c => Array.Exists(c.LearnWeek.Split(','), element => int.Parse(element) == week)).ToList();
         }
