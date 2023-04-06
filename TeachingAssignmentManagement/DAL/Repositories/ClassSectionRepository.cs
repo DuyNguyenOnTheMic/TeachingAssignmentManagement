@@ -106,6 +106,11 @@ namespace TeachingAssignmentManagement.DAL
             return context.class_section.Where(c => c.term_id == termId && c.lecturer_id == lecturerId);
         }
 
+        public IEnumerable<class_section> GetClassesInLearnWeek(IEnumerable<class_section> classSections, int[] currentLearnWeek)
+        {
+            return classSections.Where(c => Array.Exists(c.learn_week.Split(','), element => currentLearnWeek.Contains(int.Parse(element))));
+        }
+
         public IEnumerable<class_section> GetClassesInLesson(IEnumerable<class_section> classSections, int lesson)
         {
             return classSections.Where(c => c.start_lesson_2 == lesson);
