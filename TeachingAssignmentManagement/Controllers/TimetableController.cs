@@ -485,6 +485,8 @@ namespace TeachingAssignmentManagement.Controllers
             {
                 // Export data in term and major
                 classes = unitOfWork.ClassSectionRepository.GetExportData(termId, majorId);
+                string majorAbb = unitOfWork.MajorRepository.GetMajorByID(majorId).abbreviation;
+                majorId = majorAbb;
             }
             else
             {
