@@ -266,5 +266,25 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(101, academicDegree.name.Length);
             Assert.AreEqual(true, jsonCollection.error);
         }
+
+        [TestMethod()]
+        public void Edit_Academic_Degree_View_Test()
+        {
+            // Arrange
+            AcademicDegreeController controller = new AcademicDegreeController();
+            academic_degree academicDegree = new academic_degree() { id = "1", name = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras consectetur sed tellus at tincidundsdss", level = 3 };
+            mockSet.Setup(m => m.Find(It.IsAny<string>())).Returns(academicDegree);
+
+            // Act
+            ViewResult result;
+            using (scope)
+            {
+                controller.Create(academicDegree);
+                result = controller.Edit(academicDegree.id) as ViewResult;
+            }
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
     }
 }
