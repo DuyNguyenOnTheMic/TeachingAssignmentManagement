@@ -179,5 +179,20 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                     "JSON record does not contain \"level\" required property.");
             }
         }
+
+        [TestMethod()]
+        public void Get_Academic_Degree_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Arrange
+            AcademicDegreeController controller = new AcademicDegreeController(unitOfWork);
+
+            // Act
+            JsonResult actionResult = controller.GetData();
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            Assert.IsNotNull(jsonCollection);
+            Assert.AreEqual(listAcademicDegree.Count(), jsonCollection.Count);
+        }
     }
 }
