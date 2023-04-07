@@ -6,6 +6,7 @@ using System.Linq;
 using System.Transactions;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers.Tests
@@ -221,6 +222,27 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             mockSet.Verify(r => r.Add(academicDegree), Times.Once);
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod()]
+        public void Create_Shoud_Be_Failed_When_Academic_Degree_Id_Is_Null_Test()
+        {
+            // Arrange
+            AcademicDegreeController controller = new AcademicDegreeController();
+            academic_degree academicDegree = new academic_degree() { id = null, name = "hehe", level = 3 };
+
+            // Act
+            JsonResult result;
+            dynamic jsonCollection;
+            using (scope)
+            {
+                controller.Create(academicDegree);
+                result = controller.Create(academicDegree) as JsonResult;
+                jsonCollection = result.Data;
+            }
+
+            // Assert
+            Assert.AreEqual(true, jsonCollection.error);
         }
     }
 }
