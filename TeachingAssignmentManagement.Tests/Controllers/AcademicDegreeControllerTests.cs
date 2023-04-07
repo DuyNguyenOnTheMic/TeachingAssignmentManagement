@@ -194,5 +194,18 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.IsNotNull(jsonCollection);
             Assert.AreEqual(listAcademicDegree.Count(), jsonCollection.Count);
         }
+
+        [TestMethod()]
+        public void Create_View_Test()
+        {
+            // Arrange
+            AcademicDegreeController controller = new AcademicDegreeController();
+
+            // Act
+            ViewResult result = controller.Create() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
     }
 }
