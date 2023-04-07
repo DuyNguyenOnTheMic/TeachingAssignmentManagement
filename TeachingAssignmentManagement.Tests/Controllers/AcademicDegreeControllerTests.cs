@@ -244,5 +244,27 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.AreEqual(true, jsonCollection.error);
         }
+
+        [TestMethod()]
+        public void Create_Shoud_Be_Failed_When_Academic_Degree_Name_Over_100_Characters_Test()
+        {
+            // Arrange
+            AcademicDegreeController controller = new AcademicDegreeController();
+            academic_degree academicDegree = new academic_degree() { id = "1", name = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras consectetur sed tellus at tincidundsdss", level = 3 };
+
+            // Act
+            JsonResult result;
+            dynamic jsonCollection;
+            using (scope)
+            {
+                controller.Create(academicDegree);
+                result = controller.Create(academicDegree) as JsonResult;
+                jsonCollection = result.Data;
+            }
+
+            // Assert
+            Assert.AreEqual(101, academicDegree.name.Length);
+            Assert.AreEqual(true, jsonCollection.error);
+        }
     }
 }
