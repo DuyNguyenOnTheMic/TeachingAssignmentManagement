@@ -207,5 +207,20 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.IsNotNull(result);
         }
+
+        [TestMethod()]
+        public void Create_Academic_Degree_Test()
+        {
+            // Arrange
+            AcademicDegreeController controller = new AcademicDegreeController(unitOfWork);
+            academic_degree academicDegree = new academic_degree() { id = "3", name = "hehe", level = 3 };
+
+            // Act
+            controller.Create(academicDegree);
+
+            // Assert
+            mockSet.Verify(r => r.Add(academicDegree), Times.Once);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
     }
 }
