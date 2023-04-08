@@ -6,6 +6,7 @@ using System.Linq;
 using System.Transactions;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
+using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers.Tests
@@ -249,7 +250,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             AcademicDegreeController controller = new AcademicDegreeController();
-            academic_degree academicDegree = new academic_degree() { id = "1", name = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras consectetur sed tellus at tincidundsdss", level = 3 };
+            academic_degree academicDegree = new academic_degree() { id = "3", name = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras consectetur sed tellus at tincidundsdss", level = 3 };
 
             // Act
             JsonResult result;
@@ -271,7 +272,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         {
             // Arrange
             AcademicDegreeController controller = new AcademicDegreeController();
-            academic_degree academicDegree = new academic_degree() { id = "1", name = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras consectetur sed tellus at tincidundsdss", level = 3 };
+            academic_degree academicDegree = new academic_degree() { id = "3", name = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras consectetur sed tellus at tincidundsdss", level = 3 };
             mockSet.Setup(m => m.Find(It.IsAny<string>())).Returns(academicDegree);
 
             // Act
@@ -284,6 +285,30 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Assert
             Assert.IsNotNull(result);
+        }
+
+        [TestMethod()]
+        public void Edit_Academic_Degree_Data_Should_Load_Correctly_Test()
+        {
+            // Arrange
+            AcademicDegreeController controller = new AcademicDegreeController();
+            academic_degree academicDegree = new academic_degree() { id = "3", name = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras consectetur sed tellus at tincidundsdss", level = 3 };
+
+            // Act
+            ViewResult result;
+            using (scope)
+            {
+                controller.Create(academicDegree);
+                result = controller.Edit(academicDegree.id) as ViewResult;
+            }
+            academic_degree model = result.Model as academic_degree;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(model);
+            Assert.AreEqual(model.id, academicDegree.id);
+            Assert.AreEqual(model.name, academicDegree.name);
+            Assert.AreEqual(model.level, academicDegree.level);
         }
     }
 }
