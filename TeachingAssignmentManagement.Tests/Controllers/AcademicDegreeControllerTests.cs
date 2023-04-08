@@ -271,7 +271,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Edit_Academic_Degree_View_Test()
         {
             // Arrange
-            AcademicDegreeController controller = new AcademicDegreeController();
+            AcademicDegreeController controller = new AcademicDegreeController(unitOfWork);
             academic_degree academicDegree = new academic_degree() { id = "3", name = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras consectetur sed tellus at tincidundsdss", level = 3 };
             mockSet.Setup(m => m.Find(It.IsAny<string>())).Returns(academicDegree);
 
@@ -315,7 +315,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Edit_Academic_Degree_Mock_Test()
         {
             // Arrange
-            AcademicDegreeController controller = new AcademicDegreeController();
+            AcademicDegreeController controller = new AcademicDegreeController(unitOfWork);
             academic_degree academicDegree = new academic_degree() { id = "3", name = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras consectetur sed tellus at tincidundsdss", level = 3 };
 
             // Act
@@ -324,6 +324,22 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Assert
             Assert.AreEqual(true, jsonCollection.success);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod()]
+        public void Delete_Academic_Degree_Test()
+        {
+            // Arrange
+            AcademicDegreeController controller = new AcademicDegreeController(unitOfWork);
+
+            // Act
+            JsonResult result = controller.Delete(listAcademicDegree.First().id) as JsonResult;
+            dynamic jsonCollection = result.Data;
+
+            // Assert
+            Assert.IsNotNull(jsonCollection);
+            mockSet.Verify(r => r.Remove(It.IsAny<academic_degree>()));
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
     }
