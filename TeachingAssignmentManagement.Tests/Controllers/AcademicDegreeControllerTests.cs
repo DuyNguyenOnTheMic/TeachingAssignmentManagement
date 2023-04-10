@@ -6,7 +6,6 @@ using System.Linq;
 using System.Transactions;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
-using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
 
 namespace TeachingAssignmentManagement.Controllers.Tests
