@@ -328,6 +328,31 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
+        public void Edit_Academic_Degree_Data_Test()
+        {
+            // Arrange
+            AcademicDegreeController controller = new AcademicDegreeController();
+            unitOfWork = new UnitOfWork(new CP25Team03Entities());
+            academic_degree academicDegree = new academic_degree() { id = "test", name = "test nha", level = 3 };
+
+            // Act
+            academic_degree academicDegreeEdited;
+            using (scope)
+            {
+                controller.Create(academicDegree);
+                academicDegree.name = "testName";
+                academicDegree.level = 1;
+                controller.Edit(academicDegree);
+                academicDegreeEdited = unitOfWork.AcademicDegreeRepository.GetAcademicDegreeByID(academicDegree.id);
+            }
+
+            // Assert
+            Assert.AreEqual(academicDegreeEdited.id, "test");
+            Assert.AreEqual(academicDegreeEdited.name, "testName");
+            Assert.AreEqual(academicDegreeEdited.level, 1);
+        }
+
+        [TestMethod()]
         public void Delete_Academic_Degree_Test()
         {
             // Arrange
