@@ -336,5 +336,21 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(model.id, academicDegreeRank.id);
             Assert.AreEqual(model.academic_degree_id, academicDegreeRank.academic_degree_id);
         }
+
+        [TestMethod()]
+        public void Edit_Academic_Degree_Rank_Mock_Test()
+        {
+            // Arrange
+            AcademicDegreeRankController controller = new AcademicDegreeRankController(unitOfWork);
+            academic_degree_rank academicDegreeRank = new academic_degree_rank() { id = "TS1", academic_degree_id = "TS" };
+
+            // Act
+            JsonResult result = controller.Edit(academicDegreeRank) as JsonResult;
+            dynamic jsonCollection = result.Data;
+
+            // Assert
+            Assert.AreEqual(true, jsonCollection.success);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
     }
 }
