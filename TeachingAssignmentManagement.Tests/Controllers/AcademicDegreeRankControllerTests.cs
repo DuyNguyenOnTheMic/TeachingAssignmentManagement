@@ -228,5 +228,26 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             mockSetAcademicDegreeRank.Verify(r => r.Add(academicDegreeRank), Times.Once);
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
+
+        [TestMethod()]
+        public void Create_Shoud_Be_Failed_When_Academic_Degree_Rank_Id_Is_Null_Test()
+        {
+            // Arrange
+            AcademicDegreeRankController controller = new AcademicDegreeRankController();
+            academic_degree_rank academicDegreeRank = new academic_degree_rank() { id = null, academic_degree_id = "TS" };
+
+            // Act
+            JsonResult result;
+            dynamic jsonCollection;
+            using (scope)
+            {
+                controller.Create(academicDegreeRank);
+                result = controller.Create(academicDegreeRank) as JsonResult;
+                jsonCollection = result.Data;
+            }
+
+            // Assert
+            Assert.AreEqual(true, jsonCollection.error);
+        }
     }
 }
