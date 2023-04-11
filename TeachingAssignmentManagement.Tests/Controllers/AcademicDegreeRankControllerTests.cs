@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Transactions;
+using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Models;
 
@@ -44,9 +45,16 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void AcademicDegreeRankControllerTest()
+        public void Index_Test()
         {
+            // Arrange
+            AcademicDegreeRankController controller = new AcademicDegreeRankController();
 
+            // Act
+            ViewResult result = controller.Index() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
         }
     }
 }
