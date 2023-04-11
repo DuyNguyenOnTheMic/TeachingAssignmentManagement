@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -256,6 +257,27 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Arrange
             AcademicDegreeRankController controller = new AcademicDegreeRankController();
             academic_degree_rank academicDegreeRank = new academic_degree_rank() { id = "TS1", academic_degree_id = null };
+
+            // Act
+            JsonResult result;
+            dynamic jsonCollection;
+            using (scope)
+            {
+                controller.Create(academicDegreeRank);
+                result = controller.Create(academicDegreeRank) as JsonResult;
+                jsonCollection = result.Data;
+            }
+
+            // Assert
+            Assert.AreEqual(true, jsonCollection.error);
+        }
+
+        [TestMethod()]
+        public void Create_Shoud_Be_Failed_When_Academic_Degree_Id_Is_Not_Exists_Test()
+        {
+            // Arrange
+            AcademicDegreeRankController controller = new AcademicDegreeRankController();
+            academic_degree_rank academicDegreeRank = new academic_degree_rank() { id = "TS1", academic_degree_id = Guid.NewGuid().ToString() };
 
             // Act
             JsonResult result;
