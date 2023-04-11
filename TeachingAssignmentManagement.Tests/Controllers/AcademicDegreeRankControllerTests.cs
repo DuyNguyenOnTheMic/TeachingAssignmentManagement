@@ -292,5 +292,25 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.AreEqual(true, jsonCollection.error);
         }
+
+        [TestMethod()]
+        public void Edit_Academic_Degree_Rank_View_Test()
+        {
+            // Arrange
+            AcademicDegreeRankController controller = new AcademicDegreeRankController(unitOfWork);
+            academic_degree_rank academicDegreeRank = new academic_degree_rank() { id = "TS1", academic_degree_id = "TS" };
+            mockSetAcademicDegreeRank.Setup(m => m.Find(It.IsAny<string>())).Returns(academicDegreeRank);
+
+            // Act
+            ViewResult result;
+            using (scope)
+            {
+                controller.Create(academicDegreeRank);
+                result = controller.Edit(academicDegreeRank.id) as ViewResult;
+            }
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
     }
 }
