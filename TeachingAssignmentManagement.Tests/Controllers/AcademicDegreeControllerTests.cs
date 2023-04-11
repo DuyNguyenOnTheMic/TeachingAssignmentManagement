@@ -23,8 +23,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Initialize()
         {
             listAcademicDegree = new List<academic_degree> {
-                new academic_degree() { id = "1", name = "CN", level = 5 },
-                new academic_degree() { id = "2", name = "THS", level = 4 }
+                new academic_degree() { id = "CN", name = "Cử nhân", level = 5 },
+                new academic_degree() { id = "THS", name = "Thạc sĩ", level = 4 }
             }.AsQueryable();
             mockSet = new Mock<DbSet<academic_degree>>();
             mockContext = new Mock<CP25Team03Entities>();

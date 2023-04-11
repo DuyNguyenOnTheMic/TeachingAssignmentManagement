@@ -13,7 +13,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
     [TestClass()]
     public class AcademicDegreeRankControllerTests
     {
-        private IQueryable<academic_degree_rank> listAcademicDegree;
+        private IQueryable<academic_degree> listAcademicDegree;
+        private IQueryable<academic_degree_rank> listAcademicDegreeRank;
         private Mock<DbSet<academic_degree_rank>> mockSet;
         private Mock<CP25Team03Entities> mockContext;
         private UnitOfWork unitOfWork;
@@ -22,18 +23,22 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         [TestInitialize()]
         public void Initialize()
         {
-            listAcademicDegree = new List<academic_degree_rank> {
-                new academic_degree_rank() { id = "1", academic_degree_id = "CN" },
-                new academic_degree_rank() { id = "2", academic_degree_id = "THS" }
+            listAcademicDegree = new List<academic_degree> {
+                new academic_degree() { id = "CN", name = "Cử nhân", level = 5 },
+                new academic_degree() { id = "THS", name = "Thạc sĩ", level = 4 }
+            }.AsQueryable();
+            listAcademicDegreeRank = new List<academic_degree_rank> {
+                new academic_degree_rank() { id = "1", academic_degree = listAcademicDegree.First() },
+                new academic_degree_rank() { id = "2", academic_degree = listAcademicDegree.Last() }
             }.AsQueryable();
             mockSet = new Mock<DbSet<academic_degree_rank>>();
             mockContext = new Mock<CP25Team03Entities>();
             unitOfWork = new UnitOfWork(mockContext.Object);
             scope = new TransactionScope();
-            mockSet.As<IQueryable<academic_degree_rank>>().Setup(m => m.Provider).Returns(listAcademicDegree.Provider);
-            mockSet.As<IQueryable<academic_degree_rank>>().Setup(m => m.Expression).Returns(listAcademicDegree.Expression);
-            mockSet.As<IQueryable<academic_degree_rank>>().Setup(m => m.ElementType).Returns(listAcademicDegree.ElementType);
-            mockSet.As<IQueryable<academic_degree_rank>>().Setup(m => m.GetEnumerator()).Returns(listAcademicDegree.GetEnumerator());
+            mockSet.As<IQueryable<academic_degree_rank>>().Setup(m => m.Provider).Returns(listAcademicDegreeRank.Provider);
+            mockSet.As<IQueryable<academic_degree_rank>>().Setup(m => m.Expression).Returns(listAcademicDegreeRank.Expression);
+            mockSet.As<IQueryable<academic_degree_rank>>().Setup(m => m.ElementType).Returns(listAcademicDegreeRank.ElementType);
+            mockSet.As<IQueryable<academic_degree_rank>>().Setup(m => m.GetEnumerator()).Returns(listAcademicDegreeRank.GetEnumerator());
             mockContext.Setup(c => c.academic_degree_rank).Returns(() => mockSet.Object);
         }
 
@@ -55,6 +60,25 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Assert
             Assert.IsNotNull(result);
+        }
+
+        [TestMethod()]
+        public void Get_Academic_Degree_Rank_Json_Data_Not_Null_Test()
+        {
+            // Arrange
+            AcademicDegreeRankController controller = new AcademicDegreeRankController(unitOfWork);
+
+            // Act
+            JsonResult actionResult = controller.GetData();
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            foreach (dynamic json in jsonCollection)
+            {
+                Assert.IsNotNull(json.id);
+                Assert.IsNotNull(json.group);
+            }
         }
     }
 }
