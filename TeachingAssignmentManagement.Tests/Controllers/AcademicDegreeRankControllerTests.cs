@@ -28,8 +28,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 new academic_degree() { id = "THS", name = "Thạc sĩ", level = 4 }
             }.AsQueryable();
             listAcademicDegreeRank = new List<academic_degree_rank> {
-                new academic_degree_rank() { id = "1", academic_degree = listAcademicDegree.First() },
-                new academic_degree_rank() { id = "2", academic_degree = listAcademicDegree.Last() }
+                new academic_degree_rank() { id = "CN1", academic_degree = listAcademicDegree.First() },
+                new academic_degree_rank() { id = "THS1", academic_degree = listAcademicDegree.Last() }
             }.AsQueryable();
             mockSet = new Mock<DbSet<academic_degree_rank>>();
             mockContext = new Mock<CP25Team03Entities>();
@@ -192,6 +192,34 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.IsNotNull(jsonCollection);
             Assert.AreEqual(listAcademicDegree.Count(), jsonCollection.Count);
+        }
+
+        [TestMethod()]
+        public void Create_View_Test()
+        {
+            // Arrange
+            AcademicDegreeRankController controller = new AcademicDegreeRankController(unitOfWork);
+
+            // Act
+            ViewResult result = controller.Create() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod()]
+        public void Create_Academic_Degree_Rank_Test()
+        {
+            // Arrange
+            AcademicDegreeRankController controller = new AcademicDegreeRankController(unitOfWork);
+            academic_degree_rank academicDegreeRank = new academic_degree_rank() { id = "TS1", academic_degree_id = "TS" };
+
+            // Act
+            controller.Create(academicDegreeRank);
+
+            // Assert
+            mockSet.Verify(r => r.Add(academicDegreeRank), Times.Once);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
     }
 }
