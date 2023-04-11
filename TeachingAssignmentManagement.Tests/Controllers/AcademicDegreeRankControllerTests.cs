@@ -154,5 +154,29 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert                
             Assert.IsNotNull(jsonCollection[0]);
         }
+
+        [TestMethod()]
+        public void Academic_Degree_Rank_JSon_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            AcademicDegreeRankController controller = new AcademicDegreeRankController(unitOfWork);
+
+            // Act
+            JsonResult actionResult = controller.GetData();
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            for (int i = 0; i < jsonCollection.Count; i++)
+            {
+
+                dynamic json = jsonCollection[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.id,
+                   "JSON record does not contain \"id\" required property.");
+                Assert.IsNotNull(json.group,
+                    "JSON record does not contain \"group\" required property.");
+            }
+        }
     }
 }
