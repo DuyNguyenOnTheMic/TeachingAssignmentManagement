@@ -15,7 +15,8 @@ namespace TeachingAssignmentManagement.Controllers.Tests
     {
         private IQueryable<academic_degree> listAcademicDegree;
         private IQueryable<academic_degree_rank> listAcademicDegreeRank;
-        private Mock<DbSet<academic_degree_rank>> mockSet;
+        private Mock<DbSet<academic_degree>> mockSetAcademicDegree;
+        private Mock<DbSet<academic_degree_rank>> mockSetAcademicDegreeRank;
         private Mock<CP25Team03Entities> mockContext;
         private UnitOfWork unitOfWork;
         private TransactionScope scope;
@@ -31,15 +32,21 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 new academic_degree_rank() { id = "CN1", academic_degree = listAcademicDegree.First() },
                 new academic_degree_rank() { id = "THS1", academic_degree = listAcademicDegree.Last() }
             }.AsQueryable();
-            mockSet = new Mock<DbSet<academic_degree_rank>>();
+            mockSetAcademicDegree = new Mock<DbSet<academic_degree>>();
+            mockSetAcademicDegreeRank = new Mock<DbSet<academic_degree_rank>>();
             mockContext = new Mock<CP25Team03Entities>();
             unitOfWork = new UnitOfWork(mockContext.Object);
             scope = new TransactionScope();
-            mockSet.As<IQueryable<academic_degree_rank>>().Setup(m => m.Provider).Returns(listAcademicDegreeRank.Provider);
-            mockSet.As<IQueryable<academic_degree_rank>>().Setup(m => m.Expression).Returns(listAcademicDegreeRank.Expression);
-            mockSet.As<IQueryable<academic_degree_rank>>().Setup(m => m.ElementType).Returns(listAcademicDegreeRank.ElementType);
-            mockSet.As<IQueryable<academic_degree_rank>>().Setup(m => m.GetEnumerator()).Returns(listAcademicDegreeRank.GetEnumerator());
-            mockContext.Setup(c => c.academic_degree_rank).Returns(() => mockSet.Object);
+            mockSetAcademicDegree.As<IQueryable<academic_degree>>().Setup(m => m.Provider).Returns(listAcademicDegree.Provider);
+            mockSetAcademicDegree.As<IQueryable<academic_degree>>().Setup(m => m.Expression).Returns(listAcademicDegree.Expression);
+            mockSetAcademicDegree.As<IQueryable<academic_degree>>().Setup(m => m.ElementType).Returns(listAcademicDegree.ElementType);
+            mockSetAcademicDegree.As<IQueryable<academic_degree>>().Setup(m => m.GetEnumerator()).Returns(listAcademicDegree.GetEnumerator());
+            mockSetAcademicDegreeRank.As<IQueryable<academic_degree_rank>>().Setup(m => m.Provider).Returns(listAcademicDegreeRank.Provider);
+            mockSetAcademicDegreeRank.As<IQueryable<academic_degree_rank>>().Setup(m => m.Expression).Returns(listAcademicDegreeRank.Expression);
+            mockSetAcademicDegreeRank.As<IQueryable<academic_degree_rank>>().Setup(m => m.ElementType).Returns(listAcademicDegreeRank.ElementType);
+            mockSetAcademicDegreeRank.As<IQueryable<academic_degree_rank>>().Setup(m => m.GetEnumerator()).Returns(listAcademicDegreeRank.GetEnumerator());
+            mockContext.Setup(c => c.academic_degree).Returns(() => mockSetAcademicDegree.Object);
+            mockContext.Setup(c => c.academic_degree_rank).Returns(() => mockSetAcademicDegreeRank.Object);
         }
 
         [TestCleanup()]
@@ -218,7 +225,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             controller.Create(academicDegreeRank);
 
             // Assert
-            mockSet.Verify(r => r.Add(academicDegreeRank), Times.Once);
+            mockSetAcademicDegreeRank.Verify(r => r.Add(academicDegreeRank), Times.Once);
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
     }
