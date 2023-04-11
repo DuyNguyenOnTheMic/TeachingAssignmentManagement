@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Sockets;
 using System.Transactions;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
@@ -350,6 +351,22 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Assert
             Assert.AreEqual(true, jsonCollection.success);
+            mockContext.Verify(r => r.SaveChanges(), Times.Once);
+        }
+
+        [TestMethod()]
+        public void Delete_Academic_Degree_Rank_Test()
+        {
+            // Arrange
+            AcademicDegreeRankController controller = new AcademicDegreeRankController(unitOfWork);
+
+            // Act
+            JsonResult result = controller.Delete(listAcademicDegreeRank.First().id) as JsonResult;
+            dynamic jsonCollection = result.Data;
+
+            // Assert
+            Assert.IsNotNull(jsonCollection);
+            mockSetAcademicDegreeRank.Verify(r => r.Remove(It.IsAny<academic_degree_rank>()));
             mockContext.Verify(r => r.SaveChanges(), Times.Once);
         }
     }
