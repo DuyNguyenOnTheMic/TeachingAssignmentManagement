@@ -80,5 +80,25 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.IsNotNull(json.group);
             }
         }
+
+        [TestMethod()]
+        public void Get_Academic_Degree_Rank_Json_Data_Is_Correct_Test()
+        {
+            // Arrange
+            AcademicDegreeRankController controller = new AcademicDegreeRankController(unitOfWork);
+
+            // Act
+            JsonResult actionResult = controller.GetData();
+            dynamic jsonCollection = actionResult.Data;
+            List<academic_degree_rank> academicDegreeRankList = listAcademicDegreeRank.ToList();
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            for (int i = 0; i < listAcademicDegree.Count(); i++)
+            {
+                Assert.AreEqual(jsonCollection[i].id, academicDegreeRankList[i].id);
+                Assert.AreEqual(jsonCollection[i].group, academicDegreeRankList[i].academic_degree.level + ". " + academicDegreeRankList[i].academic_degree_id + " (" + academicDegreeRankList[i].academic_degree.name + ")");
+            }
+        }
     }
 }
