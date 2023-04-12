@@ -62,8 +62,9 @@ namespace TeachingAssignmentManagement.Controllers
             ViewData["major"] = major;
             if (major != "-1")
             {
-                ViewData["majorAbb"] = unitOfWork.MajorRepository.GetMajorByID(major).abbreviation;
-                ViewData["majorName"] = unitOfWork.MajorRepository.GetMajorByID(major).name;
+                major currentMajor = unitOfWork.MajorRepository.GetMajorByID(major);
+                ViewData["majorAbb"] = currentMajor.abbreviation;
+                ViewData["majorName"] = currentMajor.name;
             }
             else
             {
@@ -264,8 +265,9 @@ namespace TeachingAssignmentManagement.Controllers
             ViewData["major"] = major;
             if (major != "-1")
             {
-                ViewData["majorAbb"] = unitOfWork.MajorRepository.GetMajorByID(major).abbreviation;
-                ViewData["majorName"] = unitOfWork.MajorRepository.GetMajorByID(major).name;
+                major currentMajor = unitOfWork.MajorRepository.GetMajorByID(major);
+                ViewData["majorAbb"] = currentMajor.abbreviation;
+                ViewData["majorName"] = currentMajor.name;
             }
             else
             {
