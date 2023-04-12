@@ -106,6 +106,7 @@
     <Compile Include="Controllers\AcademicDegreeRankControllerTests.cs" />
     <Compile Include="Controllers\ErrorControllerTests.cs" />
     <Compile Include="Controllers\MajorControllerTests.cs" />
+    <Compile Include="Controllers\StatisticsControllerTests.cs" />
     <Compile Include="Controllers\TermControllerTests.cs" />
     <Compile Include="Controllers\TimetableControllerTests.cs" />
     <Compile Include="Controllers\UserControllerTests.cs" />
