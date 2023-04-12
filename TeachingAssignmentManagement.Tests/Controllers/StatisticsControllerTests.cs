@@ -185,5 +185,42 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.AreEqual(viewBagResult[i].schoolyear, termList[i].start_year + " - " + termList[i].end_year);
             }
         }
+
+        [TestMethod()]
+        public void Index_View_Should_Load_Major_SelectList_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+
+            // Act
+            ViewResult result = controller.Index() as ViewResult;
+            SelectList majorList = new SelectList(listMajor);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(majorList.Count(), ((IEnumerable<dynamic>)result.ViewBag.major).Count());
+        }
+
+        [TestMethod()]
+        public void Index_View_Should_Load_Major_SelectList_Data_Correctly_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+
+            // Act
+            ViewResult result = controller.Index() as ViewResult;
+            dynamic viewBagResult = result.ViewBag.major.Items;
+            List<major> majorList = listMajor.OrderByDescending(m => m.name.Contains("công nghệ thông tin")).ToList();
+
+            // Assert
+            Assert.IsNotNull(result);
+            for (int i = 0; i < majorList.Count(); i++)
+            {
+                Assert.AreEqual(viewBagResult[i].id, majorList[i].id);
+                Assert.AreEqual(viewBagResult[i].name, majorList[i].name);
+                Assert.AreEqual(viewBagResult[i].abbreviation, majorList[i].abbreviation);
+                Assert.AreEqual(viewBagResult[i].program_type, majorList[i].program_type);
+            }
+        }
     }
 }
