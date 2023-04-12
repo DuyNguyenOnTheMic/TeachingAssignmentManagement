@@ -441,8 +441,6 @@
     <Content Include="app-assets\css\pages\page-profile.min.css" />
     <Content Include="app-assets\css\pages\ui-feather.css" />
     <Content Include="app-assets\css\pages\ui-feather.min.css" />
-    <Content Include="app-assets\css\plugins\charts\chart-apex.css" />
-    <Content Include="app-assets\css\plugins\charts\chart-apex.min.css" />
     <Content Include="app-assets\css\plugins\extensions\ext-component-context-menu.css" />
     <Content Include="app-assets\css\plugins\extensions\ext-component-context-menu.min.css" />
     <Content Include="app-assets\css\plugins\extensions\ext-component-drag-drop.css" />
@@ -824,8 +822,6 @@
     <Content Include="app-assets\js\scripts\cards\card-analytics.min.js" />
     <Content Include="app-assets\js\scripts\cards\card-statistics.js" />
     <Content Include="app-assets\js\scripts\cards\card-statistics.min.js" />
-    <Content Include="app-assets\js\scripts\charts\chart-apex.js" />
-    <Content Include="app-assets\js\scripts\charts\chart-apex.min.js" />
     <Content Include="app-assets\js\scripts\charts\chart-chartjs.js" />
     <Content Include="app-assets\js\scripts\charts\chart-chartjs.min.js" />
     <Content Include="app-assets\js\scripts\components\components-accordion.js" />
@@ -1001,7 +997,6 @@
     <Content Include="app-assets\vendors\css\animate\animate.min.css" />
     <Content Include="app-assets\vendors\css\calendars\fullcalendar.min.css" />
     <Content Include="app-assets\vendors\css\calendars\fullcalendar.print.css" />
-    <Content Include="app-assets\vendors\css\charts\apexcharts.css" />
     <Content Include="app-assets\vendors\css\documentation.css" />
     <Content Include="app-assets\vendors\css\extensions\32px.png" />
     <Content Include="app-assets\vendors\css\extensions\dd-icon\dd-icon.svg" />
