@@ -1055,8 +1055,6 @@
     <Content Include="app-assets\vendors\js\blockui\blockui.min.js" />
     <Content Include="app-assets\vendors\js\bootstrap\bootstrap.min.js" />
     <Content Include="app-assets\vendors\js\calendar\fullcalendar.min.js" />
-    <Content Include="app-assets\vendors\js\charts\apexcharts.js" />
-    <Content Include="app-assets\vendors\js\charts\apexcharts.min.js" />
     <Content Include="app-assets\vendors\js\charts\chart.min.js" />
     <Content Include="app-assets\vendors\js\charts\chartjs-plugin-datalabels.min.js" />
     <Content Include="app-assets\vendors\js\extensions\dragula.min.js" />
