@@ -46,6 +46,14 @@ namespace TeachingAssignmentManagement.Controllers
         }
 
         //
+        // GET: /Account/LoginRedirect
+        [AllowAnonymous]
+        public ActionResult LoginRedirect()
+        {
+            return RedirectToAction("Login");
+        }
+
+        //
         // POST: /Account/SignIn
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
