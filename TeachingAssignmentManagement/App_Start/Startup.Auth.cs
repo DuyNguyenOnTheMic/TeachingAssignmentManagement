@@ -20,17 +20,13 @@ namespace TeachingAssignmentManagement
         {
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
-
             app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
-
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
-
             app.UseOpenIdConnectAuthentication(
                 new OpenIdConnectAuthenticationOptions
                 {
                     ClientId = clientId,
                     Authority = authority,
-
                     Notifications = new OpenIdConnectAuthenticationNotifications()
                     {
                         SecurityTokenValidated = (context) =>
@@ -41,9 +37,7 @@ namespace TeachingAssignmentManagement
                         }
                     }
                 });
-
             app.MapSignalR();
-
         }
 
         private static string EnsureTrailingSlash(string value)
@@ -52,13 +46,7 @@ namespace TeachingAssignmentManagement
             {
                 value = string.Empty;
             }
-
-            if (!value.EndsWith("/", StringComparison.Ordinal))
-            {
-                return value + "/";
-            }
-
-            return value;
+            return !value.EndsWith("/", StringComparison.Ordinal) ? value + "/" : value;
         }
     }
 }
