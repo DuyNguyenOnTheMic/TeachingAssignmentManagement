@@ -151,5 +151,39 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.AreEqual(viewBagResult[i].start_year, termList[i].start_year);
             }
         }
+
+        [TestMethod()]
+        public void Index_View_Should_Load_Year_SelectList_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+
+            // Act
+            ViewResult result = controller.Index() as ViewResult;
+            SelectList termList = new SelectList(listTerm);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(termList.Count(), ((IEnumerable<dynamic>)result.ViewBag.year).Count());
+        }
+
+        [TestMethod()]
+        public void Index_View_Should_Load_year_SelectList_Data_Correctly_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+
+            // Act
+            ViewResult result = controller.Index() as ViewResult;
+            dynamic viewBagResult = result.ViewBag.year.Items;
+            List<term> termList = listTerm.OrderByDescending(t => t.id).ToList();
+
+            // Assert
+            Assert.IsNotNull(result);
+            for (int i = 0; i < termList.Count(); i++)
+            {
+                Assert.AreEqual(viewBagResult[i].schoolyear, termList[i].start_year + " - " + termList[i].end_year);
+            }
+        }
     }
 }
