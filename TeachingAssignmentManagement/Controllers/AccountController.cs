@@ -89,9 +89,7 @@ namespace TeachingAssignmentManagement.Controllers
                 {
                     context.Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
                     return View("Lockout");
-                }
-
-                if (currentUser.Roles.Count != 0)
+                } else if (currentUser.Roles.Count != 0)
                 {
                     // Add role claim to user
                     System.Collections.Generic.IList<string> currentRole = await UserManager.GetRolesAsync(currentUser.Id);
