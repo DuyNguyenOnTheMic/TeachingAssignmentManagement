@@ -7,6 +7,7 @@ using System;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
+using System.Web.Mvc;
 
 namespace TeachingAssignmentManagement.Controllers.Tests
 {
@@ -101,6 +102,54 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void TestCleanup()
         {
             unitOfWork.Dispose();
+        }
+
+        [TestMethod()]
+        public void Index_View_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController();
+
+            // Act
+            ViewResult result = controller.Index() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod()]
+        public void Index_View_Should_Load_Term_SelectList_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+
+            // Act
+            ViewResult result = controller.Index() as ViewResult;
+            SelectList termList = new SelectList(listTerm);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(termList.Count(), ((IEnumerable<dynamic>)result.ViewBag.term).Count());
+        }
+
+        [TestMethod()]
+        public void Index_View_Should_Load_Term_SelectList_Data_Correctly_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+
+            // Act
+            ViewResult result = controller.Index() as ViewResult;
+            dynamic viewBagResult = result.ViewBag.term.Items;
+            List<term> termList = listTerm.OrderByDescending(t => t.id).ToList();
+
+            // Assert
+            Assert.IsNotNull(result);
+            for (int i = 0; i < termList.Count(); i++)
+            {
+                Assert.AreEqual(viewBagResult[i].id, termList[i].id);
+                Assert.AreEqual(viewBagResult[i].start_year, termList[i].start_year);
+            }
         }
     }
 }
