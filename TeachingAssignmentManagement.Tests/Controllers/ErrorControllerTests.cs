@@ -9,8 +9,13 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         [TestMethod()]
         public void Not_Found_View_Test()
         {
+            // Arrange
             ErrorController controller = new ErrorController();
+
+            // Act
             ViewResult result = controller.NotFound() as ViewResult;
+
+            // Assert
             Assert.AreEqual("NotFound", result.ViewName);
         }
     }

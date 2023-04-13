@@ -222,5 +222,41 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.AreEqual(viewBagResult[i].program_type, majorList[i].program_type);
             }
         }
+
+        [TestMethod()]
+        public void Get_Chart_View_Not_Null_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController();
+            bool isLesson = false;
+            string type = "term";
+            string value = termId.ToString();
+            string major = majorId;
+            string lecturerType = MyConstants.VisitingLecturerType;
+
+            // Act
+            PartialViewResult result = controller.GetChart(isLesson, type, value, major, lecturerType) as PartialViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod()]
+        public void Get_Chart_View_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController();
+            bool isLesson = false;
+            string type = "term";
+            string value = termId.ToString();
+            string major = majorId;
+            string lecturerType = MyConstants.VisitingLecturerType;
+
+            // Act
+            PartialViewResult result = controller.GetChart(isLesson, type, value, major, lecturerType) as PartialViewResult;
+
+            // Assert
+            Assert.AreEqual("_Chart", result.ViewName);
+        }
     }
 }
