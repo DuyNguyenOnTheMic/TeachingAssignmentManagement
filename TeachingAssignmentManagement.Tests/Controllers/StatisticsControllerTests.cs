@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -257,6 +258,36 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Assert
             Assert.AreEqual("_Chart", result.ViewName);
+        }
+
+        [TestMethod()]
+        public void Get_Chart_View_Should_Load_View_Data_Correctly_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            bool isLesson = false;
+            string type = "term";
+            string value = termId.ToString();
+            string major = majorId;
+            string lecturerType = MyConstants.VisitingLecturerType;
+            mockSetMajor.Setup(m => m.Find(It.IsAny<string>())).Returns(listMajor.First());
+
+            // Act
+            PartialViewResult result = controller.GetChart(isLesson, type, value, major, lecturerType) as PartialViewResult;
+            dynamic viewData = result.ViewBag;
+            bool isLessonViewdata = viewData.isLesson;
+            string typeViewData = viewData.type;
+            string valueViewData = viewData.value;
+            string majorViewData = viewData.major;
+            string lecturerTypeViewData = viewData.lecturerType;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(isLesson, isLessonViewdata);
+            Assert.AreEqual(type, typeViewData);
+            Assert.AreEqual(value, valueViewData);
+            Assert.AreEqual(major, majorViewData);
+            Assert.AreEqual(lecturerType, lecturerTypeViewData);
         }
     }
 }
