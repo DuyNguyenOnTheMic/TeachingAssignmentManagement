@@ -14,7 +14,7 @@
                         <div class="card">
                             <h3 class="mt-3 ms-3">Chào <span class="text-primary">@User.Identity.Name</span>,<br />Chúc bạn có một ngày tốt lành <i class="feather feather-heart-on"></i></h3>
                             <div class="card-body">
-                                <img class="mx-auto d-block w-50" alt="Welcome" src="~/assets/images/img_welcome.svg" />
+                                <img class="mx-auto d-block w-45" alt="Welcome" src="~/assets/images/img_welcome.svg" />
                             </div>
                         </div>
                     </div>
@@ -24,3 +24,11 @@
         </div>
     </div>
 </div>
+
+@section styles {
+    <style type="text/css">
+        .w-45 {
+            width: 45% !important;
+        }
+    </style>
+}
