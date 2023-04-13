@@ -37,7 +37,7 @@ if (type == yearSelect.attr('id')) {
 } else {
     data = { isLesson, 'termId': value, majorId };
     titleText = 'Thống kê số giờ quy đổi HK' + value + ' ngành ' + majorName;
-    fileName = 'ThongKeSoGio_HK' + value + '_Nganh_' + majorAbb;
+    fileName = 'ThongKeSoGioQuyDoi_HK' + value + '_Nganh_' + majorAbb;
     url += 'GetTermRemunerationData';
 }
 
