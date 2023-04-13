@@ -1,14 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web.Mvc;
-using TeachingAssignmentManagement.Controllers;
 
-namespace TeachingAssignmentManagement.Tests.Controllers
+namespace TeachingAssignmentManagement.Controllers.Tests
 {
     [TestClass()]
     public class HomeControllerTest
     {
         [TestMethod()]
-        public void Index()
+        public void Home_View_Index_Test()
         {
             // Arrange
             HomeController controller = new HomeController();
