@@ -339,7 +339,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_Term_Json_Data_Not_Null_Test()
+        public void Get_Term_And_Major_Statistics_Json_Data_Not_Null_Test()
         {
             // Arrange
             StatisticsController controller = new StatisticsController(unitOfWork);
@@ -365,7 +365,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_Term_Json_Data_Not_False_Test()
+        public void Get_Term_And_Major_Statistics_Json_Data_Not_False_Test()
         {
             // Arrange
             StatisticsController controller = new StatisticsController(unitOfWork);
@@ -397,7 +397,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Term_Json_Data_Should_Convert_To_IEnumerable_Test()
+        public void Term_And_Major_Statistics_Json_Data_Should_Convert_To_IEnumerable_Test()
         {
             // Arrange
             StatisticsController controller = new StatisticsController(unitOfWork);
@@ -417,7 +417,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Term_Json_Data_Index_at_0_Should_Not_Be_Null_Test()
+        public void Term_And_Major_Statistics_Json_Data_Index_at_0_Should_Not_Be_Null_Test()
         {
             // Arrange
             StatisticsController controller = new StatisticsController(unitOfWork);
@@ -432,7 +432,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Term_JSon_Data_Should_Be_Indexable_Test()
+        public void Term_And_Major_Statistics_JSon_Data_Should_Be_Indexable_Test()
         {
             // Arrange
             StatisticsController controller = new StatisticsController(unitOfWork);
@@ -467,7 +467,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Get_Term_List_Should_Be_Not_Null_And_Equal_Test()
+        public void Get_Term_And_Major_Statistics_List_Should_Be_Not_Null_And_Equal_Test()
         {
             // Arrange
             StatisticsController controller = new StatisticsController(unitOfWork);
@@ -480,6 +480,27 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.IsNotNull(jsonCollection);
             Assert.AreEqual(listMajor.Count(), jsonCollection.Count);
+        }
+
+        [TestMethod()]
+        public void Get_Term_And_Major_Statistics_Should_Order_By_Largest_To_Smallest_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            bool isLesson = false;
+            int previousSum = 0;
+
+            // Act
+            JsonResult actionResult = controller.GetTermData(isLesson, termId, majorId, MyConstants.VisitingLecturerType);
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            foreach (dynamic json in jsonCollection)
+            {
+                int currentSum = json.sum;
+                Assert.IsTrue(currentSum >= previousSum);
+                previousSum = json.sum;
+            }
         }
     }
 }
