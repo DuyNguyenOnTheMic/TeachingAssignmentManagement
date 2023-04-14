@@ -337,5 +337,31 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual("TatCa", majorAbbViewData);
             Assert.AreEqual("Tất cả", majorNameViewData);
         }
+
+        [TestMethod()]
+        public void Get_Term_Json_Data_Not_Null_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            bool isLesson = false;
+
+            // Act
+            JsonResult actionResult = controller.GetTermData(isLesson, termId, majorId, MyConstants.VisitingLecturerType);
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            foreach (dynamic json in jsonCollection)
+            {
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.Key);
+                Assert.IsNotNull(json.staff_id);
+                Assert.IsNotNull(json.full_name);
+                Assert.IsNotNull(json.subject_count);
+                Assert.IsNotNull(json.class_count);
+                Assert.IsNotNull(json.sum);
+                Assert.IsNotNull(json.lecturer_type);
+            }
+        }
     }
 }
