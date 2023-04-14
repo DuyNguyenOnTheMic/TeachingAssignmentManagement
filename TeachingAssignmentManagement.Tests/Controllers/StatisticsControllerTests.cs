@@ -288,5 +288,30 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(major, majorViewData);
             Assert.AreEqual(lecturerType, lecturerTypeViewData);
         }
+
+        [TestMethod()]
+        public void Get_Chart_View_Should_Load_View_Data_About_Major_Correctly_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            bool isLesson = false;
+            string type = "term";
+            string value = termId.ToString();
+            string major = majorId;
+            string lecturerType = MyConstants.VisitingLecturerType;
+            major testMajor = listMajor.First();
+            mockSetMajor.Setup(m => m.Find(It.IsAny<string>())).Returns(testMajor);
+
+            // Act
+            PartialViewResult result = controller.GetChart(isLesson, type, value, major, lecturerType) as PartialViewResult;
+            dynamic viewData = result.ViewBag;
+            string majorAbbViewData = viewData.majorAbb;
+            string majorNameViewData = viewData.majorName;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(testMajor.abbreviation, majorAbbViewData);
+            Assert.AreEqual(testMajor.name, majorNameViewData);
+        }
     }
 }
