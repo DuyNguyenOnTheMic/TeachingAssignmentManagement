@@ -475,11 +475,11 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Act
             JsonResult actionResult = controller.GetTermData(isLesson, termId, majorId, MyConstants.VisitingLecturerType);
-            dynamic jsonCollection = actionResult.Data;
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term_id == termId && c.major_id == majorId && c.lecturer.type == MyConstants.VisitingLecturerType).GroupBy(c => c.lecturer_id);
 
             // Assert
-            Assert.IsNotNull(jsonCollection);
-            Assert.AreEqual(listMajor.Count(), jsonCollection.Count);
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), actionResult.Count);
         }
 
         [TestMethod()]
