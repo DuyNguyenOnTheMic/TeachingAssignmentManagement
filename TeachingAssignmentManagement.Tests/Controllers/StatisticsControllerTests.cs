@@ -313,5 +313,29 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             Assert.AreEqual(testMajor.abbreviation, majorAbbViewData);
             Assert.AreEqual(testMajor.name, majorNameViewData);
         }
+
+        [TestMethod()]
+        public void Get_Chart_View_Should_Load_View_Data_About_All_Majors_Correctly_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            bool isLesson = false;
+            string type = "term";
+            string value = termId.ToString();
+            string major = "-1";
+            string lecturerType = MyConstants.VisitingLecturerType;
+            mockSetMajor.Setup(m => m.Find(It.IsAny<string>())).Returns(listMajor.First());
+
+            // Act
+            PartialViewResult result = controller.GetChart(isLesson, type, value, major, lecturerType) as PartialViewResult;
+            dynamic viewData = result.ViewBag;
+            string majorAbbViewData = viewData.majorAbb;
+            string majorNameViewData = viewData.majorName;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("TatCa", majorAbbViewData);
+            Assert.AreEqual("Tất cả", majorNameViewData);
+        }
     }
 }
