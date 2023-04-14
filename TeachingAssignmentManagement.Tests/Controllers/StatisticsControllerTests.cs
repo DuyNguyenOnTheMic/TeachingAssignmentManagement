@@ -465,5 +465,21 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                     "JSON record does not contain \"lecturer_type\" required property.");
             }
         }
+
+        [TestMethod()]
+        public void Get_Term_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            bool isLesson = false;
+
+            // Act
+            JsonResult actionResult = controller.GetTermData(isLesson, termId, majorId, MyConstants.VisitingLecturerType);
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            Assert.IsNotNull(jsonCollection);
+            Assert.AreEqual(listMajor.Count(), jsonCollection.Count);
+        }
     }
 }
