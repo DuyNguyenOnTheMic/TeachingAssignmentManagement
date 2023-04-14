@@ -415,5 +415,20 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.IsTrue(count > 0);
         }
+
+        [TestMethod()]
+        public void Term_Json_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            bool isLesson = false;
+
+            // Act
+            JsonResult actionResult = controller.GetTermData(isLesson, termId, majorId, MyConstants.VisitingLecturerType);
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert                
+            Assert.IsNotNull(jsonCollection[0]);
+        }
     }
 }
