@@ -363,5 +363,37 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.IsNotNull(json.lecturer_type);
             }
         }
+
+        [TestMethod()]
+        public void Get_Term_Json_Data_Not_False_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            bool isLesson = false;
+
+            // Act
+            JsonResult actionResult = controller.GetTermData(isLesson, termId, majorId, MyConstants.VisitingLecturerType);
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            dynamic jsonCollection = actionResult.Data;
+            foreach (dynamic json in jsonCollection)
+            {
+                Assert.IsNotNull(json.Key,
+                    "JSON record does not contain \"Key\" required property.");
+                Assert.IsNotNull(json.staff_id,
+                    "JSON record does not contain \"staff_id\" required property.");
+                Assert.IsNotNull(json.full_name,
+                    "JSON record does not contain \"full_name\" required property.");
+                Assert.IsNotNull(json.subject_count,
+                    "JSON record does not contain \"subject_count\" required property.");
+                Assert.IsNotNull(json.class_count,
+                    "JSON record does not contain \"class_count\" required property.");
+                Assert.IsNotNull(json.sum,
+                    "JSON record does not contain \"sum\" required property.");
+                Assert.IsNotNull(json.lecturer_type,
+                    "JSON record does not contain \"lecturer_type\" required property.");
+            }
+        }
     }
 }
