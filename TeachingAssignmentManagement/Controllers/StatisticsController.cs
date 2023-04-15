@@ -87,7 +87,7 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
-        public ActionResult GetTermSubjects(int termId, string majorId, string lecturerId)
+        public JsonResult GetTermSubjects(int termId, string majorId, string lecturerId)
         {
             return Json(unitOfWork.ClassSectionRepository.GetTermSubjects(termId, majorId, lecturerId), JsonRequestBehavior.AllowGet);
         }
@@ -104,7 +104,7 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
-        public ActionResult GetYearsubjects(int startYear, int endYear, string majorId, string lecturerId)
+        public JsonResult GetYearsubjects(int startYear, int endYear, string majorId, string lecturerId)
         {
             return Json(unitOfWork.ClassSectionRepository.GetYearSubjects(startYear, endYear, majorId, lecturerId), JsonRequestBehavior.AllowGet);
         }
@@ -279,7 +279,7 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
-        public ActionResult GetTermRemunerationData(bool isLesson, int termId, string majorId)
+        public JsonResult GetTermRemunerationData(bool isLesson, int termId, string majorId)
         {
             // Declare variables
             term term = unitOfWork.TermRepository.GetTermByID(termId);
@@ -304,7 +304,7 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
-        public ActionResult GetYearRemunerationData(bool isLesson, int startYear, int endYear, string majorId)
+        public JsonResult GetYearRemunerationData(bool isLesson, int startYear, int endYear, string majorId)
         {
             // Declare variables
             coefficient coefficient = unitOfWork.CoefficientRepository.GetCoefficientInYear(startYear, endYear);
@@ -328,14 +328,14 @@ namespace TeachingAssignmentManagement.Controllers
 
         [HttpGet]
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
-        public ActionResult GetTermRemunerationSubjects(int termId, string majorId, string lecturerId)
+        public JsonResult GetTermRemunerationSubjects(int termId, string majorId, string lecturerId)
         {
             return GetPersonalTermStatistics(false, termId, majorId, lecturerId);
         }
 
         [HttpGet]
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
-        public ActionResult GetYearRemunerationSubjects(int startYear, int endYear, string majorId, string lecturerId)
+        public JsonResult GetYearRemunerationSubjects(int startYear, int endYear, string majorId, string lecturerId)
         {
             return GetPersonalYearStatistics(false, startYear, endYear, majorId, lecturerId);
         }

@@ -1001,5 +1001,29 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 previousSum = json.sum;
             }
         }
+
+        [TestMethod()]
+        public void Get_Term_And_Major_Subjects_Json_Data_Not_Null_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+
+            // Act
+            JsonResult actionResult = controller.GetTermSubjects(termId, majorId, userId1);
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            foreach (dynamic json in jsonCollection)
+            {
+                Assert.IsNotNull(json.id);
+                Assert.IsNotNull(json.subject_name);
+                Assert.IsNotNull(json.subject_credits);
+                Assert.IsNotNull(json.subject_major);
+                Assert.IsNotNull(json.subject_hours);
+                Assert.IsNotNull(json.theory_count);
+                Assert.IsNotNull(json.practice_count);
+            }
+        }
     }
 }
