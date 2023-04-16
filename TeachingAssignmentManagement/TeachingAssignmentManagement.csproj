@@ -431,8 +431,6 @@
     <Content Include="app-assets\css\plugins\forms\pickers\form-flat-pickr.min.css" />
     <Content Include="app-assets\css\plugins\forms\pickers\form-pickadate.css" />
     <Content Include="app-assets\css\plugins\forms\pickers\form-pickadate.min.css" />
-    <Content Include="app-assets\css\plugins\maps\map-leaflet.css" />
-    <Content Include="app-assets\css\plugins\maps\map-leaflet.min.css" />
     <Content Include="app-assets\css\plugins\ui\coming-soon.css" />
     <Content Include="app-assets\css\plugins\ui\coming-soon.min.css" />
     <Content Include="app-assets\css\themes\dark-layout.css" />
