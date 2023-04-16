@@ -174,12 +174,9 @@ namespace TeachingAssignmentManagement.Controllers
             {
                 Directory.CreateDirectory(path);
             }
-
             string filePath = path + Path.GetFileName(postedFile.FileName);
             postedFile.SaveAs(filePath);
-
             string conString = ConfigurationManager.ConnectionStrings["ExcelConString"].ConnectionString;
-
             DataTable dt = new DataTable();
             conString = string.Format(conString, filePath);
 
