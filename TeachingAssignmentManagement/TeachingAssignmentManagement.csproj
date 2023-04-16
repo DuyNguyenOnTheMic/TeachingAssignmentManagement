@@ -397,6 +397,8 @@
     <Content Include="app-assets\css\core\menu\menu-types\vertical-overlay-menu.min.css" />
     <Content Include="app-assets\css\pages\authentication.css" />
     <Content Include="app-assets\css\pages\authentication.min.css" />
+    <Content Include="app-assets\css\pages\page-misc.css" />
+    <Content Include="app-assets\css\pages\page-misc.min.css" />
     <Content Include="app-assets\css\plugins\extensions\ext-component-context-menu.css" />
     <Content Include="app-assets\css\plugins\extensions\ext-component-context-menu.min.css" />
     <Content Include="app-assets\css\plugins\extensions\ext-component-drag-drop.css" />
