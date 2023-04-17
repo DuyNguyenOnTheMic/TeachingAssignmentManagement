@@ -17,6 +17,7 @@ var dataLoader = $('#data-loader'),
     url = rootUrl + 'Statistics/',
     titleText,
     fileName,
+    detailsFileName,
     data;
 
 // Detect Dark Layout
@@ -33,11 +34,13 @@ if (type == yearSelect.attr('id')) {
     data = { isLesson, startYear, endYear, majorId };
     titleText = 'Thống kê số giờ quy đổi năm học ' + value + ' ngành ' + majorName;
     fileName = 'ThongKeSoGioQuyDoi_NamHoc_' + startYear + '-' + endYear + '_Nganh_' + majorAbb;
+    detailsFileName = 'ThongKeChiTietSoGioQuyDoi_NamHoc_' + startYear + '-' + endYear + '_Nganh_' + majorAbb;
     url += 'GetYearRemunerationData';
 } else {
     data = { isLesson, 'termId': value, majorId };
     titleText = 'Thống kê số giờ quy đổi HK' + value + ' ngành ' + majorName;
     fileName = 'ThongKeSoGioQuyDoi_HK' + value + '_Nganh_' + majorAbb;
+    detailsFileName = 'ThongKeChiTietSoGioQuyDoi_HK' + value + '_Nganh_' + majorAbb;
     url += 'GetTermRemunerationData';
 }
 
@@ -320,7 +323,8 @@ $.ajax({
             });
 
             // populate table for viewing statistics
-            populateDatatable(response);
+            populateStatisticsDatatable(response);
+            populateStatisticsDetailsDatatable(response);
         }
     }
 });
@@ -331,7 +335,7 @@ function hoursSum(items, prop) {
     }, 0);
 };
 
-function populateDatatable(data) {
+function populateStatisticsDatatable(data) {
     var dataTable;
     var exportColumns = isLessonCheck.is(":checked") ? [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17] : [0, 2, 3, 4, 5, 6, 7];
 
@@ -486,6 +490,95 @@ function populateDatatable(data) {
                 }
             });
         }
+    });
+}
+
+function populateStatisticsDetailsDatatable(data) {
+    var dataTable;
+
+    // Populate statistics table
+    dataTable = $('#tblStatisticsDetails').DataTable(
+        {
+            columns: [
+                { 'data': '', defaultContent: '' },
+                { 'data': 'staff_id' },
+                { 'data': 'full_name' },
+                { 'data': 'classes_taught' },
+                { 'data': 'sum' }
+            ],
+            data: data,
+            columnDefs: [
+                {
+                    searchable: false,
+                    orderable: false,
+                    width: '1%',
+                    targets: 0
+                },
+                { width: '15%', targets: 2 },
+                {
+                    // Join classes taught string
+                    targets: 3,
+                    render: function (data) {
+                        return data.join('; ');
+                    }
+                },
+                {
+                    visible: false,
+                    searchable: false,
+                    targets: 4
+                },
+            ],
+            order: [[4, 'desc']],
+            dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+            displayLength: 10,
+            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "tất cả"]],
+            buttons: [
+                {
+                    extend: 'collection',
+                    className: 'btn btn-outline-secondary dropdown-toggle me-2',
+                    text: feather.icons['share'].toSvg({ class: 'font-small-4 me-50' }) + 'Export',
+                    buttons: [
+                        {
+                            extend: 'print',
+                            className: 'dropdown-item',
+                            title: detailsFileName
+                        },
+                        {
+                            extend: 'excel',
+                            className: 'dropdown-item',
+                            title: detailsFileName
+                        },
+                        {
+                            extend: 'pdf',
+                            className: 'dropdown-item',
+                            title: detailsFileName
+                        },
+                        {
+                            extend: 'copy',
+                            className: 'dropdown-item',
+                            title: detailsFileName
+                        }
+                    ],
+                    init: function (api, node, config) {
+                        $(node).removeClass('btn-secondary');
+                        $(node).parent().removeClass('btn-group');
+                        setTimeout(function () {
+                            $(node).closest('.dt-buttons').removeClass('btn-group').addClass('d-inline-flex mt-50');
+                        }, 50);
+                    }
+                }
+            ],
+            language: {
+                'url': rootUrl + 'app-assets/language/datatables/vi.json'
+            }
+        });
+
+    // Create Index column datatable
+    dataTable.on('draw.dt', function () {
+        dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            dataTable.cell(cell).invalidate('dom');
+        });
     });
 }
 
