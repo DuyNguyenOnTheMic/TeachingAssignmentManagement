@@ -479,6 +479,7 @@ namespace TeachingAssignmentManagement.Controllers
                     classCount = 0;
                 int? originalHours = 0;
                 decimal remunerationHours = decimal.Zero;
+                List<string> classesTaught = new List<string>();
                 string previousSubjectId = string.Empty;
 
                 // Get classes in term of lecturer
@@ -486,6 +487,7 @@ namespace TeachingAssignmentManagement.Controllers
                 foreach (class_section item in query_classes)
                 {
                     int totalLesson = item.total_lesson.GetValueOrDefault(0);
+                    decimal classRemuneration = totalLesson * RemunerationService.CalculateRemuneration(item, coefficient);
 
                     // Count subjects and classes of lecturer
                     if (item.subject_id != previousSubjectId)
@@ -496,7 +498,8 @@ namespace TeachingAssignmentManagement.Controllers
 
                     // Sum up remuneration hours for this class
                     originalHours += totalLesson;
-                    remunerationHours += totalLesson * RemunerationService.CalculateRemuneration(item, coefficient);
+                    remunerationHours += classRemuneration;
+                    classesTaught.Add(item.class_section_id + "-" + item.subject.name + " (" + classRemuneration + " tiết)");
                     previousSubjectId = item.subject_id;
                 }
 
@@ -511,6 +514,7 @@ namespace TeachingAssignmentManagement.Controllers
                         OriginalHours = originalHours,
                         SubjectCount = subjectCount,
                         ClassCount = classCount,
+                        ClassesTaught = classesTaught,
                         RemunerationHours = Math.Round(remunerationHours)
                     });
                 }
@@ -544,10 +548,9 @@ namespace TeachingAssignmentManagement.Controllers
                 IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInTermOrderBySubject(termId, majorId, lecturer.id);
                 foreach (class_section item in query_classes)
                 {
-                    decimal remunerationCoefficient = RemunerationService.CalculateRemuneration(item, coefficient);
                     int startLesson = item.start_lesson_2;
                     int totalLesson = item.total_lesson.GetValueOrDefault(0);
-                    decimal classRemuneration = totalLesson * remunerationCoefficient;
+                    decimal classRemuneration = totalLesson * RemunerationService.CalculateRemuneration(item, coefficient);
 
                     // Count subjects and classes of lecturer
                     if (item.subject_id != previousSubjectId)

@@ -1,4 +1,6 @@
-﻿namespace TeachingAssignmentManagement.Models
+﻿using System.Collections.Generic;
+
+namespace TeachingAssignmentManagement.Models
 {
     public class RemunerationDTO
     {
@@ -10,6 +12,7 @@
         public bool Status { get; set; }
         public int SubjectCount { get; set; }
         public int ClassCount { get; set; }
+        public IEnumerable<string> ClassesTaught { get; set; }
         public int? OriginalHours { get; set; }
         public decimal RemunerationHours { get; set; }
         public int? OriginalSumLesson1 { get; set; }

@@ -501,10 +501,10 @@ function populateStatisticsDetailsDatatable(data) {
         {
             columns: [
                 { 'data': '', defaultContent: '' },
-                { 'data': 'staff_id' },
-                { 'data': 'full_name' },
-                { 'data': 'classes_taught' },
-                { 'data': 'sum' }
+                { 'data': 'StaffId' },
+                { 'data': 'FullName' },
+                { 'data': 'ClassesTaught' },
+                { 'data': 'RemunerationHours' }
             ],
             data: data,
             columnDefs: [
