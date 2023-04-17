@@ -499,7 +499,7 @@ namespace TeachingAssignmentManagement.Controllers
                     // Sum up remuneration hours for this class
                     originalHours += totalLesson;
                     remunerationHours += classRemuneration;
-                    classesTaught.Add(item.class_section_id + "-" + item.subject.name + " (" + classRemuneration + " tiết)");
+                    classesTaught.Add(item.class_section_id + "-" + item.subject.name + " (" + Math.Round(classRemuneration) + " tiết)");
                     previousSubjectId = item.subject_id;
                 }
 
