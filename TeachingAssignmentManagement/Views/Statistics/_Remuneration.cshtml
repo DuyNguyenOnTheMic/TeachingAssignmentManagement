@@ -12,6 +12,9 @@
             <li class="nav-item">
                 <a class="nav-link" id="table-tab" data-bs-toggle="tab" href="#tableIcon" aria-controls="table" role="tab" aria-selected="false"><i class="feather feather-grid"></i> Bảng biểu</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="details-tab" data-bs-toggle="tab" href="#detailsIcon" aria-controls="details" role="tab" aria-selected="false"><i class="feather feather-info"></i> Chi tiết</a>
+            </li>
         </ul>
     </div>
 </div>
@@ -49,6 +52,23 @@
             </div>
         </div>
     </div>
+    <div class="tab-pane" id="detailsIcon" aria-labelledby="details-tab" role="tabpanel">
+        <div class="card-datatable">
+            <div class="table-responsive">
+                <table class="datatables-ajax table" id="tblStatisticsDetails">
+                    <thead class="table-light">
+                        <tr>
+                            <th></th>
+                            <th>Mã GV</th>
+                            <th>Tên GV</th>
+                            <th>Lớp giảng dạy</th>
+                            <th>Số giờ giảng</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
-<script src="~/assets/js/statistics/remuneration-statistics.min.js"></script>
+<script src="~/assets/js/statistics/remuneration-statistics.js"></script>
