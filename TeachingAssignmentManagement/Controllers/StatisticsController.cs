@@ -542,6 +542,7 @@ namespace TeachingAssignmentManagement.Controllers
                         sumLesson7 = decimal.Zero,
                         sumLesson10 = decimal.Zero,
                         sumLesson13 = decimal.Zero;
+                List<string> classesTaught = new List<string>();
                 string previousSubjectId = string.Empty;
 
                 // Get classes in term of lecturer
@@ -587,6 +588,7 @@ namespace TeachingAssignmentManagement.Controllers
                         default:
                             break;
                     }
+                    classesTaught.Add(item.class_section_id + "-" + item.subject.name + " (" + Math.Round(classRemuneration) + " tiết)");
                     previousSubjectId = item.subject_id;
                 }
 
@@ -600,6 +602,7 @@ namespace TeachingAssignmentManagement.Controllers
                         FullName = lecturer.full_name,
                         SubjectCount = subjectCount,
                         ClassCount = classCount,
+                        ClassesTaught = classesTaught,
                         OriginalHours = originalHours,
                         RemunerationHours = Math.Round(remunerationHours),
                         OriginalSumLesson1 = originalSumLesson1,
