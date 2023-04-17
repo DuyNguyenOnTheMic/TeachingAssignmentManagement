@@ -499,7 +499,7 @@ namespace TeachingAssignmentManagement.Controllers
                     // Sum up remuneration hours for this class
                     originalHours += totalLesson;
                     remunerationHours += classRemuneration;
-                    classesTaught.Add(item.class_section_id + "-" + item.subject.name + " (" + Math.Round(classRemuneration) + " tiết)");
+                    classesTaught.Add(GetClassesTaughtString(item.class_section_id, item.subject.name, classRemuneration));
                     previousSubjectId = item.subject_id;
                 }
 
@@ -588,7 +588,7 @@ namespace TeachingAssignmentManagement.Controllers
                         default:
                             break;
                     }
-                    classesTaught.Add(item.class_section_id + "-" + item.subject.name + " (" + Math.Round(classRemuneration) + " tiết)");
+                    classesTaught.Add(GetClassesTaughtString(item.class_section_id, item.subject.name, classRemuneration));
                     previousSubjectId = item.subject_id;
                 }
 
@@ -651,7 +651,7 @@ namespace TeachingAssignmentManagement.Controllers
                     // Sum up remuneration hours for this class
                     originalHours += totalLesson;
                     remunerationHours += classRemuneration;
-                    classesTaught.Add(item.class_section_id + "-" + item.subject.name + " (" + Math.Round(classRemuneration) + " tiết)");
+                    classesTaught.Add(GetClassesTaughtString(item.class_section_id, item.subject.name, classRemuneration));
                     previousSubjectId = item.subject_id;
                 }
 
@@ -740,7 +740,7 @@ namespace TeachingAssignmentManagement.Controllers
                         default:
                             break;
                     }
-                    classesTaught.Add(item.class_section_id + "-" + item.subject.name + " (" + Math.Round(classRemuneration) + " tiết)");
+                    classesTaught.Add(GetClassesTaughtString(item.class_section_id, item.subject.name, classRemuneration));
                     previousSubjectId = item.subject_id;
                 }
 
@@ -771,6 +771,11 @@ namespace TeachingAssignmentManagement.Controllers
                 }
             }
             return remunerationDTOs;
+        }
+
+        private string GetClassesTaughtString(string classSectionId, string subjectName, decimal classRemuneration)
+        {
+            return $"{classSectionId}-{subjectName} ({Math.Round(classRemuneration)} tiết)";
         }
 
         protected override void Dispose(bool disposing)
