@@ -178,12 +178,13 @@ namespace TeachingAssignmentManagement.DAL
                     subject_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
+                    lecturer_type = c.FirstOrDefault().lecturer.type,
+                    classes_taught = c.Select(item => item.class_section_id + "-" + item.subject.name + " (" + item.total_lesson + " tiết)"),
                     sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
                     sumLesson4 = c.Where(item => item.start_lesson_2 == 4).Sum(item => item.total_lesson),
                     sumLesson7 = c.Where(item => item.start_lesson_2 == 7).Sum(item => item.total_lesson),
                     sumLesson10 = c.Where(item => item.start_lesson_2 == 10).Sum(item => item.total_lesson),
-                    sumLesson13 = c.Where(item => item.start_lesson_2 == 13).Sum(item => item.total_lesson),
-                    lecturer_type = c.FirstOrDefault().lecturer.type
+                    sumLesson13 = c.Where(item => item.start_lesson_2 == 13).Sum(item => item.total_lesson)
                 }).OrderByDescending(c => c.sum).ToList();
             }
         }
@@ -203,7 +204,8 @@ namespace TeachingAssignmentManagement.DAL
                     lecturer_type = c.FirstOrDefault().lecturer.type,
                     subject_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
-                    sum = c.Sum(item => item.total_lesson)
+                    sum = c.Sum(item => item.total_lesson),
+                    classes_taught = c.Select(item => item.class_section_id + "-" + item.subject.name + " (" + item.total_lesson + " tiết)")
                 }).OrderByDescending(c => c.sum).ToList();
             }
             else
@@ -216,12 +218,13 @@ namespace TeachingAssignmentManagement.DAL
                     subject_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
+                    lecturer_type = c.FirstOrDefault().lecturer.type,
+                    classes_taught = c.Select(item => item.class_section_id + "-" + item.subject.name + " (" + item.total_lesson + " tiết)"),
                     sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
                     sumLesson4 = c.Where(item => item.start_lesson_2 == 4).Sum(item => item.total_lesson),
                     sumLesson7 = c.Where(item => item.start_lesson_2 == 7).Sum(item => item.total_lesson),
                     sumLesson10 = c.Where(item => item.start_lesson_2 == 10).Sum(item => item.total_lesson),
-                    sumLesson13 = c.Where(item => item.start_lesson_2 == 13).Sum(item => item.total_lesson),
-                    lecturer_type = c.FirstOrDefault().lecturer.type
+                    sumLesson13 = c.Where(item => item.start_lesson_2 == 13).Sum(item => item.total_lesson)
                 }).OrderByDescending(c => c.sum).ToList();
             }
         }
@@ -258,7 +261,8 @@ namespace TeachingAssignmentManagement.DAL
                     subject_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
-                    lecturer_type = c.FirstOrDefault().lecturer.type
+                    lecturer_type = c.FirstOrDefault().lecturer.type,
+                    classes_taught = c.Select(item => item.class_section_id + "-" + item.subject.name + " (" + item.total_lesson + " tiết)")
                 }).OrderByDescending(c => c.sum).ToList();
             }
             else
@@ -271,12 +275,13 @@ namespace TeachingAssignmentManagement.DAL
                     subject_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
+                    lecturer_type = c.FirstOrDefault().lecturer.type,
+                    classes_taught = c.Select(item => item.class_section_id + "-" + item.subject.name + " (" + item.total_lesson + " tiết)"),
                     sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
                     sumLesson4 = c.Where(item => item.start_lesson_2 == 4).Sum(item => item.total_lesson),
                     sumLesson7 = c.Where(item => item.start_lesson_2 == 7).Sum(item => item.total_lesson),
                     sumLesson10 = c.Where(item => item.start_lesson_2 == 10).Sum(item => item.total_lesson),
-                    sumLesson13 = c.Where(item => item.start_lesson_2 == 13).Sum(item => item.total_lesson),
-                    lecturer_type = c.FirstOrDefault().lecturer.type
+                    sumLesson13 = c.Where(item => item.start_lesson_2 == 13).Sum(item => item.total_lesson)
                 }).OrderByDescending(c => c.sum).ToList();
             }
         }
@@ -296,7 +301,8 @@ namespace TeachingAssignmentManagement.DAL
                     lecturer_type = c.FirstOrDefault().lecturer.type,
                     subject_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
-                    sum = c.Sum(item => item.total_lesson)
+                    sum = c.Sum(item => item.total_lesson),
+                    classes_taught = c.Select(item => item.class_section_id + "-" + item.subject.name + " (" + item.total_lesson + " tiết)")
                 }).OrderByDescending(c => c.sum).ToList();
             }
             else
@@ -309,12 +315,13 @@ namespace TeachingAssignmentManagement.DAL
                     subject_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
+                    lecturer_type = c.FirstOrDefault().lecturer.type,
+                    classes_taught = c.Select(item => item.class_section_id + "-" + item.subject.name + " (" + item.total_lesson + " tiết)"),
                     sumLesson1 = c.Where(item => item.start_lesson_2 == 1).Sum(item => item.total_lesson),
                     sumLesson4 = c.Where(item => item.start_lesson_2 == 4).Sum(item => item.total_lesson),
                     sumLesson7 = c.Where(item => item.start_lesson_2 == 7).Sum(item => item.total_lesson),
                     sumLesson10 = c.Where(item => item.start_lesson_2 == 10).Sum(item => item.total_lesson),
-                    sumLesson13 = c.Where(item => item.start_lesson_2 == 13).Sum(item => item.total_lesson),
-                    lecturer_type = c.FirstOrDefault().lecturer.type
+                    sumLesson13 = c.Where(item => item.start_lesson_2 == 13).Sum(item => item.total_lesson)
                 }).OrderByDescending(c => c.sum).ToList();
             }
         }
