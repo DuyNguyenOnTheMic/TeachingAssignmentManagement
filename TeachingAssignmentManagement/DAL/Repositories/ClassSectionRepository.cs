@@ -164,7 +164,8 @@ namespace TeachingAssignmentManagement.DAL
                     subject_count = c.GroupBy(item => item.subject.id).Count(),
                     class_count = c.Count(),
                     sum = c.Sum(item => item.total_lesson),
-                    lecturer_type = c.FirstOrDefault().lecturer.type
+                    lecturer_type = c.FirstOrDefault().lecturer.type,
+                    classes_taught = c.Select(item => item.class_section_id + "-" + item.subject.name + " (" + item.total_lesson + " tiết)")
                 }).OrderByDescending(c => c.sum).ToList();
             }
             else
