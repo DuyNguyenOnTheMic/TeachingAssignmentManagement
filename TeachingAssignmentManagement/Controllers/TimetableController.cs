@@ -75,7 +75,6 @@ namespace TeachingAssignmentManagement.Controllers
                 int startWeek = term.start_week;
                 int endWeek = query_classes.Max(c => c.EndWeek);
                 int currentWeek = 0;
-                string weekLabel = string.Empty;
 
                 if (week > 0)
                 {
@@ -128,7 +127,7 @@ namespace TeachingAssignmentManagement.Controllers
                 string[] userLang = Request.UserLanguages;
                 string language = userLang[0];
                 string formatInfo = new CultureInfo(language).DateTimeFormat.ShortDatePattern;
-                weekLabel = "Tuần " + currentWeek + ": Từ ngày " + startDate.ToString(formatInfo) + " đến ngày " + endDate.ToString(formatInfo);
+                string weekLabel = "Tuần " + currentWeek + ": Từ ngày " + startDate.ToString(formatInfo) + " đến ngày " + endDate.ToString(formatInfo);
 
                 ViewData["startWeek"] = startWeek;
                 ViewData["endWeek"] = endWeek;
