@@ -541,22 +541,34 @@ function populateStatisticsDetailsDatatable(data) {
                         {
                             extend: 'print',
                             className: 'dropdown-item',
-                            title: detailsFileName
+                            title: detailsFileName,
+                            exportOptions: {
+                                columns: ':visible'
+                            }
                         },
                         {
                             extend: 'excel',
                             className: 'dropdown-item',
-                            title: detailsFileName
+                            title: detailsFileName,
+                            exportOptions: {
+                                columns: ':visible'
+                            }
                         },
                         {
                             extend: 'pdf',
                             className: 'dropdown-item',
-                            title: detailsFileName
+                            title: detailsFileName,
+                            exportOptions: {
+                                columns: ':visible'
+                            }
                         },
                         {
                             extend: 'copy',
                             className: 'dropdown-item',
-                            title: detailsFileName
+                            title: detailsFileName,
+                            exportOptions: {
+                                columns: ':visible'
+                            }
                         }
                     ],
                     init: function (api, node, config) {
