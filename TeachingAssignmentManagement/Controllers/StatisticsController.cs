@@ -694,16 +694,16 @@ namespace TeachingAssignmentManagement.Controllers
                         sumLesson7 = decimal.Zero,
                         sumLesson10 = decimal.Zero,
                         sumLesson13 = decimal.Zero;
+                List<string> classesTaught = new List<string>();
                 string previousSubjectId = string.Empty;
 
                 // Get classes in year of lecturer
                 IEnumerable<class_section> query_classes = unitOfWork.ClassSectionRepository.GetPersonalClassesInYearOrderBySubject(startYear, endYear, majorId, lecturer.id);
                 foreach (class_section item in query_classes)
                 {
-                    decimal remunerationCoefficient = RemunerationService.CalculateRemuneration(item, coefficient);
                     int startLesson = item.start_lesson_2;
                     int totalLesson = item.total_lesson.GetValueOrDefault(0);
-                    decimal classRemuneration = totalLesson * remunerationCoefficient;
+                    decimal classRemuneration = totalLesson * RemunerationService.CalculateRemuneration(item, coefficient);
 
                     // Count subjects and classes of lecturer
                     if (item.subject_id != previousSubjectId)
@@ -740,6 +740,7 @@ namespace TeachingAssignmentManagement.Controllers
                         default:
                             break;
                     }
+                    classesTaught.Add(item.class_section_id + "-" + item.subject.name + " (" + Math.Round(classRemuneration) + " tiết)");
                     previousSubjectId = item.subject_id;
                 }
 
@@ -753,6 +754,7 @@ namespace TeachingAssignmentManagement.Controllers
                         FullName = lecturer.full_name,
                         SubjectCount = subjectCount,
                         ClassCount = classCount,
+                        ClassesTaught = classesTaught,
                         OriginalHours = originalHours,
                         RemunerationHours = Math.Round(remunerationHours),
                         OriginalSumLesson1 = originalSumLesson1,
