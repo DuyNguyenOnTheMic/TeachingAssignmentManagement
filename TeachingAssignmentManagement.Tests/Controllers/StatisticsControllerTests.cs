@@ -2027,5 +2027,319 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 previousSum = json.sum;
             }
         }
+
+        [TestMethod()]
+        public void Get_Year_And_Major_Subjects_Json_Data_Not_Null_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            JsonResult actionResult = controller.GetYearsubjects(startYear, endYear, majorId, userId1);
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            foreach (dynamic json in jsonCollection)
+            {
+                Assert.IsNotNull(json.id);
+                Assert.IsNotNull(json.subject_name);
+                Assert.IsNotNull(json.subject_credits);
+                Assert.IsNotNull(json.subject_major);
+                Assert.IsNotNull(json.subject_hours);
+                Assert.IsNotNull(json.theory_count);
+                Assert.IsNotNull(json.practice_count);
+            }
+        }
+
+
+        [TestMethod()]
+        public void Get_Year_And_Major_Subjects_Json_Data_Not_False_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            JsonResult actionResult = controller.GetYearsubjects(startYear, endYear, majorId, userId1);
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            dynamic jsonCollection = actionResult.Data;
+            foreach (dynamic json in jsonCollection)
+            {
+                Assert.IsNotNull(json.id,
+                    "JSON record does not contain \"id\" required property.");
+                Assert.IsNotNull(json.subject_name,
+                    "JSON record does not contain \"subject_name\" required property.");
+                Assert.IsNotNull(json.subject_credits,
+                    "JSON record does not contain \"subject_credits\" required property.");
+                Assert.IsNotNull(json.subject_major,
+                    "JSON record does not contain \"subject_major\" required property.");
+                Assert.IsNotNull(json.subject_hours,
+                    "JSON record does not contain \"subject_hours\" required property.");
+                Assert.IsNotNull(json.theory_count,
+                    "JSON record does not contain \"theory_count\" required property.");
+                Assert.IsNotNull(json.practice_count,
+                    "JSON record does not contain \"practice_count\" required property.");
+            }
+        }
+
+        [TestMethod()]
+        public void Year_And_Major_Subjects_Json_Data_Should_Convert_To_IEnumerable_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            JsonResult actionResult = controller.GetYearsubjects(startYear, endYear, majorId, userId1);
+            dynamic jsonCollection = actionResult.Data;
+            int count = 0;
+            foreach (dynamic value in jsonCollection)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod()]
+        public void Year_And_Major_Subjects_Json_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            JsonResult actionResult = controller.GetYearsubjects(startYear, endYear, majorId, userId1);
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert                
+            Assert.IsNotNull(jsonCollection[0]);
+        }
+
+        [TestMethod()]
+        public void Year_And_Major_Subjects_JSon_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            JsonResult actionResult = controller.GetYearsubjects(startYear, endYear, majorId, userId1);
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            for (int i = 0; i < jsonCollection.Count; i++)
+            {
+
+                dynamic json = jsonCollection[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.id,
+                    "JSON record does not contain \"id\" required property.");
+                Assert.IsNotNull(json.subject_name,
+                    "JSON record does not contain \"subject_name\" required property.");
+                Assert.IsNotNull(json.subject_credits,
+                    "JSON record does not contain \"subject_credits\" required property.");
+                Assert.IsNotNull(json.subject_major,
+                    "JSON record does not contain \"subject_major\" required property.");
+                Assert.IsNotNull(json.subject_hours,
+                    "JSON record does not contain \"subject_hours\" required property.");
+                Assert.IsNotNull(json.theory_count,
+                    "JSON record does not contain \"theory_count\" required property.");
+                Assert.IsNotNull(json.practice_count,
+                    "JSON record does not contain \"practice_count\" required property.");
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Year_And_Major_Subjects_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            JsonResult actionResult = controller.GetYearsubjects(startYear, endYear, majorId, userId1);
+            dynamic jsonCollection = actionResult.Data;
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.major_id == majorId && c.lecturer_id == userId1).GroupBy(c => c.subject_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), jsonCollection.Count);
+        }
+
+        [TestMethod()]
+        public void Get_Year_Subjects_Json_Data_Not_Null_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            JsonResult actionResult = controller.GetYearsubjects(startYear, endYear, "-1", userId1);
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            foreach (dynamic json in jsonCollection)
+            {
+                Assert.IsNotNull(json.id);
+                Assert.IsNotNull(json.subject_name);
+                Assert.IsNotNull(json.subject_credits);
+                Assert.IsNotNull(json.subject_major);
+                Assert.IsNotNull(json.subject_hours);
+                Assert.IsNotNull(json.theory_count);
+                Assert.IsNotNull(json.practice_count);
+            }
+        }
+
+
+        [TestMethod()]
+        public void Get_Year_Subjects_Json_Data_Not_False_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            JsonResult actionResult = controller.GetYearsubjects(startYear, endYear, "-1", userId1);
+
+            // Assert
+            Assert.IsNotNull(actionResult, "No ActionResult returned from action method.");
+            dynamic jsonCollection = actionResult.Data;
+            foreach (dynamic json in jsonCollection)
+            {
+                Assert.IsNotNull(json.id,
+                    "JSON record does not contain \"id\" required property.");
+                Assert.IsNotNull(json.subject_name,
+                    "JSON record does not contain \"subject_name\" required property.");
+                Assert.IsNotNull(json.subject_credits,
+                    "JSON record does not contain \"subject_credits\" required property.");
+                Assert.IsNotNull(json.subject_major,
+                    "JSON record does not contain \"subject_major\" required property.");
+                Assert.IsNotNull(json.subject_hours,
+                    "JSON record does not contain \"subject_hours\" required property.");
+                Assert.IsNotNull(json.theory_count,
+                    "JSON record does not contain \"theory_count\" required property.");
+                Assert.IsNotNull(json.practice_count,
+                    "JSON record does not contain \"practice_count\" required property.");
+            }
+        }
+
+        [TestMethod()]
+        public void Year_Subjects_Json_Data_Should_Convert_To_IEnumerable_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            JsonResult actionResult = controller.GetYearsubjects(startYear, endYear, "-1", userId1);
+            dynamic jsonCollection = actionResult.Data;
+            int count = 0;
+            foreach (dynamic value in jsonCollection)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
+
+        [TestMethod()]
+        public void Year_Subjects_Json_Data_Index_at_0_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            JsonResult actionResult = controller.GetYearsubjects(startYear, endYear, "-1", userId1);
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert                
+            Assert.IsNotNull(jsonCollection[0]);
+        }
+
+        [TestMethod()]
+        public void Year_Subjects_JSon_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            JsonResult actionResult = controller.GetYearsubjects(startYear, endYear, "-1", userId1);
+            dynamic jsonCollection = actionResult.Data;
+
+            // Assert
+            for (int i = 0; i < jsonCollection.Count; i++)
+            {
+
+                dynamic json = jsonCollection[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.id,
+                    "JSON record does not contain \"id\" required property.");
+                Assert.IsNotNull(json.subject_name,
+                    "JSON record does not contain \"subject_name\" required property.");
+                Assert.IsNotNull(json.subject_credits,
+                    "JSON record does not contain \"subject_credits\" required property.");
+                Assert.IsNotNull(json.subject_major,
+                    "JSON record does not contain \"subject_major\" required property.");
+                Assert.IsNotNull(json.subject_hours,
+                    "JSON record does not contain \"subject_hours\" required property.");
+                Assert.IsNotNull(json.theory_count,
+                    "JSON record does not contain \"theory_count\" required property.");
+                Assert.IsNotNull(json.practice_count,
+                    "JSON record does not contain \"practice_count\" required property.");
+            }
+        }
+
+        [TestMethod()]
+        public void Get_Year_Subjects_List_Should_Be_Not_Null_And_Equal_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            term term = listTerm.First();
+            int startYear = term.start_year;
+            int endYear = term.end_year;
+
+            // Act
+            JsonResult actionResult = controller.GetYearsubjects(startYear, endYear, "-1", userId1);
+            dynamic jsonCollection = actionResult.Data;
+            IQueryable<IGrouping<string, class_section>> query_classSection = listClassSection.Where(c => c.term.start_year == startYear && c.term.end_year == endYear && c.lecturer_id == userId1).GroupBy(c => c.subject_id);
+
+            // Assert
+            Assert.IsNotNull(actionResult);
+            Assert.AreEqual(query_classSection.Count(), jsonCollection.Count);
+        }
     }
 }
