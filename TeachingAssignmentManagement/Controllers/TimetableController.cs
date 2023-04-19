@@ -256,7 +256,7 @@ namespace TeachingAssignmentManagement.Controllers
             TimetableViewModel timetableViewModel = new TimetableViewModel();
             List<class_section> classSectionList = new List<class_section>();
             IEnumerable<class_section> query_classSectionWhere = classSectionList;
-            major currentMajor = unitOfWork.MajorRepository.GetMajorByID(major);
+            unitOfWork.MajorRepository.GetMajorByID(major);
             if (isUpdate)
             {
                 // Query classes of this term
@@ -413,7 +413,7 @@ namespace TeachingAssignmentManagement.Controllers
 
                     if (!isUpdate)
                     {
-                        CreateNewClass(term, currentMajor, errorAssignList, classSectionid, day, lessonTime, lecturerId, fullName, lastAssignedBy, classSection, assignedLecturerId);
+                        CreateNewClass(term, errorAssignList, classSectionid, day, lessonTime, lecturerId, fullName, lastAssignedBy, classSection, assignedLecturerId);
                     }
                     else
                     {
@@ -441,7 +441,7 @@ namespace TeachingAssignmentManagement.Controllers
                         }
                         else
                         {
-                            CreateNewClass(term, currentMajor, errorAssignList, classSectionid, day, lessonTime, lecturerId, fullName, lastAssignedBy, classSection, assignedLecturerId);
+                            CreateNewClass(term, errorAssignList, classSectionid, day, lessonTime, lecturerId, fullName, lastAssignedBy, classSection, assignedLecturerId);
                         }
                     }
                     ProgressHub.SendProgress("Đang import...", dt.Rows.IndexOf(row), itemsCount);
@@ -460,24 +460,26 @@ namespace TeachingAssignmentManagement.Controllers
             }
         }
 
-        private void CreateNewClass(int term, major currentMajor, List<Tuple<string, string, string, string, string, string>> errorAssignList, string classSectionid, string day, string lessonTime, string lecturerId, string fullName, string lastAssignedBy, class_section classSection, string assignedLecturerId)
+        private void CreateNewClass(int term, List<Tuple<string, string, string, string, string, string>> errorAssignList, string classSectionid, string day, string lessonTime, string lecturerId, string fullName, string lastAssignedBy, class_section classSection, string assignedLecturerId)
         {
             // Create new class
-            classSection.major = currentMajor;
             unitOfWork.ClassSectionRepository.InsertClassSection(classSection);
             unitOfWork.Save();
-            dynamic checkState = CheckState(classSection.id, term, assignedLecturerId, true).Data;
-            if (checkState.success)
+            if (assignedLecturerId != null)
             {
-                // Assign lecturer
-                classSection.last_assigned_by = lastAssignedBy;
-                classSection.lecturer_id = assignedLecturerId;
-                unitOfWork.Save();
-            }
-            else
-            {
-                // Add lecturer to error list
-                errorAssignList.Add(Tuple.Create(lecturerId, fullName, classSectionid, day, lessonTime, checkState.message));
+                dynamic checkState = CheckState(classSection.id, term, assignedLecturerId, true).Data;
+                if (checkState.success)
+                {
+                    // Assign lecturer
+                    classSection.last_assigned_by = lastAssignedBy;
+                    classSection.lecturer_id = assignedLecturerId;
+                    unitOfWork.Save();
+                }
+                else
+                {
+                    // Add lecturer to error list
+                    errorAssignList.Add(Tuple.Create(lecturerId, fullName, classSectionid, day, lessonTime, checkState.message));
+                }
             }
         }
 
