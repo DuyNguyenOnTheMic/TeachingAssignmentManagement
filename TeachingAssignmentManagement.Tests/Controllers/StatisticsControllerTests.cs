@@ -3,8 +3,12 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Helpers;
 using TeachingAssignmentManagement.Models;
@@ -2388,6 +2392,25 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.AreEqual(viewBagResult[i].id, termList[i].id);
                 Assert.AreEqual(viewBagResult[i].start_year, termList[i].start_year);
             }
+        }
+
+        [TestMethod()]
+        public void Get_Timetable_View_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController();
+            int week = listClassSection.First().start_week;
+            var request = new Mock<HttpRequestBase>();
+            request.SetupGet(x => x.UserLanguages).Returns(new string[] { "en" });
+            var context = new Mock<HttpContextBase>();
+            context.SetupGet(x => x.Request).Returns(request.Object);
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+
+            // Act
+            PartialViewResult result = controller.GetTimetable(termId, week) as PartialViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
         }
     }
 }
