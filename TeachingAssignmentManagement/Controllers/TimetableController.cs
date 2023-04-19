@@ -424,19 +424,7 @@ namespace TeachingAssignmentManagement.Controllers
                             query_classSection.student_registered_number = classSection.student_registered_number;
                             if (query_classSection.lecturer_id == null && assignedLecturerId != null)
                             {
-                                dynamic checkState = CheckState(query_classSection.id, term, assignedLecturerId, true).Data;
-                                if (checkState.success)
-                                {
-                                    // update lecturer if check success
-                                    query_classSection.last_assigned_by = lastAssignedBy;
-                                    query_classSection.lecturer_id = assignedLecturerId;
-                                    unitOfWork.Save();
-                                }
-                                else
-                                {
-                                    // Add lecturer to error list
-                                    errorAssignList.Add(Tuple.Create(lecturerId, fullName, classSectionid, day, lessonTime, checkState.message));
-                                }
+                                AssignLecturerToClass(term, errorAssignList, classSectionid, day, lessonTime, lecturerId, fullName, lastAssignedBy, assignedLecturerId, query_classSection);
                             }
                         }
                         else
@@ -460,6 +448,23 @@ namespace TeachingAssignmentManagement.Controllers
             }
         }
 
+        private void AssignLecturerToClass(int term, List<Tuple<string, string, string, string, string, string>> errorAssignList, string classSectionid, string day, string lessonTime, string lecturerId, string fullName, string lastAssignedBy, string assignedLecturerId, class_section query_classSection)
+        {
+            dynamic checkState = CheckState(query_classSection.id, term, assignedLecturerId, true).Data;
+            if (checkState.success)
+            {
+                // update lecturer if check success
+                query_classSection.last_assigned_by = lastAssignedBy;
+                query_classSection.lecturer_id = assignedLecturerId;
+                unitOfWork.Save();
+            }
+            else
+            {
+                // Add lecturer to error list
+                errorAssignList.Add(Tuple.Create(lecturerId, fullName, classSectionid, day, lessonTime, checkState.message));
+            }
+        }
+
         private void CreateNewClass(int term, List<Tuple<string, string, string, string, string, string>> errorAssignList, string classSectionid, string day, string lessonTime, string lecturerId, string fullName, string lastAssignedBy, class_section classSection, string assignedLecturerId)
         {
             // Create new class
@@ -467,19 +472,7 @@ namespace TeachingAssignmentManagement.Controllers
             unitOfWork.Save();
             if (assignedLecturerId != null)
             {
-                dynamic checkState = CheckState(classSection.id, term, assignedLecturerId, true).Data;
-                if (checkState.success)
-                {
-                    // Assign lecturer
-                    classSection.last_assigned_by = lastAssignedBy;
-                    classSection.lecturer_id = assignedLecturerId;
-                    unitOfWork.Save();
-                }
-                else
-                {
-                    // Add lecturer to error list
-                    errorAssignList.Add(Tuple.Create(lecturerId, fullName, classSectionid, day, lessonTime, checkState.message));
-                }
+                AssignLecturerToClass(term, errorAssignList, classSectionid, day, lessonTime, lecturerId, fullName, lastAssignedBy, assignedLecturerId, classSection);
             }
         }
 
