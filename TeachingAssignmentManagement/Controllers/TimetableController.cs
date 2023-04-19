@@ -256,6 +256,7 @@ namespace TeachingAssignmentManagement.Controllers
             TimetableViewModel timetableViewModel = new TimetableViewModel();
             List<class_section> classSectionList = new List<class_section>();
             IEnumerable<class_section> query_classSectionWhere = classSectionList;
+            major currentMajor = unitOfWork.MajorRepository.GetMajorByID(major);
             if (isUpdate)
             {
                 // Query classes of this term
@@ -403,8 +404,6 @@ namespace TeachingAssignmentManagement.Controllers
                         end_week = ToInt(endWeek),
                         note_1 = ToNullableString(note1),
                         note_2 = ToNullableString(note2),
-                        last_assigned_by = lastAssignedBy,
-                        lecturer_id = query_lecturer?.id,
                         term_id = term,
                         major_id = major,
                         subject_id = subjectKey,
@@ -413,8 +412,7 @@ namespace TeachingAssignmentManagement.Controllers
 
                     if (!isUpdate)
                     {
-                        // Create new class
-                        unitOfWork.ClassSectionRepository.InsertClassSection(classSection);
+                        CreateNewClass(term, currentMajor, errorAssignList, classSectionid, day, lessonTime, lecturerId, fullName, lastAssignedBy, query_lecturer, classSection);
                     }
                     else
                     {
@@ -442,10 +440,7 @@ namespace TeachingAssignmentManagement.Controllers
                         }
                         else
                         {
-                            // Create new class if no class found
-                            classSection.last_assigned_by = null;
-                            classSection.lecturer_id = null;
-                            unitOfWork.ClassSectionRepository.InsertClassSection(classSection);
+                            CreateNewClass(term, currentMajor, errorAssignList, classSectionid, day, lessonTime, lecturerId, fullName, lastAssignedBy, query_lecturer, classSection);
                         }
                     }
                     ProgressHub.SendProgress("Đang import...", dt.Rows.IndexOf(row), itemsCount);
@@ -461,6 +456,27 @@ namespace TeachingAssignmentManagement.Controllers
                 Response.TrySkipIisCustomErrors = true;
                 Response.Write($"Oops, có lỗi đã xảy ra, vui lòng kiểm tra lại tệp tin");
                 return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
+            }
+        }
+
+        private void CreateNewClass(int term, major currentMajor, List<Tuple<string, string, string, string, string, string>> errorAssignList, string classSectionid, string day, string lessonTime, string lecturerId, string fullName, string lastAssignedBy, lecturer query_lecturer, class_section classSection)
+        {
+            // Create new class
+            classSection.major = currentMajor;
+            unitOfWork.ClassSectionRepository.InsertClassSection(classSection);
+            unitOfWork.Save();
+            dynamic checkState = CheckState(classSection.id, term, query_lecturer?.id, true).Data;
+            if (checkState.success)
+            {
+                // Assign lecturer
+                classSection.last_assigned_by = lastAssignedBy;
+                classSection.lecturer_id = query_lecturer?.id;
+                unitOfWork.Save();
+            }
+            else
+            {
+                // Add lecturer to error list
+                errorAssignList.Add(Tuple.Create(lecturerId, fullName, classSectionid, day, lessonTime, checkState.message));
             }
         }
 
@@ -575,7 +591,7 @@ namespace TeachingAssignmentManagement.Controllers
         [Authorize(Roles = CustomRoles.FacultyBoardOrDepartment)]
         public JsonResult CheckState(int id, int termId, string lecturerId, bool warning)
         {
-            if (lecturerId != string.Empty)
+            if (!string.IsNullOrEmpty(lecturerId))
             {
                 // Declare variables
                 class_section classSection = unitOfWork.ClassSectionRepository.GetClassByID(id);
