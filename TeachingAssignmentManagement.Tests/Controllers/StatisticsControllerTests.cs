@@ -3,9 +3,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Globalization;
 using System.Linq;
-using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -2398,7 +2396,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Get_Timetable_View_Not_Null_Test()
         {
             // Arrange
-            StatisticsController controller = new StatisticsController();
+            StatisticsController controller = new StatisticsController(unitOfWork);
             int week = listClassSection.First().start_week;
             var request = new Mock<HttpRequestBase>();
             request.SetupGet(x => x.UserLanguages).Returns(new string[] { "en" });
@@ -2417,7 +2415,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
         public void Get_Timetable_View_Name_Should_Be_Correct_Test()
         {
             // Arrange
-            StatisticsController controller = new StatisticsController();
+            StatisticsController controller = new StatisticsController(unitOfWork);
             int week = listClassSection.First().start_week;
             var request = new Mock<HttpRequestBase>();
             request.SetupGet(x => x.UserLanguages).Returns(new string[] { "en" });
@@ -2430,6 +2428,26 @@ namespace TeachingAssignmentManagement.Controllers.Tests
 
             // Assert
             Assert.AreEqual("_Timetable", result.ViewName);
+        }
+
+        [TestMethod]
+        public void Get_Timetable_View_Model_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            int week = listClassSection.First().start_week;
+            var request = new Mock<HttpRequestBase>();
+            request.SetupGet(x => x.UserLanguages).Returns(new string[] { "en" });
+            var context = new Mock<HttpContextBase>();
+            context.SetupGet(x => x.Request).Returns(request.Object);
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+
+            // Act
+            PartialViewResult result = controller.GetTimetable(termId, week) as PartialViewResult;
+            TimetableViewModel viewModel = (TimetableViewModel)result.ViewData.Model;
+
+            // Assert
+            Assert.IsNotNull(viewModel);
         }
     }
 }
