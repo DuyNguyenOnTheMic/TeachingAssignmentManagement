@@ -369,7 +369,7 @@ namespace TeachingAssignmentManagement.Controllers
 
                     string lastAssignedBy = null;
                     lecturer query_lecturer = unitOfWork.UserRepository.GetLecturerByStaffId(lecturerId);
-                    string queryLecturerId = query_lecturer?.id;
+                    string assignedLecturerId = query_lecturer?.id;
                     if (query_lecturer == null && ToNullableString(lecturerId) != null && ToNullableString(fullName) != null)
                     {
                         // Add record to error list
@@ -413,7 +413,7 @@ namespace TeachingAssignmentManagement.Controllers
 
                     if (!isUpdate)
                     {
-                        CreateNewClass(term, currentMajor, errorAssignList, classSectionid, day, lessonTime, lecturerId, fullName, lastAssignedBy, classSection, queryLecturerId);
+                        CreateNewClass(term, currentMajor, errorAssignList, classSectionid, day, lessonTime, lecturerId, fullName, lastAssignedBy, classSection, assignedLecturerId);
                     }
                     else
                     {
@@ -422,14 +422,14 @@ namespace TeachingAssignmentManagement.Controllers
                         {
                             // Edit class assignment
                             query_classSection.student_registered_number = classSection.student_registered_number;
-                            if (query_classSection.lecturer_id == null && queryLecturerId != null)
+                            if (query_classSection.lecturer_id == null && assignedLecturerId != null)
                             {
-                                dynamic checkState = CheckState(query_classSection.id, term, queryLecturerId, true).Data;
+                                dynamic checkState = CheckState(query_classSection.id, term, assignedLecturerId, true).Data;
                                 if (checkState.success)
                                 {
                                     // update lecturer if check success
                                     query_classSection.last_assigned_by = lastAssignedBy;
-                                    query_classSection.lecturer_id = queryLecturerId;
+                                    query_classSection.lecturer_id = assignedLecturerId;
                                     unitOfWork.Save();
                                 }
                                 else
@@ -441,7 +441,7 @@ namespace TeachingAssignmentManagement.Controllers
                         }
                         else
                         {
-                            CreateNewClass(term, currentMajor, errorAssignList, classSectionid, day, lessonTime, lecturerId, fullName, lastAssignedBy, classSection, queryLecturerId);
+                            CreateNewClass(term, currentMajor, errorAssignList, classSectionid, day, lessonTime, lecturerId, fullName, lastAssignedBy, classSection, assignedLecturerId);
                         }
                     }
                     ProgressHub.SendProgress("Đang import...", dt.Rows.IndexOf(row), itemsCount);
@@ -460,18 +460,18 @@ namespace TeachingAssignmentManagement.Controllers
             }
         }
 
-        private void CreateNewClass(int term, major currentMajor, List<Tuple<string, string, string, string, string, string>> errorAssignList, string classSectionid, string day, string lessonTime, string lecturerId, string fullName, string lastAssignedBy, class_section classSection, string queryLecturerId)
+        private void CreateNewClass(int term, major currentMajor, List<Tuple<string, string, string, string, string, string>> errorAssignList, string classSectionid, string day, string lessonTime, string lecturerId, string fullName, string lastAssignedBy, class_section classSection, string assignedLecturerId)
         {
             // Create new class
             classSection.major = currentMajor;
             unitOfWork.ClassSectionRepository.InsertClassSection(classSection);
             unitOfWork.Save();
-            dynamic checkState = CheckState(classSection.id, term, queryLecturerId, true).Data;
+            dynamic checkState = CheckState(classSection.id, term, assignedLecturerId, true).Data;
             if (checkState.success)
             {
                 // Assign lecturer
                 classSection.last_assigned_by = lastAssignedBy;
-                classSection.lecturer_id = queryLecturerId;
+                classSection.lecturer_id = assignedLecturerId;
                 unitOfWork.Save();
             }
             else
