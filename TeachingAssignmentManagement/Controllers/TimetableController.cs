@@ -254,8 +254,7 @@ namespace TeachingAssignmentManagement.Controllers
 
             int itemsCount = dt.Rows.Count;
             TimetableViewModel timetableViewModel = new TimetableViewModel();
-            List<class_section> classSectionList = new List<class_section>();
-            IEnumerable<class_section> query_classSectionWhere = classSectionList;
+            IEnumerable<class_section> query_classSectionWhere = new List<class_section>();
             unitOfWork.MajorRepository.GetMajorByID(major);
             if (isUpdate)
             {
