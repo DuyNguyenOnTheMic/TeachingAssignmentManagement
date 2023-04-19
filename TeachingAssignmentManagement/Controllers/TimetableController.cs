@@ -437,7 +437,7 @@ namespace TeachingAssignmentManagement.Controllers
                 TimetableHub.RefreshData(term, major);
                 return errorLecturerList.Count > 0
                     ? Json(errorLecturerList.Distinct(), JsonRequestBehavior.AllowGet)
-                    : (ActionResult)Json(errorAssignList, JsonRequestBehavior.AllowGet);
+                    : Json(errorAssignList, JsonRequestBehavior.AllowGet);
             }
             catch
             {
