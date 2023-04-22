@@ -4,6 +4,7 @@
     termStatus = $('#termData').data('status'),
     subjectFilter = $('#subjectFilter'),
     lecturerFilter = $('#lecturerFilter'),
+    notAssignedMessage = $('#notAssignedMessage'),
     rowCount = $('#tblAssign tbody tr').length;
 
 $(function () {
@@ -81,6 +82,7 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
             }
             self.trigger('close');
             $('#tblAssign tbody tr').show();
+            notAssignedMessage.addClass('d-none');
             updateClassCount();
         });
         $unselectAll.on('click', function () {
@@ -94,6 +96,7 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
             }
             self.trigger('close');
             $('#tblAssign tbody tr').hide();
+            notAssignedMessage.addClass('d-none');
             updateClassCount();
         });
         return $rendered;
@@ -162,6 +165,7 @@ lecturerFilter.on('select2:select', function (e) {
         tableRow.not(lecturerClass.closest('tr')).hide();
         updateRow(tableRow);
     }
+    showNotAssignedMessage();
     updateClassCount();
 }).on('select2:unselect', function (e) {
     var tableRow = $('#tblAssign tbody tr'),
@@ -171,6 +175,11 @@ lecturerFilter.on('select2:select', function (e) {
     lecturerClass.hide();
     filterCount(lecturerFilter);
     updateRow(tableRow);
+    showNotAssignedMessage();
+    // Hide not assigned message when user unselect all options
+    if ($('#tblAssign tbody tr:visible').length == 0 && $(this).val().length == 0) {
+        notAssignedMessage.addClass('d-none');
+    }
     updateClassCount();
 });
 
@@ -352,6 +361,14 @@ function updateRow(tableRow) {
             $this.closest('tr').show();
         }
     });
+}
+
+function showNotAssignedMessage() {
+    if ($('#tblAssign tbody tr:visible').length > 0) {
+        notAssignedMessage.addClass('d-none');
+    } else {
+        notAssignedMessage.removeClass('d-none');
+    }
 }
 
 function filterCount(element) {
