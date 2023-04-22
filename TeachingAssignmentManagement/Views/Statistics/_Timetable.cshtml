@@ -81,7 +81,7 @@
                                     @foreach (var item in classes)
                                     {
                                         string cardClass = MyConstants.TheoreticalClassType == item.Type ? "btn-success" : "btn-warning";
-                                        <button class="btn @cardClass text-nowrap class-card my-25 p-25" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>@item.ClassSectionId</b><br /><b>Tên HP: </b>@item.Subject.name<br /><b>Ngành: </b>@item.MajorName<br /><b>Phòng: </b>@item.RoomId">@item.Subject.name</button>
+                                        <button class="btn @cardClass text-nowrap class-card my-25 p-25" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="<b>@item.ClassSectionId</b><br /><b>Tên HP: </b>@item.Subject.name<br /><b>Ngành: </b>@item.MajorName<br /><b>Tuần BĐ/KT: </b>@item.StartWeek/@item.EndWeek<br /><b>Phòng: </b>@item.RoomId">@item.Subject.name</button>
                                     }
                                 </td>
                             }
