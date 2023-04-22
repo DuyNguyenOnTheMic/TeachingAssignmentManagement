@@ -61,6 +61,7 @@ var chartOptions = {
                 color: gridLineColor,
                 drawTicks: false,
             },
+            grace: 1,
             ticks: {
                 color: labelColor
             }
