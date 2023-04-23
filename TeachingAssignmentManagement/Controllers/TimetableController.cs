@@ -52,6 +52,7 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult Index()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
+            ViewData["lecturer"] = new SelectList(unitOfWork.UserRepository.GetLecturers(), "Id", "FullName");
             return View();
         }
 
