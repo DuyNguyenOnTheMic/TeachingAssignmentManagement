@@ -52,17 +52,16 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult Index()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
-            ViewData["lecturer"] = new SelectList(unitOfWork.UserRepository.GetLecturers(), "Id", "FullName");
+            ViewData["lecturer"] = new SelectList(unitOfWork.UserRepository.GetLecturers(), "Id", "FullName", UserManager.FindByEmail(User.Identity.Name).Id);
             return View();
         }
 
         [HttpGet]
-        public ActionResult GetPersonalData(int termId, int week)
+        public ActionResult GetPersonalData(int termId, int week, string lecturerId)
         {
             // Declare variables
-            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
             term term = unitOfWork.TermRepository.GetTermByID(termId);
-            IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, userId);
+            IEnumerable<ClassSectionDTO> query_classes = unitOfWork.ClassSectionRepository.GetTimetable(termId, lecturerId);
             if (!query_classes.Any())
             {
                 // Return not found error message
