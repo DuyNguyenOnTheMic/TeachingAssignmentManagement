@@ -155,13 +155,11 @@ function getTimetable(termId, majorId) {
     $("#tblAssign [data-bs-toggle='tooltip']").tooltip('dispose');
     $("#tblAssign [data-bs-toggle='popover']").popover('dispose');
 
-    if (termId && majorId) {
-        // Display loading message while fetching data
-        showLoading(assignLecturerDiv);
+    // Display loading message while fetching data
+    showLoading(assignLecturerDiv);
 
-        // Get Partial View timetable data
-        $.get(url, { termId, majorId }, function (data) {
-            assignLecturerDiv.html(data);
-        });
-    }
+    // Get Partial View timetable data
+    $.get(url, { termId, majorId }, function (data) {
+        assignLecturerDiv.html(data);
+    });
 }
