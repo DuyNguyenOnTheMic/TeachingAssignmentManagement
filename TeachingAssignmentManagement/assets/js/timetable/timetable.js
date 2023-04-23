@@ -4,7 +4,6 @@
     termStatus = $('#termData').data('status'),
     subjectFilter = $('#subjectFilter'),
     lecturerFilter = $('#lecturerFilter'),
-    notAssignedMessage = $('#notAssignedMessage'),
     rowCount = $('#tblAssign tbody tr').length;
 
 $(function () {
@@ -82,7 +81,6 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
             }
             self.trigger('close');
             $('#tblAssign tbody tr').show();
-            notAssignedMessage.addClass('d-none');
             updateClassCount();
         });
         $unselectAll.on('click', function () {
@@ -96,7 +94,6 @@ $.fn.select2.amd.define('select2/selectAllAdapter', [
             }
             self.trigger('close');
             $('#tblAssign tbody tr').hide();
-            notAssignedMessage.addClass('d-none');
             updateClassCount();
         });
         return $rendered;
@@ -154,32 +151,32 @@ lecturerFilter.on('select2:select', function (e) {
     hidePopover();
     lecturerClass.show();
     filterCount(lecturerFilter);
-    if ($('#tblAssign tbody tr:visible').length > 0) {
-        // Filter for subject classes which has lecturer
-        tableRow.show();
-        updateRow(tableRow);
+    // Show error message when lecturer class is not found
+    if (!lecturerClass.length) {
+        toastr.info('Giảng viên chưa được phân giảng lớp nào!');
     } else {
-        // Filter from beginning when user deselects all options
-        tableRow.show();
-        $('#tblAssign .assign-card').not(lecturerClass).hide();
-        tableRow.not(lecturerClass.closest('tr')).hide();
-        updateRow(tableRow);
+        if ($('#tblAssign tbody tr:visible').length > 0) {
+            // Filter for subject classes which has lecturer
+            tableRow.show();
+            updateRow(tableRow);
+        } else {
+            // Filter from beginning when user deselects all options
+            tableRow.show();
+            $('#tblAssign .assign-card').not(lecturerClass).hide();
+            tableRow.not(lecturerClass.closest('tr')).hide();
+            updateRow(tableRow);
+        }
     }
-    showNotAssignedMessage();
     updateClassCount();
 }).on('select2:unselect', function (e) {
     var tableRow = $('#tblAssign tbody tr'),
         lecturerId = e.params.data.id,
         lecturerClass = tableRow.find('[data-lecturerid="' + lecturerId + '"]');
     hidePopover();
-    lecturerClass.hide();
     filterCount(lecturerFilter);
-    updateRow(tableRow);
-    // Hide not assigned message when user unselect all options
-    if ($('#tblAssign tbody tr:visible').length == 0 && $(this).val().length == 0) {
-        notAssignedMessage.addClass('d-none');
-    } else {
-        showNotAssignedMessage();
+    if (lecturerClass.length) {
+        lecturerClass.hide();
+        updateRow(tableRow);
     }
     updateClassCount();
 });
@@ -362,14 +359,6 @@ function updateRow(tableRow) {
             $this.closest('tr').show();
         }
     });
-}
-
-function showNotAssignedMessage() {
-    if ($('#tblAssign tbody tr:visible').length > 0) {
-        notAssignedMessage.addClass('d-none');
-    } else {
-        notAssignedMessage.removeClass('d-none');
-    }
 }
 
 function filterCount(element) {
