@@ -31,7 +31,12 @@
                                             <option value="">Đang tải...</option>
                                         </select>
                                     </div>
-                                    @if (User.IsInRole(CustomRoles.FacultyBoard) || User.IsInRole(CustomRoles.Department))
+                                    @if (User.IsInRole(CustomRoles.Lecturer))
+                                    {
+                                        SelectList lecturerSelect = (SelectList)ViewData["lecturer"];
+                                        @Html.Hidden("lecturer", lecturerSelect.SelectedValue)
+                                    }
+                                    else
                                     {
                                         <div class="col-md mb-1">
                                             <label class="form-label font-small-4" for="lecturer">Giảng viên: </label>

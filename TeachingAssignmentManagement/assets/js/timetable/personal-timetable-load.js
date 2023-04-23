@@ -1,15 +1,16 @@
-﻿var termSelect = $('#term'),
+﻿var formSelect = $('.form-select'),
+    termSelect = $('#term'),
     weekSelect = $('#week'),
+    lecturerSelect = $('#lecturer'),
     rootUrl = $('#loader').data('request-url'),
     personalTimetableDiv = $('#personalTimetableDiv'),
     url = rootUrl + 'Timetable/GetPersonalData';
 
 $(function () {
-    var formSelect = $('.form-select');
-
     // Set latest term option
     var termId = $('#term option:eq(1)').val(),
-        week = 0;
+        week = 0,
+        lecturerId = lecturerSelect.val();
     termSelect.val(termId);
 
     // Populate select2 for choosing term and week
@@ -25,29 +26,31 @@ $(function () {
     })
 
     if (termId) {
-        // Get Partial View personal timetable data
-        fetchData(termId, week);
+        if (lecturerId) {
+            // Get Partial View personal timetable data
+            fetchData(termId, week, lecturerId);
+        } else {
+            personalTimetableDiv.html('<h4 class="text-center mt-2">Bạn chưa điền đẩy đủ mã giảng viên và tên giảng viên</h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="No data" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
+        }
     } else {
         showNoData(personalTimetableDiv, 'học kỳ');
         weekSelect.parent().find('.select2-selection__placeholder').text('không khả dụng');
     }
 });
 
-termSelect.change(function () {
-    // Empty week select to re-populate weeks
-    weekSelect.empty();
-
-    var termId = $(this).val(),
-        week = 0;
-    loading();
-    fetchData(termId, week);
-});
-
-weekSelect.change(function () {
+formSelect.on('change', function () {
     var termId = termSelect.val(),
-        week = $(this).val();
-    loading();
-    fetchData(termId, week);
+        week = weekSelect.val(),
+        lecturerId = $('#lecturer').val();
+    if (termId && week && lecturerId) {
+        if ($(this).is(termSelect)) {
+            // Empty week select to re-populate weeks
+            weekSelect.empty();
+            week = 0;
+        }
+        loading();
+        fetchData(termId, week, lecturerId);
+    }
 });
 
 function loading() {
@@ -58,15 +61,15 @@ function loading() {
     $("[data-bs-toggle='tooltip']").tooltip('dispose');
 }
 
-function fetchData(termId, week) {
+function fetchData(termId, week, lecturerId) {
     // Get Partial View timetable data
-    $.get(url, { termId, week }, function (data) {
+    $.get(url, { termId, week, lecturerId }, function (data) {
         if (!data.error) {
             // Populate personal timetable
             personalTimetableDiv.html(data);
         } else {
             // Return not found error message
-            personalTimetableDiv.html('<h4 class="text-center mt-2">' + data.message + '</h4><div class="card-body"><img class="mx-auto p-3 d-block w-50" alt="No data" src="' + rootUrl + 'assets/images/img_no_data.svg"></div>');
+            showNoData(personalTimetableDiv, 'phân công trong học kỳ');
             weekSelect.parent().find('.select2-selection__placeholder').text('không khả dụng');
         }
     });
