@@ -175,10 +175,11 @@ lecturerFilter.on('select2:select', function (e) {
     lecturerClass.hide();
     filterCount(lecturerFilter);
     updateRow(tableRow);
-    showNotAssignedMessage();
     // Hide not assigned message when user unselect all options
     if ($('#tblAssign tbody tr:visible').length == 0 && $(this).val().length == 0) {
         notAssignedMessage.addClass('d-none');
+    } else {
+        showNotAssignedMessage();
     }
     updateClassCount();
 });
