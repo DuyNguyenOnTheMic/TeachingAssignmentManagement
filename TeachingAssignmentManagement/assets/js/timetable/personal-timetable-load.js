@@ -42,8 +42,8 @@ formSelect.on('change', function () {
     var termId = termSelect.val(),
         week = weekSelect.val(),
         lecturerId = $('#lecturer').val();
-    if (termId && week && lecturerId) {
-        if ($(this).is(termSelect)) {
+    if (termId && lecturerId) {
+        if (!$(this).is(weekSelect)) {
             // Empty week select to re-populate weeks
             weekSelect.empty();
             week = 0;
