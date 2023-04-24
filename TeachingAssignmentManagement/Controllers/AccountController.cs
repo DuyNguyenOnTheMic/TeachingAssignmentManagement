@@ -105,6 +105,12 @@ namespace TeachingAssignmentManagement.Controllers
                 await UserManager.AddToRoleAsync(user.Id, newUserRole);
                 identity.AddClaim(new Claim(ClaimTypes.Role, newUserRole));
             }
+            // Update NameIdentifier claim to get user id from Aspnetusers table
+            Claim existingClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
+            identity.RemoveClaim(existingClaim);
+            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, currentUser.Id));
+
+            // Sign out and sign user in with role
             context.Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             context.Authentication.SignIn(identity);
 
