@@ -108,7 +108,7 @@ namespace TeachingAssignmentManagement.Controllers
             // Update NameIdentifier claim to get user id from Aspnetusers table
             Claim existingClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
             identity.RemoveClaim(existingClaim);
-            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, currentUser.Id));
+            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
 
             // Sign out and sign user in with role
             context.Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
