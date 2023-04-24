@@ -109,8 +109,6 @@ namespace TeachingAssignmentManagement.Controllers
                 identity.AddClaim(new Claim(ClaimTypes.Role, newUserRole));
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
             }
-
-            // Sign out and sign user in with role
             context.Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             context.Authentication.SignIn(identity);
 
