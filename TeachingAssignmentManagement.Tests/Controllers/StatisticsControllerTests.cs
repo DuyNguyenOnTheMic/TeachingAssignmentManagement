@@ -2403,6 +2403,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             var context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(request.Object);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(listTerm.First());
 
             // Act
             PartialViewResult result = controller.GetTimetable(termId, week) as PartialViewResult;
@@ -2422,6 +2423,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             var context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(request.Object);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(listTerm.First());
 
             // Act
             PartialViewResult result = controller.GetTimetable(termId, week) as PartialViewResult;
@@ -2441,6 +2443,7 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             var context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(request.Object);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(listTerm.First());
 
             // Act
             PartialViewResult result = controller.GetTimetable(termId, week) as PartialViewResult;
