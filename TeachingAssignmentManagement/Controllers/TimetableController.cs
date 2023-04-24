@@ -52,7 +52,7 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult Index()
         {
             ViewData["term"] = new SelectList(unitOfWork.TermRepository.GetTerms(), "id", "id");
-            ViewData["lecturer"] = new SelectList(unitOfWork.UserRepository.GetLecturers(), "Id", "FullName", UserManager.FindByEmail(User.Identity.Name).Id);
+            ViewData["lecturer"] = new SelectList(unitOfWork.UserRepository.GetLecturers(), "Id", "FullName", User.Identity.GetUserId());
             return View();
         }
 
@@ -214,7 +214,7 @@ namespace TeachingAssignmentManagement.Controllers
             }
 
             // Get current User Id
-            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
+            string userId = User.Identity.GetUserId();
 
             // Check if lecturer has filled in personal information
             lecturer lecturer = unitOfWork.UserRepository.GetLecturerByID(userId);
@@ -561,7 +561,7 @@ namespace TeachingAssignmentManagement.Controllers
         {
             // Declare variables
             class_section classSection = unitOfWork.ClassSectionRepository.GetClassByID(id);
-            string currentLecturerId = UserManager.FindByEmail(User.Identity.Name).Id;
+            string currentLecturerId = User.Identity.GetUserId();
             string currentLecturerName = unitOfWork.UserRepository.GetLecturerByID(currentLecturerId).full_name;
             lecturerId = ToNullableString(lecturerId);
 

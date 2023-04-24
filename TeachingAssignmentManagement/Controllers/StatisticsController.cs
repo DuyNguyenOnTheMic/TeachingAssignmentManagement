@@ -214,14 +214,14 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpGet]
         public JsonResult GetPersonalTermData(bool isLesson, int termId)
         {
-            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
+            string userId = User.Identity.GetUserId();
             return GetPersonalTermStatistics(isLesson, termId, "-1", userId);
         }
 
         [HttpGet]
         public JsonResult GetPersonalYearData(bool isLesson, int startYear, int endYear)
         {
-            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
+            string userId = User.Identity.GetUserId();
             return GetPersonalYearStatistics(isLesson, startYear, endYear, "-1", userId);
         }
 

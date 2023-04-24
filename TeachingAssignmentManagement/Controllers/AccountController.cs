@@ -136,6 +136,7 @@ namespace TeachingAssignmentManagement.Controllers
         //
         // POST: /Account/SignOut
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SignOut()
         {
             /// Send an OpenID Connect sign-out request.
@@ -150,7 +151,7 @@ namespace TeachingAssignmentManagement.Controllers
         public ActionResult Update()
         {
             // Return update user profile view
-            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
+            string userId = User.Identity.GetUserId();
             return View(unitOfWork.UserRepository.GetLecturerByID(userId));
         }
 
@@ -159,7 +160,7 @@ namespace TeachingAssignmentManagement.Controllers
         [HttpPost]
         public ActionResult Update([Bind(Include = "staff_id,full_name")] lecturer lecturer)
         {
-            string userId = UserManager.FindByEmail(User.Identity.Name).Id;
+            string userId = User.Identity.GetUserId();
             try
             {
                 lecturer query_lecturer = unitOfWork.UserRepository.GetLecturerByID(userId);
