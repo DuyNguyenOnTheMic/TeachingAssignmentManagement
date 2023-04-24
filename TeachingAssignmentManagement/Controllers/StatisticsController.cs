@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TeachingAssignmentManagement.DAL;
 using TeachingAssignmentManagement.Helpers;
@@ -17,7 +15,6 @@ namespace TeachingAssignmentManagement.Controllers
     [Authorize(Roles = CustomRoles.AllRoles)]
     public class StatisticsController : Controller
     {
-        private ApplicationUserManager _userManager;
         private readonly UnitOfWork unitOfWork;
 
         public StatisticsController()
@@ -28,18 +25,6 @@ namespace TeachingAssignmentManagement.Controllers
         public StatisticsController(UnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
         }
 
         [HttpGet]

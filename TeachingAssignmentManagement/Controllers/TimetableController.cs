@@ -1,6 +1,5 @@
 ﻿using ClosedXML.Excel;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,7 +22,6 @@ namespace TeachingAssignmentManagement.Controllers
     [Authorize(Roles = CustomRoles.AllRoles)]
     public class TimetableController : Controller
     {
-        private ApplicationUserManager _userManager;
         private readonly UnitOfWork unitOfWork;
 
         public TimetableController()
@@ -34,18 +32,6 @@ namespace TeachingAssignmentManagement.Controllers
         public TimetableController(UnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
         }
 
         [HttpGet]
@@ -685,15 +671,6 @@ namespace TeachingAssignmentManagement.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                if (_userManager != null)
-                {
-                    _userManager.Dispose();
-                    _userManager = null;
-                }
-            }
-
             unitOfWork.Dispose();
             base.Dispose(disposing);
         }
