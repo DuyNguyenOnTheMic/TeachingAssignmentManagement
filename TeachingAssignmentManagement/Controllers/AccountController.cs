@@ -82,6 +82,8 @@ namespace TeachingAssignmentManagement.Controllers
             // Check if user exists
             ApplicationUser currentUser = await UserManager.FindByEmailAsync(userEmail);
             ClaimsIdentity identity = (ClaimsIdentity)User.Identity;
+            Claim existingClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
+            identity.RemoveClaim(existingClaim);
             if (currentUser != null)
             {
                 // Check if user status is available
@@ -95,6 +97,7 @@ namespace TeachingAssignmentManagement.Controllers
                     // Add role claim to user
                     System.Collections.Generic.IList<string> currentRole = await UserManager.GetRolesAsync(currentUser.Id);
                     identity.AddClaim(new Claim(ClaimTypes.Role, currentRole[0]));
+                    identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, currentUser.Id));
                 }
             }
             else
@@ -104,11 +107,8 @@ namespace TeachingAssignmentManagement.Controllers
                 await UserManager.CreateAsync(user);
                 await UserManager.AddToRoleAsync(user.Id, newUserRole);
                 identity.AddClaim(new Claim(ClaimTypes.Role, newUserRole));
+                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
             }
-            // Update NameIdentifier claim to get user id from Aspnetusers table
-            Claim existingClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
-            identity.RemoveClaim(existingClaim);
-            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
 
             // Sign out and sign user in with role
             context.Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
