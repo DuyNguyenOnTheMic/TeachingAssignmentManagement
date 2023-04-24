@@ -2503,5 +2503,33 @@ namespace TeachingAssignmentManagement.Controllers.Tests
                 Assert.AreEqual(lecturerDTOs[i].Type, lecturerList[i].type);
             }
         }
+
+        [TestMethod()]
+        public void Get_Timetable_View_Model_LecturerDTOs_Data_Should_Be_IEnumerable_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            int week = listClassSection.First().start_week;
+            Mock<HttpRequestBase> request = new Mock<HttpRequestBase>();
+            request.SetupGet(x => x.UserLanguages).Returns(new string[] { "en" });
+            Mock<HttpContextBase> context = new Mock<HttpContextBase>();
+            context.SetupGet(x => x.Request).Returns(request.Object);
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(listTerm.First());
+            List<lecturer> lecturerList = listLecturer.ToList();
+
+            // Act
+            PartialViewResult result = controller.GetTimetable(termId, week) as PartialViewResult;
+            TimetableViewModel viewModel = (TimetableViewModel)result.ViewData.Model;
+            var lecturerDTOs = viewModel.LecturerDTOs;
+            int count = 0;
+            foreach (dynamic value in lecturerDTOs)
+            {
+                count++;
+            }
+
+            // Assert
+            Assert.IsTrue(count > 0);
+        }
     }
 }
