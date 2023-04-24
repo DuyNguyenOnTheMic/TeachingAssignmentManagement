@@ -2452,5 +2452,27 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.IsNotNull(viewModel);
         }
+
+        [TestMethod]
+        public void Get_Timetable_View_Model_LecturerDTOs_Should_Not_Be_Null_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            int week = listClassSection.First().start_week;
+            var request = new Mock<HttpRequestBase>();
+            request.SetupGet(x => x.UserLanguages).Returns(new string[] { "en" });
+            var context = new Mock<HttpContextBase>();
+            context.SetupGet(x => x.Request).Returns(request.Object);
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(listTerm.First());
+
+            // Act
+            PartialViewResult result = controller.GetTimetable(termId, week) as PartialViewResult;
+            TimetableViewModel viewModel = (TimetableViewModel)result.ViewData.Model;
+
+            // Assert
+            Assert.IsNotNull(viewModel);
+            Assert.IsNotNull(viewModel.LecturerDTOs);
+        }
     }
 }
