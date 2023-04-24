@@ -2554,5 +2554,37 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.IsNotNull(lecturerDTOs[0]);
         }
+
+        [TestMethod()]
+        public void Get_Timetable_View_Model_LecturerDTOs_Data_Should_Be_Indexable_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            int week = listClassSection.First().start_week;
+            Mock<HttpRequestBase> request = new Mock<HttpRequestBase>();
+            request.SetupGet(x => x.UserLanguages).Returns(new string[] { "en" });
+            Mock<HttpContextBase> context = new Mock<HttpContextBase>();
+            context.SetupGet(x => x.Request).Returns(request.Object);
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(listTerm.First());
+            List<lecturer> lecturerList = listLecturer.ToList();
+
+            // Act
+            PartialViewResult result = controller.GetTimetable(termId, week) as PartialViewResult;
+            TimetableViewModel viewModel = (TimetableViewModel)result.ViewData.Model;
+            List<LecturerDTO> lecturerDTOs = viewModel.LecturerDTOs.ToList();
+
+            // Assert
+            for (int i = 0; i < lecturerDTOs.Count; i++)
+            {
+
+                dynamic json = lecturerDTOs[i];
+
+                Assert.IsNotNull(json);
+                Assert.IsNotNull(json.Id);
+                Assert.IsNotNull(json.FullName);
+                Assert.IsNotNull(json.Type);
+            }
+        }
     }
 }
