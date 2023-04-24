@@ -2398,9 +2398,9 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Arrange
             StatisticsController controller = new StatisticsController(unitOfWork);
             int week = listClassSection.First().start_week;
-            var request = new Mock<HttpRequestBase>();
+            Mock<HttpRequestBase> request = new Mock<HttpRequestBase>();
             request.SetupGet(x => x.UserLanguages).Returns(new string[] { "en" });
-            var context = new Mock<HttpContextBase>();
+            Mock<HttpContextBase> context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(request.Object);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
             mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(listTerm.First());
@@ -2418,9 +2418,9 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Arrange
             StatisticsController controller = new StatisticsController(unitOfWork);
             int week = listClassSection.First().start_week;
-            var request = new Mock<HttpRequestBase>();
+            Mock<HttpRequestBase> request = new Mock<HttpRequestBase>();
             request.SetupGet(x => x.UserLanguages).Returns(new string[] { "en" });
-            var context = new Mock<HttpContextBase>();
+            Mock<HttpContextBase> context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(request.Object);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
             mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(listTerm.First());
@@ -2438,9 +2438,9 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Arrange
             StatisticsController controller = new StatisticsController(unitOfWork);
             int week = listClassSection.First().start_week;
-            var request = new Mock<HttpRequestBase>();
+            Mock<HttpRequestBase> request = new Mock<HttpRequestBase>();
             request.SetupGet(x => x.UserLanguages).Returns(new string[] { "en" });
-            var context = new Mock<HttpContextBase>();
+            Mock<HttpContextBase> context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(request.Object);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
             mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(listTerm.First());
@@ -2459,9 +2459,9 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Arrange
             StatisticsController controller = new StatisticsController(unitOfWork);
             int week = listClassSection.First().start_week;
-            var request = new Mock<HttpRequestBase>();
+            Mock<HttpRequestBase> request = new Mock<HttpRequestBase>();
             request.SetupGet(x => x.UserLanguages).Returns(new string[] { "en" });
-            var context = new Mock<HttpContextBase>();
+            Mock<HttpContextBase> context = new Mock<HttpContextBase>();
             context.SetupGet(x => x.Request).Returns(request.Object);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
             mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(listTerm.First());
@@ -2473,6 +2473,35 @@ namespace TeachingAssignmentManagement.Controllers.Tests
             // Assert
             Assert.IsNotNull(viewModel);
             Assert.IsNotNull(viewModel.LecturerDTOs);
+        }
+
+        [TestMethod()]
+        public void Get_Timetable_View_Model_LecturerDTOs_Data_Is_Correct_Test()
+        {
+            // Arrange
+            StatisticsController controller = new StatisticsController(unitOfWork);
+            int week = listClassSection.First().start_week;
+            Mock<HttpRequestBase> request = new Mock<HttpRequestBase>();
+            request.SetupGet(x => x.UserLanguages).Returns(new string[] { "en" });
+            Mock<HttpContextBase> context = new Mock<HttpContextBase>();
+            context.SetupGet(x => x.Request).Returns(request.Object);
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+            mockSetTerm.Setup(m => m.Find(It.IsAny<int>())).Returns(listTerm.First());
+            List<lecturer> lecturerList = listLecturer.ToList();
+
+            // Act
+            PartialViewResult result = controller.GetTimetable(termId, week) as PartialViewResult;
+            TimetableViewModel viewModel = (TimetableViewModel)result.ViewData.Model;
+            List<LecturerDTO> lecturerDTOs = viewModel.LecturerDTOs.ToList();
+
+            // Assert
+            Assert.IsNotNull(lecturerDTOs);
+            for (int i = 0; i < listLecturer.Count(); i++)
+            {
+                Assert.AreEqual(lecturerDTOs[i].Id, lecturerList[i].id);
+                Assert.AreEqual(lecturerDTOs[i].FullName, lecturerList[i].full_name);
+                Assert.AreEqual(lecturerDTOs[i].Type, lecturerList[i].type);
+            }
         }
     }
 }
