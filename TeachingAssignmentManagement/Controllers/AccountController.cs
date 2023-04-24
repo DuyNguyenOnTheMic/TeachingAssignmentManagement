@@ -136,7 +136,6 @@ namespace TeachingAssignmentManagement.Controllers
         //
         // POST: /Account/SignOut
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult SignOut()
         {
             /// Send an OpenID Connect sign-out request.

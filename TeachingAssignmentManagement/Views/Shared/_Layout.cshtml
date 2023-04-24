@@ -45,10 +45,10 @@
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
                                 <a class="dropdown-item" href="@Url.Action("Update", "Account")"><i class="me-50 feather feather-user"></i> Hồ sơ</a>
                                 <div class="dropdown-divider"></div>
-                                <form action="@Url.Action("SignOut", "Account")" id="logoutForm" method="post">
-                                    @Html.AntiForgeryToken()
+                                @using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                {
                                     <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()"><i class="me-50 feather feather-power"></i> Đăng xuất</a>
-                                </form>
+                                }
                             </div>
                         </li>
                     </ul>
