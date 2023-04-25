@@ -37,19 +37,19 @@
                 <div class="tab-pane active" id="standard" aria-labelledby="standard-tab" role="tabpanel">
                     @{
                         Model.ProgramType = MyConstants.StandardProgramType;
-                        Html.RenderPartial("_ProgramUnitPrice", Model, new ViewDataDictionary { { "tableId", "tblStandard" } });
+                        Html.RenderPartial("_UnitPrice", Model, new ViewDataDictionary { { "tableId", "tblStandard" } });
                     }
                 </div>
                 <div class="tab-pane" id="special" aria-labelledby="special-tab" role="tabpanel">
                     @{
                         Model.ProgramType = MyConstants.SpecialProgramType;
-                        Html.RenderPartial("_ProgramUnitPrice", Model, new ViewDataDictionary { { "tableId", "tblSpecial" } });
+                        Html.RenderPartial("_UnitPrice", Model, new ViewDataDictionary { { "tableId", "tblSpecial" } });
                     }
                 </div>
                 <div class="tab-pane" id="foreign" aria-labelledby="foreign-tab" role="tabpanel">
                     @{
                         Model.ProgramType = MyConstants.ForeignType;
-                        Html.RenderPartial("_ProgramUnitPrice", Model, new ViewDataDictionary { { "tableId", "tblForeign" } });
+                        Html.RenderPartial("_UnitPrice", Model, new ViewDataDictionary { { "tableId", "tblForeign" } });
                     }
                 </div>
             </div>

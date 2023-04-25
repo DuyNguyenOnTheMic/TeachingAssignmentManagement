@@ -755,7 +755,7 @@
     <Content Include="Views\Statistics\_Remuneration.cshtml" />
     <Content Include="Views\Statistics\VisitingLecturer.cshtml" />
     <Content Include="Views\Statistics\_VisitingLecturer.cshtml" />
-    <Content Include="Views\PriceCoefficient\_ProgramUnitPrice.cshtml" />
+    <Content Include="Views\PriceCoefficient\_UnitPrice.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
