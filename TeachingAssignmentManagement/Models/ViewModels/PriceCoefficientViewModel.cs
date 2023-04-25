@@ -6,10 +6,9 @@ namespace TeachingAssignmentManagement.Models
     {
         public int StartYear { get; set; }
         public int EndYear { get; set; }
+        public int ProgramType { get; set; }
         public IEnumerable<AcademicDegreeRankDTO> AcademicDegreeRankDTOs { get; set; }
-        public IEnumerable<UnitPriceDTO> StandardProgramDTOs { get; set; }
-        public IEnumerable<UnitPriceDTO> SpecialProgramDTOs { get; set; }
-        public IEnumerable<UnitPriceDTO> ForeignDTOs { get; set; }
+        public IEnumerable<UnitPriceDTO> ProgramDTOs { get; set; }
         public coefficient Coefficients { get; set; }
     }
 }

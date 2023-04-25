@@ -28,12 +28,13 @@ namespace TeachingAssignmentManagement.DAL
             return context.unit_price.Any(r => r.type == type && r.start_year == startYear && r.end_year == endYear && r.academic_degree_rank_id == rankId);
         }
 
-        public IEnumerable<UnitPriceDTO> GetUnitPriceByProgram(IEnumerable<unit_price> query_unitPrice, int type)
+        public IEnumerable<UnitPriceDTO> GetUnitPrice(IEnumerable<unit_price> query_unitPrice)
         {
-            return query_unitPrice.Where(r => r.type == type).Select(r => new UnitPriceDTO
+            return query_unitPrice.Select(r => new UnitPriceDTO
             {
                 Id = r.id,
                 UnitPrice = r.unit_price1,
+                Type = r.type,
                 AcademicDegreeRankId = r.academic_degree_rank_id
             }).ToList();
         }
