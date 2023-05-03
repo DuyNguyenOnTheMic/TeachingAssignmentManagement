@@ -206,7 +206,7 @@ function importSucceeded(data) {
         // If has data, then show section
         if (errorLecurersFilter.length) {
             errorLecturersSection.show();
-            populateDatatable(errorLecurersFilter);
+            populateErrorLecturersDatatable(errorLecurersFilter);
         }
         if (differentCampusFilter.length) {
             differentCampusSection.show();
@@ -310,7 +310,7 @@ function deleteAndImport(myDropzone) {
     });
 }
 
-function populateDatatable(data) {
+function populateErrorLecturersDatatable(data) {
     var dataTable;
     var fileName = $('#lblErrorLecturers').text();
 
