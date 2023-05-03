@@ -103,6 +103,7 @@ dropzone.dropzone({
             Swal.close();
             isCheckStudentNumber.val(true);
             errorLecturersSection.hide();
+            differentCampusSection.hide();
             window.onbeforeunload = null;
 
             if (xhr) {
@@ -200,12 +201,17 @@ function importSucceeded(data) {
     isUpdate.val(false);
 
     if (data.length) {
-        // Show section
-        errorLecturersSection.show();
-
-        // Populate datatables
-        populateDatatable(data.filter(x => x.Item7 === false));
-        populateDifferentCampusDatatable(data.filter(x => x.Item7 === true));
+        var errorLecurersFilter = data.filter(x => x.Item7 === false),
+            differentCampusFilter = data.filter(x => x.Item7 === true);
+        // If has data, then show section
+        if (errorLecurersFilter.length) {
+            errorLecturersSection.show();
+            populateDatatable(errorLecurersFilter);
+        }
+        if (differentCampusFilter.length) {
+            differentCampusSection.show();
+            populateDifferentCampusDatatable(differentCampusFilter);
+        }
 
         var message;
         if (data[0].Item6) {
@@ -248,6 +254,7 @@ function importSucceeded(data) {
         });
         // Hide section
         errorLecturersSection.hide();
+        differentCampusSection.hide();
     }
     window.onbeforeunload = null;
 }
@@ -524,6 +531,7 @@ function importUsers() {
 
                 // Hide error lecturers section
                 errorLecturersSection.hide();
+                differentCampusSection.hide();
 
                 // Show confirm message
                 Swal.fire({
