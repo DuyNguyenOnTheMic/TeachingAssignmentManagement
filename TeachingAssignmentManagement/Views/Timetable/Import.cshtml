@@ -98,6 +98,39 @@
                         </div>
                     </div>
                 </div>
+                <div class="row" id="differentCampus-section" style="display: none">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title-wrap">
+                                    <h4 class="card-title" id="lblDifferentCampus">Phân công ở cơ sở khác</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-primary my-25" role="alert">
+                                    <div class="alert-body"><b><i class="feather feather-help-circle"></i> Hướng dẫn: </b>Hệ thống sẽ tự động tạo tất cả giảng viên vào hệ thống nếu bạn chọn <strong>"Import vào hệ thống"</strong>.</div>
+                                </div>
+                                <div class="card-datatable">
+                                    <div class="table-responsive">
+                                        <table class="datatables-ajax table" id="tblDifferentCampus">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Mã giảng viên</th>
+                                                    <th>Tên giảng viên</th>
+                                                    <th>Mã LHP</th>
+                                                    <th>Thứ</th>
+                                                    <th>Tiết học</th>
+                                                    <th>Lý do</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
             <!-- Dropzone section end -->
         </div>
@@ -119,5 +152,5 @@
     <script src="~/app-assets/language/select2/vi.min.js"></script>
     <script src="~/app-assets/vendors/js/signalr/jquery.signalR.min.js"></script>
     <script src="~/signalr/hubs"></script>
-    <script src="~/assets/js/timetable/import.min.js"></script>
+    <script src="~/assets/js/timetable/import.js"></script>
 }

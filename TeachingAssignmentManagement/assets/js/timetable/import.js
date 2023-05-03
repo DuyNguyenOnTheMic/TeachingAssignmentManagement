@@ -2,7 +2,8 @@
     dropzone = $('#dpz-single-file'),
     isUpdate = $('#isUpdate'),
     isCheckStudentNumber = $('#isCheckStudentNumber'),
-    rootUrl = $('#loader').data('request-url');
+    rootUrl = $('#loader').data('request-url'),
+    errorLecturersSection = $('#errorLecturers-section');
 
 // Populate select2 for choosing term and major
 select.each(function () {
@@ -100,7 +101,7 @@ dropzone.dropzone({
 
             Swal.close();
             isCheckStudentNumber.val(true);
-            $('#errorLecturers-section').hide();
+            errorLecturersSection.hide();
             window.onbeforeunload = null;
 
             if (xhr) {
@@ -199,8 +200,7 @@ function importSucceeded(data) {
 
     if (data.length) {
         // Show section
-        var errorLecturers = $('#errorLecturers-section');
-        errorLecturers.show();
+        errorLecturersSection.show();
 
         // Populate datatables
         populateDatatable(data);
@@ -211,16 +211,16 @@ function importSucceeded(data) {
             message = 'Đã import dữ liệu! \nCó một số giảng viên có lịch giảng dạy bị trùng, vui lòng xem chi tiết ở cuối trang.';
             setVisibleColumn(true);
             setTimeout(function () {
-                errorLecturers.find('.alert').hide();
-                errorLecturers.find('.importUser').hide();
+                errorLecturersSection.find('.alert').hide();
+                errorLecturersSection.find('.importUser').hide();
             }, 100);
         } else {
             // Show lecturer that hasn't been in the system yet
             message = 'Đã import dữ liệu! \nCó một số giảng viên chưa có trong hệ thống, vui lòng xem chi tiết ở cuối trang.';
             setVisibleColumn(false);
             setTimeout(function () {
-                errorLecturers.find('.alert').show();
-                errorLecturers.find('.importUser').show();
+                errorLecturersSection.find('.alert').show();
+                errorLecturersSection.find('.importUser').show();
             }, 100);
         }
 
@@ -245,7 +245,7 @@ function importSucceeded(data) {
             buttonsStyling: false
         });
         // Hide section
-        $('#errorLecturers-section').hide();
+        errorLecturersSection.hide();
     }
     window.onbeforeunload = null;
 }
@@ -435,7 +435,7 @@ function importUsers() {
             if (data.success) {
 
                 // Hide error lecturers section
-                $('#errorLecturers-section').hide();
+                errorLecturersSection.hide();
 
                 // Show confirm message
                 Swal.fire({
