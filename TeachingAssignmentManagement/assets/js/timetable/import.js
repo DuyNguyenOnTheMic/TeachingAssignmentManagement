@@ -204,8 +204,8 @@ function importSucceeded(data) {
         errorLecturersSection.show();
 
         // Populate datatables
-        populateDatatable(data.filter(x => x.Item7 == false));
-        populateDifferentCampusDatatable(data.filter(x => x.Item7 == true));
+        populateDatatable(data.filter(x => x.Item7 === false));
+        populateDifferentCampusDatatable(data.filter(x => x.Item7 === true));
 
         var message;
         if (data[0].Item6) {
