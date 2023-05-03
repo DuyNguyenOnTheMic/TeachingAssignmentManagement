@@ -178,7 +178,13 @@ $(function () {
                     dropdownAutoWidth: true,
                     dropdownParent: columnFilter.parent(),
                     closeOnSelect: false,
-                })
+                }).on('select2:open', function () {
+                    // Set dropdown height for select2
+                    var dropdown = columnFilter.parent().find('.select2-results__options');
+                    if (dropdown.css('max-height') != '160px') {
+                        dropdown.css({ 'max-height': '160px' });
+                    }
+                });
                 columnFilter.parent().find('.select2-search__field').attr('placeholder', 'Ẩn/ hiện cột');
                 columnFilter.on('select2:select select2:unselect', function (e) {
                     // Show/hide table column on select
