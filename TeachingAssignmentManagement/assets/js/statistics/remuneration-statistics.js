@@ -504,6 +504,7 @@ function populateStatisticsDetailsDatatable(data) {
                 { 'data': '', defaultContent: '' },
                 { 'data': 'StaffId' },
                 { 'data': 'FullName' },
+                { 'data': 'ClassCount' },
                 { 'data': 'ClassesTaught' },
                 { 'data': 'RemunerationHours' }
             ],
@@ -516,9 +517,10 @@ function populateStatisticsDetailsDatatable(data) {
                     targets: 0
                 },
                 { width: '15%', targets: 2 },
+                { className: 'text-center', targets: 3 },
                 {
                     // Join classes taught string
-                    targets: 3,
+                    targets: 4,
                     render: function (data) {
                         return data.join('; ');
                     }
@@ -526,10 +528,10 @@ function populateStatisticsDetailsDatatable(data) {
                 {
                     visible: false,
                     searchable: false,
-                    targets: 4
+                    targets: 5
                 },
             ],
-            order: [[4, 'desc']],
+            order: [[5, 'desc']],
             dom: '<"d-flex justify-content-between align-items-center header-actions mx-2 row"<"col-sm-12 col-lg-4 d-flex justify-content-center justify-content-lg-start" l><"col-sm-12 col-lg-8 ps-xl-75 px-0"<"dt-action-buttons d-flex align-items-center justify-content-center justify-content-lg-end flex-lg-nowrap flex-wrap"<"me-1"f>B>>>t<"d-flex justify-content-between mx-2 row mb-1"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
             displayLength: 10,
             lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "tất cả"]],
