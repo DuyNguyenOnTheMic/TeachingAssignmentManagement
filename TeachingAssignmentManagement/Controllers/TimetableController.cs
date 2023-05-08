@@ -406,7 +406,10 @@ namespace TeachingAssignmentManagement.Controllers
                         if (query_classSection != null)
                         {
                             // Edit class assignment
+                            query_classSection.learn_week = classSection.learn_week;
                             query_classSection.student_registered_number = classSection.student_registered_number;
+                            query_classSection.start_week = classSection.start_week;
+                            query_classSection.end_week = classSection.end_week;
                             if (query_classSection.lecturer_id == null && assignedLecturerId != null)
                             {
                                 AssignLecturerToClass(term, errorAssignList, classSectionid, day, lessonTime, lecturerId, fullName, lastAssignedBy, assignedLecturerId, query_classSection);
