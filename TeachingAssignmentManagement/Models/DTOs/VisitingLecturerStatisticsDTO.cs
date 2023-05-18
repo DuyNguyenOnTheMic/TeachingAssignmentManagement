@@ -6,6 +6,7 @@ namespace TeachingAssignmentManagement.Models
     {
         public string StaffId { get; set; }
         public string FullName { get; set; }
+        public string AcademicDegreeRank { get; set; }
         public IEnumerable<subject> Subjects { get; set; }
     }
 }

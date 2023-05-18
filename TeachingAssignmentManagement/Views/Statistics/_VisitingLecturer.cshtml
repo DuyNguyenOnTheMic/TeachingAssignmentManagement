@@ -8,6 +8,7 @@
                     <th></th>
                     <th>Mã GVTG</th>
                     <th>Họ tên GVTG</th>
+                    <th>Cấp bậc</th>
                     @foreach (var termId in Model.TermIds)
                     {
                         <th>@termId</th>
@@ -21,6 +22,7 @@
                         <td></td>
                         <td>@item.StaffId</td>
                         <td>@item.FullName</td>
+                        <td>@item.AcademicDegreeRank</td>
                         @foreach (var termId in Model.TermIds)
                         {
                             <td>@string.Join("; ", item.Subjects.Where(s => s.term_id == termId).Select(item => item.subject_id + "-" + item.name))</td>
