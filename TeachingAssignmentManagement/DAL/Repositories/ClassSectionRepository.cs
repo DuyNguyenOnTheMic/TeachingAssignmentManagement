@@ -377,7 +377,7 @@ namespace TeachingAssignmentManagement.DAL
             {
                 StaffId = c.FirstOrDefault().lecturer.staff_id,
                 FullName = c.FirstOrDefault().lecturer.full_name,
-                AcademicDegreeRank = c.FirstOrDefault().lecturer.lecturer_rank.OrderByDescending(item => item.id).FirstOrDefault().academic_degree_rank_id,
+                AcademicDegreeRank = c.FirstOrDefault().lecturer.lecturer_rank.OrderByDescending(item => item.term_id).FirstOrDefault().academic_degree_rank_id,
                 Subjects = c.Select(item => item.subject).Distinct()
             }).ToList();
         }
