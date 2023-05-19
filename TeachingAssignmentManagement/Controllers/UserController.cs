@@ -158,7 +158,7 @@ namespace TeachingAssignmentManagement.Controllers
         {
             // Get user role
             ApplicationUser user = UserManager.FindById(id);
-            lecturer lecturer = unitOfWork.UserRepository.GetLecturerByID(id);
+            lecturer lecturer = unitOfWork.UserRepository.GetLecturerByID(id) ?? new lecturer { id = id };
             List<SelectListItem> lecturerType = new List<SelectListItem>()
             {
                 new SelectListItem() { Text = "Cơ hữu", Value = MyConstants.FacultyMemberType },
