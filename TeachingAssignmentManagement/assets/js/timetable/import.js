@@ -224,6 +224,8 @@ function importSucceeded(data) {
             }, 100);
         } else {
             // Show lecturer that hasn't been in the system yet
+            errorLecturersSection.show();
+            populateErrorLecturersDatatable(data);
             message = 'Đã import dữ liệu! \nCó một số giảng viên chưa có trong hệ thống, vui lòng xem chi tiết ở cuối trang.';
             setVisibleColumn(false);
             setTimeout(function () {
