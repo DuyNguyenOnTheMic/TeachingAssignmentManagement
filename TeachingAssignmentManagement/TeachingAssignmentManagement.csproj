@@ -756,6 +756,7 @@
     <Content Include="Views\Statistics\VisitingLecturer.cshtml" />
     <Content Include="Views\Statistics\_VisitingLecturer.cshtml" />
     <Content Include="Views\PriceCoefficient\_UnitPrice.cshtml" />
+    <Content Include="Views\Error\NotFoundAjax.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

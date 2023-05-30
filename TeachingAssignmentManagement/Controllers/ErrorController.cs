@@ -7,7 +7,7 @@ namespace TeachingAssignmentManagement.Controllers
         // GET: NotFound
         public ActionResult NotFound()
         {
-            return View("NotFound");
+            return Request.IsAjaxRequest() ? View("NotFoundAjax") : View("NotFound");
         }
     }
 }
