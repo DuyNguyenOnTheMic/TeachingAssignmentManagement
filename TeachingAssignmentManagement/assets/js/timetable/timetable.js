@@ -203,8 +203,8 @@ $(document).off('click', '.btn-assign').on('click', '.btn-assign', function () {
     // Get values
     var id = $this.data('id'),
         lecturerSelect = $this.parent().find('.select2 :selected'),
-        lecturerId = lecturerSelect.val()
-    warning = true;
+        lecturerId = lecturerSelect.val(),
+        warning = true;
 
     // Send ajax request to check state of lecturer
     $.ajax({
