@@ -116,6 +116,22 @@ namespace TeachingAssignmentManagement.Controllers
             return Json(new { success = true, message = "Lưu thành công!" }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                // Delete unit price
+                unitOfWork.UnitPriceRepository.DeleteUnitPrice(id);
+                unitOfWork.Save();
+            }
+            catch
+            {
+                return Json(new { error = true, message = "Có lỗi đã xảy ra, vui lòng thử lại sau!" }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { success = true, message = "Xoá thành công!" }, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpGet]
         public ActionResult CreateCoefficient(int startYear, int endYear)
         {

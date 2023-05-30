@@ -26,10 +26,16 @@ function disableButtons(state) {
         $('.editRow').each(function () {
             this.style.pointerEvents = 'none';
         });
+        $('.deleteRow').each(function () {
+            this.style.pointerEvents = 'none';
+        });
     } else {
         // enable buttons
         $('.editAll').prop('disabled', false);
         $('.editRow').each(function () {
+            this.style.pointerEvents = 'auto';
+        });
+        $('.deleteRow').each(function () {
             this.style.pointerEvents = 'auto';
         });
     }
@@ -98,4 +104,48 @@ function submitForm(form) {
         });
     }
     return false;
+}
+
+function deleteUnitPrice(id) {
+    Swal.fire({
+        title: 'Thông báo',
+        text: 'Bạn có chắc muốn xoá đơn giá này?',
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'Huỷ',
+        confirmButtonText: 'Xoá',
+        customClass: {
+            confirmButton: 'btn btn-primary',
+            cancelButton: 'btn btn-outline-danger ms-1'
+        },
+        buttonsStyling: false
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Delete item
+            $.ajax({
+                type: 'POST',
+                url: rootUrl + 'PriceCoefficient/Delete/' + id,
+                success: function (data) {
+                    if (data.success) {
+                        refreshTable();
+
+                        // Show message when delete succeeded
+                        toastr["success"](data.message);
+                    }
+                    else {
+                        // Show message when delete failed
+                        Swal.fire({
+                            title: 'Thông báo',
+                            text: data.message,
+                            icon: 'error',
+                            customClass: {
+                                confirmButton: 'btn btn-primary'
+                            },
+                            buttonsStyling: false
+                        })
+                    }
+                }
+            });
+        }
+    })
 }

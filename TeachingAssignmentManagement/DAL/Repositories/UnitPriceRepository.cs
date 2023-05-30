@@ -44,6 +44,12 @@ namespace TeachingAssignmentManagement.DAL
             context.unit_price.Add(unitPrice);
         }
 
+        public void DeleteUnitPrice(int unitPriceId)
+        {
+            unit_price unitPrice = context.unit_price.Find(unitPriceId);
+            context.unit_price.Remove(unitPrice);
+        }
+
         public void DeleteAllUnitPrice(int type, int startYear, int endYear)
         {
             context.unit_price.RemoveRange(context.unit_price.Where(r => r.type == type && r.start_year == startYear && r.end_year == endYear));
