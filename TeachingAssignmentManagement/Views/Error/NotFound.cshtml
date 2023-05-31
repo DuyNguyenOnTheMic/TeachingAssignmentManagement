@@ -1,6 +1,4 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
-
-@{
+﻿@{
     Layout = null;
 }
 
@@ -33,9 +31,9 @@
                     <!-- Error page-->
                     <div class="misc-wrapper">
                         <div class="misc-inner p-2 p-sm-3">
-                            <div class="w-100 text-center">
+                            <div class="text-center">
                                 <h2 class="mb-1">Không thể tìm thấy trang 🕵🏻‍♀️</h2>
-                                <p class="mb-2">Oops! 😖 Yêu cầu của bạn không được tìm thấy.</p><a class="btn btn-primary mb-2 btn-sm-block" href="@Url.Action("Index", "Home")">Quay về trang chủ</a><img class="w-100" src="~/assets/images/img_error.svg" alt="Error page" />
+                                <p>Oops! 😖 Yêu cầu của bạn không được tìm thấy.</p><a class="btn btn-primary btn-sm-block" href="@Url.Action("Index", "Home")">Quay về trang chủ</a><img class="w-100" src="~/assets/images/img_error.svg" alt="Error page" />
                             </div>
                         </div>
                     </div>
