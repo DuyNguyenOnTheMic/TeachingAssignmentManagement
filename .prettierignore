@@ -1,0 +1,13 @@
+# Ignore artifacts:
+build
+coverage
+
+# Ignore all minified files:
+**/*.min.*
+
+# Ignore files built by Visual Studio
+**/obj
+**/packages
+
+# Ignore app assets folder
+**/app-assets
